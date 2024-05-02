@@ -97,7 +97,7 @@ The following contains the instructions for running this repository locally in t
 
 1. Clone the repo
    ```sh
-   git clone --recurse-submodules https://github.com/your_username_/Project-Name.git
+   git clone --recurse-submodules git@github.com:ChargeSage-Inc/BMSLogic.git
    ```
 3. Build the C++ files using cmake
    ```sh
