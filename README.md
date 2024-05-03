@@ -92,10 +92,39 @@ The following contains the instructions for running this repository locally in t
     * Python with pip and venv installed
     * CMake
 
+* Install Python project dependencies. <br>
+  It is recommended to create a virtual Python environment for this project, especially if the functionalities supported by Python Language are to be used. For this purpose, follow the steps below:
+
+  1. Create the Python virtual environment
+      ```sh
+      python -m venv venv
+      ``` 
+
+  2. Activate the virtual envinronment <br>
+      On Windows:
+      ```sh
+      venv\Scripts\activate
+      ```
+      On macOS and Linux:
+      ```sh
+      source venv/bin/activate
+      ```
+
+  3. Verify Activation <br>
+      Once activated, your command line prompt should prepend the name of the virtual environment, indicating that it's active. For example:
+      ```sh
+      (venv) user@hostname:~/path/to/repository$
+      ```
+  
+  4. Install Python dependencies
+      ```sh
+      pip install -r requirements.txt
+      ```
+
 
 ### Installation
 
-1. Clone the repo
+1. Clone the repository
    ```sh
    git clone --recurse-submodules git@github.com:ChargeSage-Inc/BMSLogic.git
    ```
@@ -104,10 +133,6 @@ The following contains the instructions for running this repository locally in t
    cd build && mkdir build
    cmake ..
    cmake --build .
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
