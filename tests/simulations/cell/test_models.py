@@ -2,6 +2,10 @@
 contains the tests for the model related equations
 """
 
+__all__ = ["TestGeneralEquations"]
+__author__ = "Moin Ahmed"
+__status__ = "development"
+
 import unittest
 
 import numpy as np
