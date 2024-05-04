@@ -3,8 +3,10 @@ contains the tests for the model related equations
 """
 
 __all__ = ["TestGeneralEquations", "TestESPModel", "TestROMSEI"]
+
 __author__ = "Moin Ahmed"
-__status__ = "development"
+__copyright__ = "Copyright 2024 by BMSLogic. All Rights Reserved."
+__status__ = "Deployed"
 
 import unittest
 

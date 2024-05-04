@@ -5,6 +5,7 @@ Unittests for the battery cell simulations
 __all__ = ["TestBaseCycler", "TestDischargeCycler", "TestDischargeRest", "TestCharge", "TestChargeDischarge", "TestCustomCycler"]
 __author__ = "Moin Ahmed"
 __copyright__ = "Copyright by BMSLogic 2024. All Rights Reserved."
+__status__ = "Deployed"
 
 import unittest
 
