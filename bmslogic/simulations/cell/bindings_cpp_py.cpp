@@ -49,4 +49,85 @@ PYBIND11_MODULE(cell, m)
              {
                  return "Electrode";
              });
+
+     // PElectrode class
+     py::class_<PElectrode, Electrode>(m, "PElectrode")
+         .def(py::init<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double,
+                       std::function<double(double)>, std::function<double(double)>>(),
+              py::arg("L"), py::arg("A"), py::arg("kappa"), py::arg("epsilon"), py::arg("max_conc"), py::arg("R"), py::arg("S"),
+              py::arg("T_ref"), py::arg("D_ref"), py::arg("k_ref"), py::arg("Ea_D"), py::arg("Ea_R"), py::arg("alpha"),
+              py::arg("brugg"), py::arg("SOC"), py::arg("T"), py::arg("func_OCP"), py::arg("func_dOCPdT"))
+         // magic methods
+         .def("__repr__", [](const PElectrode &a)
+              { return "PElectrode"; });
+
+     // NElectrode class
+     py::class_<NElectrode, Electrode>(m, "NElectrode")
+         .def(py::init<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double,
+                       std::function<double(double)>, std::function<double(double)>>(),
+              py::arg("L"), py::arg("A"), py::arg("kappa"), py::arg("epsilon"), py::arg("max_conc"), py::arg("R"), py::arg("S"),
+              py::arg("T_ref"), py::arg("D_ref"), py::arg("k_ref"), py::arg("Ea_D"), py::arg("Ea_R"), py::arg("alpha"),
+              py::arg("brugg"), py::arg("SOC"), py::arg("T"), py::arg("func_OCP"), py::arg("func_dOCPdT"))
+         // magic methods
+         .def("__repr__", [](const NElectrode &a)
+              { return "NElectrode"; });
+
+     // Electrolyte class
+     py::class_<Electrolyte>(m, "Electrolyte")
+         .def(py::init<double, double, double, double, double>(),
+              py::arg("conc"), py::arg("L"), py::arg("kappa"), py::arg("epsilon"), py::arg("brugg"))
+         .def_property_readonly("conc", &Electrolyte::get_conc)
+         .def_property_readonly("L", &Electrolyte::get_L)
+         .def_property_readonly("kappa", &Electrolyte::get_kappa)
+         .def_property_readonly("epsilon", &Electrolyte::get_epsilon)
+         .def_property_readonly("brugg", &Electrolyte::get_brugg)
+         .def("kappa_eff", &Electrolyte::get_kappa_eff);
+
+     // BatteryCell class
+     py::class_<BatteryCell>(m, "BatteryCell")
+         .def(py::init<PElectrode, NElectrode, Electrolyte, double, double, double, double, double, double, double, double, double>(),
+              py::arg("p_elec"), py::arg("n_elec"), py::arg("electrolyte"),
+              py::arg("rho"), py::arg("Vol"), py::arg("C_p"), py::arg("h"), py::arg("A"), py::arg("cap"),
+              py::arg("V_max"), py::arg("V_min"), py::arg("R_cell"))
+         .def(py::init<double, double, double, double, double, double, double,
+                       double, double, double, double, double, double,
+                       double, double, double,
+                       std::function<double(double)>, std::function<double(double)>,
+                       double, double, double, double, double,
+                       double, double, double, double, double, double, double,
+                       double, double, double, double, double, double,
+                       double, double, double,
+                       std::function<double(double)>, std::function<double(double)>,
+                       double, double,
+                       double, double, double, double, double, double, double>(),
+              py::arg("L_p"), py::arg("A_p"), py::arg("kappa_p"), py::arg("epsilon_p"), py::arg("max_conc_p"),
+              py::arg("R_p"), py::arg("S_p"), py::arg("T_ref_p"), py::arg("D_ref_p"), py::arg("k_ref_p"),
+              py::arg("Ea_D_p"), py::arg("Ea_R_p"), py::arg("alpha_p"), py::arg("brugg_p"), py::arg("SOC_p"),
+              py::arg("T_p"),
+              py::arg("func_OCP_p"), py::arg("func_dOCPdT_p"),
+
+              py::arg("conc_e"), py::arg("L_s"), py::arg("kappa_s"), py::arg("epsilon_s"), py::arg("brugg_s"),
+
+              py::arg("L_n"), py::arg("A_n"), py::arg("kappa_n"), py::arg("epsilon_n"),
+              py::arg("max_conc_n"), py::arg("R_n"), py::arg("S_n"), py::arg("T_ref_n"),
+              py::arg("D_ref_n"), py::arg("k_ref_n"), py::arg("Ea_D_n"), py::arg("Ea_R_n"),
+              py::arg("alpha_n"), py::arg("brugg_n"), py::arg("SOC_n"), py::arg("T_n"),
+              py::arg("func_OCP_n"), py::arg("func_dOCPdT_n"),
+
+              py::arg("rho"), py::arg("Vol"), py::arg("C_p"), py::arg("h"), py::arg("A"), py::arg("cap"),
+              py::arg("V_max"), py::arg("V_min"), py::arg("R_cell"))
+         .def_property_readonly("p_elec", &BatteryCell::get_elec_p)
+         .def_property_readonly("n_elec", &BatteryCell::get_elec_n)
+         .def_property_readonly("electrolyte", &BatteryCell::get_electrolyte)
+         .def("T", &BatteryCell::get_T)
+         .def("rho", &BatteryCell::get_rho)
+         .def("vol", &BatteryCell::get_Vol)
+         .def("C_p", &BatteryCell::get_C_p)
+         .def("h", &BatteryCell::get_h)
+         .def("A", &BatteryCell::get_A)
+         .def("cap", &BatteryCell::get_cap)
+         .def("V_max", &BatteryCell::get_V_max)
+         .def("V_min", &BatteryCell::get_V_min)
+         .def_property("R_cell", &BatteryCell::get_R_cell, &BatteryCell::set_R_cell);
+    
 }
