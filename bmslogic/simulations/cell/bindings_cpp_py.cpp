@@ -17,6 +17,7 @@
 
 #include "battery_components.h"
 #include "models.h"
+#include "cyclers.h"
 
 namespace py = pybind11;
 
@@ -165,4 +166,56 @@ PYBIND11_MODULE(cell, m)
          .def("calc_eta_n", &ROMSEI::calc_eta_n, py::arg("temp"), py::arg("j_i"), py::arg("i_0"))
          .def("calc_eta_s", &ROMSEI::calc_eta_s, py::arg("eta_n"), py::arg("ocp"), py::arg("ocp_s"))
          .def("calc_j_s", &ROMSEI::calc_j_s, py::arg("temp"), py::arg("i_0_s"), py::arg("eta_s"));
+
+     /*
+     * Cyclers
+     */
+
+    // Base cycler
+     py::class_<BaseCycler>(m, "BaseCycler")
+         .def(py::init<>())
+         .def_property("time_elapsed", &BaseCycler::get_time_elapsed, &BaseCycler::set_time_elapsed)
+         .def_property("V_min", &BaseCycler::get_V_min, &BaseCycler::set_V_min)
+         .def_property("V_max", &BaseCycler::get_V_max, &BaseCycler::set_V_min)
+         .def_property("rest_time", &BaseCycler::get_rest_time, &BaseCycler::set_rest_time)
+         .def_property("num_cycles", &BaseCycler::get_num_cycles, &BaseCycler::set_num_cycles)
+         // caluclation functions
+         .def("get_current", &Discharge::get_current, py::arg("cycling_step"), py::arg("t"));
+
+     // Discharge
+     py::class_<Discharge, BaseCycler>(m, "Discharge")
+         .def(py::init<double, double, double, double>(),
+              py::arg("current"), py::arg("V_min"),
+              py::arg("soc_lib_min"), py::arg("soc_lib"));
+
+     // DischargeRest
+     py::class_<DischargeRest, BaseCycler>(m, "DischargeRest")
+         .def(py::init<double, double, double, double, double>(),
+              py::arg("current"), py::arg("V_min"),
+              py::arg("soc_lib_min"), py::arg("soc_lib"),
+              py::arg("rest_time"));
+
+     // Charge
+     py::class_<Charge, BaseCycler>(m, "Charge")
+         .def(py::init<double, double, double, double>(),
+              py::arg("current"), py::arg("V_max"),
+              py::arg("soc_lib_max"), py::arg("soc_lib"));
+
+     // ChargeDischarge
+     py::class_<ChargeDischarge, BaseCycler>(m, "ChargeDischarge")
+         .def(py::init<double, double, double, double,
+                       double, double, double, double>(),
+              py::arg("charge_current"), py::arg("discharge_current"), py::arg("V_min"), py::arg("V_max"),
+              py::arg("soc_min"), py::arg("soc_max"), py::arg("soc"), py::arg("rest_time"));
+
+     // CustomCycler
+     py::class_<CustomCycler, BaseCycler>(m, "CustomCycler")
+         .def(py::init<std::vector<double>, std::vector<double>, double, double, double, double, double>(),
+              py::arg("t_array"), py::arg("current_array"), py::arg("V_min"), py::arg("V_max"), py::arg("soc_lib_min"),
+              py::arg("soc_lib_max"), py::arg("soc_lib"))
+         // properties
+         .def_property("t_array", &CustomCycler::get_t_vector, &CustomCycler::set_t_vector)
+         .def_property("current_array", &CustomCycler::get_current_vector, &CustomCycler::set_current_vector);
+     // calculations/helper methods
+     //     .def("get_current", &CustomCycler::get_current);
 }
