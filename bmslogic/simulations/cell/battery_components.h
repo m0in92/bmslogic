@@ -23,22 +23,22 @@ public:
     Electrode(double L_i, double A_i, double kappa_i, double epsilon_i, double max_conc_i, double R_i, double S_i,
               double T_ref_i, double D_ref_i, double k_ref_i, double Ea_D_i, double Ea_R_i, double alpha_i,
               double brugg_i, double SOC_i, double T_i, std::function<double(double)> func_OCP_i, std::function<double(double)> func_dOCPdT_i);
-//     virtual ~Electrode() = default;
-//     // Accessor functions
-//     double get_L() const { return L; }
-//     double get_A() const { return A; }
-//     double get_T() const { return T; } // returns the electrode temperature [K]
-//     double get_SOC() const { return SOC; }
-//     double get_OCP() { return calc_OCP(); }                // returns the OCP value at the inputted SOC.
-//     double get_dOCPdT() const { return func_dOCPdT(SOC); } // returns the dOCP/dT value at the inputted SOC.
-//     double get_D() { return calc_D(); }                    // calculates and returns the electrode diffusivity [m2/s]
-//     double get_k() { return calc_k(); }
-//     double get_S() const { return S; }
-//     double get_c_max() const { return max_conc; }
-//     double get_R() const { return R; }
-//     // Modifier functions
-//     void update_T(double &T_new) { T = T_new; }        // updates the electrode temp.
-//     void update_SOC(double SOC_new) { SOC = SOC_new; } // update the electrode SOC
+    virtual ~Electrode() = default;
+    // Accessor functions
+    double get_L() const { return L; }
+    double get_A() const { return A; }
+    double get_T() const { return T; } // returns the electrode temperature [K]
+    double get_SOC() const { return SOC; }
+    double get_OCP() { return calc_OCP(); }                // returns the OCP value at the inputted SOC.
+    double get_dOCPdT() const { return func_dOCPdT(SOC); } // returns the dOCP/dT value at the inputted SOC.
+    double get_D() { return calc_D(); }                    // calculates and returns the electrode diffusivity [m2/s]
+    double get_k() { return calc_k(); }
+    double get_S() const { return S; }
+    double get_c_max() const { return max_conc; }
+    double get_R() const { return R; }
+    // Modifier functions
+    void update_T(double &T_new) { T = T_new; }        // updates the electrode temp.
+    void update_SOC(double SOC_new) { SOC = SOC_new; } // update the electrode SOC
 protected:
     double L;        // Electrode Thickness [m]
     double A;        // Electrode Area [m^2]
