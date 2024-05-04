@@ -25,6 +25,11 @@ namespace general_equations
     double molar_flux_to_current(double &molar_flux, double &S, char electrode_type);
 }
 
+/**
+ * @class SPModel
+ * @brief Equations for the single particle model
+ * 
+ */
 class SPModel
 {
 public:
@@ -33,6 +38,10 @@ public:
     double calc_terminal_V(double OCP_p, double OCP_n, double m_p, double m_n, double R_cell, double T, double I);
 };
 
+/**
+ * @brief contains equations for the Enhanced single particle models. 
+ * 
+ */
 namespace ESPModel
 {
     double molar_flux_electrode(double &i_app, double S, char electrode_type);
@@ -46,14 +55,16 @@ namespace ESPModel
                                  double temp, double i_app);
 };
 
+
 /**
- * This class contains the equations for the reduced order SEI growth model as mentioned in ref [1], with slight
+ * @class ROMSEI
+ * @brief This class contains the equations for the reduced order SEI growth model as mentioned in ref [1], with slight
  * modifications.
- *
- * Literature Reference:
- * 1. Randell et al. "Controls oriented reduced order modeling of solid-electrolyte interphase layer growth". 2012.
- * Journal of Power Sources. Vol: 209. pgs: 282-288.
- */
+ * 
+ *  * Literature Reference:
+ *      1. Randell et al. "Controls oriented reduced order modeling of solid-electrolyte interphase layer growth". 2012.
+ *          Journal of Power Sources. Vol: 209. pgs: 282-288.
+*/
 class ROMSEI
 {
 public:

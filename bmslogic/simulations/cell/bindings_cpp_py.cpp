@@ -136,10 +136,33 @@ PYBIND11_MODULE(cell, m)
      /*
       * Pertaining to models
       */
+
+     // general equations
      m.def("calc_cap", &general_equations::calc_cap,
            py::arg("cap_prev"), py::arg("Q"), py::arg("I"), py::arg("dt"));
      m.def("calc_i_0", &general_equations::calc_i_0,
            py::arg("k"), py::arg("c_s_max"), py::arg("soc"), py::arg("c_e"));
      m.def("molar_flux_to_current", &general_equations::molar_flux_to_current,
            py::arg("molar_flux"), py::arg("S"), py::arg("electrode_type"));
+
+     // Enhanced single particle model
+     m.def("ESPModel_molar_flux_electrode", &ESPModel::molar_flux_electrode, py::arg("i_app"), py::arg("S"), py::arg("electrode_type"));
+     m.def("ESPModel_a_s", &ESPModel::a_s, py::arg("epsilon"), py::arg("R"));
+     m.def("ESPModel_i_0", &ESPModel::i_0, py::arg("k"), py::arg("c_s_max"), py::arg("c_e"), py::arg("soc_surf"));
+     m.def("ESPModel_m", &ESPModel::m,
+           py::arg("i_app"), py::arg("k"), py::arg("S"), py::arg("c_s_max"), py::arg("c_e"), py::arg("soc_surf"));
+     m.def("ESPModel_calc_terminal_voltage", &ESPModel::calc_terminal_voltage,
+           py::arg("ocp_p"), py::arg("ocp_n"), py::arg("m_p"), py::arg("m_n"),
+           py::arg("L_n"), py::arg("L_sep"), py::arg("L_p"),
+           py::arg("kappa_eff_avg"), py::arg("k_f_avg"), py::arg("t_c"), py::arg("R_cell"),
+           py::arg("c_e_n"), py::arg("c_e_p"),
+           py::arg("temp"), py::arg("i_app"));
+
+     // ROM SEI
+     py::class_<ROMSEI>(m, "ROMSEI")
+         .def(py::init<>())
+         .def("calc_j_i", &ROMSEI::calc_j_i, py::arg("j_tot"), py::arg("j_s"), "Calculates the intercalation lithium molar flux density [mol/m2/s]")
+         .def("calc_eta_n", &ROMSEI::calc_eta_n, py::arg("temp"), py::arg("j_i"), py::arg("i_0"))
+         .def("calc_eta_s", &ROMSEI::calc_eta_s, py::arg("eta_n"), py::arg("ocp"), py::arg("ocp_s"))
+         .def("calc_j_s", &ROMSEI::calc_j_s, py::arg("temp"), py::arg("i_0_s"), py::arg("eta_s"));
 }
