@@ -10,8 +10,10 @@
  */
 
 #include <cmath>
+
 #include "battery_components.h"
-#include "calc_helpers/constants.h"
+#include "common_includes.h"
+
 
 Electrode::Electrode(double L_i, double A_i, double kappa_i, double epsilon_i, double max_conc_i, double R_i, double S_i,
                      double T_ref_i, double D_ref_i, double k_ref_i, double Ea_D_i, double Ea_R_i, double alpha_i,

@@ -9,12 +9,13 @@
  * 
  */
 
-#ifndef SPCPP_PROJECT_CONSTANTS_H
-#define SPCPP_PROJECT_CONSTANTS_H
+#ifndef BMSLOGIC_PROJECT_CONSTANTS_H
+#define BMSLOGIC_PROJECT_CONSTANTS_H
 
 #include <cmath>
 
-struct
+
+static struct
 {
 public:
     double F = 96487;  // Faraday's constant [C/mol]
@@ -23,4 +24,4 @@ public:
     double pi = std::atan(1.0) * 4.0; // value of pi
 } Constants;
 
-#endif //SPCPP_PROJECT_CONSTANTS_H
+#endif //BMSLOGIC_PROJECT_CONSTANTS_H
