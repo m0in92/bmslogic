@@ -18,6 +18,7 @@
 #include "battery_components.h"
 #include "models.h"
 #include "cyclers.h"
+#include "solution.h"
 
 namespace py = pybind11;
 
@@ -168,10 +169,10 @@ PYBIND11_MODULE(cell, m)
          .def("calc_j_s", &ROMSEI::calc_j_s, py::arg("temp"), py::arg("i_0_s"), py::arg("eta_s"));
 
      /*
-     * Cyclers
-     */
+      * Cyclers
+      */
 
-    // Base cycler
+     // Base cycler
      py::class_<BaseCycler>(m, "BaseCycler")
          .def(py::init<>())
          .def_property("time_elapsed", &BaseCycler::get_time_elapsed, &BaseCycler::set_time_elapsed)
@@ -218,4 +219,25 @@ PYBIND11_MODULE(cell, m)
          .def_property("current_array", &CustomCycler::get_current_vector, &CustomCycler::set_current_vector);
      // calculations/helper methods
      //     .def("get_current", &CustomCycler::get_current);
+
+     /*
+      * Solutions
+      */
+     py::class_<Solution>(m, "Solution")
+         .def(py::init<>())
+         .def(py::init<std::vector<double>,
+                       std::vector<std::string>,
+                       std::vector<double>,
+                       std::vector<double>,
+                       std::vector<double>,
+                       std::vector<double>,
+                       std::vector<double>>(),
+              py::arg("t"), py::arg("cycling_step"), py::arg("V"), py::arg("temp"), py::arg("cap"), py::arg("soc_p"), py::arg("soc_n"))
+         .def_property("t", &Solution::get_t, &Solution::set_t)
+         .def_property("cycling_step", &Solution::get_cycling_step, &Solution::set_cycling_step)
+         .def_property("V", &Solution::get_V, &Solution::set_V)
+         .def_property("temp", &Solution::get_temp, &Solution::set_temp)
+         .def_property("cap", &Solution::get_cap, &Solution::set_cap)
+         .def_property("soc_p", &Solution::get_x_p, &Solution::set_x_p)
+         .def_property("soc_n", &Solution::get_x_n, &Solution::set_x_n);
 }
