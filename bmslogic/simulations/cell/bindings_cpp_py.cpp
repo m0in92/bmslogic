@@ -15,15 +15,19 @@
 #include "pybind11/functional.h"
 #include "pybind11/stl.h"
 
+#include "calc_helpers/constants.h"
 #include "battery_components.h"
 #include "models.h"
 #include "cyclers.h"
 #include "solution.h"
+#include "solvers.h"
 
 namespace py = pybind11;
 
 PYBIND11_MODULE(cell, m)
 {
+     m.doc() = "This module contains the classes and functionalities associated with the battery cell simulations.";
+
      /*
       * Bindings pertaining to battery components
       */
@@ -240,4 +244,90 @@ PYBIND11_MODULE(cell, m)
          .def_property("cap", &Solution::get_cap, &Solution::set_cap)
          .def_property("soc_p", &Solution::get_x_p, &Solution::set_x_p)
          .def_property("soc_n", &Solution::get_x_n, &Solution::set_x_n);
+
+     /*
+      * Solvers
+      */
+
+     // ROM SEI Solver
+     py::class_<ROMSEISolver>(m, "ROMSEISolver")
+         .def(py::init<double, double, double, double, double,
+                       double, double, double, double, double>(),
+              py::arg("k"), py::arg("c_e"), py::arg("S"), py::arg("c_s_max"), py::arg("U_s"),
+              py::arg("j_0_s"), py::arg("A"), py::arg("MW"), py::arg("rho"), py::arg("kappa"))
+         .def_property_readonly("k", &ROMSEISolver::get_k)
+         .def_property_readonly("c_e", &ROMSEISolver::get_c_e)
+         .def_property_readonly("S", &ROMSEISolver::get_S)
+         .def_property_readonly("c_s_max", &ROMSEISolver::get_c_s_max)
+         .def_property_readonly("U_s", &ROMSEISolver::get_U_s)
+         .def_property_readonly("j_0_s", &ROMSEISolver::get_j_0_s)
+         .def_property_readonly("A", &ROMSEISolver::get_A)
+         .def_property_readonly("MW", &ROMSEISolver::get_MW)
+         .def_property_readonly("rho", &ROMSEISolver::get_rho)
+         .def_property_readonly("kappa", &ROMSEISolver::get_kappa)
+         .def_property_readonly("cumulative_j_s", &ROMSEISolver::get_cumulative_j_s)
+         .def_property_readonly("L_SEI", &ROMSEISolver::get_L_SEI)
+         .def("calc_current", &ROMSEISolver::solve_current,
+              py::arg("soc"), py::arg("ocp"), py::arg("temp"), py::arg("i_app"),
+              py::arg("relative_tolerance") = 1e-12, py::arg("max_iter") = 10)
+         .def("calc_delta_L", &ROMSEISolver::solve_delta_L, py::arg("j_s"), py::arg("dt"))
+         .def("update_L", &ROMSEISolver::update_L, py::arg("j_s"), py::arg("dt"));
+
+     // Lumped Thermal Solver
+     py::class_<LumpedThermalSolver>(m, "LumpedThermalSolver")
+         .def(py::init<double, double, double, double, double, double>(),
+              py::arg("h"), py::arg("A"), py::arg("rho"), py::arg("vol"), py::arg("C_p"), py::arg("temp_init"))
+         // methods for calculations
+         .def("reversible_heat", &LumpedThermalSolver::reversible_heat,
+              py::arg("dOCPdT_p"), py::arg("dOCPdT_n"),
+              py::arg("current"), py::arg("temp"))
+         .def("irreversible_heat", &LumpedThermalSolver::irreversible_heat,
+              py::arg("OCP_p"), py::arg("OCP_n"), py::arg("current"), py::arg("V"))
+         .def("heat_transfer", &LumpedThermalSolver::heat_transfer,
+              py::arg("temp"), py::arg("temp_amb"))
+         .def("solve_temp", &LumpedThermalSolver::solve_temp,
+              py::arg("dt"), py::arg("t_prev"), py::arg("I"), py::arg("V"),
+              py::arg("temp_amb"),
+              py::arg("OCP_p"), py::arg("OCP_n"), py::arg("dOCPdT_p"), py::arg("dOCPdT_n"))
+         // getters
+         .def("temp", &LumpedThermalSolver::get_temp)
+         .def("temp_init", &LumpedThermalSolver::get_temp_init)
+         .def("temp_prev", &LumpedThermalSolver::get_temp_prev);
+
+     // Eigen Solver
+     py::class_<EigenSolver>(m, "EigenSolver")
+         .def(py::init<char, double, int>(),
+              py::arg("electrode_type"), py::arg("soc_init"), py::arg("num_roots"), py::return_value_policy::reference)
+         // getters
+         .def("roots", &EigenSolver::get_roots, py::return_value_policy::copy)
+         .def("integ_term", &EigenSolver::get_integ_term, py::return_value_policy::copy)
+         .def("vec_u_k", &EigenSolver::get_vec_u_k, py::return_value_policy::copy)
+         // calculations
+         .def("j_scaled", &EigenSolver::j_scaled,
+              py::arg("i_app"), py::arg("R"), py::arg("S"), py::arg("D_s"), py::arg("c_s_max"))
+         .def("update_integ_term", &EigenSolver::update_integ_term, py::return_value_policy::reference,
+              py::arg("dt"), py::arg("i_app"), py::arg("R"), py::arg("S"), py::arg("D_s"), py::arg("c_s_max"))
+         .def("du_kdt", &EigenSolver::du_kdt,
+              py::arg("root"), py::arg("D"), py::arg("R"), py::arg("scaled_j_value"),
+              py::arg("t"), py::arg("u"))
+         .def("solve_u_k", &EigenSolver::solve_u_k,
+              py::arg("root"), py::arg("t_prev"), py::arg("dt"),
+              py::arg("u_k_prev"), py::arg("i_app"), py::arg("R"),
+              py::arg("S"), py::arg("D_s"), py::arg("c_s_max"))
+         .def("update_vec_uk", &EigenSolver::update_vec_u_k,
+              py::arg("dt"), py::arg("t_prev"), py::arg("i_app"), py::arg("R"),
+              py::arg("S"), py::arg("D_s"), py::arg("c_s_max"))
+         .def("get_summation_term", &EigenSolver::get_summation_term,
+              py::arg("dt"), py::arg("t_prev"), py::arg("i_app"), py::arg("R"),
+              py::arg("S"), py::arg("D_s"), py::arg("c_s_max"))
+         .def("calc_soc_surf", &EigenSolver::solve_soc_surf,
+              py ::arg("dt"), py::arg("t_prev"), py::arg("i_app"), py::arg("R"),
+              py::arg("S"), py::arg("D_s"), py::arg("c_s_max"));
+
+     // Battery Solver
+     py::class_<BatterySolver>(m, "BatterySolver")
+         .def(py::init<BatteryCell, bool, bool, std::string>(),
+              py::arg("battery_cell"), py::arg("is_isothermal"), py::arg("enable_degradation"),
+              py::arg("electrode_mass_balance_solver") = "solver")
+         .def("solve", &BatterySolver::solve, py::arg("cycler"));
 }
