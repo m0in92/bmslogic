@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from build.bmslogic.simulations.cell.Debug.cell import EigenSolver, LumpedThermalSolver, ROMSEISolver
+from bmslogic.simulations.cell.cell import EigenSolver, LumpedThermalSolver, ROMSEISolver
 
 
 class TestROMSEISolver(unittest.TestCase):

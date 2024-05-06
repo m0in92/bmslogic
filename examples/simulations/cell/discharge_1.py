@@ -11,7 +11,7 @@ import time
 import numpy as np
 # import matplotlib.pyplot as plt
 
-import build.bmslogic.simulations.cell.Debug.cell as sp
+import bmslogic.simulations.cell.cell as sp
 from bmslogic.simulations.cell.plot import Plot
 
 from examples.simulations.cell.example_parameter import *

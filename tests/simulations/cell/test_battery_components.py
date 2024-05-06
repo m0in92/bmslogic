@@ -10,7 +10,7 @@ __status__ =  "deployed"
 
 import unittest
 
-import build.bmslogic.simulations.cell.Debug.cell as bc
+import bmslogic.simulations.cell.cell as bc
 from .parameters_funcs import *
 
 

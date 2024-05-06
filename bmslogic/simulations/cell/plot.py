@@ -3,8 +3,8 @@ Contains the plotting/visualization objects.
 """
 
 __author__ = "Moin Ahmed"
-__copyright__ = 'Copyright 2024 by SPPCPPy. All rights reserved.'
-__status__ = 'deployed'
+__copyright__ = 'Copyright 2024 by BMSLogic. All rights reserved.'
+__status__ = 'Deployed'
 
 __all__ = ['Plot']
 
@@ -12,17 +12,16 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import matplotlib as mpl
 
-import build.bmslogic.simulations.cell.Debug.cell as sp
-# import SPCPPY as sp
+import bmslogic.simulations.cell.cell as cell_sim
 # from SPCPPY.calc_helpers import constants
 
 
 class Plot:
-    def __init__(self, sol: sp.Solution) -> None:
+    def __init__(self, sol: cell_sim.Solution) -> None:
         """Constructor for the Plot class
 
         Args:
-            sol (sp.Solution): sp.Solution object obtained after the simulation.
+            sol (cell.Solution): sp.Solution object obtained after the simulation.
         """
         self.t: list = sol.t  # Array containing the times at each timesteps [s]
         self.cycling_step = sol.cycling_step  # cycling step type, for example "discharge", "charge", "rest"

@@ -12,9 +12,9 @@ import unittest
 
 import numpy as np
 
-from build.bmslogic.simulations.cell.Debug.cell import calc_cap, calc_i_0, molar_flux_to_current
-from build.bmslogic.simulations.cell.Debug.cell import calc_cap, calc_i_0, molar_flux_to_current, ROMSEI
-from build.bmslogic.simulations.cell.Debug.cell import ESPModel_molar_flux_electrode, ESPModel_a_s, ESPModel_i_0, ESPModel_m, ESPModel_calc_terminal_voltage
+from bmslogic.simulations.cell.cell import calc_cap, calc_i_0, molar_flux_to_current
+from bmslogic.simulations.cell.cell import calc_cap, calc_i_0, molar_flux_to_current, ROMSEI
+from bmslogic.simulations.cell.cell import ESPModel_molar_flux_electrode, ESPModel_a_s, ESPModel_i_0, ESPModel_m, ESPModel_calc_terminal_voltage
 
 
 class TestGeneralEquations(unittest.TestCase):

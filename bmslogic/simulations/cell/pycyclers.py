@@ -9,7 +9,7 @@ __status__ = "Deployed"
 
 import numpy as np
 
-from build.bmslogic.simulations.cell.Debug import cell
+from bmslogic.simulations.cell import cell
 
 
 class HPPCCycler(cell.CustomCycler):

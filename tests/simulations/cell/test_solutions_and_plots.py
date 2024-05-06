@@ -10,7 +10,7 @@ import unittest
 
 import numpy as np
 
-import build.bmslogic.simulations.cell.Debug.cell as slv
+import bmslogic.simulations.cell.cell as slv
 
 
 class TestSolutionClass(unittest.TestCase):
