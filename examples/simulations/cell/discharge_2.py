@@ -1,5 +1,5 @@
 """
-This module is an example implementation of SPCPPy using the parameter_sets.
+This module is an example simulation run using single particle model under CC discharge.
 """
 
 __author__ = "Moin Ahmed"
@@ -11,7 +11,8 @@ import time
 import numpy as np
 import matplotlib.pyplot as plt
 
-import SPCPPY as sp
+import bmslogic.simulations.cell.cell as sp
+from bmslogic.simulations.cell.plot import Plot
 
 from examples.example_parameter import *
 
