@@ -6,5 +6,6 @@ set(CXX_STANDARD_REQUIRED True)
 
 add_subdirectory(extern/pybind11)
 add_subdirectory(bmslogic)
+add_subdirectory(examples)
 
 

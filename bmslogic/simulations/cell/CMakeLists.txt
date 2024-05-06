@@ -10,10 +10,7 @@ pybind11_add_module(cell MODULE ${PYBIND11_SOURCES})
 target_include_directories(cell PUBLIC ${PROJECT_SOURCE_DIR}/bmslogic)
 
 if (MSVC)
-    message(${PROJECT_SOURCE_DIR})
     set_target_properties(cell PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell)
     set_target_properties(cell PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell)
     set_target_properties(cell PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell)
 endif(MSVC)
-
-
