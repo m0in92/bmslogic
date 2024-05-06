@@ -12,6 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import matplotlib as mpl
 
+import build.bmslogic.simulations.cell.Debug.cell as sp
 # import SPCPPY as sp
 # from SPCPPY.calc_helpers import constants
 
@@ -174,7 +175,8 @@ class Plot:
 
         # t-temp
         ax5 = fig.add_subplot(num_rows, num_cols, 5)
-        ax5.plot(self.t, np.array(self.temp) - constants.Constants.T_abs)
+        ax5.plot(self.t, np.array(self.temp))
+        # ax5.plot(self.t, np.array(self.temp) - constants.Constants.T_abs)
         ax5.set_xlabel('Time [s]')
         ax5.set_ylabel('Temperature [C]')
         ax5.set_title('Battery Cell Surface Temp.')
