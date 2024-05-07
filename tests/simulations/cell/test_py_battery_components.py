@@ -18,6 +18,9 @@ from bmslogic.simulations.cell import custom_warnings_exceptions
 from tests.path_definations import TEST_ELECTROLYTE_ERROR_DIR
 
 
+# Below are the functions for the equivalent circuit model objects.
+## Note: These function have been defined outside the scope of the test classes to ensure that they have '__call__' attribute
+## in Python 3.9
 def func_ocv(soc: float) -> float:
     return 2.5 + 1.7 * soc
 
