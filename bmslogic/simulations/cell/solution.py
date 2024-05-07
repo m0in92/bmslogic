@@ -273,7 +273,7 @@ class PySolution:
 
     @classmethod
     def upload_exp_data(cls, filename: str, cycle_num: Union[None, int, np.ndarray] = None,
-                        step_num: int | str = None, cell_cap: float = None) -> Self:
+                        step_num: Union[None, int, str] = None, cell_cap: float = None) -> Self:
         sol_init = PySolutionInitializer()
         df = pd.read_csv(filename)
         if cycle_num is not None:
