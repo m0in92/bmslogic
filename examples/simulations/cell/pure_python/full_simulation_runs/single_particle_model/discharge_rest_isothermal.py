@@ -3,41 +3,53 @@ Contains the example implementation of SPPy using a discharge and rest operation
 isothermal conditions.
 """
 
+from bmslogic import cell_sim
+import matplotlib.pyplot as plt
 __author__ = 'Moin Ahmed'
 __copyright__ = 'Copyright 2023 by SPPy. All rights reserved.'
 __status__ = 'deployed'
 
 
-import SPPy
+"""
+This script contains the example usage of the single particle model for the discharge operation under non-isothermal conditions.
+"""
 
-import matplotlib.pyplot as plt
+__all__ = []
+
+__author__ = 'Moin Ahmed'
+__copyright__ = 'Copyright 2024 by BMSLogic. All rights reserved.'
+__status__ = 'Deployed'
 
 
 # Operating parameters
-I = 1.65
-T = 298.15
-V_min = 2.5
-SOC_min = 0.1
-SOC_LIB = 1
+I: float = 1.656
+temp: float = 298.15
+V_min: float = 3
+SOC_min: float = 0.1
+soc_lib_init: float = 1.0
+rest_time: float = 500  # [s]
+SOC_LIB_MAX: float = 1
 
 # Modelling parameters
-SOC_init_p, SOC_init_n = 0.4956, 0.7568  # conditions in the literature source. Guo et al
+SOC_init_p: float = 0.4956  # from Guo et. al.
+SOC_init_n: float = 0.7568  # from Guo et. al.
 
 # Setup battery components
-cell = SPPy.BatteryCell.read_from_parametersets(parameter_set_name='Gao-Randall-Han',
-                                                soc_init_p=SOC_init_p, soc_init_n=SOC_init_n,
-                                                temp_init=T)
+cell: cell_sim.PyBatteryCell = cell_sim.PyBatteryCell.read_from_parametersets(parameter_set_name='Gao-Randall-Han',
+                                                                              soc_init_p=SOC_init_p, soc_init_n=SOC_init_n,
+                                                                              temp_init=temp)
 
 
 # set-up cycler and solver
-dc = SPPy.DischargeRest(discharge_current=I, V_min=V_min, SOC_LIB=SOC_LIB, SOC_LIB_min=SOC_min, SOC_LIB_max=1,
-                        rest_time=500)
-solver_poly = SPPy.SPPySolver(b_cell=cell, isothermal=True, degradation=False,
-                              electrode_SOC_solver='poly')
-
+dc: cell_sim.PyDischargeRest = cell_sim.PyDischargeRest(discharge_current=I, V_min=V_min,
+                                                        SOC_LIB_min=SOC_min, SOC_LIB=soc_lib_init, 
+                                                        rest_time=rest_time, SOC_LIB_max=SOC_LIB_MAX)
+solver: cell_sim.PySPSolver = cell_sim.PySPSolver(b_cell=cell,
+                                                  isothermal=False, degradation=False,
+                                                  electrode_SOC_solver='poly')
 
 # simulate
-sol_poly = solver_poly.solve(cycler_instance=dc)
+sol_poly = solver.solve(cycler_instance=dc)
 
 # Plot
 fig = plt.figure(figsize=(10, 3), dpi=300)
