@@ -2,7 +2,8 @@
 Contains the unittests for the Python battery component objects.
 """
 
-__all__ = ['TestElectrode', 'TestElectrolyte', 'TestBatteryCell', 'TestECMBatteryCell']
+__all__ = ['TestElectrode', 'TestElectrolyte',
+    'TestBatteryCell', 'TestECMBatteryCell']
 __author__ = "Moin Ahmed"
 __copyright__ = "Copyright 2024 by Moin Ahmed. All Rights Reserved."
 __status__ = "Deployed"
@@ -15,6 +16,18 @@ from bmslogic.parameter_sets.test import funcs
 from bmslogic.simulations.cell import custom_warnings_exceptions
 
 from tests.path_definations import TEST_ELECTROLYTE_ERROR_DIR
+
+
+def func_ocv(soc: float) -> float:
+    return 2.5 + 1.7 * soc
+
+
+def func_docvdtemp(soc: float):
+    return 1.0
+
+
+def func_eta(soc: float, temp: float) -> float:
+    return 1.0
 
 
 class TestElectrode(unittest.TestCase):
@@ -131,7 +144,7 @@ class TestElectrode(unittest.TestCase):
                                                   SOC_init=self.SOC_init,
                                                   soc_min=self.soc_min, soc_max=self.soc_max,
                                                   alpha=0.5, func_OCP=funcs.OCP_ref_p, func_dOCPdT=13)
-            
+
 
 class TestElectrolyte(unittest.TestCase):
     L = 2e-5
@@ -139,7 +152,8 @@ class TestElectrolyte(unittest.TestCase):
     kappa = 0.2875
     epsilon = 0.724
     brugg = 1.5
-    test_electrolyte = battery_components.PyElectrolyte(L=L, conc=c_init, kappa=kappa, brugg=brugg, epsilon_sep=epsilon)
+    test_electrolyte = battery_components.PyElectrolyte(
+        L=L, conc=c_init, kappa=kappa, brugg=brugg, epsilon_sep=epsilon)
 
     def test_constructor(self):
         """
@@ -153,7 +167,8 @@ class TestElectrolyte(unittest.TestCase):
         self.assertEqual(self.brugg, self.test_electrolyte.brugg)
 
     def test_property(self):
-        self.assertEqual(0.1771110665373567, self.test_electrolyte.kappa_sep_eff)
+        self.assertEqual(0.1771110665373567,
+                         self.test_electrolyte.kappa_sep_eff)
 
     def test_constructur_raises(self):
         with self.assertRaises(TypeError) as context:
@@ -165,11 +180,11 @@ class TestBatteryCell(unittest.TestCase):
     SOC_init_p = 0.4956
     SOC_init_n = 0.7568
     test_cell = battery_components.PyBatteryCell.read_from_parametersets(parameter_set_name='test',
-                                                         soc_init_p=SOC_init_p, soc_init_n=SOC_init_n,
-                                                         temp_init=T)
+                                                                         soc_init_p=SOC_init_p, soc_init_n=SOC_init_n,
+                                                                         temp_init=T)
     test_cell_sp = battery_components.PyBatteryCell.read_from_parametersets(parameter_set_name="test_single_particle_only",
-                                                            soc_init_p=SOC_init_p, soc_init_n=SOC_init_n,
-                                                            temp_init=T)
+                                                                            soc_init_p=SOC_init_p, soc_init_n=SOC_init_n,
+                                                                            temp_init=T)
 
     def test_negative_electrode_parameters(self):
         """
@@ -262,9 +277,9 @@ class TestBatteryCell(unittest.TestCase):
         SOC_init_p = 0.4956
         SOC_init_n = 0.7568
         test_cell = battery_components.PyBatteryCell.read_from_parametersets(parameter_set_name='test',
-                                                             soc_init_p=SOC_init_p,
-                                                             soc_init_n=SOC_init_n,
-                                                             temp_init=T)
+                                                                             soc_init_p=SOC_init_p,
+                                                                             soc_init_n=SOC_init_n,
+                                                                             temp_init=T)
 
         self.assertEqual(test_cell.T, T)
         self.assertEqual(test_cell.elec_p.T, T)
@@ -284,9 +299,9 @@ class TestBatteryCell(unittest.TestCase):
         SOC_init_p = 0.4956
         SOC_init_n = 0.7568
         test_cell = battery_components.PyBatteryCell.read_from_parametersets(parameter_set_name='test',
-                                                             soc_init_p=SOC_init_p,
-                                                             soc_init_n=SOC_init_n,
-                                                             temp_init=orig_T)
+                                                                             soc_init_p=SOC_init_p,
+                                                                             soc_init_n=SOC_init_n,
+                                                                             temp_init=orig_T)
 
         self.assertEqual(test_cell.T_amb, orig_T)
         # Now change to new T but T_amb should not change
@@ -310,30 +325,18 @@ class TestBatteryCell(unittest.TestCase):
 
 class TestECMBatteryCell(unittest.TestCase):
 
-    @staticmethod
-    def func_ocv(soc: float) -> float:
-        return 2.5 + 1.7 * soc
-
-    @staticmethod
-    def func_docvdtemp(soc: float):
-        return 1.0
-
-    @staticmethod
-    def func_eta(soc: float, temp: float) -> float:
-        return 1.0
-
     test_cell_Thevenin = battery_components.PyECMBatteryCell(R0_ref=0.225, R1_ref=0.001, C1=0.03, temp_ref=298.15, Ea_R1=400, Ea_R0=400,
-                                             rho=1626, vol=3.38e-5, c_p=750, h=1, area=0.085,
-                                             func_eta=func_eta, func_ocv=func_ocv, func_docvdtemp=func_docvdtemp,
-                                             soc_init=0.1, temp_init=298.15,
-                                             cap=1.65, v_max=4.2, v_min=2.5)
+                                                             rho=1626, vol=3.38e-5, c_p=750, h=1, area=0.085,
+                                                             func_eta=func_eta, func_ocv=func_ocv, func_docvdtemp=func_docvdtemp,
+                                                             soc_init=0.1, temp_init=298.15,
+                                                             cap=1.65, v_max=4.2, v_min=2.5)
 
     test_cell_ESC = battery_components.PyECMBatteryCell(R0_ref=0.225, R1_ref=0.001, C1=0.03, temp_ref=298.15, Ea_R1=400, Ea_R0=400,
-                                        rho=1626, vol=3.38e-5, c_p=750, h=1, area=0.085,
-                                        func_eta=func_eta, func_ocv=func_ocv, func_docvdtemp=func_docvdtemp,
-                                        soc_init=0.1, temp_init=298.15,
-                                        cap=1.65, v_max=4.2, v_min=2.5,
-                                        M_0=4.4782e-4, M=0.0012)
+                                                        rho=1626, vol=3.38e-5, c_p=750, h=1, area=0.085,
+                                                        func_eta=func_eta, func_ocv=func_ocv, func_docvdtemp=func_docvdtemp,
+                                                        soc_init=0.1, temp_init=298.15,
+                                                        cap=1.65, v_max=4.2, v_min=2.5,
+                                                        M_0=4.4782e-4, M=0.0012)
 
     def test_battery_cell_parameters_for_Thevenin_simulations(self):
         self.assertEqual(self.test_cell_Thevenin.rho, 1626)
@@ -352,7 +355,8 @@ class TestECMBatteryCell(unittest.TestCase):
 
         self.assertTrue(hasattr(self.test_cell_Thevenin.func_eta, '__call__'))
 
-        self.assertTrue(hasattr(self.test_cell_Thevenin.func_docvdtemp, '__call__'))
+        self.assertTrue(
+            hasattr(self.test_cell_Thevenin.func_docvdtemp, '__call__'))
 
         self.assertTrue(self.test_cell_Thevenin.M is None)
         self.assertTrue(self.test_cell_Thevenin.M_0 is None)
@@ -381,7 +385,7 @@ class TestECMBatteryCell(unittest.TestCase):
 
     def test_read_from_parameterset(self):
         b_cell: battery_components.PyECMBatteryCell = battery_components.PyECMBatteryCell.read_from_parametersets(parameter_set_name='test',
-                                                                                  soc_init=1.0, temp_init=298.15)
+                                                                                                                  soc_init=1.0, temp_init=298.15)
         self.assertEqual(0.005, b_cell.R0_ref)
         self.assertTrue(0.001, b_cell.R1_ref)
         self.assertTrue(0.03, b_cell.C1)
