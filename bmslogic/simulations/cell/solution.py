@@ -10,7 +10,7 @@ __status__ = 'deployed'
 
 from dataclasses import dataclass, field
 import pickle
-from typing import Optional
+from typing import Optional, Union
 import sys
 
 import numpy as np
@@ -272,7 +272,7 @@ class PySolution:
         return cls(base_solution_instance=sol_instance)
 
     @classmethod
-    def upload_exp_data(cls, filename: str, cycle_num: int | np.ndarray = None,
+    def upload_exp_data(cls, filename: str, cycle_num: Union[None, int, np.ndarray] = None,
                         step_num: int | str = None, cell_cap: float = None) -> Self:
         sol_init = PySolutionInitializer()
         df = pd.read_csv(filename)
