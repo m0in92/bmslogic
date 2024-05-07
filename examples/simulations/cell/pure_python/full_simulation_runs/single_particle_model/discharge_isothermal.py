@@ -2,8 +2,10 @@
 This script contains the example usage of the single particle model for the discharge operation.
 """
 
+__all__ = []
+
 __author__ = 'Moin Ahmed'
-__copyright__ = 'Copyright 2023 by SPPy. All rights reserved.'
+__copyright__ = 'Copyright 2024 by BMSLogic. All rights reserved.'
 __status__ = 'Deployed'
 
 from bmslogic import cell_sim
