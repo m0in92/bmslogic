@@ -283,3 +283,4 @@ _deps
 
 ### VSCode ###
 .vscode/
+.VSCodeCounter/
