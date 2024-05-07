@@ -272,7 +272,7 @@ class PySolution:
         return cls(base_solution_instance=sol_instance)
 
     @classmethod
-    def upload_exp_data(cls, filename: str, cycle_num: int | npt.ArrayLike = None,
+    def upload_exp_data(cls, filename: str, cycle_num: int | np.ndarray = None,
                         step_num: int | str = None, cell_cap: float = None) -> Self:
         sol_init = PySolutionInitializer()
         df = pd.read_csv(filename)
