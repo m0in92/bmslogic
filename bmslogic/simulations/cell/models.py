@@ -382,7 +382,7 @@ class PyROMSEI:
 
     @classmethod
     def calc_j_tot(cls, I: float, S: float) -> float:
-        return SPM.molar_flux_electrode(I=I, S=S, electrode_type='n')
+        return PySPM.molar_flux_electrode(I=I, S=S, electrode_type='n')
 
     @classmethod
     def calc_j_i(cls, j_tot: float, j_s: float) -> float:
@@ -429,4 +429,4 @@ class PyROMSEI:
         :param S: (float) electrode electrochemically active area [m2]
         :return: current [A]
         """
-        return SPM.flux_to_current(molar_flux=molar_flux, S=S, electrode_type='n')
+        return PySPM.flux_to_current(molar_flux=molar_flux, S=S, electrode_type='n')
