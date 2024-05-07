@@ -345,14 +345,14 @@ class TestECMBatteryCell(unittest.TestCase):
         self.assertEqual(self.test_cell_Thevenin.v_max, 4.2)
         self.assertEqual(self.test_cell_Thevenin.v_min, 2.5)
 
-        self.assertTrue(isinstance(self.test_cell_Thevenin.func_ocv, typing.Callable))
+        self.assertTrue(hasattr(self.test_cell_Thevenin.func_ocv, '__call__'))
         self.assertEqual(2.5, self.test_cell_Thevenin.func_ocv(soc=0.0))
         self.assertEqual(3.35, self.test_cell_Thevenin.func_ocv(soc=0.5))
         self.assertEqual(4.2, self.test_cell_Thevenin.func_ocv(soc=1.0))
 
-        self.assertTrue(isinstance(self.test_cell_Thevenin.func_eta, typing.Callable))
+        self.assertTrue(hasattr(self.test_cell_Thevenin.func_eta, '__call__'))
 
-        self.assertTrue(isinstance(self.test_cell_Thevenin.func_docvdtemp, typing.Callable))
+        self.assertTrue(hasattr(self.test_cell_Thevenin.func_docvdtemp, '__call__'))
 
         self.assertTrue(self.test_cell_Thevenin.M is None)
         self.assertTrue(self.test_cell_Thevenin.M_0 is None)
@@ -367,14 +367,14 @@ class TestECMBatteryCell(unittest.TestCase):
         self.assertEqual(self.test_cell_ESC.v_max, 4.2)
         self.assertEqual(self.test_cell_ESC.v_min, 2.5)
 
-        self.assertTrue(isinstance(self.test_cell_ESC.func_ocv, typing.Callable))
+        self.assertTrue(hasattr(self.test_cell_ESC.func_ocv, '__call__'))
         self.assertEqual(2.5, self.test_cell_ESC.func_ocv(soc=0.0))
         self.assertEqual(3.35, self.test_cell_ESC.func_ocv(soc=0.5))
         self.assertEqual(4.2, self.test_cell_ESC.func_ocv(soc=1.0))
 
-        self.assertTrue(isinstance(self.test_cell_ESC.func_eta, typing.Callable))
+        self.assertTrue(hasattr(self.test_cell_ESC.func_eta, '__call__'))
 
-        self.assertTrue(isinstance(self.test_cell_ESC.func_docvdtemp, typing.Callable))
+        self.assertTrue(hasattr(self.test_cell_ESC.func_docvdtemp, '__call__'))
 
         self.assertEqual(4.4782e-4, self.test_cell_ESC.M_0)
         self.assertEqual(0.0012, self.test_cell_ESC.M)
