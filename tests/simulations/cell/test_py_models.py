@@ -246,7 +246,7 @@ class TestROMSEI(unittest.TestCase):
         j_tot: float = -I / (96487 * 0.7824)
         j_s: float = 0.0
 
-        solver: models.ROMSEI = models.ROMSEI()
+        solver: models.PyROMSEI = models.PyROMSEI()
         j_i: float = solver.calc_j_i(j_tot=j_tot, j_s=j_s)
         self.assertAlmostEqual(-2.193626517e-5, j_i, places=12)
 
@@ -257,7 +257,7 @@ class TestROMSEI(unittest.TestCase):
         j_s: float = 0.0
         temp: float = 298.15
 
-        solver: models.ROMSEI = models.ROMSEI()
+        solver: models.PyROMSEI = models.PyROMSEI()
         j_i: float = solver.calc_j_i(j_tot=j_tot, j_s=j_s)
         j_0_i: float = solver.calc_j_0_i(k=1.764e-11, c_s_max=31833,
                                          soc=0.7522, c_e=1000)
@@ -274,7 +274,7 @@ class TestROMSEI(unittest.TestCase):
         j_s: float = 0.0
         temp: float = 298.15
 
-        solver: models.ROMSEI = models.ROMSEI()
+        solver: models.PyROMSEI = models.PyROMSEI()
         j_0_i: float = solver.calc_j_0_i(k=1.764e-11, c_s_max=31833,
                                          soc=0.7522, c_e=1000)
         j_i: float = solver.calc_j_i(j_tot=j_tot, j_s=j_s)
@@ -289,7 +289,7 @@ class TestROMSEI(unittest.TestCase):
         temp: float = 298.15
         eta_s: float = -0.377814
 
-        solver: models.ROMSEI = models.ROMSEI()
+        solver: models.PyROMSEI = models.PyROMSEI()
         self.assertAlmostEqual(1.783e-2, solver.calc_j_s(temp=temp, j_0_s=i_0_s,
                                                          eta_s=eta_s), places=1)
 

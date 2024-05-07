@@ -358,7 +358,7 @@ Below are the battery cell degradation model equations
 """
 
 
-class ROMSEI:
+class PyROMSEI:
     """
     This class contains the equations for the reduced order SEI growth model as mentioned in ref [1], with slight
     modifications.
