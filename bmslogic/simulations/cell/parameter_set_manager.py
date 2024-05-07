@@ -124,7 +124,7 @@ class ParameterSets:
         self.V_max: float = df['Maximum Potential Cut-off [V]']
         self.V_min: float = df['Minimum Potential Cut-off [V]']
 
-        func_module = importlib.import_module(f'parameter_sets.{self.name}.funcs')  # imports the python module
+        func_module = importlib.import_module(f'bmslogic.parameter_sets.{self.name}.funcs')  # imports the python module
         # containing the OCP related funcs in the parameter set.
         self.OCP_ref_p_: Callable = func_module.OCP_ref_p
         self.dOCPdT_p_: Callable = func_module.dOCPdT_p
