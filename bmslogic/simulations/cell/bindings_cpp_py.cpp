@@ -16,6 +16,7 @@
 #include "pybind11/stl.h"
 
 #include "calc_helpers/constants.h"
+#include "general_ocps.h"
 #include "battery_components.h"
 #include "models.h"
 #include "cyclers.h"
@@ -27,6 +28,23 @@ namespace py = pybind11;
 PYBIND11_MODULE(cell, m)
 {
      m.doc() = "This module contains the classes and functionalities associated with the battery cell simulations.";
+
+     /*
+     * General open circuit potential functions
+     */
+     m.def("LCO", py::overload_cast<double&>(&positive_electrode_ocps::LCO), py::arg("soc"));
+     m.def("LCO", py::overload_cast<std::vector<double>&>(&positive_electrode_ocps::LCO), py::arg("soc"));
+     m.def("NMC", py::overload_cast<double&>(&positive_electrode_ocps::NMC), py::arg("soc"));
+     m.def("NMC", py::overload_cast<std::vector<double>&>(&positive_electrode_ocps::NMC), py::arg("soc"));
+     m.def("LFP", py::overload_cast<double&>(&positive_electrode_ocps::LFP), py::arg("soc"));
+     m.def("LFP", py::overload_cast<std::vector<double>&>(&positive_electrode_ocps::LFP), py::arg("soc"));
+     m.def("LMO", py::overload_cast<double&>(&positive_electrode_ocps::LMO), py::arg("soc"));
+     m.def("LMO", py::overload_cast<std::vector<double>&>(&positive_electrode_ocps::LMO), py::arg("soc"));
+     m.def("NCA", py::overload_cast<double&>(&positive_electrode_ocps::NCA), py::arg("soc"));
+     m.def("NCA", py::overload_cast<std::vector<double>&>(&positive_electrode_ocps::NCA), py::arg("soc"));
+
+     m.def("graphite", py::overload_cast<double&>(&negative_electrode_ocps::graphite), py::arg("soc"));
+     m.def("graphite", py::overload_cast<std::vector<double>&>(&negative_electrode_ocps::graphite), py::arg("soc"));
 
      /*
       * Bindings pertaining to battery components
@@ -294,7 +312,8 @@ PYBIND11_MODULE(cell, m)
          .def("temp_init", &LumpedThermalSolver::get_temp_init)
          .def("temp_prev", &LumpedThermalSolver::get_temp_prev);
 
-     // Eigen Solver
+     // Lithium Ion in Solid Electrode Solvers
+     // // Eigen Solver
      py::class_<EigenSolver>(m, "EigenSolver")
          .def(py::init<char, double, int>(),
               py::arg("electrode_type"), py::arg("soc_init"), py::arg("num_roots"), py::return_value_policy::reference)
