@@ -1,0 +1,33 @@
+#include <iostream>
+
+#include "solvers.h"
+
+// Electrode parameters below
+static double R = 1.25e-5;       // electrode particle radius in [m]
+static double c_max = 31833;     // max. electrode concentration [mol/m3]
+static double D = 3.9e-14;       // electrode diffusivity [m2/s]
+static double S = 0.7824;        // electrode electrochemical active area [m2]
+static double SOC_init = 0.7568; // initial electrode SOC
+static double c_init = c_max * SOC_init; // initial electrode concentration [mol/m3]
+static char electrode_type = 'n';
+
+// Simulation parameters below
+double i_app = -1.65;  // Applied current [A]
+double dt = 0.1;
+
+int main()
+{
+    PolynomialApprox poly_solver = PolynomialApprox(electrode_type, c_init, "higher");
+    
+    double t_prev = 0.0;
+    double soc_poly = SOC_init;
+    while(soc_poly > 0) {
+        poly_solver.solve(dt, t_prev, i_app, R, S, D);
+        t_prev += dt;
+        soc_poly = poly_solver.get_x_surf(c_max);
+        std::cout << poly_solver.get_x_surf(c_max) << std::endl;
+    }
+    std::cout << R << std::endl;
+
+    return 0;
+}
