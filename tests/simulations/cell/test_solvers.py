@@ -1,3 +1,11 @@
+"""
+Unittests for testing the C++ based battery cell solvers that uses the Python interface
+"""
+
+__author__ = "Moin Ahmed"
+__copyright__ = "Copyright 2024 by Moin Ahmed. All Rights Reserved."
+__status__ = "Deployed"
+
 import unittest
 
 import numpy as np
