@@ -3,7 +3,7 @@ import unittest
 import numpy as np
 
 from bmslogic.simulations.cell.cell import EigenSolver, LumpedThermalSolver, ROMSEISolver
-from bmslogic.simulations.cell.cell import ElectrolyteFVMCoordinates
+from bmslogic.simulations.cell.cell import ElectrolyteFVMCoordinates, ElectrolyteFVMSolver
 
 
 class TestROMSEISolver(unittest.TestCase):
@@ -40,13 +40,15 @@ class TestROMSEISolver(unittest.TestCase):
         # the first test case
         soc: float = 0.01
         ocp: float = 0.64981159
-        I_s = self.solver.calc_current(soc=soc, ocp=ocp, temp=self.temp, i_app=1.656)
+        I_s = self.solver.calc_current(
+            soc=soc, ocp=ocp, temp=self.temp, i_app=1.656)
         self.assertAlmostEqual(8.35925983e-12, I_s, places=16)
 
         # the second case
         soc: float = 0.7568
         ocp: float = 0.07464309895951012
-        I_s = self.solver.calc_current(soc=soc, ocp=ocp, temp=self.temp, i_app=1.656)
+        I_s = self.solver.calc_current(
+            soc=soc, ocp=ocp, temp=self.temp, i_app=1.656)
         self.assertAlmostEqual(1.55111785e-07, I_s, places=15)
 
     def test_method_calc_L(self) -> None:
@@ -397,6 +399,321 @@ class TestFVMCoordinates(unittest.TestCase):
         self.assertEqual(30, len(self.instance.array_dx))
 
 
+class TestElectrolyteFVMSolver(unittest.TestCase):
+    L_n: float = 8e-5
+    L_sep: float = 2.5e-5
+    L_p: float = 8.8e-5
+    epsilon_e_n: float = 0.385
+    epsilon_e_sep: float = 0.785
+    epsilon_e_p: float = 0.485
+    D_e: float = 3.5e-10  # [mol/m3]
+    brugg: float = 4
+    a_s_n: float = 5.78e3
+    a_s_p: float = 7.28e3
+    c_e_init: float = 1000  # [mol/m3]
+    transference: float = 0.354
 
-    
+    coords: ElectrolyteFVMCoordinates = ElectrolyteFVMCoordinates(
+        L_n=L_n, L_sep=L_sep, L_p=L_p)
+    instance: ElectrolyteFVMSolver = ElectrolyteFVMSolver(fvm_coords=coords, c_e_init=c_e_init, t_c=transference,
+                                                          epsilon_e_n=epsilon_e_n, epsilon_e_sep=epsilon_e_sep, epsilon_e_p=epsilon_e_p,
+                                                          a_s_n=a_s_n, a_s_p=a_s_p,
+                                                          D_e=D_e, brugg=brugg)
 
+    def test_properties(self):
+        self.assertEqual(self.transference, self.instance.t_c)
+        self.assertEqual(self.c_e_init, self.instance.c_e_init)
+        self.assertEqual(self.epsilon_e_n, self.instance.epsilon_e_n)
+        self.assertEqual(self.epsilon_e_sep, self.instance.epsilon_e_sep)
+        self.assertEqual(self.epsilon_e_p, self.instance.epsilon_e_p)
+        self.assertEqual(self.a_s_n, self.instance.a_s_n)
+        self.assertEqual(self.a_s_p, self.instance.a_s_p)
+        self.assertEqual(self.D_e, self.instance.D_e)
+        self.assertEqual(self.brugg, self.instance.brugg)
+
+    def test_property_coords(self):
+        self.assertEqual(8e-5 / 10, self.instance.coords.dx_n)
+        self.assertEqual(2.5e-5 / 10, self.instance.coords.dx_sep)
+        self.assertEqual(8.8e-5 / 10, self.instance.coords.dx_p)
+
+        self.assertAlmostEqual(4e-6, self.instance.coords.array_x_n[0])
+        self.assertAlmostEqual(
+            4e-6 + 1 * 8e-6, self.instance.coords.array_x_n[1])
+        self.assertAlmostEqual(
+            4e-6 + 2 * 8e-6, self.instance.coords.array_x_n[2])
+        self.assertAlmostEqual(
+            4e-6 + 3 * 8e-6, self.instance.coords.array_x_n[3])
+        self.assertAlmostEqual(
+            4e-6 + 4 * 8e-6, self.instance.coords.array_x_n[4])
+        self.assertAlmostEqual(
+            4e-6 + 5 * 8e-6, self.instance.coords.array_x_n[5])
+        self.assertAlmostEqual(
+            4e-6 + 6 * 8e-6, self.instance.coords.array_x_n[6])
+        self.assertAlmostEqual(
+            4e-6 + 7 * 8e-6, self.instance.coords.array_x_n[7])
+        self.assertAlmostEqual(
+            4e-6 + 8 * 8e-6, self.instance.coords.array_x_n[8])
+        self.assertAlmostEqual(
+            4e-6 + 9 * 8e-6, self.instance.coords.array_x_n[9])
+
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6, self.instance.coords.array_x_sep[0])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 1 * self.instance.coords.dx_sep, self.instance.coords.array_x_sep[1])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 2 * self.instance.coords.dx_sep, self.instance.coords.array_x_sep[2])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 3 * self.instance.coords.dx_sep, self.instance.coords.array_x_sep[3])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 4 * self.instance.coords.dx_sep, self.instance.coords.array_x_sep[4])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 5 * self.instance.coords.dx_sep, self.instance.coords.array_x_sep[5])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 6 * self.instance.coords.dx_sep, self.instance.coords.array_x_sep[6])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 7 * self.instance.coords.dx_sep, self.instance.coords.array_x_sep[7])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 8 * self.instance.coords.dx_sep, self.instance.coords.array_x_sep[8])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 9 * self.instance.coords.dx_sep, self.instance.coords.array_x_sep[9])
+
+        self.assertAlmostEqual(
+            1.05e-4 + 4.4e-6, self.instance.coords.array_x_p[0])
+        self.assertAlmostEqual(
+            1.05e-4 + 4.4e-6 + 1 * self.instance.coords.dx_p, self.instance.coords.array_x_p[1])
+        self.assertAlmostEqual(
+            1.05e-4 + 4.4e-6 + 2 * self.instance.coords.dx_p, self.instance.coords.array_x_p[2])
+        self.assertAlmostEqual(
+            1.05e-4 + 4.4e-6 + 3 * self.instance.coords.dx_p, self.instance.coords.array_x_p[3])
+        self.assertAlmostEqual(
+            1.05e-4 + 4.4e-6 + 4 * self.instance.coords.dx_p, self.instance.coords.array_x_p[4])
+        self.assertAlmostEqual(
+            1.05e-4 + 4.4e-6 + 5 * self.instance.coords.dx_p, self.instance.coords.array_x_p[5])
+        self.assertAlmostEqual(
+            1.05e-4 + 4.4e-6 + 6 * self.instance.coords.dx_p, self.instance.coords.array_x_p[6])
+        self.assertAlmostEqual(
+            1.05e-4 + 4.4e-6 + 7 * self.instance.coords.dx_p, self.instance.coords.array_x_p[7])
+        self.assertAlmostEqual(
+            1.05e-4 + 4.4e-6 + 8 * self.instance.coords.dx_p, self.instance.coords.array_x_p[8])
+        self.assertAlmostEqual(
+            1.05e-4 + 4.4e-6 + 9 * self.instance.coords.dx_p, self.instance.coords.array_x_p[9])
+
+        self.assertAlmostEqual(10, len(self.instance.coords.array_x_n))
+        self.assertAlmostEqual(10, len(self.instance.coords.array_x_sep))
+        self.assertAlmostEqual(10, len(self.instance.coords.array_x_p))
+
+    def test_property_array_c_e(self):
+        self.assertEqual(1000, self.instance.array_c_e[0])
+        self.assertTrue(np.array_equal(
+            1000 * np.ones(30), self.instance.array_c_e))
+
+        self.assertEqual(30, len(self.instance.array_c_e))
+
+    def test_property_array_epsilon_e(self):
+        self.assertTrue(np.allclose(self.epsilon_e_n *
+                        np.ones(10), self.instance.array_epsilon_e[:10]))
+        self.assertTrue(np.allclose(self.epsilon_e_sep,
+                        self.instance.array_epsilon_e[10:20]))
+        self.assertTrue(np.allclose(self.epsilon_e_p *
+                        np.ones(10), self.instance.array_epsilon_e[20:30]))
+
+    def test_property_array_D_e(self):
+        self.assertTrue(np.allclose(7.689727719e-12 *
+                        np.ones(10), self.instance.array_D_eff[:10]))
+        self.assertTrue(np.allclose(1.329066377e-10 *
+                        np.ones(10), self.instance.array_D_eff[10:20]))
+        self.assertTrue(np.allclose(1.936578022e-11 * np.ones(10),
+                        self.instance.array_D_eff[20:30], rtol=1e-10))
+
+    def test_property_array_a_s(self):
+        self.assertTrue(np.allclose(self.a_s_n * np.ones(10),
+                        self.instance.array_a_s[:10]))
+        self.assertTrue(np.allclose(
+            np.zeros(10), self.instance.array_a_s[10:20]))
+        self.assertTrue(np.allclose(self.a_s_p * np.ones(10),
+                        self.instance.array_a_s[20:30]))
+
+    def test_method_calc_diag(self):
+        L_n: float = 8e-5
+        L_sep: float = 2.5e-5
+        L_p: float = 8.8e-5
+
+        epsilon_e_n: float = 0.385
+        epsilon_e_sep: float = 0.785
+        epsilon_e_p: float = 0.485
+
+        D_e: float = 3.5e-10  # [m2/s]
+        brugg: float = 4
+        t_c: float = 0.354
+        c_e_init = 1000  # [mol/m3]
+
+        a_s_n: float = 5.78e3
+        a_s_p: float = 7.28e3
+
+        dt: float = 0.1  # [s]
+
+        coords: ElectrolyteFVMCoordinates = ElectrolyteFVMCoordinates(
+            L_n=L_n, L_sep=L_sep, L_p=L_p)
+        solver: ElectrolyteFVMSolver = ElectrolyteFVMSolver(fvm_coords=coords, c_e_init=c_e_init, t_c=t_c,
+                                                            epsilon_e_n=epsilon_e_n, epsilon_e_sep=epsilon_e_sep, epsilon_e_p=epsilon_e_p,
+                                                            a_s_n=a_s_n, a_s_p=a_s_p,
+                                                            D_e=D_e, brugg=brugg)
+
+        self.assertTrue(np.allclose(np.array(
+            [0.39701519956054687, 0.40903039912109374, 0.40903039912109374, 0.40903039912109374, 0.40903039912109374,
+             0.40903039912109374, 0.40903039912109374, 0.40903039912109374, 0.40903039912109374, 0.5643918250813804,
+             3.447111405166663, 5.03801240699999, 5.03801240699999, 5.03801240699999, 5.03801240699999,
+             5.03801240699999,
+             5.03801240699999, 5.03801240699999, 5.03801240699999, 3.45052361212832, 0.6631374097584988,
+             0.5350149282509039,
+             0.5350149282509039, 0.5350149282509039, 0.5350149282509039, 0.5350149282509039, 0.5350149282509039,
+             0.5350149282509039, 0.5350149282509039, 0.510007464125452]), np.array(solver.get_calc_diag(dt=dt))))
+
+    def test_method_calc_diags(self):
+        L_n: float = 8e-5
+        L_sep: float = 2.5e-5
+        L_p: float = 8.8e-5
+
+        epsilon_e_n: float = 0.385
+        epsilon_e_sep: float = 0.785
+        epsilon_e_p: float = 0.485
+
+        D_e: float = 3.5e-10  # [m2/s]
+        brugg: float = 4
+        t_c: float = 0.354
+        c_e_init = 1000  # [mol/m3]
+
+        a_s_n: float = 5.78e3
+        a_s_p: float = 7.28e3
+
+        dt: float = 0.1  # [s]
+
+        coords: ElectrolyteFVMCoordinates = ElectrolyteFVMCoordinates(
+            L_n=L_n, L_sep=L_sep, L_p=L_p)
+        solver: ElectrolyteFVMSolver = ElectrolyteFVMSolver(fvm_coords=coords, c_e_init=c_e_init, t_c=t_c,
+                                                            epsilon_e_n=epsilon_e_n, epsilon_e_sep=epsilon_e_sep, epsilon_e_p=epsilon_e_p,
+                                                            a_s_n=a_s_n, a_s_p=a_s_p,
+                                                            D_e=D_e, brugg=brugg)
+
+        self.assertTrue(np.allclose(np.array(
+            [0.39701519956054687, 0.40903039912109374, 0.40903039912109374, 0.40903039912109374, 0.40903039912109374,
+             0.40903039912109374, 0.40903039912109374, 0.40903039912109374, 0.40903039912109374, 0.5643918250813804,
+             3.447111405166663, 5.03801240699999, 5.03801240699999, 5.03801240699999, 5.03801240699999,
+             5.03801240699999,
+             5.03801240699999, 5.03801240699999, 5.03801240699999, 3.45052361212832, 0.6631374097584988,
+             0.5350149282509039,
+             0.5350149282509039, 0.5350149282509039, 0.5350149282509039, 0.5350149282509039, 0.5350149282509039,
+             0.5350149282509039, 0.5350149282509039, 0.510007464125452]), np.array(solver.get_calc_diag(dt=dt))))
+
+        self.assertTrue(
+            np.allclose(
+                np.array([-0.01201519956054687, -0.012015199560546868, -0.012015199560546875, -0.012015199560546865,
+                          -0.012015199560546865, -0.012015199560546875,
+                          -0.012015199560546875, -0.012015199560546865,
+                          -0.012015199560546865, -0.5356052016666676,
+                          -2.126506203499995, -2.126506203499995,
+                          -2.126506203499995,
+                          -2.126506203499995, -2.126506203499995, -2.126506203499995, -2.126506203499995,
+                          -2.126506203499995,
+                          -2.126506203499995, -0.15312994563304688,
+                          -0.02500746412545197, -0.02500746412545197,
+                          -0.02500746412545197,
+                          -0.02500746412545197, -0.02500746412545197,
+                          -0.02500746412545197, -0.02500746412545197,
+                          -0.02500746412545197,
+                          -0.02500746412545197]),
+                np.array(solver.get_calc_lower_diag(dt=dt))))
+
+        self.assertTrue(
+            np.allclose(
+                np.array([-0.01201519956054687, -0.012015199560546868, -0.012015199560546875, -0.012015199560546865,
+                          -0.012015199560546865, -0.012015199560546875, -
+                          0.012015199560546875, -0.012015199560546865,
+                          -0.012015199560546865, -0.1673766255208336, -
+                          2.126506203499995, -2.126506203499995,
+                          -2.126506203499995, -2.126506203499995, -2.126506203499995, -2.126506203499995,
+                          -2.126506203499995,
+                          -2.126506203499995, -2.126506203499995, -
+                          0.539017408628325, -0.02500746412545197,
+                          -0.02500746412545197, -0.02500746412545197, -
+                          0.02500746412545197, -0.02500746412545197,
+                          -0.02500746412545197, -0.02500746412545197, -0.02500746412545197, -0.02500746412545197]),
+                np.array(solver.get_calc_upper_diag(dt=dt))))
+
+    def test_method_calc_c_e_j(self):
+        L_n: float = 8e-5
+        L_sep: float = 2.5e-5
+        L_p: float = 8.8e-5
+
+        epsilon_e_n: float = 0.385
+        epsilon_e_sep: float = 0.785
+        epsilon_e_p: float = 0.485
+
+        D_e: float = 3.5e-10  # [m2/s]
+        brugg: float = 4
+        t_c: float = 0.354
+        c_e_init = 1000  # [mol/m3]
+
+        a_s_n: float = 5.78e3
+        a_s_p: float = 7.28e3
+
+        dt: float = 0.1  # [s]
+
+        coords: ElectrolyteFVMCoordinates = ElectrolyteFVMCoordinates(
+            L_n=L_n, L_sep=L_sep, L_p=L_p)
+        solver: ElectrolyteFVMSolver = ElectrolyteFVMSolver(fvm_coords=coords, c_e_init=c_e_init, t_c=t_c,
+                                                            epsilon_e_n=epsilon_e_n, epsilon_e_sep=epsilon_e_sep, epsilon_e_p=epsilon_e_p,
+                                                            a_s_n=a_s_n, a_s_p=a_s_p,
+                                                            D_e=D_e, brugg=brugg)
+
+        j_p = -1.53693327e-05 * np.ones(10)  # [mol/m2/s]
+        j_sep = np.zeros(10)  # [mol/m2/s]
+        j_n = 2.19362652e-05 * np.ones(10)  # [mol/m2/s]
+        j = np.append(np.append(j_n, j_sep), j_p)  # [mol/m2/s]
+
+        self.assertTrue(np.allclose(
+            np.array([385.00819074, 385.00819074, 385.00819074, 385.00819074, 385.00819074, 385.00819074, 385.00819074, 385.00819074, 385.00819074, 385.00819074,
+                      785., 785., 785., 785., 785., 785., 785., 785., 785., 785., 484.99277199, 484.99277199, 484.99277199, 484.99277199, 484.99277199, 484.99277199, 484.99277199, 484.99277199, 484.99277199, 484.99277199]),
+            solver.get_vec_ce_j(c_prev=solver.array_c_e, j=j, dt=dt)))
+
+    def test_method_solve(self):
+        L_n: float = 8e-5
+        L_sep: float = 2.5e-5
+        L_p: float = 8.8e-5
+
+        epsilon_e_n: float = 0.385
+        epsilon_e_sep: float = 0.785
+        epsilon_e_p: float = 0.485
+
+        D_e: float = 3.5e-10  # [m2/s]
+        brugg: float = 4
+        t_c: float = 0.354
+        c_e_init = 1000  # [mol/m3]
+
+        a_s_n: float = 5.78e3
+        a_s_p: float = 7.28e3
+
+        dt: float = 0.1  # [s]
+
+        coords: ElectrolyteFVMCoordinates = ElectrolyteFVMCoordinates(
+            L_n=L_n, L_sep=L_sep, L_p=L_p)
+        solver: ElectrolyteFVMSolver = ElectrolyteFVMSolver(fvm_coords=coords, c_e_init=c_e_init, t_c=t_c,
+                                                            epsilon_e_n=epsilon_e_n, epsilon_e_sep=epsilon_e_sep, epsilon_e_p=epsilon_e_p,
+                                                            a_s_n=a_s_n, a_s_p=a_s_p,
+                                                            D_e=D_e, brugg=brugg)
+
+        j_p = -1.53693327e-05 * np.ones(10)  # [mol/m2/s]
+        j_sep = np.zeros(10)  # [mol/m2/s]
+        j_n = 2.19362652e-05 * np.ones(10)  # [mol/m2/s]
+        j = np.append(np.append(j_n, j_sep), j_p)  # [mol/m2/s]
+
+        solver.solve(j=j, dt=dt)
+
+        self.assertTrue(np.allclose(
+            np.array([1000.02127464, 1000.02127464, 1000.02127464, 1000.02127464, 1000.02127464,
+                      1000.02127464, 1000.02127451, 1000.02127015, 1000.02112188, 1000.01607847,
+                      1000.00376418, 1000.00205212, 1000.0010976, 1000.00054825, 1000.00020129,
+                      999.99992864, 999.99962965, 999.99919394, 999.99846067, 999.99715915,
+                      999.9878872, 999.98522759, 999.985103, 999.98509717, 999.98509689,
+                      999.98509688, 999.98509688, 999.98509688, 999.98509688, 999.98509688]),
+            np.array(solver.array_c_e)))

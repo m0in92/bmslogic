@@ -361,6 +361,38 @@ PYBIND11_MODULE(cell, m)
          .def_property_readonly("array_x", &ElectrolyteFVMCoordinates::get_vector_x)
          .def_property_readonly("array_dx", &ElectrolyteFVMCoordinates::get_vector_dx);
 
+     // Electrolyte FVM Solver
+     py::class_<ElectrolyteFVMSolver>(m, "ElectrolyteFVMSolver")
+         .def(py::init<ElectrolyteFVMCoordinates, double, double,
+                       double, double, double,
+                       double, double,
+                       double, double>(),
+              py::arg("fvm_coords"), py::arg("c_e_init"), py::arg("t_c"),
+              py::arg("epsilon_e_n"), py::arg("epsilon_e_sep"), py::arg("epsilon_e_p"),
+              py::arg("a_s_n"), py::arg("a_s_p"),
+              py::arg("D_e"), py::arg("brugg"))
+         .def_property_readonly("coords", &ElectrolyteFVMSolver::get_coords)
+         .def_property_readonly("t_c", &ElectrolyteFVMSolver::get_t_c)
+         .def_property_readonly("c_e_init", &ElectrolyteFVMSolver::get_c_e_init)
+         .def_property_readonly("epsilon_e_n", &ElectrolyteFVMSolver::get_epsilon_e_n)
+         .def_property_readonly("epsilon_e_sep", &ElectrolyteFVMSolver::get_epsilon_e_sep)
+         .def_property_readonly("epsilon_e_p", &ElectrolyteFVMSolver::get_epsilon_e_p)
+         .def_property_readonly("a_s_n", &ElectrolyteFVMSolver::get_a_s_n)
+         .def_property_readonly("a_s_p", &ElectrolyteFVMSolver::get_a_s_p)
+         .def_property_readonly("D_e", &ElectrolyteFVMSolver::get_D_e)
+         .def_property_readonly("brugg", &ElectrolyteFVMSolver::get_brugg)
+         .def_property_readonly("array_c_e", &ElectrolyteFVMSolver::get_vector_c_e)
+         .def_property_readonly("array_a_s", &ElectrolyteFVMSolver::get_vector_a_s)
+         .def_property_readonly("array_D_eff", &ElectrolyteFVMSolver::get_vector_D_eff)
+         .def_property_readonly("array_epsilon_e", &ElectrolyteFVMSolver::get_vector_epsilon_e)
+
+         .def("get_calc_lower_diag", &ElectrolyteFVMSolver::get_calc_lower_diag, py::arg("dt"))
+         .def("get_calc_diag", &ElectrolyteFVMSolver::get_calc_diag, py::arg("dt"))
+         .def("get_calc_upper_diag", &ElectrolyteFVMSolver::get_calc_upper_diag, py::arg("dt"))
+         .def("get_vec_ce_j", &ElectrolyteFVMSolver::get_vec_ce_j, py::arg("c_prev"), py::arg("j"), py::arg("dt"))
+
+         .def("solve", &ElectrolyteFVMSolver::solve, py::arg("j"), py::arg("dt"));
+
      // Battery Solver
      py::class_<BatterySolver>(m, "BatterySolver")
          .def(py::init<BatteryCell, bool, bool, std::string>(),

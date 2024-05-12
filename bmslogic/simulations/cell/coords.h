@@ -9,6 +9,9 @@
  * 
  */
 
+#ifndef BMSLOGIC_SIMULATIONS_COORDS
+#define BMSLOGIC_SIMULATIONS_COORDS
+
 #include <vector>
 
 /**
@@ -57,3 +60,5 @@ private:
     std::vector<double> m_vector_x;
     std::vector<double> m_vector_dx;
 };
+
+#endif //BMSLOGIC_SIMULATIONS_COORDS

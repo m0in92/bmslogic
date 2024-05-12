@@ -8,7 +8,8 @@
 #include "battery_components.h"
 #include "cyclers.h"
 #include "solution.h"
-// #include "electrolyte_conc_solvers.h"
+#include "coords.h"
+
 
 /// @brief Degradation solvers
 class ROMSEISolver
@@ -164,6 +165,67 @@ private:
 };
 
 double lambda_function(double lambda_k);
+
+/*
+* Lithium-Ion Concentration Solver in the Electrolyte
+*/
+class ElectrolyteFVMSolver
+{
+public:
+    ElectrolyteFVMSolver(ElectrolyteFVMCoordinates i_coords, double i_c_e_init, double i_t_c,
+                         double i_epsilon_e_n, double i_epsilon_e_sep, double i_epsilon_e_p,
+                         double i_a_s_n, double i_a_s_p,
+                         double i_D_e, double i_brugg);
+    ElectrolyteFVMCoordinates get_coords() const { return m_coords; }
+
+    // getter functions
+    double get_t_c() const { return m_t_c; }
+    double get_c_e_init() const { return m_c_e_init; }
+    double get_epsilon_e_n() const { return m_epsilon_e_n; }
+    double get_epsilon_e_sep() const { return m_epsilon_e_sep; }
+    double get_epsilon_e_p() const { return m_epsilon_e_p; }
+    double get_a_s_n() const { return m_a_s_n; }
+    double get_a_s_p() const { return m_a_s_p; }
+    double get_D_e() const { return m_D_e; }
+    double get_brugg() const { return m_brugg; }
+    std::vector<double> get_vector_c_e() const { return m_vector_c_e; }
+    std::vector<double> get_vector_a_s() const { return m_vector_a_s; }
+    std::vector<double> get_vector_D_eff() const { return m_vector_D_eff; }
+    std::vector<double> get_vector_epsilon_e() const { return m_vector_epsilon_e; }
+    const std::vector<double> get_calc_lower_diag(double &dt) { return calc_lower_diag(dt); }
+    const std::vector<double> get_calc_diag(double &dt) { return calc_diag(dt); }
+    const std::vector<double> get_calc_upper_diag(double &dt) { return calc_upper_diag(dt); }
+    const std::vector<double> get_vec_ce_j(std::vector<double> &c_prev, std::vector<double> &j, double &dt) { return calc_vector_ce_j(c_prev, j, dt); }
+
+    // setter functions
+    void set_vector_c_e(std::vector<double> &i_vector_c_e) { m_vector_c_e = i_vector_c_e; }
+
+    // functions for calculations
+    std::vector<double> calc_lower_diag(double &dt);
+    std::vector<double> calc_diag(double &dt);
+    std::vector<double> calc_upper_diag(double &dt);
+
+    std::vector<double> calc_vector_ce_j(std::vector<double> &c_prev, std::vector<double> &j, double &dt);
+
+    void solve(std::vector<double> j, double dt);
+
+private:
+    ElectrolyteFVMCoordinates m_coords;
+    double m_t_c;
+    double m_c_e_init;
+    double m_epsilon_e_n;
+    double m_epsilon_e_sep;
+    double m_epsilon_e_p;
+    double m_a_s_n;
+    double m_a_s_p;
+    double m_D_e;
+    double m_brugg;
+
+    std::vector<double> m_vector_c_e;
+    std::vector<double> m_vector_epsilon_e;
+    std::vector<double> m_vector_D_eff;
+    std::vector<double> m_vector_a_s;
+};
 
 /*
 * Battery Solvers below
