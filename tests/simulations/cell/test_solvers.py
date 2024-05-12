@@ -3,6 +3,7 @@ import unittest
 import numpy as np
 
 from bmslogic.simulations.cell.cell import EigenSolver, LumpedThermalSolver, ROMSEISolver
+from bmslogic.simulations.cell.cell import ElectrolyteFVMCoordinates
 
 
 class TestROMSEISolver(unittest.TestCase):
@@ -250,6 +251,150 @@ class TestEigenSolver(unittest.TestCase):
         #                                              R=self.R, S=self.S, D_s=self.D_s,
         #                                              c_s_max=self.c_s_max)
         # self.assertAlmostEqual(0.5042242859771239, soc_new, places=6)
+
+
+class TestFVMCoordinates(unittest.TestCase):
+    """
+    Unittest for the finite volume method co-ordinates
+    """
+
+    instance = ElectrolyteFVMCoordinates(L_n=8e-5, L_sep=2.5e-5, L_p=8.8e-5)
+
+    def test_constructor(self):
+        self.assertEqual(8e-5, self.instance.L_n)
+        self.assertEqual(2.5e-5, self.instance.L_sep)
+        self.assertEqual(8.8e-5, self.instance.L_p)
+        self.assertEqual(8e-5 / 10, self.instance.dx_n)
+        self.assertEqual(2.5e-5 / 10, self.instance.dx_sep)
+        self.assertEqual(8.8e-5 / 10, self.instance.dx_p)
+
+    def test_property_array_x_n(self):
+        self.assertEqual(8e-5 / 10, self.instance.dx_n)
+        self.assertAlmostEqual(4e-6, self.instance.array_x_n[0])
+        self.assertAlmostEqual(4e-6 + 1 * 8e-6, self.instance.array_x_n[1])
+        self.assertAlmostEqual(4e-6 + 2 * 8e-6, self.instance.array_x_n[2])
+        self.assertAlmostEqual(4e-6 + 3 * 8e-6, self.instance.array_x_n[3])
+        self.assertAlmostEqual(4e-6 + 4 * 8e-6, self.instance.array_x_n[4])
+        self.assertAlmostEqual(4e-6 + 5 * 8e-6, self.instance.array_x_n[5])
+        self.assertAlmostEqual(4e-6 + 6 * 8e-6, self.instance.array_x_n[6])
+        self.assertAlmostEqual(4e-6 + 7 * 8e-6, self.instance.array_x_n[7])
+        self.assertAlmostEqual(4e-6 + 8 * 8e-6, self.instance.array_x_n[8])
+        self.assertAlmostEqual(4e-6 + 9 * 8e-6, self.instance.array_x_n[9])
+        self.assertAlmostEqual(10, len(self.instance.array_x_n))
+
+    def test_array_xs(self):
+        self.assertEqual(2.5e-5 / 10, self.instance.dx_sep)
+        self.assertAlmostEqual(8e-5 + 1.25e-6, self.instance.array_x_sep[0])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 1 * self.instance.dx_sep, self.instance.array_x_sep[1])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 2 * self.instance.dx_sep, self.instance.array_x_sep[2])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 3 * self.instance.dx_sep, self.instance.array_x_sep[3])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 4 * self.instance.dx_sep, self.instance.array_x_sep[4])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 5 * self.instance.dx_sep, self.instance.array_x_sep[5])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 6 * self.instance.dx_sep, self.instance.array_x_sep[6])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 7 * self.instance.dx_sep, self.instance.array_x_sep[7])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 8 * self.instance.dx_sep, self.instance.array_x_sep[8])
+        self.assertAlmostEqual(
+            8e-5 + 1.25e-6 + 9 * self.instance.dx_sep, self.instance.array_x_sep[9])
+        self.assertAlmostEqual(10, len(self.instance.array_x_sep))
+
+    def test_array_xp(self):
+        self.assertEqual(8.8e-5 / 10, self.instance.dx_p)
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6, self.instance.array_x_p[0])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 1 *
+                               self.instance.dx_p, self.instance.array_x_p[1])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 2 *
+                               self.instance.dx_p, self.instance.array_x_p[2])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 3 *
+                               self.instance.dx_p, self.instance.array_x_p[3])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 4 *
+                               self.instance.dx_p, self.instance.array_x_p[4])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 5 *
+                               self.instance.dx_p, self.instance.array_x_p[5])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 6 *
+                               self.instance.dx_p, self.instance.array_x_p[6])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 7 *
+                               self.instance.dx_p, self.instance.array_x_p[7])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 8 *
+                               self.instance.dx_p, self.instance.array_x_p[8])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 9 *
+                               self.instance.dx_p, self.instance.array_x_p[9])
+        self.assertAlmostEqual(10, len(self.instance.array_x_p))
+
+    def test_vector_x(self):
+        self.assertAlmostEqual(4e-6, self.instance.array_x[0])
+        self.assertAlmostEqual(4e-6 + 1 * 8e-6, self.instance.array_x[1])
+        self.assertAlmostEqual(4e-6 + 2 * 8e-6, self.instance.array_x[2])
+        self.assertAlmostEqual(4e-6 + 3 * 8e-6, self.instance.array_x[3])
+        self.assertAlmostEqual(4e-6 + 4 * 8e-6, self.instance.array_x[4])
+        self.assertAlmostEqual(4e-6 + 5 * 8e-6, self.instance.array_x[5])
+        self.assertAlmostEqual(4e-6 + 6 * 8e-6, self.instance.array_x[6])
+        self.assertAlmostEqual(4e-6 + 7 * 8e-6, self.instance.array_x[7])
+        self.assertAlmostEqual(4e-6 + 8 * 8e-6, self.instance.array_x[8])
+        self.assertAlmostEqual(4e-6 + 9 * 8e-6, self.instance.array_x[9])
+
+        self.assertAlmostEqual(8e-5 + 1.25e-6, self.instance.array_x[10])
+        self.assertAlmostEqual(8e-5 + 1.25e-6 + 1 *
+                               self.instance.dx_sep, self.instance.array_x[11])
+        self.assertAlmostEqual(8e-5 + 1.25e-6 + 2 *
+                               self.instance.dx_sep, self.instance.array_x[12])
+        self.assertAlmostEqual(8e-5 + 1.25e-6 + 3 *
+                               self.instance.dx_sep, self.instance.array_x[13])
+        self.assertAlmostEqual(8e-5 + 1.25e-6 + 4 *
+                               self.instance.dx_sep, self.instance.array_x[14])
+        self.assertAlmostEqual(8e-5 + 1.25e-6 + 5 *
+                               self.instance.dx_sep, self.instance.array_x[15])
+        self.assertAlmostEqual(8e-5 + 1.25e-6 + 6 *
+                               self.instance.dx_sep, self.instance.array_x[16])
+        self.assertAlmostEqual(8e-5 + 1.25e-6 + 7 *
+                               self.instance.dx_sep, self.instance.array_x[17])
+        self.assertAlmostEqual(8e-5 + 1.25e-6 + 8 *
+                               self.instance.dx_sep, self.instance.array_x[18])
+        self.assertAlmostEqual(8e-5 + 1.25e-6 + 9 *
+                               self.instance.dx_sep, self.instance.array_x[19])
+
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6, self.instance.array_x[20])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 1 *
+                               self.instance.dx_p, self.instance.array_x[21])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 2 *
+                               self.instance.dx_p, self.instance.array_x[22])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 3 *
+                               self.instance.dx_p, self.instance.array_x[23])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 4 *
+                               self.instance.dx_p, self.instance.array_x[24])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 5 *
+                               self.instance.dx_p, self.instance.array_x[25])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 6 *
+                               self.instance.dx_p, self.instance.array_x[26])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 7 *
+                               self.instance.dx_p, self.instance.array_x[27])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 8 *
+                               self.instance.dx_p, self.instance.array_x[28])
+        self.assertAlmostEqual(1.05e-4 + 4.4e-6 + 9 *
+                               self.instance.dx_p, self.instance.array_x[29])
+
+        self.assertAlmostEqual(30, len(self.instance.array_x))
+
+    def test_array_dx(self):
+        self.assertEqual(self.instance.dx_n, self.instance.array_dx[0])
+        self.assertEqual(self.instance.dx_n, self.instance.array_dx[5])
+        self.assertEqual(self.instance.dx_n, self.instance.array_dx[9])
+
+        self.assertEqual(self.instance.dx_sep, self.instance.array_dx[11])
+        self.assertEqual(self.instance.dx_sep, self.instance.array_dx[15])
+        self.assertEqual(self.instance.dx_sep, self.instance.array_dx[18])
+
+        self.assertEqual(self.instance.dx_p, self.instance.array_dx[20])
+        self.assertEqual(self.instance.dx_p, self.instance.array_dx[25])
+        self.assertEqual(self.instance.dx_p, self.instance.array_dx[-1])
+        self.assertEqual(30, len(self.instance.array_dx))
 
 
 

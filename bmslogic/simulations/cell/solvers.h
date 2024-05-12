@@ -80,7 +80,11 @@ private:
     double m_C_p;
 };
 
-/// @brief Solvers pertaining to the lithium-ion concentrations in the solid electrode region.
+/**
+ * @brief Lithium-ion concentration solver in the solid electrode region.
+ * 
+ */
+
 class BaseConcSolver
 {
 public:
@@ -161,22 +165,9 @@ private:
 
 double lambda_function(double lambda_k);
 
-// /// @brief Thermal Solvers
-// class LumpedThermalSolver
-// {
-// public:
-//     LumpedThermalSolver(double i_T) { m_T = i_T; }
-//     // public variables
-//     double m_T;
-//     double func_heat_balance(double i_h, double i_A, double i_rho, double i_Vol, double i_C_p,
-//                              double i_OCP_p, double i_OCP_n,
-//                              double i_dOCPdT_p, double i_dOCPdT_n,
-//                              double i_I, double i_V, double i_T, double i_T_amb);
-//     double solve(double dt, double t_prev,
-//                  double i_h, double i_A, double i_rho, double i_Vol, double i_C_p,
-//                  double i_OCP_p, double i_OCP_n, double i_dOCPdT_p, double i_dOCPdT_n, double i_I, double i_V,
-//                  double i_T, double i_T_amb);
-// };
+/*
+* Battery Solvers below
+*/
 
 class BaseBatterySolver
 {

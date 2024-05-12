@@ -21,6 +21,7 @@
 #include "models.h"
 #include "cyclers.h"
 #include "solution.h"
+#include "coords.h"
 #include "solvers.h"
 
 namespace py = pybind11;
@@ -30,21 +31,21 @@ PYBIND11_MODULE(cell, m)
      m.doc() = "This module contains the classes and functionalities associated with the battery cell simulations.";
 
      /*
-     * General open circuit potential functions
-     */
-     m.def("LCO", py::overload_cast<double&>(&positive_electrode_ocps::LCO), py::arg("soc"));
-     m.def("LCO", py::overload_cast<std::vector<double>&>(&positive_electrode_ocps::LCO), py::arg("soc"));
-     m.def("NMC", py::overload_cast<double&>(&positive_electrode_ocps::NMC), py::arg("soc"));
-     m.def("NMC", py::overload_cast<std::vector<double>&>(&positive_electrode_ocps::NMC), py::arg("soc"));
-     m.def("LFP", py::overload_cast<double&>(&positive_electrode_ocps::LFP), py::arg("soc"));
-     m.def("LFP", py::overload_cast<std::vector<double>&>(&positive_electrode_ocps::LFP), py::arg("soc"));
-     m.def("LMO", py::overload_cast<double&>(&positive_electrode_ocps::LMO), py::arg("soc"));
-     m.def("LMO", py::overload_cast<std::vector<double>&>(&positive_electrode_ocps::LMO), py::arg("soc"));
-     m.def("NCA", py::overload_cast<double&>(&positive_electrode_ocps::NCA), py::arg("soc"));
-     m.def("NCA", py::overload_cast<std::vector<double>&>(&positive_electrode_ocps::NCA), py::arg("soc"));
+      * General open circuit potential functions
+      */
+     m.def("LCO", py::overload_cast<double &>(&positive_electrode_ocps::LCO), py::arg("soc"));
+     m.def("LCO", py::overload_cast<std::vector<double> &>(&positive_electrode_ocps::LCO), py::arg("soc"));
+     m.def("NMC", py::overload_cast<double &>(&positive_electrode_ocps::NMC), py::arg("soc"));
+     m.def("NMC", py::overload_cast<std::vector<double> &>(&positive_electrode_ocps::NMC), py::arg("soc"));
+     m.def("LFP", py::overload_cast<double &>(&positive_electrode_ocps::LFP), py::arg("soc"));
+     m.def("LFP", py::overload_cast<std::vector<double> &>(&positive_electrode_ocps::LFP), py::arg("soc"));
+     m.def("LMO", py::overload_cast<double &>(&positive_electrode_ocps::LMO), py::arg("soc"));
+     m.def("LMO", py::overload_cast<std::vector<double> &>(&positive_electrode_ocps::LMO), py::arg("soc"));
+     m.def("NCA", py::overload_cast<double &>(&positive_electrode_ocps::NCA), py::arg("soc"));
+     m.def("NCA", py::overload_cast<std::vector<double> &>(&positive_electrode_ocps::NCA), py::arg("soc"));
 
-     m.def("graphite", py::overload_cast<double&>(&negative_electrode_ocps::graphite), py::arg("soc"));
-     m.def("graphite", py::overload_cast<std::vector<double>&>(&negative_electrode_ocps::graphite), py::arg("soc"));
+     m.def("graphite", py::overload_cast<double &>(&negative_electrode_ocps::graphite), py::arg("soc"));
+     m.def("graphite", py::overload_cast<std::vector<double> &>(&negative_electrode_ocps::graphite), py::arg("soc"));
 
      /*
       * Bindings pertaining to battery components
@@ -342,6 +343,23 @@ PYBIND11_MODULE(cell, m)
          .def("calc_soc_surf", &EigenSolver::solve_soc_surf,
               py ::arg("dt"), py::arg("t_prev"), py::arg("i_app"), py::arg("R"),
               py::arg("S"), py::arg("D_s"), py::arg("c_s_max"));
+
+     // Co-ordinate Systems
+     py::class_<ElectrolyteFVMCoordinates>(m, "ElectrolyteFVMCoordinates")
+         .def(py::init<double, double, double, int, int, int>(),
+              py::arg("L_n"), py::arg("L_sep"), py::arg("L_p"),
+              py::arg("num_grid_n") = 10, py::arg("num_grid_sep") = 10, py::arg("num_grid_n") = 10)
+         .def_property_readonly("L_n", &ElectrolyteFVMCoordinates::get_L_n)
+         .def_property_readonly("L_sep", &ElectrolyteFVMCoordinates::get_L_sep)
+         .def_property_readonly("L_p", &ElectrolyteFVMCoordinates::get_L_p)
+         .def_property_readonly("dx_n", &ElectrolyteFVMCoordinates::get_dx_n)
+         .def_property_readonly("dx_sep", &ElectrolyteFVMCoordinates::get_dx_sep)
+         .def_property_readonly("dx_p", &ElectrolyteFVMCoordinates::get_dx_p)
+         .def_property_readonly("array_x_n", &ElectrolyteFVMCoordinates::get_vector_x_n)
+         .def_property_readonly("array_x_sep", &ElectrolyteFVMCoordinates::get_vector_x_sep)
+         .def_property_readonly("array_x_p", &ElectrolyteFVMCoordinates::get_vector_x_p)
+         .def_property_readonly("array_x", &ElectrolyteFVMCoordinates::get_vector_x)
+         .def_property_readonly("array_dx", &ElectrolyteFVMCoordinates::get_vector_dx);
 
      // Battery Solver
      py::class_<BatterySolver>(m, "BatterySolver")
