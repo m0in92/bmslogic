@@ -18,3 +18,6 @@ from bmslogic.simulations.cell.cyclers import PyCharge, PyChargeRest, PyDischarg
 from bmslogic.simulations.cell.solution import PySolution, PyECMSolution
 
 from bmslogic.simulations.cell.solvers.battery import PySPSolver, PyEnhancedSPSolver
+
+# CPP from pybind11
+# from cell import ElectrolyteFVMCoordinates, ElectrolyteFVMSolver

@@ -3,7 +3,7 @@ import time
 import numpy as np
 import matplotlib.pyplot as plt
 
-from cpp_modules.solvers import ElectrolyteFVMCoordinates, ElectrolyteFVMSolver
+from bmslogic.simulations.cell.cell import ElectrolyteFVMCoordinates, ElectrolyteFVMSolver
 
 
 L_n: float = 8e-5
@@ -23,12 +23,12 @@ a_s_n: float = 5.78e3
 a_s_p: float = 7.28e3
 
 
-
 # Simulation parameters
 dt: float = 0.1  # [s]
 max_iter: int = 1000
 
-coords: ElectrolyteFVMCoordinates = ElectrolyteFVMCoordinates(L_n=L_n, L_sep=L_sep, L_p=L_p)
+coords: ElectrolyteFVMCoordinates = ElectrolyteFVMCoordinates(
+    L_n=L_n, L_sep=L_sep, L_p=L_p)
 solver: ElectrolyteFVMSolver = ElectrolyteFVMSolver(fvm_coords=coords, c_e_init=c_e_init, t_c=t_c,
                                                     epsilon_e_n=epsilon_e_n, epsilon_e_sep=epsilon_e_sep, epsilon_e_p=epsilon_e_p,
                                                     a_s_n=a_s_n, a_s_p=a_s_p,
