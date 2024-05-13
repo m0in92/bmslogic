@@ -30,7 +30,6 @@ c_e_init = 1000  # [mol/m3]
 a_s_n: float = 5.78e3
 a_s_p: float = 7.28e3
 
-
 # Simulation parameters
 dt: float = 0.1  # [s]
 max_iter: int = 1000
