@@ -11,6 +11,7 @@ BMSLOGIC_DIR: str = pathlib.Path(__file__).parent.__str__()
 
 # File paths pertaining to the databases
 EV_DATABASE_DIR: str = os.path.join(BMSLOGIC_DIR, "parameter_sets", "application", "EV")
+EV_DATABASE_FILE: str = os.path.join(EV_DATABASE_DIR, "EV_dataset.csv")
 EV_DRIVECYCLE_DIR: str = os.path.join(EV_DATABASE_DIR, "drivecycles")
 
 PARAMETER_SET_DIR: str = os.path.join(BMSLOGIC_DIR, 'parameter_sets')
