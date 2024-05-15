@@ -36,7 +36,8 @@ int main()
     OWL::ArrayXD j_n = 2.19362652e-05 * OWL::Ones(10);
     OWL::ArrayXD j_sep = OWL::Zeros(10);
     OWL::ArrayXD j_p = -2.19362652e-05 * OWL::Ones(10);
-    std::vector<double> j = OWL::append(j_n, OWL::append(j_sep, j_p)).getArray();
+    OWL::ArrayXD j_sep_p = OWL::append(j_sep, j_p);
+    std::vector<double> j = OWL::append(j_n, j_sep_p).getArray();
 
     solver.solve(j, dt);
     std::cout << solver.get_vector_c_e()[0] << std::endl;
