@@ -588,7 +588,7 @@ class EVDynamics:
         sol = Solution(veh_alias=self.EV.alias_name, t=self.DriveCycle.t)
         return sol
 
-    @staticmethod
+    # @staticmethod
     def simulate_over_all_timesteps(func) -> Callable[[], Solution]:
         """
         Acts as a decorator function, whose wrapper function defines the initial conditions and performs simulation
