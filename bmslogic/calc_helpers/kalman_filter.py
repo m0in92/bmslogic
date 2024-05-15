@@ -5,8 +5,8 @@ Contains the classes and functionalities for the implementing kalman filter (inc
 __all__ = ['InvalidKFMethodType', 'NormalRandomVector', 'SigmaPointKalmanFilter']
 
 __author__ = 'Moin Ahmed'
-__copywrite__ = 'Copywrite 2023 by BMSLogic. All rights reserved.'
-__status__ = 'Development'
+__copyright__ = 'Copyright 2024 by BMSLogic. All Rights Reserved.'
+__status__ = 'Deployed'
 
 
 from typing import Callable, Optional
