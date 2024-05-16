@@ -1,3 +1,5 @@
+#include <functional>
+#include <string>
 #include <vector>
 
 class NormalRandomVector
@@ -15,4 +17,25 @@ public:
 private:
     std::vector<std::vector<double>> m_vec;
     std::vector<std::vector<double>> m_cov;
+};
+
+class SigmaPointKalmanFilter
+{
+public:
+    SigmaPointKalmanFilter(NormalRandomVector i_X, NormalRandomVector i_W, NormalRandomVector i_V, int y_dim,
+                           std::function<NormalRandomVector(NormalRandomVector, NormalRandomVector, NormalRandomVector)> state_equation,
+                           std::function<NormalRandomVector(NormalRandomVector, NormalRandomVector, NormalRandomVector)> output_equation,
+                           std::string method_type);
+
+private:
+    NormalRandomVector m_X;
+    NormalRandomVector m_W;
+    NormalRandomVector m_V;
+
+    int m_y_dim;
+
+    std::function<NormalRandomVector(NormalRandomVector, NormalRandomVector, NormalRandomVector)> m_state_equation;
+    std::function<NormalRandomVector(NormalRandomVector, NormalRandomVector, NormalRandomVector)> m_output_equation;
+
+    std::string m_method_type;
 };
