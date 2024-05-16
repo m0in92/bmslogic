@@ -35,7 +35,7 @@ class TestErrors(unittest.TestCase):
         print(errors.calc_mse(arr1, arr2))
 
 
-class TestNormalRandomVector(unittest.TestCase):
+class TestPyNormalRandomVector(unittest.TestCase):
     mean = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9]).reshape(-1, 1)
     cov = np.ones(len(mean) ** 2).reshape(len(mean), len(mean))
 
