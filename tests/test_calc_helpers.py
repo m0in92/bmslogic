@@ -67,4 +67,14 @@ class TestSPKFProperties(unittest.TestCase):
         self.assertTrue(np.array_equal(self.vector_x, np.array(self.spkf_instance.X.get_vec)))
         self.assertTrue(np.array_equal(self.vector_w, self.spkf_instance.W.get_vec))
         self.assertTrue(np.array_equal(self.vector_v, self.spkf_instance.V.get_vec))
-        # self.assertEqual(self.y_dim, self.spkf_instance.y_dim)
+
+        self.assertEqual(2, self.spkf_instance.nX)
+        self.assertEqual(1, self.spkf_instance.nW)
+        self.assertEqual(1, self.spkf_instance.nV)
+
+        self.assertEqual(1, self.spkf_instance2.nX)
+        self.assertEqual(1, self.spkf_instance2.nW)
+        self.assertEqual(1, self.spkf_instance2.nV)
+
+    def test_aug_vector(self):
+        self.assertTrue(np.array_equal(np.array([2, 2, 0, 0]).reshape(-1, 1), self.spkf_instance.aug_vec()))

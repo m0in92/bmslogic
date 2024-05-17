@@ -30,5 +30,10 @@ PYBIND11_MODULE(calc_helpers, m)
                       py::arg("state_equation"), py::arg("output_equation"), py::arg("method_type")="CDKF")
         .def_property_readonly("X", &SigmaPointKalmanFilter::get_X)
         .def_property_readonly("W", &SigmaPointKalmanFilter::get_W)
-        .def_property_readonly("V", &SigmaPointKalmanFilter::get_V);
+        .def_property_readonly("V", &SigmaPointKalmanFilter::get_V)
+        .def_property_readonly("nX", &SigmaPointKalmanFilter::get_nX)
+        .def_property_readonly("nW", &SigmaPointKalmanFilter::get_nV)
+        .def_property_readonly("nV", &SigmaPointKalmanFilter::get_nW)
+        
+        .def("aug_vec", &SigmaPointKalmanFilter::aug_vec);
 }

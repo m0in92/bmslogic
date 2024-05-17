@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 
+#include "extern/owl.h"
+
 class NormalRandomVector
 {
 public:
@@ -31,6 +33,12 @@ public:
     NormalRandomVector get_X() { return m_X; }
     NormalRandomVector get_W() { return m_W; }
     NormalRandomVector get_V() { return m_V; }
+    int get_nX() { return m_nX; }
+    int get_nW() { return m_nW; }
+    int get_nV() { return m_nV; }
+
+    // helpers functions
+    std::vector<std::vector<double>> aug_vec();
 
 private:
     NormalRandomVector m_X;
@@ -38,11 +46,11 @@ private:
     NormalRandomVector m_V;
 
     int m_y_dim;
-    size_t m_mX = m_X.get_vec().size(); // size of vector X
-    size_t m_mW = m_X.get_vec().size(); // size of vector W
-    size_t m_mV = m_X.get_vec().size(); // size of vector V
-    int L;                              // dimensions of augmented covariance state vector
-    int p;                              // number of Sigma Points
+    int m_nX = m_X.get_vec().size(); // size of vector X
+    int m_nW = m_X.get_vec().size(); // size of vector W
+    int m_nV = m_X.get_vec().size(); // size of vector V
+    int m_L;                         // dimensions of augmented covariance state vector
+    int m_p;                         // number of Sigma Points
 
     std::function<NormalRandomVector(NormalRandomVector, NormalRandomVector, NormalRandomVector)> m_state_equation;
     std::function<NormalRandomVector(NormalRandomVector, NormalRandomVector, NormalRandomVector)> m_output_equation;
