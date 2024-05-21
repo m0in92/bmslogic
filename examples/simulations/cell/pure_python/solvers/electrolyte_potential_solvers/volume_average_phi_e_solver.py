@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from SPPy.solvers.electrolyte_conc import ElectrolyteConcVolAvgSolver
+from bmslogic.simulations.cell.solvers import ElectrolyteConcVolAvgSolver
 from SPPy.solvers.electrolyte_potential import ElectrolytePotentialVolAvgSolver
 from SPPy.models.battery import SPMe
 

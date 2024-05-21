@@ -9,7 +9,7 @@
  * 
  */
 
-#include "HummingBird.h"
+#include "hummingbird.h"
 
 
 namespace HB {
