@@ -340,7 +340,7 @@ PYBIND11_MODULE(cell, m)
          .def("get_summation_term", &EigenSolver::get_summation_term,
               py::arg("dt"), py::arg("t_prev"), py::arg("i_app"), py::arg("R"),
               py::arg("S"), py::arg("D_s"), py::arg("c_s_max"))
-         .def("calc_soc_surf", &EigenSolver::solve_soc_surf,
+         .def("calc_soc_surf", &EigenSolver::solve,
               py ::arg("dt"), py::arg("t_prev"), py::arg("i_app"), py::arg("R"),
               py::arg("S"), py::arg("D_s"), py::arg("c_s_max"));
 

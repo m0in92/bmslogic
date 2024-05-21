@@ -266,7 +266,7 @@ double EigenSolver::get_summation_term(double dt, double t_prev, double i_app, d
     return sum_term;
 }
 
-double EigenSolver::solve_soc_surf(double dt, double t_prev, double i_app, double R, double S, double D_s, double c_s_max)
+double EigenSolver::solve(double dt, double t_prev, double i_app, double R, double S, double D_s, double c_s_max)
 {
     double j_scaled_value = j_scaled(i_app, R, S, D_s, c_s_max);
     double sum_term = get_summation_term(t_prev, dt, i_app, R, S, D_s, c_s_max);

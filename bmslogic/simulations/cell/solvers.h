@@ -152,7 +152,7 @@ public:
     double solve_u_k(double roots, double t_prev, double dt, double u_k_prev, double i_app, double R, double S, double D_s, double c_s_max);
     void update_vec_u_k(double dt, double t_prev, double i_app, double R, double S, double D_s, double c_s_max);
     double get_summation_term(double dt, double t_prev, double i_app, double R, double S, double D_s, double c_s_max);
-    double solve_soc_surf(double dt, double t_prev, double i_app, double R, double S, double D_s, double c_s_max);
+    double solve(double dt, double t_prev, double i_app, double R, double S, double D_s, double c_s_max);
 
 private:
     char m_electrode_type;
