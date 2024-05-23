@@ -8,7 +8,21 @@ __author__ = 'Moin Ahmed'
 __copyright__ = 'Copyright 2024 by BMSLogic. All rights reserved.'
 __status__ = 'Deployed'
 
-from bmslogic import cell_sim
+# try/except block are used since the user of this script can call this Python module from any file path.
+# If the user calls this module from a path other than the project directory, then the except block appends the
+# absolute path to the project directory to the system path.
+try:
+    from bmslogic import cell_sim
+except ModuleNotFoundError as e:
+    import os
+    import pathlib
+    import sys
+
+    PROJECT_DIR: str = pathlib.Path(
+        __file__).parent.parent.parent.parent.parent.parent.parent.__str__()
+    sys.path.append(PROJECT_DIR)
+
+    from bmslogic import cell_sim
 
 # Operating parameters
 I: float = 1.656
@@ -35,6 +49,8 @@ solver: cell_sim.PySPSolver = cell_sim.PySPSolver(b_cell=cell,
 
 # simulate
 sol: cell_sim.PySolution = solver.solve(cycler_instance=dc)
+
+print(cell.elec_p.SOC, cell.elec_n.SOC)
 
 # Plot
 sol.comprehensive_isothermal_plot()

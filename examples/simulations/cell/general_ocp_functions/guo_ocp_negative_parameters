@@ -1,0 +1,30 @@
+import pathlib 
+import sys
+
+import numpy as np
+import matplotlib 
+import matplotlib.pyplot as plt
+
+sys.path.append(pathlib.Path(__file__).parent.parent.parent.parent.parent.__str__())
+from bmslogic.parameter_sets.test.funcs import OCP_ref_n, OCP_ref_p
+
+
+soc_n: np.ndarray = np.linspace(0, 0.8)
+ocp_n: np.ndarray = OCP_ref_n(soc_n)
+
+plt.plot(soc_n, ocp_n)
+plt.vlines(0.0189023, -0.1, 1.5, 'r', linestyles='dotted', label="$soc_n^{max}$")
+plt.vlines(0.7568, -0.1, 1.5, 'r', linestyles='dotted', label="$soc_n^{max}$")
+
+
+matplotlib.rc('xtick', labelsize=12) 
+matplotlib.rc('ytick', labelsize=12) 
+
+plt.ylabel("$U_n$", fontsize=15)
+plt.xlabel('$soc_n$', fontsize=15)
+plt.legend(loc="best")
+plt.tight_layout()
+plt.show()
+
+
+

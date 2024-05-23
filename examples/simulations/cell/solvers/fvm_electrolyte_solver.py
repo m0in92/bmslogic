@@ -3,7 +3,7 @@ Example of using the Python-based electrolyte battery cell solver.
 """
 
 __author__ = "Moin Ahmed"
-__copyright__ = "Copytright 2024 by Moin Ahmed. All Rights Reserved."
+__copyright__ = "Copyright 2024 by Moin Ahmed. All Rights Reserved."
 __status__ = "Deployed"
 
 import time

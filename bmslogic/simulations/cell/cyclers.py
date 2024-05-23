@@ -213,7 +213,6 @@ class PyDischargeRestChargeRest(PyBaseCycler):
 
 
 class PyCharge(PyBaseCycler):
-
     def __init__(self, charge_current: float, V_max: float, SOC_LIB_max: float=1, SOC_LIB: float=0):
         super().__init__(charge_current=charge_current, SOC_LIB_max=SOC_LIB_max)
         # self.charge_current = charge_current

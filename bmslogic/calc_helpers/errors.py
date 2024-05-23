@@ -10,7 +10,7 @@ __status__ = "Deployed"
 import numpy as np
 
 
-def calc_mse(array1: np.ndarray, array2: np.ndarray) -> np.ndarray:
+def calc_mse(array1: np.ndarray, array2: np.ndarray) -> float:
     """
     Calcs the mse of two numpy array
     :param array1: numpy array of observed values.
@@ -23,3 +23,7 @@ def calc_mse(array1: np.ndarray, array2: np.ndarray) -> np.ndarray:
     if not isinstance(array2, np.ndarray):
         raise TypeError("mse array 2 input needs to be a numpy array object.")
     return np.mean(np.square(array1 - array2))
+
+
+def absolute_error(array1: np.ndarray, array2: np.ndarray) -> np.ndarray:
+    return np.abs(array1 - array2)
