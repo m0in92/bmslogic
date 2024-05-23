@@ -7,9 +7,12 @@ __copyright__ = "Copyright 2024 by BMSLogic. All Rights Reserved."
 import pathlib
 import pickle  # pickle is used for storing the results of this script
 import os
+import sys
 import time
 
 import matplotlib.pyplot as plt
+
+sys.path.append(pathlib.Path(__file__).parent.parent.parent.parent.parent.parent.parent.__str__())
 
 from bmslogic.simulations.cell.cyclers import PyDischarge
 from bmslogic.simulations.cell.solvers.electrode_conc import PyEigenFuncExp, PyCNSolver, PyPolynomialApproximation
