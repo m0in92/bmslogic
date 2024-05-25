@@ -21,6 +21,8 @@ eigen_solver = PyEigenFuncExp(x_init=SOC_init, n=5, electrode_type='p')
 cn_solver = PyCNSolver(c_init=c_max*SOC_init, electrode_type='p')
 poly_solver = PyPolynomialApproximation(
     c_init=SOC_init*c_max, electrode_type='p', type='higher')
+poly_solver = PyPolynomialApproximation(
+    c_init=SOC_init*c_max, electrode_type='p', type='two')
 
 # Simulation parameters below
 i_app = -1.65  # Applied current [A]
@@ -87,6 +89,26 @@ while SOC_poly < 1:
     t_prev += dt  # update the time
 t_end = time.time()  # end timer
 print(f"Poly solver solved in {t_end - t_start} s")
+
+# -------------------------------------- Poly Solver - Two Order -------------------------------------------------------------------
+
+# Simulation parameters below
+t_prev = 0  # previous time [s]
+
+# solve for SOC wrt to time
+lst_poly_time_two, lst_poly_soc_two = [], []
+t_start = time.time()  # start timer
+SOC_poly_two = SOC_init
+while SOC_poly_two > 0:
+    i_app_: float = cycler.get_current(step_name="discharge")
+    SOC_poly_two: float = poly_solver_two(dt=dt, t_prev=t_prev,
+                                          i_app=i_app_, R=R, S=S, D_s=D, c_smax=c_max)
+    lst_poly_time_two.append(t_prev)
+    lst_poly_soc_two.append(SOC_poly_two)
+
+    t_prev += dt  # update the time
+t_end = time.time()  # end timer
+print(f"Poly solver - Two Order - solved in {t_end - t_start} s")
 
 # ----------------------------------------------Save Results-----------------------------------------------------------
 

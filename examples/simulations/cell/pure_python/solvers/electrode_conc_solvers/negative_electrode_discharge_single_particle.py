@@ -12,7 +12,8 @@ import time
 
 import matplotlib.pyplot as plt
 
-sys.path.append(pathlib.Path(__file__).parent.parent.parent.parent.parent.parent.parent.__str__())
+sys.path.append(pathlib.Path(
+    __file__).parent.parent.parent.parent.parent.parent.parent.__str__())
 
 from bmslogic.simulations.cell.cyclers import PyDischarge
 from bmslogic.simulations.cell.solvers.electrode_conc import PyEigenFuncExp, PyCNSolver, PyPolynomialApproximation
@@ -102,6 +103,26 @@ while SOC_poly > 0:
 t_end = time.time()  # end timer
 print(f"Poly solver solved in {t_end - t_start} s")
 
+# -------------------------------------- Poly Solver - Two Order -------------------------------------------------------------------
+
+# Simulation parameters below
+t_prev = 0  # previous time [s]
+
+# solve for SOC wrt to time
+lst_poly_time_two, lst_poly_soc_two = [], []
+t_start = time.time()  # start timer
+SOC_poly_two = SOC_init
+while SOC_poly_two > 0:
+    i_app_: float = cycler.get_current(step_name="discharge")
+    SOC_poly_two: float = poly_solver_two(dt=dt, t_prev=t_prev,
+                                          i_app=i_app_, R=R, S=S, D_s=D, c_smax=c_max)
+    lst_poly_time_two.append(t_prev)
+    lst_poly_soc_two.append(SOC_poly_two)
+
+    t_prev += dt  # update the time
+t_end = time.time()  # end timer
+print(f"Poly solver - Two Order - solved in {t_end - t_start} s")
+
 # ----------------------------------------------Save Results-----------------------------------------------------------
 
 FILE_DIR: str = pathlib.Path(__file__).parent.__str__()
@@ -124,11 +145,20 @@ with open(os.path.join(FILE_DIR, "negative_electrode_discharge_poly_time.pkl"), 
 with open(os.path.join(FILE_DIR, "negative_electrode_discharge_poly_soc.pkl"), "wb") as pkl_poly_file:
     pickle.dump(lst_poly_soc, pkl_poly_file)
 
+with open(os.path.join(FILE_DIR, "negative_electrode_discharge_poly_two_time.pkl"), "wb") as pkl_poly_two_file:
+    pickle.dump(lst_poly_time_two, pkl_poly_two_file)
+
+with open(os.path.join(FILE_DIR, "negative_electrode_discharge_poly_two_soc.pkl"), "wb") as pkl_poly_two_file:
+    pickle.dump(lst_poly_soc_two, pkl_poly_two_file)
+
+
 # ----------------------------------------------Plots------------------------------------------------------------------
 
 plt.plot(lst_cn_time, lst_cn_soc, label="Crank-Nicolson Scheme")
 plt.plot(lst_eigen_time, lst_eigen_soc, label="Eigen Expansion Method")
 plt.plot(lst_poly_time, lst_poly_soc, label="Polynomial Approximation")
+plt.plot(lst_poly_time_two, lst_poly_soc_two,
+         label="Polynomial Approximation - Two Order")
 
 plt.xlabel("Time [s]")
 plt.ylabel("Negative Electrode SOC")
