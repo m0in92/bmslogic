@@ -12,10 +12,9 @@ import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 
+FILE_DIR: str = pathlib.Path(__file__).parent.__str__()
 from bmslogic.calc_helpers.errors import calc_mse, absolute_error
 
-
-FILE_DIR: str = pathlib.Path(__file__).parent.__str__()
 
 # CN solvers below
 with open(os.path.join(FILE_DIR, "negative_electrode_discharge_cn_time.pkl"), "rb") as pkl_cn_file:

@@ -20,26 +20,26 @@ from bmslogic.simulations.cell.solvers.electrode_conc import PyEigenFuncExp
 
 
 # Electrode parameters below
-R = 1.25e-5  # electrode particle radius in [m]
-c_max = 31833  # max. electrode concentration [mol/m3]
-D = 3.9e-14  # electrode diffusivity [m2/s]
-S = 0.7824  # electrode electrochemical active area [m2]
-SOC_init = 0.7568  # initial electrode SOC
+R = 8.50E-06  # electrode particle radius in [m]
+c_max = 51410 # max. electrode concentration [mol/m3]
+D = 1.00E-14  # electrode diffusivity [m2/s]
+S = 1.1167  # electrode electrochemical active area [m2]
+SOC_init = 0.4956  # initial electrode SOC
 
 # initiate solver instances below
 eigen_solver_2: PyEigenFuncExp = PyEigenFuncExp(
-    x_init=SOC_init, n=2, electrode_type='n')
+    x_init=SOC_init, n=2, electrode_type='p')
 eigen_solver_5: PyEigenFuncExp = PyEigenFuncExp(
-    x_init=SOC_init, n=5, electrode_type='n')
+    x_init=SOC_init, n=5, electrode_type='p')
 eigen_solver_10: PyEigenFuncExp = PyEigenFuncExp(
-    x_init=SOC_init, n=10, electrode_type='n')
+    x_init=SOC_init, n=10, electrode_type='p')
 eigen_solver_20: PyEigenFuncExp = PyEigenFuncExp(
-    x_init=SOC_init, n=20, electrode_type='n')
+    x_init=SOC_init, n=20, electrode_type='p')
 eigen_solver_25: PyEigenFuncExp = PyEigenFuncExp(
-    x_init=SOC_init, n=25, electrode_type='n')
+    x_init=SOC_init, n=25, electrode_type='p')
 
 # Simulation parameters below
-i_app = 1.65  # Applied current [A]
+i_app = -1.65  # Applied current [A]
 dt = 0.1  # time increment [s]
 
 # initiate cycler instance. Note that the cyclers are programmed to be used for the battery cells and not for specific solvers.
@@ -67,7 +67,7 @@ def perform_eigen_discharge_sim(soc_init: float, N: int) -> tuple[list, list]:
     # solve for SOC wrt to time
     lst_eigen_time, lst_eigen_soc = [], []
     t_start = time.time()  # start timer
-    while eigen_soc_ > 0:
+    while eigen_soc_ < 0.98901:
         i_app_: float = cycler.get_current(step_name="discharge")
         eigen_soc_ = eigen_solver(
             dt=dt, t_prev=t_prev, i_app=i_app_, R=R, S=S, D_s=D, c_smax=c_max)
@@ -82,7 +82,7 @@ def perform_eigen_discharge_sim(soc_init: float, N: int) -> tuple[list, list]:
 
 
 # ----------------------------------Simulations------------------------------------------------------------------------
-n_sim: int = 1  # number of simulation runs
+n_sim: int = 5  # number of simulation runs
 
 for i in range(n_sim):
     lst_eigen_time_2, lst_eigen_soc_2 = perform_eigen_discharge_sim(
@@ -99,47 +99,46 @@ for i in range(n_sim):
 FILE_DIR: str = pathlib.Path(__file__).parent.__str__()
 
 # N=2
-with open(os.path.join(FILE_DIR, "saved_results", "neg_electrode_discharge_eigen_time_2.pkl"), "wb") as pkl_eigen_file:
+with open(os.path.join(FILE_DIR, "saved_results", "pos_electrode_discharge_eigen_time_2.pkl"), "wb") as pkl_eigen_file:
     pickle.dump(lst_eigen_time_2, pkl_eigen_file)
 
-with open(os.path.join(FILE_DIR, "saved_results", "neg_electrode_discharge_eigen_soc_2.pkl"), "wb") as pkl_eigen_file:
+with open(os.path.join(FILE_DIR, "saved_results", "pos_electrode_discharge_eigen_soc_2.pkl"), "wb") as pkl_eigen_file:
     pickle.dump(lst_eigen_soc_2, pkl_eigen_file)
 
 # N=5
-with open(os.path.join(FILE_DIR, "saved_results", "neg_electrode_discharge_eigen_time_5.pkl"), "wb") as pkl_eigen_file:
+with open(os.path.join(FILE_DIR, "saved_results", "pos_electrode_discharge_eigen_time_5.pkl"), "wb") as pkl_eigen_file:
     pickle.dump(lst_eigen_time_5, pkl_eigen_file)
 
-with open(os.path.join(FILE_DIR, "saved_results", "neg_electrode_discharge_eigen_soc_5.pkl"), "wb") as pkl_eigen_file:
+with open(os.path.join(FILE_DIR, "saved_results", "pos_electrode_discharge_eigen_soc_5.pkl"), "wb") as pkl_eigen_file:
     pickle.dump(lst_eigen_soc_5, pkl_eigen_file)
 
 # N=10
-with open(os.path.join(FILE_DIR, "saved_results", "neg_electrode_discharge_eigen_time_10.pkl"), "wb") as pkl_eigen_file:
+with open(os.path.join(FILE_DIR, "saved_results", "pos_electrode_discharge_eigen_time_10.pkl"), "wb") as pkl_eigen_file:
     pickle.dump(lst_eigen_time_10, pkl_eigen_file)
 
-with open(os.path.join(FILE_DIR, "saved_results", "neg_electrode_discharge_eigen_soc_10.pkl"), "wb") as pkl_eigen_file:
+with open(os.path.join(FILE_DIR, "saved_results", "pos_electrode_discharge_eigen_soc_10.pkl"), "wb") as pkl_eigen_file:
     pickle.dump(lst_eigen_soc_10, pkl_eigen_file)
 
 # N=20
-with open(os.path.join(FILE_DIR, "saved_results", "neg_electrode_discharge_eigen_time_20.pkl"), "wb") as pkl_eigen_file:
+with open(os.path.join(FILE_DIR, "saved_results", "pos_electrode_discharge_eigen_time_20.pkl"), "wb") as pkl_eigen_file:
     pickle.dump(lst_eigen_time_20, pkl_eigen_file)
 
-with open(os.path.join(FILE_DIR, "saved_results", "neg_electrode_discharge_eigen_soc_20.pkl"), "wb") as pkl_eigen_file:
+with open(os.path.join(FILE_DIR, "saved_results", "pos_electrode_discharge_eigen_soc_20.pkl"), "wb") as pkl_eigen_file:
     pickle.dump(lst_eigen_soc_20, pkl_eigen_file)
 
 # N=50
-with open(os.path.join(FILE_DIR, "saved_results", "neg_electrode_discharge_eigen_time_50.pkl"), "wb") as pkl_eigen_file:
+with open(os.path.join(FILE_DIR, "saved_results", "pos_electrode_discharge_eigen_time_50.pkl"), "wb") as pkl_eigen_file:
     pickle.dump(lst_eigen_time_50, pkl_eigen_file)
 
-with open(os.path.join(FILE_DIR, "saved_results", "neg_electrode_discharge_eigen_soc_50.pkl"), "wb") as pkl_eigen_file:
+with open(os.path.join(FILE_DIR, "saved_results", "pos_electrode_discharge_eigen_soc_50.pkl"), "wb") as pkl_eigen_file:
     pickle.dump(lst_eigen_soc_50, pkl_eigen_file)
 
 # N=100
-with open(os.path.join(FILE_DIR, "saved_results", "neg_electrode_discharge_eigen_time_100.pkl"), "wb") as pkl_eigen_file:
+with open(os.path.join(FILE_DIR, "saved_results", "pos_electrode_discharge_eigen_time_100.pkl"), "wb") as pkl_eigen_file:
     pickle.dump(lst_eigen_time_100, pkl_eigen_file)
 
-with open(os.path.join(FILE_DIR, "saved_results", "neg_electrode_discharge_eigen_soc_100.pkl"), "wb") as pkl_eigen_file:
+with open(os.path.join(FILE_DIR, "saved_results", "pos_electrode_discharge_eigen_soc_100.pkl"), "wb") as pkl_eigen_file:
     pickle.dump(lst_eigen_soc_100, pkl_eigen_file)
-
 
 # ----------------------------------Plots ------------------------------------------------------------------------
 plt.plot(lst_eigen_time_2, lst_eigen_soc_2, label="N=2")
