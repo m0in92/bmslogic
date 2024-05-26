@@ -232,7 +232,7 @@ class PyCharge(PyBaseCycler):
 
 
 class PyChargeRest(PyBaseCycler):
-    def __init__(self, charge_current: float, V_max:float, rest_time: float, SOC_LIB_max:float=1, SOC_LIB:float=0):
+    def __init__(self, charge_current: float, rest_time: float, V_max:float, SOC_LIB_max:float=1, SOC_LIB:float=0):
         super().__init__(charge_current=charge_current, SOC_LIB_max=SOC_LIB_max, SOC_LIB=SOC_LIB)
         self.cycle_steps = ['charge', 'rest']
         self.rest_time = rest_time
@@ -244,7 +244,7 @@ class PyChargeRest(PyBaseCycler):
         if step_name == 'charge':
             return self.charge_current
         elif step_name == 'rest':
-            return 0
+            return 0.0
 
     def reset(self) -> None:
         self.time_elapsed = 0.0

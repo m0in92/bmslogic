@@ -8,14 +8,24 @@ __status__ = "Deployed"
 import os
 import pathlib
 import pickle
+import sys
 
+import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 
+try:
+    from bmslogic.calc_helpers.errors import calc_mse, absolute_error
+except ModuleNotFoundError as e:
+    PROJECT_DIR = pathlib.Path(
+        __file__).parent.parent.parent.parent.parent.parent.parent.__str__()
+    sys.path.append(PROJECT_DIR)
+    from bmslogic.calc_helpers.errors import calc_mse, absolute_error
+
+
+# open file
+
 FILE_DIR: str = pathlib.Path(__file__).parent.__str__()
-from bmslogic.calc_helpers.errors import calc_mse, absolute_error
-
-
 # CN solvers below
 with open(os.path.join(FILE_DIR, "negative_electrode_discharge_cn_time.pkl"), "rb") as pkl_cn_file:
     lst_cn_time: list = pickle.load(pkl_cn_file)
@@ -39,12 +49,18 @@ with open(os.path.join(FILE_DIR, "negative_electrode_discharge_poly_soc.pkl"), "
 
 diff_len_cn_eigen: float = len(lst_cn_soc) - len(lst_eigen_soc)
 
+# plots
+
+matplotlib.rc('xtick', labelsize=12)
+matplotlib.rc('ytick', labelsize=12)
+
 plt.plot(lst_poly_time, absolute_error(np.array(lst_cn_soc)[
          :len(lst_poly_soc)], np.array(lst_poly_soc)), label="Polynomial Approximation")
 plt.plot(lst_eigen_time, absolute_error(np.array(lst_cn_soc)[
          :len(lst_eigen_soc)], np.array(lst_eigen_soc)), label="Eigen Expansion Method")
 
-plt.xlabel("Time [s]")
-plt.ylabel("Absolute Error [V]")
-plt.legend()
+plt.xlabel("Time [s]", fontsize=15)
+plt.ylabel("Absolute Error", fontsize=15)
+plt.legend(fontsize=12)
+plt.tight_layout()
 plt.show()

@@ -12,10 +12,9 @@ import time
 
 import matplotlib.pyplot as plt
 
-sys.path.append(pathlib.Path(
-    __file__).parent.parent.parent.parent.parent.parent.parent.__str__())
+sys.path.append(pathlib.Path(__file__).parent.parent.parent.parent.parent.parent.parent.__str__())
 
-from bmslogic.simulations.cell.cyclers import PyDischarge
+from bmslogic.simulations.cell.cyclers import PyCharge
 from bmslogic.simulations.cell.solvers.electrode_conc import PyEigenFuncExp, PyCNSolver, PyPolynomialApproximation
 
 
@@ -24,7 +23,7 @@ R = 1.25e-5  # electrode particle radius in [m]
 c_max = 31833  # max. electrode concentration [mol/m3]
 D = 3.9e-14  # electrode diffusivity [m2/s]
 S = 0.7824  # electrode electrochemical active area [m2]
-SOC_init = 0.7568  # initial electrode SOC
+SOC_init = 0.0189023  # initial electrode SOC
 
 # initiate solver instances below
 eigen_solver: PyEigenFuncExp = PyEigenFuncExp(
@@ -42,8 +41,8 @@ dt = 0.1  # time increment [s]
 
 # initiate cycler instance. Note that the cyclers are programmed to be used for the battery cells and not for specific solvers.
 # Hence there has to be some compromise in their usage in this script.
-cycler: PyDischarge = PyDischarge(
-    discharge_current=i_app, v_min=2.0, SOC_LIB_min=0.0, SOC_LIB=1.0)
+cycler: PyCharge = PyCharge(
+    charge_current=i_app, V_max=4.2, SOC_LIB_max=1.0, SOC_LIB=0.0)
 
 # # -------------------------------------- CN Solver ---------------------------------------------------------------------
 
@@ -54,7 +53,7 @@ t_prev = 0  # previous time [s]
 lst_cn_time, lst_cn_soc = [], []
 t_start = time.time()  # start timer
 SOC_cn = SOC_init
-while SOC_cn > 0:
+while SOC_cn < 0.7568:
     i_app_: float = cycler.get_current(step_name="discharge")
     SOC_cn = cn_solver(dt=dt, t_prev=t_prev, i_app=i_app_,
                        R=R, S=S, D_s=D, c_smax=c_max, solver_method="TDMA")
@@ -72,7 +71,7 @@ t_prev: float = 0.0  # previous time [s]
 # solve for SOC wrt to time
 lst_eigen_time, lst_eigen_soc = [], []
 t_start = time.time()  # start timer
-while SOC_eigen > 0:
+while SOC_eigen < 0.7568:
     i_app_: float = cycler.get_current(step_name="discharge")
     SOC_eigen = eigen_solver(dt=dt, t_prev=t_prev,
                              i_app=i_app_, R=R, S=S, D_s=D, c_smax=c_max)
@@ -92,7 +91,7 @@ t_prev = 0  # previous time [s]
 lst_poly_time, lst_poly_soc = [], []
 t_start = time.time()  # start timer
 SOC_poly = SOC_init
-while SOC_poly > 0:
+while SOC_poly < 0.7568:
     i_app_: float = cycler.get_current(step_name="discharge")
     SOC_poly = poly_solver(dt=dt, t_prev=t_prev,
                            i_app=i_app_, R=R, S=S, D_s=D, c_smax=c_max)
@@ -103,62 +102,33 @@ while SOC_poly > 0:
 t_end = time.time()  # end timer
 print(f"Poly solver solved in {t_end - t_start} s")
 
-# -------------------------------------- Poly Solver - Two Order -------------------------------------------------------------------
-
-# Simulation parameters below
-t_prev = 0  # previous time [s]
-
-# solve for SOC wrt to time
-lst_poly_time_two, lst_poly_soc_two = [], []
-t_start = time.time()  # start timer
-SOC_poly_two = SOC_init
-while SOC_poly_two > 0:
-    i_app_: float = cycler.get_current(step_name="discharge")
-    SOC_poly_two: float = poly_solver_two(dt=dt, t_prev=t_prev,
-                                          i_app=i_app_, R=R, S=S, D_s=D, c_smax=c_max)
-    lst_poly_time_two.append(t_prev)
-    lst_poly_soc_two.append(SOC_poly_two)
-
-    t_prev += dt  # update the time
-t_end = time.time()  # end timer
-print(f"Poly solver - Two Order - solved in {t_end - t_start} s")
-
-# ----------------------------------------------Save Results-----------------------------------------------------------
+# # ----------------------------------------------Save Results-----------------------------------------------------------
 
 FILE_DIR: str = pathlib.Path(__file__).parent.__str__()
 
-with open(os.path.join(FILE_DIR, "negative_electrode_discharge_eigen_time.pkl"), "wb") as pkl_eigen_file:
-    pickle.dump(lst_eigen_time, pkl_eigen_file)
-
-with open(os.path.join(FILE_DIR, "negative_electrode_discharge_eigen_soc.pkl"), "wb") as pkl_eigen_file:
-    pickle.dump(lst_eigen_soc, pkl_eigen_file)
-
-with open(os.path.join(FILE_DIR, "negative_electrode_discharge_cn_time.pkl"), "wb") as pkl_cn_file:
+with open(os.path.join(FILE_DIR, "saved_results", "neg_charge_cn_time.pkl"), "wb") as pkl_cn_file:
     pickle.dump(lst_cn_time, pkl_cn_file)
 
-with open(os.path.join(FILE_DIR, "negative_electrode_discharge_cn_soc.pkl"), "wb") as pkl_cn_file:
+with open(os.path.join(FILE_DIR, "saved_results", "neg_charge_cn_soc.pkl"), "wb") as pkl_cn_file:
     pickle.dump(lst_cn_soc, pkl_cn_file)
 
-with open(os.path.join(FILE_DIR, "negative_electrode_discharge_poly_time.pkl"), "wb") as pkl_poly_file:
+with open(os.path.join(FILE_DIR, "saved_results", "neg_charge_eigen_time.pkl"), "wb") as pkl_eigen_file:
+    pickle.dump(lst_eigen_time, pkl_eigen_file)
+
+with open(os.path.join(FILE_DIR, "saved_results", "neg_charge_eigen_soc.pkl"), "wb") as pkl_eigen_file:
+    pickle.dump(lst_eigen_soc, pkl_eigen_file)
+
+with open(os.path.join(FILE_DIR, "saved_results", "neg_charge_poly_time.pkl"), "wb") as pkl_poly_file:
     pickle.dump(lst_poly_time, pkl_poly_file)
 
-with open(os.path.join(FILE_DIR, "negative_electrode_discharge_poly_soc.pkl"), "wb") as pkl_poly_file:
+with open(os.path.join(FILE_DIR, "saved_results", "neg_charge_poly_soc.pkl"), "wb") as pkl_poly_file:
     pickle.dump(lst_poly_soc, pkl_poly_file)
 
-with open(os.path.join(FILE_DIR, "negative_electrode_discharge_poly_two_time.pkl"), "wb") as pkl_poly_two_file:
-    pickle.dump(lst_poly_time_two, pkl_poly_two_file)
-
-with open(os.path.join(FILE_DIR, "negative_electrode_discharge_poly_two_soc.pkl"), "wb") as pkl_poly_two_file:
-    pickle.dump(lst_poly_soc_two, pkl_poly_two_file)
-
-
-# ----------------------------------------------Plots------------------------------------------------------------------
+# # ----------------------------------------------Plots------------------------------------------------------------------
 
 plt.plot(lst_cn_time, lst_cn_soc, label="Crank-Nicolson Scheme")
 plt.plot(lst_eigen_time, lst_eigen_soc, label="Eigen Expansion Method")
 plt.plot(lst_poly_time, lst_poly_soc, label="Polynomial Approximation")
-plt.plot(lst_poly_time_two, lst_poly_soc_two,
-         label="Polynomial Approximation - Two Order")
 
 plt.xlabel("Time [s]")
 plt.ylabel("Negative Electrode SOC")

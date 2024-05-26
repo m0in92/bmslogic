@@ -45,7 +45,7 @@ matplotlib.rc('ytick', labelsize=12)
 plt.plot(lst_cn_time, lst_cn_soc, label="Crank-Nicolson Scheme")
 plt.plot(lst_eigen_time, lst_eigen_soc, label="Eigen Expansion Method")
 plt.plot(lst_poly_time, lst_poly_soc, label="Polynomial Approximation")
-plt.plot(lst_poly_time_two, lst_poly_soc_two, label="Polynomial Approximation - Two Order")
+# plt.plot(lst_poly_time_two, lst_poly_soc_two, label="Polynomial Approximation - Two Order")
 
 plt.xlabel("Time [s]", fontsize=15)
 plt.ylabel("Negative Electrode SOC", fontsize=15)
