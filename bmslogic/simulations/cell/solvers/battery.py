@@ -135,6 +135,8 @@ class PySPSolver(PyBaseSolver):
             self.SOC_solver_n = PyPolynomialApproximation(
                 c_init=self.b_cell.elec_n.max_conc * self.b_cell.elec_n.SOC_init,
                 electrode_type='n', type=type)
+            
+        self.b_model = PySPMe()
 
         self.t_model = PyLumped(b_cell=self.b_cell)  # thermal model object
 
@@ -625,7 +627,8 @@ class PyEnhancedSPSolver(PySPSolver):
         # to be the initial electrolyte concentration.
         L_cell: float = self.b_cell.elec_n.L + \
             self.b_cell.electrolyte.L + self.b_cell.elec_p.L
-        return self.b_model(ocp_p=self.b_cell.elec_p.OCP, ocp_n=self.b_cell.elec_n.OCP,
+        
+        V: float = self.b_model(ocp_p=self.b_cell.elec_p.OCP, ocp_n=self.b_cell.elec_n.OCP,
                             R_cell=self.b_cell.R_cell,
                             k_p=self.b_cell.elec_p.k, S_p=self.b_cell.elec_p.S, c_smax_p=self.b_cell.elec_p.max_conc,
                             soc_surf_p=self.b_cell.elec_p.SOC,
@@ -639,6 +642,12 @@ class PyEnhancedSPSolver(PySPSolver):
                             c_e_n=self.electrolyte_conc_solver.extrapolate_conc(
                                 L_value=0),
                             c_e_p=self.electrolyte_conc_solver.extrapolate_conc(L_value=L_cell))
+        
+        # Calc temp below and update the battery cell's temperature attribute.
+        if not self.bool_isothermal:
+            self.b_cell.T = self.calc_cell_temp(t_model=self.t_model, t_prev=t_prev, dt=dt,
+                                                temp_prev=self.b_cell.T, V=V, I=i_app)
+        return V
 
     @timer
     def solve(self, cycler: PyBaseCycler, sol_name: Optional[str] = None, 
@@ -661,7 +670,79 @@ class PyEnhancedSPSolver(PySPSolver):
 
     def _custom_cycler_solve(self, custom_cycler_instance: PyCustomCycler, sol_name: str = None, save_csv_dir: str = None,
                              verbose: bool = False, t_increment: float = 0.1, termination_criteria: str = 'V'):
-        pass
+        if not isinstance(custom_cycler_instance, PyCustomCycler):
+            raise TypeError(
+                'inputted cycler needs to be a PyCustomCycler object.')
+
+        # boolean that indicates if the cycling step is completed.
+        step_completed = False
+
+        cap = 0
+        cap_charge = 0
+        cap_discharge = 0
+        t_curr = t_prev = 0.0  # time value of this current iteration step.
+        while not step_completed:
+            t_curr += t_increment
+            dt = t_curr - t_prev
+
+            I = custom_cycler_instance.get_current(
+                step_name=custom_cycler_instance.cycle_steps[0], t=t_curr)
+
+            # All simulations parameters and battery cell attributes updates are done the in the code block
+            # below.
+            try:
+                V = self.solve_one_iteration(t_prev=t_prev, dt=dt, i_app=I, temp=self.b_cell.T)
+            except InvalidSOCException as e:
+                print(e)
+                break
+
+            if t_curr > custom_cycler_instance.t_max:
+                print('cycling continued till the last time value in the t_array.')
+                break
+
+            # Calc charge capacity, discharge capacity, and overall LIB capacity
+            cap = self.calc_SOC_cap(
+                cap_prev=cap, Q=self.b_cell.cap, I=I, dt=dt)
+            delta_SOC_cap = self.delta_SOC_cap(Q=self.b_cell.cap, I=I, dt=dt)
+            if I < 0:
+                cap_discharge += self.delta_cap(I=I, dt=dt)
+                custom_cycler_instance.SOC_LIB -= delta_SOC_cap
+            elif I > 0:
+                cap_charge += self.delta_cap(I=I, dt=dt)
+                custom_cycler_instance.SOC_LIB += delta_SOC_cap
+
+            if verbose == True:
+                print("time elapsed [s]: ", custom_cycler_instance.time_elapsed, ", cycle_no: ", 1,
+                      'step: ', custom_cycler_instance.cycle_steps[0], "current [A]", I,
+                      ", terminal voltage [V]: ", V, ", SOC_LIB: ", custom_cycler_instance.SOC_LIB,
+                      "cap: ", cap)
+
+            # update time
+            t_prev = t_curr
+            custom_cycler_instance.time_elapsed += t_increment
+
+            # Update results lists
+            self.sol_init.update(cycle_num=1,
+                                 cycle_step='custom',
+                                 t=custom_cycler_instance.time_elapsed,
+                                 I=I,
+                                 V=V,
+                                 OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
+                                 x_surf_p=self.b_cell.elec_p.SOC,
+                                 x_surf_n=self.b_cell.elec_n.SOC,
+                                 cap=cap,
+                                 cap_charge=cap_charge,
+                                 cap_discharge=cap_discharge,
+                                 SOC_LIB=custom_cycler_instance.SOC_LIB,
+                                 battery_cap=self.b_cell.cap,
+                                 temp=self.b_cell.T,
+                                 R_cell=self.b_cell.R_cell)
+            # if self.bool_degradation:
+            #     self.sol_init.lst_j_tot.append(self.SEI_model.J_tot)
+            #     self.sol_init.lst_j_i.append(self.SEI_model.J_i)
+            #     self.sol_init.lst_j_s.append(self.SEI_model.J_s)
+
+        return PySolution(base_solution_instance=self.sol_init, name=sol_name, save_csv_dir=save_csv_dir)
 
     def _cycler_solve(self, cycler: PyBaseCycler, sol_name: str = None, save_csv_dir: str = None, verbose: bool = False,
                       dt: float = 0.1, termination_criteria: float = 'V'):
@@ -730,7 +811,7 @@ class PyEnhancedSPSolver(PySPSolver):
                         print("time elapsed [s]: ", cycler.time_elapsed, ", cycle_no: ", cycle_no,
                               'step: ', step, "current [A]", i_app, ", terminal voltage [V]: ", V, ", SOC_LIB: ",
                               cycler.SOC_LIB, "SOC_p: ", self.b_cell.elec_p.SOC, "SOC_n: ", self.b_cell.elec_n.SOC,
-                              "cap: ", cap)
+                              "cap: ", cap, "temp: ", self.b_cell.T)
         electrolyte_conc: np.ndarray = self.electrolyte_conc_solver.array_c_e[np.newaxis, :]
         self.sol_init.electrolyte_conc = np.append(self.sol_init.electrolyte_conc,
                                                    electrolyte_conc,
