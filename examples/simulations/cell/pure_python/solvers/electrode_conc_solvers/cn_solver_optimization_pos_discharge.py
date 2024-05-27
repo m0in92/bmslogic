@@ -20,15 +20,14 @@ from bmslogic.simulations.cell.solvers.electrode_conc import PyCNSolver
 
 
 # Electrode parameters below
-R = 1.25e-5  # electrode particle radius in [m]
-c_max = 31833  # max. electrode concentration [mol/m3]
-D = 3.9e-14  # electrode diffusivity [m2/s]
-S = 0.7824  # electrode electrochemical active area [m2]
-SOC_init = 0.7568  # initial electrode SOC
+R = 8.5e-6  # electrode particle radius in [m]
+c_max = 51410  # max. electrode concentration [mol/m3]
+D = 1e-14  # electrode diffusivity [m2/s]
+S = 1.1167  # electrode electrochemical active area [m2]
+SOC_init = 0.4956  # initial electrode SOC
 
 # Simulation parameters below
 i_app = 1.65  # Applied current [A]
-SOC_eigen = SOC_init  # electrode current SOC
 dt = 0.1  # time increment [s]
 
 # initiate solver instances below
@@ -71,7 +70,7 @@ def perform_cn_sim(soc_init: float, cn_method_type: str) -> tuple[list, list]:
 
     # initiate solver instances below
     cn_solver: PyCNSolver = PyCNSolver(
-        c_init=SOC_init*c_max, electrode_type='n')
+        c_init=SOC_init*c_max, electrode_type='p')
     
     # print(matprint(cn_solver.M(dt=dt, R=R, D=D)))
     print(cn_solver.M(dt=dt, R=R, D=D))

@@ -8,6 +8,8 @@ __copyright__ = "Copyright SPPy 2024. All rights reserved."
 __status__ = "Deployed"
 
 import pathlib
+import pickle
+import os
 import time
 import sys
 
@@ -41,23 +43,66 @@ j_n = PySPMe.molar_flux_electrode(
     I=-1.656, S=0.7824, electrode_type='n') * np.ones(len(co_ords.array_x_n))  # [mol/m2/s]
 j = np.append(np.append(j_n, j_sep), j_p)  # [mol/m2/s]
 
+# --------------------------------SIMULATION-----------------------------------------------------------------
+
+lst_0: list = conc_solver.array_c_e
+lst_1000: list = []
+lst_2000: list = []
+lst_3000: list = []
+lst_4000: list = []
+
 time_start: int = time.time()
 for i in range(max_iter):
     conc_solver.solve_ce(j=j, dt=dt, solver_method='TDMA')
+
+    if i==1000:
+        lst_1000 = conc_solver.array_c_e.tolist()
+
+    if i==2000:
+        lst_2000 = conc_solver.array_c_e.tolist()
+
+    if i==3000:
+        lst_3000 = conc_solver.array_c_e.tolist()
+
+    if i==4000:
+        lst_4000 = conc_solver.array_c_e.tolist()
+
 time_end: int = time.time()
 
-print("Simulation loop solution time ", time_end - time_start, " s.")
+print(f"Solution Time [s]: {time_end-time_start}")
 
-print(f"Electrolyte Length Dimensions [m]: {conc_solver.co_ords.array_x}")
-print(f"Electrolyte conc. [mol/m3]: {conc_solver.array_c_e}")
-print(
-    f"Electrolyte conc. at L=0 [mol/m3]: {conc_solver.extrapolate_conc(L_value=0.0)} mol/m3")
-print(
-    f"Electrolyte conc. at L=L_cell [mol/m3]: {conc_solver.extrapolate_conc(L_value=19.3e-5)} mol/m3")
+# ----------------------------------SAVE RESULTS ---------------------------------------------------------
 
+FILE_DIR_TO_SAVE = os.path.join(pathlib.Path(__file__).parent, "saved_results")
+
+with open(os.path.join(FILE_DIR_TO_SAVE, "fvm_inverse_neg_discharge_x.pkl"), "wb") as pkl_file:
+    pickle.dump(co_ords.array_x.tolist(), pkl_file)
+
+with open(os.path.join(FILE_DIR_TO_SAVE, "fvm_neg_discharge_t_0.pkl"), "wb") as pkl_file:
+    pickle.dump(lst_0, pkl_file)
+
+with open(os.path.join(FILE_DIR_TO_SAVE, "fvm_neg_discharge_t_1000.pkl"), "wb") as pkl_file:
+    pickle.dump(lst_1000, pkl_file)
+
+with open(os.path.join(FILE_DIR_TO_SAVE, "fvm_neg_discharge_t_2000.pkl"), "wb") as pkl_file:
+    pickle.dump(lst_2000, pkl_file)
+
+with open(os.path.join(FILE_DIR_TO_SAVE, "fvm_neg_discharge_t_3000.pkl"), "wb") as pkl_file:
+    pickle.dump(lst_3000, pkl_file)
+
+with open(os.path.join(FILE_DIR_TO_SAVE, "fvm_neg_discharge_t_4000.pkl"), "wb") as pkl_file:
+    pickle.dump(lst_4000, pkl_file)
+
+# -----------------------------------PLOTS --------------------------------------------------------------
 plt.xlabel("Battery Cell Thickness [m]")
 plt.ylabel("Electrolyte Conc. [mol/m3]")
 plt.title(f"Electrolyte Conc. [mol/m3] after {max_iter * dt} s of discharge")
 plt.ticklabel_format(axis="x", scilimits=[-3, 1])
-plt.plot(co_ords.array_x, conc_solver.array_c_e)
+plt.plot(co_ords.array_x, lst_0, label="t=0s")
+plt.plot(co_ords.array_x, lst_1000, label="t=1000s")
+plt.plot(co_ords.array_x, lst_2000, label="t=2000s")
+plt.plot(co_ords.array_x, lst_3000, label="t=3000s")
+plt.plot(co_ords.array_x, lst_4000, label="t=4000s")
+
+plt.legend()
 plt.show()

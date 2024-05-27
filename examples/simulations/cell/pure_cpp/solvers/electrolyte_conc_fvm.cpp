@@ -1,3 +1,14 @@
+/**
+ * @file electrolyte_conc_fvm.cpp
+ * @author Moin Ahmed (moinahmed100@gmail.com)
+ * @brief Contains the script to run the finite volume method for the electrolyte conc.
+ * @version 0.1
+ * @date 2024-05-27
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
+
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -40,9 +51,17 @@ int main()
     OWL::ArrayXD j_p = -2.19362652e-05 * OWL::Ones(10);
     OWL::ArrayXD j_sep_p = OWL::append(j_sep, j_p);
     std::vector<double> j = OWL::append(j_n, j_sep_p).getArray();
-
-    solver.solve(j, dt);
+    
+    clock_t start, end;
+    start = clock();
+    for(int i=0; i < 40000; i++) {
+        solver.solve(j, dt);
+    }
+    end = clock();
+    
     std::cout << solver.get_vector_c_e()[0] << std::endl;
+        std::cout << std::fixed << std::setprecision(10) << "Solution time [s]: " << double(end - start) / double(CLOCKS_PER_SEC) << std::endl;
+
 
     return 0;
 }
