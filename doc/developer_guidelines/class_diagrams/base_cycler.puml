@@ -1,0 +1,20 @@
+@startuml
+
+class BaseCycler {
+    + double time_elapsed = 0.0
+    + double SOC_LIB
+    + double SOC_LIB_min
+    + double SOC_LIB_max
+    + double charge_current
+    + double discharge_current
+    + double rest_time = 0.0;
+    + int num_cycles = 1;
+    + vector<std::string> cycle_steps
+    + vector<std::double> t_vector
+    + vector<std::double> current_vector
+
+    + double get_current(std::string cycle_step, int time_step)
+    + void reset()
+}
+
+@enduml

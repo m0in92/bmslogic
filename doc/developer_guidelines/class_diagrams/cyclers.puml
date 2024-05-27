@@ -1,0 +1,62 @@
+@startuml
+
+'https://plantuml.com/class-diagram
+
+BaseCycler <|-left Discharge
+BaseCycler <|- DischargeRest
+BaseCycler <|-- ChargeDischarge
+BaseCycler <|-- Charge
+BaseCycler <|-- CustomCycler
+CustomCycler <|-- HPPCCyler
+CustomCycler <|-- DSTCycler
+
+class BaseCycler {
+    + double time_elapsed = 0.0
+    + double SOC_LIB
+    + double SOC_LIB_min
+    + double SOC_LIB_max
+    + double charge_current
+    + double discharge_current
+    + double rest_time = 0.0;
+    + int num_cycles = 1;
+    + vector<std::string> cycle_steps
+    + vector<std::double> t_vector
+    + vector<std::double> current_vector
+
+    + double get_current(std::string cycle_step, int time_step)
+    + void reset()
+}
+
+class Discharge {
+    std::vector<std::str> cycle_steps = {"discharge"}
+}
+
+class DischargeRest {
+    std::vector<std::str> cycle_steps = {"discharge", "rest"}
+}
+
+class Charge {
+    std::vector<std::str> cycle_steps = {"charge"}
+}
+
+class ChargeDischarge {
+    std::vector<std::str> cycle_steps = {"charge", "rest", "discharge", "rest"}
+}
+
+class CustomCycler {
+    std::vector<std::str> cycle_steps = {"custom"}
+}
+
+class HPPCCyler {
+    t1: float
+    t2: float
+    i_app: float
+    hppc_steps: int
+}
+
+class DSTCycler {
+    cap_nom: float
+    dst_steps: int
+}
+
+@enduml

@@ -640,10 +640,31 @@ class PyEnhancedSPSolver(PySPSolver):
                                 L_value=0),
                             c_e_p=self.electrolyte_conc_solver.extrapolate_conc(L_value=L_cell))
 
-    # @timer
-    def solve(self, cycler: PyBaseCycler, sol_name: Optional[str] = None, verbose: bool = False,
+    @timer
+    def solve(self, cycler: PyBaseCycler, sol_name: Optional[str] = None, 
+              save_csv_dir: Optional[str] = None,
+              verbose: bool = False,
               dt: float = 0.1, termination_criteria: str = "V") -> PySolution:
+        
+        # check for function input parameter types below.
+        if not isinstance(cycler, PyBaseCycler):
+            raise TypeError("cycler needs to be a Cycler object.")
+        
+        if isinstance(cycler, PyCustomCycler):
+            return self._custom_cycler_solve(custom_cycler_instance=cycler, sol_name=sol_name,
+                                             save_csv_dir=save_csv_dir, verbose=verbose, t_increment=dt,
+                                             termination_criteria=termination_criteria)
+        else:
+            return self._cycler_solve(cycler=cycler, sol_name=sol_name,
+                                      save_csv_dir=save_csv_dir, verbose=verbose, dt=dt,
+                                      termination_criteria=termination_criteria)
 
+    def _custom_cycler_solve(self, custom_cycler_instance: PyCustomCycler, sol_name: str = None, save_csv_dir: str = None,
+                             verbose: bool = False, t_increment: float = 0.1, termination_criteria: str = 'V'):
+        pass
+
+    def _cycler_solve(self, cycler: PyBaseCycler, sol_name: str = None, save_csv_dir: str = None, verbose: bool = False,
+                      dt: float = 0.1, termination_criteria: float = 'V'):
         for cycle_no in tqdm(range(cycler.num_cycles)):
 
             cap: float = 0
@@ -715,11 +736,3 @@ class PyEnhancedSPSolver(PySPSolver):
                                                    electrolyte_conc,
                                                    axis=0)
         return PySolution(base_solution_instance=self.sol_init, name=sol_name)
-
-    def _custom_cycler_solve(self, custom_cycler_instance: PyCustomCycler, sol_name: str = None, save_csv_dir: str = None,
-                             verbose: bool = False, t_increment: float = 0.1, termination_criteria: str = 'V'):
-        pass
-
-    def _cycler_solve(self, cycler: PyBaseCycler, sol_name: str = None, save_csv_dir: str = None, verbose: bool = False,
-                      t_increment: float = 0.1, termination_criteria: float = 'V'):
-        pass

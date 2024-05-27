@@ -11,13 +11,14 @@ __status__ = 'Deployed'
 # try/except block are used since the user of this script can call this Python module from any file path.
 # If the user calls this module from a path other than the project directory, then the except block appends the
 # absolute path to the project directory to the system path.
+import os
+import pathlib
+import pickle
+import sys
+
 try:
     from bmslogic import cell_sim
 except ModuleNotFoundError as e:
-    import os
-    import pathlib
-    import sys
-
     PROJECT_DIR: str = pathlib.Path(
         __file__).parent.parent.parent.parent.parent.parent.parent.__str__()
     sys.path.append(PROJECT_DIR)
@@ -50,7 +51,15 @@ solver: cell_sim.PySPSolver = cell_sim.PySPSolver(b_cell=cell,
 # simulate
 sol: cell_sim.PySolution = solver.solve(cycler_instance=dc)
 
-print(cell.elec_p.SOC, cell.elec_n.SOC)
+# Save Results
+DIR_TO_SAVE: str = os.path.join(pathlib.Path(__file__).parent.__str__(), "saved_results")
+
+with open(os.path.join(DIR_TO_SAVE, "discharge_spm_isothermal_time.pkl"), "wb") as pkl_file:
+    pickle.dump(sol.t.tolist(), pkl_file)
+
+with open(os.path.join(DIR_TO_SAVE, "discharge_spm_isothermal_V.pkl"), "wb") as pkl_file:
+    pickle.dump(sol.V.tolist(), pkl_file)
+
 
 # Plot
 sol.comprehensive_isothermal_plot()

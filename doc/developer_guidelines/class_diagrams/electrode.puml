@@ -1,0 +1,23 @@
+class Electrode {
+- double L
+- double A
+- double kappa
+- double epsilon
+- double max_conc
+- double R
+- double S
+- double T_ref
+- double D_ref
+- double k_ref
+- double Ea_D
+- double Ea_R
+- double alpha
+- double brugg
+- double SOC_init
+- double T
+
++ double func_OCP(double SOC)
++ double func_dOCPdT(double SOC)
++ double calc_D()
++ double calc_k()
+}

@@ -1,0 +1,74 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+Electrode <-- PElectrode
+Electrode <-- NElectrode
+
+BatteryCell *-- PElectrode
+BatteryCell *-- NElectrode
+BatteryCell *-- Electrolyte
+
+class Electrode {
+- double L
+- double A
+- double kappa
+- double epsilon
+- double max_conc
+- double R
+- double S
+- double T_ref
+- double D_ref
+- double k_ref
+- double Ea_D
+- double Ea_R
+- double alpha
+- double brugg
+- double SOC_init
+- double T
+
++ double func_OCP(double SOC)
++ double func_dOCPdT(double SOC)
++ double calc_D()
++ double calc_k()
+}
+
+class PElectrode {
++ electrode_type: str = 'p'
+}
+
+class NElectrode {
++ electrode_type: str = 'n'
+}
+
+class Electrolyte {
+    - double conc 
+    - double L  
+    - double kappa 
+    - double epsilon
+    - double brugg
+
+    + double get_conc() 
+    + double get_L() 
+    + double get_kappa() 
+    + double get_epsilon() 
+    + double get_brugg() 
+    + double get_kappa_eff()
+}
+
+class BatteryCell {
+    + PElectrode elec_p;
+    + NElectrode elec_n;
+    + Electrolyte electrolyte;
+    - double T    
+    - double rho
+    - double Vol
+    - double C_p
+    - double h
+    - double A
+    - double cap
+    - double V_max
+    - double V_min
+    - double R_cell
+}
+
+@enduml

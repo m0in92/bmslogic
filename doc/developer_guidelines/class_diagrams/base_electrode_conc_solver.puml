@@ -1,0 +1,10 @@
+@startuml
+
+class BaseElectrodeConcSolver {
+    + solve(dt: float, t_prev: float, i_app: float)
+
+    - electrode_type: str
+    - c_s_surf: float
+}
+
+@enduml
