@@ -7,13 +7,29 @@ __copyright__ = 'Copyright 2024 by cell_simCPPy. All rights reserved.'
 __status__ = 'deployed'
 
 import time
+import os
+import pathlib
+import pickle
+import sys
 
 import numpy as np
 
-import bmslogic.simulations.cell.cell as cell_sim
-from bmslogic.simulations.cell.plot import Plot
+try:
+    import bmslogic.simulations.cell.cell as cell_sim
+    from bmslogic.simulations.cell.plot import Plot
 
-from examples.simulations.cell.example_parameter import *
+    from examples.simulations.cell.example_parameter import *
+
+except ModuleNotFoundError as e:
+    PROJECT_DIR: str = pathlib.Path(
+        __file__).parent.parent.parent.parent.__str__()
+    print(PROJECT_DIR)
+    sys.path.append(PROJECT_DIR)
+
+    import bmslogic.simulations.cell.cell as cell_sim
+    from bmslogic.simulations.cell.plot import Plot
+
+    from examples.simulations.cell.example_parameter import *
 
 
 if __name__ == "__main__":

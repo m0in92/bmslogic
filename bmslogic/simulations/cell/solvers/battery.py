@@ -136,7 +136,7 @@ class PySPSolver(PyBaseSolver):
                 c_init=self.b_cell.elec_n.max_conc * self.b_cell.elec_n.SOC_init,
                 electrode_type='n', type=type)
             
-        self.b_model = PySPMe()
+        # self.b_model = PySPM()
 
         self.t_model = PyLumped(b_cell=self.b_cell)  # thermal model object
 

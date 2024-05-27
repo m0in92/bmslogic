@@ -17,17 +17,23 @@ with open(os.path.join(FILE_DIR_TO_OPEN, "hppc_spm_isothermal_time.pkl"), "rb") 
 with open(os.path.join(FILE_DIR_TO_OPEN, "hppc_spm_isothermal_V.pkl"), "rb") as pkl_file:
     sol_V: list = pickle.load(pkl_file)
 
+with open(os.path.join(FILE_DIR_TO_OPEN, "hppc_spm_non_isothermal_time.pkl"), "rb") as pkl_file:
+    sol_spm_non_isothermal_time: list = pickle.load(pkl_file)
+
+with open(os.path.join(FILE_DIR_TO_OPEN, "hppc_spm_non_isothermal_V.pkl"), "rb") as pkl_file:
+    sol_spm_non_isothermal_V: list = pickle.load(pkl_file)
+
 with open(os.path.join(FILE_DIR_TO_OPEN, "hppc_espm_isothermal_time.pkl"), "rb") as pkl_file:
     sol_espm_time: list = pickle.load(pkl_file)
 
 with open(os.path.join(FILE_DIR_TO_OPEN, "hppc_espm_isothermal_V.pkl"), "rb") as pkl_file:
     sol_espm_V: list = pickle.load(pkl_file)
 
-with open(os.path.join(FILE_DIR_TO_OPEN, "hppc_spm_non_isothermal_time.pkl"), "rb") as pkl_file:
-    sol_spm_non_isothermal_time: list = pickle.load(pkl_file)
+with open(os.path.join(FILE_DIR_TO_OPEN, "hppc_espm_non_isothermal_time.pkl"), "rb") as pkl_file:
+    sol_espm_non_isothermal_time: list = pickle.load(pkl_file)
 
-with open(os.path.join(FILE_DIR_TO_OPEN, "hppc_spm_non_isothermal_V.pkl"), "rb") as pkl_file:
-    sol_spm_non_isothermal_V: list = pickle.load(pkl_file)
+with open(os.path.join(FILE_DIR_TO_OPEN, "hppc_espm_non_isothermal_V.pkl"), "rb") as pkl_file:
+    sol_espm_non_isothermal_V: list = pickle.load(pkl_file)
 
 # ----------------------------------------PLOTS------------------------------------------------------------------------
 # Plots
@@ -37,6 +43,7 @@ matplotlib.rc('ytick', labelsize=12)
 plt.plot(sol_time, sol_V, label="SPM")
 plt.plot(sol_spm_non_isothermal_time, sol_spm_non_isothermal_V, label="SPM-non_isothermal")
 plt.plot(sol_espm_time, sol_espm_V, label="Enhanced SPM")
+plt.plot(sol_espm_non_isothermal_time, sol_espm_non_isothermal_V, label="ESPM-non_isothermal")
 
 plt.xlabel("Time [$s$]", fontsize=15)
 plt.ylabel("Terminal Voltage [$V$]", fontsize=15)

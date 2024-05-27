@@ -43,7 +43,7 @@ temp: float = 298.15
 V_min: float = 3
 SOC_min: float = 0.1
 soc_lib_init: float = 1.0
-rest_time: float = 3600  # [s]
+rest_time: float = 500  # [s]
 SOC_LIB_MAX: float = 1
 
 # Modelling parameters
@@ -61,7 +61,7 @@ dc: cell_sim.PyDischargeRest = cell_sim.PyDischargeRest(discharge_current=I, V_m
                                                         SOC_LIB_min=SOC_min, SOC_LIB=soc_lib_init, 
                                                         rest_time=rest_time, SOC_LIB_max=SOC_LIB_MAX)
 solver: cell_sim.PySPSolver = cell_sim.PySPSolver(b_cell=cell,
-                                                  isothermal=True, degradation=False,
+                                                  isothermal=False, degradation=False,
                                                   electrode_SOC_solver='poly')
 
 # simulate
