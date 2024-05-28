@@ -4,9 +4,9 @@
  * @brief functionalities for defining the battery cyclers
  * @version 0.1
  * @date 2024-05-04
- * 
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 
 #ifndef BMSLOGIC_PROJECT_CYCLERS_H
@@ -15,7 +15,6 @@
 #include <string>
 #include <vector>
 // #include "pybind11/pybind11.h"
-
 
 /**
  * @class BaseCycler
@@ -56,11 +55,10 @@ public:
     void reset_time_elapsed();
 };
 
-
 /**
  * @class Discharge
- * @brief 
- * 
+ * @brief
+ *
  */
 class Discharge : public BaseCycler
 {
@@ -70,8 +68,8 @@ public:
 
 /**
  * @class DischargeRest
- * @brief 
- * 
+ * @brief
+ *
  */
 class DischargeRest : public BaseCycler
 {
@@ -81,8 +79,8 @@ public:
 
 /**
  * @class Charge
- * @brief 
- * 
+ * @brief
+ *
  */
 class Charge : public BaseCycler
 {
@@ -90,10 +88,16 @@ public:
     Charge(double i_charge_current, double i_V_max, double i_soc_lib_max, double i_soc);
 };
 
+class ChargeRest : public BaseCycler
+{
+public:
+    ChargeRest(double i_charge_current, double i_V_min, double i_soc_lib_max, double i_soc, double i_rest_time);
+};
+
 /**
  * @class ChargeDischarge
- * @brief 
- * 
+ * @brief
+ *
  */
 class ChargeDischarge : public BaseCycler
 {
@@ -104,8 +108,8 @@ public:
 
 /**
  * @class CustomCycler
- * @brief 
- * 
+ * @brief
+ *
  */
 class CustomCycler : public BaseCycler
 {

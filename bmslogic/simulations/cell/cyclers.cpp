@@ -4,15 +4,14 @@
  * @brief functionalities for defining the battery cyclers
  * @version 0.1
  * @date 2024-05-04
- * 
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 
 #include <stdexcept>
 
 #include "cyclers.h"
-
 
 /// @brief constructor for the BaseCycler. Essentially the typical LIB parameters are initialized.
 BaseCycler::BaseCycler() : SOC_LIB(1.0),
@@ -79,6 +78,16 @@ Charge::Charge(double i_charge_current, double i_V_max, double i_soc_lib_max, do
     cycle_steps = {"charge"};
 }
 
+ChargeRest::ChargeRest(double i_charge_current, double i_V_min, double i_soc_lib_max, double i_soc, double i_rest_time)
+{
+    charge_current = i_charge_current;
+    V_max = V_max;
+    SOC_LIB_max = i_soc_lib_max;
+    SOC_LIB = i_soc;
+    rest_time = i_rest_time;
+    cycle_steps = {"charge", "rest"};
+}
+
 ChargeDischarge::ChargeDischarge(double i_charge_current, double i_discharge_current, double i_V_min, double i_V_max,
                                  double i_soc_min, double i_soc_max, double i_soc, double i_rest_time) : BaseCycler()
 {
@@ -107,7 +116,7 @@ CustomCycler::CustomCycler(std::vector<double> i_t, std::vector<double> i_curren
     cycle_steps = {"custom"};
 }
 
-// double CustomCycler::get_current(std::string cycling_step, double t) 
+// double CustomCycler::get_current(std::string cycling_step, double t)
 // {
 //     return -1.656;
 // }

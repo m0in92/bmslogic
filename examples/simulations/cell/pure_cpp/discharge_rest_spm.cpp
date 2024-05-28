@@ -23,10 +23,11 @@ int main()
     double soc_n = 0.7522;
     double soc_p = 0.4952;
 
-    double discharge_current = 1.5;
+    double discharge_current = 1.65;
     double V_min = 2.5;
     double SOC_lib_min = 0.0;
     double SOC_lib = 0.0;
+    double rest_time = 3600;  // [s]
 
     std::function<double(double)> OCP_ref_n_ = OCP_ref_n;
     std::function<double(double)> dOCPdT_n_ = dOCPdT_n;
@@ -42,7 +43,7 @@ int main()
     Electrolyte electrolyte = Electrolyte(c_init_e, L_e, kappa_e, epsilon_e, brugg_e);
     BatteryCell b_cell = BatteryCell(elec_p, elec_n, electrolyte, rho, Vol, C_p, h, A, cap, V_max, V_min, R_cell);
 
-    Discharge cycler = Discharge(discharge_current, V_min, SOC_lib_min, SOC_lib);
+    DischargeRest cycler = DischargeRest(discharge_current, V_min, SOC_lib_min, SOC_lib, rest_time);
 
     BatterySolver solver = BatterySolver(b_cell, true, true, "poly");
     Solution sol = solver.solve(cycler);
