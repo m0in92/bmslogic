@@ -2,12 +2,14 @@
 Contains the Python's unittests for the classes pertaining to the battery components.
 """
 
-__all__ = ['TestElectrode', "TestNElectrode", "TestPElectrode", "TestElectrolyte", "TestBatteryCell"]
+__all__ = ['TestElectrode', "TestNElectrode",
+           "TestPElectrode", "TestElectrolyte", "TestBatteryCell"]
 
 __author__ = "Moin Ahmed"
 __copyright__ = "Copyright 2024 by Moin Ahmed. All Rights Reserved."
-__status__ =  "deployed"
+__status__ = "deployed"
 
+import typing
 import unittest
 
 import bmslogic.simulations.cell.cell as bc
@@ -128,10 +130,10 @@ class TestNElectrode(unittest.TestCase):
     alpha_n: float = 0.5
     SOC_init_n: float = 0.59
 
-    n_electrode: bc.NElectrode = bc.NElectrode(L=L_n, A=A_n, kappa=kappa_n, epsilon=epsilon_n, max_conc=max_conc_n, R=R_n, S=S_n, 
+    n_electrode: bc.NElectrode = bc.NElectrode(L=L_n, A=A_n, kappa=kappa_n, epsilon=epsilon_n, max_conc=max_conc_n, R=R_n, S=S_n,
                                                T_ref=T_ref_n, D_ref=D_ref_n, k_ref=k_ref_n, Ea_D=Ea_D_n, Ea_R=Ea_R_n, alpha=alpha_n,
                                                brugg=brugg_n, SOC=SOC_init_n, T=T, func_OCP=OCP_ref_n, func_dOCPdT=dOCPdT_n)
-    
+
     def test_properties(self) -> None:
         self.assertAlmostEqual(self.T, self.n_electrode.T)
         self.assertAlmostEqual(self.SOC_init, self.n_electrode.soc)
@@ -151,7 +153,7 @@ class TestNElectrode(unittest.TestCase):
         Tests for the calculated ocp value at the reference temperature
         """
         T: float = 298.15
-        electrode: bc.NElectrode = bc.NElectrode(L=self.L_n, A=self.A_n, kappa=self.kappa_n, epsilon=self.epsilon_n, max_conc=self.max_conc_n, R=self.R_n, S=self.S_n, 
+        electrode: bc.NElectrode = bc.NElectrode(L=self.L_n, A=self.A_n, kappa=self.kappa_n, epsilon=self.epsilon_n, max_conc=self.max_conc_n, R=self.R_n, S=self.S_n,
                                                  T_ref=self.T_ref_n, D_ref=self.D_ref_n, k_ref=self.k_ref_n, Ea_D=self.Ea_D_n, Ea_R=self.Ea_R_n, alpha=self.alpha_n,
                                                  brugg=self.brugg_n, SOC=self.SOC_init, T=T, func_OCP=OCP_ref_n, func_dOCPdT=dOCPdT_n)
         self.assertAlmostEqual(OCP_ref_n(SOC=self.SOC_init), electrode.ocp())
@@ -179,7 +181,7 @@ class TestPElectrode(unittest.TestCase):
     T: float = 298.15
     SOC_init_p: float = 0.59
     SOC_p: float = SOC_init_p
-    soc_min_p: float = 0.4956 
+    soc_min_p: float = 0.4956
     soc_max_p: float = 0.989011
     alpha_p: float = 0.5
 
@@ -187,7 +189,7 @@ class TestPElectrode(unittest.TestCase):
         L=L_p, A=A_p, kappa=kappa_p, epsilon=epsilon_p, max_conc=max_conc_p, R=R_p, S=S_p,
         T_ref=T_ref_p, D_ref=D_ref_p, k_ref=k_ref_p, Ea_D=Ea_D_p, Ea_R=Ea_R_p, alpha=alpha_p,
         brugg=brugg_p, SOC=SOC_init_p, T=T, func_OCP=OCP_ref_p, func_dOCPdT=dOCPdT_p)
-    
+
     def test_properties(self):
         self.assertAlmostEqual(self.T, self.p_electrode.T)
         self.assertAlmostEqual(self.SOC_p, self.p_electrode.soc)
@@ -201,7 +203,7 @@ class TestPElectrode(unittest.TestCase):
         new_soc: float = 0.61
         self.p_electrode.soc = new_soc
         self.assertEqual(new_soc, self.p_electrode.soc)
-    
+
     def test_methods(self):
         electrode: bc.Electrode = bc.Electrode(L=self.L_p, A=self.A_p, kappa=self.kappa_p, epsilon=self.epsilon_p, max_conc=self.max_conc_p, R=self.R_p, S=self.S_p,
                                                T_ref=self.T_ref_p, D_ref=self.D_ref_p, k_ref=self.k_ref_p, Ea_D=self.Ea_D_p, Ea_R=self.Ea_R_p, alpha=0.5,
@@ -221,7 +223,8 @@ class TestElectrolyte(unittest.TestCase):
     epsilon_e: float = 0.724
     brugg_e: float = 1.5
 
-    electrolyte: bc.Electrolyte = bc.Electrolyte(L=L_e, conc=c_init_e, kappa=kappa_e, epsilon=epsilon_e, brugg=brugg_e)
+    electrolyte: bc.Electrolyte = bc.Electrolyte(
+        L=L_e, conc=c_init_e, kappa=kappa_e, epsilon=epsilon_e, brugg=brugg_e)
 
     def test_properties(self):
         """
@@ -232,7 +235,8 @@ class TestElectrolyte(unittest.TestCase):
         self.assertEqual(self.kappa_e, self.electrolyte.kappa)
         self.assertEqual(self.epsilon_e, self.electrolyte.epsilon)
         self.assertEqual(self.brugg_e, self.electrolyte.brugg)
-        self.assertEqual(self.kappa_e * self.epsilon_e ** self.brugg_e, self.electrolyte.kappa_eff())
+        self.assertEqual(self.kappa_e * self.epsilon_e **
+                         self.brugg_e, self.electrolyte.kappa_eff())
 
 
 class TestBatteryCell(unittest.TestCase):
@@ -317,8 +321,10 @@ class TestBatteryCell(unittest.TestCase):
         self.assertEqual(self.L_e, instance_BatteryCell.electrolyte.L)
         self.assertEqual(self.c_init_e, instance_BatteryCell.electrolyte.conc)
         self.assertEqual(self.kappa_e, instance_BatteryCell.electrolyte.kappa)
-        self.assertEqual(self.epsilon_e, instance_BatteryCell.electrolyte.epsilon)
-        self.assertAlmostEqual(self.brugg_e, instance_BatteryCell.electrolyte.brugg)
+        self.assertEqual(
+            self.epsilon_e, instance_BatteryCell.electrolyte.epsilon)
+        self.assertAlmostEqual(
+            self.brugg_e, instance_BatteryCell.electrolyte.brugg)
 
     def test_constructor1(self) -> None:
         """ This method checks for the BatteryCell's attribute and methods when the BatteryCell class is initialiated with one of the constructors.
@@ -358,10 +364,56 @@ class TestBatteryCell(unittest.TestCase):
                                                       brugg_n=self.brugg_n, SOC_n=self.SOC_init_n, T_n=self.T,
                                                       func_OCP_n=OCP_ref_n, func_dOCPdT_n=dOCPdT_n,
 
-                                                      rho=self.rho, Vol=self.Vol, C_p=self.C_p, h=self.h, A=self.A, cap=self.cap, 
+                                                      rho=self.rho, Vol=self.Vol, C_p=self.C_p, h=self.h, A=self.A, cap=self.cap,
                                                       V_max=self.V_max, V_min=self.V_min, R_cell=self.R_cell)
         self.check_BatteryCell_properties(instance_BatteryCell=battery_cell)
-        self.check_BatteryCell_electrolyte_properties(instance_BatteryCell=battery_cell)
+        self.check_BatteryCell_electrolyte_properties(
+            instance_BatteryCell=battery_cell)
 
     def test_properties(self):
         pass
+
+
+class TestECMBatteryCell(unittest.TestCase):
+
+    @staticmethod
+    def func_ocv(soc: float) -> float:
+        return 2.5 + 1.7 * soc
+
+    @staticmethod
+    def func_docvdtemp(soc: float):
+        return 1.0
+
+    @staticmethod
+    def func_eta(soc: float, temp: float) -> float:
+        return 1.0
+
+    test_cell_ESC: bc.ECMBatteryCell = bc.ECMBatteryCell(R0_ref=0.225, R1_ref=0.001, C1=0.03, temp_ref=298.15, Ea_R0=400, Ea_R1=400,
+                                                         rho=1626, vol=3.38e-5, c_p=750, h=1, area=0.085,
+                                                         cap=1.65, V_max=4.2, V_min=2.5,
+                                                         soc_init=0.1, temp_init=298.15,
+                                                         func_eta=func_eta, func_ocv=func_ocv, func_docvdtemp=func_docvdtemp,
+                                                         M_0=4.4782e-4, M=0.0012, gamma=0.1)
+    
+    def test_constructor(self):
+        self.assertEqual(self.test_cell_ESC.rho, 1626)
+        self.assertEqual(self.test_cell_ESC.vol, 3.38e-5)
+        self.assertEqual(self.test_cell_ESC.C_p, 750)
+        self.assertEqual(self.test_cell_ESC.h, 1)
+        self.assertEqual(self.test_cell_ESC.area, 0.085)
+        self.assertEqual(self.test_cell_ESC.cap, 1.65)
+        self.assertEqual(self.test_cell_ESC.V_max, 4.2)
+        self.assertEqual(self.test_cell_ESC.V_min, 2.5)
+
+        # self.assertTrue(isinstance(self.test_cell_ESC.calc_ocv, typing.Callable))
+        # self.assertEqual(2.5, self.test_cell_ESC.calc_ocv(soc=0.0))
+        # self.assertEqual(3.35, self.test_cell_ESC.calc_ocv(soc=0.5))
+        # self.assertEqual(4.2, self.test_cell_ESC.calc_ocv(soc=1.0))
+
+        # self.assertTrue(isinstance(self.test_cell_ESC.func_eta, typing.Callable))
+
+        # self.assertTrue(isinstance(self.test_cell_ESC.func_docvdtemp, typing.Callable))
+
+        self.assertEqual(4.4782e-4, self.test_cell_ESC.M0)
+        self.assertEqual(0.0012, self.test_cell_ESC.M)
+        self.assertEqual(0.1, self.test_cell_ESC.gamma)

@@ -158,6 +158,39 @@ PYBIND11_MODULE(cell, m)
          .def("V_min", &BatteryCell::get_V_min)
          .def_property("R_cell", &BatteryCell::get_R_cell, &BatteryCell::set_R_cell);
 
+     // ECMBatteryCell Class
+     py::class_<ECMBatteryCell>(m, "ECMBatteryCell")
+         .def(py::init<double, double, double, double, double, double,
+                   double, double, double, double, double, double, double, double,
+                   double, double,
+                   std::function<double(double)>, std::function<double(double)>, std::function<double(double)>,
+                   double, double, double>(), 
+                   py::arg("R0_ref"), py::arg("R1_ref"), py::arg("C1"), py::arg("temp_ref"), py::arg("Ea_R0"), py::arg("Ea_R1"),
+                   py::arg("rho"), py::arg("vol"), py::arg("c_p"),py::arg("h"), py::arg("area"), py::arg("cap"), py::arg("V_max"), py::arg("V_min"),
+                   py::arg("soc_init"), py::arg("temp_init"),
+                   py::arg("func_eta"), py::arg("func_ocv"), py::arg("func_docvdtemp"),
+                   py::arg("M_0"), py::arg("M"), py::arg("gamma"))
+          .def_property_readonly("R0_ref", &ECMBatteryCell::get_R0_ref)
+          .def_property_readonly("R1_ref", &ECMBatteryCell::get_R1_ref)
+          .def_property_readonly("C1", &ECMBatteryCell::get_C1)
+          .def_property_readonly("temp_ref", &ECMBatteryCell::get_temp_ref)
+          .def_property_readonly("Ea_R0", &ECMBatteryCell::get_Ea_R0)
+          .def_property_readonly("Ea_R1", &ECMBatteryCell::get_Ea_R1)
+          .def_property_readonly("rho", &ECMBatteryCell::get_rho)
+          .def_property_readonly("vol", &ECMBatteryCell::get_vol)
+          .def_property_readonly("C_p", &ECMBatteryCell::get_C_p)
+          .def_property_readonly("h", &ECMBatteryCell::get_h)
+          .def_property_readonly("area", &ECMBatteryCell::get_area)
+          .def_property_readonly("cap", &ECMBatteryCell::get_cap)
+          .def_property_readonly("V_max", &ECMBatteryCell::get_V_max)
+          .def_property_readonly("V_min", &ECMBatteryCell::get_V_min)
+          .def_property_readonly("soc_min", &ECMBatteryCell::get_soc_min)
+          .def_property_readonly("temp_init", &ECMBatteryCell::get_temp_init)
+          .def_property_readonly("M0", &ECMBatteryCell::get_M0)
+          .def_property_readonly("M", &ECMBatteryCell::get_M)
+          .def_property_readonly("gamma", &ECMBatteryCell::get_gamma)
+          .def("calc_ocv", &ECMBatteryCell::get_ocv, py::arg("soc"));
+
      /*
       * Pertaining to models
       */

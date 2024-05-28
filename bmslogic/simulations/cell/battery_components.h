@@ -179,7 +179,7 @@ public:
     double get_R0() { return calc_R0(); }
     double get_R1_ref() const { return m_R1_ref; }
     double get_R1() { return calc_R1(); }
-    double get_C1_ref() const { return m_C1; }
+    double get_C1() const { return m_C1; }
     double get_temp_ref() const { return m_temp_ref; }
     double get_Ea_R0() const { return m_Ea_R0; }
     double get_Ea_R1() const { return m_Ea_R1; }
@@ -193,8 +193,11 @@ public:
     double get_V_min() const { return m_v_min; }
     double get_soc_min() const { return m_soc_init; }
     double get_temp_init() const { return m_temp_init; }
-    double get_eta(double &soc) const { return m_func_eta(soc); }
-    double get_ocv(double &soc) const { return m_func_ocv(soc) + m_func_docvdtemp(m_temp) * (m_temp - m_temp_ref); }
+    double get_eta(double i_soc) const { return m_func_eta(i_soc); }
+    double get_ocv(double i_soc) const { return m_func_ocv(i_soc) + m_func_docvdtemp(i_soc) * (m_temp - m_temp_ref); }
+    double get_M0() const { return m_M_0; }
+    double get_M() const { return m_M; }
+    double get_gamma() const { return m_gamma; }
 
     // functions for calculations
     double calc_R0();
