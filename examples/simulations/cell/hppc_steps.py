@@ -29,6 +29,7 @@ except ModuleNotFoundError as e:
     sys.path.append(PROJECT_DIR)
 
     import bmslogic.simulations.cell.cell as cell_sim
+    from bmslogic.simulations.cell.parameter_set_manager import ParameterSets
     from bmslogic.simulations.cell import pycyclers
     from bmslogic.simulations.cell.plot import Plot
 
@@ -43,7 +44,7 @@ except ModuleNotFoundError as e:
 if __name__ == "__main__":
     SOC_init_p: float = 0.4952
     SOC_init_n: float = 0.7522
-    battery_cell: cell_sim.BatteryCell = cell_sim.PyParameterSets(name='test').generate_BatteryCell_instance(soc_n_init=SOC_init_n,
+    battery_cell: cell_sim.BatteryCell = ParameterSets(name='test').generate_BatteryCell_instance(soc_n_init=SOC_init_n,
                                                                                                              soc_p_init=SOC_init_p,
                                                                                                              T_amb=T,
                                                                                                              R_cell=R_cell)
@@ -52,10 +53,10 @@ if __name__ == "__main__":
                                                         V_min=2.5, V_max=4.2, soc_lib_min=0.0,
                                                         soc_lib_max=1.0, soc_lib=1.0, hppc_steps=100)
 
-    solver: sp.BatterySolver = sp.BatterySolver(battery_cell=battery_cell,
+    solver: cell_sim.BatterySolver = cell_sim.BatterySolver(battery_cell=battery_cell,
                                                 is_isothermal=True,
                                                 enable_degradation=False)
-    sol: sp.Solution = solver.solve(cycler=cycler)
+    sol: cell_sim.Solution = solver.solve(cycler=cycler)
 
     # plots
-    sp.Plot(sol=sol).plot_comprehensive()
+    Plot(sol=sol).plot_comprehensive()

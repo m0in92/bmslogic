@@ -120,3 +120,29 @@ CustomCycler::CustomCycler(std::vector<double> i_t, std::vector<double> i_curren
 // {
 //     return -1.656;
 // }
+
+HPPCCycler::HPPCCycler(double i_t1, double i_t2, double i_i_app, int i_num_hppc_pulses,
+                       double i_V_min, double i_SOC_LIB_min, double i_SOC_LIB) : m_t1(i_t1), m_t2(i_t2),
+                                                                                 m_num_hppc_pulses(i_num_hppc_pulses)
+{
+    discharge_current = -i_i_app;
+    V_min = i_V_min;
+    SOC_LIB_min = i_SOC_LIB_min;
+    SOC_LIB = i_SOC_LIB;
+    num_cycles = 1;
+    cycle_steps = {"discharge"};
+}
+
+double HPPCCycler::get_current(std::string i_cycling_step, double t)
+{
+    for (int n = 0; n < m_num_hppc_pulses; n++)
+    {
+        if ((t < ((n + 1) * m_t1 + (n + 1) * m_t2)) & (t >= (n * m_t1 + n * m_t2)))
+        {
+            if (t > ((n + 1) * m_t1 + n * m_t2))
+                return discharge_current;
+            else
+                return 0.0;
+        }
+    }
+}

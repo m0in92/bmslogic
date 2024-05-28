@@ -126,4 +126,18 @@ public:
     // std::vector<double> m_current_vector;
 };
 
+class HPPCCycler : public BaseCycler
+{
+public:
+    HPPCCycler(double i_t1, double i_t2, double i_i_app, int i_num_hppc_pulses,
+               double i_V_min, double i_SOC_LIB_min, double i_SOC_LIB);
+    // helpers functions
+    double get_current(std::string cycling_step, double t);
+
+private:
+    double m_t1;
+    double m_t2;
+    double m_num_hppc_pulses;
+};
+
 #endif // BMSLOGIC_PROJECT_CYCLERS_H

@@ -24,7 +24,7 @@ if __name__ == "__main__":
                                                                                                soc_p_init=SOC_init_p,
                                                                                                T_amb=T,
                                                                                                R_cell=R_cell)
-    dc: sp.Discharge = sp.DischargeRest(current=discharge_current, V_min=V_min, soc_lib_min=soc_lib_min, soc_lib=soc_lib,
+    dc: sp.RestDischarge = sp.DischargeRest(current=discharge_current, V_min=V_min, soc_lib_min=soc_lib_min, soc_lib=soc_lib,
                                         rest_time = 3600)
 
     solver: sp.BatterySolver =sp.BatterySolver(battery_cell=battery_cell, 

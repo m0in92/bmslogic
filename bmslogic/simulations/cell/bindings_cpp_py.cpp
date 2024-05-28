@@ -225,6 +225,10 @@ PYBIND11_MODULE(cell, m)
               py::arg("current"), py::arg("V_max"),
               py::arg("soc_lib_max"), py::arg("soc_lib"));
 
+     py::class_<ChargeRest, BaseCycler>(m, "ChargeRest")
+         .def(py::init<double, double, double, double, double>(),
+              py::arg("charge_current"), py::arg("V_min"), py::arg("soc_lib_max"), py::arg("soc_lib"), py::arg("rest_time"));
+
      // ChargeDischarge
      py::class_<ChargeDischarge, BaseCycler>(m, "ChargeDischarge")
          .def(py::init<double, double, double, double,
@@ -242,6 +246,12 @@ PYBIND11_MODULE(cell, m)
          .def_property("current_array", &CustomCycler::get_current_vector, &CustomCycler::set_current_vector);
      // calculations/helper methods
      //     .def("get_current", &CustomCycler::get_current);
+
+     // HPPC Cycler
+     py::class_<HPPCCycler, BaseCycler>(m, "HPPCCycler")
+         .def(py::init<double, double, double, int, double, double, double>(),
+              py::arg("t1"), py::arg("t2"), py::arg("i_app"), py::arg("n_hppc_steps"), py::arg("V_min"), py::arg("soc_lib_min"), py::arg("soc_lib"))
+         .def("get_current", &HPPCCycler::get_current, py::arg("cycling_step"), py::arg("t"));
 
      /*
       * Solutions

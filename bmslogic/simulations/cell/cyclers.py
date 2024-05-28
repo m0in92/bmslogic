@@ -410,7 +410,7 @@ class PyHPPCCycler(PyCustomCycler):
             soc_lib_min (float): minimum LIB SOC
             soc_lib_max (float): max. LIB SOC
             soc_lib (float): SOC LIB at the start of the HPPC cycling step.
-            hppc_steps (int): number of HPPC repetitions. DEfault is 10.
+            hppc_steps (int): number of HPPC repetitions. Default is 10.
         """
         dt: float = 0.1  # the time difference between the time steps
         if charge_or_discharge == 'discharge':
