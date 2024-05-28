@@ -4,16 +4,15 @@
  * @brief Contains the classes and functionalities pertaining to the storage of battery parameters.
  * @version 0.1
  * @date 2024-05-03
- * 
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 
 #include <cmath>
 
 #include "battery_components.h"
 #include "common_includes.h"
-
 
 Electrode::Electrode(double L_i, double A_i, double kappa_i, double epsilon_i, double max_conc_i, double R_i, double S_i,
                      double T_ref_i, double D_ref_i, double k_ref_i, double Ea_D_i, double Ea_R_i, double alpha_i,
@@ -170,4 +169,27 @@ BatteryCell::BatteryCell(double L_p, double A_p, double kappa_p, double epsilon_
     V_min = i_V_min;
     R_cell = i_R_cell;
     T = elec_n.get_T();
+}
+
+ECMBatteryCell::ECMBatteryCell(double i_R0_ref, double i_R1_ref, double i_C1, double i_temp_ref, double i_Ea_R0, double i_Ea_R1,
+                               double i_rho, double i_vol, double i_c_p, double i_h, double i_area, double i_cap, double i_V_max, double i_V_min,
+                               double i_soc_init, double i_temp_init,
+                               std::function<double(double)> i_func_eta, std::function<double(double)> i_func_ocv, std::function<double(double)>,
+                               double i_M_0, double i_M, double i_gamma) : m_R0_ref(i_R0_ref), m_R1_ref(i_R1_ref), m_C1(i_C1), m_temp_ref(i_temp_ref),
+                                                                           m_Ea_R0(i_Ea_R0), m_Ea_R1(i_Ea_R1), m_rho(i_rho), m_vol(i_vol), m_c_p(i_c_p), m_h(i_h), m_area(i_area), m_cap(i_cap),
+                                                                           m_v_max(i_V_max), m_v_min(i_V_min), m_soc_init(i_soc_init), m_temp_init(i_temp_init),
+                                                                           m_func_eta(i_func_eta), m_func_ocv(i_func_ocv), m_M_0(i_M_0), m_M(i_M), m_gamma(i_gamma)
+{
+    m_soc = m_soc_init;
+    m_temp = m_temp_init;
+}
+
+double ECMBatteryCell::calc_R0()
+{
+    return m_R0_ref * std::exp(-1 * m_Ea_R0 / Constants.R * (1 / m_temp - 1 / m_temp_ref));
+}
+
+double ECMBatteryCell::calc_R1()
+{
+    return m_R1_ref * std::exp(-1 * m_Ea_R1 / Constants.R * (1 / m_temp - 1 / m_temp_ref));
 }

@@ -4,9 +4,9 @@
  * @brief Contains the classes and functionalities pertaining to the storage of battery parameters.
  * @version 0.1
  * @date 2024-05-03
- * 
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 
 #ifndef BMSLOGIC_CELL_BATTERY_COMPONENTS_H
@@ -163,6 +163,74 @@ private:
     double V_max;  // maximum potential
     double V_min;  // minimum potential
     double R_cell; // battery cell internal resistance [ohms]
+};
+
+class ECMBatteryCell
+{
+public:
+    ECMBatteryCell(double i_R0_ref, double i_R1_ref, double i_C1, double i_temp_ref, double i_Ea_R0, double i_Ea_R1,
+                   double i_rho, double i_vol, double i_c_p, double i_h, double i_area, double i_cap, double i_V_max, double i_V_min,
+                   double i_soc_init, double i_temp_init,
+                   std::function<double(double)> i_func_eta, std::function<double(double)> i_func_ocv, std::function<double(double)> i_func_docvdtemp,
+                   double i_M_0, double i_M, double i_gamma);
+
+    // getters
+    double get_R0_ref() const { return m_R0_ref; }
+    double get_R0() { return calc_R0(); }
+    double get_R1_ref() const { return m_R1_ref; }
+    double get_R1() { return calc_R1(); }
+    double get_C1_ref() const { return m_C1; }
+    double get_temp_ref() const { return m_temp_ref; }
+    double get_Ea_R0() const { return m_Ea_R0; }
+    double get_Ea_R1() const { return m_Ea_R1; }
+    double get_rho() const { return m_rho; }
+    double get_vol() const { return m_vol; }
+    double get_C_p() const { return m_c_p; }
+    double get_h() const { return m_h; }
+    double get_area() const { return m_area; }
+    double get_cap() const { return m_cap; }
+    double get_V_max() const { return m_v_max; }
+    double get_V_min() const { return m_v_min; }
+    double get_soc_min() const { return m_soc_init; }
+    double get_temp_init() const { return m_temp_init; }
+    double get_eta(double &soc) const { return m_func_eta(soc); }
+    double get_ocv(double &soc) const { return m_func_ocv(soc) + m_func_docvdtemp(m_temp) * (m_temp - m_temp_ref); }
+
+    // functions for calculations
+    double calc_R0();
+    double calc_R1();
+
+private:
+    double m_R0_ref;   // resistance value of R0 [ohm]
+    double m_R1_ref;   // resistance value of R1 [ohm]
+    double m_C1;       // capacitance of capacitor in RC circuit [ohm]
+    double m_temp_ref; // reference temperature for R0_ref and R1_ref
+    double m_Ea_R0;    // activation energy for R0 [J/mol]
+    double m_Ea_R1;    // activation energy for R1 [J/mol]
+
+    double m_rho;   // battery density (mostly for thermal modelling), kg/m3
+    double m_vol;   // battery cell volume, m3
+    double m_c_p;   // specific heat capacity, J / (K kg)
+    double m_h;     // # heat transfer coefficient, J / (S K)
+    double m_area;  // surface area, m2
+    double m_cap;   // capacity, Ah
+    double m_v_max; // maximum potential
+    double m_v_min; // minimum potential
+
+    double m_soc_init;  // initial SOC
+    double m_temp_init; // initial battery cell temperature [K]
+    double m_soc;
+    double m_temp; // Battery cell temperature [K]
+
+    std::function<double(double)> m_func_eta; // func for the Columbic efficiency as a func of SOC and temp
+    std::function<double(double)> m_func_ocv; // func which outputs the battery OCV from its SOC function which outputs the change of OCV with respect to temperature from its SOC
+    std::function<double(double)> m_func_docvdtemp;
+
+    // The parameters below relate the dynamic and instantaneous hysteresis
+    // The instantaneous hysteresis co-efficient [V]
+    double m_M_0;
+    double m_M;     // SOC-dependent hysteresis co-efficient [V]
+    double m_gamma; // Hysteresis time-constant
 };
 
 #endif // BMSLOGIC_CELL_BATTERY_COMPONENTS_H
