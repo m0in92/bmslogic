@@ -165,6 +165,10 @@ private:
     double R_cell; // battery cell internal resistance [ohms]
 };
 
+/**
+ * @brief class to store the variables for the equivalent circuit model (ECM) simulations.
+ *
+ */
 class ECMBatteryCell
 {
 public:
@@ -194,12 +198,20 @@ public:
     double get_soc_min() const { return m_soc_init; }
     double get_temp_init() const { return m_temp_init; }
     double get_eta(double i_soc) const { return m_func_eta(i_soc); }
-    double get_ocv(double i_soc) const { return m_func_ocv(i_soc) + m_func_docvdtemp(i_soc) * (m_temp - m_temp_ref); }
     double get_M0() const { return m_M_0; }
     double get_M() const { return m_M; }
     double get_gamma() const { return m_gamma; }
+    double get_eta() { return m_func_eta(m_soc); }
+    double get_ocv() { return calc_ocv(m_soc); }
+
+    double get_soc() { return m_soc; }
+    double get_temp() {return m_temp;}
+
+    // setters
+    void set_soc(double i_soc) { m_soc = i_soc; }
 
     // functions for calculations
+    double calc_ocv(double i_soc) const { return m_func_ocv(i_soc) + m_func_docvdtemp(i_soc) * (m_temp - m_temp_ref); }
     double calc_R0();
     double calc_R1();
 

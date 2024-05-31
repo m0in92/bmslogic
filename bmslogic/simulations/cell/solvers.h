@@ -10,6 +10,36 @@
 #include "solution.h"
 #include "coords.h"
 
+/// ECM Models
+
+/**
+ * @brief Base solver for the equivalent circuit model (ECM)
+ *
+ */
+class BaseECMSolver
+{
+public:
+    BaseECMSolver(ECMBatteryCell i_b_cell, bool i_isothermal) : m_b_cell(i_b_cell), m_isothermal(i_isothermal) {}
+
+protected:
+    ECMBatteryCell m_b_cell;
+    bool m_isothermal;
+};
+
+/**
+ * @class ESCDTSolver
+ * @brief Solver for discrete solver for enhanced self correcting equivalent circuit model
+ */
+class ESCDTSolver : public BaseECMSolver
+{
+public:
+    ESCDTSolver(ECMBatteryCell i_b_cell, bool i_isothermal) : BaseECMSolver(i_b_cell, i_isothermal) {}
+    ECMSolution solve(BaseCycler cycler, double dt);
+
+// private:
+//     ECMBatteryCell m_b_cell;
+//     bool m_isothermal;
+};
 
 /// @brief Degradation solvers
 class ROMSEISolver
@@ -83,7 +113,7 @@ private:
 
 /**
  * @brief Lithium-ion concentration solver in the solid electrode region.
- * 
+ *
  */
 
 class BaseConcSolver
@@ -167,8 +197,8 @@ private:
 double lambda_function(double lambda_k);
 
 /*
-* Lithium-Ion Concentration Solver in the Electrolyte
-*/
+ * Lithium-Ion Concentration Solver in the Electrolyte
+ */
 class ElectrolyteFVMSolver
 {
 public:
@@ -228,8 +258,8 @@ private:
 };
 
 /*
-* Battery Solvers below
-*/
+ * Battery Solvers below
+ */
 
 class BaseBatterySolver
 {

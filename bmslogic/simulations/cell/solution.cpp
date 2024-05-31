@@ -4,13 +4,27 @@
  * @brief Contains the funcitionalities to store and display the simulations results.
  * @version 0.1
  * @date 2024-05-04
- * 
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 
 #include "solution.h"
 
+ECMSolution::ECMSolution(std::vector<double> i_t,
+                         std::vector<double> i_I,
+                         std::vector<double> i_V,
+                         std::vector<double> i_temp,
+                         std::vector<double> i_soc,
+                         std::vector<double> i_i_R1)
+{
+    m_t = i_t;
+    m_I = i_I;
+    m_V = i_V;
+    m_temp = i_temp;
+    m_soc = i_soc;
+    m_i_R1 = i_i_R1;
+}
 
 Solution::Solution(std::vector<double> i_t,
                    std::vector<std::string> i_cycling_step,

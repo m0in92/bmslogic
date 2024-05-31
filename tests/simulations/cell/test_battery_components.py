@@ -405,12 +405,14 @@ class TestECMBatteryCell(unittest.TestCase):
         self.assertEqual(self.test_cell_ESC.V_max, 4.2)
         self.assertEqual(self.test_cell_ESC.V_min, 2.5)
 
-        # self.assertTrue(isinstance(self.test_cell_ESC.calc_ocv, typing.Callable))
-        # self.assertEqual(2.5, self.test_cell_ESC.calc_ocv(soc=0.0))
-        # self.assertEqual(3.35, self.test_cell_ESC.calc_ocv(soc=0.5))
-        # self.assertEqual(4.2, self.test_cell_ESC.calc_ocv(soc=1.0))
+        self.assertTrue(isinstance(self.test_cell_ESC.calc_ocv, typing.Callable))
+        self.assertEqual(2.5, self.test_cell_ESC.calc_ocv(soc=0.0))
+        self.assertEqual(3.35, self.test_cell_ESC.calc_ocv(soc=0.5))
+        self.assertEqual(4.2, self.test_cell_ESC.calc_ocv(soc=1.0))
 
-        # self.assertTrue(isinstance(self.test_cell_ESC.func_eta, typing.Callable))
+        self.assertEqual(2.67, self.test_cell_ESC.ocv)
+
+        # self.assertTrue(isinstance(self.test_cell_ESC.eta, typing.Callable))
 
         # self.assertTrue(isinstance(self.test_cell_ESC.func_docvdtemp, typing.Callable))
 

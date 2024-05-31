@@ -12,6 +12,65 @@
 #include "solvers.h"
 #include "models.h"
 
+// ECM Solvers below
+ECMSolution ESCDTSolver::solve(BaseCycler cycler, double dt)
+{
+    ECMSolution sol;
+
+    // Initial simulation variables values
+    double i_R1 = 0.0;
+    double h = 0.0;
+    double s = 0.0;
+
+    ESC model = ESC();
+
+    for (int cycle_iter = 0; cycle_iter < cycler.num_cycles; cycle_iter++)
+    {
+        for (int step_iter = 0; step_iter < cycler.cycle_steps.size(); step_iter++)
+        {
+            double t_prev = 0.0;
+            double t_curr;
+            bool step_completed = false;
+            double i_app;
+            double i_R1_prev, h_prev, s_prev, V;
+
+            while (!step_completed)
+            {
+                t_curr = t_prev + dt;
+                i_app = cycler.get_current(cycler.cycle_steps[step_iter], t_curr);
+
+                // Calculation of the cell terminal potential below
+                m_b_cell.set_soc(model.soc_next(dt, i_app, m_b_cell.get_soc(), m_b_cell.get_cap(), m_b_cell.get_eta()));
+                i_R1_prev = m_b_cell.get_R1();
+                i_R1 = model.i_R1_next(dt, i_app, i_R1, m_b_cell.get_R1(), m_b_cell.get_C1());
+                h_prev = h;
+                s_prev = s;
+                s = model.s(i_app, s_prev);
+                V = model.v(i_app, m_b_cell.get_ocv(), m_b_cell.get_R0(), m_b_cell.get_R1(), i_R1_prev, m_b_cell.get_M0(), m_b_cell.get_M(), h_prev, s_prev);
+
+                // loop termination conditions
+                if ((cycler.cycle_steps[step_iter] == "charge") & (V > cycler.V_max))
+                    step_completed = true; 
+                if((cycler.cycle_steps[step_iter] == "discharge") & (V < cycler.V_min))
+                    step_completed = true;
+                if ((cycler.cycle_steps[step_iter] == "rest") & (t_curr > cycler.rest_time))
+                    step_completed = true;
+
+                t_prev = t_curr;  // update times
+                
+                // Solution object update below
+                sol.update_t(t_curr);
+                sol.update_I(i_app);
+                sol.update_V(V);
+                sol.update_temp(m_b_cell.get_temp());
+                sol.update_soc(m_b_cell.get_soc());
+                sol.update_i_R1(i_R1);
+            }
+        }
+    }
+    return sol;
+}
+
 // degradation solvers definations below
 ROMSEISolver::ROMSEISolver(double i_k, double i_c_e, double i_S, double i_c_s_max, double i_U_s, double i_j_0_s, double i_A,
                            double i_MW_SEI, double i_rho, double i_kappa) : m_k(i_k), m_c_e(i_c_e), m_S(i_S),
@@ -275,51 +334,51 @@ double EigenSolver::solve(double dt, double t_prev, double i_app, double R, doub
 }
 
 /*
-*  Lithium-Ion Concentration Solver in the Electrolyte
-*/
+ *  Lithium-Ion Concentration Solver in the Electrolyte
+ */
 
 ElectrolyteFVMSolver::ElectrolyteFVMSolver(ElectrolyteFVMCoordinates i_coords, double i_c_e_init, double i_t_c,
-                        double i_epsilon_e_n, double i_epsilon_e_sep, double i_epsilon_e_p,
-                        double i_a_s_n, double i_a_s_p,
-                        double i_D_e, double i_brugg) : m_coords(i_coords), m_c_e_init(i_c_e_init), m_t_c(i_t_c),
-                        m_epsilon_e_n(i_epsilon_e_n), m_epsilon_e_sep(i_epsilon_e_sep), m_epsilon_e_p(i_epsilon_e_p),
-                        m_a_s_n(i_a_s_n), m_a_s_p(i_a_s_p),
-                        m_D_e(i_D_e), m_brugg(i_brugg)
-                        {
-                            // below sets the vector_c_e
-                            OWL::ArrayXD m_vector_c_e_ = m_c_e_init * OWL::Ones(m_coords.get_vector_x().size());
-                            m_vector_c_e = m_vector_c_e_.getArray();
+                                           double i_epsilon_e_n, double i_epsilon_e_sep, double i_epsilon_e_p,
+                                           double i_a_s_n, double i_a_s_p,
+                                           double i_D_e, double i_brugg) : m_coords(i_coords), m_c_e_init(i_c_e_init), m_t_c(i_t_c),
+                                                                           m_epsilon_e_n(i_epsilon_e_n), m_epsilon_e_sep(i_epsilon_e_sep), m_epsilon_e_p(i_epsilon_e_p),
+                                                                           m_a_s_n(i_a_s_n), m_a_s_p(i_a_s_p),
+                                                                           m_D_e(i_D_e), m_brugg(i_brugg)
+{
+    // below sets the vector_c_e
+    OWL::ArrayXD m_vector_c_e_ = m_c_e_init * OWL::Ones(m_coords.get_vector_x().size());
+    m_vector_c_e = m_vector_c_e_.getArray();
 
-                            // below creates the vector_epsilon_e
-                            OWL::ArrayXD vector_epsilon_e_n_ = m_epsilon_e_n * OWL::Ones(m_coords.get_vector_x_n().size());
-                            OWL::ArrayXD vector_epsilon_e_sep_ = m_epsilon_e_sep * OWL::Ones(m_coords.get_vector_x_sep().size());
-                            OWL::ArrayXD vector_epsilon_e_p_ = m_epsilon_e_p * OWL::Ones(m_coords.get_vector_x_p().size());
-                            OWL::ArrayXD vector_epsilon_e_ = OWL::append(vector_epsilon_e_n_, vector_epsilon_e_sep_);
-                            m_vector_epsilon_e = OWL::append(vector_epsilon_e_, vector_epsilon_e_p_).getArray();
+    // below creates the vector_epsilon_e
+    OWL::ArrayXD vector_epsilon_e_n_ = m_epsilon_e_n * OWL::Ones(m_coords.get_vector_x_n().size());
+    OWL::ArrayXD vector_epsilon_e_sep_ = m_epsilon_e_sep * OWL::Ones(m_coords.get_vector_x_sep().size());
+    OWL::ArrayXD vector_epsilon_e_p_ = m_epsilon_e_p * OWL::Ones(m_coords.get_vector_x_p().size());
+    OWL::ArrayXD vector_epsilon_e_ = OWL::append(vector_epsilon_e_n_, vector_epsilon_e_sep_);
+    m_vector_epsilon_e = OWL::append(vector_epsilon_e_, vector_epsilon_e_p_).getArray();
 
-                            // below creates vector_D_e
-                            OWL::ArrayXD vector_D_e_n_ = m_D_e * std::pow(m_epsilon_e_n, m_brugg) * OWL::Ones(m_coords.get_vector_x_n().size());
-                            OWL::ArrayXD vector_D_e_sep_ = m_D_e * std::pow(m_epsilon_e_sep, m_brugg) * OWL::Ones(m_coords.get_vector_x_sep().size());
-                            OWL::ArrayXD vector_D_e_p_ = m_D_e * std::pow(m_epsilon_e_p, m_brugg) * OWL::Ones(m_coords.get_vector_x_p().size());
-                            OWL::ArrayXD vector_D_e_ = OWL::append(vector_D_e_n_, vector_D_e_sep_);
-                            m_vector_D_eff = OWL::append(vector_D_e_, vector_D_e_p_).getArray();
+    // below creates vector_D_e
+    OWL::ArrayXD vector_D_e_n_ = m_D_e * std::pow(m_epsilon_e_n, m_brugg) * OWL::Ones(m_coords.get_vector_x_n().size());
+    OWL::ArrayXD vector_D_e_sep_ = m_D_e * std::pow(m_epsilon_e_sep, m_brugg) * OWL::Ones(m_coords.get_vector_x_sep().size());
+    OWL::ArrayXD vector_D_e_p_ = m_D_e * std::pow(m_epsilon_e_p, m_brugg) * OWL::Ones(m_coords.get_vector_x_p().size());
+    OWL::ArrayXD vector_D_e_ = OWL::append(vector_D_e_n_, vector_D_e_sep_);
+    m_vector_D_eff = OWL::append(vector_D_e_, vector_D_e_p_).getArray();
 
-                            // below sets the vector_a_s
-                            OWL::ArrayXD vector_a_n_ = m_a_s_n * OWL::Ones(m_coords.get_vector_x_n().size());
-                            OWL::ArrayXD vector_a_sep_ = OWL::Zeros(m_coords.get_vector_x_sep().size());
-                            OWL::ArrayXD vector_a_p_ = m_a_s_p * OWL::Ones(m_coords.get_vector_x_p().size());
-                            OWL::ArrayXD vector_a_s_ = OWL::append(vector_a_n_, vector_a_sep_);
-                            m_vector_a_s = OWL::append(vector_a_s_, vector_a_p_).getArray();
-                        }
-
+    // below sets the vector_a_s
+    OWL::ArrayXD vector_a_n_ = m_a_s_n * OWL::Ones(m_coords.get_vector_x_n().size());
+    OWL::ArrayXD vector_a_sep_ = OWL::Zeros(m_coords.get_vector_x_sep().size());
+    OWL::ArrayXD vector_a_p_ = m_a_s_p * OWL::Ones(m_coords.get_vector_x_p().size());
+    OWL::ArrayXD vector_a_s_ = OWL::append(vector_a_n_, vector_a_sep_);
+    m_vector_a_s = OWL::append(vector_a_s_, vector_a_p_).getArray();
+}
 
 /**
  * @brief returns a vector representing the main diagonal the FVM left-hand side matrix
- * 
+ *
  * @param dt time difference between the current and previous time steps
  * @return std::vector<double> vector representing the main diagonal
  */
-std::vector<double> ElectrolyteFVMSolver::calc_diag(double &dt) {
+std::vector<double> ElectrolyteFVMSolver::calc_diag(double &dt)
+{
     std::vector<double> result_vector;
     double dx, dx1, dx2, D1, D2, D3, A;
     dx = m_coords.get_vector_x()[1] - m_coords.get_vector_x()[0];
@@ -328,7 +387,8 @@ std::vector<double> ElectrolyteFVMSolver::calc_diag(double &dt) {
     A = dt / (2 * m_coords.get_vector_dx()[0]);
     result_vector.push_back(m_vector_epsilon_e[0] + A * (D2 + D1) / dx);
 
-    for (int i=1; i < m_coords.get_vector_x().size()-1; i++) {
+    for (int i = 1; i < m_coords.get_vector_x().size() - 1; i++)
+    {
         dx1 = m_coords.get_vector_x()[i] - m_coords.get_vector_x()[i - 1];
         dx2 = m_coords.get_vector_x()[i + 1] - m_coords.get_vector_x()[i];
         D1 = m_vector_D_eff[i - 1];
@@ -338,7 +398,7 @@ std::vector<double> ElectrolyteFVMSolver::calc_diag(double &dt) {
         result_vector.push_back(m_vector_epsilon_e[i] + A * ((D1 + D2) / dx1 + (D2 + D3) / dx2));
     }
 
-    dx = m_coords.get_vector_x().back() - m_coords.get_vector_x()[m_coords.get_vector_x().size()-2];
+    dx = m_coords.get_vector_x().back() - m_coords.get_vector_x()[m_coords.get_vector_x().size() - 2];
     D1 = m_vector_D_eff.back();
     D2 = m_vector_D_eff.back();
     A = dt / (2 * m_coords.get_vector_dx().back());
@@ -349,15 +409,17 @@ std::vector<double> ElectrolyteFVMSolver::calc_diag(double &dt) {
 
 /**
  * @brief returns a vector representing the lower diagonal of the FVM left-hand side matrix
- * 
+ *
  * @param dt time difference between the current and the previous time step.
  * @return std::vector<double> vector representing the lower diagonal
  */
-std::vector<double> ElectrolyteFVMSolver::calc_lower_diag(double &dt) {
+std::vector<double> ElectrolyteFVMSolver::calc_lower_diag(double &dt)
+{
     std::vector<double> result_vector;
     double dx, dx1, D1, D2, A;
 
-    for (int i=1; i < m_coords.get_vector_x().size()-1; i++) {
+    for (int i = 1; i < m_coords.get_vector_x().size() - 1; i++)
+    {
         dx1 = m_coords.get_vector_x()[i] - m_coords.get_vector_x()[i - 1];
         D1 = m_vector_D_eff[i - 1];
         D2 = m_vector_D_eff[i];
@@ -365,22 +427,23 @@ std::vector<double> ElectrolyteFVMSolver::calc_lower_diag(double &dt) {
         result_vector.push_back(-A * (D1 + D2) / dx1);
     }
 
-    dx = m_coords.get_vector_x().back() - m_coords.get_vector_x()[m_coords.get_vector_x().size()-2];
+    dx = m_coords.get_vector_x().back() - m_coords.get_vector_x()[m_coords.get_vector_x().size() - 2];
     D1 = m_vector_D_eff.back();
     D2 = m_vector_D_eff.back();
     A = dt / (2 * m_coords.get_vector_dx().back());
-    result_vector.push_back(-A * (D2 + D1) / dx);   
+    result_vector.push_back(-A * (D2 + D1) / dx);
 
     return result_vector;
 }
 
 /**
  * @brief Returns the upper diagonal of the FVM left-hand side matrix.
- * 
+ *
  * @param dt time difference between the previous time step and the current time step
  * @return std::vector<double> vector representing the upper diagonal
  */
-std::vector<double> ElectrolyteFVMSolver::calc_upper_diag(double &dt) {
+std::vector<double> ElectrolyteFVMSolver::calc_upper_diag(double &dt)
+{
     std::vector<double> result_vector;
     double dx, dx1, dx2, D1, D2, D3, A;
 
@@ -390,7 +453,8 @@ std::vector<double> ElectrolyteFVMSolver::calc_upper_diag(double &dt) {
     A = dt / (2 * m_coords.get_vector_dx()[0]);
     result_vector.push_back(-A * (D2 + D1) / dx);
 
-    for (int i=1; i < m_coords.get_vector_x().size()-1; i++) {
+    for (int i = 1; i < m_coords.get_vector_x().size() - 1; i++)
+    {
         dx1 = m_coords.get_vector_x()[i] - m_coords.get_vector_x()[i - 1];
         dx2 = m_coords.get_vector_x()[i + 1] - m_coords.get_vector_x()[i];
         D1 = m_vector_D_eff[i - 1];
@@ -403,25 +467,27 @@ std::vector<double> ElectrolyteFVMSolver::calc_upper_diag(double &dt) {
     return result_vector;
 }
 
-std::vector<double> ElectrolyteFVMSolver::calc_vector_ce_j(std::vector<double> &c_prev, std::vector<double> &j, double &dt) {
+std::vector<double> ElectrolyteFVMSolver::calc_vector_ce_j(std::vector<double> &c_prev, std::vector<double> &j, double &dt)
+{
     std::vector<double> result_vector;
 
-    for (int i=0; i<m_coords.get_vector_x().size(); i++) {
-        result_vector.push_back(c_prev[i] * m_vector_epsilon_e[i] + (1-m_t_c) * m_vector_a_s[i] * j[i] * dt);
+    for (int i = 0; i < m_coords.get_vector_x().size(); i++)
+    {
+        result_vector.push_back(c_prev[i] * m_vector_epsilon_e[i] + (1 - m_t_c) * m_vector_a_s[i] * j[i] * dt);
     }
 
     return result_vector;
 }
 
-void ElectrolyteFVMSolver::solve(std::vector<double> j, double dt) {
+void ElectrolyteFVMSolver::solve(std::vector<double> j, double dt)
+{
     std::vector<double> b = calc_vector_ce_j(m_vector_c_e, j, dt);
     m_vector_c_e = Newton::MatrixSolvers::TDMASolver(calc_lower_diag(dt), calc_diag(dt), calc_upper_diag(dt), b);
 }
 
-
 /*
-*  Battery Solvers Below
-*/
+ *  Battery Solvers Below
+ */
 
 BaseBatterySolver::BaseBatterySolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation,
                                      std::string i_electrode_SOC_solver) : m_b_cell(i_b_cell)
@@ -549,7 +615,7 @@ Solution BatterySolver::solve(BaseCycler i_cycler)
     // std::time_t time_end = std::time(NULL);
     // const auto t_end = std::chrono::high_resolution_clock::now();
 
-    std::cout << std::fixed << std::setprecision(10) << "Solution time: " << double(end - start) / double(CLOCKS_PER_SEC)  << "s" <<std::endl;
+    std::cout << std::fixed << std::setprecision(10) << "Solution time: " << double(end - start) / double(CLOCKS_PER_SEC) << "s" << std::endl;
 
     return sol;
 }

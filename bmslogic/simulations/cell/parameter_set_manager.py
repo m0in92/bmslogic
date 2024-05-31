@@ -16,7 +16,11 @@ import pandas as pd
 from pydantic import BaseModel
 
 from bmslogic.path_definations import *
-from bmslogic.simulations.cell.cell import *
+
+try:
+    from bmslogic.simulations.cell.cell import *
+except ModuleNotFoundError:
+    pass
 
 
 class ParameterSets:

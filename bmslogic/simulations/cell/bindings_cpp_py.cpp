@@ -161,35 +161,37 @@ PYBIND11_MODULE(cell, m)
      // ECMBatteryCell Class
      py::class_<ECMBatteryCell>(m, "ECMBatteryCell")
          .def(py::init<double, double, double, double, double, double,
-                   double, double, double, double, double, double, double, double,
-                   double, double,
-                   std::function<double(double)>, std::function<double(double)>, std::function<double(double)>,
-                   double, double, double>(), 
-                   py::arg("R0_ref"), py::arg("R1_ref"), py::arg("C1"), py::arg("temp_ref"), py::arg("Ea_R0"), py::arg("Ea_R1"),
-                   py::arg("rho"), py::arg("vol"), py::arg("c_p"),py::arg("h"), py::arg("area"), py::arg("cap"), py::arg("V_max"), py::arg("V_min"),
-                   py::arg("soc_init"), py::arg("temp_init"),
-                   py::arg("func_eta"), py::arg("func_ocv"), py::arg("func_docvdtemp"),
-                   py::arg("M_0"), py::arg("M"), py::arg("gamma"))
-          .def_property_readonly("R0_ref", &ECMBatteryCell::get_R0_ref)
-          .def_property_readonly("R1_ref", &ECMBatteryCell::get_R1_ref)
-          .def_property_readonly("C1", &ECMBatteryCell::get_C1)
-          .def_property_readonly("temp_ref", &ECMBatteryCell::get_temp_ref)
-          .def_property_readonly("Ea_R0", &ECMBatteryCell::get_Ea_R0)
-          .def_property_readonly("Ea_R1", &ECMBatteryCell::get_Ea_R1)
-          .def_property_readonly("rho", &ECMBatteryCell::get_rho)
-          .def_property_readonly("vol", &ECMBatteryCell::get_vol)
-          .def_property_readonly("C_p", &ECMBatteryCell::get_C_p)
-          .def_property_readonly("h", &ECMBatteryCell::get_h)
-          .def_property_readonly("area", &ECMBatteryCell::get_area)
-          .def_property_readonly("cap", &ECMBatteryCell::get_cap)
-          .def_property_readonly("V_max", &ECMBatteryCell::get_V_max)
-          .def_property_readonly("V_min", &ECMBatteryCell::get_V_min)
-          .def_property_readonly("soc_min", &ECMBatteryCell::get_soc_min)
-          .def_property_readonly("temp_init", &ECMBatteryCell::get_temp_init)
-          .def_property_readonly("M0", &ECMBatteryCell::get_M0)
-          .def_property_readonly("M", &ECMBatteryCell::get_M)
-          .def_property_readonly("gamma", &ECMBatteryCell::get_gamma)
-          .def("calc_ocv", &ECMBatteryCell::get_ocv, py::arg("soc"));
+                       double, double, double, double, double, double, double, double,
+                       double, double,
+                       std::function<double(double)>, std::function<double(double)>, std::function<double(double)>,
+                       double, double, double>(),
+              py::arg("R0_ref"), py::arg("R1_ref"), py::arg("C1"), py::arg("temp_ref"), py::arg("Ea_R0"), py::arg("Ea_R1"),
+              py::arg("rho"), py::arg("vol"), py::arg("c_p"), py::arg("h"), py::arg("area"), py::arg("cap"), py::arg("V_max"), py::arg("V_min"),
+              py::arg("soc_init"), py::arg("temp_init"),
+              py::arg("func_eta"), py::arg("func_ocv"), py::arg("func_docvdtemp"),
+              py::arg("M_0"), py::arg("M"), py::arg("gamma"))
+         .def_property_readonly("R0_ref", &ECMBatteryCell::get_R0_ref)
+         .def_property_readonly("R1_ref", &ECMBatteryCell::get_R1_ref)
+         .def_property_readonly("C1", &ECMBatteryCell::get_C1)
+         .def_property_readonly("temp_ref", &ECMBatteryCell::get_temp_ref)
+         .def_property_readonly("Ea_R0", &ECMBatteryCell::get_Ea_R0)
+         .def_property_readonly("Ea_R1", &ECMBatteryCell::get_Ea_R1)
+         .def_property_readonly("rho", &ECMBatteryCell::get_rho)
+         .def_property_readonly("vol", &ECMBatteryCell::get_vol)
+         .def_property_readonly("C_p", &ECMBatteryCell::get_C_p)
+         .def_property_readonly("h", &ECMBatteryCell::get_h)
+         .def_property_readonly("area", &ECMBatteryCell::get_area)
+         .def_property_readonly("cap", &ECMBatteryCell::get_cap)
+         .def_property_readonly("V_max", &ECMBatteryCell::get_V_max)
+         .def_property_readonly("V_min", &ECMBatteryCell::get_V_min)
+         .def_property_readonly("soc_min", &ECMBatteryCell::get_soc_min)
+         .def_property_readonly("temp_init", &ECMBatteryCell::get_temp_init)
+         .def_property_readonly("M0", &ECMBatteryCell::get_M0)
+         .def_property_readonly("M", &ECMBatteryCell::get_M)
+         .def_property_readonly("gamma", &ECMBatteryCell::get_gamma)
+         .def_property_readonly("ocv", &ECMBatteryCell::get_ocv)
+         // .def_property_readonly("eta", &ECMBatteryCell::get_eta)
+         .def("calc_ocv", &ECMBatteryCell::calc_ocv, py::arg("soc"));
 
      /*
       * Pertaining to models
@@ -202,6 +204,27 @@ PYBIND11_MODULE(cell, m)
            py::arg("k"), py::arg("c_s_max"), py::arg("soc"), py::arg("c_e"));
      m.def("molar_flux_to_current", &general_equations::molar_flux_to_current,
            py::arg("molar_flux"), py::arg("S"), py::arg("electrode_type"));
+
+     // Thevenin1RC
+     py::class_<Thevenin1RC>(m, "Thevenin1RC")
+         .def(py::init<>())
+         .def("soc_next", &Thevenin1RC::soc_next, py::arg("dt"), py::arg("i_app"), py::arg("soc_prev"), py::arg("Q"), py::arg("eta"))
+         .def("i_R1_next", &Thevenin1RC::i_R1_next, py::arg("dt"), py::arg("i_app"), py::arg("i_R1_prev"), py::arg("R1"), py::arg("C1"))
+         .def("V", &Thevenin1RC::V);
+
+     // ESC
+     py::class_<ESC>(m, "ESC")
+         .def(py::init<>())
+         .def("sign", py::overload_cast<int &>(&ESC::sign), py::arg("num"))
+         .def("sign", py::overload_cast<double &>(&ESC::sign), py::arg("num"))
+         .def("s", &ESC::s, py::arg("i_app"), py::arg("s_prev"))
+         .def("soc_next", &ESC::soc_next, py::arg("dt"), py::arg("i_app"), py::arg("soc_prev"), py::arg("Q"), py::arg("eta"))
+         .def("i_R1_next", &ESC::i_R1_next, py::arg("dt"), py::arg("i_app"), py::arg("i_R1_prev"), py::arg("R1"), py::arg("C1"))
+         .def("h_next", &ESC::h_next, py::arg("dt"), py::arg("i_app"), py::arg("eta"), py::arg("gamma"), py::arg("cap"), py::arg("h_prev"))
+         .def("V", &ESC::v,
+              py::arg("i_app"), py::arg("ocv"),
+              py::arg("R0"), py::arg("R1"), py::arg("i_R1"),
+              py::arg("m_0"), py::arg("m"), py::arg("h"), py::arg("s_prev"));
 
      // Enhanced single particle model
      m.def("ESPModel_molar_flux_electrode", &ESPModel::molar_flux_electrode, py::arg("i_app"), py::arg("S"), py::arg("electrode_type"));
@@ -289,6 +312,19 @@ PYBIND11_MODULE(cell, m)
      /*
       * Solutions
       */
+     py::class_<ECMSolution>(m, "ECMSolution")
+         .def(py::init<>())
+         .def(py::init<std::vector<double>, std::vector<double>, std::vector<double>,
+                       std::vector<double>, std::vector<double>, std::vector<double>>(),
+              py::arg("t"), py::arg("I"), py::arg("V"),
+              py::arg("temp"), py::arg("soc"), py::arg("i_R1"))
+         .def_property("t", &ECMSolution::get_t, &ECMSolution::set_t)
+         .def_property("I", &ECMSolution::get_I, &ECMSolution::set_I)
+         .def_property("V", &ECMSolution::get_V, &ECMSolution::set_V)
+         .def_property("temp", &ECMSolution::get_temp, &ECMSolution::set_temp)
+         .def_property("soc", &ECMSolution::get_soc, &ECMSolution::set_soc)
+         .def_property("i_R1", &ECMSolution::get_i_R1, &ECMSolution::set_i_R1);
+
      py::class_<Solution>(m, "Solution")
          .def(py::init<>())
          .def(py::init<std::vector<double>,

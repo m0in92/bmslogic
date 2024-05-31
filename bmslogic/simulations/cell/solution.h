@@ -4,9 +4,9 @@
  * @brief Contains the funcitionalities to store and display the simulations results.
  * @version 0.1
  * @date 2024-05-04
- * 
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 
 #ifndef BMSLOGIC_PROJECT_SOLUTION_H
@@ -16,6 +16,47 @@
 #include <string>
 
 #include "extern/owl.h"
+
+class ECMSolution
+{
+public:
+    ECMSolution(){};
+    ECMSolution(std::vector<double> i_t,
+                std::vector<double> i_I,
+                std::vector<double> i_V,
+                std::vector<double> i_temp,
+                std::vector<double> i_soc,
+                std::vector<double> i_i_R1);
+    // getter methods
+    std::vector<double> get_t() { return m_t; }
+    std::vector<double> get_I() { return m_I; }
+    std::vector<double> get_V() { return m_V; }
+    std::vector<double> get_temp() { return m_temp; }
+    std::vector<double> get_soc() { return m_soc; }
+    std::vector<double> get_i_R1() { return m_i_R1; }
+    // setters
+    void set_t(std::vector<double> i_t) { m_t = i_t; }
+    void set_I(std::vector<double> i_t) { m_I = i_t; }
+    void set_V(std::vector<double> i_t) { m_V = i_t; }
+    void set_temp(std::vector<double> i_temp) { m_temp = i_temp; }
+    void set_soc(std::vector<double> i_soc) { m_soc = i_soc; }
+    void set_i_R1(std::vector<double> i_i_R1) { m_i_R1 = i_i_R1; }
+    // the methods below are intended for updating the member vectors
+    void update_t(double t_new) { m_t.push_back(t_new); }
+    void update_I(double I_new) { m_t.push_back(I_new); }
+    void update_V(double V_new) { m_t.push_back(V_new); }
+    void update_temp(double temp_new) { m_t.push_back(temp_new); }
+    void update_soc(double soc_new) { m_t.push_back(soc_new); }
+    void update_i_R1(double i_R1_new) { m_t.push_back(i_R1_new); }
+
+private:
+    std::vector<double> m_t;
+    std::vector<double> m_I;
+    std::vector<double> m_V;
+    std::vector<double> m_temp;
+    std::vector<double> m_soc;
+    std::vector<double> m_i_R1;
+};
 
 class Solution
 {

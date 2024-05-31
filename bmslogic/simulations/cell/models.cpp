@@ -16,7 +16,6 @@
 #include "common_includes.h"
 #include "extern/owl.h"
 
-
 /**
  * @brief the capacity increment
  *
@@ -68,6 +67,45 @@ double general_equations::molar_flux_to_current(double &molar_flux, double &S, c
         return -molar_flux * Constants.F * S;
     else
         throw std::invalid_argument("invalid electrode_type argument");
+}
+
+int ESC::sign(int &number)
+{
+    if (number < 0)
+        return -1;
+    else if (number == 0)
+        return 0;
+    else
+        return 1;
+}
+
+int ESC::sign(double &number)
+{
+    if (number < 0.0)
+        return -1;
+    else if (number == 0.0)
+        return 0;
+    else
+        return 1;
+}
+
+double ESC::s(double &i_app, double &s_prev)
+{
+    if (std::abs(i_app) > 0)
+        return ESC::sign(i_app);
+    else
+        return s_prev;
+}
+
+double ESC::h_next(double dt, double i_app, double eta, double gamma, double cap, double h_prev)
+{
+    double exp_term = std::exp(-std::abs((eta * i_app * gamma * dt) / (3600 * cap)));
+    return exp_term * h_prev - (1 - exp_term) * sign(i_app);
+}
+
+double ESC::v(double i_app, double ocv, double R0, double R1, double i_R1, double m_0, double m, double h, double s_prev)
+{
+    return ocv - R1 * i_R1 - R0 * i_app + m * h + m_0 * s(i_app, s_prev);
 }
 
 /**

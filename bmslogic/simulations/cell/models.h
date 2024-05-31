@@ -5,9 +5,9 @@
  * simulation equations in their methods. These equations are used by the relevant solvers during the simulation runs.
  * @version 0.1
  * @date 2024-05-04
- * 
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 
 #ifndef BMSLOGIC_PROJECT_MODELS_H
@@ -26,9 +26,81 @@ namespace general_equations
 }
 
 /**
+ * @brief     This class creates a first order Thevenin model object for a lithium-ion battery cell. It contains relevant model
+ * parameters as class attributes and methods to calculate SOC and terminal voltage.
+ *
+ * Thevenin first order model is a phenomenological model that can be used to simulate the terminal voltage across a
+ * lithium-ion battery cell. It has representative electrical components that represent the open-circuit voltage,
+ * internal resistance, and diffusion voltages. The set of differential and algebraic equations are:
+
+ * dz/dt = -eta(t) * i_app(t) / capacity
+ * di_R1/dt = -i_R1/(R1*C1) + i_app(t)/(R1*C1)
+ * v(t) = OCV(z(t)) - R1*i_R1(t) - R0*i_app(t)
+
+ * Where the second equation is a non-homogenous linear first-order differential equation. Furthermore, the variables
+ * are:
+ * z: state of charge (SOC)
+ * R0: resistance of the resistor that represents the battery cell's internal resistance
+ * R1: resistance of the resistor in the RC pair.
+ * C1: capacitance of the capacitor in the RC pair.
+ * i_R1: current through R1
+ * i_app: applied current
+ * eta: Colombic efficiency
+
+ * Note that the RC pair represents the diffusion voltage in the battery cell.
+
+
+ * After time discretization, the set of algebraic equations are:
+
+ * z[k+1] = z[k] - delta_t*eta[k]*i_app[k]/capacity
+ * i_R1[k+1] = exp(-delta_t/(R1*C1))*i_R1[k] + (1-exp(-delta_t/(R1*C1))) * i_app[k]
+ * v[k] = OCV(z[k]) - R1*i_R1[k] - R0*i_app[k]
+
+ * Where k represents the time-point and delta_t represents the time-step between z[k+1] and z[k].
+
+ * Code Notes:
+ * 1. It is assumed for now that eta is a function of applied current only.
+ * 2. Discharge currrent is positve and charge current is negative by convention.
+
+ * Reference:
+ * Hariharan, K. S. (2013). A coupled nonlinear equivalent circuit – Thermal model for lithium ion cells.
+ * In Journal of Power Sources (Vol. 227, pp. 171–176). Elsevier BV.
+ * https://doi.org/10.1016/j.jpowsour.2012.11.044
+ *
+ */
+class Thevenin1RC
+{
+public:
+    Thevenin1RC() = default;
+    double soc_next(double dt, double i_app, double soc_prev, double Q, double eta) { return soc_prev - dt * eta * i_app / (3600 * Q); }
+    double i_R1_next(double dt, double i_app, double i_R1_prev, double R1, double C1) { return std::exp(-dt / (R1 * C1)) * i_R1_prev + (1 - std::exp(-dt / (R1 * C1))) * i_app; }
+    double V(double i_app, double ocv, double R0, double R1, double i_R1) { return ocv - R1 * i_R1 - R0 * i_app; }
+};
+
+/**
+ * @brief     Class oject contains the relevant functions to perform the Enhanched-self-correcting ECM model.
+ *
+ * Notes:
+ *      The discharge current is assumed to be positive values. Meanwhile, the charge current is negative by convention.
+ *
+ */
+class ESC
+{
+public:
+    ESC() = default;
+    int sign(double &i_number);
+    int sign(int &i_number);
+    double s(double &i_app, double &s_prev);
+    double soc_next(double dt, double i_app, double soc_prev, double Q, double eta) { return soc_prev - dt * eta * i_app / (3600 * Q); }
+    double i_R1_next(double dt, double i_app, double i_R1_prev, double R1, double C1) { return std::exp(-dt / (R1 * C1)) * i_R1_prev + (1 - std::exp(-dt / (R1 * C1))) * i_app;  }
+    double h_next(double dt, double i_app, double eta, double gamma, double cap, double h_prev);
+    double v(double i_app, double ocv, double R0, double R1, double i_R1, double m_0, double m, double h, double s_prev);
+};
+
+/**
  * @class SPModel
  * @brief Equations for the single particle model
- * 
+ *
  */
 class SPModel
 {
@@ -39,8 +111,8 @@ public:
 };
 
 /**
- * @brief contains equations for the Enhanced single particle models. 
- * 
+ * @brief contains equations for the Enhanced single particle models.
+ *
  */
 namespace ESPModel
 {
@@ -55,16 +127,15 @@ namespace ESPModel
                                  double temp, double i_app);
 };
 
-
 /**
  * @class ROMSEI
  * @brief This class contains the equations for the reduced order SEI growth model as mentioned in ref [1], with slight
  * modifications.
- * 
+ *
  *  * Literature Reference:
  *      1. Randell et al. "Controls oriented reduced order modeling of solid-electrolyte interphase layer growth". 2012.
  *          Journal of Power Sources. Vol: 209. pgs: 282-288.
-*/
+ */
 class ROMSEI
 {
 public:
