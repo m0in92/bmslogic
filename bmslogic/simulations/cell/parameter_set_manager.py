@@ -19,214 +19,623 @@ from bmslogic.path_definations import *
 
 try:
     from bmslogic.simulations.cell.cell import *
+
+    class ParameterSets:
+        PARAMETER_SET_DIR = PARAMETER_SET_DIR  # directory to the parameter_sets folder
+
+        def __init__(self, name: str):
+            # below checks if the inputted name is available in the parameter sets.
+            if not self._check_parameter_set(name):
+                raise ValueError(f"{name} not found in the existing parameter_set")
+
+            self.name: str = name  # name of the parameter set
+
+            self.POSITIVE_ELECTRODE_DIR: str = os.path.join(
+                self.PARAMETER_SET_DIR, self.name, 'param_pos-electrode.csv')
+            self.NEGATIVE_ELECTRODE_DIR: str = os.path.join(
+                self.PARAMETER_SET_DIR, self.name, 'param_neg-electrode.csv')
+            self.ELECTROLYTE_DIR: str = os.path.join(
+                self.PARAMETER_SET_DIR, self.name, 'param_electrolyte.csv')
+            self.BATTERY_CELL_DIR: str = os.path.join(
+                self.PARAMETER_SET_DIR, self.name, 'param_battery-cell.csv')
+
+            # Positive electrode parameters are extracted below
+            # Read and parse the csv file.
+            df = ParameterSets._parse_csv(file_path=self.POSITIVE_ELECTRODE_DIR)
+            self.L_p: float = df['Electrode Thickness [m]']
+            self.A_p: float = df['Electrode Area [m^2]']
+            self.kappa_p: float = df['Ionic Conductivity [S m^-1]']
+            self.epsilon_p: float = df['Volume Fraction']
+            self.max_conc_p: float = df['Max. Conc. [mol m^-3]']
+            self.R_p: float = df['Radius [m]']
+            self.S_p: float = df['Electroactive Area [m^2]']
+            self.T_ref_p: float = df['Reference Temperature [K]']
+            self.D_ref_p: float = df['Reference Diffusitivity [m^2 s^-1]']
+            self.k_ref_p: float = df['Reference Rate Constant [m^2.5 mol^-0.5 s^-1]']
+            self.Ea_D_p: float = df['Activation Energy of Diffusion [J mol^-1]']
+            self.Ea_R_p: float = df['Activation Energy of Reaction [J mol^-1]']
+            self.alpha_p: float = df['Anodic Transfer Coefficient']
+            self.brugg_p: float = df['Bruggerman Coefficient']
+            self.soc_min_p: float = df['soc_min']
+            self.soc_max_p: float = df['soc_max']
+
+            # Negative electrode parameters are extracted below
+            # Read and parse the csv file.
+            df = ParameterSets._parse_csv(file_path=self.NEGATIVE_ELECTRODE_DIR)
+            self.L_n: float = df['Electrode Thickness [m]']
+            self.A_n: float = df['Electrode Area [m^2]']
+            self.kappa_n: float = df['Ionic Conductivity [S m^-1]']
+            self.epsilon_n: float = df['Volume Fraction']
+            self.max_conc_n: float = df['Max. Conc. [mol m^-3]']
+            self.R_n: float = df['Radius [m]']
+            self.S_n: float = df['Electroactive Area [m^2]']
+            self.T_ref_n: float = df['Reference Temperature [K]']
+            self.D_ref_n: float = df['Reference Diffusitivity [m^2 s^-1]']
+            self.k_ref_n: float = df['Reference Rate Constant [m^2.5 mol^-0.5 s^-1]']
+            self.Ea_D_n: float = df['Activation Energy of Diffusion [J mol^-1]']
+            self.Ea_R_n: float = df['Activation Energy of Reaction [J mol^-1]']
+            self.alpha_n: float = df['Anodic Transfer Coefficient']
+            self.brugg_n: float = df['Bruggerman Coefficient']
+            self.soc_min_n: float = df['soc_min']
+            self.soc_max_n: float = df['soc_max']
+            # SEI parameters for the negative electrode are extracted below
+            self.U_s: float = df['SEI Reference Overpotential [V]']
+            self.i_s: float = df['SEI Exchange Current Density [mol m^-2 s^-1]']
+            self.MW_SEI: float = df['SEI Molar Weight [kg mol^-1]']
+            self.rho_SEI: float = df['SEI Density [kg m^-3]']
+            # SEI conductivity [S/m]
+            self.kappa_SEI: float = df['SEI Conductivity [S m^-1]']
+
+            # Below extracts electrolyte parameters
+            df = ParameterSets._parse_csv(file_path=self.ELECTROLYTE_DIR)
+            self.conc_es: float = df['Conc. [mol m^-3]']
+            self.L_es: float = df['Thickness [m]']
+            self.kappa_es: float = df['Ionic Conductivity [S m^-1]']
+            self.epsilon_es: float = df['Volume Fraction']
+            self.brugg_es: float = df['Bruggerman Coefficient']
+
+            try:
+                # This parameter is NOT used in the single
+                self.t_c: Optional[float] = df['Cation Transference No.']
+                # particle model
+            except KeyError as e:
+                self.t_c: Optional[float] = None
+                print("No value found for t_c. Can only perform single particle model.")
+
+            try:
+                # This parameter is NOT used in the single
+                self.value_D_e: Optional[float] = df['Diffusivity']
+                # particle model
+            except KeyError as e:
+                self.value_D_e: Optional[float] = None
+                print(
+                    "No value found for D_e [m2/s]. Can only perform single particle model.")
+
+            try:
+                # This parameter is NOT used in the
+                self.epsilon_en: Optional[float] = df['Volume Fraction N']
+                # single particle model
+            except KeyError as e:
+                self.epsilon_en: Optional[float] = None
+                print("No value found for kappa_en. Can only perform single particle model.")
+
+            try:
+                # This parameter is NOT used in the
+                self.epsilon_ep: Optional[float] = df['Volume Fraction P']
+                # single particle model
+            except KeyError as e:
+                self.epsilon_ep: Optional[float] = None
+                print("No value found for kappa_pn. Can only perform single particle model.")
+
+            # Below extracts the battery cell parameters
+            df = ParameterSets._parse_csv(file_path=self.BATTERY_CELL_DIR)
+            self.rho: float = df['Density [kg m^-3]']
+            self.Vol: float = df['Volume [m^3]']
+            self.C_p: float = df['Specific Heat [J K^-1 kg^-1]']
+            self.h: float = df['Heat Transfer Coefficient [J s^-1 K^-1]']
+            self.A: float = df['Surface Area [m^2]']
+            self.cap: float = df['Capacity [A hr]']
+            self.V_max: float = df['Maximum Potential Cut-off [V]']
+            self.V_min: float = df['Minimum Potential Cut-off [V]']
+
+            func_module = importlib.import_module(
+                f'bmslogic.parameter_sets.{self.name}.funcs')  # imports the python module
+            # containing the OCP related funcs in the parameter set.
+            self.OCP_ref_p_: Callable = func_module.OCP_ref_p
+            self.dOCPdT_p_: Callable = func_module.dOCPdT_p
+            self.OCP_ref_n_: Callable = func_module.OCP_ref_n
+            self.dOCPdT_n_: Callable = func_module.dOCPdT_n
+
+            # containing the electrolyte related functions in the parameter set below.
+            warning_msg: str = 'No electrolyte related functions found in the parameter set: '
+            try:
+                self.func_D_e_ = func_module.func_D_e
+            except AttributeError as e:
+                print(warning_msg, 'D_e')
+                self.func_D_e_ = None
+            try:
+                self.func_kappa_e_ = func_module.func_kappa_e
+            except AttributeError as e:
+                print(warning_msg, 'kappa_e')
+            try:
+                self.func_dlnf_ = func_module.func_dlnf
+            except AttributeError as e:
+                print(warning_msg, '1+dlnf/flnc_e')
+
+        @classmethod
+        def list_parameters_sets(cls):
+            """
+            Returns the list of available parameter sets.
+            :return: (list) list of available parameters sets.
+            """
+            return os.listdir(cls.PARAMETER_SET_DIR)
+
+        @classmethod
+        def _check_parameter_set(cls, name) -> bool:
+            """
+            Checks if the inputted parameter name is in the parameter set. If not available, it raises an exception.
+            """
+            flag_name_present: bool = False
+            if name in cls.list_parameters_sets():
+                flag_name_present = True
+            return flag_name_present
+
+        @classmethod
+        def _parse_csv(cls, file_path):
+            """
+            reads the csv file and returns a Pandas DataFrame.
+            :param file_path: the absolute or relative file drectory of the csv file.
+            :return: the dataframe with the column containing numerical values only.
+            """
+            return pd.read_csv(file_path, index_col=0)["Value"]
+
+        def generate_BatteryCell_instance(self, soc_p_init: float, soc_n_init: float, T_amb: float, R_cell: float) -> BatteryCell:
+            """Generates a BatteryCell instance with the parameters from the relevant parameter_sets.
+
+            Parameters
+            ----------
+            soc_p_init : float
+                Positive electrode's intial SOC
+            soc_n_init : float
+                Negative electrode's initial SOC
+            T_amb : float
+                Ambient temperature
+            R_cell: float
+                Battery cell's internal resistance
+
+            Returns
+            -------
+            sp.BatteryCell
+                BatteryCell instance
+            """
+            p_electrode: PElectrode = PElectrode(L=self.L_p, A=self.A_p, kappa=self.kappa_p, epsilon=self.epsilon_p, max_conc=self.max_conc_p,
+                                                R=self.R_p, S=self.S_p,
+                                                T_ref=self.T_ref_p, D_ref=self.D_ref_p, k_ref=self.k_ref_p, Ea_D=self.Ea_D_p, Ea_R=self.Ea_R_p,
+                                                alpha=self.alpha_p, brugg=self.brugg_p,
+                                                SOC=soc_p_init, T=T_amb, func_OCP=self.OCP_ref_p_, func_dOCPdT=self.dOCPdT_p_)
+            n_electrode: NElectrode = NElectrode(L=self.L_n, A=self.A_n, kappa=self.kappa_n, epsilon=self.epsilon_n, max_conc=self.max_conc_n,
+                                                R=self.R_n, S=self.S_n,
+                                                T_ref=self.T_ref_n, D_ref=self.D_ref_n, k_ref=self.k_ref_n, Ea_D=self.Ea_D_n, Ea_R=self.Ea_R_n,
+                                                alpha=self.alpha_n, brugg=self.brugg_n,
+                                                SOC=soc_n_init, T=T_amb, func_OCP=self.OCP_ref_n_, func_dOCPdT=self.dOCPdT_n_)
+            electrolyte: Electrolyte = Electrolyte(L=self.L_es, conc=self.conc_es,
+                                                kappa=self.kappa_es, epsilon=self.epsilon_es, brugg=self.brugg_es)
+            battery_cell: BatteryCell = BatteryCell(p_elec=p_electrode, n_elec=n_electrode, electrolyte=electrolyte,
+                                                    rho=self.rho, Vol=self.Vol, C_p=self.C_p, h=self.h, A=self.A, cap=self.cap,
+                                                    V_max=self.V_max, V_min=self.V_min, R_cell=R_cell)
+            return battery_cell
+    
 except ModuleNotFoundError:
-    pass
+    class ParameterSets:
+        PARAMETER_SET_DIR = PARAMETER_SET_DIR  # directory to the parameter_sets folder
+
+        def __init__(self, name: str):
+            # below checks if the inputted name is available in the parameter sets.
+            if not self._check_parameter_set(name):
+                raise ValueError(f"{name} not found in the existing parameter_set")
+
+            self.name: str = name  # name of the parameter set
+
+            self.POSITIVE_ELECTRODE_DIR: str = os.path.join(
+                self.PARAMETER_SET_DIR, self.name, 'param_pos-electrode.csv')
+            self.NEGATIVE_ELECTRODE_DIR: str = os.path.join(
+                self.PARAMETER_SET_DIR, self.name, 'param_neg-electrode.csv')
+            self.ELECTROLYTE_DIR: str = os.path.join(
+                self.PARAMETER_SET_DIR, self.name, 'param_electrolyte.csv')
+            self.BATTERY_CELL_DIR: str = os.path.join(
+                self.PARAMETER_SET_DIR, self.name, 'param_battery-cell.csv')
+
+            # Positive electrode parameters are extracted below
+            # Read and parse the csv file.
+            df = ParameterSets._parse_csv(file_path=self.POSITIVE_ELECTRODE_DIR)
+            self.L_p: float = df['Electrode Thickness [m]']
+            self.A_p: float = df['Electrode Area [m^2]']
+            self.kappa_p: float = df['Ionic Conductivity [S m^-1]']
+            self.epsilon_p: float = df['Volume Fraction']
+            self.max_conc_p: float = df['Max. Conc. [mol m^-3]']
+            self.R_p: float = df['Radius [m]']
+            self.S_p: float = df['Electroactive Area [m^2]']
+            self.T_ref_p: float = df['Reference Temperature [K]']
+            self.D_ref_p: float = df['Reference Diffusitivity [m^2 s^-1]']
+            self.k_ref_p: float = df['Reference Rate Constant [m^2.5 mol^-0.5 s^-1]']
+            self.Ea_D_p: float = df['Activation Energy of Diffusion [J mol^-1]']
+            self.Ea_R_p: float = df['Activation Energy of Reaction [J mol^-1]']
+            self.alpha_p: float = df['Anodic Transfer Coefficient']
+            self.brugg_p: float = df['Bruggerman Coefficient']
+            self.soc_min_p: float = df['soc_min']
+            self.soc_max_p: float = df['soc_max']
+
+            # Negative electrode parameters are extracted below
+            # Read and parse the csv file.
+            df = ParameterSets._parse_csv(file_path=self.NEGATIVE_ELECTRODE_DIR)
+            self.L_n: float = df['Electrode Thickness [m]']
+            self.A_n: float = df['Electrode Area [m^2]']
+            self.kappa_n: float = df['Ionic Conductivity [S m^-1]']
+            self.epsilon_n: float = df['Volume Fraction']
+            self.max_conc_n: float = df['Max. Conc. [mol m^-3]']
+            self.R_n: float = df['Radius [m]']
+            self.S_n: float = df['Electroactive Area [m^2]']
+            self.T_ref_n: float = df['Reference Temperature [K]']
+            self.D_ref_n: float = df['Reference Diffusitivity [m^2 s^-1]']
+            self.k_ref_n: float = df['Reference Rate Constant [m^2.5 mol^-0.5 s^-1]']
+            self.Ea_D_n: float = df['Activation Energy of Diffusion [J mol^-1]']
+            self.Ea_R_n: float = df['Activation Energy of Reaction [J mol^-1]']
+            self.alpha_n: float = df['Anodic Transfer Coefficient']
+            self.brugg_n: float = df['Bruggerman Coefficient']
+            self.soc_min_n: float = df['soc_min']
+            self.soc_max_n: float = df['soc_max']
+            # SEI parameters for the negative electrode are extracted below
+            self.U_s: float = df['SEI Reference Overpotential [V]']
+            self.i_s: float = df['SEI Exchange Current Density [mol m^-2 s^-1]']
+            self.MW_SEI: float = df['SEI Molar Weight [kg mol^-1]']
+            self.rho_SEI: float = df['SEI Density [kg m^-3]']
+            # SEI conductivity [S/m]
+            self.kappa_SEI: float = df['SEI Conductivity [S m^-1]']
+
+            # Below extracts electrolyte parameters
+            df = ParameterSets._parse_csv(file_path=self.ELECTROLYTE_DIR)
+            self.conc_es: float = df['Conc. [mol m^-3]']
+            self.L_es: float = df['Thickness [m]']
+            self.kappa_es: float = df['Ionic Conductivity [S m^-1]']
+            self.epsilon_es: float = df['Volume Fraction']
+            self.brugg_es: float = df['Bruggerman Coefficient']
+
+            try:
+                # This parameter is NOT used in the single
+                self.t_c: Optional[float] = df['Cation Transference No.']
+                # particle model
+            except KeyError as e:
+                self.t_c: Optional[float] = None
+                print("No value found for t_c. Can only perform single particle model.")
+
+            try:
+                # This parameter is NOT used in the single
+                self.value_D_e: Optional[float] = df['Diffusivity']
+                # particle model
+            except KeyError as e:
+                self.value_D_e: Optional[float] = None
+                print(
+                    "No value found for D_e [m2/s]. Can only perform single particle model.")
+
+            try:
+                # This parameter is NOT used in the
+                self.epsilon_en: Optional[float] = df['Volume Fraction N']
+                # single particle model
+            except KeyError as e:
+                self.epsilon_en: Optional[float] = None
+                print("No value found for kappa_en. Can only perform single particle model.")
+
+            try:
+                # This parameter is NOT used in the
+                self.epsilon_ep: Optional[float] = df['Volume Fraction P']
+                # single particle model
+            except KeyError as e:
+                self.epsilon_ep: Optional[float] = None
+                print("No value found for kappa_pn. Can only perform single particle model.")
+
+            # Below extracts the battery cell parameters
+            df = ParameterSets._parse_csv(file_path=self.BATTERY_CELL_DIR)
+            self.rho: float = df['Density [kg m^-3]']
+            self.Vol: float = df['Volume [m^3]']
+            self.C_p: float = df['Specific Heat [J K^-1 kg^-1]']
+            self.h: float = df['Heat Transfer Coefficient [J s^-1 K^-1]']
+            self.A: float = df['Surface Area [m^2]']
+            self.cap: float = df['Capacity [A hr]']
+            self.V_max: float = df['Maximum Potential Cut-off [V]']
+            self.V_min: float = df['Minimum Potential Cut-off [V]']
+
+            func_module = importlib.import_module(
+                f'bmslogic.parameter_sets.{self.name}.funcs')  # imports the python module
+            # containing the OCP related funcs in the parameter set.
+            self.OCP_ref_p_: Callable = func_module.OCP_ref_p
+            self.dOCPdT_p_: Callable = func_module.dOCPdT_p
+            self.OCP_ref_n_: Callable = func_module.OCP_ref_n
+            self.dOCPdT_n_: Callable = func_module.dOCPdT_n
+
+            # containing the electrolyte related functions in the parameter set below.
+            warning_msg: str = 'No electrolyte related functions found in the parameter set: '
+            try:
+                self.func_D_e_ = func_module.func_D_e
+            except AttributeError as e:
+                print(warning_msg, 'D_e')
+                self.func_D_e_ = None
+            try:
+                self.func_kappa_e_ = func_module.func_kappa_e
+            except AttributeError as e:
+                print(warning_msg, 'kappa_e')
+            try:
+                self.func_dlnf_ = func_module.func_dlnf
+            except AttributeError as e:
+                print(warning_msg, '1+dlnf/flnc_e')
+
+        @classmethod
+        def list_parameters_sets(cls):
+            """
+            Returns the list of available parameter sets.
+            :return: (list) list of available parameters sets.
+            """
+            return os.listdir(cls.PARAMETER_SET_DIR)
+
+        @classmethod
+        def _check_parameter_set(cls, name) -> bool:
+            """
+            Checks if the inputted parameter name is in the parameter set. If not available, it raises an exception.
+            """
+            flag_name_present: bool = False
+            if name in cls.list_parameters_sets():
+                flag_name_present = True
+            return flag_name_present
+
+        @classmethod
+        def _parse_csv(cls, file_path):
+            """
+            reads the csv file and returns a Pandas DataFrame.
+            :param file_path: the absolute or relative file drectory of the csv file.
+            :return: the dataframe with the column containing numerical values only.
+            """
+            return pd.read_csv(file_path, index_col=0)["Value"]
+
+    # def generate_BatteryCell_instance(self, soc_p_init: float, soc_n_init: float, T_amb: float, R_cell: float) -> BatteryCell:
+    #     """Generates a BatteryCell instance with the parameters from the relevant parameter_sets.
+
+    #     Parameters
+    #     ----------
+    #     soc_p_init : float
+    #         Positive electrode's intial SOC
+    #     soc_n_init : float
+    #         Negative electrode's initial SOC
+    #     T_amb : float
+    #         Ambient temperature
+    #     R_cell: float
+    #         Battery cell's internal resistance
+
+    #     Returns
+    #     -------
+    #     sp.BatteryCell
+    #         BatteryCell instance
+    #     """
+    #     p_electrode: PElectrode = PElectrode(L=self.L_p, A=self.A_p, kappa=self.kappa_p, epsilon=self.epsilon_p, max_conc=self.max_conc_p,
+    #                                          R=self.R_p, S=self.S_p,
+    #                                          T_ref=self.T_ref_p, D_ref=self.D_ref_p, k_ref=self.k_ref_p, Ea_D=self.Ea_D_p, Ea_R=self.Ea_R_p,
+    #                                          alpha=self.alpha_p, brugg=self.brugg_p,
+    #                                          SOC=soc_p_init, T=T_amb, func_OCP=self.OCP_ref_p_, func_dOCPdT=self.dOCPdT_p_)
+    #     n_electrode: NElectrode = NElectrode(L=self.L_n, A=self.A_n, kappa=self.kappa_n, epsilon=self.epsilon_n, max_conc=self.max_conc_n,
+    #                                          R=self.R_n, S=self.S_n,
+    #                                          T_ref=self.T_ref_n, D_ref=self.D_ref_n, k_ref=self.k_ref_n, Ea_D=self.Ea_D_n, Ea_R=self.Ea_R_n,
+    #                                          alpha=self.alpha_n, brugg=self.brugg_n,
+    #                                          SOC=soc_n_init, T=T_amb, func_OCP=self.OCP_ref_n_, func_dOCPdT=self.dOCPdT_n_)
+    #     electrolyte: Electrolyte = Electrolyte(L=self.L_es, conc=self.conc_es,
+    #                                            kappa=self.kappa_es, epsilon=self.epsilon_es, brugg=self.brugg_es)
+    #     battery_cell: BatteryCell = BatteryCell(p_elec=p_electrode, n_elec=n_electrode, electrolyte=electrolyte,
+    #                                             rho=self.rho, Vol=self.Vol, C_p=self.C_p, h=self.h, A=self.A, cap=self.cap,
+    #                                             V_max=self.V_max, V_min=self.V_min, R_cell=R_cell)
+    #     return battery_cell
 
 
-class ParameterSets:
-    PARAMETER_SET_DIR = PARAMETER_SET_DIR  # directory to the parameter_sets folder
+# class ParameterSets:
+#     PARAMETER_SET_DIR = PARAMETER_SET_DIR  # directory to the parameter_sets folder
 
-    def __init__(self, name: str):
-        # below checks if the inputted name is available in the parameter sets.
-        if not self._check_parameter_set(name):
-            raise ValueError(f"{name} not found in the existing parameter_set")
+#     def __init__(self, name: str):
+#         # below checks if the inputted name is available in the parameter sets.
+#         if not self._check_parameter_set(name):
+#             raise ValueError(f"{name} not found in the existing parameter_set")
 
-        self.name: str = name  # name of the parameter set
+#         self.name: str = name  # name of the parameter set
 
-        self.POSITIVE_ELECTRODE_DIR: str = os.path.join(
-            self.PARAMETER_SET_DIR, self.name, 'param_pos-electrode.csv')
-        self.NEGATIVE_ELECTRODE_DIR: str = os.path.join(
-            self.PARAMETER_SET_DIR, self.name, 'param_neg-electrode.csv')
-        self.ELECTROLYTE_DIR: str = os.path.join(
-            self.PARAMETER_SET_DIR, self.name, 'param_electrolyte.csv')
-        self.BATTERY_CELL_DIR: str = os.path.join(
-            self.PARAMETER_SET_DIR, self.name, 'param_battery-cell.csv')
+#         self.POSITIVE_ELECTRODE_DIR: str = os.path.join(
+#             self.PARAMETER_SET_DIR, self.name, 'param_pos-electrode.csv')
+#         self.NEGATIVE_ELECTRODE_DIR: str = os.path.join(
+#             self.PARAMETER_SET_DIR, self.name, 'param_neg-electrode.csv')
+#         self.ELECTROLYTE_DIR: str = os.path.join(
+#             self.PARAMETER_SET_DIR, self.name, 'param_electrolyte.csv')
+#         self.BATTERY_CELL_DIR: str = os.path.join(
+#             self.PARAMETER_SET_DIR, self.name, 'param_battery-cell.csv')
 
-        # Positive electrode parameters are extracted below
-        # Read and parse the csv file.
-        df = ParameterSets._parse_csv(file_path=self.POSITIVE_ELECTRODE_DIR)
-        self.L_p: float = df['Electrode Thickness [m]']
-        self.A_p: float = df['Electrode Area [m^2]']
-        self.kappa_p: float = df['Ionic Conductivity [S m^-1]']
-        self.epsilon_p: float = df['Volume Fraction']
-        self.max_conc_p: float = df['Max. Conc. [mol m^-3]']
-        self.R_p: float = df['Radius [m]']
-        self.S_p: float = df['Electroactive Area [m^2]']
-        self.T_ref_p: float = df['Reference Temperature [K]']
-        self.D_ref_p: float = df['Reference Diffusitivity [m^2 s^-1]']
-        self.k_ref_p: float = df['Reference Rate Constant [m^2.5 mol^-0.5 s^-1]']
-        self.Ea_D_p: float = df['Activation Energy of Diffusion [J mol^-1]']
-        self.Ea_R_p: float = df['Activation Energy of Reaction [J mol^-1]']
-        self.alpha_p: float = df['Anodic Transfer Coefficient']
-        self.brugg_p: float = df['Bruggerman Coefficient']
-        self.soc_min_p: float = df['soc_min']
-        self.soc_max_p: float = df['soc_max']
+#         # Positive electrode parameters are extracted below
+#         # Read and parse the csv file.
+#         df = ParameterSets._parse_csv(file_path=self.POSITIVE_ELECTRODE_DIR)
+#         self.L_p: float = df['Electrode Thickness [m]']
+#         self.A_p: float = df['Electrode Area [m^2]']
+#         self.kappa_p: float = df['Ionic Conductivity [S m^-1]']
+#         self.epsilon_p: float = df['Volume Fraction']
+#         self.max_conc_p: float = df['Max. Conc. [mol m^-3]']
+#         self.R_p: float = df['Radius [m]']
+#         self.S_p: float = df['Electroactive Area [m^2]']
+#         self.T_ref_p: float = df['Reference Temperature [K]']
+#         self.D_ref_p: float = df['Reference Diffusitivity [m^2 s^-1]']
+#         self.k_ref_p: float = df['Reference Rate Constant [m^2.5 mol^-0.5 s^-1]']
+#         self.Ea_D_p: float = df['Activation Energy of Diffusion [J mol^-1]']
+#         self.Ea_R_p: float = df['Activation Energy of Reaction [J mol^-1]']
+#         self.alpha_p: float = df['Anodic Transfer Coefficient']
+#         self.brugg_p: float = df['Bruggerman Coefficient']
+#         self.soc_min_p: float = df['soc_min']
+#         self.soc_max_p: float = df['soc_max']
 
-        # Negative electrode parameters are extracted below
-        # Read and parse the csv file.
-        df = ParameterSets._parse_csv(file_path=self.NEGATIVE_ELECTRODE_DIR)
-        self.L_n: float = df['Electrode Thickness [m]']
-        self.A_n: float = df['Electrode Area [m^2]']
-        self.kappa_n: float = df['Ionic Conductivity [S m^-1]']
-        self.epsilon_n: float = df['Volume Fraction']
-        self.max_conc_n: float = df['Max. Conc. [mol m^-3]']
-        self.R_n: float = df['Radius [m]']
-        self.S_n: float = df['Electroactive Area [m^2]']
-        self.T_ref_n: float = df['Reference Temperature [K]']
-        self.D_ref_n: float = df['Reference Diffusitivity [m^2 s^-1]']
-        self.k_ref_n: float = df['Reference Rate Constant [m^2.5 mol^-0.5 s^-1]']
-        self.Ea_D_n: float = df['Activation Energy of Diffusion [J mol^-1]']
-        self.Ea_R_n: float = df['Activation Energy of Reaction [J mol^-1]']
-        self.alpha_n: float = df['Anodic Transfer Coefficient']
-        self.brugg_n: float = df['Bruggerman Coefficient']
-        self.soc_min_n: float = df['soc_min']
-        self.soc_max_n: float = df['soc_max']
-        # SEI parameters for the negative electrode are extracted below
-        self.U_s: float = df['SEI Reference Overpotential [V]']
-        self.i_s: float = df['SEI Exchange Current Density [mol m^-2 s^-1]']
-        self.MW_SEI: float = df['SEI Molar Weight [kg mol^-1]']
-        self.rho_SEI: float = df['SEI Density [kg m^-3]']
-        # SEI conductivity [S/m]
-        self.kappa_SEI: float = df['SEI Conductivity [S m^-1]']
+#         # Negative electrode parameters are extracted below
+#         # Read and parse the csv file.
+#         df = ParameterSets._parse_csv(file_path=self.NEGATIVE_ELECTRODE_DIR)
+#         self.L_n: float = df['Electrode Thickness [m]']
+#         self.A_n: float = df['Electrode Area [m^2]']
+#         self.kappa_n: float = df['Ionic Conductivity [S m^-1]']
+#         self.epsilon_n: float = df['Volume Fraction']
+#         self.max_conc_n: float = df['Max. Conc. [mol m^-3]']
+#         self.R_n: float = df['Radius [m]']
+#         self.S_n: float = df['Electroactive Area [m^2]']
+#         self.T_ref_n: float = df['Reference Temperature [K]']
+#         self.D_ref_n: float = df['Reference Diffusitivity [m^2 s^-1]']
+#         self.k_ref_n: float = df['Reference Rate Constant [m^2.5 mol^-0.5 s^-1]']
+#         self.Ea_D_n: float = df['Activation Energy of Diffusion [J mol^-1]']
+#         self.Ea_R_n: float = df['Activation Energy of Reaction [J mol^-1]']
+#         self.alpha_n: float = df['Anodic Transfer Coefficient']
+#         self.brugg_n: float = df['Bruggerman Coefficient']
+#         self.soc_min_n: float = df['soc_min']
+#         self.soc_max_n: float = df['soc_max']
+#         # SEI parameters for the negative electrode are extracted below
+#         self.U_s: float = df['SEI Reference Overpotential [V]']
+#         self.i_s: float = df['SEI Exchange Current Density [mol m^-2 s^-1]']
+#         self.MW_SEI: float = df['SEI Molar Weight [kg mol^-1]']
+#         self.rho_SEI: float = df['SEI Density [kg m^-3]']
+#         # SEI conductivity [S/m]
+#         self.kappa_SEI: float = df['SEI Conductivity [S m^-1]']
 
-        # Below extracts electrolyte parameters
-        df = ParameterSets._parse_csv(file_path=self.ELECTROLYTE_DIR)
-        self.conc_es: float = df['Conc. [mol m^-3]']
-        self.L_es: float = df['Thickness [m]']
-        self.kappa_es: float = df['Ionic Conductivity [S m^-1]']
-        self.epsilon_es: float = df['Volume Fraction']
-        self.brugg_es: float = df['Bruggerman Coefficient']
+#         # Below extracts electrolyte parameters
+#         df = ParameterSets._parse_csv(file_path=self.ELECTROLYTE_DIR)
+#         self.conc_es: float = df['Conc. [mol m^-3]']
+#         self.L_es: float = df['Thickness [m]']
+#         self.kappa_es: float = df['Ionic Conductivity [S m^-1]']
+#         self.epsilon_es: float = df['Volume Fraction']
+#         self.brugg_es: float = df['Bruggerman Coefficient']
 
-        try:
-            # This parameter is NOT used in the single
-            self.t_c: Optional[float] = df['Cation Transference No.']
-            # particle model
-        except KeyError as e:
-            self.t_c: Optional[float] = None
-            print("No value found for t_c. Can only perform single particle model.")
+#         try:
+#             # This parameter is NOT used in the single
+#             self.t_c: Optional[float] = df['Cation Transference No.']
+#             # particle model
+#         except KeyError as e:
+#             self.t_c: Optional[float] = None
+#             print("No value found for t_c. Can only perform single particle model.")
 
-        try:
-            # This parameter is NOT used in the single
-            self.value_D_e: Optional[float] = df['Diffusivity']
-            # particle model
-        except KeyError as e:
-            self.value_D_e: Optional[float] = None
-            print(
-                "No value found for D_e [m2/s]. Can only perform single particle model.")
+#         try:
+#             # This parameter is NOT used in the single
+#             self.value_D_e: Optional[float] = df['Diffusivity']
+#             # particle model
+#         except KeyError as e:
+#             self.value_D_e: Optional[float] = None
+#             print(
+#                 "No value found for D_e [m2/s]. Can only perform single particle model.")
 
-        try:
-            # This parameter is NOT used in the
-            self.epsilon_en: Optional[float] = df['Volume Fraction N']
-            # single particle model
-        except KeyError as e:
-            self.epsilon_en: Optional[float] = None
-            print("No value found for kappa_en. Can only perform single particle model.")
+#         try:
+#             # This parameter is NOT used in the
+#             self.epsilon_en: Optional[float] = df['Volume Fraction N']
+#             # single particle model
+#         except KeyError as e:
+#             self.epsilon_en: Optional[float] = None
+#             print("No value found for kappa_en. Can only perform single particle model.")
 
-        try:
-            # This parameter is NOT used in the
-            self.epsilon_ep: Optional[float] = df['Volume Fraction P']
-            # single particle model
-        except KeyError as e:
-            self.epsilon_ep: Optional[float] = None
-            print("No value found for kappa_pn. Can only perform single particle model.")
+#         try:
+#             # This parameter is NOT used in the
+#             self.epsilon_ep: Optional[float] = df['Volume Fraction P']
+#             # single particle model
+#         except KeyError as e:
+#             self.epsilon_ep: Optional[float] = None
+#             print("No value found for kappa_pn. Can only perform single particle model.")
 
-        # Below extracts the battery cell parameters
-        df = ParameterSets._parse_csv(file_path=self.BATTERY_CELL_DIR)
-        self.rho: float = df['Density [kg m^-3]']
-        self.Vol: float = df['Volume [m^3]']
-        self.C_p: float = df['Specific Heat [J K^-1 kg^-1]']
-        self.h: float = df['Heat Transfer Coefficient [J s^-1 K^-1]']
-        self.A: float = df['Surface Area [m^2]']
-        self.cap: float = df['Capacity [A hr]']
-        self.V_max: float = df['Maximum Potential Cut-off [V]']
-        self.V_min: float = df['Minimum Potential Cut-off [V]']
+#         # Below extracts the battery cell parameters
+#         df = ParameterSets._parse_csv(file_path=self.BATTERY_CELL_DIR)
+#         self.rho: float = df['Density [kg m^-3]']
+#         self.Vol: float = df['Volume [m^3]']
+#         self.C_p: float = df['Specific Heat [J K^-1 kg^-1]']
+#         self.h: float = df['Heat Transfer Coefficient [J s^-1 K^-1]']
+#         self.A: float = df['Surface Area [m^2]']
+#         self.cap: float = df['Capacity [A hr]']
+#         self.V_max: float = df['Maximum Potential Cut-off [V]']
+#         self.V_min: float = df['Minimum Potential Cut-off [V]']
 
-        func_module = importlib.import_module(
-            f'bmslogic.parameter_sets.{self.name}.funcs')  # imports the python module
-        # containing the OCP related funcs in the parameter set.
-        self.OCP_ref_p_: Callable = func_module.OCP_ref_p
-        self.dOCPdT_p_: Callable = func_module.dOCPdT_p
-        self.OCP_ref_n_: Callable = func_module.OCP_ref_n
-        self.dOCPdT_n_: Callable = func_module.dOCPdT_n
+#         func_module = importlib.import_module(
+#             f'bmslogic.parameter_sets.{self.name}.funcs')  # imports the python module
+#         # containing the OCP related funcs in the parameter set.
+#         self.OCP_ref_p_: Callable = func_module.OCP_ref_p
+#         self.dOCPdT_p_: Callable = func_module.dOCPdT_p
+#         self.OCP_ref_n_: Callable = func_module.OCP_ref_n
+#         self.dOCPdT_n_: Callable = func_module.dOCPdT_n
 
-        # containing the electrolyte related functions in the parameter set below.
-        warning_msg: str = 'No electrolyte related functions found in the parameter set: '
-        try:
-            self.func_D_e_ = func_module.func_D_e
-        except AttributeError as e:
-            print(warning_msg, 'D_e')
-            self.func_D_e_ = None
-        try:
-            self.func_kappa_e_ = func_module.func_kappa_e
-        except AttributeError as e:
-            print(warning_msg, 'kappa_e')
-        try:
-            self.func_dlnf_ = func_module.func_dlnf
-        except AttributeError as e:
-            print(warning_msg, '1+dlnf/flnc_e')
+#         # containing the electrolyte related functions in the parameter set below.
+#         warning_msg: str = 'No electrolyte related functions found in the parameter set: '
+#         try:
+#             self.func_D_e_ = func_module.func_D_e
+#         except AttributeError as e:
+#             print(warning_msg, 'D_e')
+#             self.func_D_e_ = None
+#         try:
+#             self.func_kappa_e_ = func_module.func_kappa_e
+#         except AttributeError as e:
+#             print(warning_msg, 'kappa_e')
+#         try:
+#             self.func_dlnf_ = func_module.func_dlnf
+#         except AttributeError as e:
+#             print(warning_msg, '1+dlnf/flnc_e')
 
-    @classmethod
-    def list_parameters_sets(cls):
-        """
-        Returns the list of available parameter sets.
-        :return: (list) list of available parameters sets.
-        """
-        return os.listdir(cls.PARAMETER_SET_DIR)
+#     @classmethod
+#     def list_parameters_sets(cls):
+#         """
+#         Returns the list of available parameter sets.
+#         :return: (list) list of available parameters sets.
+#         """
+#         return os.listdir(cls.PARAMETER_SET_DIR)
 
-    @classmethod
-    def _check_parameter_set(cls, name) -> bool:
-        """
-        Checks if the inputted parameter name is in the parameter set. If not available, it raises an exception.
-        """
-        flag_name_present: bool = False
-        if name in cls.list_parameters_sets():
-            flag_name_present = True
-        return flag_name_present
+#     @classmethod
+#     def _check_parameter_set(cls, name) -> bool:
+#         """
+#         Checks if the inputted parameter name is in the parameter set. If not available, it raises an exception.
+#         """
+#         flag_name_present: bool = False
+#         if name in cls.list_parameters_sets():
+#             flag_name_present = True
+#         return flag_name_present
 
-    @classmethod
-    def _parse_csv(cls, file_path):
-        """
-        reads the csv file and returns a Pandas DataFrame.
-        :param file_path: the absolute or relative file drectory of the csv file.
-        :return: the dataframe with the column containing numerical values only.
-        """
-        return pd.read_csv(file_path, index_col=0)["Value"]
+#     @classmethod
+#     def _parse_csv(cls, file_path):
+#         """
+#         reads the csv file and returns a Pandas DataFrame.
+#         :param file_path: the absolute or relative file drectory of the csv file.
+#         :return: the dataframe with the column containing numerical values only.
+#         """
+#         return pd.read_csv(file_path, index_col=0)["Value"]
 
-    def generate_BatteryCell_instance(self, soc_p_init: float, soc_n_init: float, T_amb: float, R_cell: float) -> BatteryCell:
-        """Generates a BatteryCell instance with the parameters from the relevant parameter_sets.
+#     def generate_BatteryCell_instance(self, soc_p_init: float, soc_n_init: float, T_amb: float, R_cell: float) -> BatteryCell:
+#         """Generates a BatteryCell instance with the parameters from the relevant parameter_sets.
 
-        Parameters
-        ----------
-        soc_p_init : float
-            Positive electrode's intial SOC
-        soc_n_init : float
-            Negative electrode's initial SOC
-        T_amb : float
-            Ambient temperature
-        R_cell: float
-            Battery cell's internal resistance
+#         Parameters
+#         ----------
+#         soc_p_init : float
+#             Positive electrode's intial SOC
+#         soc_n_init : float
+#             Negative electrode's initial SOC
+#         T_amb : float
+#             Ambient temperature
+#         R_cell: float
+#             Battery cell's internal resistance
 
-        Returns
-        -------
-        sp.BatteryCell
-            BatteryCell instance
-        """
-        p_electrode: PElectrode = PElectrode(L=self.L_p, A=self.A_p, kappa=self.kappa_p, epsilon=self.epsilon_p, max_conc=self.max_conc_p,
-                                             R=self.R_p, S=self.S_p,
-                                             T_ref=self.T_ref_p, D_ref=self.D_ref_p, k_ref=self.k_ref_p, Ea_D=self.Ea_D_p, Ea_R=self.Ea_R_p,
-                                             alpha=self.alpha_p, brugg=self.brugg_p,
-                                             SOC=soc_p_init, T=T_amb, func_OCP=self.OCP_ref_p_, func_dOCPdT=self.dOCPdT_p_)
-        n_electrode: NElectrode = NElectrode(L=self.L_n, A=self.A_n, kappa=self.kappa_n, epsilon=self.epsilon_n, max_conc=self.max_conc_n,
-                                             R=self.R_n, S=self.S_n,
-                                             T_ref=self.T_ref_n, D_ref=self.D_ref_n, k_ref=self.k_ref_n, Ea_D=self.Ea_D_n, Ea_R=self.Ea_R_n,
-                                             alpha=self.alpha_n, brugg=self.brugg_n,
-                                             SOC=soc_n_init, T=T_amb, func_OCP=self.OCP_ref_n_, func_dOCPdT=self.dOCPdT_n_)
-        electrolyte: Electrolyte = Electrolyte(L=self.L_es, conc=self.conc_es,
-                                               kappa=self.kappa_es, epsilon=self.epsilon_es, brugg=self.brugg_es)
-        battery_cell: BatteryCell = BatteryCell(p_elec=p_electrode, n_elec=n_electrode, electrolyte=electrolyte,
-                                                rho=self.rho, Vol=self.Vol, C_p=self.C_p, h=self.h, A=self.A, cap=self.cap,
-                                                V_max=self.V_max, V_min=self.V_min, R_cell=R_cell)
-        return battery_cell
+#         Returns
+#         -------
+#         sp.BatteryCell
+#             BatteryCell instance
+#         """
+#         p_electrode: PElectrode = PElectrode(L=self.L_p, A=self.A_p, kappa=self.kappa_p, epsilon=self.epsilon_p, max_conc=self.max_conc_p,
+#                                              R=self.R_p, S=self.S_p,
+#                                              T_ref=self.T_ref_p, D_ref=self.D_ref_p, k_ref=self.k_ref_p, Ea_D=self.Ea_D_p, Ea_R=self.Ea_R_p,
+#                                              alpha=self.alpha_p, brugg=self.brugg_p,
+#                                              SOC=soc_p_init, T=T_amb, func_OCP=self.OCP_ref_p_, func_dOCPdT=self.dOCPdT_p_)
+#         n_electrode: NElectrode = NElectrode(L=self.L_n, A=self.A_n, kappa=self.kappa_n, epsilon=self.epsilon_n, max_conc=self.max_conc_n,
+#                                              R=self.R_n, S=self.S_n,
+#                                              T_ref=self.T_ref_n, D_ref=self.D_ref_n, k_ref=self.k_ref_n, Ea_D=self.Ea_D_n, Ea_R=self.Ea_R_n,
+#                                              alpha=self.alpha_n, brugg=self.brugg_n,
+#                                              SOC=soc_n_init, T=T_amb, func_OCP=self.OCP_ref_n_, func_dOCPdT=self.dOCPdT_n_)
+#         electrolyte: Electrolyte = Electrolyte(L=self.L_es, conc=self.conc_es,
+#                                                kappa=self.kappa_es, epsilon=self.epsilon_es, brugg=self.brugg_es)
+#         battery_cell: BatteryCell = BatteryCell(p_elec=p_electrode, n_elec=n_electrode, electrolyte=electrolyte,
+#                                                 rho=self.rho, Vol=self.Vol, C_p=self.C_p, h=self.h, A=self.A, cap=self.cap,
+#                                                 V_max=self.V_max, V_min=self.V_min, R_cell=R_cell)
+#         return battery_cell
 
 
 class ECMParameterSets:
