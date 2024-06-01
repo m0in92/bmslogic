@@ -14,7 +14,7 @@ from abc import ABC, abstractmethod
 
 import numpy as np
 import numpy.typing as npt
-from scipy import interpolate
+# from scipy import interpolate
 import matplotlib.pyplot as plt
 
 
@@ -368,7 +368,12 @@ class PyCustomCycler(PyBaseCycler):
         :param t: time [s]
         :returns: current value [A]
         """
-        i_app = interpolate.interp1d(self.array_t, self.array_I, kind='previous', fill_value='extrapolate')(t)
+        try:
+            from scipy import interpolate
+            i_app = interpolate.interp1d(self.array_t, self.array_I, kind='previous', fill_value='extrapolate')(t)
+        except ModuleNotFoundError:
+            from bmslogic.calc_helpers.matrix_operations import interp1d
+            i_app = interp1d(array_1=self.array_t, array_2=self.array_I, value=t)
         if np.isnan(i_app):
             return 0.0
         return i_app

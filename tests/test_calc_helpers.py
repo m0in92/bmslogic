@@ -3,6 +3,7 @@ import unittest
 import numpy as np
 
 from bmslogic.calc_helpers.calc_helpers import NormalRandomVector, SigmaPointKalmanFilter
+from bmslogic.calc_helpers.matrix_operations import find_the_element_with_closest_number, interp1d
 
 
 def func_f(x_k, u_k, w_k):
@@ -78,3 +79,22 @@ class TestSPKFProperties(unittest.TestCase):
 
     def test_aug_vector(self):
         self.assertTrue(np.array_equal(np.array([2, 2, 0, 0]).reshape(-1, 1), self.spkf_instance.aug_vec()))
+
+
+class TestClosestElement(unittest.TestCase):
+    def test_case_1(self):
+        array: np.ndarray = np.arange(0, 10, 1)
+        value: float = 4.45
+
+        self.assertEqual(4, find_the_element_with_closest_number(value=value, array=array)[0])
+        self.assertEqual(4, find_the_element_with_closest_number(value=value, array=array)[1])
+
+
+class TestInterp1d(unittest.TestCase):
+    def test_case_1(self):
+        array_1: np.ndarray = np.array([0,4,5,3,2])
+        array_2: np.ndarray = np.array([10, 90, 67, 34, 98])
+        
+        self.assertEqual(10, interp1d(array_1=array_1, array_2=array_2, value=-10))
+        self.assertEqual(78.5, interp1d(array_1=array_1, array_2=array_2, value=4.5))
+        self.assertEqual(67, interp1d(array_1=array_1, array_2=array_2, value=100))
