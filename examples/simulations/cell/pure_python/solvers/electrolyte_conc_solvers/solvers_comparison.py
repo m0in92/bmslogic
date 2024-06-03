@@ -6,12 +6,19 @@ __author__ = "Moin Ahmed"
 __copyright__ = "Copyright 2024 by BMSLogic. All rights reserved."
 __status__ = "development"
 
+import os
+import pathlib
+import sys
+
 import numpy as np
 import matplotlib.pyplot as plt
 
+PROJECT_FILEPATH: str = pathlib.Path(__file__).parent.parent.parent.parent.parent.parent.parent.__str__()
+sys.path.append(PROJECT_FILEPATH)
 from bmslogic.simulations.cell.solvers.coords import PyElectrolyteFVMCoordinates
 from bmslogic.simulations.cell.solvers.electrolyte_conc import PyElectrolyteConcVolAvgSolver, PyElectrolyteConcFVMSolver
 from bmslogic.simulations.cell.models import PySPMe
+
 
 # Battery cell parameters
 epsilon_ep: float = 0.485
@@ -85,6 +92,9 @@ x_n: np.ndarray = np.linspace(0.0, L_n)
 x_s: np.ndarray = np.linspace(L_n, L_n + L_s)
 x_p: np.ndarray = np.linspace(L_n+L_s, L_n+L_s+L_p)
 
+# print results
+print(conc_avg_solver.conc_profile_p(L_value=x_p))
+
 # plots
 plt.xlabel("Battery Cell Thickness [m]")
 plt.ylabel("Electrolyte Conc. [mol/m3]")
@@ -96,10 +106,10 @@ plt.plot(x_n, conc_avg_solver.conc_profile_n(L_value=x_n), label="Vol. Avg.")
 plt.plot(x_p, conc_avg_solver.conc_profile_p(L_value=x_p), label="Vol. Avg.")
 plt.plot(x_s, conc_avg_solver.conc_profile_s(L_value=x_s), label="Vol. Avg.")
 
-plt.vlines(L_n, np.min(conc_fvm_solver.array_c_e), np.max(
-    conc_fvm_solver.array_c_e), colors='r', linestyles='dashed')
-plt.vlines(L_n + L_s, np.min(conc_fvm_solver.array_c_e), np.max(conc_fvm_solver.array_c_e), colors='r',
-           linestyles='dashed')
+# plt.vlines(L_n, np.min(conc_fvm_solver.array_c_e), np.max(
+#     conc_fvm_solver.array_c_e), colors='r', linestyles='dashed')
+# plt.vlines(L_n + L_s, np.min(conc_fvm_solver.array_c_e), np.max(conc_fvm_solver.array_c_e), colors='r',
+#            linestyles='dashed')
 
 plt.ticklabel_format(axis="x", scilimits=[-3, 1])
 plt.legend()

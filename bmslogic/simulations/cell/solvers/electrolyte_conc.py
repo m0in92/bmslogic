@@ -2,7 +2,8 @@
 Contains classes for electrolyte solvers.
 """
 
-__all__ = ["PyBaseElectrolyteConcSolver", 'PyElectrolyteConcFVMSolver', "PyElectrolyteConcVolAvgSolver"]
+__all__ = ["PyBaseElectrolyteConcSolver",
+           'PyElectrolyteConcFVMSolver', "PyElectrolyteConcVolAvgSolver"]
 
 __authors__ = "Moin Ahmed"
 __copyright__ = "Copyright by BMSLogic. All rights reserved."
@@ -35,6 +36,7 @@ class PyElectrolyteConcFVMSolver(PyBaseElectrolyteConcSolver):
     pseudo-2-dimensional (P2D) Li-ion cell model. Journal of Power Sources, 490, 229571.
     https://doi.org/10.1016/J.JPOWSOUR.2021.229571Han, S., Tang, Y., & Khaleghi Rahimian, S. (2021).
     """
+
     def __init__(self, fvm_co_ords: PyElectrolyteFVMCoordinates, c_e_init: float, transference: float,
                  epsilon_en: float, epsilon_esep: float, epsilon_ep: float,
                  a_sn: float, a_sp: float,
@@ -42,7 +44,8 @@ class PyElectrolyteConcFVMSolver(PyBaseElectrolyteConcSolver):
         self.co_ords = fvm_co_ords
         self.t_c = transference
         self.c_e_init: float = c_e_init
-        self.array_c_e_ = self.c_e_init * np.ones(len(self.co_ords.array_x))  # assuming consistent electrolyte conc.
+        # assuming consistent electrolyte conc.
+        self.array_c_e_ = self.c_e_init * np.ones(len(self.co_ords.array_x))
         # across the battery cell.
 
         self.epsilon_en: float = epsilon_en
@@ -61,9 +64,12 @@ class PyElectrolyteConcFVMSolver(PyBaseElectrolyteConcSolver):
         Returns an array containing the volume fraction of the electrolyte at each spatial region
         :return:
         """
-        array_epsilon_n: np.ndarray = self.epsilon_en * np.ones(len(self.co_ords.array_x_n))
-        array_epsilon_s: np.ndarray = self.epsilon_esep * np.ones(len(self.co_ords.array_x_s))
-        array_epsilon_p: np.ndarray = self.epsilon_ep * np.ones(len(self.co_ords.array_x_p))
+        array_epsilon_n: np.ndarray = self.epsilon_en * \
+            np.ones(len(self.co_ords.array_x_n))
+        array_epsilon_s: np.ndarray = self.epsilon_esep * \
+            np.ones(len(self.co_ords.array_x_s))
+        array_epsilon_p: np.ndarray = self.epsilon_ep * \
+            np.ones(len(self.co_ords.array_x_p))
         return np.append(np.append(array_epsilon_n, array_epsilon_s), array_epsilon_p)
 
     @property
@@ -72,9 +78,15 @@ class PyElectrolyteConcFVMSolver(PyBaseElectrolyteConcSolver):
         Returns an array containing the effective electrolyte diffusivity at spatial FVM points.
         :return:
         """
-        array_D_eff_n: np.ndarray = self.D_e * (self.epsilon_en ** self.brugg) * np.ones(len(self.co_ords.array_x_n))
-        array_D_eff_s: np.ndarray = self.D_e * (self.epsilon_esep ** self.brugg) * np.ones(len(self.co_ords.array_x_s))
-        array_D_eff_p: np.ndarray = self.D_e * (self.epsilon_ep ** self.brugg) * np.ones(len(self.co_ords.array_x_p))
+        array_D_eff_n: np.ndarray = self.D_e * \
+            (self.epsilon_en ** self.brugg) * \
+            np.ones(len(self.co_ords.array_x_n))
+        array_D_eff_s: np.ndarray = self.D_e * \
+            (self.epsilon_esep ** self.brugg) * \
+            np.ones(len(self.co_ords.array_x_s))
+        array_D_eff_p: np.ndarray = self.D_e * \
+            (self.epsilon_ep ** self.brugg) * \
+            np.ones(len(self.co_ords.array_x_p))
         return np.append(np.append(array_D_eff_n, array_D_eff_s), array_D_eff_p)
 
     @property
@@ -111,7 +123,8 @@ class PyElectrolyteConcFVMSolver(PyBaseElectrolyteConcSolver):
             D2: float = self.array_D_eff[i]
             D3: float = self.array_D_eff[i + 1]
             A: float = dt / (2 * self.co_ords.array_dx[i])
-            diag_elements.append(self.array_epsilon_e[i] + A * ((D1 + D2) / dx1 + (D2 + D3) / dx2))
+            diag_elements.append(
+                self.array_epsilon_e[i] + A * ((D1 + D2) / dx1 + (D2 + D3) / dx2))
             upper_diag_elements.append(-A * (D3 + D2) / dx2)
             lower_diag_elements.append(-A * (D1 + D2) / dx1)
         # update last elements
@@ -143,7 +156,8 @@ class PyElectrolyteConcFVMSolver(PyBaseElectrolyteConcSolver):
         b = self.ce_j_vec(c_prev=self.array_c_e, j=j, dt=dt)
         if solver_method == 'TDMA':
             l_diag, diag, u_diag = self.diags(dt)
-            self.array_c_e = TDMAsolver(l_diag=l_diag, diag=diag, u_diag=u_diag, col_vec=b)
+            self.array_c_e = TDMAsolver(
+                l_diag=l_diag, diag=diag, u_diag=u_diag, col_vec=b)
         elif solver_method == 'inverse':
             M = np.linalg.inv(self.M_ce(dt=dt))
             self.array_c_e = np.ndarray.flatten(M @ b)
@@ -161,6 +175,7 @@ class PyElectrolyteConcVolAvgSolver(PyBaseElectrolyteConcSolver):
     """
     Volume average technique for the electrolyte concentration.
     """
+
     def __init__(self, L_n: float, L_s: float, L_p: float,
                  epsilon_n: float, epsilon_s: float, epsilon_p: float,
                  D_n: float, D_s: float, D_p: float,
@@ -180,19 +195,28 @@ class PyElectrolyteConcVolAvgSolver(PyBaseElectrolyteConcSolver):
         num_second_term: float = (L_s**2 * epsilon_s) / (6*D_s)
         num_third_term: float = (L_n**2 * epsilon_n) / (3*D_n)
         dem: float = L_n * epsilon_n + L_s * epsilon_s + L_p * epsilon_p
-        self.alpha_n: float = -(num_first_term + num_second_term + num_third_term) / dem
+        self.alpha_n: float = - \
+            (num_first_term + num_second_term + num_third_term) / dem
 
-        num_first_term: float = (L_p * L_s * epsilon_p) / (2 * D_s)
-        num_second_term: float = (L_s ** 2 * epsilon_s) / (6 * D_s)
+        num_first_term: float = (L_n * L_s * epsilon_n) / (2 * D_s)
+        num_second_term: float = (L_s ** 2 * epsilon_s) / (3 * D_s)
         num_third_term: float = (L_p ** 2 * epsilon_p) / (3 * D_p)
-        self.alpha_p: float = -(num_first_term + num_second_term + num_third_term) / dem
+        self.alpha_p: float = - \
+            (num_first_term + num_second_term - num_third_term) / dem
 
-        self.A_1: float = L_n * epsilon_n * self.alpha_n + L_s * L_n * epsilon_n / (2*D_s) + L_n**2 * epsilon_n / (3*D_n)
-        self.A_2: float = L_n * epsilon_n * self.alpha_p + L_n * L_s * epsilon_n / (2*D_n)
+        self. A_1: float = (((self.L_n**2) * epsilon_n) / (3 * D_n)) - ((self.L_n * epsilon_n) * (((self.L_n**2) * epsilon_n) / (3 * D_n) - ((self.L_s**2) * epsilon_s) / (3 * self.D_s) +
+                                                                                                  self.alpha_n * self.L_p * epsilon_p)) / (self.L_s * epsilon_n + self.L_n * epsilon_n)
+        # self.A_1: float = (L_p * epsilon_p * self.alpha_n) / (self.L_s * epsilon_s + self.L_n * epsilon_n) \
+        #     + L_s * L_n * epsilon_n / (2*D_s) + L_n**2 * epsilon_n / (3*D_n)
+        self.A_2: float = ((self.L_n * epsilon_n) * (((self.L_p**2) * epsilon_p) / (3 * self.D_p) + ((self.L_s**2) * epsilon_s) / (6 * self.D_s) +
+                                                     self.alpha_p * self.L_p * epsilon_p)) / (self.L_s * epsilon_n + self.L_n * epsilon_n)
+        # self.A_2: float = L_n * epsilon_n * \
+        #     self.alpha_p + L_n * L_s * epsilon_n / (2*D_n)
         self.A_3: float = (1-t_c) * a_n * L_n
 
         self.B_1: float = L_p * epsilon_p * self.alpha_n
-        self.B_2: float = L_p * epsilon_p * self.alpha_p - L_p**2 * epsilon_p / (3 * D_p)
+        self.B_2: float = L_p * epsilon_p * \
+            self.alpha_p - L_p**2 * epsilon_p / (3 * D_p)
         self.B_3: float = (1-t_c) * a_p * L_p
 
         self.D_: float = self.A_1 * self.B_2 - self.A_2 * self.B_1
@@ -227,7 +251,8 @@ class PyElectrolyteConcVolAvgSolver(PyBaseElectrolyteConcSolver):
 
     def conc_profile_s(self, L_value: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
         return self.c_e_n - self.q_n * (L_value-self.L_n) / self.D_n + \
-               (self.q_n-self.q_p) * (L_value-self.L_n) ** 2 / (2 * self.L_s * self.D_s)
+            (self.q_n-self.q_p) * (L_value-self.L_n) ** 2 / \
+            (2 * self.L_s * self.D_s)
 
     def conc_seperator_mid(self) -> float:
         return self.conc_profile_s(L_value=self.L_n + self.L_s/2)
@@ -240,4 +265,3 @@ class PyElectrolyteConcVolAvgSolver(PyBaseElectrolyteConcSolver):
                                    t_prev=t_prev, y_prev=self.q_p, step_size=dt)
         self.c_e_p = self.func_c_p()
         self.c_e_n = self.func_c_n(c_p=self.c_e_p)
-
