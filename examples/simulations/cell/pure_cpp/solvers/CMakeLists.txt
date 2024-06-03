@@ -17,6 +17,12 @@ set_target_properties(neg_discharge_single_particle PROPERTIES RUNTIME_OUTPUT_DI
 set_target_properties(neg_discharge_single_particle PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp/solvers)
 set_target_properties(neg_discharge_single_particle PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp/solvers)
 
+add_executable(neg_charge_single_particle neg_charge_single_particle.cpp ${SOLVER_SOURCE})
+target_include_directories(neg_charge_single_particle PUBLIC ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell ${PROJECT_SOURCE_DIR}/bmslogic/)
+set_target_properties(neg_charge_single_particle PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp/solvers)
+set_target_properties(neg_charge_single_particle PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp/solvers)
+set_target_properties(neg_charge_single_particle PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp/solvers)
+
 add_executable(neg_discharge_rest_single_particle neg_discharge_rest_single_particle.cpp ${SOLVER_SOURCE})
 target_include_directories(neg_discharge_rest_single_particle PUBLIC ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell ${PROJECT_SOURCE_DIR}/bmslogic/)
 set_target_properties(neg_discharge_rest_single_particle PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp/solvers)
@@ -28,6 +34,12 @@ target_include_directories(pos_discharge_single_particle PUBLIC ${PROJECT_SOURCE
 set_target_properties(pos_discharge_single_particle PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp/solvers)
 set_target_properties(pos_discharge_single_particle PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp/solvers)
 set_target_properties(pos_discharge_single_particle PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp/solvers)
+
+add_executable(pos_charge_single_particle pos_charge_single_particle.cpp ${SOLVER_SOURCE})
+target_include_directories(pos_charge_single_particle PUBLIC ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell ${PROJECT_SOURCE_DIR}/bmslogic/)
+set_target_properties(pos_charge_single_particle PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp/solvers)
+set_target_properties(pos_charge_single_particle PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp/solvers)
+set_target_properties(pos_charge_single_particle PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp/solvers)
 
 add_executable(electrolyte_conc_fvm electrolyte_conc_fvm.cpp ${SOLVER_SOURCE})
 target_include_directories(electrolyte_conc_fvm PUBLIC ${COMMON_INCLUDE_DIRECTORIES})
