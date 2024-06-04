@@ -21,6 +21,7 @@ int main()
 {
     PolynomialApprox poly_solver = PolynomialApprox(electrode_type, c_init, "higher");
     EigenSolver eigen_solver = EigenSolver(electrode_type, SOC_init, 10);
+    CNSolver cn_solver = CNSolver(c_init, electrode_type, 100);
 
     // poly solver
     clock_t start, end;
@@ -52,13 +53,27 @@ int main()
     {
         soc_eigen = eigen_solver.solve(dt, t_prev, i_app, R, S, D, c_max);
         t_prev += dt;
-        // soc_eigen = poly_solver.get_x_surf(c_max);
-        // std::cout << poly_solver.get_x_surf(c_max) << std::endl;
     }
-    // std::cout << R << std::endl;
 
     eigen_end = clock();
     std::cout << std::fixed << std::setprecision(10) << "Eigen Solution time in seconds: " << double(eigen_end - eigen_start) / double(CLOCKS_PER_SEC) << std::endl;
+
+    // CN Solver
+    clock_t cn_solver_start, cn_solver_end;
+
+    cn_solver_start = clock();
+
+    t_prev = 0.0;
+    double soc_cn = SOC_init;
+    while (soc_cn > 0)
+    {
+        cn_solver.solve(dt, i_app, R, S, D);
+        soc_cn = cn_solver.get_c_s_surf();
+        t_prev += dt;
+    }
+
+    cn_solver_end = clock();
+    std::cout << std::fixed << std::setprecision(10) << "CN Solution time in seconds: " << double(cn_solver_end - cn_solver_start) / double(CLOCKS_PER_SEC) << std::endl;
 
     return 0;
 }

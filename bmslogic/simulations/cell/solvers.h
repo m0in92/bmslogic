@@ -36,9 +36,9 @@ public:
     ESCDTSolver(ECMBatteryCell i_b_cell, bool i_isothermal) : BaseECMSolver(i_b_cell, i_isothermal) {}
     ECMSolution solve(BaseCycler cycler, double dt);
 
-// private:
-//     ECMBatteryCell m_b_cell;
-//     bool m_isothermal;
+    // private:
+    //     ECMBatteryCell m_b_cell;
+    //     bool m_isothermal;
 };
 
 /// @brief Degradation solvers
@@ -195,6 +195,35 @@ private:
 };
 
 double lambda_function(double lambda_k);
+
+class CNSolver : public BaseConcSolver
+{
+public:
+    CNSolver(double i_c_init, char i_electrode_type, int i_spatial_grid_points);
+
+    // getter functions
+    char get_electrode_type() { return m_electrode_type; }
+    int get_spatial_pts() { return m_K; }
+    double get_c_s_surf() { return m_c_prev[m_c_prev.size() - 1]; }
+    std::vector<double> get_c_prev() { return m_c_prev; }
+
+    // calculation functions
+    double calc_A(double dt, double R, double D) { return A(dt, R, D); }
+    double calc_B(double dt, double R, double D) { return B(dt, R, D); }
+    void solve(double dt, double i_app, double R, double S, double D);
+
+private:
+    int m_K;
+    std::vector<double> m_c_prev;
+    double dr(double R) { return R / m_K; };
+    double A(double dt, double R, double D) { return dt * D / std::pow(dr(R), 2); }
+    double B(double dt, double R, double D) { return dt * D / (2 * dr(R)); };
+    std::vector<double> array_R(double R);
+    std::vector<double> LHS_diag_elements(double dt, double R, double D);
+    std::vector<double> LHS_lower_diag_elements(double dt, double R, double D);
+    std::vector<double> LHS_upper_diag_elements(double dt, double R, double D);
+    std::vector<double> RHS_vector(double j, double dt, double R, double D);
+};
 
 /*
  * Lithium-Ion Concentration Solver in the Electrolyte

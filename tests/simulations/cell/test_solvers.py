@@ -10,7 +10,7 @@ import unittest
 
 import numpy as np
 
-from bmslogic.simulations.cell.cell import EigenSolver, LumpedThermalSolver, ROMSEISolver
+from bmslogic.simulations.cell.cell import EigenSolver, CNSolver, LumpedThermalSolver, ROMSEISolver
 from bmslogic.simulations.cell.cell import ElectrolyteFVMCoordinates, ElectrolyteFVMSolver
 
 
@@ -261,6 +261,42 @@ class TestEigenSolver(unittest.TestCase):
         #                                              R=self.R, S=self.S, D_s=self.D_s,
         #                                              c_s_max=self.c_s_max)
         # self.assertAlmostEqual(0.5042242859771239, soc_new, places=6)
+
+
+class TestCNSolver(unittest.TestCase):
+    i_app: float = -1.656
+    R: float = 8.5e-6
+    S: float = 1.1167
+    D_s: float = 1e-14
+    c_s_max: float = 51410
+    soc_init: float = 0.45
+
+    dt: float = 0.1
+
+    def test_constructor(self):
+        spatial_pts: int = 100
+        solver: CNSolver = CNSolver(c_init = self.soc_init * self.c_s_max, electrode_type="p", num_spatial_pts=spatial_pts)
+
+        self.assertEqual(spatial_pts, solver.K)
+        self.assertEqual(self.c_s_max * self.soc_init, solver.c_s_surf)
+
+    def test_method_calc_A(self):
+        spatial_pts: int = 100
+        solver: CNSolver = CNSolver(c_init = self.soc_init * self.c_s_max, electrode_type="p", num_spatial_pts=spatial_pts)
+
+        dt: float = 0.1
+        R: float = 8.5e-6
+        D: float = 1e-14
+        self.assertAlmostEqual(0.138408304, solver.calc_A(dt=dt, R=R, D=D))
+
+    def test_method_calc_B(self):
+        spatial_pts: int = 100
+        solver: CNSolver = CNSolver(c_init = self.soc_init * self.c_s_max, electrode_type="p", num_spatial_pts=spatial_pts)
+
+        dt: float = 0.1
+        R: float = 8.5e-6
+        D: float = 1e-14
+        self.assertAlmostEqual(5.88235e-9, solver.calc_B(dt=dt, R=R, D=D), places=12)
 
 
 class TestFVMCoordinates(unittest.TestCase):

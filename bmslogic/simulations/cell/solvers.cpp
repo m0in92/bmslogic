@@ -50,14 +50,14 @@ ECMSolution ESCDTSolver::solve(BaseCycler cycler, double dt)
 
                 // loop termination conditions
                 if ((cycler.cycle_steps[step_iter] == "charge") & (V > cycler.V_max))
-                    step_completed = true; 
-                if((cycler.cycle_steps[step_iter] == "discharge") & (V < cycler.V_min))
+                    step_completed = true;
+                if ((cycler.cycle_steps[step_iter] == "discharge") & (V < cycler.V_min))
                     step_completed = true;
                 if ((cycler.cycle_steps[step_iter] == "rest") & (t_curr > cycler.rest_time))
                     step_completed = true;
 
-                t_prev = t_curr;  // update times
-                
+                t_prev = t_curr; // update times
+
                 // Solution object update below
                 sol.update_t(t_curr);
                 sol.update_I(i_app);
@@ -331,6 +331,89 @@ double EigenSolver::solve(double dt, double t_prev, double i_app, double R, doub
     double sum_term = get_summation_term(t_prev, dt, i_app, R, S, D_s, c_s_max);
     update_integ_term(dt, i_app, R, S, D_s, c_s_max);
     return m_soc_init + j_scaled_value / 5 + m_integ_term + sum_term;
+}
+
+
+CNSolver::CNSolver(double i_c_init, char i_electrode_type, int i_spatial_grid_points) : BaseConcSolver(i_electrode_type), m_K(i_spatial_grid_points)
+{
+    OWL::ArrayXD c_prev_ = i_c_init * OWL::Ones(m_K);
+    m_c_prev = c_prev_.getArray();
+}
+
+std::vector<double> CNSolver::array_R(double R)
+{
+    OWL::ArrayXD array_ = OWL::LinSpaced(0, R, m_K);
+    return array_.getArray();
+}
+
+std::vector<double> CNSolver::LHS_diag_elements(double dt, double R, double D)
+{
+    double A_ = A(dt, R, D);
+    OWL::ArrayXD array_ = (1 + A_) * OWL::Ones(m_K);
+    std::vector<double> result_vector = array_.getArray();
+    result_vector[0] = 1 + 3 * A_; // for symmetry boundary condition at r=0
+    result_vector[result_vector.size() - 1] = 1 + A_;
+    return result_vector;
+}
+
+std::vector<double> CNSolver::LHS_lower_diag_elements(double dt, double R, double D)
+{
+    double A_ = A(dt, R, D);
+    double B_ = B(dt, R, D);
+    std::vector<double> result_vector;
+    std::vector<double> vector_R = array_R(R);
+    for (int i = 0; i < m_K - 2; i++)
+    {
+        result_vector.push_back(-(A_ / 2 - B_ / vector_R[i + 1]));
+    }
+    result_vector.push_back(-A_);
+    return result_vector;
+}
+
+std::vector<double> CNSolver::LHS_upper_diag_elements(double dt, double R, double D)
+{
+    double A_ = A(dt, R, D);
+    double B_ = B(dt, R, D);
+    std::vector<double> result_vector;
+    std::vector<double> vector_R = array_R(R);
+    result_vector.push_back(-3 * A_);
+    for (int i = 0; i < result_vector.size() - 2; i++)
+    {
+        result_vector.push_back(A_ / 2 + B_ / vector_R[i]);
+    }
+    return result_vector;
+}
+
+std::vector<double> CNSolver::RHS_vector(double j, double dt, double R, double D)
+{
+    double A_ = A(dt, R, D);
+    double B_ = B(dt, R, D);
+    std::vector<double> result_vector;
+
+    result_vector.push_back((1 - 3 * A_) * m_c_prev[0] + 3 * A_ * m_c_prev[1]); // for the symmetry boundary condition at r=0
+
+    for (int i = 1; i < m_K - 1; i++)
+    {
+        result_vector.push_back((1 - A_) * m_c_prev[i] +
+                                (A_ / 2 + B_ / array_R(R)[i]) * m_c_prev[i + 1] +
+                                (A_ / 2 - B_ / array_R(R)[i]) * m_c_prev[i - 1]);
+    }
+    result_vector.push_back((1 - A_) * m_c_prev[m_c_prev.size() - 1] - (A_ + B_ / R) * (2 * dr(R = R) * j / D) +
+                            A_ * m_c_prev[m_c_prev.size() - 2]); // for the boundary condition at r=R
+    return result_vector;
+}
+
+void CNSolver::solve(double dt, double i_app, double R, double S, double D)
+{
+    SPModel model_ = SPModel();
+    double j = model_.molar_flux_electrode(i_app, S, m_electrode_type);
+
+    std::vector<double> diag = LHS_diag_elements(dt, R, D);
+    std::vector<double> lower_diag = LHS_lower_diag_elements(dt, R, D);
+    std::vector<double> upper_diag = LHS_upper_diag_elements(dt, R, D);
+    std::vector<double> b = RHS_vector(j, dt, R, D);
+
+    m_c_prev = Newton::MatrixSolvers::TDMASolver(lower_diag, diag, upper_diag, b);
 }
 
 /*

@@ -423,6 +423,14 @@ PYBIND11_MODULE(cell, m)
               py ::arg("dt"), py::arg("t_prev"), py::arg("i_app"), py::arg("R"),
               py::arg("S"), py::arg("D_s"), py::arg("c_s_max"));
 
+     // // CN Solver
+     py::class_<CNSolver>(m, "CNSolver")
+         .def(py::init<double, char, int>(), py::arg("c_init"), py::arg("electrode_type"), py::arg("num_spatial_pts"))
+         .def_property_readonly("K", &CNSolver::get_spatial_pts)
+         .def_property_readonly("c_s_surf", &CNSolver::get_c_s_surf)
+         .def("calc_A", &CNSolver::calc_A, py::arg("dt"), py::arg("R"), py::arg("D"))
+         .def("calc_B", &CNSolver::calc_B, py::arg("dt"), py::arg("R"), py::arg("D"));
+
      // Co-ordinate Systems
      py::class_<ElectrolyteFVMCoordinates>(m, "ElectrolyteFVMCoordinates")
          .def(py::init<double, double, double, int, int, int>(),
