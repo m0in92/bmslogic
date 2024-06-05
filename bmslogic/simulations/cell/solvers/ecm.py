@@ -75,8 +75,9 @@ class PyESCDTSolver(PyECMBaseSolver):
 
                     # Below updates the simulation parameters
                     t_prev = t_curr
+                    cycler.time_elapsed += dt
 
                     # update solution object
-                    sol.update(t=t_curr, i_app=i_app, v=v, temp=self.b_cell.temp, soc=self.b_cell.soc, i_r1=i_R1_prev)
+                    sol.update(t=cycler.time_elapsed, i_app=i_app, v=v, temp=self.b_cell.temp, soc=self.b_cell.soc, i_r1=i_R1_prev)
 
         return sol

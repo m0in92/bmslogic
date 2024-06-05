@@ -640,13 +640,13 @@ Solution BatterySolver::solve(BaseCycler i_cycler)
     double term_V = m_b_cell.elec_p.get_OCP() - m_b_cell.elec_n.get_OCP();
     double cap = 0.0;
     double sim_time = 0.0;
-    sol.update_t(sim_time);
-    sol.update_cycling_step("rest");
-    sol.update_V(term_V);
-    sol.update_temp(m_b_cell.get_T());
-    sol.update_cap(cap);
-    sol.update_x_p(m_b_cell.elec_p.get_SOC());
-    sol.update_x_n(m_b_cell.elec_n.get_SOC());
+    // sol.update_t(sim_time);
+    // sol.update_cycling_step("rest");
+    // sol.update_V(term_V);
+    // sol.update_temp(m_b_cell.get_T());
+    // sol.update_cap(cap);
+    // sol.update_x_p(m_b_cell.elec_p.get_SOC());
+    // sol.update_x_n(m_b_cell.elec_n.get_SOC());
 
     // simultion loop
     for (int i = 0; i < i_cycler.cycle_steps.size(); i++)
@@ -667,8 +667,6 @@ Solution BatterySolver::solve(BaseCycler i_cycler)
             I = i_cycler.get_current(i_cycler.cycle_steps[i], sim_time);
             term_V = solve_one_iteration(t_prev, dt, I);
             cap = general_equations::calc_cap(cap, m_b_cell.get_cap(), I, dt);
-
-            std::cout << sim_time << " " << I << std::endl;
 
             // break conditions
             if ((i_cycler.cycle_steps[i] == "rest") & (t_curr > i_cycler.rest_time))

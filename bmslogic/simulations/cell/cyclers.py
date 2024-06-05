@@ -273,7 +273,7 @@ class PyDischargeRest(PyBaseCycler):
         super().__init__(SOC_LIB=SOC_LIB, SOC_LIB_min=SOC_LIB_min, SOC_LIB_max=SOC_LIB_max)
         self.discharge_current = -discharge_current
         self.rest_time = rest_time
-        self.V_min = V_min
+        self.v_min = V_min
         self.num_cycles = 1
         self.cycle_steps = ['discharge', 'rest']
         self.SOC_LIB_init = SOC_LIB
