@@ -40,7 +40,7 @@ __status__ = 'Deployed'
 # Operating parameters
 I: float = 1.656
 temp: float = 298.15
-V_min: float = 2.5
+V_min: float = 2.5  # in V
 SOC_min: float = 0.1
 soc_lib_init: float = 1.0
 rest_time: float = 500  # [s]
@@ -77,16 +77,17 @@ with open(os.path.join(DIR_TO_SAVE, "discharge_rest_espm_isothermal_V.pkl"), "wb
     pickle.dump(sol.V.tolist(), pkl_file)
 
 # Plot
-fig = plt.figure(figsize=(10, 3), dpi=300)
-ax1 = fig.add_subplot(121)
-ax1.plot(sol.t, sol.I)
-ax1.set_xlabel('Time [s]')
-ax1.set_ylabel('Current [A]')
+sol.comprehensive_isothermal_plot()
+# fig = plt.figure(figsize=(10, 3), dpi=300)
+# ax1 = fig.add_subplot(121)
+# ax1.plot(sol.t, sol.I)
+# ax1.set_xlabel('Time [s]')
+# ax1.set_ylabel('Current [A]')
 
-ax2 = fig.add_subplot(122)
-ax2.plot(sol.t, sol.V, label="Polynomial Approximation", linewidth=2)
-ax2.set_xlabel('Time [s]')
-ax2.set_ylabel('Cell Terminal Voltage [V]')
+# ax2 = fig.add_subplot(122)
+# ax2.plot(sol.t, sol.V, label="Polynomial Approximation", linewidth=2)
+# ax2.set_xlabel('Time [s]')
+# ax2.set_ylabel('Cell Terminal Voltage [V]')
 
-plt.tight_layout()
-plt.show()
+# plt.tight_layout()
+# plt.show()

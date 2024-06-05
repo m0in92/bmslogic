@@ -756,6 +756,12 @@ class PyEnhancedSPSolver(PySPSolver):
             t_prev: float = 0.0
 
             for step in cycler.cycle_steps:
+                cap: float = 0
+                cap_charge: float = 0
+                cap_discharge: float = 0
+
+                step_completed: bool = False
+                t_prev: float = 0.0
                 while not step_completed:
                     t_curr = t_prev + dt
                     i_app = cycler.get_current(step_name=step, t=t_curr)
