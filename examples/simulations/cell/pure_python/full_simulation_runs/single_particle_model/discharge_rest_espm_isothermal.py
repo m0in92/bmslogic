@@ -40,7 +40,7 @@ __status__ = 'Deployed'
 # Operating parameters
 I: float = 1.656
 temp: float = 298.15
-V_min: float = 4
+V_min: float = 2.5
 SOC_min: float = 0.1
 soc_lib_init: float = 1.0
 rest_time: float = 500  # [s]
