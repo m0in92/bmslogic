@@ -39,7 +39,15 @@ ocv_lib_fit: np.array = np.polyval(poly_coeff, soc_lib)
 print(poly_coeff)
 
 # plots
+plt.plot(soc_lib, np.flip(ocp_p), "--")
+plt.plot(soc_lib, ocp_n, "--")
 plt.plot(soc_lib, ocv_lib, label="OCV-actual")
 plt.plot(soc_lib, ocv_lib_fit, label="OCV-fit")
 
+plt.xlabel("Time [$s$]", fontsize=15, weight="normal")
+plt.ylabel("Voltage [$V$]", fontsize=15,weight="normal")
+plt.legend(fontsize=12)
+plt.tight_layout()
+plt.ticklabel_format(style='sci', axis='x', scilimits=(-3,5), useMathText=True)
 plt.show()
+
