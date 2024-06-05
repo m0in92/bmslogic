@@ -64,7 +64,7 @@ solver: cell_sim.PyEnhancedSPSolver = cell_sim.PyEnhancedSPSolver(b_cell=cell, e
                                                                   isothermal=True, degradation=False)
 
 # simulate
-sol: cell_sim.PySolution = solver.solve(cycler=cycler, verbose=True)
+sol: cell_sim.PySolution = solver.solve(cycler=cycler, verbose=False)
 
 # save_results
 DIR_TO_SAVE: str = os.path.join(pathlib.Path(
