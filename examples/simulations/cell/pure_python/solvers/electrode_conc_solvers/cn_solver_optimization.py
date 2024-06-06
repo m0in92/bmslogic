@@ -12,6 +12,7 @@ import time
 
 import numpy as np
 import matplotlib.pyplot as plt
+from memory_profiler import profile
 
 sys.path.append(pathlib.Path(
     __file__).parent.parent.parent.parent.parent.parent.parent.__str__())
@@ -42,7 +43,7 @@ cn_solver_TDMA: PyCNSolver = PyCNSolver(
 cycler: PyDischarge = PyDischarge(
     discharge_current=i_app, v_min=2.0, SOC_LIB_min=0.0, SOC_LIB=1.0)
 
-# ---------------------------------------SIMULATion FUNCTIONS ----------------------------------------------------------
+# ---------------------------------------SIMULATION FUNCTIONS ----------------------------------------------------------
 
 def matprint(mat: np.ndarray, fmt: str="g") -> None:
     col_maxes = [max([len(("{:"+fmt+"}").format(x)) for x in col]) for col in mat.T]
@@ -52,6 +53,7 @@ def matprint(mat: np.ndarray, fmt: str="g") -> None:
         print("")
 
 
+@profile
 def perform_cn_sim(soc_init: float, cn_method_type: str) -> tuple[list, list]:
     """Simple function to perform the simulation on the global parameters above
 
@@ -97,7 +99,7 @@ def perform_cn_sim(soc_init: float, cn_method_type: str) -> tuple[list, list]:
     return lst_time, lst_soc
 
 # # -------------------------------------- SIMULATION RUN ---------------------------------------------------------------------
-N_SIM: int = 5
+N_SIM: int = 1
 
 for i in range(N_SIM):
     lst_time_inverse, lst_soc_inverse = perform_cn_sim(soc_init=SOC_init, cn_method_type="inverse")
