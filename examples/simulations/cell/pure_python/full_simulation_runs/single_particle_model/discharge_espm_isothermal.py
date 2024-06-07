@@ -46,7 +46,7 @@ cell: cell_sim.PyBatteryCell = cell_sim.PyBatteryCell.read_from_parametersets(pa
 dc: cell_sim.PyDischarge = cell_sim.PyDischarge(discharge_current=I, v_min=V_min,
                                                 SOC_LIB_min=SOC_min, SOC_LIB=soc_lib_init)
 solver: cell_sim.PyEnhancedSPSolver = cell_sim.PyEnhancedSPSolver(b_cell=cell, electrode_soc_solver="poly",
-                                                                  isothermal=True, degradation=False)
+                                                                  isothermal=True, degradation=False, electrolyte_conc_solver_type="poly")
 sol: cell_sim.PySolution = solver.solve(cycler=dc, verbose=False)
 
 # Save Resuts

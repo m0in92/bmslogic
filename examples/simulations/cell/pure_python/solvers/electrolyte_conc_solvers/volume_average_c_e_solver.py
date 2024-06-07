@@ -59,11 +59,13 @@ for simulation_index in range(t_end):
     t_prev += dt
 
 x_n: np.ndarray = np.linspace(0.0, L_n)
+x_s: np.ndarray = np.linspace(L_n, L_n + L_s)
 x_p: np.ndarray = np.linspace(L_n+L_s, L_n+L_s+L_p)
 # print(conc_solver.conc_profile_n(x_n))
 # print(conc_solver.conc_profile_p(x_p))
 
 plt.plot(x_n, conc_solver.conc_profile_n(L_value=x_n))
+plt.plot(x_s, conc_solver.conc_profile_s(L_value=x_s), label="Vol. Avg.")
 plt.plot(x_p, conc_solver.conc_profile_p(L_value=x_p))
 plt.ticklabel_format(axis="x", scilimits=[-3, 1])
 plt.show()

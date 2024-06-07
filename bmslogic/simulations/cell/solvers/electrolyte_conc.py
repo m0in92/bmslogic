@@ -195,28 +195,19 @@ class PyElectrolyteConcVolAvgSolver(PyBaseElectrolyteConcSolver):
         num_second_term: float = (L_s**2 * epsilon_s) / (6*D_s)
         num_third_term: float = (L_n**2 * epsilon_n) / (3*D_n)
         dem: float = L_n * epsilon_n + L_s * epsilon_s + L_p * epsilon_p
-        self.alpha_n: float = - \
-            (num_first_term + num_second_term + num_third_term) / dem
+        self.alpha_n: float = - (num_first_term + num_second_term + num_third_term) / dem
 
-        num_first_term: float = (L_n * L_s * epsilon_n) / (2 * D_s)
-        num_second_term: float = (L_s ** 2 * epsilon_s) / (3 * D_s)
+        num_first_term: float = (L_p * L_s * epsilon_p) / (2 * D_s)
+        num_second_term: float = (L_s ** 2 * epsilon_s) / (6 * D_s)
         num_third_term: float = (L_p ** 2 * epsilon_p) / (3 * D_p)
-        self.alpha_p: float = - \
-            (num_first_term + num_second_term - num_third_term) / dem
-
-        # self. A_1: float = (((self.L_n**2) * epsilon_n) / (3 * D_n)) - ((self.L_n * epsilon_n) * (((self.L_n**2) * epsilon_n) / (3 * D_n) - ((self.L_s**2) * epsilon_s) / (3 * self.D_s) +
-        #                                                                                           self.alpha_n * self.L_p * epsilon_p)) / (self.L_s * epsilon_n + self.L_n * epsilon_n)
-        self.A_1: float = (L_p * epsilon_p * self.alpha_n) / (self.L_s * epsilon_s + self.L_n * epsilon_n) \
-            + L_s * L_n * epsilon_n / (2*D_s) + L_n**2 * epsilon_n / (3*D_n)
-        # self.A_2: float = ((self.L_n * epsilon_n) * (((self.L_p**2) * epsilon_p) / (3 * self.D_p) + ((self.L_s**2) * epsilon_s) / (6 * self.D_s) +
-        #                                              self.alpha_p * self.L_p * epsilon_p)) / (self.L_s * epsilon_n + self.L_n * epsilon_n)
-        self.A_2: float = L_n * epsilon_n * \
-            self.alpha_p + L_n * L_s * epsilon_n / (2*D_n)
+        self.alpha_p: float = - (num_first_term + num_second_term - num_third_term) / dem
+        
+        self.A_1: float = self.L_n*epsilon_n*self.alpha_n + self.L_s*self.L_n*epsilon_n/(2*self.D_s) + self.L_n**2*epsilon_n/(3*self.D_n)
+        self.A_2: float = L_p * epsilon_p * self.alpha_p - L_p**2*epsilon_p/(3*D_p)
         self.A_3: float = (1-t_c) * a_n * L_n
 
-        self.B_1: float = L_p * epsilon_p * self.alpha_n
-        self.B_2: float = L_p * epsilon_p * \
-            self.alpha_p - L_p**2 * epsilon_p / (3 * D_p)
+        self.B_1: float = L_p*epsilon_p*self.alpha_n
+        self.B_2: float = L_p*epsilon_p*self.alpha_p - L_p**2*epsilon_p/(3*D_p)
         self.B_3: float = (1-t_c) * a_p * L_p
 
         self.D_: float = self.A_1 * self.B_2 - self.A_2 * self.B_1
@@ -244,15 +235,20 @@ class PyElectrolyteConcVolAvgSolver(PyBaseElectrolyteConcSolver):
         return self.c_e_init + self.alpha_n * self.q_n + self.alpha_p * self.q_p
 
     def conc_profile_n(self, L_value: Union[float, np.ndarray] = 0.0) -> Union[float, np.ndarray]:
-        return self.c_e_n + self.q_n * (self.q_n * (self.L_n**2 - L_value**2)) / (2 * self.L_n * self.D_n)
+        return self.c_e_n + self.q_n * (self.L_n**2 - L_value**2) / (2 * self.L_n * self.D_n)
 
     def conc_profile_p(self, L_value: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
         return self.c_e_p - self.q_p * (self.L_p**2 - (self.L_cell - L_value)**2) / (2 * self.L_p * self.D_p)
 
     def conc_profile_s(self, L_value: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
         return self.c_e_n - self.q_n * (L_value-self.L_n) / self.D_n + \
-            (self.q_n-self.q_p) * (L_value-self.L_n) ** 2 / \
-            (2 * self.L_s * self.D_s)
+            (self.q_n-self.q_p) * (L_value-self.L_n) ** 2 / (2 * self.L_s * self.D_s)
+    
+    def conc_e_L_0(self) -> float:
+        return self.conc_profile_n(L_value=0.0)
+    
+    def conc_e_L_cell(self) -> float:
+        return self.conc_profile_n(L_value=self.L_cell)
 
     def conc_seperator_mid(self) -> float:
         return self.conc_profile_s(L_value=self.L_n + self.L_s/2)
