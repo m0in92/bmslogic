@@ -10,6 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pathlib
 import sys
+import time
 
 PROJECT_FILEPATH: str = pathlib.Path(__file__).parent.parent.parent.parent.parent.parent.parent.__str__()
 sys.path.append(PROJECT_FILEPATH)
@@ -53,10 +54,15 @@ j_n: float = PySPMe.molar_flux_electrode(
     I=-1.656, S=0.7824, electrode_type='n')  # [mol/m2/s]
 
 t_prev: float = 0.0
-for simulation_index in range(t_end):
+max_iter: int = int(4000 / dt)
+
+time_start: float = time.time()
+for simulation_index in range(max_iter):
     conc_solver.solve(t_prev=t_prev, avg_j_p=j_p, avg_j_n=j_n, dt=dt)
-    print(conc_solver.q_p)
     t_prev += dt
+time_end: float = time.time()
+
+print(f"simulation time: {time_end - time_start}s ")
 
 x_n: np.ndarray = np.linspace(0.0, L_n)
 x_s: np.ndarray = np.linspace(L_n, L_n + L_s)
