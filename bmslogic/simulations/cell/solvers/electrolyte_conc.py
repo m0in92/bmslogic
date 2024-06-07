@@ -204,14 +204,14 @@ class PyElectrolyteConcVolAvgSolver(PyBaseElectrolyteConcSolver):
         self.alpha_p: float = - \
             (num_first_term + num_second_term - num_third_term) / dem
 
-        self. A_1: float = (((self.L_n**2) * epsilon_n) / (3 * D_n)) - ((self.L_n * epsilon_n) * (((self.L_n**2) * epsilon_n) / (3 * D_n) - ((self.L_s**2) * epsilon_s) / (3 * self.D_s) +
-                                                                                                  self.alpha_n * self.L_p * epsilon_p)) / (self.L_s * epsilon_n + self.L_n * epsilon_n)
-        # self.A_1: float = (L_p * epsilon_p * self.alpha_n) / (self.L_s * epsilon_s + self.L_n * epsilon_n) \
-        #     + L_s * L_n * epsilon_n / (2*D_s) + L_n**2 * epsilon_n / (3*D_n)
-        self.A_2: float = ((self.L_n * epsilon_n) * (((self.L_p**2) * epsilon_p) / (3 * self.D_p) + ((self.L_s**2) * epsilon_s) / (6 * self.D_s) +
-                                                     self.alpha_p * self.L_p * epsilon_p)) / (self.L_s * epsilon_n + self.L_n * epsilon_n)
-        # self.A_2: float = L_n * epsilon_n * \
-        #     self.alpha_p + L_n * L_s * epsilon_n / (2*D_n)
+        # self. A_1: float = (((self.L_n**2) * epsilon_n) / (3 * D_n)) - ((self.L_n * epsilon_n) * (((self.L_n**2) * epsilon_n) / (3 * D_n) - ((self.L_s**2) * epsilon_s) / (3 * self.D_s) +
+        #                                                                                           self.alpha_n * self.L_p * epsilon_p)) / (self.L_s * epsilon_n + self.L_n * epsilon_n)
+        self.A_1: float = (L_p * epsilon_p * self.alpha_n) / (self.L_s * epsilon_s + self.L_n * epsilon_n) \
+            + L_s * L_n * epsilon_n / (2*D_s) + L_n**2 * epsilon_n / (3*D_n)
+        # self.A_2: float = ((self.L_n * epsilon_n) * (((self.L_p**2) * epsilon_p) / (3 * self.D_p) + ((self.L_s**2) * epsilon_s) / (6 * self.D_s) +
+        #                                              self.alpha_p * self.L_p * epsilon_p)) / (self.L_s * epsilon_n + self.L_n * epsilon_n)
+        self.A_2: float = L_n * epsilon_n * \
+            self.alpha_p + L_n * L_s * epsilon_n / (2*D_n)
         self.A_3: float = (1-t_c) * a_n * L_n
 
         self.B_1: float = L_p * epsilon_p * self.alpha_n
@@ -227,14 +227,14 @@ class PyElectrolyteConcVolAvgSolver(PyBaseElectrolyteConcSolver):
         self.q_n: float = 0.0
         self.q_p: float = 0.0
 
-    def func_q_n(self, avg_j_n: float, avg_j_p: float) -> Callable:
+    def func_q_n(self, i_q_p: float, avg_j_n: float, avg_j_p: float) -> Callable:
         def wrapper(x: float, t: float) -> float:
-            return (1/self.D_) * (-self.B_2*x - self.A_2*x + self.A_3*self.B_2*avg_j_n - self.A_2*self.B_3*avg_j_p)
+            return (1/self.D_) * (-self.B_2*x - self.A_2*i_q_p + self.A_3*self.B_2*avg_j_n - self.A_2*self.B_3*avg_j_p)
         return wrapper
 
-    def func_q_p(self, avg_j_n: float, avg_j_p: float) -> Callable:
+    def func_q_p(self, i_q_n: float, avg_j_n: float, avg_j_p: float) -> Callable:
         def wrapper(x: float, t: float) -> float:
-            return (1/self.D_) * (self.B_1*x + self.A_1*x - self.A_3*self.B_1*avg_j_n + self.A_1*self.B_3*avg_j_p)
+            return (1/self.D_) * (self.B_1*i_q_n + self.A_1*x - self.A_3*self.B_1*avg_j_n + self.A_1*self.B_3*avg_j_p)
         return wrapper
 
     def func_c_n(self, c_p: float) -> float:
@@ -259,9 +259,9 @@ class PyElectrolyteConcVolAvgSolver(PyBaseElectrolyteConcSolver):
 
     def solve(self, t_prev: float, dt: float,
               avg_j_n: float, avg_j_p: float) -> None:
-        self.q_n = ode_solvers.rk4(func=self.func_q_n(avg_j_n=avg_j_n, avg_j_p=avg_j_p),
+        self.q_n = ode_solvers.rk4(func=self.func_q_n(i_q_p=self.q_p, avg_j_n=avg_j_n, avg_j_p=avg_j_p),
                                    t_prev=t_prev, y_prev=self.q_n, step_size=dt)
-        self.q_p = ode_solvers.rk4(func=self.func_q_n(avg_j_n=avg_j_n, avg_j_p=avg_j_p),
+        self.q_p = ode_solvers.rk4(func=self.func_q_p(i_q_n=self.q_n, avg_j_n=avg_j_n, avg_j_p=avg_j_p),
                                    t_prev=t_prev, y_prev=self.q_p, step_size=dt)
         self.c_e_p = self.func_c_p()
         self.c_e_n = self.func_c_n(c_p=self.c_e_p)

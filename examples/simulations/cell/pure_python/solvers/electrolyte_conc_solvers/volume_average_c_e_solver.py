@@ -8,7 +8,11 @@ __status__ = "development"
 
 import numpy as np
 import matplotlib.pyplot as plt
+import pathlib
+import sys
 
+PROJECT_FILEPATH: str = pathlib.Path(__file__).parent.parent.parent.parent.parent.parent.parent.__str__()
+sys.path.append(PROJECT_FILEPATH)
 from bmslogic.simulations.cell.solvers.electrolyte_conc import PyElectrolyteConcVolAvgSolver
 from bmslogic.simulations.cell.models import PySPMe
 
@@ -51,12 +55,13 @@ j_n: float = PySPMe.molar_flux_electrode(
 t_prev: float = 0.0
 for simulation_index in range(t_end):
     conc_solver.solve(t_prev=t_prev, avg_j_p=j_p, avg_j_n=j_n, dt=dt)
+    print(conc_solver.q_p)
     t_prev += dt
 
 x_n: np.ndarray = np.linspace(0.0, L_n)
 x_p: np.ndarray = np.linspace(L_n+L_s, L_n+L_s+L_p)
-print(conc_solver.conc_profile_n(x_n))
-print(conc_solver.conc_profile_p(x_p))
+# print(conc_solver.conc_profile_n(x_n))
+# print(conc_solver.conc_profile_p(x_p))
 
 plt.plot(x_n, conc_solver.conc_profile_n(L_value=x_n))
 plt.plot(x_p, conc_solver.conc_profile_p(L_value=x_p))
