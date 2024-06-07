@@ -55,14 +55,11 @@ j_n: float = PySPMe.molar_flux_electrode(
 t_prev: float = 0.0
 for simulation_index in range(t_end):
     conc_solver.solve(t_prev=t_prev, avg_j_p=j_p, avg_j_n=j_n, dt=dt)
-    print(conc_solver.q_p)
     t_prev += dt
 
 x_n: np.ndarray = np.linspace(0.0, L_n)
 x_s: np.ndarray = np.linspace(L_n, L_n + L_s)
 x_p: np.ndarray = np.linspace(L_n+L_s, L_n+L_s+L_p)
-# print(conc_solver.conc_profile_n(x_n))
-# print(conc_solver.conc_profile_p(x_p))
 
 plt.plot(x_n, conc_solver.conc_profile_n(L_value=x_n))
 plt.plot(x_s, conc_solver.conc_profile_s(L_value=x_s), label="Vol. Avg.")
