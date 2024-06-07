@@ -67,8 +67,6 @@ print(f"simulation time: {time_end - time_start}s ")
 x_n: np.ndarray = np.linspace(0.0, L_n)
 x_s: np.ndarray = np.linspace(L_n, L_n + L_s)
 x_p: np.ndarray = np.linspace(L_n+L_s, L_n+L_s+L_p)
-# print(conc_solver.conc_profile_n(x_n))
-# print(conc_solver.conc_profile_p(x_p))
 
 plt.plot(x_n, conc_solver.conc_profile_n(L_value=x_n))
 plt.plot(x_s, conc_solver.conc_profile_s(L_value=x_s), label="Vol. Avg.")
