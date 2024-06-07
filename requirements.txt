@@ -3,6 +3,7 @@ numpy
 pandas
 scipy
 matplotlib
+memory-profiler
 pydantic
 pytest
 sphinx
