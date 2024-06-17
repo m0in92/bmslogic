@@ -241,7 +241,7 @@ class PySPSolver(PyBaseSolver):
 
     @timer
     def solve(self, cycler_instance: PyBaseCycler, sol_name: str = None, save_csv_dir: str = None, verbose: bool = False,
-              t_increment: float = 0.1, termination_criteria: str = 'V'):
+              t_increment: float = 0.1, termination_criteria: str = 'V', t_prev: float = 0.0):
         # check for function input parameter types below.
         if not isinstance(cycler_instance, PyBaseCycler):
             raise TypeError("cycler needs to be a Cycler object.")
@@ -253,10 +253,10 @@ class PySPSolver(PyBaseSolver):
         else:
             return self._cycler_solve(cycler=cycler_instance, sol_name=sol_name,
                                       save_csv_dir=save_csv_dir, verbose=verbose, t_increment=t_increment,
-                                      termination_criteria=termination_criteria)
+                                      termination_criteria=termination_criteria, t_prev=t_prev)
 
     def _cycler_solve(self, cycler: PyBaseCycler, sol_name: str = None, save_csv_dir: str = None, verbose: bool = False,
-                      t_increment: float = 0.1, termination_criteria: float = 'V'):
+                      t_increment: float = 0.1, termination_criteria: float = 'V', t_prev: float = 0.0):
         # cycling simulation below. The first two loops iterate over the cycle numbers and cycling steps,
         # respectively. The following while loops checks for termination conditions and breaks when it reaches it.
         # The termination criteria are specified within the cycler instance.
@@ -265,7 +265,7 @@ class PySPSolver(PyBaseSolver):
                 cap = 0
                 cap_charge = 0
                 cap_discharge = 0
-                t_prev = 0
+                # t_prev = t_prev
                 step_completed = False
                 while not step_completed:
                     if isinstance(cycler, PyCustomDischarge):
@@ -314,8 +314,13 @@ class PySPSolver(PyBaseSolver):
                             step_completed = True
                     # break condition for charge and discharge if stop criteria is time based
                     elif termination_criteria == 'time':
-                        if step == "discharge" and cycler.time_elapsed > cycler.t_max:
-                            step_completed = True
+                        if isinstance(cycler, PyCustomCycler):
+                            if step == "discharge" and cycler.time_elapsed > cycler.t_max:
+                                step_completed = True
+                            if step == "charge" and cycler.time_elapsed > cycler.t_max:
+                                step_completed = True
+                        else:
+                            raise TypeError("To use time termination condition, use the Custom Cycler.")
 
                     # update time
                     t_prev = t_curr
@@ -362,7 +367,9 @@ class PySPSolver(PyBaseSolver):
         cap = 0
         cap_charge = 0
         cap_discharge = 0
-        t_curr = t_prev = 0.0  # time value of this current iteration step.
+        t_curr: float = custom_cycler_instance.array_t[0]
+        t_prev: float = custom_cycler_instance.array_t[0]
+        # t_curr = t_prev = 0.0  # time value of this current iteration step.
         while not step_completed:
             t_curr += t_increment
             dt = t_curr - t_prev
@@ -406,7 +413,7 @@ class PySPSolver(PyBaseSolver):
             # Update results lists
             self.sol_init.update(cycle_num=1,
                                  cycle_step='custom',
-                                 t=custom_cycler_instance.time_elapsed,
+                                 t=t_curr,
                                  I=I,
                                  V=V,
                                  OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
