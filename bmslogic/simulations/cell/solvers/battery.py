@@ -329,7 +329,7 @@ class PySPSolver(PyBaseSolver):
                     # Update results lists
                     self.sol_init.update(cycle_num=cycle_no,
                                          cycle_step=step,
-                                         t=cycler.time_elapsed,
+                                         t=t_curr,
                                          I=I,
                                          V=V,
                                          OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,

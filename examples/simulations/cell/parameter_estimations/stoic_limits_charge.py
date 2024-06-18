@@ -1,13 +1,18 @@
 import os
+import pathlib
+import sys
 
 import numpy as np
 import pandas as pd
 
-from SPCPPY.parameter_estimations import OCVData
+PROJ_DIR: str = pathlib.Path(__file__).parent.parent.parent.parent.parent.__str__()
+sys.path.append(PROJ_DIR)
+from bmslogic.simulations.cell.parameter_estimations import OCVData
+
 
 BATTERY_CELL_CAP: float = 1.69230688135793
 
-df: pd.DataFrame = pd.read_csv(os.path.join("examples", "parameter_estimations", "data", "INR18650_slow_charge.csv"))
+df: pd.DataFrame = pd.read_csv(os.path.join(PROJ_DIR, "examples", "simulations", "cell", "parameter_estimations", "data", "INR18650_slow_charge.csv"))
 print(df.columns)
 t_charge: np.ndarray = df['t [s]'].to_numpy()
 v_charge: np.ndarray = df['V [V]'].to_numpy()

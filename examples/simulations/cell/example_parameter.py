@@ -1,5 +1,5 @@
 """
-This module contains example parameters for the battery simulaitons
+This module contains example parameters for the battery simulations
 """
 
 import numpy as np
