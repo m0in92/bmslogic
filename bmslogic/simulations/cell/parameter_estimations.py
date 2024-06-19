@@ -160,8 +160,8 @@ class OCVData:
                                                 [self.SOC_N_MIN_1,
                                                     self.SOC_N_MIN_2],
                                                 [self.SOC_N_MAX_1, self.SOC_N_MAX_2]])
-        result: np.ndarray = CI_algorithms.GA(n_chromosomes=10000, bounds=array_bounds, obj_func=func_obj,
-                                              n_pool=7, n_elite=3, n_generations=10).solve()[0]
+        result: np.ndarray = CI_algorithms.GA(n_chromosomes=1000, bounds=array_bounds, obj_func=func_obj,
+                                              n_pool=7, n_elite=3, n_generations=20).solve()[0]
         self.fitted_soc_p_min = result[0]
         self.fitted_soc_p_max = result[1]
         self.fitted_soc_n_min = result[2]
