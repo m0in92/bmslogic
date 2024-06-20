@@ -12,6 +12,7 @@ import os
 import typing
 from typing import overload
 
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -32,7 +33,8 @@ class EVDriveCycle:
         ...
 
     def __init__(self, drive_cycle_name: typing.Optional[str],
-                 folder_dir: str = path_definations.EV_DRIVECYCLE_DIR):
+                 folder_dir: str = path_definations.EV_DRIVECYCLE_DIR,
+                 cycles: int = 1):
         """
         DriveCycle constructor
         :param drive_cycle_name: Drive cycle name as store in the data/drive_cycles directory.
@@ -64,6 +66,18 @@ class EVDriveCycle:
             self.speed_mph = df_drivecycle['Target Speed, mph'].to_numpy()  # desired speed, m/h
             self.speed_kmph = df_drivecycle["Target Speed [km/h]"].to_numpy()  # desired speed, km/h
             self.speed_mps = df_drivecycle["Target Speed [m/h]"].to_numpy()  # desired speed, mps
+
+            if cycles > 1:
+                t_a_cycle = df_drivecycle['Test Time, secs'].to_numpy()  # time array in seconds
+                speed_mph_a_cycle = df_drivecycle['Target Speed, mph'].to_numpy()  # desired speed, m/h
+                speed_kmph_a_cycle = df_drivecycle["Target Speed [km/h]"].to_numpy()  # desired speed, km/h
+                speed_mps_a_cycle = df_drivecycle["Target Speed [m/h]"].to_numpy()  # desired speed, mps
+                for i in range(cycles):
+                    t_: np.ndarray = t_a_cycle + self.t[-1] + 1  # 1 second is added since the time 
+                    self.t = np.append(self.t, t_)
+                    self.speed_mph = np.append(self.speed_mph, speed_mph_a_cycle)
+                    self.speed_kmph = np.append(self.speed_kmph, speed_kmph_a_cycle)
+                    self.speed_mps = np.append(self.speed_mps, speed_mps_a_cycle)
             del df_drivecycle
 
     def parse_file(self):
