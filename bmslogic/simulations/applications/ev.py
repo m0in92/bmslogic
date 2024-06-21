@@ -677,8 +677,9 @@ class EVDynamics:
         sol.actual_speed[k] = sol.motor_speed[k] * 2 * np.pi * self.EV.drive_train.wheel.r / (
             60 * self.EV.drive_train.gear_box.N)
         sol.actual_speed_kmph[k] = sol.actual_speed[k] * 3600 / 1000
-        sol.distance[k] = prev_distance + ((sol.actual_speed_kmph[k] + prev_speed) / 2) * (self.DriveCycle.t[k] -
-                                                                                      prev_time) / 3600
+        # sol.distance[k] = prev_distance + ((sol.actual_speed_kmph[k] + prev_speed) / 2) * (self.DriveCycle.t[k] -
+        #                                                                               prev_time) / 3600
+        sol.distance[k] = prev_distance + sol.actual_speed_kmph[k] / 3600
 
         # Finally, calculates the battery power, current demanded
         if sol.limit_torque[k] > 0:

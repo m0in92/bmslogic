@@ -400,6 +400,12 @@ class PySPSolver(PyBaseSolver):
                 cap_charge += self.delta_cap(I=I, dt=dt)
                 custom_cycler_instance.SOC_LIB += delta_SOC_cap
 
+            # termination criteria
+            if (termination_criteria == 'V_max') and (V > custom_cycler_instance.v_max):
+                step_completed = True
+            if (termination_criteria == "V_min") and (V < custom_cycler_instance.v_min):
+                step_completed = True
+
             if verbose == True:
                 print("time elapsed [s]: ", custom_cycler_instance.time_elapsed, ", cycle_no: ", 1,
                       'step: ', custom_cycler_instance.cycle_steps[0], "current [A]", I,
