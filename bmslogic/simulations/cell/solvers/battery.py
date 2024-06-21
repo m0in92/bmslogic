@@ -401,9 +401,9 @@ class PySPSolver(PyBaseSolver):
                 custom_cycler_instance.SOC_LIB += delta_SOC_cap
 
             # termination criteria
-            if (termination_criteria == 'V_max') and (V > custom_cycler_instance.v_max):
+            if (termination_criteria == 'V_max') and (V > custom_cycler_instance.V_max):
                 step_completed = True
-            if (termination_criteria == "V_min") and (V < custom_cycler_instance.v_min):
+            if (termination_criteria == "V_min") and (V < custom_cycler_instance.V_min):
                 step_completed = True
 
             if verbose == True:
