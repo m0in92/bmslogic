@@ -1,0 +1,9 @@
+Name,Value,Reference
+Density [kg m^-3],2680.938465,estimated from the mass and the volume of the 2170 battery cell dimensions
+Volume [m^3],2.42E-05,Estimated from the radius and height of the 2170 battery cell format
+Specific Heat [J K^-1 kg^-1],0.32,Estimated from common battery materials
+Heat Transfer Coefficient [J s^-1 K^-1],11,Estimated from experimental results
+Surface Area [m^2],0.005310862,Calculated from the radius and height of the battery cell
+Capacity [A hr],6.5,online
+Maximum Potential Cut-off [V],4.2,online
+Minimum Potential Cut-off [V],2.5,online

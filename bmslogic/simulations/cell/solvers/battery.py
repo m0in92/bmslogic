@@ -425,7 +425,7 @@ class PySPSolver(PyBaseSolver):
                                  OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
                                  x_surf_p=self.b_cell.elec_p.SOC,
                                  x_surf_n=self.b_cell.elec_n.SOC,
-                                 cap=cap,
+                                 cap=custom_cycler_instance.SOC_LIB,
                                  cap_charge=cap_charge,
                                  cap_discharge=cap_discharge,
                                  SOC_LIB=custom_cycler_instance.SOC_LIB,

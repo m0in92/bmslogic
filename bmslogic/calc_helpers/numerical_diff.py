@@ -18,6 +18,7 @@ def first_centered_FD(y: np.ndarray, x: np.ndarray) -> np.ndarray:
     """
     array_diff = np.zeros(len(x)-2)
     for i in range(1, len(array_diff)+1):
+        print(x[i+1])
         array_diff[i-1] = (y[i+1] - y[i-1]) / (x[i+1] - x[i-1])
     return array_diff
 

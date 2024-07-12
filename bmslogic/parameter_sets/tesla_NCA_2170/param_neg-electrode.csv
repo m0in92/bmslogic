@@ -1,0 +1,22 @@
+Name,Value,Reference
+Electrode Area [m^2],0.047049792,Estimated from fitting with the experimental results
+Electrode Thickness [m],2.56E-04,
+Ionic Conductivity [S m^-1],100,Randell et al.
+Volume Fraction,0.59,Randell et al.
+Electroactive Area [m^2],4.257178063,
+Max. Conc. [mol m^-3],31833,Guo et al.
+Radius [m],5.00E-06,Estimated from fitting with the experimental results
+Reference Rate Constant [m^2.5 mol^-0.5 s^-1],1.76E-11,Guo et al.
+Reference Diffusitivity [m^2 s^-1],3.90E-12,Estimated from fitting with the experimental results
+Activation Energy of Reaction [J mol^-1],1.88E+04,Estimated from fitting with the experimental results
+Activation Energy of Diffusion [J mol^-1],3.69E+04,Estimated from fitting with the experimental results
+Anodic Transfer Coefficient,5.00E-01,Guo et al.
+Reference Temperature [K],298.15,
+Bruggerman Coefficient,1.50E+00,
+SEI Reference Overpotential [V],0.4,Randell et al.
+SEI Exchange Current Density [mol m^-2 s^-1],1.14E-15,
+SEI Molar Weight [kg mol^-1],0.16,Yin et al.
+SEI Density [kg m^-3],1600,Yin et al.
+SEI Conductivity [S m^-1],5.00E-06,Yin et al.
+soc_min,0,Estimated from fitting with the experimental results
+soc_max,0.72,Estimated from fitting with the experimental results
