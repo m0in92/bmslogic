@@ -78,7 +78,7 @@ j: np.ndarray = np.append(np.append(j_n, j_sep), j_p)  # [mol/m2/s]
 # Simulation iteration below
 # Simulation parameters
 dt: float = 0.1
-t_iterations: int = 360  # [s]
+t_iterations: int = 1000  # [s]
 t_prev: float = 0.0
 
 for simulation_index in range(t_iterations):
