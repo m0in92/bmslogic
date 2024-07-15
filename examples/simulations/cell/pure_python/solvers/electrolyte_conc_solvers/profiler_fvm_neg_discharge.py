@@ -16,11 +16,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 from memory_profiler import profile
 
-sys.path.append(pathlib.Path(
-    __file__).parent.parent.parent.parent.parent.parent.parent.__str__())
-from bmslogic.simulations.cell.solvers.electrolyte_conc import PyElectrolyteFVMCoordinates
-from bmslogic.simulations.cell.solvers.electrolyte_conc import PyElectrolyteConcFVMSolver
-from bmslogic.simulations.cell.models import PySPMe
+try:
+    from bmslogic.simulations.cell.solvers.electrolyte_conc import PyElectrolyteFVMCoordinates
+    from bmslogic.simulations.cell.solvers.electrolyte_conc import PyElectrolyteConcFVMSolver
+    from bmslogic.simulations.cell.models import PySPMe
+except ModuleNotFoundError as e:
+    sys.path.append(pathlib.Path(
+        __file__).parent.parent.parent.parent.parent.parent.parent.__str__())
+    from bmslogic.simulations.cell.solvers.electrolyte_conc import PyElectrolyteFVMCoordinates
+    from bmslogic.simulations.cell.solvers.electrolyte_conc import PyElectrolyteConcFVMSolver
+    from bmslogic.simulations.cell.models import PySPMe
+
 
 
 # Simulation parameters
