@@ -1,9 +1,14 @@
+import sys
+import pathlib
+
 import numpy as np
 import matplotlib.pyplot as plt
 
-from bmslogic.simulations.cell.solvers import ElectrolyteConcVolAvgSolver
-from SPPy.solvers.electrolyte_potential import ElectrolytePotentialVolAvgSolver
-from SPPy.models.battery import SPMe
+sys.path.append(pathlib.Path(
+    __file__).parent.parent.parent.parent.parent.parent.parent.__str__())
+from bmslogic.simulations.cell.solvers.electrolyte_conc import PyElectrolyteConcVolAvgSolver
+from bmslogic.simulations.cell.solvers.electrolyte_potential import PyElectrolytePotentialVolAvgSolver
+from bmslogic.simulations.cell.models import PySPMe
 
 # Battery cell parameters
 epsilon_ep: float = 0.485
@@ -33,21 +38,21 @@ dt: float = 0.1
 t_end: int = 3600  # [s]
 
 # Simulation below
-conc_solver: ElectrolyteConcVolAvgSolver = ElectrolyteConcVolAvgSolver(L_n=L_n, L_s=L_s, L_p=L_p,
+conc_solver: PyElectrolyteConcVolAvgSolver = PyElectrolyteConcVolAvgSolver(L_n=L_n, L_s=L_s, L_p=L_p,
                                                                        epsilon_n=epsilon_en,
                                                                        epsilon_s=epsilon_sep,
                                                                        epsilon_p=epsilon_ep,
                                                                        D_n=D_e_eff_n, D_s=D_e_eff_s, D_p=D_e_eff_p,
                                                                        a_n=a_s_n, a_p=a_s_p, t_c=t_c, c_e_init=1000)
-phi_solver: ElectrolytePotentialVolAvgSolver = ElectrolytePotentialVolAvgSolver(L_n=L_n, L_s=L_s, L_p=L_p,
+phi_solver: PyElectrolytePotentialVolAvgSolver = PyElectrolytePotentialVolAvgSolver(L_n=L_n, L_s=L_s, L_p=L_p,
                                                                                 kappa_en=kappa_en,
                                                                                 kappa_es=kappa_es,
                                                                                 kappa_ep=kappa_ep,
                                                                                 t_c=t_c)
 
 i_app: float = -1.656
-j_p: float = SPMe.molar_flux_electrode(I=i_app, S=1.1167, electrode_type='p')
-j_n: float = SPMe.molar_flux_electrode(I=i_app, S=0.7824, electrode_type='n')  # [mol/m2/s]
+j_p: float = PySPMe.molar_flux_electrode(I=i_app, S=1.1167, electrode_type='p')
+j_n: float = PySPMe.molar_flux_electrode(I=i_app, S=0.7824, electrode_type='n')  # [mol/m2/s]
 
 t_prev: float = 0.0
 for simulation_index in range(t_end):
