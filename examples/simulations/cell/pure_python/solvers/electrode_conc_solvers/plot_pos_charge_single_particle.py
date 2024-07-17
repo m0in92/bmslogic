@@ -44,7 +44,7 @@ plt.plot(lst_poly_time, lst_poly_soc, label="Polynomial Approximation")
 # plt.plot(lst_poly_time_two, lst_poly_soc_two, label="Polynomial Approximation - Two Order")
 
 plt.xlabel("Time [s]", fontsize=15)
-plt.ylabel("Negative Electrode SOC", fontsize=15)
+plt.ylabel("Positive Electrode SOC", fontsize=15)
 plt.legend(fontsize=12)
 plt.tight_layout()
 plt.show()
