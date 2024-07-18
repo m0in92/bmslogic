@@ -222,9 +222,17 @@ class TestElectrolyte(unittest.TestCase):
     kappa_e: float = 0.2875
     epsilon_e: float = 0.724
     brugg_e: float = 1.5
+    D_e: float = 3.5e-10
+    t_c: float = 0.354
+    epsilon_en: float = 0.385
+    epsilon_ep: float = 0.485
+    
 
     electrolyte: bc.Electrolyte = bc.Electrolyte(
         L=L_e, conc=c_init_e, kappa=kappa_e, epsilon=epsilon_e, brugg=brugg_e)
+
+    electrolyte_2: bc.Electrolyte = bc.Electrolyte(
+        L=L_e, conc=c_init_e, kappa=kappa_e, epsilon_n=epsilon_en, epsilon=epsilon_e, epsilon_p=epsilon_ep, D_e=D_e, t_c=t_c, brugg=brugg_e)
 
     def test_properties(self):
         """
@@ -237,12 +245,25 @@ class TestElectrolyte(unittest.TestCase):
         self.assertEqual(self.brugg_e, self.electrolyte.brugg)
         self.assertEqual(self.kappa_e * self.epsilon_e **
                          self.brugg_e, self.electrolyte.kappa_eff())
-        
+
         self.assertEqual(0.0, self.electrolyte.epsilon_p)
         self.assertEqual(0.0, self.electrolyte.epsilon_n)
         self.assertEqual(0.0, self.electrolyte.D_e)
         self.assertEqual(0.0, self.electrolyte.t_c)
 
+    def test_properties_2(self):
+        self.assertEqual(self.c_init_e, self.electrolyte_2.conc)
+        self.assertEqual(self.L_e, self.electrolyte_2.L)
+        self.assertEqual(self.kappa_e, self.electrolyte_2.kappa)
+        self.assertEqual(self.epsilon_e, self.electrolyte_2.epsilon)
+        self.assertEqual(self.brugg_e, self.electrolyte_2.brugg)
+        self.assertEqual(self.kappa_e * self.epsilon_e **
+                         self.brugg_e, self.electrolyte_2.kappa_eff())
+
+        self.assertEqual(self.epsilon_ep, self.electrolyte_2.epsilon_p)
+        self.assertEqual(self.epsilon_en, self.electrolyte_2.epsilon_n)
+        self.assertEqual(self.D_e, self.electrolyte_2.D_e)
+        self.assertEqual(self.t_c, self.electrolyte_2.t_c)
 
 class TestBatteryCell(unittest.TestCase):
     # PElectrode Parameters
@@ -399,7 +420,7 @@ class TestECMBatteryCell(unittest.TestCase):
                                                          soc_init=0.1, temp_init=298.15,
                                                          func_eta=func_eta, func_ocv=func_ocv, func_docvdtemp=func_docvdtemp,
                                                          M_0=4.4782e-4, M=0.0012, gamma=0.1)
-    
+
     def test_constructor(self):
         self.assertEqual(self.test_cell_ESC.rho, 1626)
         self.assertEqual(self.test_cell_ESC.vol, 3.38e-5)
@@ -410,7 +431,8 @@ class TestECMBatteryCell(unittest.TestCase):
         self.assertEqual(self.test_cell_ESC.V_max, 4.2)
         self.assertEqual(self.test_cell_ESC.V_min, 2.5)
 
-        self.assertTrue(isinstance(self.test_cell_ESC.calc_ocv, typing.Callable))
+        self.assertTrue(isinstance(
+            self.test_cell_ESC.calc_ocv, typing.Callable))
         self.assertEqual(2.5, self.test_cell_ESC.calc_ocv(soc=0.0))
         self.assertEqual(3.35, self.test_cell_ESC.calc_ocv(soc=0.5))
         self.assertEqual(4.2, self.test_cell_ESC.calc_ocv(soc=1.0))

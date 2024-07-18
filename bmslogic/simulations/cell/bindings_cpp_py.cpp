@@ -104,6 +104,9 @@ PYBIND11_MODULE(cell, m)
      py::class_<Electrolyte>(m, "Electrolyte")
          .def(py::init<double, double, double, double, double>(),
               py::arg("conc"), py::arg("L"), py::arg("kappa"), py::arg("epsilon"), py::arg("brugg"))
+         .def(py::init<double, double, double, double, double, double, double, double, double>(),
+              py::arg("conc"), py::arg("L"), py::arg("kappa"), py::arg("epsilon_n"), py::arg("epsilon"), py::arg("epsilon_p"),
+              py::arg("D_e"), py::arg("t_c"), py::arg("brugg"))
          .def_property_readonly("conc", &Electrolyte::get_conc)
          .def_property_readonly("L", &Electrolyte::get_L)
          .def_property_readonly("kappa", &Electrolyte::get_kappa)
@@ -494,7 +497,7 @@ PYBIND11_MODULE(cell, m)
               py::arg("electrode_mass_balance_solver") = "solver")
          .def("solve", &BatterySolver::solve, py::arg("cycler"));
 
-     py::class_<ESPBatterySolver, BaseBatterySolver>(m, "ESPBatterySolver")
+     py::class_<ESPBatterySolver>(m, "ESPBatterySolver")
          .def(py::init<BatteryCell, bool, bool, std::string>(),
               py::arg("battery_cell"), py::arg("is_isothermal"), py::arg("enable_degradation"),
               py::arg("electrode_mass_balance_solver") = "solver")

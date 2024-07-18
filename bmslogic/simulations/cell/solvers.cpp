@@ -754,13 +754,26 @@ double ESPBatterySolver::solve_one_iteration(double t_prev, double dt, double i_
                              m_b_cell.electrolyte.get_conc(), m_b_cell.elec_n.get_SOC());
 
     double c_e_n = electrolyte_solver.get_vector_c_e()[0];
-    double c_e_p = electrolyte_solver.get_vector_c_e()[static_cast<int>(electrolyte_solver.get_vector_c_e().size())];
+    double c_e_p = electrolyte_solver.get_vector_c_e()[static_cast<int>(electrolyte_solver.get_vector_c_e().size()) - 1];
 
-    double V = ESPModel::calc_terminal_voltage(m_b_cell.elec_p.get_OCP(), m_b_cell.elec_p.get_OCP(), m_p, m_n,
+    double V = ESPModel::calc_terminal_voltage(m_b_cell.elec_p.get_OCP(), m_b_cell.elec_n.get_OCP(), m_p, m_n,
                                                m_b_cell.elec_n.get_L(), m_b_cell.electrolyte.get_L(), m_b_cell.elec_p.get_L(),
                                                m_b_cell.electrolyte.get_kappa_eff(), 1.0,
                                                m_b_cell.electrolyte.get_t_c(), m_b_cell.get_R_cell(),
-                                               c_e_n, c_e_p, m_b_cell.get_T(), i_app);
+                                               c_e_n, c_e_p, temp, i_app);
+
+    if (!m_isothermal)
+    {
+        double temp_new = thermal_solver.solve_temp(dt, t_prev, i_app, V,
+                                                    thermal_solver.get_temp_init(),
+                                                    m_b_cell.elec_p.get_OCP(), m_b_cell.elec_n.get_OCP(),
+                                                    m_b_cell.elec_p.get_dOCPdT(),
+                                                    m_b_cell.elec_n.get_dOCPdT()); // Note: It is assumed that the ambient temperature remains constant.
+                                                                                   // FOr varying ambient temperature, enter the value of the ambient temperature at that time-step here.
+        m_b_cell.elec_p.update_T(temp_new);
+        m_b_cell.elec_n.update_T(temp_new);
+        m_b_cell.set_temp(temp_new);
+    }
 
     return V;
 }

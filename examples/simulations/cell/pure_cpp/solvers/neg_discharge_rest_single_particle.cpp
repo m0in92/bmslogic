@@ -36,7 +36,7 @@ int main()
     double i_app_;
     while (soc_poly > 0)
     {
-        i_app_ = cycler.get_current("discharge", t_prev);
+        i_app_ = cycler.get_current("discharge", 0);
         poly_solver.solve(dt, t_prev, i_app_, R, S, D);
         t_prev += dt;
         soc_poly = poly_solver.get_x_surf(c_max);
@@ -56,7 +56,7 @@ int main()
     double soc_eigen = SOC_init;
     while (soc_eigen > 0)
     {
-        i_app_ = cycler.get_current("discharge", t_prev);
+        i_app_ = cycler.get_current("discharge", 0);
         soc_eigen = eigen_solver.solve(dt, t_prev, i_app_, R, S, D, c_max);
         t_prev += dt;
         // soc_eigen = poly_solver.get_x_surf(c_max);

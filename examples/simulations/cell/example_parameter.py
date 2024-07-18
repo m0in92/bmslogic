@@ -51,6 +51,9 @@ kappa_e: float = 0.2875
 epsilon_e: float = 0.724
 brugg_e: float = 1.5
 D_e: float = 3.5e-10
+t_c: float = 0.354
+epsilon_en: float = 0.385
+epsilon_ep: float = 0.485
 
 # Battery Parameters
 T: float = 298.15
