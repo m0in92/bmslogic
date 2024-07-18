@@ -24,6 +24,32 @@ class PyBaseElectrodeConcSolver:
             self.electrode_type = electrode_type  # either positive electrode ('p') or negative electrode ('n').
         else:
             raise InvalidElectrodeType
+        
+
+class PyFDM(PyBaseElectrodeConcSolver):
+    def __init__(self, c_init: float, electrode_type: str, Nr: int = 100):
+        super.__init__(electrode_type)
+
+        self.Nr: str = Nr  # number of radial discretization points
+        self.c_prev: np.ndarray = c_init * np.ones(Nr).reshape(-1, 1)
+        
+    def dr(self, R: float) -> float: 
+        return R / self.Nr
+    
+    def array_R(self, R: float)-> np.ndarray:
+        return np.linspace(0, R, self.Nr)
+    
+    def _LHS_diag_elements(self) -> np.ndarray:
+        pass
+
+    def _LHS_diag_elements(self) -> np.ndarray:
+        pass
+
+    def _LHS_diag_elements(self) -> np.ndarray:
+        pass
+
+    def _M(self) -> np.ndarray:
+        pass
 
 
 class PyEigenFuncExp(PyBaseElectrodeConcSolver):
@@ -202,7 +228,7 @@ class PyCNSolver(PyBaseElectrodeConcSolver):
     def __init__(self, c_init: float, electrode_type: str, spatial_grid_points: int = 100):
         super().__init__(electrode_type=electrode_type)
         self.K = spatial_grid_points  # number of spatial grid points
-        self.c_prev = c_init * np.ones(self.K).reshape(-1, 1)  # column vector used for storing concentrations at t_prev
+        self.c_prev: np.ndarray = c_init * np.ones(self.K).reshape(-1, 1)  # column vector used for storing concentrations at t_prev
 
     def dr(self, R: float) -> float:
         """

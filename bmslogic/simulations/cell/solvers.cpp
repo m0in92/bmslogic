@@ -360,8 +360,9 @@ std::vector<double> CNSolver::LHS_lower_diag_elements(double dt, double R, doubl
 {
     double A_ = A(dt, R, D);
     double B_ = B(dt, R, D);
-    std::vector<double> result_vector;
     std::vector<double> vector_R = array_R(R);
+
+    std::vector<double> result_vector;
     for (int i = 0; i < m_K - 2; i++)
     {
         result_vector.push_back(-(A_ / 2 - B_ / vector_R[i + 1]));
@@ -374,12 +375,13 @@ std::vector<double> CNSolver::LHS_upper_diag_elements(double dt, double R, doubl
 {
     double A_ = A(dt, R, D);
     double B_ = B(dt, R, D);
-    std::vector<double> result_vector;
     std::vector<double> vector_R = array_R(R);
+
+    std::vector<double> result_vector;
     result_vector.push_back(-3 * A_);
-    for (int i = 0; i < result_vector.size() - 2; i++)
+    for (int i = 1; i < m_K - 1; i++)
     {
-        result_vector.push_back(A_ / 2 + B_ / vector_R[i]);
+        result_vector.push_back(-(A_ / 2 + B_ / vector_R[i]));
     }
     return result_vector;
 }
@@ -388,15 +390,16 @@ std::vector<double> CNSolver::RHS_vector(double j, double dt, double R, double D
 {
     double A_ = A(dt, R, D);
     double B_ = B(dt, R, D);
-    std::vector<double> result_vector;
+    std::vector<double> vector_R = array_R(R);
 
+    std::vector<double> result_vector;
     result_vector.push_back((1 - 3 * A_) * m_c_prev[0] + 3 * A_ * m_c_prev[1]); // for the symmetry boundary condition at r=0
 
     for (int i = 1; i < m_K - 1; i++)
     {
         result_vector.push_back((1 - A_) * m_c_prev[i] +
-                                (A_ / 2 + B_ / array_R(R)[i]) * m_c_prev[i + 1] +
-                                (A_ / 2 - B_ / array_R(R)[i]) * m_c_prev[i - 1]);
+                                (A_ / 2 + B_ / vector_R[i]) * m_c_prev[i + 1] +
+                                (A_ / 2 - B_ / vector_R[i]) * m_c_prev[i - 1]);
     }
     result_vector.push_back((1 - A_) * m_c_prev[m_c_prev.size() - 1] - (A_ + B_ / R) * (2 * dr(R = R) * j / D) +
                             A_ * m_c_prev[m_c_prev.size() - 2]); // for the boundary condition at r=R

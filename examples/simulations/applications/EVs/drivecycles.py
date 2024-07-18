@@ -11,6 +11,7 @@ import os
 
 import numpy as np
 import pandas as pd
+import matplotlib
 import matplotlib.pyplot as plt
 
 
@@ -42,42 +43,52 @@ df_bcdc: pd.DataFrame = pd.read_csv(os.path.join(EV_DRIVECYCLES_DIR, "bcdc.csv")
 t_bcdc: np.ndarray = df_bcdc['Test Time, secs'].to_numpy()
 v_bcdc: np.ndarray = df_bcdc['Target Speed, mph'].to_numpy()
 
-fig = plt.figure(figsize=(10/1.5, 12.5/1.5))
-ax1 = fig.add_subplot(321)
+# Plots
+matplotlib.rc('xtick', labelsize=12) 
+matplotlib.rc('ytick', labelsize=12) 
+
+num_row: int = 2
+num_col: int = 2
+
+if num_col == 3:
+    fig = plt.figure(figsize=(10/1.5, 12.5/1.5))
+else:
+    fig = plt.figure()
+ax1 = fig.add_subplot(num_row, num_col, 1)
 ax1.plot(t_us06, v_us06)
-ax1.set_xlabel('Time [s]')
-ax1.set_ylabel('Speed [mph]')
-ax1.set_title('US06')
+ax1.set_xlabel('Time [s]', fontsize=15)
+ax1.set_ylabel('Speed [mph]', fontsize=15)
+ax1.set_title('US06', fontsize=20)
 
-ax2 = fig.add_subplot(322)
+ax2 = fig.add_subplot(num_row, num_col, 2)
 ax2.plot(t_hwfet, v_hwfet)
-ax2.set_xlabel('Time [s]')
-ax2.set_ylabel('Speed [mph]')
-ax2.set_title('HWFET')
+ax2.set_xlabel('Time [s]', fontsize=15)
+ax2.set_ylabel('Speed [mph]', fontsize=15)
+ax2.set_title('HWFET', fontsize=20)
 
-ax3 = fig.add_subplot(323)
+ax3 = fig.add_subplot(num_row, num_col, 3)
 ax3.plot(t_udds, v_udds)
-ax3.set_xlabel('Time [s]')
-ax3.set_ylabel('Speed [mph]')
-ax3.set_title('UDDS')
+ax3.set_xlabel('Time [s]', fontsize=15)
+ax3.set_ylabel('Speed [mph]', fontsize=15)
+ax3.set_title('UDDS', fontsize=20)
 
-ax4 = fig.add_subplot(324)
+ax4 = fig.add_subplot(num_row, num_col, 4)
 ax4.plot(t_nycc, v_nycc)
-ax4.set_xlabel('Time [s]')
-ax4.set_ylabel('Speed [mph]')
-ax4.set_title('NYCC')
+ax4.set_xlabel('Time [s]', fontsize=15)
+ax4.set_ylabel('Speed [mph]', fontsize=15)
+ax4.set_title('NYCC', fontsize=20)
 
-ax5 = fig.add_subplot(325)
-ax5.plot(t_ftp, v_ftp)
-ax5.set_xlabel('Time [s]')
-ax5.set_ylabel('Speed [mph]')
-ax5.set_title('FTP')
+# ax5 = fig.add_subplot(num_row, num_col, 5)
+# ax5.plot(t_ftp, v_ftp)
+# ax5.set_xlabel('Time [s]', fontsize=15)
+# ax5.set_ylabel('Speed [mph]', fontsize=15)
+# ax5.set_title('FTP', fontsize=20)
 
-ax6 = fig.add_subplot(326)
-ax6.plot(t_bcdc, v_bcdc)
-ax6.set_xlabel('Time [s]')
-ax6.set_ylabel('Speed [mph]')
-ax6.set_title('BCDC')
+# ax6 = fig.add_subplot(num_row, num_col, 6)
+# ax6.plot(t_bcdc, v_bcdc)
+# ax6.set_xlabel('Time [s]', fontsize=15)
+# ax6.set_ylabel('Speed [mph]', fontsize=15)
+# ax6.set_title('BCDC', fontsize=20)
 
 plt.tight_layout()
 plt.show()
