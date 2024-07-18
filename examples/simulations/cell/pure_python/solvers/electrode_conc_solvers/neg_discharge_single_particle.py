@@ -50,6 +50,16 @@ cycler: PyDischarge = PyDischarge(
 # # Simulation parameters below
 t_prev = 0  # previous time [s]
 
+print(cn_solver.c_prev[-1])
+i_app_: float = cycler.get_current(step_name="discharge")
+SOC_cn = cn_solver(dt=dt, t_prev=t_prev, i_app=i_app_,
+                       R=R, S=S, D_s=D, c_smax=c_max, solver_method="TDMA")
+print(cn_solver.c_prev[-1])
+i_app_: float = cycler.get_current(step_name="discharge")
+SOC_cn = cn_solver(dt=dt, t_prev=t_prev, i_app=i_app_,
+                       R=R, S=S, D_s=D, c_smax=c_max, solver_method="TDMA")
+print(cn_solver.c_prev[-1])
+
 # solve for SOC wrt to time
 lst_cn_time, lst_cn_soc = [], []
 t_start = time.time()  # start timer
