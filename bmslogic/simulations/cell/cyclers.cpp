@@ -35,9 +35,7 @@ double BaseCycler::get_current(std::string step_name, int t_step)
     else if (step_name == "custom")
         return m_current_vector[t_step];
     else
-    {
-        std::invalid_argument("Invalid cycling step name.");
-    }
+        throw std::invalid_argument("Invalid cycling step name.");
 }
 
 /// @brief resets the time_elapsed to zero. Useful when subjecting an already cycled BaseCycler instance.
@@ -139,5 +137,7 @@ double HPPCCycler::get_current(std::string i_cycling_step, double t)
             else
                 return 0.0;
         }
+        else
+            return 0;
     }
 }

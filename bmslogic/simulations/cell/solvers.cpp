@@ -33,11 +33,12 @@ ECMSolution ESCDTSolver::solve(BaseCycler cycler, double dt)
             bool step_completed = false;
             double i_app;
             double i_R1_prev, h_prev, s_prev, V;
+            int step_index = 0;
 
             while (!step_completed)
             {
                 t_curr = t_prev + dt;
-                i_app = cycler.get_current(cycler.cycle_steps[step_iter], t_curr);
+                i_app = cycler.get_current(cycler.cycle_steps[step_iter], step_index);
 
                 // Calculation of the cell terminal potential below
                 m_b_cell.set_soc(model.soc_next(dt, i_app, m_b_cell.get_soc(), m_b_cell.get_cap(), m_b_cell.get_eta()));
@@ -57,6 +58,7 @@ ECMSolution ESCDTSolver::solve(BaseCycler cycler, double dt)
                     step_completed = true;
 
                 t_prev = t_curr; // update times
+                step_index++;
 
                 // Solution object update below
                 sol.update_t(t_curr);
@@ -90,7 +92,7 @@ double ROMSEISolver::solve_current(double soc_n, double ocp_n, double temp, doub
     double j_tot = SPModel::molar_flux_electrode(i_app, m_S, electrode_type); // assuming the negative electrode
     double j_i = sei_model.calc_j_i(j_tot, j_s);
 
-    double eta_n, eta_s, I_i, I_s;
+    double eta_n, eta_s, I_i {0.0}, I_s {0.0};
 
     if (i_app > 0)
     {
@@ -172,7 +174,7 @@ double LumpedThermalSolver::solve_temp(double dt, double t_prev, double I, doubl
 
 BaseConcSolver::BaseConcSolver(char i_electrode_type)
 {
-    if (i_electrode_type == 'p' | i_electrode_type == 'n')
+    if ((i_electrode_type == 'p') | (i_electrode_type == 'n'))
         m_electrode_type = i_electrode_type;
     else
         throw std::invalid_argument("electrode_type must be p or n");
@@ -333,12 +335,11 @@ double EigenSolver::solve(double dt, double t_prev, double i_app, double R, doub
     return m_soc_init + j_scaled_value / 5 + m_integ_term + sum_term;
 }
 
-
 CNSolver::CNSolver(double i_c_init, char i_electrode_type, int i_spatial_grid_points) : BaseConcSolver(i_electrode_type), m_K(i_spatial_grid_points)
 {
     OWL::ArrayXD c_prev_ = i_c_init * OWL::Ones(m_K);
     m_c_prev = c_prev_.getArray();
-    m_c_surf = m_c_prev[m_c_prev.size()-1];
+    m_c_surf = m_c_prev[m_c_prev.size() - 1];
 }
 
 std::vector<double> CNSolver::array_R(double R)
@@ -418,7 +419,7 @@ void CNSolver::solve(double dt, double i_app, double R, double S, double D)
     std::vector<double> b = RHS_vector(j, dt, R, D);
 
     m_c_prev = Newton::MatrixSolvers::TDMASolver(lower_diag, diag, upper_diag, b);
-    m_c_surf = m_c_prev[m_c_prev.size()-1];
+    m_c_surf = m_c_prev[m_c_prev.size() - 1];
 }
 
 /*
@@ -434,27 +435,27 @@ ElectrolyteFVMSolver::ElectrolyteFVMSolver(ElectrolyteFVMCoordinates i_coords, d
                                                                            m_D_e(i_D_e), m_brugg(i_brugg)
 {
     // below sets the vector_c_e
-    OWL::ArrayXD m_vector_c_e_ = m_c_e_init * OWL::Ones(m_coords.get_vector_x().size());
+    OWL::ArrayXD m_vector_c_e_ = m_c_e_init * OWL::Ones(static_cast<int>(m_coords.get_vector_x().size()));
     m_vector_c_e = m_vector_c_e_.getArray();
 
     // below creates the vector_epsilon_e
-    OWL::ArrayXD vector_epsilon_e_n_ = m_epsilon_e_n * OWL::Ones(m_coords.get_vector_x_n().size());
-    OWL::ArrayXD vector_epsilon_e_sep_ = m_epsilon_e_sep * OWL::Ones(m_coords.get_vector_x_sep().size());
-    OWL::ArrayXD vector_epsilon_e_p_ = m_epsilon_e_p * OWL::Ones(m_coords.get_vector_x_p().size());
+    OWL::ArrayXD vector_epsilon_e_n_ = m_epsilon_e_n * OWL::Ones(static_cast<int>(m_coords.get_vector_x_n().size()));
+    OWL::ArrayXD vector_epsilon_e_sep_ = m_epsilon_e_sep * OWL::Ones(static_cast<int>(m_coords.get_vector_x_sep().size()));
+    OWL::ArrayXD vector_epsilon_e_p_ = m_epsilon_e_p * OWL::Ones(static_cast<int>(m_coords.get_vector_x_p().size()));
     OWL::ArrayXD vector_epsilon_e_ = OWL::append(vector_epsilon_e_n_, vector_epsilon_e_sep_);
     m_vector_epsilon_e = OWL::append(vector_epsilon_e_, vector_epsilon_e_p_).getArray();
 
     // below creates vector_D_e
-    OWL::ArrayXD vector_D_e_n_ = m_D_e * std::pow(m_epsilon_e_n, m_brugg) * OWL::Ones(m_coords.get_vector_x_n().size());
-    OWL::ArrayXD vector_D_e_sep_ = m_D_e * std::pow(m_epsilon_e_sep, m_brugg) * OWL::Ones(m_coords.get_vector_x_sep().size());
-    OWL::ArrayXD vector_D_e_p_ = m_D_e * std::pow(m_epsilon_e_p, m_brugg) * OWL::Ones(m_coords.get_vector_x_p().size());
+    OWL::ArrayXD vector_D_e_n_ = m_D_e * std::pow(m_epsilon_e_n, m_brugg) * OWL::Ones(static_cast<int>(m_coords.get_vector_x_n().size()));
+    OWL::ArrayXD vector_D_e_sep_ = m_D_e * std::pow(m_epsilon_e_sep, m_brugg) * OWL::Ones(static_cast<int>(m_coords.get_vector_x_sep().size()));
+    OWL::ArrayXD vector_D_e_p_ = m_D_e * std::pow(m_epsilon_e_p, m_brugg) * OWL::Ones(static_cast<int>(m_coords.get_vector_x_p().size()));
     OWL::ArrayXD vector_D_e_ = OWL::append(vector_D_e_n_, vector_D_e_sep_);
     m_vector_D_eff = OWL::append(vector_D_e_, vector_D_e_p_).getArray();
 
     // below sets the vector_a_s
-    OWL::ArrayXD vector_a_n_ = m_a_s_n * OWL::Ones(m_coords.get_vector_x_n().size());
-    OWL::ArrayXD vector_a_sep_ = OWL::Zeros(m_coords.get_vector_x_sep().size());
-    OWL::ArrayXD vector_a_p_ = m_a_s_p * OWL::Ones(m_coords.get_vector_x_p().size());
+    OWL::ArrayXD vector_a_n_ = m_a_s_n * OWL::Ones(static_cast<int>(m_coords.get_vector_x_n().size()));
+    OWL::ArrayXD vector_a_sep_ = OWL::Zeros(static_cast<int>(m_coords.get_vector_x_sep().size()));
+    OWL::ArrayXD vector_a_p_ = m_a_s_p * OWL::Ones(static_cast<int>(m_coords.get_vector_x_p().size()));
     OWL::ArrayXD vector_a_s_ = OWL::append(vector_a_n_, vector_a_sep_);
     m_vector_a_s = OWL::append(vector_a_s_, vector_a_p_).getArray();
 }
@@ -681,7 +682,7 @@ Solution BatterySolver::solve(BaseCycler i_cycler)
                 step_completed = true;
             if ((i_cycler.cycle_steps[i] == "charge") & (term_V > i_cycler.V_max))
                 step_completed = true;
-            if ((i_cycler.cycle_steps[i] == "custom") & ((t_curr > i_cycler.rest_time) | term_V < i_cycler.V_min))
+            if ((i_cycler.cycle_steps[i] == "custom") & ((t_curr > i_cycler.rest_time) | (term_V < i_cycler.V_min)))
                 step_completed = true;
 
             // The arrays are updated below
@@ -714,28 +715,30 @@ Solution BatterySolver::solve(BaseCycler i_cycler)
 //                                                                          SOC_solver_p('p', i_b_cell.elec_p.get_c_max() * i_b_cell.elec_p.get_SOC(), "higher"),
 //                                                                          SOC_solver_n('n', i_b_cell.elec_n.get_c_max() * i_b_cell.elec_n.get_SOC(), "higher"),
 //                                                                          thermal_solver(i_b_cell.get_h(), i_b_cell.get_A(), i_b_cell.get_rho(),
-//                                                                                         i_b_cell.get_Vol(), i_b_cell.get_C_p(), i_b_cell.get_T()),
-//                                                                          electrolyte_coords(m_b_cell.elec_n.get_L(),
-//                                                                                             m_b_cell.electrolyte.get_L(),
-//                                                                                             m_b_cell.elec_p.get_L(),
-//                                                                                             10, 10, 10),
-//                                                                          electrolyte_solver(electrolyte_coords,
-//                                                                                             m_b_cell.electrolyte.get_conc(), 0.354,
-//                                                                                             0.385, 0.785, 0.485,
-//                                                                                             5.78e3, 7.28e3,
-//                                                                                             3.5e-10,
-//                                                                                             m_b_cell.electrolyte.get_brugg())
+//                                                                                         i_b_cell.get_Vol(), i_b_cell.get_C_p(), i_b_cell.get_T())
 // {
+//     int N_SPATIAL_PTS_EN = 10;   // number of spatial pts in the negative electrode region for the electrolyte
+//     int N_SPATIAL_PTS_ESEP = 10; // number of spatial pts in the seperator region for the electrolyte
+//     int N_SPATIAL_PTS_EP = 10;   // number of spatial pts in the positive electrode region for the electrolyte
+//     electrolyte_coords = ElectrolyteFVMCoordinates(m_b_cell.elec_n.get_L(), m_b_cell.electrolyte.get_L(), m_b_cell.elec_p.get_L(),
+//                                                    N_SPATIAL_PTS_EN, N_SPATIAL_PTS_ESEP, N_SPATIAL_PTS_EP);
+//     electrolyte_solver = ElectrolyteFVMSolver(electrolyte_coords, m_b_cell.electrolyte.get_conc(), 0.354,
+//                                               0.385, 0.785, 0.485,
+//                                               5.78e3, 7.28e3,
+//                                               3.5e-10,
+//                                               m_b_cell.electrolyte.get_brugg());
 // }
 
 // double ESPBatterySolver::solve_one_iteration(double t_prev, double dt, double i_app, double temp)
 // {
+//     // solve for the electrode surface conc
 //     SOC_solver_p.solve(dt, t_prev, i_app, m_b_cell.elec_p.get_R(), m_b_cell.elec_p.get_S(), m_b_cell.elec_p.get_D());
 //     SOC_solver_n.solve(dt, t_prev, i_app, m_b_cell.elec_n.get_R(), m_b_cell.elec_n.get_S(), m_b_cell.elec_n.get_D());
 
 //     m_b_cell.elec_p.update_SOC(SOC_solver_p.get_x_surf(m_b_cell.elec_p.get_c_max()));
 //     m_b_cell.elec_n.update_SOC(SOC_solver_n.get_x_surf(m_b_cell.elec_n.get_c_max()));
 
+//     // solve for the electrolyte conc
 //     OWL::ArrayXD j_n_ = ESPModel::molar_flux_electrode(i_app, m_b_cell.elec_n.get_S(), 'n') * OWL::Ones(electrolyte_coords.get_vector_x_n().size());
 //     OWL::ArrayXD j_sep_ = OWL::Zeros(electrolyte_coords.get_vector_x_sep().size());
 //     OWL::ArrayXD j_p_ = ESPModel::molar_flux_electrode(i_app, m_b_cell.elec_p.get_S(), 'p') * OWL::Ones(electrolyte_coords.get_vector_x_p().size());
@@ -755,5 +758,8 @@ Solution BatterySolver::solve(BaseCycler i_cycler)
 //     //                              double c_e_n, double c_e_p,
 //     //                              double temp, double i_app
 
-//     return 0.0;
+//     // Calculate cell terminal voltage
+//     return ESPModel::calc_terminal_voltage(m_b_cell.elec_p.get_OCP(), m_b_cell.elec_p.get_OCP(), m_p, m_n,
+//                                            m_b_cell.elec_n.get_L(), m_b_cell.electrolyte.get_L(), m_b_cell.elec_p.get_L(),
+//                                            m_b_cell.kapp);
 // }

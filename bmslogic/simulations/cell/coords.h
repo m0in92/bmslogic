@@ -4,9 +4,9 @@
  * @brief contains classes that enable functionality to define coordinate systems.
  * @version 0.1
  * @date 2024-05-12
- * 
+ *
  * @copyright Copyright (c) 2024 by BMSLogoc. All Rights Reserved.
- * 
+ *
  */
 
 #ifndef BMSLOGIC_SIMULATIONS_COORDS
@@ -18,7 +18,7 @@
  * @class ElectrolyteFVMCoordinates
  * @brief Contains the functionality to define and store co-ordinate points for 1D finite volume coordinates
  * across the battery cell thickness.
- * 
+ *
  */
 class ElectrolyteFVMCoordinates
 {
@@ -61,4 +61,4 @@ private:
     std::vector<double> m_vector_dx;
 };
 
-#endif //BMSLOGIC_SIMULATIONS_COORDS
+#endif // BMSLOGIC_SIMULATIONS_COORDS

@@ -326,20 +326,20 @@ private:
     double solve_one_iteration(double t_prev, double dt, double I);
 };
 
-// class ESPBatterySolver : public BaseBatterySolver
-// {
-// public:
-//     explicit ESPBatterySolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver);
-//     // Solvers instances
-//     PolynomialApprox SOC_solver_p;
-//     PolynomialApprox SOC_solver_n;
-//     LumpedThermalSolver thermal_solver;
-//     ElectrolyteFVMCoordinates electrolyte_coords;
-//     ElectrolyteFVMSolver electrolyte_solver;
+class ESPBatterySolver : public BaseBatterySolver
+{
+public:
+    explicit ESPBatterySolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver);
+    // Solvers instances
+    PolynomialApprox SOC_solver_p;
+    PolynomialApprox SOC_solver_n;
+    LumpedThermalSolver thermal_solver;
+    ElectrolyteFVMCoordinates electrolyte_coords;
+    ElectrolyteFVMSolver electrolyte_solver;
 
-// private:
-//     double calc_V();
-//     double solve_one_iteration(double t_prev, double dt, double i_app, double temp);
-// };
+private:
+    // double calc_V();
+    // double solve_one_iteration(double t_prev, double dt, double i_app, double temp);
+};
 
 #endif // SPCPP_PROJECT_SOLVERS_H

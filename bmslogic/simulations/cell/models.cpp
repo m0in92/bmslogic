@@ -127,6 +127,8 @@ double SPModel::molar_flux_electrode(double &I, double &S, char &electrode_type)
         return I / (Constants.F * S); // molar flux [mol/m2/s]
     else if (electrode_type == 'n')
         return -I / (Constants.F * S); // molar flux [mol/m2/s]
+    else
+        throw std::invalid_argument("Electrode type values must be 'p' or 'n'.");
 }
 
 /**
@@ -183,6 +185,8 @@ namespace ESPModel
             return I / (Constants.F * S); // molar flux [mol/m2/s]
         else if (electrode_type == 'n')
             return -I / (Constants.F * S); // molar flux [mol/m2/s]
+        else
+            throw std::invalid_argument("electrode_type must be p or n");
     }
 
     double a_s(double epsilon, double R)
