@@ -35,11 +35,6 @@ except ModuleNotFoundError as e:
 
     from examples.simulations.cell.example_parameter import *
 
-# import SPCPPY as sp
-# from SPCPPY import pycyclers
-
-# from examples.example_parameter import *
-
 
 if __name__ == "__main__":
     SOC_init_p: float = 0.4952
