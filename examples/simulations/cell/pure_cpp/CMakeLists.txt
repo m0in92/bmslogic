@@ -6,6 +6,7 @@ set(EXAMPLE_SOURCE ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell/battery_compo
                     ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell/cyclers.cpp
                     ${PROJECT_SOURCE_DIR}/bmslogic/extern/owl.h ${PROJECT_SOURCE_DIR}/bmslogic/extern/owl.cpp 
                     ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell/models.h ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell/models.cpp 
+                    ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell/coords.h ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell/coords.cpp
                     ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell/solvers.h
                     ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell/solvers.cpp)
 

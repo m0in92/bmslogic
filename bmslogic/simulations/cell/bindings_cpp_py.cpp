@@ -109,6 +109,10 @@ PYBIND11_MODULE(cell, m)
          .def_property_readonly("kappa", &Electrolyte::get_kappa)
          .def_property_readonly("epsilon", &Electrolyte::get_epsilon)
          .def_property_readonly("brugg", &Electrolyte::get_brugg)
+         .def_property_readonly("epsilon_p", &Electrolyte::get_epsilon_p)
+         .def_property_readonly("epsilon_n", &Electrolyte::get_epsilon_n)
+         .def_property_readonly("D_e", &Electrolyte::get_D_e)
+         .def_property_readonly("t_c", &Electrolyte::get_t_c)
          .def("kappa_eff", &Electrolyte::get_kappa_eff);
 
      // BatteryCell class

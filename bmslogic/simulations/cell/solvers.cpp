@@ -11,6 +11,7 @@
 #include "extern/owl.h"
 #include "solvers.h"
 #include "models.h"
+#include "coords.h"
 
 // ECM Solvers below
 ECMSolution ESCDTSolver::solve(BaseCycler cycler, double dt)
@@ -92,7 +93,7 @@ double ROMSEISolver::solve_current(double soc_n, double ocp_n, double temp, doub
     double j_tot = SPModel::molar_flux_electrode(i_app, m_S, electrode_type); // assuming the negative electrode
     double j_i = sei_model.calc_j_i(j_tot, j_s);
 
-    double eta_n, eta_s, I_i {0.0}, I_s {0.0};
+    double eta_n, eta_s, I_i{0.0}, I_s{0.0};
 
     if (i_app > 0)
     {
@@ -708,58 +709,58 @@ Solution BatterySolver::solve(BaseCycler i_cycler)
     return sol;
 }
 
-// ESPBatterySolver::ESPBatterySolver(BatteryCell i_b_cell,
-//                                    bool i_isothermal,
-//                                    bool i_degradation,
-//                                    std::string i_electrode_SOC_solver) : BaseBatterySolver(i_b_cell, i_isothermal, i_degradation, i_electrode_SOC_solver),
-//                                                                          SOC_solver_p('p', i_b_cell.elec_p.get_c_max() * i_b_cell.elec_p.get_SOC(), "higher"),
-//                                                                          SOC_solver_n('n', i_b_cell.elec_n.get_c_max() * i_b_cell.elec_n.get_SOC(), "higher"),
-//                                                                          thermal_solver(i_b_cell.get_h(), i_b_cell.get_A(), i_b_cell.get_rho(),
-//                                                                                         i_b_cell.get_Vol(), i_b_cell.get_C_p(), i_b_cell.get_T())
-// {
-//     int N_SPATIAL_PTS_EN = 10;   // number of spatial pts in the negative electrode region for the electrolyte
-//     int N_SPATIAL_PTS_ESEP = 10; // number of spatial pts in the seperator region for the electrolyte
-//     int N_SPATIAL_PTS_EP = 10;   // number of spatial pts in the positive electrode region for the electrolyte
-//     electrolyte_coords = ElectrolyteFVMCoordinates(m_b_cell.elec_n.get_L(), m_b_cell.electrolyte.get_L(), m_b_cell.elec_p.get_L(),
-//                                                    N_SPATIAL_PTS_EN, N_SPATIAL_PTS_ESEP, N_SPATIAL_PTS_EP);
-//     electrolyte_solver = ElectrolyteFVMSolver(electrolyte_coords, m_b_cell.electrolyte.get_conc(), 0.354,
-//                                               0.385, 0.785, 0.485,
-//                                               5.78e3, 7.28e3,
-//                                               3.5e-10,
-//                                               m_b_cell.electrolyte.get_brugg());
-// }
+ESPBatterySolver::ESPBatterySolver(BatteryCell i_b_cell,
+                                   bool i_isothermal,
+                                   bool i_degradation,
+                                   std::string i_electrode_SOC_solver) : BaseBatterySolver(i_b_cell, i_isothermal, i_degradation, i_electrode_SOC_solver),
+                                                                         a_s_p(m_b_cell.elec_p.get_S() / m_b_cell.elec_p.get_L()),
+                                                                         a_s_n(m_b_cell.elec_n.get_S() / m_b_cell.elec_n.get_L()),
+                                                                         SOC_solver_p('p', i_b_cell.elec_p.get_c_max() * i_b_cell.elec_p.get_SOC(), "higher"),
+                                                                         SOC_solver_n('n', i_b_cell.elec_n.get_c_max() * i_b_cell.elec_n.get_SOC(), "higher"),
+                                                                         electrolyte_coords(i_b_cell.elec_n.get_L(), i_b_cell.electrolyte.get_L(), i_b_cell.elec_p.get_L(), 10, 10, 10),
+                                                                         electrolyte_solver(electrolyte_coords, i_b_cell.electrolyte.get_conc(),
+                                                                                            m_b_cell.electrolyte.get_t_c(),
+                                                                                            m_b_cell.electrolyte.get_epsilon_n(), m_b_cell.electrolyte.get_epsilon(), m_b_cell.electrolyte.get_epsilon_p(),
+                                                                                            a_s_n, a_s_p, m_b_cell.electrolyte.get_D_e(),
+                                                                                            m_b_cell.electrolyte.get_brugg()),
+                                                                         thermal_solver(i_b_cell.get_h(), i_b_cell.get_A(), i_b_cell.get_rho(),
+                                                                                        i_b_cell.get_Vol(), i_b_cell.get_C_p(), i_b_cell.get_T())
+{
+}
 
-// double ESPBatterySolver::solve_one_iteration(double t_prev, double dt, double i_app, double temp)
-// {
-//     // solve for the electrode surface conc
-//     SOC_solver_p.solve(dt, t_prev, i_app, m_b_cell.elec_p.get_R(), m_b_cell.elec_p.get_S(), m_b_cell.elec_p.get_D());
-//     SOC_solver_n.solve(dt, t_prev, i_app, m_b_cell.elec_n.get_R(), m_b_cell.elec_n.get_S(), m_b_cell.elec_n.get_D());
+double ESPBatterySolver::solve_one_iteration(double t_prev, double dt, double i_app, double temp)
+{
+    // solve for the electrode surface conc
+    SOC_solver_p.solve(dt, t_prev, i_app, m_b_cell.elec_p.get_R(), m_b_cell.elec_p.get_S(), m_b_cell.elec_p.get_D());
+    SOC_solver_n.solve(dt, t_prev, i_app, m_b_cell.elec_n.get_R(), m_b_cell.elec_n.get_S(), m_b_cell.elec_n.get_D());
 
-//     m_b_cell.elec_p.update_SOC(SOC_solver_p.get_x_surf(m_b_cell.elec_p.get_c_max()));
-//     m_b_cell.elec_n.update_SOC(SOC_solver_n.get_x_surf(m_b_cell.elec_n.get_c_max()));
+    m_b_cell.elec_p.update_SOC(SOC_solver_p.get_x_surf(m_b_cell.elec_p.get_c_max()));
+    m_b_cell.elec_n.update_SOC(SOC_solver_n.get_x_surf(m_b_cell.elec_n.get_c_max()));
 
-//     // solve for the electrolyte conc
-//     OWL::ArrayXD j_n_ = ESPModel::molar_flux_electrode(i_app, m_b_cell.elec_n.get_S(), 'n') * OWL::Ones(electrolyte_coords.get_vector_x_n().size());
-//     OWL::ArrayXD j_sep_ = OWL::Zeros(electrolyte_coords.get_vector_x_sep().size());
-//     OWL::ArrayXD j_p_ = ESPModel::molar_flux_electrode(i_app, m_b_cell.elec_p.get_S(), 'p') * OWL::Ones(electrolyte_coords.get_vector_x_p().size());
-//     OWL::ArrayXD j_ = OWL::append(j_n_, j_sep_);
-//     j_ = OWL::append(j_, j_p_);
-//     std::vector<double> j = j_.getArray();
+    // solve for the electrolyte conc
+    OWL::ArrayXD j_n_ = ESPModel::molar_flux_electrode(i_app, m_b_cell.elec_n.get_S(), 'n') * OWL::Ones(electrolyte_coords.get_vector_x_n().size());
+    OWL::ArrayXD j_sep_ = OWL::Zeros(electrolyte_coords.get_vector_x_sep().size());
+    OWL::ArrayXD j_p_ = ESPModel::molar_flux_electrode(i_app, m_b_cell.elec_p.get_S(), 'p') * OWL::Ones(electrolyte_coords.get_vector_x_p().size());
+    OWL::ArrayXD j_ = OWL::append(j_n_, j_sep_);
+    j_ = OWL::append(j_, j_p_);
+    std::vector<double> j = j_.getArray();
 
-//     electrolyte_solver.solve(j, dt);
+    electrolyte_solver.solve(j, dt);
 
-//     // double m_p = ESPModel return ESPModel::calc_terminal_voltage(m_b_cell.elec_p.get_OCP(), m_b_cell.elec_p.get_OCP(), m_p, m_n,
-//     //                                                              m_b_cell.elec_n.get_L(), m_b_cell_electrolyte.get_L(), m_b_cell.elec_p.get_L(),
-//     //                                                              m_b_cell)
+    // calculation of the terminal voltage
+    double m_p = ESPModel::m(i_app, m_b_cell.elec_p.get_k(), m_b_cell.elec_p.get_S(), m_b_cell.elec_p.get_c_max(),
+                             m_b_cell.electrolyte.get_conc(), m_b_cell.elec_p.get_SOC());
+    double m_n = ESPModel::m(i_app, m_b_cell.elec_n.get_k(), m_b_cell.elec_n.get_S(), m_b_cell.elec_n.get_c_max(),
+                             m_b_cell.electrolyte.get_conc(), m_b_cell.elec_n.get_SOC());
 
-//     // double ocp_p, double ocp_n, double m_p, double m_n,
-//     //                              double L_n, double L_sep, double L_p,
-//     //                              double kappa_eff_avg, double k_f_avg, double t_c, double R_cell,
-//     //                              double c_e_n, double c_e_p,
-//     //                              double temp, double i_app
+    // double ocp_p, double ocp_n, double m_p, double m_n,
+    //                              double L_n, double L_sep, double L_p,
+    //                              double kappa_eff_avg, double k_f_avg, double t_c, double R_cell,
+    //                              double c_e_n, double c_e_p,
+    //                              double temp, double i_app
 
-//     // Calculate cell terminal voltage
-//     return ESPModel::calc_terminal_voltage(m_b_cell.elec_p.get_OCP(), m_b_cell.elec_p.get_OCP(), m_p, m_n,
-//                                            m_b_cell.elec_n.get_L(), m_b_cell.electrolyte.get_L(), m_b_cell.elec_p.get_L(),
-//                                            m_b_cell.kapp);
-// }
+    // return ESPModel::calc_terminal_voltage(m_b_cell.elec_p.get_OCP(), m_b_cell.elec_p.get_OCP(), m_p, m_n,
+    //                                        m_b_cell.elec_n.get_L(), m_b_cell.electrolyte.get_L(), m_b_cell.elec_p.get_L(), m_b_cell.kapp);
+
+    return 0.0
+}

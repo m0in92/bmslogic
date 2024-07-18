@@ -320,7 +320,8 @@ class PySPSolver(PyBaseSolver):
                             if step == "charge" and cycler.time_elapsed > cycler.t_max:
                                 step_completed = True
                         else:
-                            raise TypeError("To use time termination condition, use the Custom Cycler.")
+                            raise TypeError(
+                                "To use time termination condition, use the Custom Cycler.")
 
                     # update time
                     t_prev = t_curr
@@ -878,6 +879,6 @@ class PyEnhancedSPSolver(PySPSolver):
         if self.electrolyte_conc_solver_type == "fvm":
             electrolyte_conc: np.ndarray = self.electrolyte_conc_solver.array_c_e[np.newaxis, :]
             self.sol_init.electrolyte_conc = np.append(self.sol_init.electrolyte_conc,
-                                                    electrolyte_conc,
-                                                    axis=0)
+                                                       electrolyte_conc,
+                                                       axis=0)
         return PySolution(base_solution_instance=self.sol_init, name=sol_name)

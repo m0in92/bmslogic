@@ -237,6 +237,11 @@ class TestElectrolyte(unittest.TestCase):
         self.assertEqual(self.brugg_e, self.electrolyte.brugg)
         self.assertEqual(self.kappa_e * self.epsilon_e **
                          self.brugg_e, self.electrolyte.kappa_eff())
+        
+        self.assertEqual(0.0, self.electrolyte.epsilon_p)
+        self.assertEqual(0.0, self.electrolyte.epsilon_n)
+        self.assertEqual(0.0, self.electrolyte.D_e)
+        self.assertEqual(0.0, self.electrolyte.t_c)
 
 
 class TestBatteryCell(unittest.TestCase):

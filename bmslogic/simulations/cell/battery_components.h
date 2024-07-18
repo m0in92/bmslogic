@@ -106,13 +106,22 @@ public:
     double get_epsilon() const { return epsilon; }
     double get_brugg() const { return brugg; }
     double get_kappa_eff() { return kappa * std::pow(epsilon, brugg); }
+    // // optional electrolyte parameters below
+    double get_epsilon_p() const { return epsilon_p; }
+    double get_epsilon_n() const { return epsilon_n; }
+    double get_D_e() const { return D_e; }
+    double get_t_c() const { return t_c; }
 
 private:
-    double conc;    // electrolyte conc. [mol/m3]
-    double L;       // seperator thickness [m]
-    double kappa;   // electrolyte conductivity [S/m]
-    double epsilon; // electrolyte volume fraction
-    double brugg;   // Bruggerman coefficient for the electrolyte
+    double conc;           // electrolyte conc. [mol/m3]
+    double L;              // seperator thickness [m]
+    double kappa;          // electrolyte conductivity [S/m]
+    double epsilon;        // electrolyte volume fraction in the seperator region
+    double epsilon_n{0.0}; // electrolyte volume fraction in the negative electrode region
+    double epsilon_p{0.0}; // electrolyte volume fraction in the positive electrode region
+    double D_e{0.0};       // electrolyte diffusivity [m2/s]
+    double t_c{0.0};       // electrolyte cationic transference number
+    double brugg;          // Bruggerman coefficient for the electrolyte
 };
 
 class BatteryCell
@@ -205,7 +214,7 @@ public:
     double get_ocv() { return calc_ocv(m_soc); }
 
     double get_soc() { return m_soc; }
-    double get_temp() {return m_temp;}
+    double get_temp() { return m_temp; }
 
     // setters
     void set_soc(double i_soc) { m_soc = i_soc; }
