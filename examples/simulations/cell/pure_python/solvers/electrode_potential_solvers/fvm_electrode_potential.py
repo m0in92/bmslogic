@@ -15,7 +15,6 @@ try:
     from bmslogic.simulations.cell.solvers.electrode_potential import PyElectrodePotentialFVMSolver
 except ModuleNotFoundError:
     import sys
-    import os
     import pathlib
     PROJECT_DIR: str = pathlib.Path(
         __file__).parent.parent.parent.parent.parent.parent.parent.__str__()

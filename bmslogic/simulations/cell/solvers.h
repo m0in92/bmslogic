@@ -215,9 +215,11 @@ public:
 private:
     int m_K;
     std::vector<double> m_c_prev;
+
     double dr(double R) { return R / m_K; };
     double A(double dt, double R, double D) { return dt * D / std::pow(dr(R), 2); }
     double B(double dt, double R, double D) { return dt * D / (2 * dr(R)); };
+    
     std::vector<double> array_R(double R);
     std::vector<double> LHS_diag_elements(double dt, double R, double D);
     std::vector<double> LHS_lower_diag_elements(double dt, double R, double D);

@@ -429,7 +429,8 @@ PYBIND11_MODULE(cell, m)
          .def_property_readonly("K", &CNSolver::get_spatial_pts)
          .def_property_readonly("c_s_surf", &CNSolver::get_c_s_surf)
          .def("calc_A", &CNSolver::calc_A, py::arg("dt"), py::arg("R"), py::arg("D"))
-         .def("calc_B", &CNSolver::calc_B, py::arg("dt"), py::arg("R"), py::arg("D"));
+         .def("calc_B", &CNSolver::calc_B, py::arg("dt"), py::arg("R"), py::arg("D"))
+         .def("solve", &CNSolver::solve, py::arg("dt"), py::arg("I_app"), py::arg("R"), py::arg("S"), py::arg("D"));
 
      // Co-ordinate Systems
      py::class_<ElectrolyteFVMCoordinates>(m, "ElectrolyteFVMCoordinates")

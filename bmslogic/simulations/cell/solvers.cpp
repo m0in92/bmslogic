@@ -659,12 +659,13 @@ Solution BatterySolver::solve(BaseCycler i_cycler)
         double I;
         bool step_completed = false;
         std::string cycling_step = i_cycler.cycle_steps[i];
+
         while (!step_completed)
         {
             t_prev = t_curr;
             t_curr = t_curr + dt;
             sim_time += dt;
-            I = i_cycler.get_current(i_cycler.cycle_steps[i], sim_time);
+            I = i_cycler.get_current(i_cycler.cycle_steps[i], time_index);
             term_V = solve_one_iteration(t_prev, dt, I);
             cap = general_equations::calc_cap(cap, m_b_cell.get_cap(), I, dt);
 

@@ -116,11 +116,6 @@ CustomCycler::CustomCycler(std::vector<double> i_t, std::vector<double> i_curren
     cycle_steps = {"custom"};
 }
 
-// double CustomCycler::get_current(std::string cycling_step, double t)
-// {
-//     return -1.656;
-// }
-
 HPPCCycler::HPPCCycler(double i_t1, double i_t2, double i_i_app, int i_num_hppc_pulses,
                        double i_V_min, double i_SOC_LIB_min, double i_SOC_LIB) : m_t1(i_t1), m_t2(i_t2),
                                                                                  m_num_hppc_pulses(i_num_hppc_pulses)
