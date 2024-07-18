@@ -4,7 +4,7 @@ This module is an example implementation of cell_simCPPy using the NElectrode, P
 
 __author__ = "Moin Ahmed"
 __copyright__ = 'Copyright 2024 by cell_simCPPy. All rights reserved.'
-__status__ = 'deployed'
+__status__ = 'Developement'
 
 import time
 import os
@@ -47,7 +47,7 @@ battery_cell: cell_sim.BatteryCell = ParameterSets(name='test').generate_Battery
                                                                                               R_cell=R_cell)
 
 cycler: cell_sim.HPPCCycler = cell_sim.HPPCCycler(
-    t1=50, t2=100, i_app=1.0, n_hppc_steps=1000, V_min=3.0, soc_lib_min=0.0, soc_lib=1.0)
+    t1=500, t2=100, i_app=1.5, n_hppc_steps=1000, V_min=3.0, soc_lib_min=0.0, soc_lib=1.0)
 
 # print(cycler.get_current("discharge", 501.0))
 
@@ -60,9 +60,9 @@ solver: cell_sim.BatterySolver = cell_sim.BatterySolver(battery_cell=battery_cel
 sol: cell_sim.Solution = solver.solve(cycler=cycler)
 
 # plots
-Plot(sol=sol).plot_comprehensive()
+# Plot(sol=sol).plot_comprehensive()
 
-# plt.plot(cycler_time, cycler_current)
+plt.plot(cycler_time, cycler_current)
 
 # plt.ylim(-2, 1)
-# plt.show()
+plt.show()

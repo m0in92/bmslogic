@@ -3,7 +3,8 @@ Example script for the usage of Crank Nicolson method for the electrode surface 
 """
 
 __author__ = "Moin Ahmed"
-__status__ = "Developement"
+__copyright__ = "Copyright 2024 by BMSLogic. All Rights Reserved."
+__status__ = "Deployed"
 
 import time
 import matplotlib.pyplot as plt
@@ -30,7 +31,6 @@ i_app = -1.65  # Applied current [A]
 dt = 0.1  # time increment [s]
 N_sim: int = 3600
 
-
 solver_instance: CNSolver = CNSolver(c_init=c_max*SOC_init, electrode_type='n', num_spatial_pts=100)
 
 # Simulation iteration below
@@ -40,7 +40,7 @@ t_start = time.time()  # start timer
 SOC_ = SOC_init
 while SOC_ > 0:
     solver_instance.solve(dt=dt, I_app=i_app, R=R, S=S, D=D)
-    SOC_ = solver_instance.c_prev[-1] / c_max
+    SOC_ = solver_instance.c_s
 
     lst_cn_time.append(t_prev)
     lst_cn_soc.append(SOC_)

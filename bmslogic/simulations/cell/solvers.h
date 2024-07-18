@@ -196,6 +196,10 @@ private:
 
 double lambda_function(double lambda_k);
 
+/**
+ * @brief This class uses the Crank Nicolson method for numerically calculating the electrode Li-ion concentration during battery operations.
+ *
+ */
 class CNSolver : public BaseConcSolver
 {
 public:
@@ -206,6 +210,7 @@ public:
     int get_spatial_pts() { return m_K; }
     double get_c_s_surf() { return m_c_prev[m_c_prev.size() - 1]; }
     std::vector<double> get_c_prev() { return m_c_prev; }
+    double get_c_surf() { return m_c_surf; }
 
     // calculation functions
     double calc_A(double dt, double R, double D) { return A(dt, R, D); }
@@ -215,11 +220,12 @@ public:
 private:
     int m_K;
     std::vector<double> m_c_prev;
+    double m_c_surf;
 
     double dr(double R) { return R / m_K; };
     double A(double dt, double R, double D) { return dt * D / std::pow(dr(R), 2); }
     double B(double dt, double R, double D) { return dt * D / (2 * dr(R)); };
-    
+
     std::vector<double> array_R(double R);
     std::vector<double> LHS_diag_elements(double dt, double R, double D);
     std::vector<double> LHS_lower_diag_elements(double dt, double R, double D);

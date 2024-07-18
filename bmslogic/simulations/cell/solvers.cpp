@@ -338,6 +338,7 @@ CNSolver::CNSolver(double i_c_init, char i_electrode_type, int i_spatial_grid_po
 {
     OWL::ArrayXD c_prev_ = i_c_init * OWL::Ones(m_K);
     m_c_prev = c_prev_.getArray();
+    m_c_surf = m_c_prev[m_c_prev.size()-1];
 }
 
 std::vector<double> CNSolver::array_R(double R)
@@ -417,6 +418,7 @@ void CNSolver::solve(double dt, double i_app, double R, double S, double D)
     std::vector<double> b = RHS_vector(j, dt, R, D);
 
     m_c_prev = Newton::MatrixSolvers::TDMASolver(lower_diag, diag, upper_diag, b);
+    m_c_surf = m_c_prev[m_c_prev.size()-1];
 }
 
 /*
