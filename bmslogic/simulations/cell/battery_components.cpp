@@ -127,6 +127,20 @@ Electrolyte::Electrolyte(double conc_i, double L_i, double kappa_i, double epsil
     brugg = brugg_i;
 }
 
+Electrolyte::Electrolyte(double conc_i, double L_i, double kappa_i, double i_epsilon_n, double epsilon_i, double i_epsilon_p,
+                         double i_D_e, double i_t_c, double brugg_i)
+{
+    conc = conc_i;
+    L = L_i;
+    kappa = kappa_i;
+    epsilon = epsilon_i;
+    epsilon_n = i_epsilon_n;
+    epsilon_p = i_epsilon_p;
+    D_e = i_D_e;
+    t_c = i_t_c;
+    brugg = brugg_i;
+}
+
 BatteryCell::BatteryCell(PElectrode i_elec_p, NElectrode i_elec_n, Electrolyte i_electrolyte, double i_rho, double i_Vol,
                          double i_C_p, double i_h, double i_A, double i_cap, double i_V_max, double i_V_min,
                          double i_R_cell) : elec_p(i_elec_p), elec_n(i_elec_n), electrolyte(i_electrolyte)

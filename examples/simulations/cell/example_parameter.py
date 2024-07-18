@@ -50,6 +50,7 @@ c_init_e: float = 1000.0
 kappa_e: float = 0.2875
 epsilon_e: float = 0.724
 brugg_e: float = 1.5
+D_e: float = 3.5e-10
 
 # Battery Parameters
 T: float = 298.15

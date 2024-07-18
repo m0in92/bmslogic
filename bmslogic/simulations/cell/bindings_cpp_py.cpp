@@ -493,4 +493,10 @@ PYBIND11_MODULE(cell, m)
               py::arg("battery_cell"), py::arg("is_isothermal"), py::arg("enable_degradation"),
               py::arg("electrode_mass_balance_solver") = "solver")
          .def("solve", &BatterySolver::solve, py::arg("cycler"));
+
+     py::class_<ESPBatterySolver, BaseBatterySolver>(m, "ESPBatterySolver")
+         .def(py::init<BatteryCell, bool, bool, std::string>(),
+              py::arg("battery_cell"), py::arg("is_isothermal"), py::arg("enable_degradation"),
+              py::arg("electrode_mass_balance_solver") = "solver")
+         .def("solve", &ESPBatterySolver::solve, py::arg("cycler"));
 }

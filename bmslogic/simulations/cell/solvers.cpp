@@ -738,9 +738,9 @@ double ESPBatterySolver::solve_one_iteration(double t_prev, double dt, double i_
     m_b_cell.elec_n.update_SOC(SOC_solver_n.get_x_surf(m_b_cell.elec_n.get_c_max()));
 
     // solve for the electrolyte conc
-    OWL::ArrayXD j_n_ = ESPModel::molar_flux_electrode(i_app, m_b_cell.elec_n.get_S(), 'n') * OWL::Ones(electrolyte_coords.get_vector_x_n().size());
-    OWL::ArrayXD j_sep_ = OWL::Zeros(electrolyte_coords.get_vector_x_sep().size());
-    OWL::ArrayXD j_p_ = ESPModel::molar_flux_electrode(i_app, m_b_cell.elec_p.get_S(), 'p') * OWL::Ones(electrolyte_coords.get_vector_x_p().size());
+    OWL::ArrayXD j_n_ = ESPModel::molar_flux_electrode(i_app, m_b_cell.elec_n.get_S(), 'n') * OWL::Ones(static_cast<int>(electrolyte_coords.get_vector_x_n().size()));
+    OWL::ArrayXD j_sep_ = OWL::Zeros(static_cast<int>(electrolyte_coords.get_vector_x_sep().size()));
+    OWL::ArrayXD j_p_ = ESPModel::molar_flux_electrode(i_app, m_b_cell.elec_p.get_S(), 'p') * OWL::Ones(static_cast<int>(electrolyte_coords.get_vector_x_p().size()));
     OWL::ArrayXD j_ = OWL::append(j_n_, j_sep_);
     j_ = OWL::append(j_, j_p_);
     std::vector<double> j = j_.getArray();
@@ -753,14 +753,91 @@ double ESPBatterySolver::solve_one_iteration(double t_prev, double dt, double i_
     double m_n = ESPModel::m(i_app, m_b_cell.elec_n.get_k(), m_b_cell.elec_n.get_S(), m_b_cell.elec_n.get_c_max(),
                              m_b_cell.electrolyte.get_conc(), m_b_cell.elec_n.get_SOC());
 
-    // double ocp_p, double ocp_n, double m_p, double m_n,
-    //                              double L_n, double L_sep, double L_p,
-    //                              double kappa_eff_avg, double k_f_avg, double t_c, double R_cell,
-    //                              double c_e_n, double c_e_p,
-    //                              double temp, double i_app
+    double c_e_n = electrolyte_solver.get_vector_c_e()[0];
+    double c_e_p = electrolyte_solver.get_vector_c_e()[static_cast<int>(electrolyte_solver.get_vector_c_e().size())];
 
-    // return ESPModel::calc_terminal_voltage(m_b_cell.elec_p.get_OCP(), m_b_cell.elec_p.get_OCP(), m_p, m_n,
-    //                                        m_b_cell.elec_n.get_L(), m_b_cell.electrolyte.get_L(), m_b_cell.elec_p.get_L(), m_b_cell.kapp);
+    double V = ESPModel::calc_terminal_voltage(m_b_cell.elec_p.get_OCP(), m_b_cell.elec_p.get_OCP(), m_p, m_n,
+                                               m_b_cell.elec_n.get_L(), m_b_cell.electrolyte.get_L(), m_b_cell.elec_p.get_L(),
+                                               m_b_cell.electrolyte.get_kappa_eff(), 1.0,
+                                               m_b_cell.electrolyte.get_t_c(), m_b_cell.get_R_cell(),
+                                               c_e_n, c_e_p, m_b_cell.get_T(), i_app);
 
-    return 0.0
+    return V;
+}
+
+Solution ESPBatterySolver::solve(BaseCycler i_cycler)
+{
+    clock_t start, end;
+    start = clock();
+    // const std::clock_t c_start = std::clock();
+    // auto t_start = std::chrono::high_resolution_clock::now();
+    // std::time_t time_start = std::time(NULL);
+
+    // initialization of the simulation results vectors
+    Solution sol = Solution();
+
+    // Simulation calculation at the initial time step
+    double term_V = m_b_cell.elec_p.get_OCP() - m_b_cell.elec_n.get_OCP();
+    double cap = 0.0;
+    double sim_time = 0.0;
+    // sol.update_t(sim_time);
+    // sol.update_cycling_step("rest");
+    // sol.update_V(term_V);
+    // sol.update_temp(m_b_cell.get_T());
+    // sol.update_cap(cap);
+    // sol.update_x_p(m_b_cell.elec_p.get_SOC());
+    // sol.update_x_n(m_b_cell.elec_n.get_SOC());
+
+    // simultion loop
+    for (int i = 0; i < i_cycler.cycle_steps.size(); i++)
+    {
+        cap = 0.0;
+        int time_index = 0;
+        double t_curr = 0.0; // This is the cycling step time.
+        double t_prev;
+        double dt = 0.1;
+        double I;
+        bool step_completed = false;
+        std::string cycling_step = i_cycler.cycle_steps[i];
+
+        while (!step_completed)
+        {
+            t_prev = t_curr;
+            t_curr = t_curr + dt;
+            sim_time += dt;
+            I = i_cycler.get_current(i_cycler.cycle_steps[i], time_index);
+            term_V = solve_one_iteration(t_prev, dt, I, m_b_cell.get_T());
+            cap = general_equations::calc_cap(cap, m_b_cell.get_cap(), I, dt);
+
+            // break conditions
+            if ((i_cycler.cycle_steps[i] == "rest") & (t_curr > i_cycler.rest_time))
+                step_completed = true;
+            if ((i_cycler.cycle_steps[i] == "discharge") & (term_V < i_cycler.V_min))
+                step_completed = true;
+            if ((i_cycler.cycle_steps[i] == "charge") & (term_V > i_cycler.V_max))
+                step_completed = true;
+            if ((i_cycler.cycle_steps[i] == "custom") & ((t_curr > i_cycler.rest_time) | (term_V < i_cycler.V_min)))
+                step_completed = true;
+
+            // The arrays are updated below
+            sol.update_t(sim_time);
+            sol.update_cycling_step(cycling_step);
+            sol.update_V(term_V);
+            sol.update_temp(m_b_cell.get_T());
+            sol.update_cap(cap);
+            sol.update_x_p(m_b_cell.elec_p.get_SOC());
+            sol.update_x_n(m_b_cell.elec_n.get_SOC());
+
+            time_index += 1;
+        }
+    }
+
+    end = clock();
+    // const std::clock_t c_end = std::clock();
+    // std::time_t time_end = std::time(NULL);
+    // const auto t_end = std::chrono::high_resolution_clock::now();
+
+    std::cout << std::fixed << std::setprecision(10) << "Solution time: " << double(end - start) / double(CLOCKS_PER_SEC) << "s" << std::endl;
+
+    return sol;
 }

@@ -98,6 +98,8 @@ class Electrolyte
 public:
     Electrolyte() = default;
     Electrolyte(double conc_i, double L_i, double kappa_i, double epsilon_i, double brugg_i);
+    Electrolyte(double conc_i, double L_i, double kappa_i, double i_epsilon_n, double epsilon_i, double i_epsilon_p,
+                double i_D_e, double i_t_c, double brugg_i);
     ~Electrolyte() = default;
     // Accessor functions
     double get_conc() const { return conc; }

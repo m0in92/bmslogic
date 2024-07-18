@@ -36,7 +36,7 @@ int main()
     double soc_poly = SOC_init;
     double i_app_ {0};
     while(soc_poly > 0.4956) {
-        i_app_ = cycler.get_current("charge", t_prev);
+        i_app_ = cycler.get_current("charge", 0);
         poly_solver.solve(dt, t_prev, i_app, R, S, D);
         t_prev += dt;
         soc_poly = poly_solver.get_x_surf(c_max);

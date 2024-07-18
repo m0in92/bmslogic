@@ -330,7 +330,11 @@ class ESPBatterySolver : public BaseBatterySolver
 {
 public:
     explicit ESPBatterySolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver);
-    // Solvers instances
+    
+    // methods for calculations
+    Solution solve(BaseCycler i_cycler);
+
+private:
     double a_s_p;
     double a_s_n;
     PolynomialApprox SOC_solver_p;
@@ -338,8 +342,6 @@ public:
     LumpedThermalSolver thermal_solver;
     ElectrolyteFVMCoordinates electrolyte_coords;
     ElectrolyteFVMSolver electrolyte_solver;
-
-private:
     // double calc_V();
     double solve_one_iteration(double t_prev, double dt, double i_app, double temp);
 };
