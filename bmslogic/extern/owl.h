@@ -19,6 +19,7 @@
 #include <stdexcept>
 #include <exception>
 #include <limits>
+#include <algorithm>
 #include <functional>
 
 /**
@@ -306,6 +307,8 @@ namespace Newton
         std::function<double(double)> line(double &slope, double &x, double &y);
         double interp(OWL::ArrayXD xArray, OWL::ArrayXD yArray, double x);
         std::function<double(double)> interpFunc(OWL::ArrayXD xArray, OWL::ArrayXD yArray);
+        double linear_interpolation(double x, std::vector<double> vec_x, std::vector<double> vec_y);
+        std::vector<double> linear_interpolation(std::vector<double> target_vec_x, std::vector<double> vec_x, std::vector<double> vec_y);
     }
 
     namespace ODESolver

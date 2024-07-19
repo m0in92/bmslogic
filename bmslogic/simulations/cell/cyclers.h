@@ -14,7 +14,8 @@
 
 #include <string>
 #include <vector>
-// #include "pybind11/pybind11.h"
+
+#include "extern/owl.h"
 
 /**
  * @class BaseCycler
@@ -121,9 +122,25 @@ public:
     // setters
     void set_t_vector(std::vector<double> &t_vector_new) { m_t_vector = t_vector_new; }
     void set_current_vector(std::vector<double> &current_vector_new) { m_current_vector = current_vector_new; }
-    // public attributes
-    // std::vector<double> m_t_vector;
-    // std::vector<double> m_current_vector;
+};
+
+/**
+ * @brief Creates a cycler class whose time and current array values have been filled through interpolation.
+ *        THIS CLASS HAS VERY HIGH COMPUTATIONAL TIMES AND IT IS RECOMMENDED TO NOT USE IT! USE THE CYCLER IN PYCYCLER
+ *        INSTEAD.
+ * 
+ */
+class InterpolatedCustomCycler : public BaseCycler
+{
+public:
+    InterpolatedCustomCycler(std::vector<double> i_t_exp, std::vector<double> i_I_exp, double dt,
+                             double V_min, double V_max, double soc_min, double soc_max, double soc);
+    // getters
+    std::vector<double> get_t_vector() { return m_t_vector; }
+    std::vector<double> get_current_vector() { return m_current_vector; }
+    // setters
+    void set_t_vector(std::vector<double> &t_vector_new) { m_t_vector = t_vector_new; }
+    void set_current_vector(std::vector<double> &current_vector_new) { m_current_vector = current_vector_new; }
 };
 
 class HPPCCycler : public BaseCycler

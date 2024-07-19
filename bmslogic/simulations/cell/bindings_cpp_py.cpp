@@ -307,8 +307,17 @@ PYBIND11_MODULE(cell, m)
          // properties
          .def_property("t_array", &CustomCycler::get_t_vector, &CustomCycler::set_t_vector)
          .def_property("current_array", &CustomCycler::get_current_vector, &CustomCycler::set_current_vector);
-     // calculations/helper methods
-     //     .def("get_current", &CustomCycler::get_current);
+
+     // InterpolatedCustomCycler
+     py::class_<InterpolatedCustomCycler, BaseCycler>(m, "InterpolatedCustomCycler")
+         .def(py::init<std::vector<double>, std::vector<double>, double, double, double, double, double, double>(),
+              py::arg("t_array"), py::arg("current_array"), py::arg("dt"),
+              py::arg("V_min"), py::arg("V_max"),
+              py::arg("soc_lib_min"), py::arg("soc_lib_max"), py::arg("soc_lib"))
+         // properties
+         .def_property("t_array", &InterpolatedCustomCycler::get_t_vector, &InterpolatedCustomCycler::set_t_vector)
+         .def_property("current_array", &InterpolatedCustomCycler::get_current_vector, &InterpolatedCustomCycler::set_current_vector);
+     ;
 
      // HPPC Cycler
      py::class_<HPPCCycler, BaseCycler>(m, "HPPCCycler")

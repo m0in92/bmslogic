@@ -2017,6 +2017,55 @@ namespace Newton
             return [xArray, yArray](double x)
             { return interp(xArray, yArray, x); };
         }
+
+        double linear_interpolation(double x, std::vector<double> vec_x, std::vector<double> vec_y)
+        {
+            if (vec_x.size() != vec_y.size())
+                throw std::invalid_argument("vector x and y need to be of same size.");
+
+            // combine the two vectors into one
+            std::vector<std::pair<double, double>> combined_vec;
+            for (int i = 0; i < vec_x.size(); i++)
+            {
+                combined_vec.push_back(std::make_pair(vec_x[i], vec_y[i]));
+            }
+
+            // sort the combined vector based on the first element of the pair
+            std::sort(combined_vec.begin(), combined_vec.end(), [&](auto a, auto b)
+                      { return a.first < b.first; });
+
+            // unzip the combined vector
+            std::vector<double> sorted_x, sorted_y;
+            for (int i = 0; i < vec_x.size(); i++)
+            {
+                sorted_x.push_back(combined_vec[i].first);
+                sorted_y.push_back(combined_vec[i].second);
+            }
+
+            // find the lower and upper bound index for the elements with value just lower and higher than x
+            auto i = lower_bound(sorted_x.begin(), sorted_x.end(), x);
+            int k = i - sorted_x.begin(); // upper element
+            if (k == 0)
+                return sorted_y[0]; // lower bound extrapolation
+            int l = k ? k - 1 : 1;  // lower element
+            if (i == sorted_x.end())
+                return sorted_y[sorted_y.size() - 1]; // extrapolate to the y value at the last element
+
+            // linear regression
+            double result = sorted_y[l] + (x - sorted_x[l]) * (sorted_y[k] - sorted_y[l]) / (sorted_x[k] - sorted_x[l]);
+
+            return result;
+        }
+
+        std::vector<double> linear_interpolation(std::vector<double> target_vec_x, std::vector<double> vec_x, std::vector<double> vec_y)
+        {
+            std::vector<double> result_vector;
+            for (int i=0; i<target_vec_x.size(); i++)
+            {
+                result_vector.push_back(linear_interpolation(target_vec_x[i], vec_x, vec_y));
+            }
+            return result_vector;
+        }
     }
 
     namespace ODESolver
@@ -2088,7 +2137,7 @@ namespace Newton
         OWL::ArrayXD Euler(OWL::ArrayXD xArray, double yInit, double (*func)(double, double))
         {
             // initialize the results vector to zeros.
-            OWL::ArrayXD resArray = OWL::Zeros(xArray.getArrayLength());
+            OWL::ArrayXD resArray = OWL::Zeros(static_cast<int>(xArray.getArrayLength()));
             resArray[0] = yInit;
             for (size_t i = 1; i < xArray.getArrayLength(); i++)
             {
@@ -2171,7 +2220,7 @@ namespace Newton
          */
         OWL::ArrayXD rk4(OWL::ArrayXD xArray, double yInit, double (*func)(double, double))
         {
-            OWL::ArrayXD res = OWL::Zeros(xArray.getArrayLength());
+            OWL::ArrayXD res = OWL::Zeros(static_cast<int>(xArray.getArrayLength()));
             res[0] = yInit;
             for (size_t i = 1; i < res.getArrayLength(); i++)
             {

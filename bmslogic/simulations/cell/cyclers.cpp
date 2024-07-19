@@ -114,6 +114,21 @@ CustomCycler::CustomCycler(std::vector<double> i_t, std::vector<double> i_curren
     cycle_steps = {"custom"};
 }
 
+InterpolatedCustomCycler::InterpolatedCustomCycler(std::vector<double> i_t_exp, std::vector<double> i_I_exp, double dt,
+                                                   double i_V_min, double i_V_max,
+                                                   double i_soc_min, double i_soc_max, double i_soc) : BaseCycler()
+{
+    m_t_vector = OWL::aRange(i_t_exp[0], i_t_exp.back(), dt).getArray();
+    m_current_vector = Newton::interp::linear_interpolation(m_t_vector, i_t_exp, i_I_exp);
+    V_min = i_V_min;
+    V_max = i_V_max;
+    SOC_LIB_min = i_soc_min;
+    SOC_LIB_max = i_soc_max;
+    SOC_LIB = i_soc;
+    rest_time = 0.0;
+    cycle_steps = {"custom"};
+}
+
 HPPCCycler::HPPCCycler(double i_t1, double i_t2, double i_i_app, int i_num_hppc_pulses,
                        double i_V_min, double i_SOC_LIB_min, double i_SOC_LIB) : m_t1(i_t1), m_t2(i_t2),
                                                                                  m_num_hppc_pulses(i_num_hppc_pulses)
