@@ -409,6 +409,13 @@ PYBIND11_MODULE(cell, m)
          .def("temp_prev", &LumpedThermalSolver::get_temp_prev);
 
      // Lithium Ion in Solid Electrode Solvers
+     // // Polynomial Solver
+     py::class_<PolynomialApprox>(m, "PolySolver")
+         .def(py::init<char, double, std::string>(), py::arg("electrode_type"), py::arg("c_init"), py::arg("solver_type"))
+         .def_property_readonly("c_s", &PolynomialApprox::get_c_surf)
+         .def_property_readonly("soc_surf", &PolynomialApprox::get_x_surf)
+         .def("solve", &PolynomialApprox::solve, py::arg("dt"), py::arg("t_prev"), py::arg("i_app"), py::arg("R"), py::arg("S"), py::arg("D"));
+
      // // Eigen Solver
      py::class_<EigenSolver>(m, "EigenSolver")
          .def(py::init<char, double, int>(),
@@ -435,9 +442,9 @@ PYBIND11_MODULE(cell, m)
          .def("get_summation_term", &EigenSolver::get_summation_term,
               py::arg("dt"), py::arg("t_prev"), py::arg("i_app"), py::arg("R"),
               py::arg("S"), py::arg("D_s"), py::arg("c_s_max"))
-         .def("calc_soc_surf", &EigenSolver::solve,
+         .def("solve", &EigenSolver::solve,
               py ::arg("dt"), py::arg("t_prev"), py::arg("i_app"), py::arg("R"),
-              py::arg("S"), py::arg("D_s"), py::arg("c_s_max"));
+              py::arg("S"), py::arg("D"), py::arg("c_s_max"));
 
      // // CN Solver
      py::class_<CNSolver>(m, "CNSolver")
