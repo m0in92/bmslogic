@@ -1,8 +1,13 @@
 cmake_minimum_required(VERSION 3.12)
 project(bmslogic)
 
-set(CXX_STANDARD 20)
-set(CXX_STANDARD_REQUIRED FALSE)
+if(${APPLE})
+    set(CXX_STANDARD 14)
+    set(CXX_STANDARD_REQUIRED OFF)
+else()
+    set(CXX_STANDARD 20)
+    set(CXX_STANDARD_REQUIRED FALSE)
+endif()
 
 option(CPP_ONLY "Only compiles the executables" OFF)
 
