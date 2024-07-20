@@ -86,6 +86,9 @@ public:
     std::vector<double> get_x_p() { return m_x_p; }
     std::vector<double> get_x_n() { return m_x_n; }
     std::vector<double> get_OCV_LIB() { return m_OCV; }
+    std::vector<double> get_overpotential_elec_p() { return m_overpotential_elec_p; }
+    std::vector<double> get_overpotential_elec_n() { return m_overpotential_elec_n; }
+    std::vector<double> get_overpotential_R_cell() { return m_overpotential_R_cell; }
     // setter methods
     void set_t(std::vector<double> t_new) { m_t = t_new; }
     void set_cycling_step(std::vector<std::string> cycling_step_new) { m_cycling_step = cycling_step_new; }
@@ -95,6 +98,9 @@ public:
     void set_x_p(std::vector<double> x_p_new) { m_x_p = x_p_new; }
     void set_x_n(std::vector<double> x_n_new) { m_x_n = x_n_new; }
     void set_OCV_LIB(std::vector<double> i_OCV_LIB) { m_OCV = i_OCV_LIB; }
+    void set_overpotential_elec_p(std::vector<double> i_overpotential_elec_p) { m_overpotential_elec_p = i_overpotential_elec_p; }
+    void set_overpotential_elec_n(std::vector<double> i_overpotential_elec_n) { m_overpotential_elec_n = i_overpotential_elec_n; }
+    void set_overpotential_R_cell(std::vector<double> i_overpotential_R_cell) { m_overpotential_R_cell = i_overpotential_R_cell; }
     // the methods below are intended for updating the member vectors
     void update_t(double t_new) { m_t.push_back(t_new); }
     void update_cycling_step(std::string cycling_step_new) { m_cycling_step.push_back(cycling_step_new); }
@@ -104,6 +110,9 @@ public:
     void update_x_p(double x_p_new) { m_x_p.push_back(x_p_new); }
     void update_x_n(double x_n_new) { m_x_n.push_back(x_n_new); }
     void update_OCV_LIB(double i_OCV) { m_OCV.push_back(i_OCV); }
+    void update_overpotential_elec_p(double i_overpotential_elec_p) { m_overpotential_elec_p.push_back(i_overpotential_elec_p); }
+    void update_overpotential_elec_n(double i_overpotential_elec_n) { m_overpotential_elec_n.push_back(i_overpotential_elec_n); }
+    void update_overpotential_R_cell(double i_overpotential_R_cell) { m_overpotential_R_cell.push_back(i_overpotential_R_cell); }
 
 private:
     std::vector<double> m_t;
@@ -114,6 +123,9 @@ private:
     std::vector<double> m_x_p;
     std::vector<double> m_x_n;
     std::vector<double> m_OCV;
+    std::vector<double> m_overpotential_elec_p;
+    std::vector<double> m_overpotential_elec_n;
+    std::vector<double> m_overpotential_R_cell;
 };
 
 #endif // BMSLOGIC_PROJECT_SOLUTION_H

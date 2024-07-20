@@ -360,7 +360,10 @@ PYBIND11_MODULE(cell, m)
          .def_property("cap", &Solution::get_cap, &Solution::set_cap)
          .def_property("soc_p", &Solution::get_x_p, &Solution::set_x_p)
          .def_property("soc_n", &Solution::get_x_n, &Solution::set_x_n)
-         .def_property("OCV_LIB", &Solution::get_OCV_LIB, &Solution::set_OCV_LIB);
+         .def_property("OCV_LIB", &Solution::get_OCV_LIB, &Solution::set_OCV_LIB)
+         .def_property("overpotential_elec_p", &Solution::get_overpotential_elec_p, &Solution::set_overpotential_elec_p)
+         .def_property("overpotential_elec_n", &Solution::get_overpotential_elec_n, &Solution::set_overpotential_elec_n)
+         .def_property("overpotential_R_cell", &Solution::get_overpotential_R_cell, &Solution::set_overpotential_R_cell);
 
      /*
       * Solvers

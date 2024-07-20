@@ -322,6 +322,7 @@ public:
 
 private:
     double calc_V(double I);
+    std::tuple<double, double, double, double, double> calc_overpotentials(double I);
     double calc_T(double I, double V);
     std::pair<double, bool> solve_one_iteration(double t_prev, double dt, double I);
 };
