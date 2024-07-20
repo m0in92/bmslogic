@@ -14,7 +14,16 @@ import pathlib  # os and pathlib are imported to define the absolute file path o
 
 import pandas as pd
 
-from bmslogic import cell_sim
+try:
+    from bmslogic import cell_sim
+except ModuleNotFoundError as e:
+    import sys 
+    
+    PROJECT_DIR: str = pathlib.Path(
+        __file__).parent.parent.parent.parent.parent.parent.parent.__str__()
+    sys.path.append(PROJECT_DIR)
+
+    from bmslogic import cell_sim
 
 
 # Operating parameters
@@ -38,7 +47,8 @@ cell = cell_sim.PyBatteryCell.read_from_parametersets(parameter_set_name='Gao-Ra
 
 # set-up cycler and solver. Also plot the cycler time [s] and current [A]. For this example the data is extracted from
 # a csv file.
-df = pd.read_csv(os.path.join(pathlib.Path(__file__).parent.__str__(), 'example_data.csv'))
+df = pd.read_csv(os.path.join(pathlib.Path(
+    __file__).parent.__str__(), 'example_data.csv'))
 cycler = cell_sim.PyCustomCycler(array_t=df['t [s]'].to_numpy(), array_I=df['I [A]'].to_numpy(), SOC_LIB=1.0,
                                  V_min=V_min, V_max=V_max)
 cycler.plot()

@@ -182,7 +182,7 @@ class PySolutionInitializer:
     electrolyte_conc: Optional[np.ndarray] = None
 
     def update(self, cycle_num: float = 0, cycle_step: str = 'rest', t: float = 0, I: float = 0, 
-               V: float = 0, overpotential_elec_n : float = 0, overpotential_elect_p: float = 0, overpotential_R_cell: float = 0,
+               V: float = 0, overpotential_elec_n : float = 0, overpotential_elec_p: float = 0, overpotential_R_cell: float = 0,
                OCV: float = 0, x_surf_p: float = 0, x_surf_n: float = 0,
                cap: float = 0, cap_charge: float = 0, cap_discharge: float = 0, SOC_LIB: float = 0,
                battery_cap: float = 0,
@@ -192,7 +192,7 @@ class PySolutionInitializer:
         self.lst_t.append(t)
         self.lst_I.append(I)
         self.lst_V.append(V)
-        self.lst_overpotential_elec_p.append(overpotential_elect_p)
+        self.lst_overpotential_elec_p.append(overpotential_elec_p)
         self.lst_overpotential_elec_n.append(overpotential_elec_n)
         self.lst_overpotential_R_cell.append(overpotential_R_cell)
         self.lst_OCV_LIB.append(OCV)
