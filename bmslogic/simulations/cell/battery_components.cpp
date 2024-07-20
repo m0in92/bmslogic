@@ -33,6 +33,11 @@ Electrode::Electrode(double L_i, double A_i, double kappa_i, double epsilon_i, d
     Ea_R = Ea_R_i;
     alpha = alpha_i;
     brugg = brugg_i;
+
+    if ((SOC_i < 0) || (SOC_i > 1))
+    {
+        throw InvalidSOCException();
+    }
     SOC_init = SOC_i;
     SOC = SOC_i; // initial condition
     T = T_i;     // initial condition

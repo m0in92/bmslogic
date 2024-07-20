@@ -253,9 +253,9 @@ class TestEigenSolver(unittest.TestCase):
     def test_method_soc_solver(self):
         electrode_soc: EigenSolver = EigenSolver(
             electrode_type='p', soc_init=0.4956, num_roots=5)
-        soc_new: float = electrode_soc.calc_soc_surf(dt=0.1, t_prev=0.0, i_app=self.i_app,
-                                                     R=self.R, S=self.S, D_s=self.D_s,
-                                                     c_s_max=self.c_s_max)
+        soc_new: float = electrode_soc.solve(dt=0.1, t_prev=0.0, i_app=self.i_app,
+                                             R=self.R, S=self.S, D=self.D_s,
+                                             c_s_max=self.c_s_max)
         # self.assertAlmostEqual(0.5042242859771239, soc_new, places=7)
         # soc_new: float = electrode_soc.calc_soc_surf(dt=0.1, t_prev=0.0, i_app=self.i_app,
         #                                              R=self.R, S=self.S, D_s=self.D_s,
@@ -304,8 +304,9 @@ class TestCNSolver(unittest.TestCase):
 
     def test_property_cs(self):
         spatial_pts: int = 100
-        solver: CNSolver = CNSolver(c_init = self.soc_init * self.c_s_max, electrode_type="p", num_spatial_pts=spatial_pts)
-        self.assertAlmostEqual(0.45, solver.c_s /  self.c_s_max)
+        solver: CNSolver = CNSolver(
+            c_init=self.soc_init * self.c_s_max, electrode_type="p", num_spatial_pts=spatial_pts)
+        self.assertAlmostEqual(0.45, solver.c_s / self.c_s_max)
 
     def test_method_solver(self):
         R = 1.25e-5  # electrode particle radius in [m]
@@ -318,7 +319,8 @@ class TestCNSolver(unittest.TestCase):
         I_app: float = -1.65
         spatial_pts: int = 100
 
-        solver: CNSolver = CNSolver(c_init = SOC_init * c_max, electrode_type="n", num_spatial_pts=spatial_pts)
+        solver: CNSolver = CNSolver(
+            c_init=SOC_init * c_max, electrode_type="n", num_spatial_pts=spatial_pts)
         self.assertAlmostEqual(24091.2144, solver.c_s)
 
         solver.solve(dt=dt, I_app=I_app, R=R, S=S, D=D)

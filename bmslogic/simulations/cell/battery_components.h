@@ -16,6 +16,15 @@
 #include <cmath>
 #include <functional>
 
+class InvalidSOCException : public std::exception
+{
+public:
+    char *what()
+    {
+        return "SOC is beyond 0 or 1.";
+    }
+};
+
 class Electrode
 {
 public:
@@ -37,8 +46,15 @@ public:
     double get_c_max() const { return max_conc; }
     double get_R() const { return R; }
     // Modifier functions
-    void update_T(double &T_new) { T = T_new; }        // updates the electrode temp.
-    void update_SOC(double SOC_new) { SOC = SOC_new; } // update the electrode SOC
+    void update_T(double &T_new) { T = T_new; } // updates the electrode temp.
+    void update_SOC(double SOC_new)
+    {
+        if ((SOC < 0) || (SOC > 1))
+        {
+            throw InvalidSOCException();
+        }
+        SOC = SOC_new;
+    } // update the electrode SOC
 protected:
     double L;        // Electrode Thickness [m]
     double A;        // Electrode Area [m^2]

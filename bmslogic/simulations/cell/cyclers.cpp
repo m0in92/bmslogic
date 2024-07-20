@@ -145,7 +145,7 @@ double HPPCCycler::get_current(std::string i_cycling_step, double t)
 {
     for (int n = 0; n < m_num_hppc_pulses; n++)
     {
-        if ((t < ((n + 1) * m_t1 + (n + 1) * m_t2)) & (t >= (n * m_t1 + n * m_t2)))
+        if ((t < ((n + 1) * m_t1 + (n + 1) * m_t2)) && (t >= (n * m_t1 + n * m_t2)))
         {
             if (t > ((n + 1) * m_t1 + n * m_t2))
                 return discharge_current;

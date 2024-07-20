@@ -51,6 +51,8 @@ PYBIND11_MODULE(cell, m)
       * Bindings pertaining to battery components
       */
 
+     // py::register_exception<InvalidSOCException()>(m, "InvalidSOCException");
+
      // Electrode class
      py::class_<Electrode>(m, "Electrode")
          .def(py::init<double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double,
