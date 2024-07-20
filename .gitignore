@@ -293,3 +293,4 @@ BMSLogic\examples\simulations\cell\pure_python\full_simulation_runs\single_parti
 
 ## Project Files ##
 .idea/
+wsl_build/
