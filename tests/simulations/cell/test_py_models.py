@@ -63,7 +63,7 @@ class TestSPModel(unittest.TestCase):
                                                           soc_init_n, self.c_e))
 
         self.assertEqual(4.032392212009281,
-                         testmodel.calc_cell_terminal_voltage(OCP_p, OCP_n, m_p, m_n, R_cell, T=T, I=I))
+                         testmodel.calc_cell_terminal_voltage(OCP_p, OCP_n, m_p, m_n, R_cell, T=T, I=I)[0])
 
 
 class TestESP(unittest.TestCase):

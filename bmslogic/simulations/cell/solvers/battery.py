@@ -202,7 +202,7 @@ class PySPSolver(PyBaseSolver):
         """
         return (1 / 3600) * (np.abs(I) * dt)
 
-    def solve_iteration_one_step(self, t_prev: float, dt: float, I: float) -> float:
+    def solve_iteration_one_step(self, t_prev: float, dt: float, I: float) -> tuple[float, float, float, float, float]:
         # Account for SEI growth
         if self.bool_degradation:
             I_i, I_s, delta_R_SEI = self.SEI_model(soc=self.b_cell.elec_n.SOC, ocp=self.b_cell.elec_n.OCP,
@@ -230,14 +230,14 @@ class PySPSolver(PyBaseSolver):
                                                    D_s=self.b_cell.elec_n.D,
                                                    c_smax=self.b_cell.elec_n.max_conc)  # calc n surf SOC
 
-        V: float = self.calc_terminal_potential(
-            I_p_i=I, I_n_i=I_i)  # calc battery cell terminal voltage
+        V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell = self.calc_terminal_potential(I_p_i=I, I_n_i=I_i)  
+        # calc battery cell terminal voltage
 
         # Calc temp below and update the battery cell's temperature attribute.
         if not self.bool_isothermal:
             self.b_cell.T = self.calc_cell_temp(t_model=self.t_model, t_prev=t_prev, dt=dt,
                                                 temp_prev=self.b_cell.T, V=V, I=I)
-        return V
+        return V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell
 
     @timer
     def solve(self, cycler_instance: PyBaseCycler, sol_name: str = None, save_csv_dir: str = None, verbose: bool = False,
@@ -282,7 +282,7 @@ class PySPSolver(PyBaseSolver):
                     # All simulations parameters and battery cell attributes updates are done the in the code block
                     # below.
                     try:
-                        V: float = self.solve_iteration_one_step(
+                        V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell = self.solve_iteration_one_step(
                             t_prev=t_prev, dt=dt, I=I)
                     except InvalidSOCException as e:
                         print(e)
@@ -334,6 +334,9 @@ class PySPSolver(PyBaseSolver):
                                          I=I,
                                          V=V,
                                          OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
+                                         overpotential_elect_p=overpotential_elec_p,
+                                         overpotential_elec_n=overpotential_elec_n,
+                                         overpotential_R_cell=overpotential_R_cell,
                                          x_surf_p=self.b_cell.elec_p.SOC,
                                          x_surf_n=self.b_cell.elec_n.SOC,
                                          cap=cap,
@@ -381,7 +384,9 @@ class PySPSolver(PyBaseSolver):
             # All simulations parameters and battery cell attributes updates are done the in the code block
             # below.
             try:
-                V = self.solve_iteration_one_step(t_prev=t_prev, dt=dt, I=I)
+                V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell = self.solve_iteration_one_step(t_prev=t_prev, 
+                                                                                                                         dt=dt, 
+                                                                                                                         I=I)
             except InvalidSOCException as e:
                 print(e)
                 break
@@ -424,6 +429,9 @@ class PySPSolver(PyBaseSolver):
                                  I=I,
                                  V=V,
                                  OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
+                                 overpotential_elec_p = overpotential_elec_p,
+                                 overpotential_elec_n=overpotential_elec_n,
+                                 overpotential_R_cell=overpotential_R_cell,
                                  x_surf_p=self.b_cell.elec_p.SOC,
                                  x_surf_n=self.b_cell.elec_n.SOC,
                                  cap=custom_cycler_instance.SOC_LIB,

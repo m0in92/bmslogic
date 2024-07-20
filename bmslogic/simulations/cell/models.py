@@ -216,22 +216,27 @@ class PySPM:
 
     @staticmethod
     def calc_cell_terminal_voltage(OCP_p: float, OCP_n: float, m_p: float, m_n: float, R_cell: float,
-                                   T: float, I: float) -> float:
-        V = OCP_p - OCP_n
-        V += (2 * Constants.R * T / Constants.F) * \
-            np.log((np.sqrt(m_p ** 2 + 4) + m_p) / 2)
-        V += (2 * Constants.R * T / Constants.F) * \
-            np.log((np.sqrt(m_n ** 2 + 4) + m_n) / 2)
-        V += I * R_cell
-        return V
+                                   T: float, I: float) -> tuple[float, float, float, float, float]:
+        OCV: float = OCP_p - OCP_n
+        overpotential_elec_p: float = (2 * Constants.R * T / Constants.F) * np.log((np.sqrt(m_p ** 2 + 4) + m_p) / 2)
+        overpotential_elec_n: float = (2 * Constants.R * T / Constants.F) * np.log((np.sqrt(m_n ** 2 + 4) + m_n) / 2)
+        overpotential_R_cell: float = I * R_cell
+        # V = OCP_p - OCP_n
+        # V += (2 * Constants.R * T / Constants.F) * \
+        #     np.log((np.sqrt(m_p ** 2 + 4) + m_p) / 2)
+        # V += (2 * Constants.R * T / Constants.F) * \
+        #     np.log((np.sqrt(m_n ** 2 + 4) + m_n) / 2)
+        # V += I * R_cell
+        V: float = OCV + overpotential_elec_p + overpotential_elec_n + overpotential_R_cell
+        return V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell
 
     def __call__(self, OCP_p: float, OCP_n: float, R_cell: float,
                  k_p: float, S_p: float, c_smax_p: float, SOC_p: float,
                  k_n: float, S_n: float, c_smax_n: float, SOC_n: float,
                  c_e: float,
-                 T: float, I_p_i: float, I_n_i: float) -> float:
+                 T: float, I_p_i: float, I_n_i: float) -> tuple[float, float, float, float, float]:
         """
-        Calculates the cell terminal voltage.
+        Calculates the cell terminal voltage and other overpotential contributions.
         :param OCP_p: Open-circuit potential of the positive electrode [V]
         :param OCP_n: Open-circuit potential of the negative electrode [V]
         :param R_cell: Battery cell ohmic resistance [ohms]

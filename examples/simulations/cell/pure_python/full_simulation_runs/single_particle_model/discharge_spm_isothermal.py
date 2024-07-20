@@ -16,6 +16,8 @@ import pathlib
 import pickle
 import sys
 
+import matplotlib.pyplot as plt
+
 try:
     from bmslogic import cell_sim
 except ModuleNotFoundError as e:
@@ -40,6 +42,7 @@ SOC_init_n: float = 0.7568  # from Guo et. al.
 cell: cell_sim.PyBatteryCell = cell_sim.PyBatteryCell.read_from_parametersets(parameter_set_name='Gao-Randall-Han',
                                                                               soc_init_p=SOC_init_p, soc_init_n=SOC_init_n,
                                                                               temp_init=temp)
+# cell.elec_n.k_ref = 5 * cell.elec_n.k_ref
 
 # set-up cycler and solver
 dc: cell_sim.PyDischarge = cell_sim.PyDischarge(discharge_current=I, v_min=V_min,
@@ -62,4 +65,12 @@ with open(os.path.join(DIR_TO_SAVE, "discharge_spm_isothermal_V.pkl"), "wb") as 
 
 
 # Plot
-sol.comprehensive_isothermal_plot()
+plt.plot(sol.t, sol.V, label="$V_{terminal}$")
+plt.plot(sol.t, sol.OCV_LIB, linestyle=":", label="$OCV_{LIB}$")
+plt.plot(sol.t, sol.overpotential_elec_p, linestyle=":", label="overpotential p")
+plt.plot(sol.t, sol.overpotential_elec_n, linestyle=":", label="overpotential n")
+plt.plot(sol.t, sol.overpotential_R_cell, linestyle=":", label="$IR_{cell}$")
+
+plt.legend()
+plt.show()
+# sol.comprehensive_isothermal_plot()
