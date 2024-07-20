@@ -323,7 +323,7 @@ public:
 private:
     double calc_V(double I);
     double calc_T(double I, double V);
-    double solve_one_iteration(double t_prev, double dt, double I);
+    std::pair<double, bool> solve_one_iteration(double t_prev, double dt, double I);
 };
 
 class ESPBatterySolver : public BaseBatterySolver
@@ -343,7 +343,7 @@ private:
     ElectrolyteFVMCoordinates electrolyte_coords;
     ElectrolyteFVMSolver electrolyte_solver;
     // double calc_V();
-    double solve_one_iteration(double t_prev, double dt, double i_app, double temp);
+    std::pair<double, bool> solve_one_iteration(double t_prev, double dt, double i_app, double temp);
 };
 
 #endif // SPCPP_PROJECT_SOLVERS_H

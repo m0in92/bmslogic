@@ -607,13 +607,23 @@ double BatterySolver::calc_V(double I)
     return V;
 }
 
-double BatterySolver::solve_one_iteration(double t_prev, double dt, double I)
+std::pair<double, bool> BatterySolver::solve_one_iteration(double t_prev, double dt, double I)
 {
+    bool step_completed = false;
+
     SOC_solver_p.solve(dt, t_prev, I, m_b_cell.elec_p.get_R(), m_b_cell.elec_p.get_S(), m_b_cell.elec_p.get_D());
     SOC_solver_n.solve(dt, t_prev, I, m_b_cell.elec_n.get_R(), m_b_cell.elec_n.get_S(), m_b_cell.elec_n.get_D());
 
-    m_b_cell.elec_p.update_SOC(SOC_solver_p.get_x_surf(m_b_cell.elec_p.get_c_max()));
-    m_b_cell.elec_n.update_SOC(SOC_solver_n.get_x_surf(m_b_cell.elec_n.get_c_max()));
+    try
+    {
+        m_b_cell.elec_p.update_SOC(SOC_solver_p.get_x_surf(m_b_cell.elec_p.get_c_max()));
+        m_b_cell.elec_n.update_SOC(SOC_solver_n.get_x_surf(m_b_cell.elec_n.get_c_max()));
+    }
+    catch (InvalidSOCException &e)
+    {
+        step_completed = true;
+        std::cout << e.what() << std::endl;
+    }
 
     double V_new = calc_V(I);
 
@@ -629,7 +639,7 @@ double BatterySolver::solve_one_iteration(double t_prev, double dt, double I)
         m_b_cell.elec_n.update_T(temp_new);
         m_b_cell.set_temp(temp_new);
     }
-    return V_new;
+    return {V_new, step_completed};
 }
 
 Solution BatterySolver::solve(BaseCycler i_cycler)
@@ -666,6 +676,7 @@ Solution BatterySolver::solve(BaseCycler i_cycler)
         double I;
         bool step_completed = false;
         std::string cycling_step = i_cycler.cycle_steps[i];
+        std::pair<double, bool> term_V_and_bool{term_V, false};
 
         while (!step_completed)
         {
@@ -673,7 +684,12 @@ Solution BatterySolver::solve(BaseCycler i_cycler)
             t_curr = t_curr + dt;
             sim_time += dt;
             I = i_cycler.get_current(i_cycler.cycle_steps[i], time_index);
-            term_V = solve_one_iteration(t_prev, dt, I);
+            term_V_and_bool = solve_one_iteration(t_prev, dt, I);
+            term_V = term_V_and_bool.first;
+            if (term_V_and_bool.second)
+            {
+                step_completed = true;
+            }
             cap = general_equations::calc_cap(cap, m_b_cell.get_cap(), I, dt);
 
             // break conditions
@@ -728,14 +744,24 @@ ESPBatterySolver::ESPBatterySolver(BatteryCell i_b_cell,
 {
 }
 
-double ESPBatterySolver::solve_one_iteration(double t_prev, double dt, double i_app, double temp)
+std::pair<double, bool> ESPBatterySolver::solve_one_iteration(double t_prev, double dt, double i_app, double temp)
 {
+    bool step_completed = false;
+
     // solve for the electrode surface conc
     SOC_solver_p.solve(dt, t_prev, i_app, m_b_cell.elec_p.get_R(), m_b_cell.elec_p.get_S(), m_b_cell.elec_p.get_D());
     SOC_solver_n.solve(dt, t_prev, i_app, m_b_cell.elec_n.get_R(), m_b_cell.elec_n.get_S(), m_b_cell.elec_n.get_D());
 
-    m_b_cell.elec_p.update_SOC(SOC_solver_p.get_x_surf(m_b_cell.elec_p.get_c_max()));
-    m_b_cell.elec_n.update_SOC(SOC_solver_n.get_x_surf(m_b_cell.elec_n.get_c_max()));
+    try
+    {
+        m_b_cell.elec_p.update_SOC(SOC_solver_p.get_x_surf(m_b_cell.elec_p.get_c_max()));
+        m_b_cell.elec_n.update_SOC(SOC_solver_n.get_x_surf(m_b_cell.elec_n.get_c_max()));
+    }
+    catch (InvalidSOCException &e)
+    {
+        std::cout << e.what() << std::endl;
+        step_completed = true;
+    }
 
     // solve for the electrolyte conc
     OWL::ArrayXD j_n_ = ESPModel::molar_flux_electrode(i_app, m_b_cell.elec_n.get_S(), 'n') * OWL::Ones(static_cast<int>(electrolyte_coords.get_vector_x_n().size()));
@@ -775,7 +801,7 @@ double ESPBatterySolver::solve_one_iteration(double t_prev, double dt, double i_
         m_b_cell.set_temp(temp_new);
     }
 
-    return V;
+    return {V, step_completed};
 }
 
 Solution ESPBatterySolver::solve(BaseCycler i_cycler)
@@ -793,6 +819,7 @@ Solution ESPBatterySolver::solve(BaseCycler i_cycler)
     double term_V = m_b_cell.elec_p.get_OCP() - m_b_cell.elec_n.get_OCP();
     double cap = 0.0;
     double sim_time = 0.0;
+    std::pair<double, bool> term_V_and_bool{term_V, false};
     // sol.update_t(sim_time);
     // sol.update_cycling_step("rest");
     // sol.update_V(term_V);
@@ -819,7 +846,12 @@ Solution ESPBatterySolver::solve(BaseCycler i_cycler)
             t_curr = t_curr + dt;
             sim_time += dt;
             I = i_cycler.get_current(i_cycler.cycle_steps[i], time_index);
-            term_V = solve_one_iteration(t_prev, dt, I, m_b_cell.get_T());
+            term_V_and_bool = solve_one_iteration(t_prev, dt, I, m_b_cell.get_T());
+            term_V = term_V_and_bool.first;
+            if (term_V_and_bool.second)
+            {
+                step_completed = true;
+            }
             cap = general_equations::calc_cap(cap, m_b_cell.get_cap(), I, dt);
 
             // break conditions

@@ -43,7 +43,7 @@ if __name__ == "__main__":
                                                                                                   T_amb=T,
                                                                                                   R_cell=R_cell)
     dc: cell_sim.Discharge = cell_sim.Discharge(
-        current=discharge_current, V_min=V_min, soc_lib_min=soc_lib_min, soc_lib=soc_lib)
+        current=discharge_current, V_min=1, soc_lib_min=soc_lib_min, soc_lib=soc_lib)
 
     solver: cell_sim.BatterySolver = cell_sim.BatterySolver(battery_cell=battery_cell,
                                                             is_isothermal=True,
