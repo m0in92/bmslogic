@@ -15,7 +15,7 @@ except ModuleNotFoundError as e:
     import sys
     import pathlib
 
-    sys.path.append(pathlib.Path(__file__).parent.parent.parent.parent.parent.__str__())
+    sys.path.append(pathlib.Path(__file__).parent.parent.parent.parent.parent.parent.__str__())
     from bmslogic.simulations.cell.cell import CNSolver
 
 
@@ -27,11 +27,11 @@ S = 1.1167  # electrode electrochemical active area [m2]
 SOC_init = 0.4956  # initial electrode SOC
 
 # Simulation parametes below
-i_app = 1.65  # Applied current [A]
+i_app = -1.65  # Applied current [A]
 dt = 0.1  # time increment [s]
 N_sim: int = 3600
 
-solver_instance: CNSolver = CNSolver(c_init=c_max*SOC_init, electrode_type='n', num_spatial_pts=100)
+solver_instance: CNSolver = CNSolver(c_init=c_max*SOC_init, electrode_type='p', num_spatial_pts=100)
 
 # Simulation iteration below
 t_prev = 0  # previous time [s]
