@@ -15,6 +15,7 @@
 
 #include <string>
 #include <cmath>
+#include <tuple>
 
 /// @brief contains the general battery-related equations
 namespace general_equations
@@ -108,6 +109,7 @@ public:
     static double molar_flux_electrode(double &I, double &S, char &electrode_type);
     double m(double I, double k, double S, double c_max, double SOC, double c_e);
     double calc_terminal_V(double OCP_p, double OCP_n, double m_p, double m_n, double R_cell, double T, double I);
+    std::tuple<double, double, double, double, double> calc_overpotentials(double OCP_p, double OCP_n, double m_p, double m_n, double R_cell, double T, double I);
 };
 
 /**

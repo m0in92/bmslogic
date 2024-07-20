@@ -177,6 +177,18 @@ double SPModel::calc_terminal_V(double OCP_p, double OCP_n, double m_p, double m
     return V;
 }
 
+std::tuple<double, double, double, double, double> SPModel::calc_overpotentials(double OCP_p, double OCP_n, double m_p, double m_n, double R_cell, double T, double I)
+{
+    std::tuple<double, double, double, double, double> overpotentials;
+    double OCV = OCP_p - OCP_n;
+    double overpotential_elec_p = (2 * Constants.R * T / Constants.F) * std::log((std::sqrt(std::pow(m_p, 2) + 4) + m_p) / 2);
+    double overpotential_elec_n = (2 * Constants.R * T / Constants.F) * std::log((std::sqrt(std::pow(m_n, 2) + 4) + m_n) / 2);
+    double overpotential_R_cell = I * R_cell;
+    double terminal_V = OCV + overpotential_elec_p + overpotential_elec_n + overpotential_R_cell;
+
+    return std::tuple<double, double, double, double, double> {terminal_V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell};
+}
+
 namespace ESPModel
 {
     double molar_flux_electrode(double &I, double S, char electrode_type)

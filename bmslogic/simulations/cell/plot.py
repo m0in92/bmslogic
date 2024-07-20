@@ -30,6 +30,7 @@ class Plot:
         self.cap: list = sol.cap  # array containing the battery's capacity during a cycling step.
         self.soc_p: list = sol.soc_p  # array containing the positive electrode soc at each time step.
         self.soc_n: list = sol.soc_n  # array containing the negative electrode soc at each time step.
+        self.OCV_LIB: list = sol.OCV_LIB  # open-circuit potential of the battery cell
 
     def get_attributes(self) -> list:
         """Returns a list of instance attributes
@@ -89,6 +90,7 @@ class Plot:
         # t-V plot
         ax1 = fig.add_subplot(num_rows, num_cols, 1)
         ax1.plot(self.t, self.V)
+        ax1.pot(self.t, self.OCV_LIB)
         ax1.set_xlabel('Time [s]')
         ax1.set_ylabel('V [V]')
         ax1.set_title('V vs. Time')
@@ -132,14 +134,17 @@ class Plot:
         """
         num_rows: int = 3
         num_cols: int = 2
-        fig = plt.figure(figsize=(6.4*2/2, 4.8*2/2), dpi=300)
+        fig = plt.figure()
 
         # t-V plot
         ax1 = fig.add_subplot(num_rows, num_cols, 1)
         ax1.plot(self.t, self.V)
+        ax1.plot(self.t, self.OCV_LIB, linestyle=":", linewidth=0.5, label="OCV")
+
         ax1.set_xlabel('Time [s]')
         ax1.set_ylabel('V [V]')
         ax1.set_title('V vs. Time')
+        ax1.legend()
 
         # cap-V plot
         ax2 = fig.add_subplot(num_rows, num_cols, 2)
@@ -156,7 +161,6 @@ class Plot:
         ax2.set_xlabel('Capacity [Ahr]')
         ax2.set_ylabel('V [V]')
         ax2.set_title('V vs. Capacity')
-        ax2.legend()
 
         # t-soc_p plot
         ax3 = fig.add_subplot(num_rows, num_cols, 3)

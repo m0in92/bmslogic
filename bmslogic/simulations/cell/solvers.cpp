@@ -710,6 +710,7 @@ Solution BatterySolver::solve(BaseCycler i_cycler)
             sol.update_cap(cap);
             sol.update_x_p(m_b_cell.elec_p.get_SOC());
             sol.update_x_n(m_b_cell.elec_n.get_SOC());
+            sol.update_OCV_LIB(m_b_cell.elec_p.get_OCP() - m_b_cell.elec_n.get_OCP());
 
             time_index += 1;
         }
