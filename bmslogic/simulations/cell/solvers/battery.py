@@ -230,7 +230,8 @@ class PySPSolver(PyBaseSolver):
                                                    D_s=self.b_cell.elec_n.D,
                                                    c_smax=self.b_cell.elec_n.max_conc)  # calc n surf SOC
 
-        V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell = self.calc_terminal_potential(I_p_i=I, I_n_i=I_i)  
+        V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell = self.calc_terminal_potential(
+            I_p_i=I, I_n_i=I_i)
         # calc battery cell terminal voltage
 
         # Calc temp below and update the battery cell's temperature attribute.
@@ -334,7 +335,7 @@ class PySPSolver(PyBaseSolver):
                                          I=I,
                                          V=V,
                                          OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
-                                         overpotential_elect_p=overpotential_elec_p,
+                                         overpotential_elec_p=overpotential_elec_p,
                                          overpotential_elec_n=overpotential_elec_n,
                                          overpotential_R_cell=overpotential_R_cell,
                                          x_surf_p=self.b_cell.elec_p.SOC,
@@ -384,8 +385,8 @@ class PySPSolver(PyBaseSolver):
             # All simulations parameters and battery cell attributes updates are done the in the code block
             # below.
             try:
-                V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell = self.solve_iteration_one_step(t_prev=t_prev, 
-                                                                                                                         dt=dt, 
+                V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell = self.solve_iteration_one_step(t_prev=t_prev,
+                                                                                                                         dt=dt,
                                                                                                                          I=I)
             except InvalidSOCException as e:
                 print(e)
@@ -429,7 +430,7 @@ class PySPSolver(PyBaseSolver):
                                  I=I,
                                  V=V,
                                  OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
-                                 overpotential_elec_p = overpotential_elec_p,
+                                 overpotential_elec_p=overpotential_elec_p,
                                  overpotential_elec_n=overpotential_elec_n,
                                  overpotential_R_cell=overpotential_R_cell,
                                  x_surf_p=self.b_cell.elec_p.SOC,
@@ -693,25 +694,25 @@ class PyEnhancedSPSolver(PySPSolver):
         L_cell: float = self.b_cell.elec_n.L + \
             self.b_cell.electrolyte.L + self.b_cell.elec_p.L
 
-        V: float = self.b_model(ocp_p=self.b_cell.elec_p.OCP, ocp_n=self.b_cell.elec_n.OCP,
-                                R_cell=self.b_cell.R_cell,
-                                k_p=self.b_cell.elec_p.k, S_p=self.b_cell.elec_p.S, c_smax_p=self.b_cell.elec_p.max_conc,
-                                soc_surf_p=self.b_cell.elec_p.SOC,
-                                k_n=self.b_cell.elec_n.k, S_n=self.b_cell.elec_n.S, c_smax_n=self.b_cell.elec_n.max_conc,
-                                soc_surf_n=self.b_cell.elec_n.SOC,
-                                c_e=self.b_cell.electrolyte.conc,
-                                I_p_i=i_app, I_n_i=i_app, temp=temp,
-                                l_p=self.b_cell.elec_p.L, l_sep=self.b_cell.electrolyte.L, l_n=self.b_cell.elec_n.L,
-                                kappa_eff_avg=self.b_cell.electrolyte.kappa_sep_eff, k_f_avg=1,
-                                t_c=self.b_cell.electrolyte.t_c,
-                                c_e_n=c_e_0,
-                                c_e_p=c_e_L)
+        V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell, overpotential_electrolyte = self.b_model(ocp_p=self.b_cell.elec_p.OCP, ocp_n=self.b_cell.elec_n.OCP,
+                                                                                                                           R_cell=self.b_cell.R_cell,
+                                                                                                                           k_p=self.b_cell.elec_p.k, S_p=self.b_cell.elec_p.S, c_smax_p=self.b_cell.elec_p.max_conc,
+                                                                                                                           soc_surf_p=self.b_cell.elec_p.SOC,
+                                                                                                                           k_n=self.b_cell.elec_n.k, S_n=self.b_cell.elec_n.S, c_smax_n=self.b_cell.elec_n.max_conc,
+                                                                                                                           soc_surf_n=self.b_cell.elec_n.SOC,
+                                                                                                                           c_e=self.b_cell.electrolyte.conc,
+                                                                                                                           I_p_i=i_app, I_n_i=i_app, temp=temp,
+                                                                                                                           l_p=self.b_cell.elec_p.L, l_sep=self.b_cell.electrolyte.L, l_n=self.b_cell.elec_n.L,
+                                                                                                                           kappa_eff_avg=self.b_cell.electrolyte.kappa_sep_eff, k_f_avg=1,
+                                                                                                                           t_c=self.b_cell.electrolyte.t_c,
+                                                                                                                           c_e_n=c_e_0,
+                                                                                                                           c_e_p=c_e_L)
 
         # Calc temp below and update the battery cell's temperature attribute.
         if not self.bool_isothermal:
             self.b_cell.T = self.calc_cell_temp(t_model=self.t_model, t_prev=t_prev, dt=dt,
                                                 temp_prev=self.b_cell.T, V=V, I=i_app)
-        return V
+        return V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell, overpotential_electrolyte
 
     @timer
     def solve(self, cycler: PyBaseCycler, sol_name: Optional[str] = None,
@@ -755,7 +756,7 @@ class PyEnhancedSPSolver(PySPSolver):
             # All simulations parameters and battery cell attributes updates are done the in the code block
             # below.
             try:
-                V = self.solve_one_iteration(
+                V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell, overpotential_electrolyte = self.solve_one_iteration(
                     t_prev=t_prev, dt=dt, i_app=I, temp=self.b_cell.T)
             except InvalidSOCException as e:
                 print(e)
@@ -787,12 +788,17 @@ class PyEnhancedSPSolver(PySPSolver):
             custom_cycler_instance.time_elapsed += t_increment
 
             # Update results lists
+            #    calculate the overpotential
             self.sol_init.update(cycle_num=1,
                                  cycle_step='custom',
                                  t=custom_cycler_instance.time_elapsed,
                                  I=I,
                                  V=V,
-                                 OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
+                                 OCV=OCV,
+                                 overpotential_elec_p=overpotential_elec_p,
+                                 overpotential_elec_n=overpotential_elec_n,
+                                 overpotential_R_cell=overpotential_R_cell,
+                                 overpotential_electrolyte=overpotential_electrolyte,
                                  x_surf_p=self.b_cell.elec_p.SOC,
                                  x_surf_n=self.b_cell.elec_n.SOC,
                                  cap=cap,
@@ -835,8 +841,8 @@ class PyEnhancedSPSolver(PySPSolver):
                     if (step == "rest") and (t_curr > cycler.rest_time):
                         step_completed = True
 
-                    V: float = self.solve_one_iteration(t_prev=t_prev, dt=dt, i_app=i_app,
-                                                        temp=self.b_cell.T)
+                    V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell, overpotential_electrolyte = self.solve_one_iteration(t_prev=t_prev, dt=dt, i_app=i_app,
+                                                                                                                                                          temp=self.b_cell.T)
 
                     # Calc charge capacity, discharge capacity, and overall LIB capacity
                     cap = self.calc_SOC_cap(
@@ -867,7 +873,11 @@ class PyEnhancedSPSolver(PySPSolver):
                                          t=cycler.time_elapsed,
                                          I=i_app,
                                          V=V,
-                                         OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
+                                         OCV=OCV,
+                                         overpotential_elec_p=overpotential_elec_p,
+                                         overpotential_elec_n=overpotential_elec_n,
+                                         overpotential_R_cell=overpotential_R_cell,
+                                         overpotential_electrolyte=overpotential_electrolyte,
                                          x_surf_p=self.b_cell.elec_p.SOC,
                                          x_surf_n=self.b_cell.elec_n.SOC,
                                          cap=cap,

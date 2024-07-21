@@ -218,8 +218,10 @@ class PySPM:
     def calc_cell_terminal_voltage(OCP_p: float, OCP_n: float, m_p: float, m_n: float, R_cell: float,
                                    T: float, I: float) -> tuple[float, float, float, float, float]:
         OCV: float = OCP_p - OCP_n
-        overpotential_elec_p: float = (2 * Constants.R * T / Constants.F) * np.log((np.sqrt(m_p ** 2 + 4) + m_p) / 2)
-        overpotential_elec_n: float = (2 * Constants.R * T / Constants.F) * np.log((np.sqrt(m_n ** 2 + 4) + m_n) / 2)
+        overpotential_elec_p: float = (
+            2 * Constants.R * T / Constants.F) * np.log((np.sqrt(m_p ** 2 + 4) + m_p) / 2)
+        overpotential_elec_n: float = (
+            2 * Constants.R * T / Constants.F) * np.log((np.sqrt(m_n ** 2 + 4) + m_n) / 2)
         overpotential_R_cell: float = I * R_cell
         # V = OCP_p - OCP_n
         # V += (2 * Constants.R * T / Constants.F) * \
@@ -227,7 +229,8 @@ class PySPM:
         # V += (2 * Constants.R * T / Constants.F) * \
         #     np.log((np.sqrt(m_n ** 2 + 4) + m_n) / 2)
         # V += I * R_cell
-        V: float = OCV + overpotential_elec_p + overpotential_elec_n + overpotential_R_cell
+        V: float = OCV + overpotential_elec_p + \
+            overpotential_elec_n + overpotential_R_cell
         return V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell
 
     def __call__(self, OCP_p: float, OCP_n: float, R_cell: float,
@@ -356,6 +359,29 @@ class PySPMe:
         V += k_conc * (np.log(c_e_p) - np.log(c_e_n))
         return V
 
+    @classmethod
+    def calc_overpotentials(cls, ocp_p: float, ocp_n: float, m_p: float, m_n: float,
+                            l_p: float, l_sep: float, l_n: float,
+                            kappa_eff_avg: float, k_f_avg: float, t_c: float,
+                            R_cell: float,
+                            c_e_n: float, c_e_p: float,
+                            temp: float, i_app: float) -> tuple[float, float, float, float, float, float]:
+        k_conc: float = (2 * Constants.R * temp /
+                         Constants.F) * (1 - t_c) * k_f_avg
+
+        OCV: float = ocp_p - ocp_n
+        overpotential_elec_p: float = (
+            2 * Constants.R * temp / Constants.F) * np.log((np.sqrt(m_p ** 2 + 4) + m_p) / 2)
+        overpotential_elec_n: float = (
+            2 * Constants.R * temp / Constants.F) * np.log((np.sqrt(m_n ** 2 + 4) + m_n) / 2)
+        overpotential_R_cell: float = R_cell * i_app
+        overpotential_electrolyte: float = (
+            l_p + 2 * l_sep + l_n) * i_app / (2 * kappa_eff_avg)
+        overpotential_electrolyte += k_conc * (np.log(c_e_p) - np.log(c_e_n))
+        V: float = OCV + overpotential_elec_p + overpotential_elec_n + \
+            overpotential_R_cell + overpotential_electrolyte
+        return V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell, overpotential_electrolyte
+
     def __call__(self, ocp_p: float, ocp_n: float, R_cell: float,
                  k_p: float, S_p: float, c_smax_p: float, soc_surf_p: float,
                  k_n: float, S_n: float, c_smax_n: float, soc_surf_n: float,
@@ -363,18 +389,20 @@ class PySPMe:
                  temp: float, I_p_i: float, I_n_i: float,
                  l_p: float, l_sep: float, l_n: float,
                  kappa_eff_avg: float, k_f_avg: float, t_c: float,
-                 c_e_n: float, c_e_p: float) -> float:
+                 c_e_n: float, c_e_p: float) -> tuple[float, float, float, float, float, float]:
         m_p: float = self.m(i_app=I_p_i, k=k_p, S=S_p,
                             c_s_max=c_smax_p, soc_surf=soc_surf_p, c_e=c_e)
         m_n: float = self.m(i_app=I_n_i, k=k_n, S=S_n,
                             c_s_max=c_smax_n, soc_surf=soc_surf_n, c_e=c_e)
 
-        return self.calc_terminal_voltage(ocp_p=ocp_p, ocp_n=ocp_n, m_p=m_p, m_n=m_n,
-                                          l_p=l_p, l_sep=l_sep, l_n=l_n,
-                                          kappa_eff_avg=kappa_eff_avg, k_f_avg=k_f_avg, t_c=t_c,
-                                          R_cell=R_cell,
-                                          c_e_n=c_e_n, c_e_p=c_e_p,
-                                          temp=temp, i_app=I_n_i)
+        V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell, overpotential_electrolyte = self.calc_overpotentials(ocp_p=ocp_p, ocp_n=ocp_n, m_p=m_p, m_n=m_n,
+                                                                                                                                       l_p=l_p, l_sep=l_sep, l_n=l_n,
+                                                                                                                                       kappa_eff_avg=kappa_eff_avg, k_f_avg=k_f_avg, t_c=t_c,
+                                                                                                                                       R_cell=R_cell,
+                                                                                                                                       c_e_n=c_e_n, c_e_p=c_e_p,
+                                                                                                                                       temp=temp, i_app=I_n_i)
+
+        return V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell, overpotential_electrolyte
 
 
 class PyP2DM:

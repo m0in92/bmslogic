@@ -158,11 +158,14 @@ class PySolutionInitializer:
     lst_cycle_step: list = field(default_factory=lambda: [])  # cycle step name
     lst_t: list = field(default_factory=lambda: [])  # time [s]
     lst_I: list = field(default_factory=lambda: [])  # applied current [A]
+
     lst_V: list = field(default_factory=lambda: [])  # cell terminal voltage [V]
     lst_OCV_LIB: list = field(default_factory=lambda: [])  # OCV of the LIB [V]
     lst_overpotential_elec_n: list = field(default_factory=lambda: [])   # overpotential from the negative electrode
     lst_overpotential_elec_p: list = field(default_factory=lambda: [])  # overpotential from the positive electrode
     lst_overpotential_R_cell: list = field(default_factory = lambda: [])  # overpotential from the other constant contributions
+    lst_overpotential_electrolyte: list = field(default_factory = lambda: [])  # electrolyte overpotential contributions
+
     lst_x_surf_p: list = field(default_factory=lambda: [])  # positive electrode surface SOC
     lst_x_surf_n: list = field(default_factory=lambda: [])  # negative electrode surface SOC
     lst_cap: list = field(default_factory=lambda: [])  # total capacity spent over cycling [Ahr]
@@ -183,6 +186,7 @@ class PySolutionInitializer:
 
     def update(self, cycle_num: float = 0, cycle_step: str = 'rest', t: float = 0, I: float = 0, 
                V: float = 0, overpotential_elec_n : float = 0, overpotential_elec_p: float = 0, overpotential_R_cell: float = 0,
+               overpotential_electrolyte: float = 0,
                OCV: float = 0, x_surf_p: float = 0, x_surf_n: float = 0,
                cap: float = 0, cap_charge: float = 0, cap_discharge: float = 0, SOC_LIB: float = 0,
                battery_cap: float = 0,
@@ -195,6 +199,7 @@ class PySolutionInitializer:
         self.lst_overpotential_elec_p.append(overpotential_elec_p)
         self.lst_overpotential_elec_n.append(overpotential_elec_n)
         self.lst_overpotential_R_cell.append(overpotential_R_cell)
+        self.lst_overpotential_electrolyte.append(overpotential_electrolyte)
         self.lst_OCV_LIB.append(OCV)
         self.lst_x_surf_p.append(x_surf_p)
         self.lst_x_surf_n.append(x_surf_n)
@@ -233,6 +238,7 @@ class PySolution:
         self.overpotential_elec_n: np.ndarray = np.array(base_solution_instance.lst_overpotential_elec_n)
         self.overpotential_R_cell:  np.ndarray = np.array(base_solution_instance.lst_overpotential_R_cell)
         self.OCV_LIB = np.array(base_solution_instance.lst_OCV_LIB)
+        self.overpotential_electrolyte = np.array(base_solution_instance.lst_overpotential_electrolyte)
         
         self.x_surf_p = np.array(base_solution_instance.lst_x_surf_p)
         self.x_surf_n = np.array(base_solution_instance.lst_x_surf_n)
