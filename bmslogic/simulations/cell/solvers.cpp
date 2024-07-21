@@ -761,7 +761,7 @@ ESPBatterySolver::ESPBatterySolver(BatteryCell i_b_cell,
 {
 }
 
-std::pair<double, bool> ESPBatterySolver::solve_one_iteration(double t_prev, double dt, double i_app, double temp)
+std::pair<OverPotentials, bool> ESPBatterySolver::solve_one_iteration(double t_prev, double dt, double i_app, double temp)
 {
     bool step_completed = false;
 
@@ -799,11 +799,12 @@ std::pair<double, bool> ESPBatterySolver::solve_one_iteration(double t_prev, dou
     double c_e_n = electrolyte_solver.get_vector_c_e()[0];
     double c_e_p = electrolyte_solver.get_vector_c_e()[static_cast<int>(electrolyte_solver.get_vector_c_e().size()) - 1];
 
-    double V = ESPModel::calc_terminal_voltage(m_b_cell.elec_p.get_OCP(), m_b_cell.elec_n.get_OCP(), m_p, m_n,
-                                               m_b_cell.elec_n.get_L(), m_b_cell.electrolyte.get_L(), m_b_cell.elec_p.get_L(),
-                                               m_b_cell.electrolyte.get_kappa_eff(), 1.0,
-                                               m_b_cell.electrolyte.get_t_c(), m_b_cell.get_R_cell(),
-                                               c_e_n, c_e_p, temp, i_app);
+    OverPotentials overpotentials_ = ESPModel::calc_overpotentials(m_b_cell.elec_p.get_OCP(), m_b_cell.elec_n.get_OCP(), m_p, m_n,
+                                                                   m_b_cell.elec_n.get_L(), m_b_cell.electrolyte.get_L(), m_b_cell.elec_p.get_L(),
+                                                                   m_b_cell.electrolyte.get_kappa_eff(), 1.0,
+                                                                   m_b_cell.electrolyte.get_t_c(), m_b_cell.get_R_cell(),
+                                                                   c_e_n, c_e_p, temp, i_app);
+    double V = overpotentials_.V;
 
     if (!m_isothermal)
     {
@@ -818,7 +819,7 @@ std::pair<double, bool> ESPBatterySolver::solve_one_iteration(double t_prev, dou
         m_b_cell.set_temp(temp_new);
     }
 
-    return {V, step_completed};
+    return {overpotentials_, step_completed};
 }
 
 Solution ESPBatterySolver::solve(BaseCycler i_cycler)
@@ -836,7 +837,7 @@ Solution ESPBatterySolver::solve(BaseCycler i_cycler)
     double term_V = m_b_cell.elec_p.get_OCP() - m_b_cell.elec_n.get_OCP();
     double cap = 0.0;
     double sim_time = 0.0;
-    std::pair<double, bool> term_V_and_bool{term_V, false};
+    std::pair<OverPotentials, bool> term_V_and_bool;
     // sol.update_t(sim_time);
     // sol.update_cycling_step("rest");
     // sol.update_V(term_V);
@@ -864,7 +865,7 @@ Solution ESPBatterySolver::solve(BaseCycler i_cycler)
             sim_time += dt;
             I = i_cycler.get_current(i_cycler.cycle_steps[i], time_index);
             term_V_and_bool = solve_one_iteration(t_prev, dt, I, m_b_cell.get_T());
-            term_V = term_V_and_bool.first;
+            term_V = term_V_and_bool.first.V;
             if (term_V_and_bool.second)
             {
                 step_completed = true;
@@ -889,6 +890,12 @@ Solution ESPBatterySolver::solve(BaseCycler i_cycler)
             sol.update_cap(cap);
             sol.update_x_p(m_b_cell.elec_p.get_SOC());
             sol.update_x_n(m_b_cell.elec_n.get_SOC());
+
+            sol.update_OCV_LIB(term_V_and_bool.first.OCV_LIB);
+            sol.update_overpotential_elec_p(term_V_and_bool.first.elec_p);
+            sol.update_overpotential_elec_n(term_V_and_bool.first.elec_n);
+            sol.update_overpotential_R_cell(term_V_and_bool.first.R_cell);
+            sol.update_overpotential_electrolyte(term_V_and_bool.first.electrolyte);
 
             time_index += 1;
         }

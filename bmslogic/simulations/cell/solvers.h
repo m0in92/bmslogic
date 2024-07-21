@@ -9,6 +9,7 @@
 #include "cyclers.h"
 #include "solution.h"
 #include "coords.h"
+#include "models.h"
 
 /// ECM Models
 
@@ -344,7 +345,7 @@ private:
     ElectrolyteFVMCoordinates electrolyte_coords;
     ElectrolyteFVMSolver electrolyte_solver;
     // double calc_V();
-    std::pair<double, bool> solve_one_iteration(double t_prev, double dt, double i_app, double temp);
+    std::pair<OverPotentials, bool> solve_one_iteration(double t_prev, double dt, double i_app, double temp);
 };
 
 #endif // SPCPP_PROJECT_SOLVERS_H

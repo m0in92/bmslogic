@@ -59,11 +59,12 @@ with open(os.path.join(DIR_TO_SAVE, "discharge_espm_isothermal_V.pkl"), "wb") as
     pickle.dump(sol.V.tolist(), pkl_file)
 
 # Plots
-# plt.plot(sol.t, sol.V)
-# plt.plot(sol.t, sol.OCV_LIB)
+plt.plot(sol.t, sol.V)
+plt.plot(sol.t, sol.OCV_LIB)
 plt.plot(sol.t, sol.overpotential_elec_p)
 plt.plot(sol.t, sol.overpotential_elec_n)
 plt.plot(sol.t, sol.overpotential_R_cell)
+plt.plot(sol.t, sol.overpotential_electrolyte)
 plt.plot(sol.t, sol.overpotential_electrolyte)
 
 plt.show()

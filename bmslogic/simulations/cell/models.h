@@ -93,7 +93,7 @@ public:
     int sign(int &i_number);
     double s(double &i_app, double &s_prev);
     double soc_next(double dt, double i_app, double soc_prev, double Q, double eta) { return soc_prev - dt * eta * i_app / (3600 * Q); }
-    double i_R1_next(double dt, double i_app, double i_R1_prev, double R1, double C1) { return std::exp(-dt / (R1 * C1)) * i_R1_prev + (1 - std::exp(-dt / (R1 * C1))) * i_app;  }
+    double i_R1_next(double dt, double i_app, double i_R1_prev, double R1, double C1) { return std::exp(-dt / (R1 * C1)) * i_R1_prev + (1 - std::exp(-dt / (R1 * C1))) * i_app; }
     double h_next(double dt, double i_app, double eta, double gamma, double cap, double h_prev);
     double v(double i_app, double ocv, double R0, double R1, double i_R1, double m_0, double m, double h, double s_prev);
 };
@@ -116,6 +116,16 @@ public:
  * @brief contains equations for the Enhanced single particle models.
  *
  */
+struct OverPotentials
+{
+    double V;
+    double OCV_LIB;
+    double elec_p;
+    double elec_n;
+    double R_cell;
+    double electrolyte;
+};
+
 namespace ESPModel
 {
     double molar_flux_electrode(double &i_app, double S, char electrode_type);
@@ -127,6 +137,11 @@ namespace ESPModel
                                  double kappa_eff_avg, double k_f_avg, double t_c, double R_cell,
                                  double c_e_n, double c_e_p,
                                  double temp, double i_app);
+    OverPotentials calc_overpotentials(double ocp_p, double ocp_n, double m_p, double m_n,
+                                       double L_n, double L_sep, double L_p,
+                                       double kappa_eff_avg, double k_f_avg, double t_c, double R_cell,
+                                       double c_e_n, double c_e_p,
+                                       double temp, double i_app);
 };
 
 /**

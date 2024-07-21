@@ -89,6 +89,8 @@ public:
     std::vector<double> get_overpotential_elec_p() { return m_overpotential_elec_p; }
     std::vector<double> get_overpotential_elec_n() { return m_overpotential_elec_n; }
     std::vector<double> get_overpotential_R_cell() { return m_overpotential_R_cell; }
+    std::vector<double> get_overpotential_electrolyte() { return m_overpotential_electrolyte; }
+
     // setter methods
     void set_t(std::vector<double> t_new) { m_t = t_new; }
     void set_cycling_step(std::vector<std::string> cycling_step_new) { m_cycling_step = cycling_step_new; }
@@ -101,6 +103,8 @@ public:
     void set_overpotential_elec_p(std::vector<double> i_overpotential_elec_p) { m_overpotential_elec_p = i_overpotential_elec_p; }
     void set_overpotential_elec_n(std::vector<double> i_overpotential_elec_n) { m_overpotential_elec_n = i_overpotential_elec_n; }
     void set_overpotential_R_cell(std::vector<double> i_overpotential_R_cell) { m_overpotential_R_cell = i_overpotential_R_cell; }
+    void set_overpotential_electrolyte(std::vector<double> i_overpotential_electrolyte) { m_overpotential_electrolyte = i_overpotential_electrolyte; }
+
     // the methods below are intended for updating the member vectors
     void update_t(double t_new) { m_t.push_back(t_new); }
     void update_cycling_step(std::string cycling_step_new) { m_cycling_step.push_back(cycling_step_new); }
@@ -113,6 +117,7 @@ public:
     void update_overpotential_elec_p(double i_overpotential_elec_p) { m_overpotential_elec_p.push_back(i_overpotential_elec_p); }
     void update_overpotential_elec_n(double i_overpotential_elec_n) { m_overpotential_elec_n.push_back(i_overpotential_elec_n); }
     void update_overpotential_R_cell(double i_overpotential_R_cell) { m_overpotential_R_cell.push_back(i_overpotential_R_cell); }
+    void update_overpotential_electrolyte(double i_overpotential_electrolyte) { m_overpotential_R_cell.push_back(i_overpotential_electrolyte); }
 
 private:
     std::vector<double> m_t;
@@ -126,6 +131,7 @@ private:
     std::vector<double> m_overpotential_elec_p;
     std::vector<double> m_overpotential_elec_n;
     std::vector<double> m_overpotential_R_cell;
+    std::vector<double> m_overpotential_electrolyte;
 };
 
 #endif // BMSLOGIC_PROJECT_SOLUTION_H

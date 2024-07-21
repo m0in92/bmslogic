@@ -186,7 +186,7 @@ std::tuple<double, double, double, double, double> SPModel::calc_overpotentials(
     double overpotential_R_cell = I * R_cell;
     double terminal_V = OCV + overpotential_elec_p + overpotential_elec_n + overpotential_R_cell;
 
-    return std::tuple<double, double, double, double, double> {terminal_V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell};
+    return std::tuple<double, double, double, double, double>{terminal_V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell};
 }
 
 namespace ESPModel
@@ -260,6 +260,25 @@ namespace ESPModel
         V += k_conc * (std::log(c_e_p) - std::log(c_e_n));
 
         return V;
+    }
+
+    OverPotentials calc_overpotentials(double ocp_p, double ocp_n, double m_p, double m_n,
+                                       double L_n, double L_sep, double L_p,
+                                       double kappa_eff_avg, double k_f_avg, double t_c, double R_cell,
+                                       double c_e_n, double c_e_p,
+                                       double temp, double i_app)
+    {
+        double k_conc = (2 * Constants.R * temp / Constants.F) * (1 - t_c) * k_f_avg;
+        double OCV = ocp_p - ocp_n;
+        double overpotential_elec_p = (2 * Constants.R * temp / Constants.F) * std::log((std::sqrt(std::pow(m_p, 2) + 4) + m_p) / 2);
+        double overpotential_elec_n = (2 * Constants.R * temp / Constants.F) * std::log((std::sqrt(std::pow(m_n, 2) + 4) + m_n) / 2);
+        double overpotential_R_cell = R_cell * i_app;
+        double overpotential_electrolyte = (L_p + 2 * L_sep + L_n) * i_app / (2 * kappa_eff_avg);
+        overpotential_electrolyte += k_conc * (std::log(c_e_p) - std::log(c_e_n));
+
+        double V = OCV + overpotential_elec_p + overpotential_elec_n + overpotential_R_cell + overpotential_electrolyte;
+
+        return {V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell, overpotential_electrolyte};
     }
 }
 

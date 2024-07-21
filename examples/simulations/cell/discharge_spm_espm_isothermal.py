@@ -72,7 +72,9 @@ if __name__ == "__main__":
 
     # plots
     plt.plot(sol_spm.t, sol_spm.V, label="spm")
+    plt.plot(sol_spm.t, sol_spm.overpotential_elec_n)
     plt.plot(sol_espm.t, sol_espm.V, label="espm")
+    plt.plot(sol_espm.t, sol_espm.overpotential_elec_n)
 
     plt.legend()
     plt.show()
