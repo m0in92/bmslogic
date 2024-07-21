@@ -117,7 +117,7 @@ public:
     void update_overpotential_elec_p(double i_overpotential_elec_p) { m_overpotential_elec_p.push_back(i_overpotential_elec_p); }
     void update_overpotential_elec_n(double i_overpotential_elec_n) { m_overpotential_elec_n.push_back(i_overpotential_elec_n); }
     void update_overpotential_R_cell(double i_overpotential_R_cell) { m_overpotential_R_cell.push_back(i_overpotential_R_cell); }
-    void update_overpotential_electrolyte(double i_overpotential_electrolyte) { m_overpotential_R_cell.push_back(i_overpotential_electrolyte); }
+    void update_overpotential_electrolyte(double i_overpotential_electrolyte) { m_overpotential_electrolyte.push_back(i_overpotential_electrolyte); }
 
 private:
     std::vector<double> m_t;
