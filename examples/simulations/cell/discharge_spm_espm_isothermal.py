@@ -37,7 +37,9 @@ if __name__ == "__main__":
     SOC_init_p: float = 0.4952
     SOC_init_n: float = 0.7522
 
-    discharge_current: float = 1.75 * 1.65  # in A
+    kappa_e: float = 1e-2
+
+    discharge_current: float = 3  # in A
 
     p_electrode: cell_sim.PElectrode = cell_sim.PElectrode(L=L_p, A=A_p, kappa=kappa_p, epsilon=epsilon_p, max_conc=max_conc_p, R=R_p, S=S_p,
                                                            T_ref=T_ref_p, D_ref=D_ref_p, k_ref=k_ref_p, Ea_D=Ea_D_p, Ea_R=Ea_R_p, alpha=alpha_p,
@@ -60,6 +62,7 @@ if __name__ == "__main__":
     sol_spm: cell_sim.Solution = solver_spm.solve(cycler=dc_spm)
 
     # ESPM specific
+    R_cell = 0.25 * R_cell
     battery_cell_espm: cell_sim.BatteryCell = cell_sim.BatteryCell(p_elec=p_electrode, n_elec=n_electrode, electrolyte=electrolyte,
                                                                    rho=rho, Vol=Vol, C_p=C_p, h=h, A=A, cap=cap, V_max=V_max, V_min=V_min, R_cell=R_cell)
     dc_espm: cell_sim.Discharge = cell_sim.Discharge(
@@ -72,10 +75,10 @@ if __name__ == "__main__":
 
     # plots
     plt.plot(sol_spm.t, sol_spm.V, label="spm")
-    plt.plot(sol_spm.t, sol_spm.overpotential_elec_n)
+    # plt.plot(sol_spm.t, sol_spm.overpotential_elec_n)
     plt.plot(sol_espm.t, sol_espm.V, label="espm")
-    plt.plot(sol_espm.t, sol_espm.overpotential_elec_n)
-    plt.plot(sol_espm.t, sol_espm.overpotential_electrolyte)
+    # plt.plot(sol_espm.t, sol_espm.overpotential_elec_n)
+    # plt.plot(sol_espm.t, sol_espm.overpotential_electrolyte)
 
     plt.legend()
     plt.show()

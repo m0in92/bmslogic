@@ -791,13 +791,13 @@ std::pair<OverPotentials, bool> ESPBatterySolver::solve_one_iteration(double t_p
     electrolyte_solver.solve(j, dt);
 
     // calculation of the terminal voltage
-    double m_p = ESPModel::m(i_app, m_b_cell.elec_p.get_k(), m_b_cell.elec_p.get_S(), m_b_cell.elec_p.get_c_max(),
-                             m_b_cell.electrolyte.get_conc(), m_b_cell.elec_p.get_SOC());
-    double m_n = ESPModel::m(i_app, m_b_cell.elec_n.get_k(), m_b_cell.elec_n.get_S(), m_b_cell.elec_n.get_c_max(),
-                             m_b_cell.electrolyte.get_conc(), m_b_cell.elec_n.get_SOC());
-
     double c_e_n = electrolyte_solver.get_vector_c_e()[0];
-    double c_e_p = electrolyte_solver.get_vector_c_e()[static_cast<int>(electrolyte_solver.get_vector_c_e().size()) - 1];
+    double c_e_p = electrolyte_solver.get_vector_c_e().back();
+
+    double m_p = ESPModel::m(i_app, m_b_cell.elec_p.get_k(), m_b_cell.elec_p.get_S(), m_b_cell.elec_p.get_c_max(),
+                             c_e_p, m_b_cell.elec_p.get_SOC());
+    double m_n = ESPModel::m(i_app, m_b_cell.elec_n.get_k(), m_b_cell.elec_n.get_S(), m_b_cell.elec_n.get_c_max(),
+                             c_e_n, m_b_cell.elec_n.get_SOC());
 
     OverPotentials overpotentials_ = ESPModel::calc_overpotentials(m_b_cell.elec_p.get_OCP(), m_b_cell.elec_n.get_OCP(), m_p, m_n,
                                                                    m_b_cell.elec_n.get_L(), m_b_cell.electrolyte.get_L(), m_b_cell.elec_p.get_L(),
