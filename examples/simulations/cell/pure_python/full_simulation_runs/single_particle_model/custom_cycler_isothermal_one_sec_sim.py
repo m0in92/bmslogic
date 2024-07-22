@@ -46,19 +46,23 @@ cell = cell_sim.PyBatteryCell.read_from_parametersets(parameter_set_name='Gao-Ra
 
 # set-up cycler and solver. Also plot the cycler time [s] and current [A]. For this example the data is extracted from
 # a csv file.
-df = pd.read_csv(os.path.join(pathlib.Path(__file__).parent.__str__(), 'example_data.csv'))
+df = pd.read_csv(os.path.join(pathlib.Path(
+    __file__).parent.__str__(), 'example_data.csv'))
 cycler = cell_sim.PyCustomCycler(array_t=df['t [s]'].to_numpy(), array_I=df['I [A]'].to_numpy(), SOC_LIB=1.0,
                                  V_min=V_min, V_max=V_max)
 # cycler.t_max = 1.0
-solver = cell_sim.PySPSolver(b_cell=cell, isothermal=True, degradation=False)
+solver = cell_sim.PySPSolver(
+    b_cell=cell, isothermal=True, degradation=False, electrode_SOC_solver="cn")
 
 # simulate and plot
-sol1 = solver.solve(cycler_instance=cycler, verbose=False, termination_criteria='time', t_sim_max=20.0)
+sol1 = solver.solve(cycler_instance=cycler, verbose=False,
+                    termination_criteria='time', t_sim_max=1.0)
 print(cycler.time_elapsed)
-sol2 = solver.solve(cycler_instance=cycler, verbose=False, termination_criteria='time', t_sim_max=40.0)
+sol2 = solver.solve(cycler_instance=cycler, verbose=False,
+                    termination_criteria='time', t_sim_max=1.0)
 print(cycler.time_elapsed)
 
-print(sol2.t)
+# print(sol2.t)
 
-sol1.plot_tV()
+# sol1.plot_tV()
 sol2.plot_tV()
