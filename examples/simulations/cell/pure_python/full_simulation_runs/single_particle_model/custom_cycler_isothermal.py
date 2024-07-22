@@ -55,6 +55,6 @@ cycler.plot()
 solver = cell_sim.PySPSolver(b_cell=cell, isothermal=True, degradation=False)
 
 # simulate and plot
-sol = solver.solve(cycler_instance=cycler, verbose=False)
+sol = solver.solve(cycler_instance=cycler, verbose=False, store_solution_iter=10)
 
 sol.plot_tV()

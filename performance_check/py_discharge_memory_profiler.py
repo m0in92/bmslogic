@@ -71,8 +71,8 @@ def run_simulation(store_solution_iter: int) -> cell_sim.PySolution:
 
 
 sol1: cell_sim.PySolution = run_simulation(store_solution_iter=1)   # after running three times 28.2, 28.0, 27.5 MB
-sol2: cell_sim.PySolution = run_simulation(store_solution_iter=10)  # 0.7, 1.1, 0.9 MB
-sol3: cell_sim.PySolution = run_simulation(store_solution_iter=100)  # 0.0, 0.0, 0.0 MB
+sol2: cell_sim.PySolution = run_simulation(store_solution_iter=10)  # after runnning three times 0.7, 1.1, 0.9 MB
+sol3: cell_sim.PySolution = run_simulation(store_solution_iter=100)  # after running three times 0.0, 0.0, 0.0 MB
 
 print(len(sol1.t))
 print(len(sol2.t))

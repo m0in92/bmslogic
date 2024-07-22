@@ -251,7 +251,8 @@ class PySPSolver(PyBaseSolver):
         if isinstance(cycler_instance, PyCustomCycler):
             return self._custom_cycler_solve(custom_cycler_instance=cycler_instance, sol_name=sol_name,
                                              save_csv_dir=save_csv_dir, verbose=verbose, t_increment=t_increment,
-                                             termination_criteria=termination_criteria)
+                                             termination_criteria=termination_criteria,
+                                             store_solution_iter=store_solution_iter)
         else:
             return self._cycler_solve(cycler=cycler_instance, sol_name=sol_name,
                                       save_csv_dir=save_csv_dir, verbose=verbose, t_increment=t_increment,
@@ -367,7 +368,8 @@ class PySPSolver(PyBaseSolver):
         return PySolution(base_solution_instance=self.sol_init, name=sol_name, save_csv_dir=save_csv_dir)
 
     def _custom_cycler_solve(self, custom_cycler_instance: PyCustomCycler, sol_name: str = None, save_csv_dir: str = None,
-                             verbose: bool = False, t_increment: float = 0.1, termination_criteria: str = 'V'):
+                             verbose: bool = False, t_increment: float = 0.1, termination_criteria: str = 'V',
+                             store_solution_iter: int = 1):
         if not isinstance(custom_cycler_instance, PyCustomCycler):
             raise TypeError(
                 'inputted cycler needs to be a PyCustomCycler object.')
@@ -375,6 +377,7 @@ class PySPSolver(PyBaseSolver):
         # boolean that indicates if the cycling step is completed.
         step_completed = False
 
+        idx_step: int = 0
         cap = 0
         cap_charge = 0
         cap_discharge = 0
@@ -425,33 +428,35 @@ class PySPSolver(PyBaseSolver):
                       ", terminal voltage [V]: ", V, ", SOC_LIB: ", custom_cycler_instance.SOC_LIB,
                       "cap: ", cap)
 
-            # update time
+            # update time and step index
             t_prev = t_curr
             custom_cycler_instance.time_elapsed += t_increment
+            idx_step += 1
 
             # Update results lists
-            self.sol_init.update(cycle_num=1,
-                                 cycle_step='custom',
-                                 t=t_curr,
-                                 I=I,
-                                 V=V,
-                                 OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
-                                 overpotential_elec_p=overpotential_elec_p,
-                                 overpotential_elec_n=overpotential_elec_n,
-                                 overpotential_R_cell=overpotential_R_cell,
-                                 x_surf_p=self.b_cell.elec_p.SOC,
-                                 x_surf_n=self.b_cell.elec_n.SOC,
-                                 cap=custom_cycler_instance.SOC_LIB,
-                                 cap_charge=cap_charge,
-                                 cap_discharge=cap_discharge,
-                                 SOC_LIB=custom_cycler_instance.SOC_LIB,
-                                 battery_cap=self.b_cell.cap,
-                                 temp=self.b_cell.T,
-                                 R_cell=self.b_cell.R_cell)
-            if self.bool_degradation:
-                self.sol_init.lst_j_tot.append(self.SEI_model.J_tot)
-                self.sol_init.lst_j_i.append(self.SEI_model.J_i)
-                self.sol_init.lst_j_s.append(self.SEI_model.J_s)
+            if (idx_step == 1) or (idx_step % store_solution_iter == 0):
+                self.sol_init.update(cycle_num=1,
+                                    cycle_step='custom',
+                                    t=t_curr,
+                                    I=I,
+                                    V=V,
+                                    OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
+                                    overpotential_elec_p=overpotential_elec_p,
+                                    overpotential_elec_n=overpotential_elec_n,
+                                    overpotential_R_cell=overpotential_R_cell,
+                                    x_surf_p=self.b_cell.elec_p.SOC,
+                                    x_surf_n=self.b_cell.elec_n.SOC,
+                                    cap=custom_cycler_instance.SOC_LIB,
+                                    cap_charge=cap_charge,
+                                    cap_discharge=cap_discharge,
+                                    SOC_LIB=custom_cycler_instance.SOC_LIB,
+                                    battery_cap=self.b_cell.cap,
+                                    temp=self.b_cell.T,
+                                    R_cell=self.b_cell.R_cell)
+                if self.bool_degradation:
+                    self.sol_init.lst_j_tot.append(self.SEI_model.J_tot)
+                    self.sol_init.lst_j_i.append(self.SEI_model.J_i)
+                    self.sol_init.lst_j_s.append(self.SEI_model.J_s)
 
         return PySolution(base_solution_instance=self.sol_init, name=sol_name, save_csv_dir=save_csv_dir)
 
