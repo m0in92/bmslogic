@@ -3,7 +3,7 @@ This module is an example simulation run using single particle model under CC di
 """
 
 __author__ = "Moin Ahmed"
-__copyright__ = 'Copyright 2024 by SPCPPy. All rights reserved.'
+__copyright__ = 'Copyright 2024 by BMSLogic. All rights reserved.'
 __status__ = 'deployed'
 
 import pathlib

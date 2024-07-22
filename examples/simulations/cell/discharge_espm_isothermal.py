@@ -3,7 +3,7 @@ This module is an example implementation of cell_simCPPy using the NElectrode, P
 """
 
 __author__ = "Moin Ahmed"
-__copyright__ = 'Copyright 2024 by cell_simCPPy. All rights reserved.'
+__copyright__ = 'Copyright 2024 by BMSLogic. All rights reserved.'
 __status__ = 'deployed'
 
 import time

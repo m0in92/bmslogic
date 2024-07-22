@@ -3,7 +3,7 @@ This module is an example implementation of SPCPPy using the parameter_sets for 
 """
 
 __author__ = "Moin Ahmed"
-__copyright__ = 'Copyright 2024 by SPCPPy. All rights reserved.'
+__copyright__ = 'Copyright 2024 by BMSLogic. All rights reserved.'
 __status__ = 'deployed'
 
 import time
