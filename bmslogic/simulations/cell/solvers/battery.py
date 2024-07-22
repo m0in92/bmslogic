@@ -63,7 +63,7 @@ class PyBaseSolver:
         if (electrode_SOC_solver == 'eigen') or ((electrode_SOC_solver == 'cn') or (electrode_SOC_solver == 'poly')):
             self.electrode_SOC_solver = electrode_SOC_solver
         else:
-            raise ValueError('''Electrode SOC solver supports Eigen expansion method ('eigen) 
+            raise ValueError('''Electrode SOC solver supports Eigen expansion method ('eigen)
             or Crank-Nicolson Scheme ('cn') or Two-Term Polynomial Approximation ('poly')''')
 
         # initializes the single particle model instance.
@@ -243,7 +243,7 @@ class PySPSolver(PyBaseSolver):
     @timer
     def solve(self, cycler_instance: PyBaseCycler, sol_name: str = None, save_csv_dir: str = None, verbose: bool = False,
               t_increment: float = 0.1, termination_criteria: str = 'V', t_prev: float = 0.0,
-              store_solution_iter: int = 1):
+              store_solution_iter: int = 1, t_sim_max: Optional[float] = None):
         # check for function input parameter types below.
         if not isinstance(cycler_instance, PyBaseCycler):
             raise TypeError("cycler needs to be a Cycler object.")
@@ -252,13 +252,13 @@ class PySPSolver(PyBaseSolver):
             return self._custom_cycler_solve(custom_cycler_instance=cycler_instance, sol_name=sol_name,
                                              save_csv_dir=save_csv_dir, verbose=verbose, t_increment=t_increment,
                                              termination_criteria=termination_criteria,
-                                             store_solution_iter=store_solution_iter)
+                                             store_solution_iter=store_solution_iter, t_sim_max=t_sim_max)
         else:
             return self._cycler_solve(cycler=cycler_instance, sol_name=sol_name,
                                       save_csv_dir=save_csv_dir, verbose=verbose, t_increment=t_increment,
                                       termination_criteria=termination_criteria, t_prev=t_prev,
                                       store_solution_iter=store_solution_iter)
-
+        
     def _cycler_solve(self, cycler: PyBaseCycler, sol_name: str = None, save_csv_dir: str = None, verbose: bool = False,
                       t_increment: float = 0.1, termination_criteria: float = 'V', t_prev: float = 0.0,
                       store_solution_iter: int = 1.0):
@@ -335,7 +335,7 @@ class PySPSolver(PyBaseSolver):
                     idx_step += 1;
 
                     # Update results lists
-                    if (idx_step==1) or (idx_step % store_solution_iter == 0):
+                    if (idx_step == 1) or (idx_step % store_solution_iter == 0):
                         self.sol_init.update(cycle_num=cycle_no,
                                             cycle_step=step,
                                             t=t_curr,
@@ -355,7 +355,8 @@ class PySPSolver(PyBaseSolver):
                                             temp=self.b_cell.T,
                                             R_cell=self.b_cell.R_cell)
                         if self.bool_degradation:
-                            self.sol_init.lst_j_tot.append(self.SEI_model.J_tot)
+                            self.sol_init.lst_j_tot.append(
+                                self.SEI_model.J_tot)
                             self.sol_init.lst_j_i.append(self.SEI_model.J_i)
                             self.sol_init.lst_j_s.append(self.SEI_model.J_s)
 
@@ -369,7 +370,7 @@ class PySPSolver(PyBaseSolver):
 
     def _custom_cycler_solve(self, custom_cycler_instance: PyCustomCycler, sol_name: str = None, save_csv_dir: str = None,
                              verbose: bool = False, t_increment: float = 0.1, termination_criteria: str = 'V',
-                             store_solution_iter: int = 1):
+                             store_solution_iter: int = 1, t_sim_max: Optional[float] = None):
         if not isinstance(custom_cycler_instance, PyCustomCycler):
             raise TypeError(
                 'inputted cycler needs to be a PyCustomCycler object.')
@@ -422,6 +423,10 @@ class PySPSolver(PyBaseSolver):
             if (termination_criteria == "V_min") and (V < custom_cycler_instance.V_min):
                 step_completed = True
 
+            if t_sim_max is not None:
+                if custom_cycler_instance.time_elapsed > t_sim_max:
+                    step_completed = True
+
             if verbose == True:
                 print("time elapsed [s]: ", custom_cycler_instance.time_elapsed, ", cycle_no: ", 1,
                       'step: ', custom_cycler_instance.cycle_steps[0], "current [A]", I,
@@ -437,7 +442,7 @@ class PySPSolver(PyBaseSolver):
             if (idx_step == 1) or (idx_step % store_solution_iter == 0):
                 self.sol_init.update(cycle_num=1,
                                     cycle_step='custom',
-                                    t=t_curr,
+                                    t=custom_cycler_instance.time_elapsed,
                                     I=I,
                                     V=V,
                                     OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,

@@ -9,6 +9,7 @@ __author__ = "Moin Ahmed"
 __copyright__ = "Copyright 2024 by Moin Ahmed. All Rights Reserved."
 __status__ = "Deployed"
 
+from typing import Optional
 from dataclasses import dataclass, field
 from abc import ABC, abstractmethod
 
