@@ -328,7 +328,7 @@ public:
     PolynomialApprox SOC_solver_n;
     LumpedThermalSolver thermal_solver;
     // Calculation functions
-    Solution solve(BaseCycler i_cycler);
+    Solution solve(BaseCycler i_cycler, int store_solution_after=1);
     // Solution solve(DischargeRest i_cycler);
 
 private:

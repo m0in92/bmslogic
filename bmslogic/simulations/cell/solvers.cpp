@@ -652,7 +652,7 @@ std::pair<double, bool> BatterySolver::solve_one_iteration(double t_prev, double
     return {V_new, step_completed};
 }
 
-Solution BatterySolver::solve(BaseCycler i_cycler)
+Solution BatterySolver::solve(BaseCycler i_cycler, int store_solution_iter)
 {
     clock_t start, end;
     start = clock();
@@ -667,13 +667,6 @@ Solution BatterySolver::solve(BaseCycler i_cycler)
     double term_V = m_b_cell.elec_p.get_OCP() - m_b_cell.elec_n.get_OCP();
     double cap = 0.0;
     double sim_time = 0.0;
-    // sol.update_t(sim_time);
-    // sol.update_cycling_step("rest");
-    // sol.update_V(term_V);
-    // sol.update_temp(m_b_cell.get_T());
-    // sol.update_cap(cap);
-    // sol.update_x_p(m_b_cell.elec_p.get_SOC());
-    // sol.update_x_n(m_b_cell.elec_n.get_SOC());
 
     // simultion loop
     for (int i = 0; i < i_cycler.cycle_steps.size(); i++)
@@ -713,20 +706,23 @@ Solution BatterySolver::solve(BaseCycler i_cycler)
                 step_completed = true;
 
             // The arrays are updated below
-            sol.update_t(sim_time);
-            sol.update_cycling_step(cycling_step);
-            sol.update_V(term_V);
-            sol.update_temp(m_b_cell.get_T());
-            sol.update_cap(cap);
-            sol.update_x_p(m_b_cell.elec_p.get_SOC());
-            sol.update_x_n(m_b_cell.elec_n.get_SOC());
+            if ((time_index == 0) || (time_index % store_solution_iter == 0))
+            {
+                sol.update_t(sim_time);
+                sol.update_cycling_step(cycling_step);
+                sol.update_V(term_V);
+                sol.update_temp(m_b_cell.get_T());
+                sol.update_cap(cap);
+                sol.update_x_p(m_b_cell.elec_p.get_SOC());
+                sol.update_x_n(m_b_cell.elec_n.get_SOC());
 
-            // // calculation and updates of overpotentials
-            std::tuple<double, double, double, double, double> overpotential_values = calc_overpotentials(I);
-            sol.update_OCV_LIB(std::get<1>(overpotential_values));
-            sol.update_overpotential_elec_p(std::get<2>(overpotential_values));
-            sol.update_overpotential_elec_n(std::get<3>(overpotential_values));
-            sol.update_overpotential_R_cell(std::get<4>(overpotential_values));
+                // // calculation and updates of overpotentials
+                std::tuple<double, double, double, double, double> overpotential_values = calc_overpotentials(I);
+                sol.update_OCV_LIB(std::get<1>(overpotential_values));
+                sol.update_overpotential_elec_p(std::get<2>(overpotential_values));
+                sol.update_overpotential_elec_n(std::get<3>(overpotential_values));
+                sol.update_overpotential_R_cell(std::get<4>(overpotential_values));
+            }
 
             time_index += 1;
         }

@@ -46,7 +46,7 @@ int main()
     DischargeRest cycler = DischargeRest(discharge_current, V_min, SOC_lib_min, SOC_lib, rest_time);
 
     BatterySolver solver = BatterySolver(b_cell, true, true, "poly");
-    Solution sol = solver.solve(cycler);
+    Solution sol = solver.solve(cycler, 10);
 
     std::cout
         << sol.get_V()[40000] << std::endl;
