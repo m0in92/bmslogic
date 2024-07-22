@@ -591,8 +591,11 @@ BatterySolver::BatterySolver(BatteryCell i_b_cell, bool i_isothermal, bool i_deg
                              std::string i_electrode_SOC_solver) : BaseBatterySolver(i_b_cell, i_isothermal, i_degradation, i_electrode_SOC_solver),
                                                                    SOC_solver_p('p', i_b_cell.elec_p.get_c_max() * i_b_cell.elec_p.get_SOC(), "higher"),
                                                                    SOC_solver_n('n', i_b_cell.elec_n.get_c_max() * i_b_cell.elec_n.get_SOC(), "higher"),
+                                                                   m_CN_SOC_solver_p(i_b_cell.elec_p.get_c_max() * i_b_cell.elec_p.get_SOC(), 'p', 100),
+                                                                   m_CN_SOC_solver_n(i_b_cell.elec_n.get_c_max() * i_b_cell.elec_n.get_SOC(), 'n', 100),
                                                                    thermal_solver(i_b_cell.get_h(), i_b_cell.get_A(), i_b_cell.get_rho(),
-                                                                                  i_b_cell.get_Vol(), i_b_cell.get_C_p(), i_b_cell.get_T())
+                                                                                  i_b_cell.get_Vol(), i_b_cell.get_C_p(), i_b_cell.get_T()),
+                                                                   m_electrode_SOC_solver(i_electrode_SOC_solver)
 {
 }
 
@@ -621,18 +624,40 @@ std::pair<OverPotentials, bool> BatterySolver::solve_one_iteration(double t_prev
 {
     bool step_completed = false;
 
-    SOC_solver_p.solve(dt, t_prev, I, m_b_cell.elec_p.get_R(), m_b_cell.elec_p.get_S(), m_b_cell.elec_p.get_D());
-    SOC_solver_n.solve(dt, t_prev, I, m_b_cell.elec_n.get_R(), m_b_cell.elec_n.get_S(), m_b_cell.elec_n.get_D());
+    if (m_electrode_SOC_solver.compare("poly") == 0)
+    {
+        SOC_solver_p.solve(dt, t_prev, I, m_b_cell.elec_p.get_R(), m_b_cell.elec_p.get_S(), m_b_cell.elec_p.get_D());
+        SOC_solver_n.solve(dt, t_prev, I, m_b_cell.elec_n.get_R(), m_b_cell.elec_n.get_S(), m_b_cell.elec_n.get_D());
 
-    try
-    {
-        m_b_cell.elec_p.update_SOC(SOC_solver_p.get_x_surf(m_b_cell.elec_p.get_c_max()));
-        m_b_cell.elec_n.update_SOC(SOC_solver_n.get_x_surf(m_b_cell.elec_n.get_c_max()));
+        try
+        {
+            m_b_cell.elec_p.update_SOC(SOC_solver_p.get_x_surf(m_b_cell.elec_p.get_c_max()));
+            m_b_cell.elec_n.update_SOC(SOC_solver_n.get_x_surf(m_b_cell.elec_n.get_c_max()));
+        }
+        catch (InvalidSOCException &e)
+        {
+            step_completed = true;
+            std::cout << e.what() << std::endl;
+        }
     }
-    catch (InvalidSOCException &e)
+    else if (m_electrode_SOC_solver.compare("CN") == 0)
     {
-        step_completed = true;
-        std::cout << e.what() << std::endl;
+        m_CN_SOC_solver_p.solve(dt, I, m_b_cell.elec_p.get_R(), m_b_cell.elec_p.get_S(), m_b_cell.elec_p.get_D());
+        m_CN_SOC_solver_n.solve(dt, I, m_b_cell.elec_n.get_R(), m_b_cell.elec_n.get_S(), m_b_cell.elec_n.get_D());
+
+        try
+        {
+            m_b_cell.elec_p.update_SOC(m_CN_SOC_solver_p.get_c_s_surf() / m_b_cell.elec_p.get_c_max());
+            m_b_cell.elec_n.update_SOC(m_CN_SOC_solver_n.get_c_s_surf() / m_b_cell.elec_n.get_c_max());
+        }
+        catch (InvalidSOCException &e)
+        {
+            std::cout << e.what() << std::endl;
+        }
+    }
+    else
+    {
+        throw std::exception();
     }
 
     OverPotentials overpotential_ = calc_overpotentials(I);

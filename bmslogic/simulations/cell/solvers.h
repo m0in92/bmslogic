@@ -322,11 +322,14 @@ public:
 class BatterySolver : public BaseBatterySolver
 {
 public:
-    explicit BatterySolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver);
+    explicit BatterySolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver="poly");
     // Solvers instances
     PolynomialApprox SOC_solver_p;
     PolynomialApprox SOC_solver_n;
+    CNSolver m_CN_SOC_solver_p;
+    CNSolver m_CN_SOC_solver_n;
     LumpedThermalSolver thermal_solver;
+    std::string m_electrode_SOC_solver;
     // Calculation functions
     Solution solve(BaseCycler i_cycler, int store_solution_after=1);
     // Solution solve(DischargeRest i_cycler);
@@ -334,7 +337,6 @@ public:
 private:
     double calc_V(double I);
     OverPotentials calc_overpotentials(double I);
-    double calc_T(double I, double V);
     std::pair<OverPotentials, bool> solve_one_iteration(double t_prev, double dt, double I);
 };
 
