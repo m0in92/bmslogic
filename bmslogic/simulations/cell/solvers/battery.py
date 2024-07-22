@@ -258,7 +258,7 @@ class PySPSolver(PyBaseSolver):
                                       save_csv_dir=save_csv_dir, verbose=verbose, t_increment=t_increment,
                                       termination_criteria=termination_criteria, t_prev=t_prev,
                                       store_solution_iter=store_solution_iter)
-        
+
     def _cycler_solve(self, cycler: PyBaseCycler, sol_name: str = None, save_csv_dir: str = None, verbose: bool = False,
                       t_increment: float = 0.1, termination_criteria: float = 'V', t_prev: float = 0.0,
                       store_solution_iter: int = 1.0):
@@ -385,9 +385,16 @@ class PySPSolver(PyBaseSolver):
         t_curr: float = custom_cycler_instance.array_t[0]
         t_prev: float = custom_cycler_instance.array_t[0]
         # t_curr = t_prev = 0.0  # time value of this current iteration step.
+        TIME_TOL: float = 1e-9   # floating point tolerance [s]
         while not step_completed:
             t_curr += t_increment
             dt = t_curr - t_prev
+
+            # time termination criteria
+            if t_sim_max is not None:
+                if custom_cycler_instance.time_elapsed >= (t_sim_max - TIME_TOL):
+                    step_completed = True
+                    break
 
             I = custom_cycler_instance.get_current(
                 step_name=custom_cycler_instance.cycle_steps[0], t=t_curr)
@@ -422,10 +429,6 @@ class PySPSolver(PyBaseSolver):
                 step_completed = True
             if (termination_criteria == "V_min") and (V < custom_cycler_instance.V_min):
                 step_completed = True
-
-            if t_sim_max is not None:
-                if custom_cycler_instance.time_elapsed > t_sim_max:
-                    step_completed = True
 
             if verbose == True:
                 print("time elapsed [s]: ", custom_cycler_instance.time_elapsed, ", cycle_no: ", 1,

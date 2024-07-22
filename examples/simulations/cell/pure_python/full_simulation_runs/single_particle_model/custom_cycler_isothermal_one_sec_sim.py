@@ -14,6 +14,7 @@ import pathlib  # os and pathlib are imported to define the absolute file path o
 import sys
 
 import pandas as pd
+import matplotlib.pyplot as plt
 
 try:
     from bmslogic import cell_sim
@@ -52,17 +53,26 @@ cycler = cell_sim.PyCustomCycler(array_t=df['t [s]'].to_numpy(), array_I=df['I [
                                  V_min=V_min, V_max=V_max)
 # cycler.t_max = 1.0
 solver = cell_sim.PySPSolver(
-    b_cell=cell, isothermal=True, degradation=False, electrode_SOC_solver="cn")
+    b_cell=cell, isothermal=True, degradation=False, electrode_SOC_solver="poly")
 
-# simulate and plot
-sol1 = solver.solve(cycler_instance=cycler, verbose=False,
-                    termination_criteria='time', t_sim_max=1.0)
-print(cycler.time_elapsed)
-sol2 = solver.solve(cycler_instance=cycler, verbose=False,
-                    termination_criteria='time', t_sim_max=1.0)
-print(cycler.time_elapsed)
+# simulate and collect results at every set interval
+t_curr: float = 0.0
+lst_t_end: list = []
+lst_V: list = []
+dt: float = 50
+t_end: float = 600
+for i in range(int(t_end/dt)):
+    t_cycle_end = t_curr + dt
+    sol = solver.solve(cycler_instance=cycler, verbose=False,
+                       termination_criteria='time', t_sim_max=t_cycle_end)
+    t_curr += dt
+    print("Anticpated End Time [s]: ", t_curr, "Actual End Time [s]",
+          sol.t[-1], "Calcuated V [V]: ", sol.V[-1])
+    lst_t_end.append(sol.t[-1])
+    lst_V.append(sol.V[-1])
 
-# print(sol2.t)
+# plots
+plt.plot(sol.t, sol.V)
+plt.scatter(lst_t_end, lst_V, color='red')
 
-# sol1.plot_tV()
-sol2.plot_tV()
+plt.show()
