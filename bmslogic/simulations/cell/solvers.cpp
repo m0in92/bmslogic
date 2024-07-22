@@ -824,6 +824,10 @@ std::pair<OverPotentials, bool> ESPBatterySolver::solve_one_iteration(double t_p
 
 Solution ESPBatterySolver::solve(BaseCycler i_cycler)
 {
+    // check for existence of relevant electrolyte parameters
+    if ((m_b_cell.electrolyte.get_D_e() == 0.0) || (m_b_cell.electrolyte.get_t_c() == 0.0) || (m_b_cell.electrolyte.get_epsilon_n() == 0.0) || (m_b_cell.electrolyte.get_epsilon_p() == 0.0))
+        throw InsufficientESPMParameters();
+
     clock_t start, end;
     start = clock();
     // const std::clock_t c_start = std::clock();

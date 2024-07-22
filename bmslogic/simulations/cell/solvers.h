@@ -11,6 +11,16 @@
 #include "coords.h"
 #include "models.h"
 
+/// Exceptions
+class InsufficientESPMParameters : public std::exception
+{
+public:
+    char *what()
+    {
+        return "Check electrolyte parameters. Insufficient Electrolyte parameters for enhanced single particle model simulation.";
+    }
+};
+
 /// ECM Models
 
 /**
@@ -332,7 +342,7 @@ class ESPBatterySolver : public BaseBatterySolver
 {
 public:
     explicit ESPBatterySolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver);
-    
+
     // methods for calculations
     Solution solve(BaseCycler i_cycler);
 
