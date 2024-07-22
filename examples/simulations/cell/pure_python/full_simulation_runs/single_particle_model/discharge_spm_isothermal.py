@@ -52,7 +52,7 @@ solver: cell_sim.PySPSolver = cell_sim.PySPSolver(b_cell=cell,
                                                   electrode_SOC_solver='poly')
 
 # simulate
-sol: cell_sim.PySolution = solver.solve(cycler_instance=dc)
+sol: cell_sim.PySolution = solver.solve(cycler_instance=dc, store_solution_iter=10)
 
 # Save Results
 DIR_TO_SAVE: str = os.path.join(pathlib.Path(__file__).parent.__str__(), "saved_results")

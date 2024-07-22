@@ -242,7 +242,8 @@ class PySPSolver(PyBaseSolver):
 
     @timer
     def solve(self, cycler_instance: PyBaseCycler, sol_name: str = None, save_csv_dir: str = None, verbose: bool = False,
-              t_increment: float = 0.1, termination_criteria: str = 'V', t_prev: float = 0.0):
+              t_increment: float = 0.1, termination_criteria: str = 'V', t_prev: float = 0.0,
+              store_solution_iter: int = 1):
         # check for function input parameter types below.
         if not isinstance(cycler_instance, PyBaseCycler):
             raise TypeError("cycler needs to be a Cycler object.")
@@ -254,10 +255,12 @@ class PySPSolver(PyBaseSolver):
         else:
             return self._cycler_solve(cycler=cycler_instance, sol_name=sol_name,
                                       save_csv_dir=save_csv_dir, verbose=verbose, t_increment=t_increment,
-                                      termination_criteria=termination_criteria, t_prev=t_prev)
+                                      termination_criteria=termination_criteria, t_prev=t_prev,
+                                      store_solution_iter=store_solution_iter)
 
     def _cycler_solve(self, cycler: PyBaseCycler, sol_name: str = None, save_csv_dir: str = None, verbose: bool = False,
-                      t_increment: float = 0.1, termination_criteria: float = 'V', t_prev: float = 0.0):
+                      t_increment: float = 0.1, termination_criteria: float = 'V', t_prev: float = 0.0,
+                      store_solution_iter: int = 1.0):
         # cycling simulation below. The first two loops iterate over the cycle numbers and cycling steps,
         # respectively. The following while loops checks for termination conditions and breaks when it reaches it.
         # The termination criteria are specified within the cycler instance.
@@ -267,6 +270,7 @@ class PySPSolver(PyBaseSolver):
                 cap_charge = 0
                 cap_discharge = 0
                 # t_prev = t_prev
+                idx_step: int = 0
                 step_completed = False
                 while not step_completed:
                     if isinstance(cycler, PyCustomDischarge):
@@ -324,33 +328,35 @@ class PySPSolver(PyBaseSolver):
                             raise TypeError(
                                 "To use time termination condition, use the Custom Cycler.")
 
-                    # update time
+                    # update time and step index
                     t_prev = t_curr
                     cycler.time_elapsed += t_increment
+                    idx_step += 1;
 
                     # Update results lists
-                    self.sol_init.update(cycle_num=cycle_no,
-                                         cycle_step=step,
-                                         t=t_curr,
-                                         I=I,
-                                         V=V,
-                                         OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
-                                         overpotential_elec_p=overpotential_elec_p,
-                                         overpotential_elec_n=overpotential_elec_n,
-                                         overpotential_R_cell=overpotential_R_cell,
-                                         x_surf_p=self.b_cell.elec_p.SOC,
-                                         x_surf_n=self.b_cell.elec_n.SOC,
-                                         cap=cap,
-                                         cap_charge=cap_charge,
-                                         cap_discharge=cap_discharge,
-                                         SOC_LIB=cycler.SOC_LIB,
-                                         battery_cap=self.b_cell.cap,
-                                         temp=self.b_cell.T,
-                                         R_cell=self.b_cell.R_cell)
-                    if self.bool_degradation:
-                        self.sol_init.lst_j_tot.append(self.SEI_model.J_tot)
-                        self.sol_init.lst_j_i.append(self.SEI_model.J_i)
-                        self.sol_init.lst_j_s.append(self.SEI_model.J_s)
+                    if (idx_step==1) or (idx_step % store_solution_iter == 0):
+                        self.sol_init.update(cycle_num=cycle_no,
+                                            cycle_step=step,
+                                            t=t_curr,
+                                            I=I,
+                                            V=V,
+                                            OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
+                                            overpotential_elec_p=overpotential_elec_p,
+                                            overpotential_elec_n=overpotential_elec_n,
+                                            overpotential_R_cell=overpotential_R_cell,
+                                            x_surf_p=self.b_cell.elec_p.SOC,
+                                            x_surf_n=self.b_cell.elec_n.SOC,
+                                            cap=cap,
+                                            cap_charge=cap_charge,
+                                            cap_discharge=cap_discharge,
+                                            SOC_LIB=cycler.SOC_LIB,
+                                            battery_cap=self.b_cell.cap,
+                                            temp=self.b_cell.T,
+                                            R_cell=self.b_cell.R_cell)
+                        if self.bool_degradation:
+                            self.sol_init.lst_j_tot.append(self.SEI_model.J_tot)
+                            self.sol_init.lst_j_i.append(self.SEI_model.J_i)
+                            self.sol_init.lst_j_s.append(self.SEI_model.J_s)
 
                     if verbose:
                         print("time elapsed [s]: ", cycler.time_elapsed, ", cycle_no: ", cycle_no,
