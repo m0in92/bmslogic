@@ -607,7 +607,7 @@ double BatterySolver::calc_V(double I)
     return V;
 }
 
-std::tuple<double, double, double, double, double> BatterySolver::calc_overpotentials(double I)
+OverPotentials BatterySolver::calc_overpotentials(double I)
 {
     double m_p = SPModel().m(I, m_b_cell.elec_p.get_k(), m_b_cell.elec_p.get_S(), m_b_cell.elec_p.get_c_max(),
                              m_b_cell.elec_p.get_SOC(), m_b_cell.electrolyte.get_conc());
@@ -617,7 +617,7 @@ std::tuple<double, double, double, double, double> BatterySolver::calc_overpoten
                                          m_b_cell.get_R_cell(), m_b_cell.get_T(), I);
 }
 
-std::pair<double, bool> BatterySolver::solve_one_iteration(double t_prev, double dt, double I)
+std::pair<OverPotentials, bool> BatterySolver::solve_one_iteration(double t_prev, double dt, double I)
 {
     bool step_completed = false;
 
@@ -635,7 +635,8 @@ std::pair<double, bool> BatterySolver::solve_one_iteration(double t_prev, double
         std::cout << e.what() << std::endl;
     }
 
-    double V_new = calc_V(I);
+    OverPotentials overpotential_ = calc_overpotentials(I);
+    double V_new = overpotential_.V;
 
     if (!m_isothermal)
     {
@@ -649,7 +650,7 @@ std::pair<double, bool> BatterySolver::solve_one_iteration(double t_prev, double
         m_b_cell.elec_n.update_T(temp_new);
         m_b_cell.set_temp(temp_new);
     }
-    return {V_new, step_completed};
+    return {overpotential_, step_completed};
 }
 
 Solution BatterySolver::solve(BaseCycler i_cycler, int store_solution_iter)
@@ -679,7 +680,8 @@ Solution BatterySolver::solve(BaseCycler i_cycler, int store_solution_iter)
         double I;
         bool step_completed = false;
         std::string cycling_step = i_cycler.cycle_steps[i];
-        std::pair<double, bool> term_V_and_bool{term_V, false};
+        OverPotentials step_overpontentials;
+        std::pair<OverPotentials, bool> term_V_and_bool;
 
         while (!step_completed)
         {
@@ -688,7 +690,8 @@ Solution BatterySolver::solve(BaseCycler i_cycler, int store_solution_iter)
             sim_time += dt;
             I = i_cycler.get_current(i_cycler.cycle_steps[i], time_index);
             term_V_and_bool = solve_one_iteration(t_prev, dt, I);
-            term_V = term_V_and_bool.first;
+            step_overpontentials = term_V_and_bool.first;
+            term_V = step_overpontentials.V;
             if (term_V_and_bool.second)
             {
                 step_completed = true;
@@ -717,11 +720,16 @@ Solution BatterySolver::solve(BaseCycler i_cycler, int store_solution_iter)
                 sol.update_x_n(m_b_cell.elec_n.get_SOC());
 
                 // // calculation and updates of overpotentials
-                std::tuple<double, double, double, double, double> overpotential_values = calc_overpotentials(I);
-                sol.update_OCV_LIB(std::get<1>(overpotential_values));
-                sol.update_overpotential_elec_p(std::get<2>(overpotential_values));
-                sol.update_overpotential_elec_n(std::get<3>(overpotential_values));
-                sol.update_overpotential_R_cell(std::get<4>(overpotential_values));
+                // std::tuple<double, double, double, double, double> overpotential_values = calc_overpotentials(I);
+                // sol.update_OCV_LIB(std::get<1>(overpotential_values));
+                // sol.update_overpotential_elec_p(std::get<2>(overpotential_values));
+                // sol.update_overpotential_elec_n(std::get<3>(overpotential_values));
+                // sol.update_overpotential_R_cell(std::get<4>(overpotential_values));
+                sol.update_OCV_LIB(step_overpontentials.OCV_LIB);
+                sol.update_overpotential_elec_p(step_overpontentials.elec_p);
+                sol.update_overpotential_elec_n(step_overpontentials.elec_n);
+                sol.update_overpotential_R_cell(step_overpontentials.R_cell);
+                sol.update_overpotential_electrolyte(step_overpontentials.electrolyte);
             }
 
             time_index += 1;
