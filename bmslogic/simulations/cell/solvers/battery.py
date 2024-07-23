@@ -332,28 +332,28 @@ class PySPSolver(PyBaseSolver):
                     # update time and step index
                     t_prev = t_curr
                     cycler.time_elapsed += t_increment
-                    idx_step += 1;
+                    idx_step += 1
 
                     # Update results lists
                     if (idx_step == 1) or (idx_step % store_solution_iter == 0):
                         self.sol_init.update(cycle_num=cycle_no,
-                                            cycle_step=step,
-                                            t=t_curr,
-                                            I=I,
-                                            V=V,
-                                            OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
-                                            overpotential_elec_p=overpotential_elec_p,
-                                            overpotential_elec_n=overpotential_elec_n,
-                                            overpotential_R_cell=overpotential_R_cell,
-                                            x_surf_p=self.b_cell.elec_p.SOC,
-                                            x_surf_n=self.b_cell.elec_n.SOC,
-                                            cap=cap,
-                                            cap_charge=cap_charge,
-                                            cap_discharge=cap_discharge,
-                                            SOC_LIB=cycler.SOC_LIB,
-                                            battery_cap=self.b_cell.cap,
-                                            temp=self.b_cell.T,
-                                            R_cell=self.b_cell.R_cell)
+                                             cycle_step=step,
+                                             t=t_curr,
+                                             I=I,
+                                             V=V,
+                                             OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
+                                             overpotential_elec_p=overpotential_elec_p,
+                                             overpotential_elec_n=overpotential_elec_n,
+                                             overpotential_R_cell=overpotential_R_cell,
+                                             x_surf_p=self.b_cell.elec_p.SOC,
+                                             x_surf_n=self.b_cell.elec_n.SOC,
+                                             cap=cap,
+                                             cap_charge=cap_charge,
+                                             cap_discharge=cap_discharge,
+                                             SOC_LIB=cycler.SOC_LIB,
+                                             battery_cap=self.b_cell.cap,
+                                             temp=self.b_cell.T,
+                                             R_cell=self.b_cell.R_cell)
                         if self.bool_degradation:
                             self.sol_init.lst_j_tot.append(
                                 self.SEI_model.J_tot)
@@ -444,23 +444,23 @@ class PySPSolver(PyBaseSolver):
             # Update results lists
             if (idx_step == 1) or (idx_step % store_solution_iter == 0):
                 self.sol_init.update(cycle_num=1,
-                                    cycle_step='custom',
-                                    t=custom_cycler_instance.time_elapsed,
-                                    I=I,
-                                    V=V,
-                                    OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
-                                    overpotential_elec_p=overpotential_elec_p,
-                                    overpotential_elec_n=overpotential_elec_n,
-                                    overpotential_R_cell=overpotential_R_cell,
-                                    x_surf_p=self.b_cell.elec_p.SOC,
-                                    x_surf_n=self.b_cell.elec_n.SOC,
-                                    cap=custom_cycler_instance.SOC_LIB,
-                                    cap_charge=cap_charge,
-                                    cap_discharge=cap_discharge,
-                                    SOC_LIB=custom_cycler_instance.SOC_LIB,
-                                    battery_cap=self.b_cell.cap,
-                                    temp=self.b_cell.T,
-                                    R_cell=self.b_cell.R_cell)
+                                     cycle_step='custom',
+                                     t=custom_cycler_instance.time_elapsed,
+                                     I=I,
+                                     V=V,
+                                     OCV=self.b_cell.elec_p.OCP - self.b_cell.elec_n.OCP,
+                                     overpotential_elec_p=overpotential_elec_p,
+                                     overpotential_elec_n=overpotential_elec_n,
+                                     overpotential_R_cell=overpotential_R_cell,
+                                     x_surf_p=self.b_cell.elec_p.SOC,
+                                     x_surf_n=self.b_cell.elec_n.SOC,
+                                     cap=custom_cycler_instance.SOC_LIB,
+                                     cap_charge=cap_charge,
+                                     cap_discharge=cap_discharge,
+                                     SOC_LIB=custom_cycler_instance.SOC_LIB,
+                                     battery_cap=self.b_cell.cap,
+                                     temp=self.b_cell.T,
+                                     R_cell=self.b_cell.R_cell)
                 if self.bool_degradation:
                     self.sol_init.lst_j_tot.append(self.SEI_model.J_tot)
                     self.sol_init.lst_j_i.append(self.SEI_model.J_i)
@@ -479,7 +479,7 @@ class PyKFSPSolver(PySPSolver):
                  electrode_SOC_solver: str = 'eigen', **electrode_SOC_solver_params):
         super().__init__(b_cell=b_cell, isothermal=isothermal, degradation=degradation, N=N,
                          electrode_SOC_solver=electrode_SOC_solver, **electrode_SOC_solver_params)
-        self.__dt: float = 0.0  # See comments below for self.__t_prev
+        self.__dt: float = 0.1  # See comments below for self.__t_prev
         # The instance variables __dt and __t_prev are needed for the state equation.
         self.__t_prev: float = 0.0
         # The input parameters of the state equation are so that it represents the text book definition of the
@@ -488,16 +488,29 @@ class PyKFSPSolver(PySPSolver):
     def __state_equation_next(self, x_k: Union[float, np.ndarray],
                               u_k: Union[float, np.ndarray],
                               w_k: Union[float, np.ndarray]) -> None:
-        self.b_cell.elec_p.SOC = self.SOC_solver_p(dt=self.__dt, t_prev=self.__t_prev, i_app=u_k + w_k,
-                                                   R=self.b_cell.elec_p.R,
-                                                   S=self.b_cell.elec_p.S,
-                                                   D_s=self.b_cell.elec_p.D,
-                                                   c_smax=self.b_cell.elec_p.max_conc)  # calc p surf SOC
-        self.b_cell.elec_n.SOC = self.SOC_solver_n(dt=self.__dt, t_prev=self.__t_prev, i_app=u_k + w_k,
-                                                   R=self.b_cell.elec_n.R,
-                                                   S=self.b_cell.elec_n.S,
-                                                   D_s=self.b_cell.elec_n.D,
-                                                   c_smax=self.b_cell.elec_n.max_conc)  # calc n surf SOC
+        soc_p_: float = self.SOC_solver_p(dt=self.__dt, t_prev=self.__t_prev, i_app=(u_k+w_k).real,
+                                          R=self.b_cell.elec_p.R,
+                                          S=self.b_cell.elec_p.S,
+                                          D_s=self.b_cell.elec_p.D,
+                                          c_smax=self.b_cell.elec_p.max_conc)  # calc p surf SOC
+        soc_n_: float = self.SOC_solver_n(dt=self.__dt, t_prev=self.__t_prev, i_app=(u_k+w_k).real,
+                                          R=self.b_cell.elec_n.R,
+                                          S=self.b_cell.elec_n.S,
+                                          D_s=self.b_cell.elec_n.D,
+                                          c_smax=self.b_cell.elec_n.max_conc)
+        # print(type(soc_p_[0].tolist()))
+        # print(np.array([[soc_p_[0].tolist()], [soc_n_[0].tolist()]]))
+        return np.array([soc_p_[0].tolist(), soc_n_[0].tolist()])
+        # self.b_cell.elec_p.SOC = self.SOC_solver_p(dt=self.__dt, t_prev=self.__t_prev, i_app=u_k + w_k,
+        #                                            R=self.b_cell.elec_p.R,
+        #                                            S=self.b_cell.elec_p.S,
+        #                                            D_s=self.b_cell.elec_p.D,
+        #                                            c_smax=self.b_cell.elec_p.max_conc)  # calc p surf SOC
+        # self.b_cell.elec_n.SOC = self.SOC_solver_n(dt=self.__dt, t_prev=self.__t_prev, i_app=u_k + w_k,
+        #                                            R=self.b_cell.elec_n.R,
+        #                                            S=self.b_cell.elec_n.S,
+        #                                            D_s=self.b_cell.elec_n.D,
+        #                                            c_smax=self.b_cell.elec_n.max_conc)  # calc n surf SOC
 
     def __output_equation(self, x_k: Union[float, np.ndarray],
                           u_k: Union[float, np.ndarray],
@@ -510,12 +523,30 @@ class PyKFSPSolver(PySPSolver):
         :param v_k: sensor noise
         :return: cell terminal voltage
         """
-        return self.b_model(OCP_p=self.b_cell.elec_p.OCP, OCP_n=self.b_cell.elec_n.OCP, R_cell=self.b_cell.R_cell,
-                            k_p=self.b_cell.elec_p.k, S_p=self.b_cell.elec_p.S, c_smax_p=self.b_cell.elec_p.max_conc,
-                            SOC_p=x_k[0, :],
-                            k_n=self.b_cell.elec_n.k, S_n=self.b_cell.elec_n.S, c_smax_n=self.b_cell.elec_n.max_conc,
-                            SOC_n=x_k[1, :],
-                            c_e=self.b_cell.electrolyte.conc, T=self.b_cell.T, I_p_i=u_k, I_n_i=u_k) + v_k
+        # print("u_k", v_k)
+        lst_V: list = []
+        for i in range(x_k.shape[1]):
+            # print("v_k", v_k[0,i], "SOC_p", x_k[0, i],
+            #   "SOC_n", x_k[1, i], "u_k", u_k, "OCP_p", self.b_cell.elec_p.OCP)
+            # u_k = -1.656
+            # print(u_k)
+            V_: float = self.b_model(OCP_p=self.b_cell.elec_p.OCP, OCP_n=self.b_cell.elec_n.OCP, R_cell=self.b_cell.R_cell,
+                                     k_p=self.b_cell.elec_p.k, S_p=self.b_cell.elec_p.S, c_smax_p=self.b_cell.elec_p.max_conc,
+                                     SOC_p=x_k[0, i],
+                                     k_n=self.b_cell.elec_n.k, S_n=self.b_cell.elec_n.S, c_smax_n=self.b_cell.elec_n.max_conc,
+                                     SOC_n=x_k[1, i],
+                                     c_e=self.b_cell.electrolyte.conc, T=self.b_cell.T, I_p_i=u_k, I_n_i=u_k)[0] + v_k[0, i]
+            # print("V", V_)
+            lst_V.append(V_)
+        # print(np.ndarray(V_))
+        # print(V_)
+        return np.array(lst_V)
+        # return self.b_model(OCP_p=self.b_cell.elec_p.OCP, OCP_n=self.b_cell.elec_n.OCP, R_cell=self.b_cell.R_cell,
+        #                     k_p = self.b_cell.elec_p.k, S_p = self.b_cell.elec_p.S, c_smax_p = self.b_cell.elec_p.max_conc,
+        #                     SOC_p = x_k[0, :],
+        #                     k_n = self.b_cell.elec_n.k, S_n = self.b_cell.elec_n.S, c_smax_n = self.b_cell.elec_n.max_conc,
+        #                     SOC_n = x_k[1, :],
+        #                     c_e = self.b_cell.electrolyte.conc, T = self.b_cell.T, I_p_i = u_k, I_n_i = u_k) + v_k
 
     def solve(self, sol_exp: PySolution, cov_soc_p: float, cov_soc_n: float, cov_process: float, cov_sensor: float,
               v_min: float, v_max: float, soc_min: float, soc_max: float, soc_init: float) -> PySolution:
@@ -559,10 +590,19 @@ class PyKFSPSolver(PySPSolver):
 
             spkf.solve(u=i_app_prev, y_true=array_y_true[i_sim])
 
-            self.b_cell.elec_p.SOC = spkf.x.get_vector()[0, 0]
-            self.b_cell.elec_n.SOC = spkf.x.get_vector()[1, 0]
+            try:
+                self.b_cell.elec_p.SOC = spkf.x.get_vector()[0, 0]
+                self.b_cell.elec_n.SOC = spkf.x.get_vector()[1, 0]
+            except InvalidSOCException as e:
+                step_completed = True
+                print(e)
+
             v: float = self.calc_terminal_potential(
-                I_n_i=i_app_prev, I_p_i=i_app_prev)
+                I_n_i=i_app_prev, I_p_i=i_app_prev)[0]
+            if isinstance(v, complex):
+                v = v.real
+
+            # print("t", t_curr,"V", v, "V_exp", array_y_true[i_sim])
 
             # loop termination criteria
             if v > cycling_step.V_max:
@@ -592,7 +632,8 @@ class PyKFSPSolver(PySPSolver):
                                  R_cell=self.b_cell.R_cell)
 
             # update simulation parameters
-            t_prev = t_curr
+            cycling_step.time_elapsed += self.__dt
+            self.__t_prev = t_curr
             i_sim += 1
 
         return PySolution(base_solution_instance=self.sol_init)
@@ -861,7 +902,7 @@ class PyEnhancedSPSolver(PySPSolver):
                         step_completed = True
 
                     V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell, overpotential_electrolyte = self.solve_one_iteration(t_prev=t_prev, dt=dt, i_app=i_app,
-                                                                                                                                                          temp=self.b_cell.T)
+                                                                                                                                                   temp=self.b_cell.T)
 
                     # Calc charge capacity, discharge capacity, and overall LIB capacity
                     cap = self.calc_SOC_cap(

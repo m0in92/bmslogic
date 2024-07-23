@@ -142,7 +142,10 @@ class SigmaPointKalmanFilter:
 
     @classmethod
     def calc_sqrt_matrix(cls, matrix: npt.ArrayLike) -> npt.ArrayLike:
-        return scipy.linalg.cholesky(matrix, lower=True)
+        try:
+            return scipy.linalg.cholesky(matrix, lower=True)
+        except:
+            return scipy.linalg.sqrtm(matrix)
 
     @classmethod
     def plot(cls, t_array, measurement_array, sigma_array=None, truth_array=None):
@@ -334,7 +337,7 @@ class SigmaPointKalmanFilter:
         """
         Xx = self.__state_prediction(u=u)  # Step 1a
         Xs = self.__cov_prediction(Xx=Xx)  # Step 1b
-        y, y_hat = self.__output_estimate(Xx=Xx, u=0)  # Step 1c
+        y, y_hat = self.__output_estimate(Xx=Xx, u=u)  # Step 1c
 
         SigmaY, Lx = self.__estimator_gain_matrix(y=y, yhat=y_hat, xs=Xs)  # Step 2a
         self.__state_update(L=Lx, ytrue=y_true, yhat=y_hat)  # Step 2b
