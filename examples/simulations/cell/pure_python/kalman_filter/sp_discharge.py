@@ -32,7 +32,7 @@ except ModuleNotFoundError as e:
 # Operating parameters
 I: float = 1.656
 temp: float = 298.15
-V_min: float = 3.0
+V_min: float = 3.98
 SOC_min: float = 0.1
 soc_lib_init: float = 1.0
 
@@ -65,7 +65,6 @@ cell_kf: cell_sim.PyBatteryCell = cell_sim.PyBatteryCell.read_from_parametersets
 solver_kf: PyKFSPSolver = PyKFSPSolver(b_cell=cell_kf)
 sol_kf: cell_sim.PySolution = solver_kf.solve(sol_exp=sol, cov_soc_n=1e-12, cov_soc_p=1e-12, cov_process=1e-10, cov_sensor=1e-3,
                                                v_min=2.0, v_max=4.25, soc_min=0.0, soc_max=1.0, soc_init=1.0)
-
 # Plot
 fig = plt.figure()
 
