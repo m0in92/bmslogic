@@ -28,11 +28,11 @@ SOC_init = 0.7568  # initial electrode SOC
 
 # Simulation parametes below
 i_app = -1.65  # Applied current [A]
-dt = 1  # time increment [s]
+dt = 0.1  # time increment [s]
 N_sim: int = 3600
 
 solver_instance: CNSolver = CNSolver(c_init=c_max*SOC_init, electrode_type='n', num_spatial_pts=100)
-eigen_solver_instance: EigenSolver = EigenSolver(electrode_type='n', soc_init=SOC_init, num_roots=4)
+eigen_solver_instance: EigenSolver = EigenSolver(electrode_type='n', soc_init=SOC_init, num_roots=10)
 poly_solver_instance: PolySolver = PolySolver(electrode_type='n', c_init=c_max*SOC_init, solver_type="higher")
 
 # CN simulation iteration below
@@ -84,7 +84,7 @@ print(f"Poly solver solved in {t_end - t_start} s")
 
 # plots
 plt.plot(lst_cn_time, lst_cn_soc, label="CN")
-# plt.plot(lst_eigen_time, lst_eigen_soc)
+plt.plot(lst_eigen_time, lst_eigen_soc)
 plt.plot(lst_poly_time, lst_poly_soc, label="poly")
 
 plt.legend()

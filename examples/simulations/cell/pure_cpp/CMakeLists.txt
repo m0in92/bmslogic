@@ -16,6 +16,12 @@ set_target_properties(discharge_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJEC
 set_target_properties(discharge_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)
 set_target_properties(discharge_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)
 
+add_executable(discharge_spm_cn_solver discharge_spm_cn_solver.cpp ${EXAMPLE_SOURCE})
+target_include_directories(discharge_spm_cn_solver PUBLIC ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell ${PROJECT_SOURCE_DIR}/bmslogic/)
+set_target_properties(discharge_spm_cn_solver PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)
+set_target_properties(discharge_spm_cn_solver PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)
+set_target_properties(discharge_spm_cn_solver PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)
+
 add_executable(charge_spm charge_spm.cpp ${EXAMPLE_SOURCE})
 target_include_directories(charge_spm PRIVATE ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell ${PROJECT_SOURCE_DIR}/bmslogic/)
 set_target_properties(charge_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)

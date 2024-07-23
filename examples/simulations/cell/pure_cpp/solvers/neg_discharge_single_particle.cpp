@@ -24,9 +24,8 @@ int main()
     CNSolver cn_solver = CNSolver(c_init, electrode_type, 100);
 
     // poly solver
-    clock_t start, end;
 
-    start = clock();
+    auto start_time = std::chrono::high_resolution_clock::now();
 
     double t_prev = 0.0;
     double soc_poly = SOC_init;
@@ -39,8 +38,9 @@ int main()
     }
     // std::cout << R << std::endl;
 
-    end = clock();
-    std::cout << std::fixed << std::setprecision(10) << "Polynomial Solution time in seconds: " << double(end - start) / double(CLOCKS_PER_SEC) << std::endl;
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
+    std::cout << "Polynomial Solution time in microseconds: " << duration.count() << std::endl;
 
     // Eigen solver
     clock_t eigen_start, eigen_end;
@@ -68,7 +68,7 @@ int main()
     while (soc_cn > 0)
     {
         cn_solver.solve(dt, i_app, R, S, D);
-        soc_cn = cn_solver.get_c_s_surf();
+        soc_cn = cn_solver.get_c_s_surf() / c_max;
         t_prev += dt;
     }
 
