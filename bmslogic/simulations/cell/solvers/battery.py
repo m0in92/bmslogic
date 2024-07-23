@@ -476,9 +476,9 @@ class PyKFSPSolver(PySPSolver):
     """
 
     def __init__(self, b_cell, isothermal: bool = True, degradation: bool = False, N: int = 5,
-                 electrode_SOC_solver: str = 'eigen', **electrode_SOC_solver_params):
+                 electrode_SOC_solver: str = 'poly', **electrode_SOC_solver_params):
         super().__init__(b_cell=b_cell, isothermal=isothermal, degradation=degradation, N=N,
-                         electrode_SOC_solver=electrode_SOC_solver, **electrode_SOC_solver_params)
+                         electrode_SOC_solver=electrode_SOC_solver, type="higher")
         self.__dt: float = 0.1  # See comments below for self.__t_prev
         # The instance variables __dt and __t_prev are needed for the state equation.
         self.__t_prev: float = 0.0
@@ -498,19 +498,7 @@ class PyKFSPSolver(PySPSolver):
                                           S=self.b_cell.elec_n.S,
                                           D_s=self.b_cell.elec_n.D,
                                           c_smax=self.b_cell.elec_n.max_conc)
-        # print(type(soc_p_[0].tolist()))
-        # print(np.array([[soc_p_[0].tolist()], [soc_n_[0].tolist()]]))
         return np.array([soc_p_[0].tolist(), soc_n_[0].tolist()])
-        # self.b_cell.elec_p.SOC = self.SOC_solver_p(dt=self.__dt, t_prev=self.__t_prev, i_app=u_k + w_k,
-        #                                            R=self.b_cell.elec_p.R,
-        #                                            S=self.b_cell.elec_p.S,
-        #                                            D_s=self.b_cell.elec_p.D,
-        #                                            c_smax=self.b_cell.elec_p.max_conc)  # calc p surf SOC
-        # self.b_cell.elec_n.SOC = self.SOC_solver_n(dt=self.__dt, t_prev=self.__t_prev, i_app=u_k + w_k,
-        #                                            R=self.b_cell.elec_n.R,
-        #                                            S=self.b_cell.elec_n.S,
-        #                                            D_s=self.b_cell.elec_n.D,
-        #                                            c_smax=self.b_cell.elec_n.max_conc)  # calc n surf SOC
 
     def __output_equation(self, x_k: Union[float, np.ndarray],
                           u_k: Union[float, np.ndarray],
@@ -523,33 +511,21 @@ class PyKFSPSolver(PySPSolver):
         :param v_k: sensor noise
         :return: cell terminal voltage
         """
-        # print("u_k", v_k)
         lst_V: list = []
         for i in range(x_k.shape[1]):
-            # print("v_k", v_k[0,i], "SOC_p", x_k[0, i],
-            #   "SOC_n", x_k[1, i], "u_k", u_k, "OCP_p", self.b_cell.elec_p.OCP)
-            # u_k = -1.656
-            # print(u_k)
             V_: float = self.b_model(OCP_p=self.b_cell.elec_p.OCP, OCP_n=self.b_cell.elec_n.OCP, R_cell=self.b_cell.R_cell,
                                      k_p=self.b_cell.elec_p.k, S_p=self.b_cell.elec_p.S, c_smax_p=self.b_cell.elec_p.max_conc,
                                      SOC_p=x_k[0, i],
                                      k_n=self.b_cell.elec_n.k, S_n=self.b_cell.elec_n.S, c_smax_n=self.b_cell.elec_n.max_conc,
                                      SOC_n=x_k[1, i],
                                      c_e=self.b_cell.electrolyte.conc, T=self.b_cell.T, I_p_i=u_k, I_n_i=u_k)[0] + v_k[0, i]
-            # print("V", V_)
             lst_V.append(V_)
-        # print(np.ndarray(V_))
-        # print(V_)
         return np.array(lst_V)
-        # return self.b_model(OCP_p=self.b_cell.elec_p.OCP, OCP_n=self.b_cell.elec_n.OCP, R_cell=self.b_cell.R_cell,
-        #                     k_p = self.b_cell.elec_p.k, S_p = self.b_cell.elec_p.S, c_smax_p = self.b_cell.elec_p.max_conc,
-        #                     SOC_p = x_k[0, :],
-        #                     k_n = self.b_cell.elec_n.k, S_n = self.b_cell.elec_n.S, c_smax_n = self.b_cell.elec_n.max_conc,
-        #                     SOC_n = x_k[1, :],
-        #                     c_e = self.b_cell.electrolyte.conc, T = self.b_cell.T, I_p_i = u_k, I_n_i = u_k) + v_k
 
+    @timer
     def solve(self, sol_exp: PySolution, cov_soc_p: float, cov_soc_n: float, cov_process: float, cov_sensor: float,
               v_min: float, v_max: float, soc_min: float, soc_max: float, soc_init: float) -> PySolution:
+        
         cycling_step = PyCustomCycler(array_t=sol_exp.t, array_I=sol_exp.I, V_min=v_min, V_max=v_max,
                                       SOC_LIB=soc_init, SOC_LIB_min=soc_min, SOC_LIB_max=soc_max)
         # array containing y_true is extracted from the solution object
@@ -599,10 +575,8 @@ class PyKFSPSolver(PySPSolver):
 
             v: float = self.calc_terminal_potential(
                 I_n_i=i_app_prev, I_p_i=i_app_prev)[0]
-            if isinstance(v, complex):
-                v = v.real
-
-            # print("t", t_curr,"V", v, "V_exp", array_y_true[i_sim])
+            # if isinstance(v, complex):
+                # v = v.real
 
             # loop termination criteria
             if v > cycling_step.V_max:

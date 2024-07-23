@@ -32,7 +32,7 @@ except ModuleNotFoundError as e:
 # Operating parameters
 I: float = 1.656
 temp: float = 298.15
-V_min: float = 3.8
+V_min: float = 3.0
 SOC_min: float = 0.1
 soc_lib_init: float = 1.0
 
@@ -55,7 +55,7 @@ solver: cell_sim.PySPSolver = cell_sim.PySPSolver(b_cell=cell,
 
 # simulate
 sol: cell_sim.PySolution = solver.solve(
-    cycler_instance=dc, store_solution_iter=1)
+    cycler_instance=dc, store_solution_iter=2)
 sol.V = sol.V + 0.01 * np.random.randn(len(sol.V))
 
 # Kalman filter
@@ -63,11 +63,8 @@ cell_kf: cell_sim.PyBatteryCell = cell_sim.PyBatteryCell.read_from_parametersets
                                                                                  soc_init_p=SOC_init_p, soc_init_n=SOC_init_n,
                                                                                  temp_init=temp)
 solver_kf: PyKFSPSolver = PyKFSPSolver(b_cell=cell_kf)
-sol_kf: cell_sim.PySolution = solver_kf.solve(sol_exp=sol, cov_soc_n=1e-4, cov_soc_p=1e-4, cov_process=1e-10, cov_sensor=1e-12,
+sol_kf: cell_sim.PySolution = solver_kf.solve(sol_exp=sol, cov_soc_n=1e-12, cov_soc_p=1e-12, cov_process=1e-10, cov_sensor=1e-3,
                                                v_min=2.0, v_max=4.25, soc_min=0.0, soc_max=1.0, soc_init=1.0)
-
-print(sol_kf.t)
-
 
 # Plot
 fig = plt.figure()
@@ -75,16 +72,12 @@ fig = plt.figure()
 ax1 = fig.add_subplot(121)
 ax1.plot(sol.t, sol.V, label="$V_{terminal}$")
 ax1.plot(sol_kf.t, sol_kf.V, label="KF")
-# plt.plot(sol.t, sol.OCV_LIB, linestyle=":", label="$OCV_{LIB}$")
-# plt.plot(sol.t, sol.overpotential_elec_p, linestyle=":", label="overpotential p")
-# plt.plot(sol.t, sol.overpotential_elec_n, linestyle=":", label="overpotential n")
-# plt.plot(sol.t, sol.overpotential_R_cell, linestyle=":", label="$IR_{cell}$")
+ax1.legend()
 
 ax2 = fig.add_subplot(122)
-ax2.plot(sol.t, sol.x_surf_n, label="$V_{terminal}$")
-ax2.plot(sol_kf.t, sol_kf.x_surf_n, label="KF")
+ax2.plot(sol.t, sol.x_surf_n, label="$SOC_{exp}$")
+ax2.plot(sol_kf.t, sol_kf.x_surf_n, label="$SOC_{KF}$")
 
 plt.tight_layout()
 plt.legend()
 plt.show()
-# sol.comprehensive_isothermal_plot()
