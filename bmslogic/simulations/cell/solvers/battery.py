@@ -502,7 +502,7 @@ class PyKFSPSolver(PySPSolver):
 
     def __output_equation(self, x_k: Union[float, np.ndarray],
                           u_k: Union[float, np.ndarray],
-                          v_k: Union[float, np.ndarray]) -> float:
+                          v_k: Union[float, np.ndarray]) -> np.ndarray:
         """
         The output equation for the sigma-point Kalman filter for non-isothermal single particle model. Here the sensor
         noise is simply added to the cell terminal voltage equation.
@@ -535,9 +535,9 @@ class PyKFSPSolver(PySPSolver):
         vector_x: np.ndarray = np.array(
             [[self.b_cell.elec_p.SOC], [self.b_cell.elec_n.SOC]])
         cov_x: np.ndarray = np.array([[cov_soc_p, 0], [0, cov_soc_n]])
-        vector_w: np.ndarray = np.array([[0]])
+        vector_w: np.ndarray = np.array([[0]])  # centered at zero mean
         cov_w: np.ndarray = np.array([[cov_process]])
-        vector_v: np.ndarray = np.array([[0]])
+        vector_v: np.ndarray = np.array([[0]])  # centered at zero mean
         cov_v: np.ndarray = np.array([[cov_sensor]])
 
         x: NormalRandomVector = NormalRandomVector(
