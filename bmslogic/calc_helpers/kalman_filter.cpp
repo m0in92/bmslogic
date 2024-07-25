@@ -35,7 +35,6 @@ SigmaPointKalmanFilter::SigmaPointKalmanFilter() : m_method_type("CDKF")
     calc_and_set_alpha_m();
 }
 
-
 SigmaPointKalmanFilter::SigmaPointKalmanFilter(NormalRandomVector i_x, NormalRandomVector i_w, NormalRandomVector i_v,
                                                int i_y_dim,
                                                std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> &i_state_equaton,
@@ -270,7 +269,7 @@ void SigmaPointKalmanFilter::set_final_cov_estimate(Eigen::MatrixXd L_k, Eigen::
     m_x.set_cov(final_cov_estimate);
 }
 
-void SigmaPointKalmanFilter::solve_one_iteration(Eigen::VectorXd u, Eigen::VectorXd y_true)
+Eigen::VectorXd SigmaPointKalmanFilter::solve_one_iteration(Eigen::VectorXd u, Eigen::VectorXd y_true)
 {
     Eigen::MatrixXd big_X = calc_and_set_state_prediction(u);
     Eigen::MatrixXd covariance_estimate = calc_and_set_state_covariance(big_X);
@@ -279,24 +278,34 @@ void SigmaPointKalmanFilter::solve_one_iteration(Eigen::VectorXd u, Eigen::Vecto
     std::pair<Eigen::MatrixXd, Eigen::MatrixXd> gain_estimator_results = estimator_gain_matrix(y_predictions.first, y_predictions.second, covariance_estimate);
     set_final_state_estimate(gain_estimator_results.second, y_true, y_predictions.second);
     set_final_cov_estimate(gain_estimator_results.second, gain_estimator_results.first);
+
+    return m_x.get_vec();
 }
 
-void SigmaPointKalmanFilter::solve(Eigen::MatrixXd u, Eigen::MatrixXd y_true)
+SimulationResults SigmaPointKalmanFilter::solve(Eigen::MatrixXd u, Eigen::MatrixXd y_true)
 {
     Eigen::VectorXd u_;
     Eigen::VectorXd y_true_;
+
+    SimulationResults sim_results;
+    sim_results.states_estimation = Eigen::MatrixXd::Zero(m_Nx, u.cols());
+
+    Eigen::VectorXd one_iteration_results;
     for (int i = 0; i < static_cast<int>(u.cols()); i++)
     {
         u_ = u.col(i);
         y_true_ = y_true.col(i);
-        solve_one_iteration(u_, y_true_);
+        one_iteration_results = solve_one_iteration(u_, y_true_);
+
+        sim_results.states_estimation.col(i) = one_iteration_results;
     }
+    return sim_results;
 }
 
 TwoStatesOneInputOneOutput::TwoStatesOneInputOneOutput(double i_state1_init, double i_state2_init, double i_cov_state1, double i_cov_state2,
                                                        double i_cov_w, double i_cov_v,
-                                                       std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> &i_state_equation,
-                                                       std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> &i_output_equation)
+                                                       std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> i_state_equation,
+                                                       std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> i_output_equation)
 {
     Eigen::VectorXd vec_x(2);
     vec_x(0) = i_state1_init;
@@ -321,4 +330,17 @@ TwoStatesOneInputOneOutput::TwoStatesOneInputOneOutput(double i_state1_init, dou
     int y_dim = 1;
 
     m_spkf = SigmaPointKalmanFilter(x, w, v, y_dim, i_state_equation, i_output_equation);
+}
+
+Eigen::VectorXd TwoStatesOneInputOneOutput::solve_one_iteration(Eigen::VectorXd u, Eigen::VectorXd y_true)
+{
+    Eigen::VectorXd state_estimation = m_spkf.solve_one_iteration(u, y_true);
+    return state_estimation;
+}
+
+Eigen::MatrixXd TwoStatesOneInputOneOutput::solve(Eigen::MatrixXd u, Eigen::MatrixXd y_true)
+{
+    SimulationResults sim_results;
+    sim_results = m_spkf.solve(u, y_true);
+    return sim_results.states_estimation;
 }

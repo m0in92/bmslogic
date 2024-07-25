@@ -52,6 +52,11 @@ private:
     void check_for_vector_size_with_matrix(Eigen::VectorXd i_vec, Eigen::MatrixXd i_matrix);
 };
 
+struct SimulationResults
+{
+    Eigen::MatrixXd states_estimation;
+};
+
 class SigmaPointKalmanFilter
 {
 public:
@@ -97,8 +102,8 @@ public:
     std::pair<Eigen::MatrixXd, Eigen::MatrixXd> estimator_gain_matrix(Eigen::MatrixXd big_y, Eigen::VectorXd y_prediction, Eigen::MatrixXd covariance_estimates);
     void set_final_state_estimate(Eigen::MatrixXd L_k, Eigen::VectorXd y_true, Eigen::VectorXd y_estimate);
     void set_final_cov_estimate(Eigen::MatrixXd L_k, Eigen::MatrixXd sigma_y);
-    void solve_one_iteration(Eigen::VectorXd u, Eigen::VectorXd y_true);
-    void solve(Eigen::MatrixXd u, Eigen::MatrixXd y_true);
+    Eigen::VectorXd solve_one_iteration(Eigen::VectorXd u, Eigen::VectorXd y_true);
+    SimulationResults solve(Eigen::MatrixXd u, Eigen::MatrixXd y_true);
 
 private:
     // // instance variables
@@ -148,13 +153,14 @@ class TwoStatesOneInputOneOutput
 public:
     TwoStatesOneInputOneOutput(double i_state1_init, double i_state2_init, double i_cov_state1, double i_cov_state2,
                                double i_cov_w, double i_cov_v,
-                               std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> &i_state_equation,
-                               std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> &i_output_equation);
+                               std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> i_state_equation,
+                               std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> i_output_equation);
     // getters
     Eigen::VectorXd get_state() { return m_spkf.get_x().get_vec(); }
     Eigen::MatrixXd get_cov() { return m_spkf.get_x().get_cov(); }
     // helper functions
-    void solve(Eigen::MatrixXd u, Eigen::MatrixXd y_true) { m_spkf.solve(u, y_true); }
+    Eigen::VectorXd solve_one_iteration(Eigen::VectorXd u, Eigen::VectorXd y_true);
+    Eigen::MatrixXd solve(Eigen::MatrixXd u, Eigen::MatrixXd y_true);
 
 private:
     SigmaPointKalmanFilter m_spkf;
