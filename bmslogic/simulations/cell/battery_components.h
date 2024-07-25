@@ -55,6 +55,8 @@ public:
         }
         SOC = SOC_new;
     } // update the electrode SOC
+    double calc_OCP(double i_soc) { return func_OCP(i_soc); }
+
 protected:
     double L;        // Electrode Thickness [m]
     double A;        // Electrode Area [m^2]
