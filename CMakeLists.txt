@@ -12,6 +12,7 @@ endif()
 option(CPP_ONLY "Only compiles the executables" OFF)
 
 add_subdirectory(extern/pybind11)
+add_subdirectory(extern/eigen)
 if(CPP_ONLY)
     message("C++ ONLY")
 elseif(NOT CPP_ONLY)
