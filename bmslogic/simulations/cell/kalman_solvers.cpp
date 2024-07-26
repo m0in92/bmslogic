@@ -10,7 +10,7 @@ BaseKFBatterySolver::BaseKFBatterySolver(int i_Nx, int i_Nw, int i_Nv, int i_y_d
     Eigen::VectorXd cov_v = Eigen::MatrixXd::Zero(m_Nv, m_Nv);
 
     m_L = m_Nx + m_Nv + m_Nw;
-    m_p = 2 * m_p;
+    m_p = 2 * m_L;
 
     calc_and_set_gamma();
     calc_and_set_h();
@@ -34,7 +34,7 @@ BaseKFBatterySolver::BaseKFBatterySolver(NormalRandomVector i_x, NormalRandomVec
     m_Nv = static_cast<int>(m_v.get_vec().size());
 
     m_L = m_Nx + m_Nv + m_Nw;
-    m_p = 2 * m_p;
+    m_p = 2 * m_L;
 
     calc_and_set_gamma();
     calc_and_set_h();
@@ -78,6 +78,35 @@ void BaseKFBatterySolver::calc_and_set_alpha_c0()
 void BaseKFBatterySolver::calc_and_set_alpha_c()
 {
     m_alpha_c = 1 / (2 * std::pow(m_h, 2));
+}
+
+Eigen::VectorXd BaseKFBatterySolver::generate_aug_vec()
+{
+    auto size_aug_vec = m_x.get_vec().size() + m_w.get_vec().size() + m_v.get_vec().size();
+
+    Eigen::VectorXd vec_aug_vec(size_aug_vec);
+    vec_aug_vec << m_x.get_vec(), m_w.get_vec(), m_v.get_vec();
+    return vec_aug_vec;
+}
+
+Eigen::MatrixXd BaseKFBatterySolver::generate_aug_cov()
+{
+    int num_rows_x = static_cast<int>(m_x.get_cov().rows());
+    int num_cols_x = static_cast<int>(m_x.get_cov().cols());
+    int num_rows_w = static_cast<int>(m_w.get_cov().rows());
+    int num_cols_w = static_cast<int>(m_w.get_cov().cols());
+    int num_rows_v = static_cast<int>(m_v.get_cov().rows());
+    int num_cols_v = static_cast<int>(m_v.get_cov().cols());
+
+    auto num_rows = num_rows_x + num_rows_w + num_rows_v;
+    auto num_cols = num_cols_x + num_rows_w + num_rows_v;
+
+    Eigen::MatrixXd result_matrix = Eigen::MatrixXd::Zero(num_rows, num_cols);
+    result_matrix.block(0, 0, num_rows_x, num_cols_x) = m_x.get_cov();
+    result_matrix.block(num_rows_x, num_cols_x, num_rows_w, num_cols_w) = m_w.get_cov();
+    result_matrix.block(num_rows_x + num_rows_w, num_cols_x + num_cols_w, num_rows_v, num_cols_v) = m_v.get_cov();
+
+    return result_matrix;
 }
 
 SPKFSolver::SPKFSolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation,
@@ -149,35 +178,6 @@ Eigen::MatrixXd SPKFSolver::calc_sqrt_matrix(Eigen::MatrixXd i_matrix)
 {
     Eigen::LLT<Eigen::MatrixXd> sqrt_matrix(i_matrix);
     return sqrt_matrix.matrixL();
-}
-
-Eigen::VectorXd SPKFSolver::generate_aug_vec()
-{
-    auto size_aug_vec = m_x.get_vec().size() + m_w.get_vec().size() + m_v.get_vec().size();
-
-    Eigen::VectorXd vec_aug_cov(size_aug_vec);
-    vec_aug_cov << m_x.get_vec(), m_w.get_vec(), m_v.get_vec();
-    return vec_aug_cov;
-}
-
-Eigen::MatrixXd SPKFSolver::generate_aug_cov()
-{
-    int num_rows_x = static_cast<int>(m_x.get_cov().rows());
-    int num_cols_x = static_cast<int>(m_x.get_cov().cols());
-    int num_rows_w = static_cast<int>(m_w.get_cov().rows());
-    int num_cols_w = static_cast<int>(m_w.get_cov().cols());
-    int num_rows_v = static_cast<int>(m_v.get_cov().rows());
-    int num_cols_v = static_cast<int>(m_v.get_cov().cols());
-
-    auto num_rows = num_rows_x + num_rows_w + num_rows_v;
-    auto num_cols = num_cols_x + num_rows_w + num_rows_v;
-
-    Eigen::MatrixXd result_matrix = Eigen::MatrixXd::Zero(num_rows, num_cols);
-    result_matrix.block(0, 0, num_rows_x, num_cols_x) = m_x.get_cov();
-    result_matrix.block(num_rows_x, num_cols_x, num_rows_w, num_cols_w) = m_w.get_cov();
-    result_matrix.block(num_rows_x + num_rows_w, num_cols_x + num_cols_w, num_rows_v, num_cols_v) = m_v.get_cov();
-
-    return result_matrix;
 }
 
 Eigen::MatrixXd SPKFSolver::generate_sigma_pts()
@@ -328,7 +328,7 @@ Solution SPKFSolver::solve(Eigen::VectorXd i_t, Eigen::VectorXd i_I, Eigen::Vect
     // simulation loop
     int sim_index = 0;
     double cap;
-    for (auto current_time : i_t.tail(i_t.size() - 2))
+    for (int i = 1; i < static_cast<int>(i_t.size()); i++)
     {
         // Gather all the simulation parameters in the right data type
         double I_app = i_I(sim_index);
@@ -357,7 +357,7 @@ Solution SPKFSolver::solve(Eigen::VectorXd i_t, Eigen::VectorXd i_I, Eigen::Vect
         cap = general_equations::calc_cap(cap, m_b_cell.get_cap(), I_app, m_dt);
 
         // update the Solution's instance variables
-        sol.update_t(current_time);
+        sol.update_t(i_t(sim_index));
         sol.update_cycling_step("custom");
         sol.update_V(V);
         sol.update_temp(m_b_cell.get_T());

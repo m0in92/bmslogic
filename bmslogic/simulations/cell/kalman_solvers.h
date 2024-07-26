@@ -62,6 +62,10 @@ protected:
     void calc_and_set_alpha_m();
     void calc_and_set_alpha_c0();
     void calc_and_set_alpha_c();
+
+    // helper functions
+    Eigen::VectorXd generate_aug_vec();
+    Eigen::MatrixXd generate_aug_cov();
 };
 
 class SPKFSolver : public BaseBatterySolver, public BaseKFBatterySolver
@@ -82,20 +86,12 @@ private:
     PolynomialApprox m_SOC_solver_p;
     PolynomialApprox m_SOC_solver_n;
 
-    // variables specific to sigma point Kalman filter
-    // // dimension related
-    // NormalRandomVector m_x;
-    // NormalRandomVector m_w;
-    // NormalRandomVector m_v;
-
     // functions specific to sigma point Kalman filter
     Eigen::VectorXd m_state_equation(Eigen::VectorXd x_k, Eigen::VectorXd u_k, Eigen::VectorXd w_k);
     Eigen::VectorXd m_output_equation(Eigen::VectorXd x_k, Eigen::VectorXd u_k, Eigen::VectorXd v_k);
 
     // functions for conduting sigma point Kalman filter during a time step
     Eigen::MatrixXd calc_sqrt_matrix(Eigen::MatrixXd i_matrix);
-    Eigen::VectorXd SPKFSolver::generate_aug_vec();
-    Eigen::MatrixXd SPKFSolver::generate_aug_cov();
     Eigen::MatrixXd generate_sigma_pts();
     Eigen::MatrixXd calc_and_set_state_prediction(Eigen::VectorXd u);
     Eigen::MatrixXd calc_and_set_state_covariance(Eigen::MatrixXd state_equation_results);
