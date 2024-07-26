@@ -38,7 +38,7 @@ public:
     double get_A() const { return A; }
     double get_T() const { return T; } // returns the electrode temperature [K]
     double get_SOC() const { return SOC; }
-    double get_OCP() { return calc_OCP(); }                // returns the OCP value at the inputted SOC.
+    double get_OCP() { return calc_OCP(SOC); }                // returns the OCP value at the inputted SOC.
     double get_dOCPdT() const { return func_dOCPdT(SOC); } // returns the dOCP/dT value at the inputted SOC.
     double get_D() { return calc_D(); }                    // calculates and returns the electrode diffusivity [m2/s]
     double get_k() { return calc_k(); }
@@ -47,13 +47,13 @@ public:
     double get_R() const { return R; }
     // Modifier functions
     void update_T(double &T_new) { T = T_new; } // updates the electrode temp.
-    void update_SOC(double SOC_new)
+    void update_SOC(double i_SOC)
     {
-        if ((SOC < 0) || (SOC > 1))
+        if ((i_SOC < 0) || (i_SOC > 1))
         {
             throw InvalidSOCException();
         }
-        SOC = SOC_new;
+        SOC = i_SOC;
     } // update the electrode SOC
     double calc_OCP(double i_soc) { return func_OCP(i_soc); }
 
