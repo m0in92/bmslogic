@@ -30,8 +30,8 @@ public:
 
     // setters
     void set_x(NormalRandomVector &i_x) { m_x = i_x; }
-    void set_w(NormalRandomVector &i_w) { m_x = i_w; }
-    void set_v(NormalRandomVector &i_v) { m_x = i_v; }
+    void set_w(NormalRandomVector &i_w) { m_w = i_w; }
+    void set_v(NormalRandomVector &i_v) { m_v = i_v; }
 
 protected:
     NormalRandomVector m_x;

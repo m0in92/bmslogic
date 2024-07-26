@@ -12,6 +12,8 @@ BaseKFBatterySolver::BaseKFBatterySolver(int i_Nx, int i_Nw, int i_Nv, int i_y_d
     m_L = m_Nx + m_Nv + m_Nw;
     m_p = 2 * m_L;
 
+    std::cout << m_p << std::endl;
+
     calc_and_set_gamma();
     calc_and_set_h();
     calc_and_set_alpha_m0();
@@ -124,7 +126,7 @@ SPKFSolver::SPKFSolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradati
     Eigen::VectorXd vec_x(2);
     vec_x(0) = i_state1_init;
     vec_x(1) = i_state2_init;
-    Eigen::MatrixXd cov_x = Eigen::MatrixXd::Zero(2, 2);
+    Eigen::MatrixXd cov_x(2, 2);
     cov_x(0, 0) = i_cov_state1;
     cov_x(1, 1) = i_cov_state2;
     NormalRandomVector x = NormalRandomVector(vec_x, cov_x);

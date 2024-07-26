@@ -1,6 +1,3 @@
-from bmslogic.simulations.cell.plot import Plot
-from bmslogic.simulations.cell.parameter_set_manager import ParameterSets
-import bmslogic.simulations.cell.cell as cell_sim
 import os
 import pathlib
 import sys
@@ -8,9 +5,17 @@ import sys
 import numpy as np
 import pandas as pd
 
-PROJ_DIR: str = pathlib.Path(
-    __file__).parent.parent.parent.parent.parent.__str__()
-sys.path.append(PROJ_DIR)
+try:
+    from bmslogic.simulations.cell.plot import Plot
+    from bmslogic.simulations.cell.parameter_set_manager import ParameterSets
+    import bmslogic.simulations.cell.cell as cell_sim
+except:
+    PROJ_DIR: str = pathlib.Path(
+        __file__).parent.parent.parent.parent.parent.__str__()
+    sys.path.append(PROJ_DIR)
+    from bmslogic.simulations.cell.plot import Plot
+    from bmslogic.simulations.cell.parameter_set_manager import ParameterSets
+    import bmslogic.simulations.cell.cell as cell_sim
 
 
 SOC_init_p: float = 0.4952
