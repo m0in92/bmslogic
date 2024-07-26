@@ -13,11 +13,17 @@ option(CPP_ONLY "Only compiles the executables" OFF)
 
 add_subdirectory(extern/pybind11)
 add_subdirectory(extern/eigen)
+add_subdirectory(extern/google_tests)
 if(CPP_ONLY)
     message("C++ ONLY")
 elseif(NOT CPP_ONLY)
     add_subdirectory(bmslogic)
 endif()   
 add_subdirectory(examples)
+add_subdirectory(cpp_tests)
+
+if (WIN32)
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+endif(WIN32)
 
 
