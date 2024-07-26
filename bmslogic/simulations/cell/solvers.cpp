@@ -705,7 +705,7 @@ Solution BatterySolver::solve(BaseCycler i_cycler, int store_solution_iter)
         double I;
         bool step_completed = false;
         std::string cycling_step = i_cycler.cycle_steps[i];
-        OverPotentials step_overpontentials;
+        OverPotentials step_overpotentials;
         std::pair<OverPotentials, bool> term_V_and_bool;
 
         while (!step_completed)
@@ -715,8 +715,8 @@ Solution BatterySolver::solve(BaseCycler i_cycler, int store_solution_iter)
             sim_time += dt;
             I = i_cycler.get_current(i_cycler.cycle_steps[i], time_index);
             term_V_and_bool = solve_one_iteration(t_prev, dt, I);
-            step_overpontentials = term_V_and_bool.first;
-            term_V = step_overpontentials.V;
+            step_overpotentials = term_V_and_bool.first;
+            term_V = step_overpotentials.V;
             if (term_V_and_bool.second)
             {
                 step_completed = true;
@@ -750,11 +750,11 @@ Solution BatterySolver::solve(BaseCycler i_cycler, int store_solution_iter)
                 // sol.update_overpotential_elec_p(std::get<2>(overpotential_values));
                 // sol.update_overpotential_elec_n(std::get<3>(overpotential_values));
                 // sol.update_overpotential_R_cell(std::get<4>(overpotential_values));
-                sol.update_OCV_LIB(step_overpontentials.OCV_LIB);
-                sol.update_overpotential_elec_p(step_overpontentials.elec_p);
-                sol.update_overpotential_elec_n(step_overpontentials.elec_n);
-                sol.update_overpotential_R_cell(step_overpontentials.R_cell);
-                sol.update_overpotential_electrolyte(step_overpontentials.electrolyte);
+                sol.update_OCV_LIB(step_overpotentials.OCV_LIB);
+                sol.update_overpotential_elec_p(step_overpotentials.elec_p);
+                sol.update_overpotential_elec_n(step_overpotentials.elec_n);
+                sol.update_overpotential_R_cell(step_overpotentials.R_cell);
+                sol.update_overpotential_electrolyte(step_overpotentials.electrolyte);
             }
 
             time_index += 1;

@@ -148,9 +148,28 @@ private:
     void calc_and_set_alpha_c();
 };
 
+/**
+ * @brief Below are the equations for the default contructor of classes pertaining to Kalman_filters
+ * that require functions parameters.
+ *
+ */
+static Eigen::VectorXd default_state_equation_(Eigen::VectorXd x_k, Eigen::VectorXd u_k, Eigen::VectorXd w_k)
+{
+    return x_k;
+}
+
+static Eigen::VectorXd default_output_equation_(Eigen::VectorXd x_k, Eigen::VectorXd u_k, Eigen::VectorXd w_k)
+{
+    return x_k;
+}
+
+static std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> default_state_equation = default_state_equation_;
+static std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> default_output_equation = default_state_equation_;
+
 class TwoStatesOneInputOneOutput
 {
 public:
+    TwoStatesOneInputOneOutput();
     TwoStatesOneInputOneOutput(double i_state1_init, double i_state2_init, double i_cov_state1, double i_cov_state2,
                                double i_cov_w, double i_cov_v,
                                std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> i_state_equation,

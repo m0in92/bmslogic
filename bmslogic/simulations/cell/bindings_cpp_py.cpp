@@ -14,6 +14,7 @@
 #include "pybind11/pybind11.h"
 #include "pybind11/functional.h"
 #include "pybind11/stl.h"
+#include "pybind11/eigen.h"
 
 #include "calc_helpers/constants.h"
 #include "general_ocps.h"
@@ -23,6 +24,7 @@
 #include "solution.h"
 #include "coords.h"
 #include "solvers.h"
+#include "kalman_solvers.h"
 
 namespace py = pybind11;
 
@@ -518,11 +520,18 @@ PYBIND11_MODULE(cell, m)
          .def(py::init<BatteryCell, bool, bool, std::string>(),
               py::arg("battery_cell"), py::arg("is_isothermal"), py::arg("enable_degradation"),
               py::arg("electrode_soc_solver") = "poly")
-         .def("solve", &BatterySolver::solve, py::arg("cycler"), py::arg("store_solution_iter")=1);
+         .def("solve", &BatterySolver::solve, py::arg("cycler"), py::arg("store_solution_iter") = 1);
 
      py::class_<ESPBatterySolver>(m, "ESPBatterySolver")
          .def(py::init<BatteryCell, bool, bool, std::string>(),
               py::arg("battery_cell"), py::arg("is_isothermal"), py::arg("enable_degradation"),
               py::arg("electrode_soc_solver") = "poly")
          .def("solve", &ESPBatterySolver::solve, py::arg("cycler"));
+
+     py::class_<SPKFSolver>(m, "SPKFSolver")
+         .def(py::init<BatteryCell, bool, bool,
+                       double, double, double, double,
+                       double, double>())
+         .def("solve", &SPKFSolver::solve,
+              py::arg("t"), py::arg("I"), py::arg("V_obs"));
 }

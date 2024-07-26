@@ -302,6 +302,33 @@ SimulationResults SigmaPointKalmanFilter::solve(Eigen::MatrixXd u, Eigen::Matrix
     return sim_results;
 }
 
+TwoStatesOneInputOneOutput::TwoStatesOneInputOneOutput()
+{
+    Eigen::VectorXd vec_x(2);
+    vec_x(0) = 0.0;
+    vec_x(1) = 0.0;
+    Eigen::MatrixXd cov_x = Eigen::MatrixXd::Zero(2, 2);
+    cov_x(0, 0) = 0.0;
+    cov_x(1, 1) = 0.0;
+    NormalRandomVector x = NormalRandomVector(vec_x, cov_x);
+
+    Eigen::VectorXd vec_w(1);
+    vec_w(0) = 0.0;
+    Eigen::MatrixXd cov_w(1, 1);
+    cov_w(0, 0) = 0.0;
+    NormalRandomVector w = NormalRandomVector(vec_w, cov_w);
+
+    Eigen::VectorXd vec_v(1);
+    vec_v(0) = 0.0;
+    Eigen::MatrixXd cov_v(1, 1);
+    cov_v(0, 0) = 0.0;
+    NormalRandomVector v = NormalRandomVector(vec_v, cov_v);
+
+    int y_dim = 1;
+
+    m_spkf = SigmaPointKalmanFilter(x, w, v, y_dim, default_state_equation, default_output_equation);
+}
+
 TwoStatesOneInputOneOutput::TwoStatesOneInputOneOutput(double i_state1_init, double i_state2_init, double i_cov_state1, double i_cov_state2,
                                                        double i_cov_w, double i_cov_v,
                                                        std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> i_state_equation,
