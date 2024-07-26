@@ -5,7 +5,66 @@
 #include "solvers.h"
 #include "calc_helpers/kalman_filter.h"
 
-class SPKFSolver : public BaseBatterySolver
+class BaseKFBatterySolver
+{
+public:
+    BaseKFBatterySolver() = default;
+    BaseKFBatterySolver(int i_Nx, int i_Nw, int i_Nv, int i_y_dim);
+    BaseKFBatterySolver(NormalRandomVector i_x, NormalRandomVector i_w, NormalRandomVector i_v, int i_y_dim);
+
+    // getters
+    int get_y_dim() const { return m_y_dim; }
+    int get_Nx() const { return m_Nx; }
+    int get_Nw() const { return m_Nw; }
+    int get_Nv() const { return m_Nv; }
+    int get_L() const { return m_L; }
+    int get_p() const { return m_p; }
+    double get_gamma() const { return m_gamma; }
+    double get_h() const { return m_h; }
+    double get_alpha_m0() const { return m_alpha_m0; }
+    double get_alpha_m() const { return m_alpha_m; }
+    double get_alpha_c0() const { return m_alpha_c0; }
+    double get_alpha_c() const { return m_alpha_c; }
+    const Eigen::VectorXd &get_vec_alpha_m() const { return m_vec_alpha_m; }
+    const Eigen::VectorXd &get_vec_alpha_c() const { return m_vec_alpha_c; }
+
+    // setters
+    void set_x(NormalRandomVector &i_x) { m_x = i_x; }
+    void set_w(NormalRandomVector &i_w) { m_x = i_w; }
+    void set_v(NormalRandomVector &i_v) { m_x = i_v; }
+
+protected:
+    NormalRandomVector m_x;
+    NormalRandomVector m_w;
+    NormalRandomVector m_v;
+
+    int m_y_dim;
+    int m_Nx;
+    int m_Nw;
+    int m_Nv;
+    int m_L; // dimension of augmented matrix
+    int m_p; // number of sigma points - 1
+
+    // Sigma Point Kalman Filter Specific Variables
+    double m_gamma;
+    double m_h;
+    double m_alpha_m0;
+    double m_alpha_m;
+    double m_alpha_c0;
+    double m_alpha_c;
+    Eigen::VectorXd m_vec_alpha_m;
+    Eigen::VectorXd m_vec_alpha_c;
+
+    // setters specific to Kalman Filters
+    void calc_and_set_gamma();
+    void calc_and_set_h();
+    void calc_and_set_alpha_m0();
+    void calc_and_set_alpha_m();
+    void calc_and_set_alpha_c0();
+    void calc_and_set_alpha_c();
+};
+
+class SPKFSolver : public BaseBatterySolver, public BaseKFBatterySolver
 {
 public:
     SPKFSolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation,
@@ -25,33 +84,9 @@ private:
 
     // variables specific to sigma point Kalman filter
     // // dimension related
-    NormalRandomVector m_x;
-    NormalRandomVector m_w;
-    NormalRandomVector m_v;
-
-    int m_y_dim;
-    int m_Nx;
-    int m_Nw;
-    int m_Nv;
-    int m_L; // dimension of augmented matrix
-    int m_p; // number of sigma points - 1
-
-    double m_gamma;
-    double m_h;
-    double m_alpha_m0;
-    double m_alpha_m;
-    double m_alpha_c0;
-    double m_alpha_c;
-    Eigen::VectorXd m_vec_alpha_m;
-    Eigen::VectorXd m_vec_alpha_c;
-
-    // setters specific to Kalman Filters
-    void calc_and_set_gamma();
-    void calc_and_set_h();
-    void calc_and_set_alpha_m0();
-    void calc_and_set_alpha_m();
-    void calc_and_set_alpha_c0();
-    void calc_and_set_alpha_c();
+    // NormalRandomVector m_x;
+    // NormalRandomVector m_w;
+    // NormalRandomVector m_v;
 
     // functions specific to sigma point Kalman filter
     Eigen::VectorXd m_state_equation(Eigen::VectorXd x_k, Eigen::VectorXd u_k, Eigen::VectorXd w_k);

@@ -1,47 +1,16 @@
 #include "kalman_solvers.h"
 
-SPKFSolver::SPKFSolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation,
-                       double i_state1_init, double i_state2_init, double i_cov_state1, double i_cov_state2,
-                       double i_cov_w, double i_cov_v) : BaseBatterySolver(i_b_cell,
-                                                                           i_isothermal,
-                                                                           i_degradation,
-                                                                           "poly"),
-                                                         m_SOC_solver_p('p', i_b_cell.elec_p.get_c_max() * i_b_cell.elec_p.get_SOC(), "higher"),
-                                                         m_SOC_solver_n('n', i_b_cell.elec_n.get_c_max() * i_b_cell.elec_n.get_SOC(), "higher")
+BaseKFBatterySolver::BaseKFBatterySolver(int i_Nx, int i_Nw, int i_Nv, int i_y_dim) : m_Nx(i_Nx), m_Nv(i_Nv), m_Nw(i_Nw)
 {
-    // below sets sigma point Kalman filter variables
-    // // // normal vector for the system states
-    Eigen::VectorXd vec_x(2);
-    vec_x(0) = i_state1_init;
-    vec_x(1) = i_state2_init;
-    Eigen::MatrixXd cov_x = Eigen::MatrixXd::Zero(2, 2);
-    cov_x(0, 0) = i_cov_state1;
-    cov_x(1, 1) = i_cov_state2;
-    NormalRandomVector x = NormalRandomVector(vec_x, cov_x);
-    m_x = x;
+    Eigen::VectorXd vec_x = Eigen::VectorXd::Zero(m_Nx);
+    Eigen::VectorXd vec_w = Eigen::VectorXd::Zero(m_Nw);
+    Eigen::VectorXd vec_v = Eigen::VectorXd::Zero(m_Nv);
+    Eigen::VectorXd cov_x = Eigen::MatrixXd::Zero(m_Nx, m_Nx);
+    Eigen::VectorXd cov_w = Eigen::MatrixXd::Zero(m_Nw, m_Nw);
+    Eigen::VectorXd cov_v = Eigen::MatrixXd::Zero(m_Nv, m_Nv);
 
-    // // // normal vector for the system noise
-    Eigen::VectorXd vec_w(1);
-    vec_w(0) = 0.0;
-    Eigen::MatrixXd cov_w(1, 1);
-    cov_w(0, 0) = i_cov_w;
-    NormalRandomVector w = NormalRandomVector(vec_w, cov_w);
-    m_w = w;
-
-    // // // normal vector for the sensor noise
-    Eigen::VectorXd vec_v(1);
-    vec_v(0) = 0.0;
-    Eigen::MatrixXd cov_v(1, 1);
-    cov_v(0, 0) = i_cov_v;
-    NormalRandomVector v = NormalRandomVector(vec_v, cov_v);
-    m_v = v;
-
-    m_y_dim = 1;
-    m_Nx = 2;
-    m_Nw = 1;
-    m_Nv = 1;
-    m_L = m_Nx + m_Nw + m_Nv;
-    m_p = 2 * m_L;
+    m_L = m_Nx + m_Nv + m_Nw;
+    m_p = 2 * m_p;
 
     calc_and_set_gamma();
     calc_and_set_h();
@@ -57,34 +26,96 @@ SPKFSolver::SPKFSolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradati
     m_vec_alpha_c(0) = m_alpha_c0;
 }
 
-void SPKFSolver::calc_and_set_gamma()
+BaseKFBatterySolver::BaseKFBatterySolver(NormalRandomVector i_x, NormalRandomVector i_w, NormalRandomVector i_v,
+                                         int i_y_dim) : m_x(i_x), m_w(i_w), m_v(i_v), m_y_dim(i_y_dim)
+{
+    m_Nx = static_cast<int>(m_x.get_vec().size());
+    m_Nw = static_cast<int>(m_w.get_vec().size());
+    m_Nv = static_cast<int>(m_v.get_vec().size());
+
+    m_L = m_Nx + m_Nv + m_Nw;
+    m_p = 2 * m_p;
+
+    calc_and_set_gamma();
+    calc_and_set_h();
+    calc_and_set_alpha_m0();
+    calc_and_set_alpha_m();
+    calc_and_set_alpha_c0();
+    calc_and_set_alpha_c();
+
+    m_vec_alpha_m = m_alpha_m * Eigen::VectorXd::Constant(m_p + 1, 1);
+    m_vec_alpha_m(0) = m_alpha_m0;
+
+    m_vec_alpha_c = m_alpha_c * Eigen::VectorXd::Constant(m_p + 1, 1);
+    m_vec_alpha_c(0) = m_alpha_c0;
+}
+
+void BaseKFBatterySolver::calc_and_set_gamma()
 {
     m_gamma = std::sqrt(3.0);
 }
 
-void SPKFSolver::calc_and_set_h()
+void BaseKFBatterySolver::calc_and_set_h()
 {
     m_h = std::sqrt(3.0);
 }
 
-void SPKFSolver::calc_and_set_alpha_m0()
+void BaseKFBatterySolver::calc_and_set_alpha_m0()
 {
     m_alpha_m0 = (std::pow(m_h, 2) - m_L) / (std::pow(m_h, 2));
 }
 
-void SPKFSolver::calc_and_set_alpha_m()
+void BaseKFBatterySolver::calc_and_set_alpha_m()
 {
     m_alpha_m = 1 / (2 * std::pow(m_h, 2));
 }
 
-void SPKFSolver::calc_and_set_alpha_c0()
+void BaseKFBatterySolver::calc_and_set_alpha_c0()
 {
     m_alpha_c0 = (std::pow(m_h, 2) - m_L) / (std::pow(m_h, 2));
 }
 
-void SPKFSolver::calc_and_set_alpha_c()
+void BaseKFBatterySolver::calc_and_set_alpha_c()
 {
     m_alpha_c = 1 / (2 * std::pow(m_h, 2));
+}
+
+SPKFSolver::SPKFSolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation,
+                       double i_state1_init, double i_state2_init, double i_cov_state1, double i_cov_state2,
+                       double i_cov_w, double i_cov_v) : BaseBatterySolver(i_b_cell,
+                                                                           i_isothermal,
+                                                                           i_degradation,
+                                                                           "poly"),
+                                                         BaseKFBatterySolver(2, 1, 1, 1),
+                                                         m_SOC_solver_p('p', i_b_cell.elec_p.get_c_max() * i_b_cell.elec_p.get_SOC(), "higher"),
+                                                         m_SOC_solver_n('n', i_b_cell.elec_n.get_c_max() * i_b_cell.elec_n.get_SOC(), "higher")
+{
+    // below sets sigma point Kalman filter variables
+    // // // normal vector for the system states
+    Eigen::VectorXd vec_x(2);
+    vec_x(0) = i_state1_init;
+    vec_x(1) = i_state2_init;
+    Eigen::MatrixXd cov_x = Eigen::MatrixXd::Zero(2, 2);
+    cov_x(0, 0) = i_cov_state1;
+    cov_x(1, 1) = i_cov_state2;
+    NormalRandomVector x = NormalRandomVector(vec_x, cov_x);
+    set_x(x);
+
+    // // // normal vector for the system noise
+    Eigen::VectorXd vec_w(1);
+    vec_w(0) = 0.0;
+    Eigen::MatrixXd cov_w(1, 1);
+    cov_w(0, 0) = i_cov_w;
+    NormalRandomVector w = NormalRandomVector(vec_w, cov_w);
+    set_w(w);
+
+    // // // normal vector for the sensor noise
+    Eigen::VectorXd vec_v(1);
+    vec_v(0) = 0.0;
+    Eigen::MatrixXd cov_v(1, 1);
+    cov_v(0, 0) = i_cov_v;
+    NormalRandomVector v = NormalRandomVector(vec_v, cov_v);
+    set_v(v);
 }
 
 Eigen::VectorXd SPKFSolver::m_state_equation(Eigen::VectorXd x_k, Eigen::VectorXd u_k, Eigen::VectorXd w_k)
@@ -297,7 +328,7 @@ Solution SPKFSolver::solve(Eigen::VectorXd i_t, Eigen::VectorXd i_I, Eigen::Vect
     // simulation loop
     int sim_index = 0;
     double cap;
-    for (auto current_time : i_t.tail(i_t.size() - 1))
+    for (auto current_time : i_t.tail(i_t.size() - 2))
     {
         // Gather all the simulation parameters in the right data type
         double I_app = i_I(sim_index);
