@@ -147,6 +147,7 @@ public:
     double &get_c_surf() { return m_c_surf; }
     double get_x_surf(double c_s_max) const { return m_c_surf / c_s_max; }
     // helper functions
+    double solve_without_update(double dt, double t_prev, double i_app, double R, double S, double D);
     void solve(double dt, double t_prev, double i_app, double R, double S, double D);
 
 private:

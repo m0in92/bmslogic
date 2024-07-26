@@ -204,6 +204,35 @@ double PolynomialApprox::solve_q(double dt, double t_prev, double j, double R, d
     return Newton::ODESolver::rk4(t_prev, m_q, dt, ode_func_q);
 }
 
+/**
+ * @brief Calculates the surface concentration without updating the instance variables.
+ *
+ * @param dt
+ * @param t_prev
+ * @param i_app
+ * @param R
+ * @param S
+ * @param D
+ * @return double
+ */
+double PolynomialApprox::solve_without_update(double dt, double t_prev, double i_app, double R, double S, double D)
+{
+    double j = SPModel().molar_flux_electrode(i_app, S, m_electrode_type);
+    m_c_s_avg_prev = solve_c_s_avg(dt, t_prev, j, R, D);
+
+    double c_surf;
+    if (m_type == "two")
+        c_surf = -(R / D) * (j / 5) + m_c_s_avg_prev;
+    else if (m_type == "higher")
+    {
+        m_q = solve_q(dt, t_prev, j, R, D);
+        c_surf = -(j * R) / (35 * D) + 8 * R * m_q / 35 + m_c_s_avg_prev;
+    }
+    else
+        throw std::invalid_argument("Invalid solver type.");
+    return c_surf;
+}
+
 void PolynomialApprox::solve(double dt, double t_prev, double i_app, double R, double S, double D)
 {
     double j = SPModel().molar_flux_electrode(i_app, S, m_electrode_type);
