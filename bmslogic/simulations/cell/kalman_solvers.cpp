@@ -92,8 +92,11 @@ Solution SPKFSolver::solve(Eigen::ArrayXd i_t, Eigen::ArrayXd i_I, Eigen::ArrayX
         m_t_prev = i_t(sim_index - 1);
 
         // perform the simulation calculations
+
+        // // SPKF
         Eigen::VectorXd result_state_estimations = m_spkf_solver.solve_one_iteration(I_app_, V_obs_);
 
+        // // update the electrode SOC
         try
         {
             m_b_cell.elec_p.update_SOC(result_state_estimations(0));
@@ -105,6 +108,7 @@ Solution SPKFSolver::solve(Eigen::ArrayXd i_t, Eigen::ArrayXd i_I, Eigen::ArrayX
             break;
         }
 
+        // // calculate the cell terminal voltage
         OverPotentials step_overpotentials = calc_overpotentials(I_app);
         double V = step_overpotentials.V;
 
