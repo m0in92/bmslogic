@@ -531,8 +531,8 @@ PYBIND11_MODULE(cell, m)
      py::class_<SPKFSolver>(m, "SPKFSolver")
          .def(py::init<BatteryCell, bool, bool,
                        double, double, double, double,
-                       double, double>())
-         .def_property_readonly("get_p", &SPKFSolver::get_p)
-         .def("solve", &SPKFSolver::solve,
-              py::arg("t"), py::arg("I"), py::arg("V_obs"));
+                       double, double>());
+     //     .def_property_readonly("get_p", &SPKFSolver::get_p)
+     //     .def("solve", &SPKFSolver::solve,
+     //          py::arg("t"), py::arg("I"), py::arg("V_obs"));
 }

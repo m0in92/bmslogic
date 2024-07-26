@@ -37,10 +37,10 @@ SigmaPointKalmanFilter::SigmaPointKalmanFilter() : m_method_type("CDKF")
 
 SigmaPointKalmanFilter::SigmaPointKalmanFilter(NormalRandomVector i_x, NormalRandomVector i_w, NormalRandomVector i_v,
                                                int i_y_dim,
-                                               std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> &i_state_equaton,
+                                               std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> &i_state_equation,
                                                std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> &i_output_equation,
                                                std::string i_method_type) : m_x(i_x), m_w(i_w), m_v(i_v), m_y_dim(i_y_dim),
-                                                                            m_state_equation(i_state_equaton), m_output_equation(i_output_equation),
+                                                                            m_state_equation(i_state_equation), m_output_equation(i_output_equation),
                                                                             m_method_type(i_method_type)
 {
     if (i_method_type.compare("CDKF") != 0)
@@ -65,6 +65,63 @@ SigmaPointKalmanFilter::SigmaPointKalmanFilter(NormalRandomVector i_x, NormalRan
     m_vec_alpha_c = m_alpha_c * Eigen::VectorXd::Constant(m_p + 1, 1);
     m_vec_alpha_c(0) = m_alpha_c0;
 }
+
+SigmaPointKalmanFilter::SigmaPointKalmanFilter(NormalRandomVector i_x, NormalRandomVector i_w, NormalRandomVector i_v,
+                                               int i_y_dim) : m_x(i_x), m_w(i_w), m_v(i_v), m_y_dim(i_y_dim)
+{
+    if (m_method_type.compare("CDKF") != 0)
+        throw InvalidKFMethodType();
+
+    m_Nx = static_cast<int>(m_x.get_vec().rows());
+    m_Nw = static_cast<int>(m_w.get_vec().rows());
+    m_Nv = static_cast<int>(m_v.get_vec().rows());
+    m_L = m_Nx + m_Nw + m_Nv;
+    m_p = 2 * m_L;
+
+    calc_and_set_gamma();
+    calc_and_set_h();
+    calc_and_set_alpha_m0();
+    calc_and_set_alpha_m();
+    calc_and_set_alpha_c0();
+    calc_and_set_alpha_c();
+
+    m_vec_alpha_m = m_alpha_m * Eigen::VectorXd::Constant(m_p + 1, 1);
+    m_vec_alpha_m(0) = m_alpha_m0;
+
+    m_vec_alpha_c = m_alpha_c * Eigen::VectorXd::Constant(m_p + 1, 1);
+    m_vec_alpha_c(0) = m_alpha_c0;
+}
+
+// SigmaPointKalmanFilter::SigmaPointKalmanFilter(NormalRandomVector i_x, NormalRandomVector i_w, NormalRandomVector i_v,
+//                                                int i_y_dim,
+//                                                Eigen::VectorXd (*i_state_equation)(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd),
+//                                                Eigen::VectorXd (*i_output_equation)(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd),
+//                                                std::string i_method_type = "CDKF") : m_x(i_x), m_w(i_w), m_v(i_v), m_y_dim(i_y_dim),
+//                                                                                      m_state_equation(i_state_equation), m_output_equation(i_output_equation),
+//                                                                                      m_method_type(i_method_type)
+// {
+//     if (i_method_type.compare("CDKF") != 0)
+//         throw InvalidKFMethodType();
+
+//     m_Nx = static_cast<int>(m_x.get_vec().rows());
+//     m_Nw = static_cast<int>(m_w.get_vec().rows());
+//     m_Nv = static_cast<int>(m_v.get_vec().rows());
+//     m_L = m_Nx + m_Nw + m_Nv;
+//     m_p = 2 * m_L;
+
+//     calc_and_set_gamma();
+//     calc_and_set_h();
+//     calc_and_set_alpha_m0();
+//     calc_and_set_alpha_m();
+//     calc_and_set_alpha_c0();
+//     calc_and_set_alpha_c();
+
+//     m_vec_alpha_m = m_alpha_m * Eigen::VectorXd::Constant(m_p + 1, 1);
+//     m_vec_alpha_m(0) = m_alpha_m0;
+
+//     m_vec_alpha_c = m_alpha_c * Eigen::VectorXd::Constant(m_p + 1, 1);
+//     m_vec_alpha_c(0) = m_alpha_c0;
+// }
 
 Eigen::VectorXd SigmaPointKalmanFilter::generate_aug_vec()
 {

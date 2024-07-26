@@ -140,4 +140,18 @@ The following contains the instructions for running this repository locally in t
    cmake .. -DCPP_ONLY=ON
    ```
 
+   ### Tests
+
+1. For python tests, run the following on the command line
+   ```sh
+   pytest tests
+   ```
+3. Google tests is used for testing the C++ code. Use the following
+  to run the existing tests.
+   ```sh
+   cd cpp_tests
+   ./bmslogic_tests   (on Linux)
+   bmslogic.exe       (on Windows)
+   ```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

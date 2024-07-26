@@ -2044,7 +2044,7 @@ namespace Newton
 
             // find the lower and upper bound index for the elements with value just lower and higher than x
             auto i = lower_bound(sorted_x.begin(), sorted_x.end(), x);
-            int k = i - sorted_x.begin(); // upper element
+            auto k = i - sorted_x.begin(); // upper element
             if (k == 0)
                 return sorted_y[0]; // lower bound extrapolation
             int l = k ? k - 1 : 1;  // lower element
@@ -2057,10 +2057,59 @@ namespace Newton
             return result;
         }
 
+        long double linear_interpolation(long double x, std::vector<long double> vec_x, std::vector<long double> vec_y)
+        {
+            if (vec_x.size() != vec_y.size())
+                throw std::invalid_argument("vector x and y need to be of same size.");
+
+            // combine the two vectors into one
+            std::vector<std::pair<long double, long double>> combined_vec;
+            for (int i = 0; i < vec_x.size(); i++)
+            {
+                combined_vec.push_back(std::make_pair(vec_x[i], vec_y[i]));
+            }
+
+            // sort the combined vector based on the first element of the pair
+            std::sort(combined_vec.begin(), combined_vec.end(), [&](auto a, auto b)
+                      { return a.first < b.first; });
+
+            // unzip the combined vector
+            std::vector<long double> sorted_x, sorted_y;
+            for (int i = 0; i < vec_x.size(); i++)
+            {
+                sorted_x.push_back(combined_vec[i].first);
+                sorted_y.push_back(combined_vec[i].second);
+            }
+
+            // find the lower and upper bound index for the elements with value just lower and higher than x
+            auto i = lower_bound(sorted_x.begin(), sorted_x.end(), x);
+            int k = i - sorted_x.begin(); // upper element
+            if (k == 0)
+                return sorted_y[0]; // lower bound extrapolation
+            int l = k ? k - 1 : 1;  // lower element
+            if (i == sorted_x.end())
+                return sorted_y[sorted_y.size() - 1]; // extrapolate to the y value at the last element
+
+            // linear regression
+            long double result = sorted_y[l] + (x - sorted_x[l]) * (sorted_y[k] - sorted_y[l]) / (sorted_x[k] - sorted_x[l]);
+
+            return result;
+        }
+
         std::vector<double> linear_interpolation(std::vector<double> target_vec_x, std::vector<double> vec_x, std::vector<double> vec_y)
         {
             std::vector<double> result_vector;
-            for (int i=0; i<target_vec_x.size(); i++)
+            for (int i = 0; i < target_vec_x.size(); i++)
+            {
+                result_vector.push_back(linear_interpolation(target_vec_x[i], vec_x, vec_y));
+            }
+            return result_vector;
+        }
+
+        std::vector<long double> linear_interpolation(std::vector<long double> target_vec_x, std::vector<long double> vec_x, std::vector<long double> vec_y)
+        {
+            std::vector<long double> result_vector;
+            for (int i = 0; i < target_vec_x.size(); i++)
             {
                 result_vector.push_back(linear_interpolation(target_vec_x[i], vec_x, vec_y));
             }
@@ -2382,7 +2431,7 @@ namespace Newton
             std::vector<double> xc = c_diag;
             xc.back() = c_col_vec.back() / c_diag.back();
 
-            for (int il = N - 2; il > -1; il--)
+            for (auto il = N - 2; il > -1; il--)
             {
                 xc[il] = (c_col_vec[il] - c_u_diag[il] * xc[il + 1]) / c_diag[il];
             }

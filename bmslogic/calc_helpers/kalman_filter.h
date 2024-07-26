@@ -66,6 +66,8 @@ public:
                            std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> &state_equaton,
                            std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> &output_equation,
                            std::string method_type = "CDKF");
+    SigmaPointKalmanFilter(NormalRandomVector i_x, NormalRandomVector i_w, NormalRandomVector i_v,
+                           int y_dim);
 
     // getters
     int get_Nx() const { return m_Nx; }
@@ -91,6 +93,10 @@ public:
     double get_alpha_c() const { return m_alpha_c; }
     Eigen::VectorXd get_vector_alpha_m() const { return m_vec_alpha_m; }
     Eigen::VectorXd get_vector_alpha_c() const { return m_vec_alpha_c; }
+
+    // setters
+    void set_state_equation(std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> i_state_equation) { m_state_equation = i_state_equation; }
+    void set_output_equation(std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> i_output_equation) { m_output_equation = i_output_equation; }
 
     // helper functions
     Eigen::MatrixXd calc_sqrt_matrix(Eigen::MatrixXd i_matrix);

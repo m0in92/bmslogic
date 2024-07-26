@@ -308,7 +308,9 @@ namespace Newton
         double interp(OWL::ArrayXD xArray, OWL::ArrayXD yArray, double x);
         std::function<double(double)> interpFunc(OWL::ArrayXD xArray, OWL::ArrayXD yArray);
         double linear_interpolation(double x, std::vector<double> vec_x, std::vector<double> vec_y);
+        long double linear_interpolation(long double x, std::vector<long double> vec_x, std::vector<long double> vec_y);
         std::vector<double> linear_interpolation(std::vector<double> target_vec_x, std::vector<double> vec_x, std::vector<double> vec_y);
+        std::vector<long double> linear_interpolation(std::vector<long double> target_vec_x, std::vector<long double> vec_x, std::vector<long double> vec_y);
     }
 
     namespace ODESolver
