@@ -15,6 +15,7 @@ add_subdirectory(extern/pybind11)
 add_subdirectory(extern/eigen)
 
 if (NO_CPP_TESTS)
+    message("NO_CPP_TESTS")
 else()
     add_subdirectory(extern/google_tests)
     if (WIN32)
