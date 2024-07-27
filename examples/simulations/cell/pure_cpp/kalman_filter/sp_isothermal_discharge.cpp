@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 #include "Eigen/Dense"
 
@@ -33,20 +34,39 @@ int main()
                                    brugg_p, soc_p, temp, OCP_ref_p_, dOCPdT_p_);
     Electrolyte electrolyte = Electrolyte(c_init_e, L_e, kappa_e, epsilon_e, brugg_e);
     BatteryCell b_cell = BatteryCell(elec_p, elec_n, electrolyte, rho, Vol, C_p, h, A, cap, V_max, V_min, R_cell);
+    BatteryCell b_cell_kf = BatteryCell(elec_p, elec_n, electrolyte, rho, Vol, C_p, h, A, cap, V_max, V_min, R_cell);
 
-    // Discharge cycler = Discharge(discharge_current, V_min, SOC_lib_min, SOC_lib);
+    //   Without KF
+    Discharge cycler = Discharge(discharge_current, V_min, SOC_lib_min, SOC_lib);
 
-    Eigen::VectorXd t(4);
-    t << 0.0, 0.1, 0.2, 0.3;
-    Eigen::VectorXd I(4);
-    I << -1.656, -1.656, -1.656, -1.656;
-    Eigen::VectorXd V(4);
-    V << 4.2, 4.2, 4.2, 4.2;
+    BatterySolver solver = BatterySolver(b_cell, true, true, "poly");
+    Solution sol = solver.solve(cycler);
 
-    SPKFSolver solver = SPKFSolver(b_cell, true, true, soc_p, soc_n, 1e-3, 1e-3, 1e-3, 1e-3);
-    Solution sol = solver.solve(t, I, V);
+    // With KF
+
+    // Eigen::VectorXd t;
+    // // t << 0.0, 0.1, 0.2, 0.3;
+    // Eigen::VectorXd I;
+    // // I << -1.656, -1.656, -1.656, -1.656;
+    // Eigen::VectorXd V;
+    // // V << 4.2, 4.2, 4.2, 4.2;
+    // for (auto t_: sol.get_t())
+    //     t << t_;
+    // for (int idx=0; idx<sol.get_t().size(); idx++)
+    //     I << discharge_current;
+    // for (auto V_: sol.get_V())
+    //     V << V_;
+
+    std::vector<double> t = sol.get_t();
+    std::vector<double> I;
+    for (int idx=0; idx<t.size(); idx++)
+        I.push_back(-discharge_current);
+    std::vector<double> V = sol.get_V();
+
+    SPKFSolver solver_kf = SPKFSolver(b_cell_kf, true, true, soc_p, soc_n, 1e-3, 1e-3, 1e-3, 1e-3);
+    Solution sol_kf = solver_kf.solve(t, I, V);
 
     // print results
     std::cout << sol.get_x_n()[0] << std::endl;
-    std::cout << sol.get_x_n()[1] << std::endl;
+    // std::cout << sol.get_x_n()[1] << std::endl;
 }

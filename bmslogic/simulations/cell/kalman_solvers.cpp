@@ -1,3 +1,5 @@
+#include <chrono>
+
 #include "kalman_solvers.h"
 
 SPKFSolver::SPKFSolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation,
@@ -76,12 +78,13 @@ Solution SPKFSolver::solve(Eigen::VectorXd i_t, Eigen::VectorXd i_I, Eigen::Vect
 {
     Solution sol = Solution();
 
+    auto t1 = std::chrono::high_resolution_clock::now();
+
     // simulation loop
     // int sim_index = 0;
     double cap = 0;
     for (int i = 1; i < static_cast<int>(i_t.size()); i++)
     {
-        std::cout << i << std::endl;
         // Gather all the simulation parameters in the right data type
 
         double I_app = i_I(i);
@@ -130,6 +133,78 @@ Solution SPKFSolver::solve(Eigen::VectorXd i_t, Eigen::VectorXd i_I, Eigen::Vect
         sol.update_overpotential_R_cell(step_overpotentials.R_cell);
         sol.update_overpotential_electrolyte(step_overpotentials.electrolyte);
     }
+
+    auto t2 = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
+    std::cout << "Simulation time: " << duration.count() << " ms" << std::endl;
+
+    return sol;
+}
+
+Solution SPKFSolver::solve(std::vector<double> i_t, std::vector<double> i_I, std::vector<double> i_V_obs)
+{
+    Solution sol = Solution();
+
+    auto t1 = std::chrono::high_resolution_clock::now();
+
+    // simulation loop
+    double cap = 0;
+    for (int i = 1; i < static_cast<int>(i_t.size()); i++)
+    {
+        // Gather all the simulation parameters in the right data type
+
+        double I_app = i_I[i];
+        Eigen::VectorXd I_app_(1);
+        I_app_(0) = I_app;
+        double V_obs = i_V_obs[i];
+        Eigen::VectorXd V_obs_(1);
+        V_obs_(0) = V_obs;
+
+        m_dt = i_t[i] - i_t[i - 1];
+        m_t_prev = i_t[i - 1];
+
+        // perform the simulation calculations
+        // // SPKF
+        Eigen::VectorXd result_state_estimations = m_spkf_solver.solve_one_iteration(I_app_, V_obs_);
+
+        // // update the electrode SOC
+        try
+        {
+            m_b_cell.elec_p.update_SOC(result_state_estimations(0));
+            m_b_cell.elec_n.update_SOC(result_state_estimations(1));
+        }
+        catch (InvalidSOCException &e)
+        {
+            std::cout << e.what() << std::endl;
+            break;
+        }
+
+        // // calculate the cell terminal voltage
+        OverPotentials step_overpotentials = calc_overpotentials(I_app);
+        double V = step_overpotentials.V;
+
+        cap = general_equations::calc_cap(cap, m_b_cell.get_cap(), I_app, m_dt);
+
+        // update the Solution's instance variables
+        sol.update_t(i_t[i]);
+        sol.update_cycling_step("custom");
+        sol.update_V(V);
+        sol.update_temp(m_b_cell.get_T());
+        sol.update_cap(cap);
+        sol.update_x_p(m_b_cell.elec_p.get_SOC());
+        sol.update_x_n(m_b_cell.elec_n.get_SOC());
+        sol.update_OCV_LIB(step_overpotentials.OCV_LIB);
+        sol.update_overpotential_elec_p(step_overpotentials.elec_p);
+        sol.update_overpotential_elec_n(step_overpotentials.elec_n);
+        sol.update_overpotential_R_cell(step_overpotentials.R_cell);
+        sol.update_overpotential_electrolyte(step_overpotentials.electrolyte);
+    }
+
+    auto t2 = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
+    std::cout << "Simulation time: " << duration.count() << " ms" << std::endl;
+
+    return sol;
 
     return sol;
 }
