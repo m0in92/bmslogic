@@ -38,12 +38,12 @@ SPKFSolver::SPKFSolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradati
     std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> state_equation = [this](Eigen::VectorXd x_k, Eigen::VectorXd u_k, Eigen::VectorXd w_k) -> Eigen::VectorXd
     {
         double soc_p, soc_n;
-        soc_p = m_SOC_solver_p.solve_without_update(m_dt, m_t_prev, u_k(0), m_b_cell.elec_p.get_R(), m_b_cell.elec_p.get_S(), m_b_cell.elec_p.get_D());
-        soc_n = m_SOC_solver_n.solve_without_update(m_dt, m_t_prev, u_k(0), m_b_cell.elec_n.get_R(), m_b_cell.elec_n.get_S(), m_b_cell.elec_n.get_D());
+        soc_p = m_SOC_solver_p.solve_without_update(m_dt, m_t_prev, u_k(0) + w_k(0), m_b_cell.elec_p.get_R(), m_b_cell.elec_p.get_S(), m_b_cell.elec_p.get_D());
+        soc_n = m_SOC_solver_n.solve_without_update(m_dt, m_t_prev, u_k(0) + w_k(0), m_b_cell.elec_n.get_R(), m_b_cell.elec_n.get_S(), m_b_cell.elec_n.get_D());
 
         Eigen::VectorXd results(2);
-        results(0) = (soc_p / m_b_cell.elec_p.get_c_max()) + w_k(0);
-        results(1) = (soc_n / m_b_cell.elec_n.get_c_max()) + w_k(0);
+        results(0) = (soc_p / m_b_cell.elec_p.get_c_max());
+        results(1) = (soc_n / m_b_cell.elec_n.get_c_max());
 
         return results;
     };
@@ -168,6 +168,10 @@ Solution SPKFSolver::solve(std::vector<double> i_t, std::vector<double> i_I, std
         Eigen::VectorXd result_state_estimations = m_spkf_solver.solve_one_iteration(I_app_, V_obs_);
 
         // // update the electrode SOC
+        m_SOC_solver_p.set_c_surf(result_state_estimations(0) * m_b_cell.elec_p.get_c_max(), m_dt, m_t_prev, I_app,
+                                  m_b_cell.elec_p.get_R(), m_b_cell.elec_p.get_S(), m_b_cell.elec_p.get_D());
+        m_SOC_solver_n.set_c_surf(result_state_estimations(1) * m_b_cell.elec_n.get_c_max(), m_dt, m_t_prev, I_app,
+                                  m_b_cell.elec_n.get_R(), m_b_cell.elec_n.get_S(), m_b_cell.elec_n.get_D());
         try
         {
             m_b_cell.elec_p.update_SOC(result_state_estimations(0));

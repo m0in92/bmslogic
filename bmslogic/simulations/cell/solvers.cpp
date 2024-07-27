@@ -218,6 +218,7 @@ double PolynomialApprox::solve_q(double dt, double t_prev, double j, double R, d
 double PolynomialApprox::solve_without_update(double dt, double t_prev, double i_app, double R, double S, double D)
 {
     double j = SPModel().molar_flux_electrode(i_app, S, m_electrode_type);
+    double c_s_avg_ = m_c_s_avg_prev;
     m_c_s_avg_prev = solve_c_s_avg(dt, t_prev, j, R, D);
 
     double c_surf_;
@@ -225,12 +226,23 @@ double PolynomialApprox::solve_without_update(double dt, double t_prev, double i
         c_surf_ = -(R / D) * (j / 5) + m_c_s_avg_prev;
     else if (m_type == "higher")
     {
+        double q_prev = m_q;
         m_q = solve_q(dt, t_prev, j, R, D);
         c_surf_ = -(j * R) / (35 * D) + 8 * R * m_q / 35 + m_c_s_avg_prev;
+        m_q = q_prev;
     }
     else
         throw std::invalid_argument("Invalid solver type.");
+    m_c_s_avg_prev = c_s_avg_;
     return c_surf_;
+}
+
+void PolynomialApprox::set_c_surf(double i_c_surf, double dt, double t_prev, double i_app, double R, double S, double D)
+{
+    double j = SPModel().molar_flux_electrode(i_app, S, m_electrode_type);
+    m_c_s_avg_prev = solve_c_s_avg(dt, t_prev, j, R, D);
+    m_c_surf = i_c_surf;
+    m_q = 35 * (m_c_surf + (j * R) / (35 * D) - m_c_s_avg_prev) / (8 * R);
 }
 
 void PolynomialApprox::solve(double dt, double t_prev, double i_app, double R, double S, double D)

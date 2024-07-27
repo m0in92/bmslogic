@@ -146,6 +146,8 @@ public:
     std::string get_solver_type() const { return m_type; }
     double &get_c_surf() { return m_c_surf; }
     double get_x_surf(double c_s_max) const { return m_c_surf / c_s_max; }
+    // setters
+    void set_c_surf(double i_c_surf, double dt, double t_prev, double i_app, double R, double S, double D);
     // helper functions
     double solve_without_update(double dt, double t_prev, double i_app, double R, double S, double D);
     void solve(double dt, double t_prev, double i_app, double R, double S, double D);
@@ -323,7 +325,7 @@ public:
 class BatterySolver : public BaseBatterySolver
 {
 public:
-    explicit BatterySolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver="poly");
+    explicit BatterySolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver = "poly");
     // Solvers instances
     PolynomialApprox SOC_solver_p;
     PolynomialApprox SOC_solver_n;
@@ -332,7 +334,7 @@ public:
     LumpedThermalSolver thermal_solver;
     std::string m_electrode_SOC_solver;
     // Calculation functions
-    Solution solve(BaseCycler i_cycler, int store_solution_after=1);
+    Solution solve(BaseCycler i_cycler, int store_solution_after = 1);
     // Solution solve(DischargeRest i_cycler);
 
 private:
