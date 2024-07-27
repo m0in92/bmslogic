@@ -5,7 +5,9 @@
 #include <cmath>
 #include <functional>
 
-#include "Eigen/Dense"
+#include "Eigen/Core"
+#include "Eigen/LU"
+#include "Eigen/Cholesky"
 
 // these changes are for the version of Eigen used here
 #define all placeholders::all
