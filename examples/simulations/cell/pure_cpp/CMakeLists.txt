@@ -39,3 +39,13 @@ target_include_directories(charge_rest_spm PRIVATE ${PROJECT_SOURCE_DIR}/bmslogi
 set_target_properties(charge_rest_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)
 set_target_properties(charge_rest_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)
 set_target_properties(charge_rest_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)
+
+add_executable(discharge_spkf_spm kalman_filter/sp_isothermal_discharge ${EXAMPLE_SOURCE} ${PROJECT_SOURCE_DIR}/bmslogic/calc_helpers/kalman_filter.h
+                                                                        ${PROJECT_SOURCE_DIR}/bmslogic/calc_helpers/kalman_filter.cpp
+                                                                        ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell/kalman_solvers.h
+                                                                        ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell/kalman_solvers.cpp)
+target_include_directories(discharge_spkf_spm PRIVATE ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell ${PROJECT_SOURCE_DIR}/bmslogic/
+                                                        ${PROJECT_SOURCE_DIR}/extern/eigen)
+set_target_properties(discharge_spkf_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp/kalman_filter)
+set_target_properties(discharge_spkf_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp/kalman_filter)
+set_target_properties(discharge_spkf_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp/kalman_filter)

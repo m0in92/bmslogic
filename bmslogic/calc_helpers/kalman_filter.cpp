@@ -27,13 +27,13 @@ void NormalRandomVector::check_for_vector_size_with_matrix(Eigen::VectorXd i_vec
         throw InvalidSize();
 }
 
-SigmaPointKalmanFilter::SigmaPointKalmanFilter() : m_method_type("CDKF")
-{
-    calc_and_set_gamma();
-    calc_and_set_h();
-    calc_and_set_alpha_m0();
-    calc_and_set_alpha_m();
-}
+// SigmaPointKalmanFilter::SigmaPointKalmanFilter() : m_method_type("CDKF")
+// {
+//     calc_and_set_gamma();
+//     calc_and_set_h();
+//     calc_and_set_alpha_m0();
+//     calc_and_set_alpha_m();
+// }
 
 SigmaPointKalmanFilter::SigmaPointKalmanFilter(NormalRandomVector i_x, NormalRandomVector i_w, NormalRandomVector i_v,
                                                int i_y_dim,
@@ -243,6 +243,7 @@ Eigen::MatrixXd SigmaPointKalmanFilter::calc_and_set_state_prediction(Eigen::Vec
         x_sp_ = x_sp.col(i);
         Eigen::VectorXd w_sp_(m_Nw);
         w_sp_ = w_sp.col(i);
+
         function_results.col(i) = m_state_equation(x_sp_, u, w_sp_);
     }
 

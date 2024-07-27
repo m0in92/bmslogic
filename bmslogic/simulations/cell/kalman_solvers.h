@@ -1,6 +1,9 @@
+#pragma once
+
 #include <functional>
 
 #include "Eigen/Dense"
+
 
 #include "solvers.h"
 #include "calc_helpers/kalman_filter.h"
@@ -13,7 +16,7 @@ public:
                double i_cov_w, double i_cov_v);
 
     // functions for calculations
-    Solution solve(Eigen::ArrayXd i_t, Eigen::ArrayXd i_I, Eigen::ArrayXd i_V_ob);
+    Solution solve(Eigen::VectorXd i_t, Eigen::VectorXd i_I, Eigen::VectorXd i_V_ob);
 
     // getters
     const SigmaPointKalmanFilter get_spkf_solver_instance() { return m_spkf_solver; }

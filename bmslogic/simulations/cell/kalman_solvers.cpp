@@ -42,19 +42,20 @@ SPKFSolver::SPKFSolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradati
         Eigen::VectorXd results(2);
         results(0) = (soc_p / m_b_cell.elec_p.get_c_max()) + w_k(0);
         results(1) = (soc_n / m_b_cell.elec_n.get_c_max()) + w_k(0);
+
         return results;
     };
 
     std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> output_equation = [this](Eigen::VectorXd x_k, Eigen::VectorXd u_k, Eigen::VectorXd v_k) -> Eigen::VectorXd
     {
         double m_p = SPModel().m(u_k(0), m_b_cell.elec_p.get_k(), m_b_cell.elec_p.get_S(), m_b_cell.elec_p.get_c_max(),
-                                 m_b_cell.elec_p.get_SOC(), m_b_cell.electrolyte.get_conc());
+                                 x_k(0), m_b_cell.electrolyte.get_conc());
         double m_n = SPModel().m(u_k(0), m_b_cell.elec_n.get_k(), m_b_cell.elec_n.get_S(), m_b_cell.elec_n.get_c_max(),
-                                 m_b_cell.elec_n.get_SOC(), m_b_cell.electrolyte.get_conc());
+                                 x_k(1), m_b_cell.electrolyte.get_conc());
         OverPotentials overpotentials_ = SPModel().calc_overpotentials(m_b_cell.elec_p.get_OCP(), m_b_cell.elec_n.get_OCP(), m_p, m_n,
                                                                        m_b_cell.get_R_cell(), m_b_cell.get_T(), u_k(0));
         Eigen::VectorXd results(1);
-        results << overpotentials_.V + v_k(0);
+        results(0) = overpotentials_.V + v_k(0);
         return results;
     };
 
@@ -71,28 +72,29 @@ OverPotentials SPKFSolver::calc_overpotentials(double I)
                                          m_b_cell.get_R_cell(), m_b_cell.get_T(), I);
 }
 
-Solution SPKFSolver::solve(Eigen::ArrayXd i_t, Eigen::ArrayXd i_I, Eigen::ArrayXd i_V_obs)
+Solution SPKFSolver::solve(Eigen::VectorXd i_t, Eigen::VectorXd i_I, Eigen::VectorXd i_V_obs)
 {
     Solution sol = Solution();
 
     // simulation loop
-    int sim_index = 0;
-    double cap;
+    // int sim_index = 0;
+    double cap = 0;
     for (int i = 1; i < static_cast<int>(i_t.size()); i++)
     {
+        std::cout << i << std::endl;
         // Gather all the simulation parameters in the right data type
-        double I_app = i_I(sim_index);
+
+        double I_app = i_I(i);
         Eigen::VectorXd I_app_(1);
         I_app_(0) = I_app;
-        double V_obs = i_V_obs(sim_index);
+        double V_obs = i_V_obs(i);
         Eigen::VectorXd V_obs_(1);
         V_obs_(0) = V_obs;
 
-        m_dt = i_t(sim_index) - i_t(sim_index - 1);
-        m_t_prev = i_t(sim_index - 1);
+        m_dt = i_t(i) - i_t(i - 1);
+        m_t_prev = i_t(i - 1);
 
         // perform the simulation calculations
-
         // // SPKF
         Eigen::VectorXd result_state_estimations = m_spkf_solver.solve_one_iteration(I_app_, V_obs_);
 
@@ -115,7 +117,7 @@ Solution SPKFSolver::solve(Eigen::ArrayXd i_t, Eigen::ArrayXd i_I, Eigen::ArrayX
         cap = general_equations::calc_cap(cap, m_b_cell.get_cap(), I_app, m_dt);
 
         // update the Solution's instance variables
-        sol.update_t(i_t(sim_index));
+        sol.update_t(i_t(i));
         sol.update_cycling_step("custom");
         sol.update_V(V);
         sol.update_temp(m_b_cell.get_T());
@@ -127,9 +129,6 @@ Solution SPKFSolver::solve(Eigen::ArrayXd i_t, Eigen::ArrayXd i_I, Eigen::ArrayX
         sol.update_overpotential_elec_n(step_overpotentials.elec_n);
         sol.update_overpotential_R_cell(step_overpotentials.R_cell);
         sol.update_overpotential_electrolyte(step_overpotentials.electrolyte);
-
-        // update the relevant simulations variables
-        sim_index++;
     }
 
     return sol;

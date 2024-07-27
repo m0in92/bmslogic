@@ -60,7 +60,7 @@ struct SimulationResults
 class SigmaPointKalmanFilter
 {
 public:
-    SigmaPointKalmanFilter();
+    SigmaPointKalmanFilter() = default;
     SigmaPointKalmanFilter(NormalRandomVector i_x, NormalRandomVector i_w, NormalRandomVector i_v,
                            int y_dim,
                            std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> &state_equaton,
