@@ -156,6 +156,7 @@ Eigen::MatrixXd SigmaPointKalmanFilter::calc_sqrt_matrix(Eigen::MatrixXd i_matri
 {
     Eigen::LLT<Eigen::MatrixXd> sqrt_matrix(i_matrix);
     return sqrt_matrix.matrixL();
+    // return i_matrix.sqrt()
 }
 
 void SigmaPointKalmanFilter::calc_and_set_gamma()
