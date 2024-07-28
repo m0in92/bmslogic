@@ -6,8 +6,6 @@
 #include <functional>
 
 #include "Eigen/Core"
-#include "Eigen/LU"
-#include "Eigen/Cholesky"
 
 // these changes are for the version of Eigen used here
 #define all placeholders::all
@@ -101,7 +99,7 @@ public:
     void set_output_equation(std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> i_output_equation) { m_output_equation = i_output_equation; }
 
     // helper functions
-    Eigen::MatrixXd calc_sqrt_matrix(Eigen::MatrixXd i_matrix);
+    static Eigen::MatrixXd calc_sqrt_matrix(Eigen::MatrixXd i_matrix);
 
     // SPKF calculation steps
     Eigen::MatrixXd calc_and_set_state_prediction(Eigen::VectorXd u);
