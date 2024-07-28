@@ -55,7 +55,7 @@ namespace OWL
     public:
         ArrayXD();
         ArrayXD(std::vector<double> &vec);
-        ~ArrayXD(){};
+        ~ArrayXD() {};
         // Getters
         const size_t getArrayLength() { return arrayLength; };
         const std::vector<double> getArray() { return array; };
@@ -191,6 +191,7 @@ namespace OWL
         MatrixXD operator+(MatrixXD &);
         MatrixXD operator-(MatrixXD &);
         MatrixXD operator*(MatrixXD &);
+        double operator()(int idx_row, int idx_col) { return elements[idx_row][idx_col]; }
         // Auxiliary Functions
         bool compareSize(MatrixXD &);
         OWL::ArrayXD getCol(int);

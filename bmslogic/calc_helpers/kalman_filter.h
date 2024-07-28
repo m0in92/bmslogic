@@ -57,6 +57,8 @@ struct SimulationResults
     Eigen::MatrixXd states_estimation;
 };
 
+Eigen::MatrixXd lower_Cholesky_decomposition(Eigen::MatrixXd i_matrix);
+
 class SigmaPointKalmanFilter
 {
 public:

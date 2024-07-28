@@ -267,7 +267,7 @@ namespace OWL
                 return flag;
             }
         }
-        catch (std::invalid_argument &e)
+        catch (std::invalid_argument)
         {
             return false;
         }
@@ -2047,7 +2047,7 @@ namespace Newton
             auto k = i - sorted_x.begin(); // upper element
             if (k == 0)
                 return sorted_y[0]; // lower bound extrapolation
-            int l = k ? k - 1 : 1;  // lower element
+            auto l = k ? k - 1 : 1;  // lower element
             if (i == sorted_x.end())
                 return sorted_y[sorted_y.size() - 1]; // extrapolate to the y value at the last element
 

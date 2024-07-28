@@ -1,10 +1,42 @@
 #include <iostream>
 #include <cmath>
+#include <exception>
 
 #include "Eigen/LU"
 #include "Eigen/Cholesky"
 
 #include "kalman_filter.h"
+
+#define CHOL_TOL 1
+
+Eigen::MatrixXd lower_Cholesky_decomposition(Eigen::MatrixXd i_matrix)
+{
+    const int ROW_SIZE = static_cast<int>(i_matrix.rows());
+    const int COL_SIZE = static_cast<int>(i_matrix.cols());
+
+    Eigen::MatrixXd result_matrix = Eigen::MatrixXd::Zero(ROW_SIZE, COL_SIZE);
+
+    for (int row = 0; row < ROW_SIZE; row++)
+    {
+        for (int col = 0; col < row; col++)
+        {
+            double value = i_matrix(row, col);
+            for (int k = 0; k < col; k++)
+                value -= result_matrix(row, k) * result_matrix(col, k);
+            result_matrix(row, col) = value / result_matrix(col, col);
+        }
+        double value = i_matrix(row, row);
+        for (int k = 0; k < row; k++)
+            value -= result_matrix(row, k) * result_matrix(row, k);
+        if (value >= 0)
+            result_matrix(row, row) = std::sqrt(value);
+        else if (std::abs(value) < CHOL_TOL)
+            result_matrix(row, row) = std::sqrt(abs(value));
+        // else
+        //     throw std::exception();
+    }
+    return result_matrix;
+}
 
 NormalRandomVector::NormalRandomVector(Eigen::VectorXd i_vec, Eigen::MatrixXd i_cov) : m_vec(i_vec), m_cov(i_cov)
 {
