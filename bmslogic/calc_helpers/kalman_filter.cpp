@@ -32,8 +32,8 @@ Eigen::MatrixXd lower_Cholesky_decomposition(Eigen::MatrixXd i_matrix)
             result_matrix(row, row) = std::sqrt(value);
         else if (std::abs(value) < CHOL_TOL)
             result_matrix(row, row) = std::sqrt(abs(value));
-        // else
-        //     throw std::exception();
+        else
+           throw std::exception();
     }
     return result_matrix;
 }

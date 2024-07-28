@@ -9,7 +9,8 @@ set(BMSLOGIC_SOURCES ${PROJECT_SOURCE_DIR}/bmslogic/extern/owl.h ${PROJECT_SOURC
                     ${CALC_HELPERS_DIR}/kalman_filter.h ${CALC_HELPERS_DIR}/kalman_filter.cpp)
 set(BMSLOGIC_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell ${PROJECT_SOURCE_DIR}/bmslogic)
 
-add_executable(bmslogic_tests test_battery_components.cpp test_cyclers.cpp test_kalman_filter.cpp ${BMSLOGIC_SOURCES})
+add_executable(bmslogic_tests test_owl.cpp test_battery_components.cpp test_cyclers.cpp 
+                                test_kalman_filter.cpp ${BMSLOGIC_SOURCES})
 target_link_libraries(bmslogic_tests gtest gtest_main)
 target_include_directories(bmslogic_tests PUBLIC ${BMSLOGIC_INCLUDE_DIRS} 
                                                     ${PROJECT_SOURCE_DIR}/extern/eigen

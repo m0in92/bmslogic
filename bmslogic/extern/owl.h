@@ -191,7 +191,12 @@ namespace OWL
         MatrixXD operator+(MatrixXD &);
         MatrixXD operator-(MatrixXD &);
         MatrixXD operator*(MatrixXD &);
-        double operator()(int idx_row, int idx_col) { return elements[idx_row][idx_col]; }
+        double operator()(int idx_row, int idx_col)
+        {
+            if ((idx_row > m) || (idx_col > n))
+                throw std::exception();
+            return elements[idx_row][idx_col];
+        }
         // Auxiliary Functions
         bool compareSize(MatrixXD &);
         OWL::ArrayXD getCol(int);
