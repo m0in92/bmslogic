@@ -13,7 +13,7 @@ set(BMSLOGIC_SOURCES ${PROJECT_SOURCE_DIR}/bmslogic/extern/owl.h ${PROJECT_SOURC
                     ${CELL_DIR}/kalman_solvers.h ${CELL_DIR}/kalman_solvers.cpp)
 set(BMSLOGIC_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell ${PROJECT_SOURCE_DIR}/bmslogic)
 
-add_executable(bmslogic_tests test_owl.cpp test_battery_components.cpp test_cyclers.cpp  test_models.cpp
+add_executable(bmslogic_tests test_owl.cpp test_battery_components.cpp test_cyclers.cpp  test_models.cpp test_solvers.cpp
                                 test_kalman_filter.cpp test_kalman_solvers.cpp ${BMSLOGIC_SOURCES})
 target_link_libraries(bmslogic_tests gtest gtest_main)
 target_include_directories(bmslogic_tests PUBLIC ${BMSLOGIC_INCLUDE_DIRS} 
