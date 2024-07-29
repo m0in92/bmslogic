@@ -128,6 +128,15 @@ The following contains the instructions for running this repository locally in t
    ```sh
    git clone --recurse-submodules git@github.com:ChargeSage-Inc/BMSLogic.git
    ```
+
+   Note that when pulling the updates use the following ```git``` commands to pull the updates and additional submodules
+
+   ```
+   git pull origin main
+   git submodule init
+   git submodule update
+   ```
+
 3. Build the C++ files using cmake
    ```sh
    cd build && mkdir build
