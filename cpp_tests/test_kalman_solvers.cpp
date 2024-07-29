@@ -59,4 +59,7 @@ TEST(SPKFPolynomialApprox, SolutionIteration)
     EXPECT_NEAR(sqrt_matrix(2, 0), 0.0, 1e-6);
     EXPECT_NEAR(sqrt_matrix(2, 1), 0.0, 1e-6);
     EXPECT_NEAR(sqrt_matrix(2, 2), 4.47214, 1e-3);
+    
+    // Check the values of the sigma points
+    
 }
