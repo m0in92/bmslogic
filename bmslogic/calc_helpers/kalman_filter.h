@@ -79,6 +79,8 @@ public:
     int get_p() const { return m_p; }
 
     NormalRandomVector get_x() const { return m_x; }
+    NormalRandomVector get_w() const { return m_w; }
+    NormalRandomVector get_v() const { return m_v; }
 
     Eigen::VectorXd get_aug_vec() { return generate_aug_vec(); }
     Eigen::MatrixXd get_aug_cov() { return generate_aug_cov(); }

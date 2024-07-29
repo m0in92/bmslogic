@@ -2,6 +2,84 @@
 
 #include "kalman_solvers.h"
 
+SPKFPolynomialApprox::SPKFPolynomialApprox(char i_electrode_type, double i_c_init,
+                                           double i_R, double i_S, double i_D, double i_cov_x, double i_cov_w, double i_cov_v) : conc_solver(i_electrode_type,
+                                                                                                                                             i_c_init,
+                                                                                                                                             "higher"),
+                                                                                                                                 m_R(i_R), m_S(i_S), m_D(i_D)
+{
+    Eigen::Matrix<double, 1, 1> vec_x;
+    vec_x(0) = i_c_init;
+    Eigen::Matrix<double, 1, 1> cov_x;
+    cov_x(0, 0) = i_cov_x;
+    NormalRandomVector x = NormalRandomVector(vec_x, cov_x);
+
+    Eigen::Matrix<double, 1, 1> vec_w;
+    vec_w(0) = 0.0;
+    Eigen::Matrix<double, 1, 1> cov_w;
+    cov_w(0, 0) = i_cov_w;
+    NormalRandomVector w = NormalRandomVector(vec_w, cov_w);
+
+    Eigen::Matrix<double, 1, 1> vec_v;
+    vec_v(0) = 0.0;
+    Eigen::Matrix<double, 1, 1> cov_v;
+    cov_v(0, 0) = i_cov_v;
+    NormalRandomVector v = NormalRandomVector(vec_v, cov_v);
+
+    int y_dim = 1;
+
+    std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> state_equation = [this](Eigen::VectorXd x_k,
+                                                                                                              Eigen::VectorXd u_k,
+                                                                                                              Eigen::VectorXd w_k)
+    {
+        double I = u_k(0) + w_k(0);
+        double j = SPModel().molar_flux_electrode(I, m_S, conc_solver.get_electrodeType());
+
+        Eigen::Matrix<double, 1, 1> result_matrix;
+        result_matrix(0) = conc_solver.get_solve_c_s_avg(m_dt, m_t_prev, m_j, m_R, m_D);
+        return result_matrix;
+    };
+
+    std::function<Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)> output_equation = [this](Eigen::VectorXd x_k,
+                                                                                                               Eigen::VectorXd u_k,
+                                                                                                               Eigen::VectorXd v_k)
+    {
+        double j = SPModel().molar_flux_electrode(u_k(0), m_S, conc_solver.get_electrodeType());
+        double q = conc_solver.get_solve_q(m_dt, m_t_prev, j, m_R, m_D);
+        double c_surf = (-(j * m_R) / (35 * m_D) + 8 * m_R * q / 35) + x_k(0);
+
+        Eigen::Matrix<double, 1, 1> result_matrix;
+        result_matrix(0) = c_surf;
+        return result_matrix;
+    };
+
+    m_spkf_solver = SigmaPointKalmanFilter(x, w, v, y_dim, state_equation, output_equation, "CDKF");
+}
+
+double SPKFPolynomialApprox::solve_spkf(double dt, double t_prev, double I_app, double c_surf_true)
+{
+    m_dt = dt;
+    m_t_prev = t_prev;
+    double j = SPModel().molar_flux_electrode(I_app, m_S, conc_solver.get_electrodeType());
+
+    // spkf solve
+    Eigen::Matrix<double, 1, 1> u_k;
+    Eigen::Matrix<double, 1, 1> y_true;
+    u_k(0) = I_app;
+    y_true(0) = c_surf_true;
+
+    m_spkf_solver.solve(u_k, y_true);
+
+    // solve and update the PolyApprox members
+    conc_solver.set_c_s_avg(m_spkf_solver.get_x().get_vec()(0)); // c_s_avg
+    double q = conc_solver.get_solve_q(m_dt, m_t_prev, j, m_R, m_D);
+    conc_solver.set_q(q); // set q
+    double c_surf = -(j * m_R) / (35 * m_D) + 8 * m_R * q / 35 + conc_solver.get_c_s_avg();
+    conc_solver.just_set_c_surf(c_surf); // set c_surf
+
+    return conc_solver.get_c_surf();
+}
+
 SPKFSolver::SPKFSolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation,
                        double i_state1_init, double i_state2_init, double i_cov_state1, double i_cov_state2,
                        double i_cov_w, double i_cov_v) : BaseBatterySolver(i_b_cell,

@@ -528,6 +528,10 @@ PYBIND11_MODULE(cell, m)
               py::arg("electrode_soc_solver") = "poly")
          .def("solve", &ESPBatterySolver::solve, py::arg("cycler"));
 
+     py::class_<SPKFPolynomialApprox>(m, "SPKFPolynomialApprox")
+         .def(py::init<char, double, double, double, double, double, double, double>())
+         .def("solve_spkf", &SPKFPolynomialApprox::solve_spkf);
+
      py::class_<SPKFSolver>(m, "SPKFSolver")
          .def(py::init<BatteryCell, bool, bool,
                        double, double, double, double,

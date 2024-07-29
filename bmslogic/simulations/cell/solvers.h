@@ -144,11 +144,17 @@ public:
     PolynomialApprox(char electrodeType, double i_c_init, std::string type);
     // getter functions
     std::string get_solver_type() const { return m_type; }
+    double get_c_s_avg() { return m_c_s_avg_prev; }
     double &get_c_surf() { return m_c_surf; }
     double get_x_surf(double c_s_max) const { return m_c_surf / c_s_max; }
     // setters
+    void set_c_s_avg(double i_c_s_avg) { m_c_s_avg_prev = i_c_s_avg; }
+    void set_q(double i_q) { m_q = i_q; }
     void set_c_surf(double i_c_surf, double dt, double t_prev, double i_app, double R, double S, double D);
+    void just_set_c_surf(double i_c_surf) { m_c_surf = i_c_surf; }
     // helper functions
+    double get_solve_c_s_avg(double dt, double t_prev, double j, double R, double D) { return solve_c_s_avg(dt, t_prev, j, R, D); }
+    double get_solve_q(double dt, double t_prev, double j, double R, double D) { return solve_q(dt, t_prev, j, R, D); }
     double solve_without_update(double dt, double t_prev, double i_app, double R, double S, double D);
     void solve(double dt, double t_prev, double i_app, double R, double S, double D);
 
