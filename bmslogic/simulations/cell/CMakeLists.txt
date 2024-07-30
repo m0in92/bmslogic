@@ -29,8 +29,8 @@ set(CELL_SIM_LIB_SOURCES    ${PROJECT_SOURCE_DIR}/bmslogic/extern/owl.cpp
 add_library(cell_sim ${CELL_SIM_LIB_SOURCES})
 target_include_directories(cell_sim PUBLIC  ${PROJECT_SOURCE_DIR}/bmslogic/ 
                                             ${PROJECT_SOURCE_DIR}/extern/eigen)
-if (MSVC)
-    set_target_properties(cell_sim PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell)
-    set_target_properties(cell_sim PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell)
-    set_target_properties(cell_sim PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell)
-endif(MSVC)
+# if (MSVC)
+#     set_target_properties(cell_sim PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell)
+#     set_target_properties(cell_sim PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell)
+#     set_target_properties(cell_sim PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell)
+# endif(MSVC)
