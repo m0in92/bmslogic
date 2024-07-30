@@ -21,3 +21,16 @@ if (MSVC)
     set_target_properties(cell PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell)
     set_target_properties(cell PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell)
 endif(MSVC)
+
+set(CELL_SIM_LIB_DIR ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell)
+set(CELL_SIM_LIB_SOURCES    ${PROJECT_SOURCE_DIR}/bmslogic/extern/owl.cpp
+                            ${PROJECT_SOURCE_DIR}/bmslogic/calc_helpers/kalman_filter.cpp 
+                            cyclers.cpp battery_components.cpp solvers.cpp coords.cpp models.cpp solution.cpp kalman_solvers.cpp)
+add_library(cell_sim ${CELL_SIM_LIB_SOURCES})
+target_include_directories(cell_sim PUBLIC  ${PROJECT_SOURCE_DIR}/bmslogic/ 
+                                            ${PROJECT_SOURCE_DIR}/extern/eigen)
+if (MSVC)
+    set_target_properties(cell_sim PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell)
+    set_target_properties(cell_sim PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell)
+    set_target_properties(cell_sim PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell)
+endif(MSVC)

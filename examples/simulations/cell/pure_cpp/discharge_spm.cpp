@@ -48,7 +48,7 @@ int main()
     Solution sol = solver.solve(cycler);
 
     std::cout
-        << sol.get_V()[40000] << std::endl;
+        << sol.get_V().back() << std::endl;
 
     return 0;
 }

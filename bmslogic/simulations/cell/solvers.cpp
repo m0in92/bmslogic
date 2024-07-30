@@ -693,6 +693,7 @@ std::pair<OverPotentials, bool> BatterySolver::solve_one_iteration(double t_prev
         }
         catch (InvalidSOCException &e)
         {
+            step_completed = true;
             std::cout << e.what() << std::endl;
         }
     }

@@ -487,7 +487,7 @@ class PyKFSPSolver(PySPSolver):
 
     def __state_equation_next(self, x_k: Union[float, np.ndarray],
                               u_k: Union[float, np.ndarray],
-                              w_k: Union[float, np.ndarray]) -> None:
+                              w_k: Union[float, np.ndarray]) -> np.ndarray:
         soc_p_: float = self.SOC_solver_p(dt=self.__dt, t_prev=self.__t_prev, i_app=(u_k+w_k).real,
                                           R=self.b_cell.elec_p.R,
                                           S=self.b_cell.elec_p.S,
