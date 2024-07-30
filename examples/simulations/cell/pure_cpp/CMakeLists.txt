@@ -72,7 +72,7 @@ set_target_properties(charge_rest_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG 
 set_target_properties(charge_rest_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)
 
 add_executable(discharge_spkf_spm kalman_filter/sp_isothermal_discharge.cpp)
-target_link_libraries(discharge_spkf_spm PRIVATE cell_sim)
+target_link_libraries(discharge_spkf_spm cell_sim)
 target_include_directories(discharge_spkf_spm PRIVATE ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell ${PROJECT_SOURCE_DIR}/bmslogic/
                                                         ${PROJECT_SOURCE_DIR}/extern/eigen)
 set_target_properties(discharge_spkf_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp/kalman_filter)
