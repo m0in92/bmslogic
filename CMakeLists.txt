@@ -21,15 +21,16 @@ else()
     if (WIN32)
         set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
     endif(WIN32)
+    add_subdirectory(cpp_tests)
 endif(NO_CPP_TESTS)
 
 if(CPP_ONLY)
     message("C++ ONLY")
 elseif(NOT CPP_ONLY)
     add_subdirectory(bmslogic)
-endif()   
+endif(CPP_ONLY)   
 add_subdirectory(examples)
-add_subdirectory(cpp_tests)
+# add_subdirectory(cpp_tests)
 
 
 
