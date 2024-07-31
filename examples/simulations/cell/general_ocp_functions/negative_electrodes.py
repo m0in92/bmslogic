@@ -14,7 +14,15 @@ __status__ = "Deployed"
 import numpy as np
 import matplotlib.pyplot as plt
 
-from bmslogic import cell_sim
+try:
+    from bmslogic import cell_sim
+except ModuleNotFoundError as e:
+    import sys
+    import pathlib
+
+    sys.path.append(pathlib.Path(__file__).parent.parent.parent.parent.parent.__str__())
+    from bmslogic.parameter_sets.test.funcs import OCP_ref_n, OCP_ref_p
+    from bmslogic import cell_sim
 
 
 SOC_graphite: np.ndarray = np.linspace(0, 0.8)
