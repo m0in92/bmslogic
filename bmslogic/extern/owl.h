@@ -191,12 +191,12 @@ namespace OWL
         MatrixXD operator+(MatrixXD &);
         MatrixXD operator-(MatrixXD &);
         MatrixXD operator*(MatrixXD &);
-        // double operator()(int idx_row, int idx_col)
-        // {
-        //     if ((idx_row > m) || (idx_col > n))
-        //         throw std::exception();
-        //     return elements[idx_row][idx_col];
-        // }
+        double operator()(int idx_row, int idx_col)
+        {
+            if ((idx_row > m) || (idx_col > n))
+                throw std::exception();
+            return elements[idx_row][idx_col];
+        }
         // Auxiliary Functions
         bool compareSize(MatrixXD &);
         OWL::ArrayXD getCol(int);
@@ -309,31 +309,31 @@ namespace Newton
             const char *what();
         };
 
-        double slope(double &y2, double &y1, double &x2, double &x1);
-        std::function<double(double)> line(double &slope, double &x, double &y);
-        double interp(OWL::ArrayXD xArray, OWL::ArrayXD yArray, double x);
-        std::function<double(double)> interpFunc(OWL::ArrayXD xArray, OWL::ArrayXD yArray);
-        double linear_interpolation(double x, std::vector<double> vec_x, std::vector<double> vec_y);
-        long double linear_interpolation(long double x, std::vector<long double> vec_x, std::vector<long double> vec_y);
-        std::vector<double> linear_interpolation(std::vector<double> target_vec_x, std::vector<double> vec_x, std::vector<double> vec_y);
-        std::vector<long double> linear_interpolation(std::vector<long double> target_vec_x, std::vector<long double> vec_x, std::vector<long double> vec_y);
+        [[nodiscard]] double slope(double &y2, double &y1, double &x2, double &x1);
+        [[nodiscard]] std::function<double(double)> line(double &slope, double &x, double &y);
+        [[nodiscard]] double interp(OWL::ArrayXD xArray, OWL::ArrayXD yArray, double x);
+        [[nodiscard]] std::function<double(double)> interpFunc(OWL::ArrayXD xArray, OWL::ArrayXD yArray);
+        [[nodiscard]] double linear_interpolation(double x, std::vector<double> vec_x, std::vector<double> vec_y);
+        [[nodiscard]] long double linear_interpolation(long double x, std::vector<long double> vec_x, std::vector<long double> vec_y);
+        [[nodiscard]] std::vector<double> linear_interpolation(std::vector<double> target_vec_x, std::vector<double> vec_x, std::vector<double> vec_y);
+        [[nodiscard]] std::vector<long double> linear_interpolation(std::vector<long double> target_vec_x, std::vector<long double> vec_x, std::vector<long double> vec_y);
     }
 
     namespace ODESolver
     {
-        double Euler(const double x_prev, const double y_prev, const double step_size, double (*func)(double, double));
-        double Euler(const double y_prev, const double step_size, double func_value);
-        OWL::ArrayXD Euler(OWL::ArrayXD xArray, double yInit, double (*func)(double, double));
+        [[nodiscard]] double Euler(const double x_prev, const double y_prev, const double step_size, double (*func)(double, double));
+        [[nodiscard]] double Euler(const double y_prev, const double step_size, double func_value);
+        [[nodiscard]] OWL::ArrayXD Euler(OWL::ArrayXD xArray, double yInit, double (*func)(double, double));[[nodiscard]] 
 
-        double rk4(const double x_prev, const double y_prev, const double step_size, double (*func)(double x, double y));
-        double rk4(const double x_prev, const double y_prev, const double step_size, std::function<double(double, double)> func);
-        OWL::ArrayXD rk4(OWL::ArrayXD xArray, double yInit, double (*func)(double, double));
+        [[nodiscard]] double rk4(const double x_prev, const double y_prev, const double step_size, double (*func)(double x, double y));
+        [[nodiscard]] double rk4(const double x_prev, const double y_prev, const double step_size, std::function<double(double, double)> func);
+        [[nodiscard]] OWL::ArrayXD rk4(OWL::ArrayXD xArray, double yInit, double (*func)(double, double));
     }
 
     namespace roots
     {
         // double Brent(double (*func)(double), double lower_bound, double upper_bound, double TOL, double MAX_ITER);
-        double Brent(std::function<double(double)> func, double lower_bound, double upper_bound, double TOL, double MAX_ITER);
+        [[nodiscard]] double Brent(std::function<double(double)> func, double lower_bound, double upper_bound, double TOL, double MAX_ITER);
     }
 
     namespace MatrixSolvers
@@ -347,7 +347,7 @@ namespace Newton
          * @param col_vec
          * @return std::vector<double>
          */
-        std::vector<double> TDMASolver(std::vector<double> l_diag, std::vector<double> diag, std::vector<double> u_diag, std::vector<double> col_vec);
+        [[nodiscard]] std::vector<double> TDMASolver(std::vector<double> l_diag, std::vector<double> diag, std::vector<double> u_diag, std::vector<double> col_vec);
     }
 }
 

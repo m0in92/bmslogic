@@ -2414,7 +2414,7 @@ namespace Newton
          */
         std::vector<double> TDMASolver(std::vector<double> l_diag, std::vector<double> diag, std::vector<double> u_diag, std::vector<double> col_vec)
         {
-            int N = col_vec.size();
+            int N = static_cast<int>(col_vec.size());
 
             std::vector<double> c_l_diag = l_diag;
             std::vector<double> c_diag = diag;

@@ -864,11 +864,11 @@ TEST(TestMatrixXDOperatorOverload, TestMatrixAccessor)
     sampleMatrix1 << row2;
     sampleMatrix1 << row3;
 
-    // EXPECT_EQ(sampleMatrix1(0, 0), 1);
-    // EXPECT_EQ(sampleMatrix1(1, 0), 2);
-    // EXPECT_EQ(sampleMatrix1(2, 0), 3);
+    EXPECT_EQ(sampleMatrix1(0, 0), 1);
+    EXPECT_EQ(sampleMatrix1(1, 0), 2);
+    EXPECT_EQ(sampleMatrix1(2, 0), 3);
 
-    // EXPECT_THROW(sampleMatrix1(0,1), std::exception);
+    EXPECT_THROW(sampleMatrix1(0,1), std::exception);
 }
 
 /**

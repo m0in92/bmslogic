@@ -81,8 +81,8 @@ from django_app.forms import SPSimulationVariables, ECMSimulationVariables
 #             return None
 
 
-# def index(request) -> HttpResponse:
-#     return render(request=request, template_name='index.html', context={})
+def index(request) -> HttpResponse:
+    return render(request=request, template_name='index.html', context={})
 
 
 # def ecm(request) -> HttpResponse:
