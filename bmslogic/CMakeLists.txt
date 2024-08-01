@@ -1,15 +1,3 @@
-if(CPP_ONLY)
-    message("C++ ONLY")
-elseif(NOT CPP_ONLY)
-    add_subdirectory(calc_helpers)
-endif(CPP_ONLY)   
-# add_subdirectory(calc_helpers)
-
+add_subdirectory(calc_helpers)
 add_subdirectory(simulations/cell)
-
-if(CPP_ONLY)
-    message("C++ ONLY")
-elseif(NOT CPP_ONLY)
-    add_subdirectory(extern)
-endif(CPP_ONLY)  
-# add_subdirectory(extern)
+add_subdirectory(extern)

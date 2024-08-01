@@ -231,6 +231,9 @@ public:
     double get_c_s_surf() { return m_c_prev[m_c_prev.size() - 1]; }
     std::vector<double> get_c_prev() { return m_c_prev; }
     double get_c_surf() { return m_c_surf; }
+    std::vector<double> get_array_R(double R) { return array_R(R); }
+    double get_dr(double R) { return dr(R); }
+    std::vector<double> get_diag_elements(double dt, double R, double D) { return LHS_diag_elements(dt, R, D); }
 
     // calculation functions
     double calc_A(double dt, double R, double D) { return A(dt, R, D); }

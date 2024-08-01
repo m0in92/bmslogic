@@ -11,7 +11,14 @@ import time
 import numpy as np
 import matplotlib.pyplot as plt
 
-from bmslogic.simulations.cell.cell import ElectrolyteFVMCoordinates, ElectrolyteFVMSolver
+try:
+    from bmslogic.simulations.cell.cell import ElectrolyteFVMCoordinates, ElectrolyteFVMSolver
+except ModuleNotFoundError as e:
+    import sys
+    import pathlib
+
+    sys.path.append(pathlib.Path(__file__).parent.parent.parent.parent.parent.__str__())
+    from bmslogic.simulations.cell.cell import ElectrolyteFVMCoordinates, ElectrolyteFVMSolver
 
 
 L_n: float = 8e-5
