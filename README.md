@@ -137,7 +137,7 @@ The following contains the instructions for running this repository locally in t
    git submodule update
    ```
 
-3. Build the C++ files using cmake
+2. Build the C++ files using cmake
    ```sh
    cd build && mkdir build
    cmake ..
@@ -155,7 +155,7 @@ The following contains the instructions for running this repository locally in t
    ```sh
    pytest tests
    ```
-3. Google tests is used for testing the C++ code. Use the following
+2. Google tests is used for testing the C++ code. Use the following
   to run the existing tests.
    ```sh
    cd cpp_tests
