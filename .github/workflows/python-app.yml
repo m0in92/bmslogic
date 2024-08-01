@@ -23,7 +23,8 @@ jobs:
         run: git submodule update --init --recursive
       - name: pybind11 bindings
         run: |
-          cmake .
+          cd build && mkdir build
+          cmake ..
           cmake --build .
       - name: Python dependencies
         run: |
