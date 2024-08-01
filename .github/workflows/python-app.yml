@@ -21,16 +21,12 @@ jobs:
         run: python -c "import sys; print(sys.version)"
       - name: Install pybind11
         run: git submodule update --init --recursive
-      - name: pybind11 bindings
+      - name: cmake build
         uses: threeal/cmake-action@main
-        with:
-          args: DNO_CPP_TESTS:BOOL=FALSE
-        #   build-dir: build/
-        #   source-dir: /
-        # run: |
-        #   cd build && mkdir build
-        #   cmake ..
-        #   cmake --build .
+      - name: run cpp_tests
+        run: |
+          cd cpp_test
+          ./bmslogic_tests
       - name: Python dependencies
         run: |
           python -m pip install --upgrade pip 
