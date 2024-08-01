@@ -2414,7 +2414,7 @@ namespace Newton
          */
         std::vector<double> TDMASolver(std::vector<double> l_diag, std::vector<double> diag, std::vector<double> u_diag, std::vector<double> col_vec)
         {
-            size_t N = col_vec.size();
+            int N = col_vec.size();
 
             std::vector<double> c_l_diag = l_diag;
             std::vector<double> c_diag = diag;
@@ -2431,7 +2431,7 @@ namespace Newton
             std::vector<double> xc = c_diag;
             xc.back() = c_col_vec.back() / c_diag.back();
 
-            for (auto il = N - 2; il > -1; il--)
+            for (int il = N - 2; il > -1; il--)
             {
                 xc[il] = (c_col_vec[il] - c_u_diag[il] * xc[il + 1]) / c_diag[il];
             }

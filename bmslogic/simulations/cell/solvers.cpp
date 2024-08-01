@@ -393,10 +393,12 @@ std::vector<double> CNSolver::array_R(double R)
 std::vector<double> CNSolver::LHS_diag_elements(double dt, double R, double D)
 {
     double A_ = A(dt, R, D);
-    OWL::ArrayXD array_ = (1 + A_) * OWL::Ones(m_K);
-    std::vector<double> result_vector = array_.getArray();
-    result_vector[0] = 1 + 3 * A_; // for symmetry boundary condition at r=0
-    result_vector[result_vector.size() - 1] = 1 + A_;
+    std::vector<double> result_vector;
+    result_vector.push_back(1 + 3 * A_); // for symmetry boundary condition at r=0
+    for (int i=0; i<m_K-1; i++)
+    {
+        result_vector.push_back(1+A_);
+    }
     return result_vector;
 }
 
@@ -461,7 +463,7 @@ void CNSolver::solve(double dt, double i_app, double R, double S, double D)
     std::vector<double> b = RHS_vector(j, dt, R, D);
 
     m_c_prev = Newton::MatrixSolvers::TDMASolver(lower_diag, diag, upper_diag, b);
-    m_c_surf = m_c_prev[m_c_prev.size() - 1];
+    // m_c_surf = m_c_prev[m_c_prev.size() - 1];
 }
 
 /*

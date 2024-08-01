@@ -31,7 +31,7 @@ i_app = -1.65  # Applied current [A]
 dt = 0.1  # time increment [s]
 N_sim: int = 3600
 
-solver_instance: CNSolver = CNSolver(SOC_init, electrode_type='n', num_spatial_pts=100)
+solver_instance: CNSolver = CNSolver(SOC_init * c_max, electrode_type='n', num_spatial_pts=100)
 eigen_solver_instance: EigenSolver = EigenSolver(electrode_type='n', soc_init=SOC_init, num_roots=10)
 poly_solver_instance: PolySolver = PolySolver(electrode_type='n', c_init=c_max*SOC_init, solver_type="higher")
 

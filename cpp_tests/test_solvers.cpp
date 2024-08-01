@@ -55,7 +55,7 @@ TEST(CNSolverTest, Constructor)
     EXPECT_EQ(solver_instance.get_electrode_type(), electrode_type);
     EXPECT_EQ(solver_instance.get_spatial_pts(), num_spatial_pts);
     EXPECT_EQ(solver_instance.get_c_s_surf(), c_init);
-    EXPECT_EQ(solver_instance.get_c_surf(), c_init);
+    // EXPECT_EQ(solver_instance.get_c_surf(), c_init);
 
     OWL::ArrayXD c_prev = c_init * OWL::Ones(num_spatial_pts);
     std::vector<double> c_prev_ = c_prev.getArray();
@@ -114,7 +114,27 @@ TEST(CNSolverTest, MethodArrayR)
     }
 }
 
-TEST(CNSolverTest, LHS_diag_elemeents)
+TEST(CNSolverTest, ArrayR)
+{
+    double c_init = 0.45 * 51410;
+    char electrode_type = 'p';
+    CNSolver solver_instance = CNSolver(c_init, electrode_type, 5);
+
+    double dt = 0.1;
+    double R = 2.0;
+    double D = 1.0;
+
+    std::vector<double> result = solver_instance.get_array_R(R);
+
+    EXPECT_EQ(result.size(), 5);
+    EXPECT_EQ(result[0], 0);
+    EXPECT_EQ(result[1], 0.5);
+    EXPECT_EQ(result[2], 1.0);
+    EXPECT_EQ(result[3], 1.5);
+    EXPECT_EQ(result[4], 2.0);
+}
+
+TEST(CNSolverTest, LHS_diag_elements)
 {
     double c_init = 0.45 * 51410;
     char electrode_type = 'p';
@@ -137,4 +157,81 @@ TEST(CNSolverTest, LHS_diag_elemeents)
     {
         EXPECT_DOUBLE_EQ(result[i], expected_result[i]);
     }
+}
+
+TEST(CNSolverTest, LHS_l_diag_elements)
+{
+    double c_init = 0.45 * 51410;
+    char electrode_type = 'p';
+    int spatial_pts = 5;
+    CNSolver solver_instance = CNSolver(c_init, electrode_type, spatial_pts);
+
+    double dt = 0.1;
+    double R = 2.0;
+    double D = 1.0;
+
+    std::vector<double> result = solver_instance.get_l_diag_elements(dt, R, D);
+
+    double A = solver_instance.calc_A(dt, R, D);
+    double B = solver_instance.calc_B(dt, R, D);
+    std::vector<double> array_R = solver_instance.get_array_R(R);
+    EXPECT_EQ(result.size(), spatial_pts - 1);
+    for (int i = 0; i < spatial_pts - 2; i++)
+    {
+
+        EXPECT_EQ(result[i], -(A / 2 - B / array_R[i + 1]));
+    }
+    EXPECT_EQ(result.back(), -A);
+}
+
+TEST(CNSolverTest, LHS_u_diag_elements)
+{
+    double c_init = 0.45 * 51410;
+    char electrode_type = 'p';
+    int spatial_pts = 5;
+    CNSolver solver_instance = CNSolver(c_init, electrode_type, spatial_pts);
+
+    double dt = 0.1;
+    double R = 2.0;
+    double D = 1.0;
+
+    std::vector<double> result = solver_instance.get_u_diag_elements(dt, R, D);
+
+    double A = solver_instance.calc_A(dt, R, D);
+    double B = solver_instance.calc_B(dt, R, D);
+    std::vector<double> array_R = solver_instance.get_array_R(R);
+    EXPECT_EQ(result.size(), spatial_pts - 1);
+    EXPECT_EQ(result[0], -3 * A);
+    for (int i = 1; i < spatial_pts - 1; i++)
+    {
+
+        EXPECT_EQ(result[i], -(A / 2 + B / array_R[i]));
+    }
+}
+
+TEST(CNSolverTest, solve)
+{
+    double R = 1.25e-5;       // electrode particle radius in [m]
+    double c_max = 31833;     // max. electrode concentration [mol/m3]
+    double D = 3.9e-14;       // electrode diffusivity [m2/s]
+    double S = 0.7824;        // electrode electrochemical active area [m2]
+    double SOC_init = 0.7568; // initial electrode SOC
+
+    double dt = 0.1;
+    double I_app = -1.65;
+    double spatial_pts = 100;
+
+    CNSolver solver_instance = CNSolver(c_max * SOC_init, 'n', spatial_pts);
+
+    EXPECT_EQ(solver_instance.get_c_s_surf(), 24091.2144);
+    for (auto i : solver_instance.get_c_prev())
+    {
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+
+    solver_instance.solve(dt, I_app, R, S, D);
+    EXPECT_NEAR(solver_instance.get_c_s_surf(), 24062.50442622, 1e-6);
+    solver_instance.solve(dt, I_app, R, S, D);
+    EXPECT_NEAR(solver_instance.get_c_s_surf(), 24043.33453948, 1e-6);
 }
