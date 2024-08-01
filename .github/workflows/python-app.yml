@@ -22,10 +22,13 @@ jobs:
       - name: Install pybind11
         run: git submodule update --init --recursive
       - name: pybind11 bindings
-        run: |
-          cd build && mkdir build
-          cmake ..
-          cmake --build .
+        uses: threeal/cmake-action@main
+        with:
+          build-dir: build/
+        # run: |
+        #   cd build && mkdir build
+        #   cmake ..
+        #   cmake --build .
       - name: Python dependencies
         run: |
           python -m pip install --upgrade pip 
