@@ -21,5 +21,7 @@ target_include_directories(bmslogic_tests PUBLIC ${BMSLOGIC_INCLUDE_DIRS}
                                                     ${CALC_HELPERS_DIR})
 include_directories(${PROJECT_SOURCE_DIR}/extern/google_tests/googletest/googletest/include 
                     ${PROJECT_SOURCE_DIR}/extern/google_tests/googletest)
+set_target_properties(bmslogic_tests PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/cpp_tests)
 set_target_properties(bmslogic_tests PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/cpp_tests)
+set_target_properties(bmslogic_tests PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/cpp_tests)
 
