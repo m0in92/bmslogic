@@ -23,9 +23,9 @@ jobs:
         run: git submodule update --init --recursive
       - name: pybind11 bindings
         uses: threeal/cmake-action@main
-        with:
-          build-dir: build/
-          source-dir: /
+        # with:
+        #   build-dir: build/
+        #   source-dir: /
         # run: |
         #   cd build && mkdir build
         #   cmake ..
