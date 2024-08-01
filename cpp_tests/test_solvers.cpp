@@ -224,12 +224,6 @@ TEST(CNSolverTest, solve)
     CNSolver solver_instance = CNSolver(c_max * SOC_init, 'n', spatial_pts);
 
     EXPECT_EQ(solver_instance.get_c_s_surf(), 24091.2144);
-    for (auto i : solver_instance.get_c_prev())
-    {
-        std::cout << i << " ";
-    }
-    std::cout << std::endl;
-
     solver_instance.solve(dt, I_app, R, S, D);
     EXPECT_NEAR(solver_instance.get_c_s_surf(), 24062.50442622, 1e-6);
     solver_instance.solve(dt, I_app, R, S, D);

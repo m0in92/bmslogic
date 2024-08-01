@@ -870,3 +870,31 @@ TEST(TestMatrixXDOperatorOverload, TestMatrixAccessor)
 
     // EXPECT_THROW(sampleMatrix1(0,1), std::exception);
 }
+
+/**
+ * @brief Construct a new TEST object.  Example obtained from https://www.quantstart.com/articles/Tridiagonal-Matrix-Algorithm-Thomas-Algorithm-in-C/
+ *
+ */
+TEST(MatrixSolversTest, TDMASolver)
+{
+    const size_t N = 4;
+    double delta_x = 1.0 / static_cast<double>(N);
+    double delta_t = 0.001;
+    double r = delta_t / (delta_x * delta_x);
+
+    std::vector<double> l_diag(N - 1, 1);
+    std::vector<double> diag(N, -2.6);
+    std::vector<double> u_diag(N - 1, 1);
+    std::vector<double> b(N, 0.0);
+    // std::vector<double> f(N, 0.0);
+
+    b[0] = -240;
+    b.back() = -150;
+
+    std::vector<double> result = Newton::MatrixSolvers::TDMASolver(l_diag, diag, u_diag, b);
+
+    EXPECT_NEAR(result[0], 118.0, 1);
+    EXPECT_NEAR(result[1], 67.0, 1);
+    EXPECT_NEAR(result[2], 56.0, 1);
+    EXPECT_NEAR(result[3], 79.35619, 0.001);
+}
