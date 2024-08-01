@@ -25,6 +25,7 @@ jobs:
         uses: threeal/cmake-action@main
         with:
           build-dir: build/
+          source-dir: BMSLogic
         # run: |
         #   cd build && mkdir build
         #   cmake ..
