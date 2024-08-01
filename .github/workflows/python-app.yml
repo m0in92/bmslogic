@@ -25,7 +25,7 @@ jobs:
         uses: threeal/cmake-action@main
       - name: run cpp_tests
         run: |
-          cd cpp_test
+          cd cpp_tests
           ./bmslogic_tests
       - name: Python dependencies
         run: |
