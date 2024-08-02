@@ -25,3 +25,5 @@ set_target_properties(bmslogic_tests PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJE
 set_target_properties(bmslogic_tests PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/cpp_tests)
 set_target_properties(bmslogic_tests PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/cpp_tests)
 
+include(GoogleTest)
+gtest_discover_tests(bmslogic_tests)
