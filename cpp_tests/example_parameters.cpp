@@ -4,17 +4,17 @@
  * @brief contains the example parameters for the battery cell
  * @version 0.1
  * @date 2024-05-06
- * 
+ *
  * @copyright Copyright (c) 2024 by BMSLogic
- * 
+ *
  */
 
 #include <cmath>
 #include <functional>
 
 /*
-* Negative Electrode
-*/
+ * Negative Electrode
+ */
 static double A_n = 0.0596;
 static double L_n = 7.35e-5;
 static double kappa_n = 100;
@@ -50,8 +50,8 @@ static double dOCPdT_n(double SOC)
 }
 
 /*
-* Positive Electrode
-*/
+ * Positive Electrode
+ */
 static double L_p = 7.000000e-05;
 static double A_p = 5.960000e-02;
 static double max_conc_p = 51410;
@@ -67,28 +67,26 @@ static double Ea_R_p = 58000;
 static double brugg_p = 1.5;
 // SOC_init_p = 0.59;
 // SOC_p = SOC_init_p
-static double soc_min_p = 0.4956 ;
+static double soc_min_p = 0.4956;
 static double soc_max_p = 0.989011;
 static double alpha_p = 0.5;
 
 // functions
-double OCP_ref_p(double SOC)
+static double OCP_ref_p(double SOC)
 {
-    return 4.04596 + std::exp(-42.30027 * SOC + 16.56714) - 0.04880 * std::atan(50.01833 * SOC - 26.48897) \
-              - 0.05447 * std::atan(18.99678 * SOC - 12.32362) - std::exp(78.24095 * SOC - 78.68074);
+    return 4.04596 + std::exp(-42.30027 * SOC + 16.56714) - 0.04880 * std::atan(50.01833 * SOC - 26.48897) - 0.05447 * std::atan(18.99678 * SOC - 12.32362) - std::exp(78.24095 * SOC - 78.68074);
 }
 
-
-double dOCPdT_p(double SOC)
+static double dOCPdT_p(double SOC)
 {
-    double num = -0.19952 + 0.92837*SOC - 1.36455 * std::pow(SOC, 2) + 0.61154 * std::pow(SOC, 3);
+    double num = -0.19952 + 0.92837 * SOC - 1.36455 * std::pow(SOC, 2) + 0.61154 * std::pow(SOC, 3);
     double dem = 1 - 5.66148 * SOC + 11.47636 * std::pow(SOC, 2) - 9.82431 * std::pow(SOC, 3) + 3.04876 * std::pow(SOC, 4);
-    return (num/dem) * 1e-3 ; // since the original unit are of mV/K
+    return (num / dem) * 1e-3; // since the original unit are of mV/K
 }
 
 /*
-* Electrolyte
-*/
+ * Electrolyte
+ */
 static double L_e = 2e-5;
 static double c_init_e = 1000.0;
 static double kappa_e = 0.2875;
@@ -96,8 +94,8 @@ static double epsilon_e = 0.724;
 static double brugg_e = 1.5;
 
 /*
-* Battery Cell
-*/
+ * Battery Cell
+ */
 static double T = 298.15;
 static double rho = 1626;
 static double Vol = 3.38e-5;

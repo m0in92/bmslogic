@@ -3,6 +3,8 @@
 #include "extern/owl.h"
 #include "solvers.h"
 
+#include "example_parameters.cpp"
+
 TEST(BaseConcSolverTest, Constructor)
 {
     char electrode_type = 'p';
@@ -228,4 +230,262 @@ TEST(CNSolverTest, solve)
     EXPECT_NEAR(solver_instance.get_c_s_surf(), 24062.50442622, 1e-6);
     solver_instance.solve(dt, I_app, R, S, D);
     EXPECT_NEAR(solver_instance.get_c_s_surf(), 24043.33453948, 1e-6);
+}
+
+TEST(ElectrolyteFVMSOlverTest, Constructor)
+{
+    double L_n = 8e-5;
+    double L_sep = 2.5e-5;
+    double L_p = 8.8e-5;
+    double epsilon_e_n = 0.385;
+    double epsilon_e_sep = 0.785;
+    double epsilon_e_p = 0.485;
+    double D_e = 3.5e-10; // [mol/m3]
+    double brugg = 4.0;
+    double a_s_n = 5.78e3;
+    double a_s_p = 7.28e3;
+    double c_e_init = 1000; // [mol/m3]
+    double transference = 0.354;
+
+    ElectrolyteFVMCoordinates coords = ElectrolyteFVMCoordinates(L_n, L_sep, L_p, 10, 10, 10);
+    ElectrolyteFVMSolver solver_instance = ElectrolyteFVMSolver(coords, c_e_init, transference, epsilon_e_n, epsilon_e_sep, epsilon_e_p,
+                                                                a_s_n, a_s_p, D_e, brugg);
+
+    EXPECT_EQ(solver_instance.get_epsilon_e_n(), epsilon_e_n);
+    EXPECT_EQ(solver_instance.get_epsilon_e_sep(), epsilon_e_sep);
+    EXPECT_EQ(solver_instance.get_epsilon_e_p(), epsilon_e_p);
+
+    EXPECT_EQ(solver_instance.get_a_s_n(), a_s_n);
+    EXPECT_EQ(solver_instance.get_a_s_p(), a_s_p);
+
+    EXPECT_EQ(solver_instance.get_D_e(), D_e);
+    EXPECT_EQ(solver_instance.get_t_c(), transference);
+}
+
+/**
+ * @brief Tests for the getter method for the vector containing the electrolyte concentrations.
+ *
+ */
+TEST(ElectrolyteFVMSolverTest, vector_c_e)
+{
+    double L_n = 8e-5;
+    double L_sep = 2.5e-5;
+    double L_p = 8.8e-5;
+    double epsilon_e_n = 0.385;
+    double epsilon_e_sep = 0.785;
+    double epsilon_e_p = 0.485;
+    double D_e = 3.5e-10; // [mol/m3]
+    double brugg = 4.0;
+    double a_s_n = 5.78e3;
+    double a_s_p = 7.28e3;
+    double c_e_init = 1000; // [mol/m3]
+    double transference = 0.354;
+
+    ElectrolyteFVMCoordinates coords = ElectrolyteFVMCoordinates(L_n, L_sep, L_p, 10, 10, 10);
+    ElectrolyteFVMSolver solver_instance = ElectrolyteFVMSolver(coords, c_e_init, transference, epsilon_e_n, epsilon_e_sep, epsilon_e_p,
+                                                                a_s_n, a_s_p, D_e, brugg);
+
+    size_t N = 30;
+    std::vector<double> expected(N, c_e_init);
+    EXPECT_EQ(solver_instance.get_vector_c_e(), expected);
+}
+
+TEST(ElectrolyteFVMSolverTest, diag_elements)
+{
+    double L_n = 8e-5;
+    double L_sep = 2.5e-5;
+    double L_p = 8.8e-5;
+    double epsilon_e_n = 0.385;
+    double epsilon_e_sep = 0.785;
+    double epsilon_e_p = 0.485;
+    double D_e = 3.5e-10; // [mol/m3]
+    double brugg = 4.0;
+    double a_s_n = 5.78e3;
+    double a_s_p = 7.28e3;
+    double c_e_init = 1000; // [mol/m3]
+    double transference = 0.354;
+
+    double dt = 0.1; // in [s]
+
+    ElectrolyteFVMCoordinates coords = ElectrolyteFVMCoordinates(L_n, L_sep, L_p, 10, 10, 10);
+    ElectrolyteFVMSolver solver_instance = ElectrolyteFVMSolver(coords, c_e_init, transference, epsilon_e_n, epsilon_e_sep, epsilon_e_p,
+                                                                a_s_n, a_s_p, D_e, brugg);
+
+    std::vector<double> expected = {0.39701519956054687, 0.40903039912109374, 0.40903039912109374, 0.40903039912109374, 0.40903039912109374,
+                                    0.40903039912109374, 0.40903039912109374, 0.40903039912109374, 0.40903039912109374, 0.5643918250813804,
+                                    3.447111405166663, 5.03801240699999, 5.03801240699999, 5.03801240699999, 5.03801240699999,
+                                    5.03801240699999,
+                                    5.03801240699999, 5.03801240699999, 5.03801240699999, 3.45052361212832, 0.6631374097584988,
+                                    0.5350149282509039,
+                                    0.5350149282509039, 0.5350149282509039, 0.5350149282509039, 0.5350149282509039, 0.5350149282509039,
+                                    0.5350149282509039, 0.5350149282509039, 0.510007464125452};
+    std::vector<double> result = solver_instance.get_calc_diag(dt);
+    for (size_t i = 0; i < expected.size(); i++)
+    {
+        EXPECT_NEAR(result[i], expected[i], 1e-8);
+    }
+}
+
+TEST(ElectrolyteFVMSolverTest, lower_diag_elements)
+{
+    double L_n = 8e-5;
+    double L_sep = 2.5e-5;
+    double L_p = 8.8e-5;
+    double epsilon_e_n = 0.385;
+    double epsilon_e_sep = 0.785;
+    double epsilon_e_p = 0.485;
+    double D_e = 3.5e-10; // [mol/m3]
+    double brugg = 4.0;
+    double a_s_n = 5.78e3;
+    double a_s_p = 7.28e3;
+    double c_e_init = 1000; // [mol/m3]
+    double transference = 0.354;
+
+    double dt = 0.1; // in [s]
+
+    ElectrolyteFVMCoordinates coords = ElectrolyteFVMCoordinates(L_n, L_sep, L_p, 10, 10, 10);
+    ElectrolyteFVMSolver solver_instance = ElectrolyteFVMSolver(coords, c_e_init, transference, epsilon_e_n, epsilon_e_sep, epsilon_e_p,
+                                                                a_s_n, a_s_p, D_e, brugg);
+
+    std::vector<double> expected = {-0.01201519956054687, -0.012015199560546868, -0.012015199560546875, -0.012015199560546865,
+                                    -0.012015199560546865, -0.012015199560546875,
+                                    -0.012015199560546875, -0.012015199560546865,
+                                    -0.012015199560546865, -0.5356052016666676,
+                                    -2.126506203499995, -2.126506203499995,
+                                    -2.126506203499995,
+                                    -2.126506203499995, -2.126506203499995, -2.126506203499995, -2.126506203499995,
+                                    -2.126506203499995,
+                                    -2.126506203499995, -0.15312994563304688,
+                                    -0.02500746412545197, -0.02500746412545197,
+                                    -0.02500746412545197,
+                                    -0.02500746412545197, -0.02500746412545197,
+                                    -0.02500746412545197, -0.02500746412545197,
+                                    -0.02500746412545197,
+                                    -0.02500746412545197};
+    std::vector<double> result = solver_instance.get_calc_lower_diag(dt);
+    for (size_t i = 0; i < expected.size(); i++)
+    {
+        EXPECT_NEAR(result[i], expected[i], 1e-8);
+    }
+}
+
+TEST(ElectrolyteFVMSolverTest, upper_diag_elements)
+{
+    double L_n = 8e-5;
+    double L_sep = 2.5e-5;
+    double L_p = 8.8e-5;
+    double epsilon_e_n = 0.385;
+    double epsilon_e_sep = 0.785;
+    double epsilon_e_p = 0.485;
+    double D_e = 3.5e-10; // [mol/m3]
+    double brugg = 4.0;
+    double a_s_n = 5.78e3;
+    double a_s_p = 7.28e3;
+    double c_e_init = 1000; // [mol/m3]
+    double transference = 0.354;
+
+    double dt = 0.1; // in [s]
+
+    ElectrolyteFVMCoordinates coords = ElectrolyteFVMCoordinates(L_n, L_sep, L_p, 10, 10, 10);
+    ElectrolyteFVMSolver solver_instance = ElectrolyteFVMSolver(coords, c_e_init, transference, epsilon_e_n, epsilon_e_sep, epsilon_e_p,
+                                                                a_s_n, a_s_p, D_e, brugg);
+
+    std::vector<double> expected = {-0.01201519956054687, -0.012015199560546868, -0.012015199560546875, -0.012015199560546865,
+                                    -0.012015199560546865, -0.012015199560546875, -0.012015199560546875, -0.012015199560546865,
+                                    -0.012015199560546865, -0.1673766255208336, -2.126506203499995, -2.126506203499995,
+                                    -2.126506203499995, -2.126506203499995, -2.126506203499995, -2.126506203499995,
+                                    -2.126506203499995,
+                                    -2.126506203499995, -2.126506203499995, -0.539017408628325, -0.02500746412545197,
+                                    -0.02500746412545197, -0.02500746412545197, -0.02500746412545197, -0.02500746412545197,
+                                    -0.02500746412545197, -0.02500746412545197, -0.02500746412545197, -0.02500746412545197};
+    std::vector<double> result = solver_instance.get_calc_upper_diag(dt);
+    for (size_t i = 0; i < expected.size(); i++)
+    {
+        EXPECT_NEAR(result[i], expected[i], 1e-8);
+    }
+}
+
+TEST(ElectrolyteFVMSolverTest, solver)
+{
+    double L_n = 8e-5;
+    double L_sep = 2.5e-5;
+    double L_p = 8.8e-5;
+    double epsilon_e_n = 0.385;
+    double epsilon_e_sep = 0.785;
+    double epsilon_e_p = 0.485;
+    double D_e = 3.5e-10; // [mol/m3]
+    double brugg = 4.0;
+    double a_s_n = 5.78e3;
+    double a_s_p = 7.28e3;
+    double c_e_init = 1000; // [mol/m3]
+    double transference = 0.354;
+
+    double dt = 0.1; // in [s]
+
+    ElectrolyteFVMCoordinates coords = ElectrolyteFVMCoordinates(L_n, L_sep, L_p, 10, 10, 10);
+    ElectrolyteFVMSolver solver_instance = ElectrolyteFVMSolver(coords, c_e_init, transference, epsilon_e_n, epsilon_e_sep, epsilon_e_p,
+                                                                a_s_n, a_s_p, D_e, brugg);
+
+    OWL::ArrayXD j_p = -1.53693327e-05 * OWL::Ones(10);
+    OWL::ArrayXD j_sep = OWL::Zeros(10);
+    OWL::ArrayXD j_n = 2.19362652e-05 * OWL::Ones(10);
+    OWL::ArrayXD j_ = OWL::append(OWL::append(j_n, j_sep), j_p);
+    std::vector<double> j = j_.getArray();
+
+    std::vector<double> expected = {1000.02127464, 1000.02127464, 1000.02127464, 1000.02127464, 1000.02127464,
+                                    1000.02127464, 1000.02127451, 1000.02127015, 1000.02112188, 1000.01607847,
+                                    1000.00376418, 1000.00205212, 1000.0010976, 1000.00054825, 1000.00020129,
+                                    999.99992864, 999.99962965, 999.99919394, 999.99846067, 999.99715915,
+                                    999.9878872, 999.98522759, 999.985103, 999.98509717, 999.98509689,
+                                    999.98509688, 999.98509688, 999.98509688, 999.98509688, 999.98509688};
+    solver_instance.solve(j, dt);
+    std::vector<double> result = solver_instance.get_vector_c_e();
+    for (int i = 0; i < expected.size(); i++)
+    {
+        EXPECT_NEAR(result[i], expected[i], 1e-6);
+    }
+}
+
+/**
+ * @brief Test the results from the isothermal and no degradation single particle simulations using the 
+ * poly solver. 
+ * 
+ * The numbers are the benchmark in-house simulations results.
+ * 
+ */
+TEST(SPSolverTest, IsoThermalSolvePolySolver)
+{
+    double temp = 298.15;
+    double soc_n = 0.7568;
+    double soc_p = 0.4956;
+
+    double discharge_current = 1.656;
+    double V_min = 4.0;
+    double SOC_lib_min = 0.0;
+    double SOC_lib = 0.0;
+
+    std::function<double(double)> OCP_ref_n_ = OCP_ref_n;
+    std::function<double(double)> dOCPdT_n_ = dOCPdT_n;
+    std::function<double(double)> OCP_ref_p_ = OCP_ref_p;
+    std::function<double(double)> dOCPdT_p_ = dOCPdT_p;
+
+    NElectrode elec_n = NElectrode(L_n, A_n, kappa_n, epsilon_n, max_conc_n, R_n, S_n,
+                                   T_ref_n, D_ref_n, k_ref_n, Ea_D_n, Ea_R_n, alpha_n,
+                                   brugg_n, soc_n, temp, OCP_ref_n_, dOCPdT_n_);
+    PElectrode elec_p = PElectrode(L_p, A_p, kappa_p, epsilon_p, max_conc_p, R_p, S_p,
+                                   T_ref_p, D_ref_p, k_ref_p, Ea_D_p, Ea_R_p, alpha_p,
+                                   brugg_p, soc_p, temp, OCP_ref_p_, dOCPdT_p_);
+    Electrolyte electrolyte = Electrolyte(c_init_e, L_e, kappa_e, epsilon_e, brugg_e);
+    BatteryCell b_cell = BatteryCell(elec_p, elec_n, electrolyte, rho, Vol, C_p, h, A, cap, V_max, V_min, R_cell);
+
+    Discharge cycler = Discharge(discharge_current, V_min, SOC_lib_min, SOC_lib);
+
+    BatterySolver solver = BatterySolver(b_cell, true, true, "poly");
+    Solution sol = solver.solve(cycler);
+
+    EXPECT_EQ(sol.get_V()[0], 4.0199174566872626);
+    EXPECT_EQ(sol.get_V()[1], 4.0198737542938119);
+    EXPECT_EQ(sol.get_V()[2], 4.0198300549308437);
+    EXPECT_EQ(sol.get_V()[3], 4.0197863584857476);
+    EXPECT_EQ(sol.get_V()[4], 4.0197426648461407);
 }
