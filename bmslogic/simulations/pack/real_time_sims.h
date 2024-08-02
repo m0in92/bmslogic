@@ -1,3 +1,6 @@
+#ifndef BMS_LOGIC_TIMED_SIMS_H
+#define BMS_LOGIC_TIMED_SIMS_H
+
 #include <iostream>
 #include <chrono>
 #include <thread>
@@ -29,7 +32,7 @@ void timed_simulation(double simulation_total_duration, long step_duration)
             if (perform_simulation)
                 // perform simulation here
                 std::cout << "Time: " << std::chrono::duration_cast<std::chrono::milliseconds>(time_current - time_simulation_start).count() << " ms" << std::endl;
-            const long sleep_time = 10.0;
+            const long sleep_time {10};
             std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
             perform_simulation = false;
 
@@ -52,7 +55,4 @@ void timed_simulation(double simulation_total_duration, long step_duration)
     }
 }
 
-int main()
-{
-    timed_simulation(10000, 100);
-}
+#endif // BMSLOGIC_TIMED_SIMS_h
