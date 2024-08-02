@@ -429,7 +429,8 @@ TEST(ElectrolyteFVMSolverTest, solver)
     OWL::ArrayXD j_p = -1.53693327e-05 * OWL::Ones(10);
     OWL::ArrayXD j_sep = OWL::Zeros(10);
     OWL::ArrayXD j_n = 2.19362652e-05 * OWL::Ones(10);
-    OWL::ArrayXD j_ = OWL::append(OWL::append(j_n, j_sep), j_p);
+    OWL::ArrayXD j_n_and_j_sep = OWL::append(j_n, j_sep);
+    OWL::ArrayXD j_ = OWL::append(j_n_and_j_sep, j_p);
     std::vector<double> j = j_.getArray();
 
     std::vector<double> expected = {1000.02127464, 1000.02127464, 1000.02127464, 1000.02127464, 1000.02127464,
@@ -447,11 +448,11 @@ TEST(ElectrolyteFVMSolverTest, solver)
 }
 
 /**
- * @brief Test the results from the isothermal and no degradation single particle simulations using the 
- * poly solver. 
- * 
+ * @brief Test the results from the isothermal and no degradation single particle simulations using the
+ * poly solver.
+ *
  * The numbers are the benchmark in-house simulations results.
- * 
+ *
  */
 TEST(SPSolverTest, IsoThermalSolvePolySolver)
 {
@@ -488,4 +489,110 @@ TEST(SPSolverTest, IsoThermalSolvePolySolver)
     EXPECT_EQ(sol.get_V()[2], 4.0198300549308437);
     EXPECT_EQ(sol.get_V()[3], 4.0197863584857476);
     EXPECT_EQ(sol.get_V()[4], 4.0197426648461407);
+
+    EXPECT_EQ(sol.get_temp()[0], temp);
+    EXPECT_EQ(sol.get_temp()[1], temp);
+    EXPECT_EQ(sol.get_temp()[2], temp);
+    EXPECT_EQ(sol.get_temp()[3], temp);
+    EXPECT_EQ(sol.get_temp()[4], temp);
+}
+
+/**
+ * @brief Test the results from the non-isothermal and no degradation single particle simulations using the
+ * poly solver.
+ *
+ * The numbers are the benchmark in-house simulations results.
+ *
+ */
+TEST(SPSolverTest, NonIsoThermalSolvePolySolver)
+{
+    double temp = 298.15;
+    double soc_n = 0.7568;
+    double soc_p = 0.4956;
+
+    double discharge_current = 1.656;
+    double V_min = 4.0;
+    double SOC_lib_min = 0.0;
+    double SOC_lib = 0.0;
+
+    std::function<double(double)> OCP_ref_n_ = OCP_ref_n;
+    std::function<double(double)> dOCPdT_n_ = dOCPdT_n;
+    std::function<double(double)> OCP_ref_p_ = OCP_ref_p;
+    std::function<double(double)> dOCPdT_p_ = dOCPdT_p;
+
+    NElectrode elec_n = NElectrode(L_n, A_n, kappa_n, epsilon_n, max_conc_n, R_n, S_n,
+                                   T_ref_n, D_ref_n, k_ref_n, Ea_D_n, Ea_R_n, alpha_n,
+                                   brugg_n, soc_n, temp, OCP_ref_n_, dOCPdT_n_);
+    PElectrode elec_p = PElectrode(L_p, A_p, kappa_p, epsilon_p, max_conc_p, R_p, S_p,
+                                   T_ref_p, D_ref_p, k_ref_p, Ea_D_p, Ea_R_p, alpha_p,
+                                   brugg_p, soc_p, temp, OCP_ref_p_, dOCPdT_p_);
+    Electrolyte electrolyte = Electrolyte(c_init_e, L_e, kappa_e, epsilon_e, brugg_e);
+    BatteryCell b_cell = BatteryCell(elec_p, elec_n, electrolyte, rho, Vol, C_p, h, A, cap, V_max, V_min, R_cell);
+
+    Discharge cycler = Discharge(discharge_current, V_min, SOC_lib_min, SOC_lib);
+
+    BatterySolver solver = BatterySolver(b_cell, false, true, "poly");
+    Solution sol = solver.solve(cycler);
+
+    EXPECT_EQ(sol.get_V()[0], 4.0199174566872626);
+    EXPECT_EQ(sol.get_V()[1], 4.0198742951877362);
+    EXPECT_EQ(sol.get_V()[2], 4.0198305958144065);
+    EXPECT_EQ(sol.get_V()[3], 4.0197874402091704);
+    EXPECT_EQ(sol.get_V()[4], 4.0197437465505015);
+
+    EXPECT_EQ(sol.get_temp()[0], 298.15028422258484);
+    EXPECT_EQ(sol.get_temp()[1], 298.15028419862062);
+    EXPECT_EQ(sol.get_temp()[2], 298.15056834028428);
+    EXPECT_EQ(sol.get_temp()[3], 298.15056829237966);
+    EXPECT_EQ(sol.get_temp()[4], 298.15085235315752);
+}
+
+/**
+ * @brief Test the results from the isothermal and no degradation single particle simulations using the
+ * CN solver.
+ *
+ * The numbers are the benchmark in-house simulations results.
+ *
+ */
+TEST(SPSolverTest, IsoThermalSPSolverCNSolver)
+{
+    double temp = 298.15;
+    double soc_n = 0.7568;
+    double soc_p = 0.4956;
+
+    double discharge_current = 1.656;
+    double V_min = 4.0;
+    double SOC_lib_min = 0.0;
+    double SOC_lib = 0.0;
+
+    std::function<double(double)> OCP_ref_n_ = OCP_ref_n;
+    std::function<double(double)> dOCPdT_n_ = dOCPdT_n;
+    std::function<double(double)> OCP_ref_p_ = OCP_ref_p;
+    std::function<double(double)> dOCPdT_p_ = dOCPdT_p;
+
+    NElectrode elec_n = NElectrode(L_n, A_n, kappa_n, epsilon_n, max_conc_n, R_n, S_n,
+                                   T_ref_n, D_ref_n, k_ref_n, Ea_D_n, Ea_R_n, alpha_n,
+                                   brugg_n, soc_n, temp, OCP_ref_n_, dOCPdT_n_);
+    PElectrode elec_p = PElectrode(L_p, A_p, kappa_p, epsilon_p, max_conc_p, R_p, S_p,
+                                   T_ref_p, D_ref_p, k_ref_p, Ea_D_p, Ea_R_p, alpha_p,
+                                   brugg_p, soc_p, temp, OCP_ref_p_, dOCPdT_p_);
+    Electrolyte electrolyte = Electrolyte(c_init_e, L_e, kappa_e, epsilon_e, brugg_e);
+    BatteryCell b_cell = BatteryCell(elec_p, elec_n, electrolyte, rho, Vol, C_p, h, A, cap, V_max, V_min, R_cell);
+
+    Discharge cycler = Discharge(discharge_current, V_min, SOC_lib_min, SOC_lib);
+
+    BatterySolver solver = BatterySolver(b_cell, true, true, "CN");
+    Solution sol = solver.solve(cycler);
+
+    EXPECT_EQ(sol.get_V()[0], 4.0292677917381994);
+    EXPECT_EQ(sol.get_V()[1], 4.0285675827922987);
+    EXPECT_EQ(sol.get_V()[2], 4.0280031299585959);
+    EXPECT_EQ(sol.get_V()[3], 4.0275294026515862);
+    EXPECT_EQ(sol.get_V()[4], 4.0271190042397649);
+
+    EXPECT_EQ(sol.get_temp()[0], temp);
+    EXPECT_EQ(sol.get_temp()[1], temp);
+    EXPECT_EQ(sol.get_temp()[2], temp);
+    EXPECT_EQ(sol.get_temp()[3], temp);
+    EXPECT_EQ(sol.get_temp()[4], temp);
 }
