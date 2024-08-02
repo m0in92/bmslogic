@@ -20,7 +20,7 @@ TEST(SPKFPolynomialApprox, Constructor)
     EXPECT_EQ(solver_instance.get_spkf_solver().get_v().get_cov()(0, 0), cov_v);
 }
 
-TEST(SPKFPolynomialApprox, SolutionIteration)
+TEST(SPKFPolynomialApprox, AugmentsStatesAndAugmentedCov)
 {
     double c_init = 3200;
     double cov_x = 10;
@@ -48,7 +48,7 @@ TEST(SPKFPolynomialApprox, SolutionIteration)
     EXPECT_EQ(solver_instance.get_spkf_solver().get_aug_cov().rows(), 3);
     EXPECT_EQ(solver_instance.get_spkf_solver().get_aug_cov().cols(), 3);
 
-    // Check the values of the square of the augmented covariance matrix. 
+    // Check the values of the square of the augmented covariance matrix.
     Eigen::Matrix<double, 3, 3> sqrt_matrix = solver_instance.get_spkf_solver().calc_sqrt_matrix(solver_instance.get_spkf_solver().get_aug_cov());
     EXPECT_NEAR(sqrt_matrix(0, 0), 3.1622776601683795, 1e-6);
     EXPECT_NEAR(sqrt_matrix(0, 1), 0.0, 1e-6);
@@ -59,6 +59,4 @@ TEST(SPKFPolynomialApprox, SolutionIteration)
     EXPECT_NEAR(sqrt_matrix(2, 0), 0.0, 1e-6);
     EXPECT_NEAR(sqrt_matrix(2, 1), 0.0, 1e-6);
     EXPECT_NEAR(sqrt_matrix(2, 2), 4.47214, 1e-3);
-    
-    // Check the values of the sigma points
 }
