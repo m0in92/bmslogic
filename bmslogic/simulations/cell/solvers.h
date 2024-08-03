@@ -347,11 +347,11 @@ public:
     // Calculation functions
     Solution solve(BaseCycler i_cycler, int store_solution_after = 1);
     // Solution solve(DischargeRest i_cycler);
+    std::pair<OverPotentials, bool> solve_one_iteration(double t_prev, double dt, double I);
 
 private:
     double calc_V(double I);
     OverPotentials calc_overpotentials(double I);
-    std::pair<OverPotentials, bool> solve_one_iteration(double t_prev, double dt, double I);
 };
 
 class ESPBatterySolver : public BaseBatterySolver
