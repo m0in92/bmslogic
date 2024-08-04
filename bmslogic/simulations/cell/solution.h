@@ -20,7 +20,7 @@
 class ECMSolution
 {
 public:
-    ECMSolution(){};
+    ECMSolution() {};
     ECMSolution(std::vector<double> i_t,
                 std::vector<double> i_I,
                 std::vector<double> i_V,
@@ -61,7 +61,7 @@ private:
 class Solution
 {
 public:
-    Solution(){};
+    Solution() {};
     Solution(std::vector<double> i_t,
              std::vector<std::string> i_cycling_step,
              std::vector<double> i_V,

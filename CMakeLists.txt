@@ -14,16 +14,7 @@ option(EMBEDDED "Only compiles the executables for the linux embedded system" OF
 
 add_subdirectory(extern/pybind11)
 add_subdirectory(extern/eigen)
-
-# if (NO_CPP_TESTS)
-#     message("NO_CPP_TESTS")
-# else()
-#     add_subdirectory(extern/google_tests)
-#     if (WIN32)
-#         set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-#     endif(WIN32)
-#     add_subdirectory(cpp_tests)
-# endif(NO_CPP_TESTS)
+add_subdirectory(extern/cpp-matplotlib)
 
 if(EMBEDDED)
     message("EMBEDDED")
@@ -36,7 +27,6 @@ elseif(NOT EMBEDDED)
     add_subdirectory(cpp_tests)
 endif()   
 add_subdirectory(examples)
-# add_subdirectory(cpp_tests)
 
 
 

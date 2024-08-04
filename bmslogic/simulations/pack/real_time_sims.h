@@ -16,7 +16,7 @@
  * @param simulation_total_duration Total simulation times in milliseconds
  * @param step_duration periodic intervals to perform a simulation in milliseconds
  */
-void timed_simulation(double simulation_total_duration, long step_duration, BatterySolver solver_instance, BaseCycler cycler);
-void timed_simulation(double simulation_total_duration, long step_duration, std::vector<BatterySolver> solver_instance, BaseCycler cycler);
+void timed_simulation(double simulation_total_duration, long step_duration, BatterySolver &solver_instance, BaseCycler cycler);
+void timed_simulation(double simulation_total_duration, long step_duration, std::vector<BatterySolver> &solver_instance, BaseCycler cycler);
 
 #endif // BMSLOGIC_TIMED_SIMS_h

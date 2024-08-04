@@ -11,7 +11,9 @@ set(EXAMPLE_SOURCE ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell/battery_compo
                     ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell/solvers.cpp)
 
 add_executable(discharge_spm discharge_spm.cpp ${EXAMPLE_SOURCE})
-target_include_directories(discharge_spm PUBLIC ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell ${PROJECT_SOURCE_DIR}/bmslogic/)
+target_include_directories(discharge_spm PUBLIC ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell ${PROJECT_SOURCE_DIR}/bmslogic/
+                                                ${PROJECT_SOURCE_DIR}/extern/cpp-matplotlib)
+target_link_libraries(discharge_spm matplotlib_cpp)
 set_target_properties(discharge_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)
 set_target_properties(discharge_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)
 set_target_properties(discharge_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)

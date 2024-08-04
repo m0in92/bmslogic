@@ -1,6 +1,6 @@
 #include "real_time_sims.h"
 
-void timed_simulation(double simulation_total_duration, long step_duration, BatterySolver solver_instance, BaseCycler cycler)
+void timed_simulation(double simulation_total_duration, long step_duration, BatterySolver &solver_instance, BaseCycler cycler)
 {
     bool simulation_end = false;
     bool perform_simulation = true;
@@ -56,7 +56,7 @@ void timed_simulation(double simulation_total_duration, long step_duration, Batt
     }
 }
 
-void timed_simulation(double simulation_total_duration, long step_duration, std::vector<BatterySolver> solver_instance, BaseCycler cycler)
+void timed_simulation(double simulation_total_duration, long step_duration, std::vector<BatterySolver> &solver_instance, BaseCycler cycler)
 {
     {
         bool simulation_end = false;

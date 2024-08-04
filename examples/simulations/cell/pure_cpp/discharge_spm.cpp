@@ -12,6 +12,8 @@
 #include <iostream>
 #include <functional>
 
+#include "matplotlibcpp.h"
+
 #include "example_parameters.cpp"
 #include "battery_components.h"
 #include "cyclers.h"
@@ -49,6 +51,12 @@ int main()
 
     std::cout
         << sol.get_V().back() << std::endl;
+
+    matplotlibcpp::plot(sol.get_t(), sol.get_V());
+
+    matplotlibcpp::xlabel("Time [s]", {{"fontsize", "15"}});
+    matplotlibcpp::ylabel("V [V]", {{"fontsize", "15"}});
+    matplotlibcpp::show();
 
     return 0;
 }

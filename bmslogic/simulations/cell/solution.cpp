@@ -61,3 +61,4 @@ Solution::Solution(std::vector<double> i_t,
     m_x_n = i_x_n;
     m_OCV = i_OCV;
 }
+
