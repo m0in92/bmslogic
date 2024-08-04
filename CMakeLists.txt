@@ -14,7 +14,7 @@ option(EMBEDDED "Only compiles the executables for the linux embedded system" OF
 
 add_subdirectory(extern/pybind11)
 add_subdirectory(extern/eigen)
-add_subdirectory(extern/cpp-matplotlib)
+add_subdirectory(extern/cpp_plotting)
 
 if(EMBEDDED)
     message("EMBEDDED")
