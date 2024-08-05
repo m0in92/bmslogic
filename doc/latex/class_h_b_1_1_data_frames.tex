@@ -1,0 +1,173 @@
+\doxysection{HB\+::Data\+Frames Class Reference}
+\hypertarget{class_h_b_1_1_data_frames}{}\label{class_h_b_1_1_data_frames}\index{HB::DataFrames@{HB::DataFrames}}
+
+
+{\ttfamily \#include $<$hummingbird.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_h_b_1_1_data_frames_a23f820ee14c3ebfef90edcdc2ac7935f}\label{class_h_b_1_1_data_frames_a23f820ee14c3ebfef90edcdc2ac7935f} 
+std\+::vector$<$ std\+::string $>$ {\bfseries get\+Index} ()
+\item 
+\Hypertarget{class_h_b_1_1_data_frames_aacfb356bac30c39bb0295e31db876935}\label{class_h_b_1_1_data_frames_aacfb356bac30c39bb0295e31db876935} 
+std\+::vector$<$ std\+::string $>$ {\bfseries get\+Col\+Names} ()
+\item 
+std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ \mbox{\hyperlink{class_h_b_1_1_data_frames_aa1b6b1fd1da1a7ddf1f3c7de616d35ed}{get\+Data}} ()
+\item 
+int \mbox{\hyperlink{class_h_b_1_1_data_frames_ac532f4b08c9ba97b89d93cb69f3d52b5}{get\+Col\+Index}} (std\+::string)
+\item 
+int \mbox{\hyperlink{class_h_b_1_1_data_frames_a34d072fa1e0d6d0ce0116014489a5c47}{get\+Index\+Index}} (std\+::string)
+\item 
+\mbox{\hyperlink{class_h_b_1_1_data_frames}{Data\+Frames}} \mbox{\hyperlink{class_h_b_1_1_data_frames_ae759fa80dcb09b653e9865bbc2fa1fac}{get\+Col\+Values}} (std\+::string)
+\item 
+\mbox{\hyperlink{class_h_b_1_1_data_frames}{Data\+Frames}} \mbox{\hyperlink{class_h_b_1_1_data_frames_a2b1ef1385804cd767e3405ac60711e7c}{get\+Index\+Values}} (std\+::string)
+\item 
+std\+::string \mbox{\hyperlink{class_h_b_1_1_data_frames_ae806e4774151ea41ee2d4c4048b71747}{get\+Value}} (const std\+::string input\+Col\+Name, const std\+::string input\+Index\+Name)
+\item 
+\Hypertarget{class_h_b_1_1_data_frames_a2cf345f3c2af96ecbbc2869c0d998e4e}\label{class_h_b_1_1_data_frames_a2cf345f3c2af96ecbbc2869c0d998e4e} 
+void {\bfseries set\+\_\+index} (std\+::vector$<$ std\+::string $>$ input\+Index)
+\item 
+\Hypertarget{class_h_b_1_1_data_frames_a9729f6a8777c36821fe37ad5eeda955c}\label{class_h_b_1_1_data_frames_a9729f6a8777c36821fe37ad5eeda955c} 
+void {\bfseries set\+\_\+colname} (std\+::vector$<$ std\+::string $>$ input\+Col\+Name)
+\item 
+\Hypertarget{class_h_b_1_1_data_frames_aa4a8a6e93845988a96883397afa662d5}\label{class_h_b_1_1_data_frames_aa4a8a6e93845988a96883397afa662d5} 
+void {\bfseries set\+\_\+data} (std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ input\+Data)
+\item 
+void \mbox{\hyperlink{class_h_b_1_1_data_frames_afb9658c803a98f10d403a58d59f4aec1}{display\+\_\+colnames}} ()
+\item 
+\Hypertarget{class_h_b_1_1_data_frames_a3d7f0da75c18235258a4b52cebecd7bd}\label{class_h_b_1_1_data_frames_a3d7f0da75c18235258a4b52cebecd7bd} 
+void {\bfseries display\+\_\+dataframes} ()
+\item 
+\mbox{\hyperlink{class_h_b_1_1_data_frames}{Data\+Frames}} \mbox{\hyperlink{class_h_b_1_1_data_frames_a8e0784cd27c49b07328effa2c119a40e}{operator\mbox{[}$\,$\mbox{]}}} (std\+::string col\+Name)
+\item 
+\Hypertarget{class_h_b_1_1_data_frames_a700c48c90c988c09ad4d611b6f2cbe9b}\label{class_h_b_1_1_data_frames_a700c48c90c988c09ad4d611b6f2cbe9b} 
+std\+::vector$<$ std\+::string $>$ {\bfseries col\+Value\+Equal\+To} (std\+::string col\+Name, std\+::string input\+Value)
+\item 
+\Hypertarget{class_h_b_1_1_data_frames_a56b6b181791dad64d9382550679652c3}\label{class_h_b_1_1_data_frames_a56b6b181791dad64d9382550679652c3} 
+\mbox{\hyperlink{class_h_b_1_1_data_frames}{Data\+Frames}} {\bfseries create\+\_\+empty\+\_\+\+Data\+Frames} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{class_h_b_1_1_data_frames}{Data\+Frames}
+
+Class for storing, accessing, and modifying dataframes. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_h_b_1_1_data_frames_afb9658c803a98f10d403a58d59f4aec1}\index{HB::DataFrames@{HB::DataFrames}!display\_colnames@{display\_colnames}}
+\index{display\_colnames@{display\_colnames}!HB::DataFrames@{HB::DataFrames}}
+\doxysubsubsection{\texorpdfstring{display\_colnames()}{display\_colnames()}}
+{\footnotesize\ttfamily \label{class_h_b_1_1_data_frames_afb9658c803a98f10d403a58d59f4aec1} 
+void HB\+::\+Data\+Frames\+::display\+\_\+colnames (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\doxylink{class_h_b_1_1_data_frames_afb9658c803a98f10d403a58d59f4aec1}{display\+\_\+colnames()}
+
+Displays all the columns in the \doxylink{class_h_b_1_1_data_frames}{Data\+Frames}.
+
+Parameters\+: None
+
+Returns\+: None
+
+Throws\+: None \Hypertarget{class_h_b_1_1_data_frames_ac532f4b08c9ba97b89d93cb69f3d52b5}\index{HB::DataFrames@{HB::DataFrames}!getColIndex@{getColIndex}}
+\index{getColIndex@{getColIndex}!HB::DataFrames@{HB::DataFrames}}
+\doxysubsubsection{\texorpdfstring{getColIndex()}{getColIndex()}}
+{\footnotesize\ttfamily \label{class_h_b_1_1_data_frames_ac532f4b08c9ba97b89d93cb69f3d52b5} 
+int HB\+::\+Data\+Frames\+::get\+Col\+Index (\begin{DoxyParamCaption}\item[{std\+::string}]{input\+Col\+Name}{}\end{DoxyParamCaption})}
+
+get\+Col\+Index
+
+Obtain the index of the column from all the column names by inputting the column name.
+
+Parameters\+: input\+Col\+Name\+: (std\+::string) the desired column name.
+
+Throws\+: std\+::invalid\+\_\+argument\+: throws when the inputted column name is not present in the data\textquotesingle{}s column names. \Hypertarget{class_h_b_1_1_data_frames_ae759fa80dcb09b653e9865bbc2fa1fac}\index{HB::DataFrames@{HB::DataFrames}!getColValues@{getColValues}}
+\index{getColValues@{getColValues}!HB::DataFrames@{HB::DataFrames}}
+\doxysubsubsection{\texorpdfstring{getColValues()}{getColValues()}}
+{\footnotesize\ttfamily \label{class_h_b_1_1_data_frames_ae759fa80dcb09b653e9865bbc2fa1fac} 
+\mbox{\hyperlink{class_h_b_1_1_data_frames}{Data\+Frames}} HB\+::\+Data\+Frames\+::get\+Col\+Values (\begin{DoxyParamCaption}\item[{std\+::string}]{input\+Col\+Name}{}\end{DoxyParamCaption})}
+
+get\+Col\+Vget\+Col\+Values
+
+Obtain the values contained within a column of the HB\+::\+Data\+Frame.
+
+Parameters\+: input\+Col\+Name\+: (std\+::string) the input column name
+
+Return\+: (\doxylink{class_h_b_1_1_data_frames}{HB\+::\+Data\+Frames}) Data\+Frame containing only the column
+
+Throws\+: std\+::invalid\+\_\+argument\+: thrown when invalid col name is inputted. Thrown when Data\+Frames\+::get\+Col\+Name() is called within this function. \Hypertarget{class_h_b_1_1_data_frames_aa1b6b1fd1da1a7ddf1f3c7de616d35ed}\index{HB::DataFrames@{HB::DataFrames}!getData@{getData}}
+\index{getData@{getData}!HB::DataFrames@{HB::DataFrames}}
+\doxysubsubsection{\texorpdfstring{getData()}{getData()}}
+{\footnotesize\ttfamily \label{class_h_b_1_1_data_frames_aa1b6b1fd1da1a7ddf1f3c7de616d35ed} 
+std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ HB\+::\+Data\+Frames\+::get\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+get\+Data
+
+Getter function to get the data body.
+
+Parameters\+: None
+
+Returns\+: (std\+::vector$<$std\+::vector$<$std\+::string$>$$>$) Data\+Frame\textquotesingle{}s data body. It is a vector within a vector. Can be indexed as data\mbox{[}row no.\mbox{]}\mbox{[}col no.\mbox{]}
+
+Throws\+: None \Hypertarget{class_h_b_1_1_data_frames_a34d072fa1e0d6d0ce0116014489a5c47}\index{HB::DataFrames@{HB::DataFrames}!getIndexIndex@{getIndexIndex}}
+\index{getIndexIndex@{getIndexIndex}!HB::DataFrames@{HB::DataFrames}}
+\doxysubsubsection{\texorpdfstring{getIndexIndex()}{getIndexIndex()}}
+{\footnotesize\ttfamily \label{class_h_b_1_1_data_frames_a34d072fa1e0d6d0ce0116014489a5c47} 
+int HB\+::\+Data\+Frames\+::get\+Index\+Index (\begin{DoxyParamCaption}\item[{std\+::string}]{input\+Index\+Name}{}\end{DoxyParamCaption})}
+
+get\+Index\+Index
+
+Obtains the index of the Data\+Frame\textquotesingle{}s index using in inputted index name.
+
+Parameters\+: input\+Index\+Name\+: (std\+::string) input index name.
+
+Returns\+: (int) index
+
+Throws\+: std\+::invalid\+\_\+argument\+: thrown when invalid index name is inputted. \Hypertarget{class_h_b_1_1_data_frames_a2b1ef1385804cd767e3405ac60711e7c}\index{HB::DataFrames@{HB::DataFrames}!getIndexValues@{getIndexValues}}
+\index{getIndexValues@{getIndexValues}!HB::DataFrames@{HB::DataFrames}}
+\doxysubsubsection{\texorpdfstring{getIndexValues()}{getIndexValues()}}
+{\footnotesize\ttfamily \label{class_h_b_1_1_data_frames_a2b1ef1385804cd767e3405ac60711e7c} 
+\mbox{\hyperlink{class_h_b_1_1_data_frames}{Data\+Frames}} HB\+::\+Data\+Frames\+::get\+Index\+Values (\begin{DoxyParamCaption}\item[{std\+::string}]{input\+Index\+Name}{}\end{DoxyParamCaption})}
+
+getindex\+Values
+
+Returns the Data\+Frame with values on the inputted row name\+:
+
+Parameters\+: input\+Index\+Name\+: (std\+::string) index name.
+
+Returns\+: (\doxylink{class_h_b_1_1_data_frames}{HB\+::\+Data\+Frames}) the index is the column names of the orignal Data\+Frame and the column name is the index name.
+
+Throws\+: std\+::invalid\+\_\+argument\+: thrown when inputted name is not present in the \doxylink{class_h_b_1_1_data_frames}{Data\+Frames}. \Hypertarget{class_h_b_1_1_data_frames_ae806e4774151ea41ee2d4c4048b71747}\index{HB::DataFrames@{HB::DataFrames}!getValue@{getValue}}
+\index{getValue@{getValue}!HB::DataFrames@{HB::DataFrames}}
+\doxysubsubsection{\texorpdfstring{getValue()}{getValue()}}
+{\footnotesize\ttfamily \label{class_h_b_1_1_data_frames_ae806e4774151ea41ee2d4c4048b71747} 
+std\+::string HB\+::\+Data\+Frames\+::get\+Value (\begin{DoxyParamCaption}\item[{const std\+::string}]{inputcol\+Name}{, }\item[{const std\+::string}]{input\+Index\+Name}{}\end{DoxyParamCaption})}
+
+get\+Value
+
+Obtain the value (in std\+::string) in the data\+Frame using index and column names.
+
+Parameters\+: inputcol\+Name\+: (std\+::string) input column name. input\+Index\+Name\+: (std\+::string) input index name.
+
+Return\+: (std\+::string) a string cotaining the value
+
+Throws\+: std\+::invalid\+\_\+argument\+: thrown when invalid column name is inputted. std\+::invalid\+\_\+argument\+: thrown when invalid index name is inputted. \Hypertarget{class_h_b_1_1_data_frames_a8e0784cd27c49b07328effa2c119a40e}\index{HB::DataFrames@{HB::DataFrames}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!HB::DataFrames@{HB::DataFrames}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \label{class_h_b_1_1_data_frames_a8e0784cd27c49b07328effa2c119a40e} 
+\mbox{\hyperlink{class_h_b_1_1_data_frames}{Data\+Frames}} HB\+::\+Data\+Frames\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{std\+::string}]{col\+Name}{}\end{DoxyParamCaption})}
+
+operator\mbox{[}\mbox{]}
+
+operator overload for indexing
+
+Parameters\+: col\+Name\+:(std\+::string) col\+Name
+
+Returns\+: Data\+Frame with the column name.
+
+Throws\+: std\+::invalid\+\_\+argument\+: Thrown when invalid index name is inputted. Thrown when \doxylink{class_h_b_1_1_data_frames_ae759fa80dcb09b653e9865bbc2fa1fac}{Data\+Frames\+::get\+Col\+Values()} is called within this function. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/extern/\mbox{\hyperlink{hummingbird_8h}{hummingbird.\+h}}\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/extern/\mbox{\hyperlink{hummingbird_8cpp}{hummingbird.\+cpp}}\end{DoxyCompactItemize}

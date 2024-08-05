@@ -1,0 +1,188 @@
+\doxysection{bmslogic.\+calc\+\_\+helpers.\+kalman\+\_\+filter.\+Sigma\+Point\+Kalman\+Filter Class Reference}
+\hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter}{}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter}\index{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter@{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a4a9c36e61467d17b2c14e7cb31912781}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_normal_random_vector}{Normal\+Random\+Vector}} x, \mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_normal_random_vector}{Normal\+Random\+Vector}} w, \mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_normal_random_vector}{Normal\+Random\+Vector}} v, int y\+\_\+dim, Callable state\+\_\+equation, Callable output\+\_\+equation, str method\+\_\+type=\textquotesingle{}CDKF\textquotesingle{})
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_ad405fe7affb9c3517be352ce299c4188}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_ad405fe7affb9c3517be352ce299c4188} 
+npt.\+Array\+Like {\bfseries calc\+\_\+sqrt\+\_\+matrix} (cls, npt.\+Array\+Like matrix)
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a28d358be2d48f625a70b36f65bd7d9e8}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a28d358be2d48f625a70b36f65bd7d9e8} 
+{\bfseries plot} (cls, t\+\_\+array, measurement\+\_\+array, sigma\+\_\+array=None, truth\+\_\+array=None)
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a84f232ff6045bf528272a0c2ce6ac00a}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a84f232ff6045bf528272a0c2ce6ac00a} 
+npt.\+Array\+Like {\bfseries aug\+\_\+vector} (self)
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a29037683596dd35e75fda1cc09e9809c}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a29037683596dd35e75fda1cc09e9809c} 
+npt.\+Array\+Like {\bfseries aug\+\_\+cov} (self)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a2d2e4e2e08d92d9a5a5000b76268b0b6}{gamma}} (self)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_acefe23a3186a3277ba97c59e98643140}{h}} (self)
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a283cc25bbddc593adf2c9296fa1469d4}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a283cc25bbddc593adf2c9296fa1469d4} 
+float {\bfseries alpha\+\_\+m\+\_\+0} (self)
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_ae0085b5b3168df91969ec244f37b010f}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_ae0085b5b3168df91969ec244f37b010f} 
+float {\bfseries alpha\+\_\+m} (self)
+\item 
+\mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_aa0f5c72b2d982988d4153d60170039df}{array\+\_\+alpha\+\_\+m}} (self)
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_af0a120e9d43b653360870d2d7dee044e}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_af0a120e9d43b653360870d2d7dee044e} 
+float {\bfseries alpha\+\_\+c\+\_\+0} (self)
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a78547b1b68d1b3805684990bf2fd0218}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a78547b1b68d1b3805684990bf2fd0218} 
+float {\bfseries alpha\+\_\+c} (self)
+\item 
+npt.\+Array\+Like \mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_adce5a283addc5143d07faa17e626c309}{array\+\_\+alpha\+\_\+c}} (self)
+\item 
+npt.\+Array\+Like \mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_acd6d98e8efbdcb846a044112d500de6d}{x\+\_\+sp}} (self)
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_aed5a2bb2c8df78a4d666c305ad21ff16}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_aed5a2bb2c8df78a4d666c305ad21ff16} 
+{\bfseries x\+\_\+sp\+\_\+x} (self)
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_aad46385dc01765d5cf570751d6a4ecca}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_aad46385dc01765d5cf570751d6a4ecca} 
+{\bfseries x\+\_\+sp\+\_\+w} (self)
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a2c875c3c7089d81a1aaf36a68f528439}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a2c875c3c7089d81a1aaf36a68f528439} 
+{\bfseries x\+\_\+sp\+\_\+v} (self)
+\item 
+None \mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a4730d0136d0a3fcd9331b23ea4a5cf98}{solve}} (self, float u, float y\+\_\+true)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a06a2261d2ffd7bce6b0bf3b325eb56cf}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a06a2261d2ffd7bce6b0bf3b325eb56cf} 
+{\bfseries x}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a047a1f3e0ae601d2d19a7c13acc4bc2c}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a047a1f3e0ae601d2d19a7c13acc4bc2c} 
+{\bfseries w}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_ad744c98bca64edac255b23bf8106dd7b}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_ad744c98bca64edac255b23bf8106dd7b} 
+{\bfseries v}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a36ab6272bde1136ad983582490931c78}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a36ab6272bde1136ad983582490931c78} 
+{\bfseries y\+\_\+dim}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_aa395db5a3c2160b5db561e27b18e5bd4}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_aa395db5a3c2160b5db561e27b18e5bd4} 
+{\bfseries func\+\_\+f}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_aad066c1adf371162166c9b97be6f204e}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_aad066c1adf371162166c9b97be6f204e} 
+{\bfseries func\+\_\+h}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_acecb6367f5d12e54a9ecb0002da0d65e}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_acecb6367f5d12e54a9ecb0002da0d65e} 
+self.\+Nx+self.\+Nw,\mbox{]} {\bfseries Nx}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a6072b7750210d5ff25474648596074a0}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a6072b7750210d5ff25474648596074a0} 
+,\mbox{]} {\bfseries Nw}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_aa7ee24d7c9a495733f013f7c7a3a685d}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_aa7ee24d7c9a495733f013f7c7a3a685d} 
+{\bfseries Nv}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a62d6b996e3f061af0888403eaa3a8be2}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a62d6b996e3f061af0888403eaa3a8be2} 
+{\bfseries L}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a9afda674bd8181696f3198172d8e78d9}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a9afda674bd8181696f3198172d8e78d9} 
+{\bfseries p}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a3e862719ffe253462125199ec3ed0f55}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a3e862719ffe253462125199ec3ed0f55} 
+{\bfseries method\+\_\+type}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_acef7108307400aa3a602768f460f5452}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_acef7108307400aa3a602768f460f5452} 
+{\bfseries alpha\+\_\+m\+\_\+0}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a345e49ff7f7367b462c1ab5e98f5375f}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a345e49ff7f7367b462c1ab5e98f5375f} 
+{\bfseries alpha\+\_\+c\+\_\+0}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_ad7d1a9240be0a495cdd74dbb67bd266e}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_ad7d1a9240be0a495cdd74dbb67bd266e} 
+{\bfseries aug\+\_\+cov}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a599429ee563b4625d051d7bebb3ce290}\label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a599429ee563b4625d051d7bebb3ce290} 
+{\bfseries array\+\_\+alpha\+\_\+m}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}The class for sigma-point Kalman filter.
+
+This class the implementation of kalman filter calculations for random variables. The inputs to this class consists
+of arrays of inputs values, their mean and covariance as well the state and output equation.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a4a9c36e61467d17b2c14e7cb31912781}\index{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter@{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter@{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a4a9c36e61467d17b2c14e7cb31912781} 
+ None bmslogic.\+calc\+\_\+helpers.\+kalman\+\_\+filter.\+Sigma\+Point\+Kalman\+Filter.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_normal_random_vector}{Normal\+Random\+Vector}}}]{x}{, }\item[{\mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_normal_random_vector}{Normal\+Random\+Vector}}}]{w}{, }\item[{\mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_normal_random_vector}{Normal\+Random\+Vector}}}]{v}{, }\item[{int}]{y\+\_\+dim}{, }\item[{Callable}]{state\+\_\+equation}{, }\item[{Callable}]{output\+\_\+equation}{, }\item[{str }]{method\+\_\+type}{ = {\ttfamily \textquotesingle{}CDKF\textquotesingle{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Constructor for the class pertaining to the sigma point Kalman filter.
+
+:param x: random variable inputs vector
+:param w:
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_adce5a283addc5143d07faa17e626c309}\index{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter@{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter}!array\_alpha\_c@{array\_alpha\_c}}
+\index{array\_alpha\_c@{array\_alpha\_c}!bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter@{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter}}
+\doxysubsubsection{\texorpdfstring{array\_alpha\_c()}{array\_alpha\_c()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_adce5a283addc5143d07faa17e626c309} 
+ npt.\+Array\+Like bmslogic.\+calc\+\_\+helpers.\+kalman\+\_\+filter.\+Sigma\+Point\+Kalman\+Filter.\+array\+\_\+alpha\+\_\+c (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}row vector for all the entries in alpha c
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_aa0f5c72b2d982988d4153d60170039df}\index{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter@{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter}!array\_alpha\_m@{array\_alpha\_m}}
+\index{array\_alpha\_m@{array\_alpha\_m}!bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter@{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter}}
+\doxysubsubsection{\texorpdfstring{array\_alpha\_m()}{array\_alpha\_m()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_aa0f5c72b2d982988d4153d60170039df} 
+bmslogic.\+calc\+\_\+helpers.\+kalman\+\_\+filter.\+Sigma\+Point\+Kalman\+Filter.\+array\+\_\+alpha\+\_\+m (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Row vector of all alpha_m entries.
+:return:
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a2d2e4e2e08d92d9a5a5000b76268b0b6}\index{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter@{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter}!gamma@{gamma}}
+\index{gamma@{gamma}!bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter@{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter}}
+\doxysubsubsection{\texorpdfstring{gamma()}{gamma()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a2d2e4e2e08d92d9a5a5000b76268b0b6} 
+ float bmslogic.\+calc\+\_\+helpers.\+kalman\+\_\+filter.\+Sigma\+Point\+Kalman\+Filter.\+gamma (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}A tuning parameter for SPKF. For Guassian distributions, gamma is sqrt(3)
+:return: the turning parameter
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_acefe23a3186a3277ba97c59e98643140}\index{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter@{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter}!h@{h}}
+\index{h@{h}!bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter@{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter}}
+\doxysubsubsection{\texorpdfstring{h()}{h()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_acefe23a3186a3277ba97c59e98643140} 
+ float bmslogic.\+calc\+\_\+helpers.\+kalman\+\_\+filter.\+Sigma\+Point\+Kalman\+Filter.\+h (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}A tuning parameter for SPKF. For Guassian distributions, gamma is sqrt(3)
+:return: h tunning parameter
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a4730d0136d0a3fcd9331b23ea4a5cf98}\index{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter@{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter}!solve@{solve}}
+\index{solve@{solve}!bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter@{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_a4730d0136d0a3fcd9331b23ea4a5cf98} 
+ None bmslogic.\+calc\+\_\+helpers.\+kalman\+\_\+filter.\+Sigma\+Point\+Kalman\+Filter.\+solve (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{u}{, }\item[{float}]{y\+\_\+true}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Performs the steps involved in the Kalman filter.
+
+:param u: system input
+:param y_true: measured output [most probably from the sensor]
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_acd6d98e8efbdcb846a044112d500de6d}\index{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter@{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter}!x\_sp@{x\_sp}}
+\index{x\_sp@{x\_sp}!bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter@{bmslogic.calc\_helpers.kalman\_filter.SigmaPointKalmanFilter}}
+\doxysubsubsection{\texorpdfstring{x\_sp()}{x\_sp()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter_acd6d98e8efbdcb846a044112d500de6d} 
+ npt.\+Array\+Like bmslogic.\+calc\+\_\+helpers.\+kalman\+\_\+filter.\+Sigma\+Point\+Kalman\+Filter.\+x\+\_\+sp (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns the matrix that represents the augmented sigma points.
+:return: augmented sigma points
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/calc\+\_\+helpers/kalman\+\_\+filter.\+py\end{DoxyCompactItemize}

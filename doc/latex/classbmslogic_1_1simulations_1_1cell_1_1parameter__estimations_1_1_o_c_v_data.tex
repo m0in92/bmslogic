@@ -1,0 +1,167 @@
+\doxysection{bmslogic.\+simulations.\+cell.\+parameter\+\_\+estimations.\+OCVData Class Reference}
+\hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data}{}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data}\index{bmslogic.simulations.cell.parameter\_estimations.OCVData@{bmslogic.simulations.cell.parameter\_estimations.OCVData}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a7f29703c20aebfec347b26e5b53591bb}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, Union\mbox{[}str, Callable\mbox{]} func\+\_\+ocp\+\_\+p, Union\mbox{[}str, Callable\mbox{]} func\+\_\+ocp\+\_\+n, float soc\+\_\+n\+\_\+min\+\_\+1, float soc\+\_\+n\+\_\+min\+\_\+2, float soc\+\_\+n\+\_\+max\+\_\+1, float soc\+\_\+n\+\_\+max\+\_\+2, float soc\+\_\+p\+\_\+min\+\_\+1, float soc\+\_\+p\+\_\+min\+\_\+2, float soc\+\_\+p\+\_\+max\+\_\+1, float soc\+\_\+p\+\_\+max\+\_\+2, str charge\+\_\+or\+\_\+discharge)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a46d9207bc572afcd1fc7ca81a428838a}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a46d9207bc572afcd1fc7ca81a428838a} 
+np.\+ndarray {\bfseries array\+\_\+soc} (cls, float soc\+\_\+min, float soc\+\_\+max)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_af2a3f08a8a05969f82a4f42483df898d}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_af2a3f08a8a05969f82a4f42483df898d} 
+np.\+ndarray {\bfseries array\+\_\+ocp\+\_\+p} (self, float soc\+\_\+min, float soc\+\_\+max)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a0b7aea16498c4e98f6dfb6a8e7fa1f75}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a0b7aea16498c4e98f6dfb6a8e7fa1f75} 
+np.\+ndarray {\bfseries array\+\_\+ocp\+\_\+n} (self, float soc\+\_\+min, float soc\+\_\+max)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a3d0dff063d248f354cd8e543e7853050}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a3d0dff063d248f354cd8e543e7853050} 
+float {\bfseries ocv\+\_\+lib} (cls, float ocp\+\_\+p, float ocp\+\_\+n)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_ae38e11cc5a39c6c0bae1215187562e0d}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_ae38e11cc5a39c6c0bae1215187562e0d} 
+Union\mbox{[}float, np.\+ndarray\mbox{]} {\bfseries mse} (cls, npt.\+Array\+Like array\+\_\+v\+\_\+exp, npt.\+Array\+Like array\+\_\+v\+\_\+fit)
+\item 
+np.\+ndarray \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a8c96b8618c09667bbf79a36b3e0869d4}{find\+\_\+optimized\+\_\+parameters}} (self, npt.\+Array\+Like array\+\_\+cap\+\_\+exp, npt.\+Array\+Like array\+\_\+v\+\_\+exp\+\_\+)
+\item 
+tuple\mbox{[}float, float\mbox{]} \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_ac1a9b7de415068526442487dde308824}{get\+\_\+soc}} (cls, Union\mbox{[}float, npt.\+Array\+Like\mbox{]} soc\+\_\+lib, float soc\+\_\+p\+\_\+min, float soc\+\_\+p\+\_\+max, float soc\+\_\+n\+\_\+min, float soc\+\_\+n\+\_\+max)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_ae529d5b7a13fb40620e887e29ee95783}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_ae529d5b7a13fb40620e887e29ee95783} 
+None {\bfseries plot\+\_\+fit} (self, Optional\mbox{[}npt.\+Array\+Like\mbox{]} cap\+\_\+exp=None, Optional\mbox{[}npt.\+Array\+Like\mbox{]} v\+\_\+exp=None)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_adaa168dc6a21a91dc98067575c3b0d4a}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_adaa168dc6a21a91dc98067575c3b0d4a} 
+{\bfseries func\+\_\+ocp\+\_\+n}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a9e42910c65d06c0882b4d4a2813b64ee}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a9e42910c65d06c0882b4d4a2813b64ee} 
+{\bfseries func\+\_\+ocp\+\_\+p}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a247089bed524c787b0d7313e37b8c92c}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a247089bed524c787b0d7313e37b8c92c} 
+{\bfseries SOC\+\_\+\+N\+\_\+\+MIN\+\_\+1}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a1bd53ebcf91a093c19b2603a04f05b6b}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a1bd53ebcf91a093c19b2603a04f05b6b} 
+{\bfseries SOC\+\_\+\+N\+\_\+\+MIN\+\_\+2}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a5cc7d36093e5678298e05c0c74d3e02d}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a5cc7d36093e5678298e05c0c74d3e02d} 
+{\bfseries SOC\+\_\+\+N\+\_\+\+MAX\+\_\+1}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a2940d6107b107bf0272dd7d12fc2a85a}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a2940d6107b107bf0272dd7d12fc2a85a} 
+{\bfseries SOC\+\_\+\+N\+\_\+\+MAX\+\_\+2}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a5143f5c4477f9300cf9a1a258ba189e5}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a5143f5c4477f9300cf9a1a258ba189e5} 
+{\bfseries SOC\+\_\+\+P\+\_\+\+MIN\+\_\+1}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a105536292309cc585cbfc2f003ecfb95}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a105536292309cc585cbfc2f003ecfb95} 
+{\bfseries SOC\+\_\+\+P\+\_\+\+MIN\+\_\+2}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a6495f030368730e23085cfb0f1560dc9}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a6495f030368730e23085cfb0f1560dc9} 
+{\bfseries SOC\+\_\+\+P\+\_\+\+MAX\+\_\+1}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a4ecce8ea713c1f95d54a7f0d743088d1}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a4ecce8ea713c1f95d54a7f0d743088d1} 
+{\bfseries SOC\+\_\+\+P\+\_\+\+MAX\+\_\+2}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a4a538217739dc03d34209bb750fb5ffa}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a4a538217739dc03d34209bb750fb5ffa} 
+Optional\mbox{[}float\mbox{]} {\bfseries fitted\+\_\+soc\+\_\+n\+\_\+min}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a022399bac71b395fb09bb33bb6d4d1db}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a022399bac71b395fb09bb33bb6d4d1db} 
+Optional\mbox{[}float\mbox{]} {\bfseries fitted\+\_\+soc\+\_\+n\+\_\+max}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a776d3a8d3afb56ddcc479f5e181873bd}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a776d3a8d3afb56ddcc479f5e181873bd} 
+Optional\mbox{[}float\mbox{]} {\bfseries fitted\+\_\+soc\+\_\+p\+\_\+min}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_ade32830d8c715b6b1a13e6d38b9e2d58}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_ade32830d8c715b6b1a13e6d38b9e2d58} 
+Optional\mbox{[}float\mbox{]} {\bfseries fitted\+\_\+soc\+\_\+p\+\_\+max}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a27ed45bdb6c95e1c39e789aec128ad0d}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a27ed45bdb6c95e1c39e789aec128ad0d} 
+str {\bfseries cycling\+\_\+step}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a9da70748b5df9a935095aebdefb0e309}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a9da70748b5df9a935095aebdefb0e309} 
+float {\bfseries SOC\+\_\+\+LIB\+\_\+\+MIN} = 0.\+0
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a506f13241d8338dbe6cc253f8075fad2}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a506f13241d8338dbe6cc253f8075fad2} 
+float {\bfseries SOC\+\_\+\+LIB\+\_\+\+MAX} = 1.\+0
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a5060581e91a6af6f2720881f9c1b9b6c}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a5060581e91a6af6f2720881f9c1b9b6c} 
+{\bfseries array\+\_\+soc\+\_\+lib} = np.\+linspace(SOC\+\_\+\+LIB\+\_\+\+MIN, SOC\+\_\+\+LIB\+\_\+\+MAX)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_afacb4145226d95c32c4414110c9e78f4}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_afacb4145226d95c32c4414110c9e78f4} 
+Callable {\bfseries \+\_\+func\+\_\+interp\+\_\+ocp} (self, float soc\+\_\+min, float soc\+\_\+max, str interpolation\+\_\+type)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_af187ae479f6e938226f9a9cffadc867e}\label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_af187ae479f6e938226f9a9cffadc867e} 
+{\bfseries \+\_\+func\+\_\+interp\+\_\+ocp\+\_\+exp} (npt.\+Array\+Like array\+\_\+cap\+\_\+exp, npt.\+Array\+Like array\+\_\+v\+\_\+exp)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}This class finds the stociometric limits of the positive and the negative electrodes using the low C-rate
+battery cycling.
+Optimization is performed whereby the fitted OCV is compared with the experimental results
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a7f29703c20aebfec347b26e5b53591bb}\index{bmslogic.simulations.cell.parameter\_estimations.OCVData@{bmslogic.simulations.cell.parameter\_estimations.OCVData}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!bmslogic.simulations.cell.parameter\_estimations.OCVData@{bmslogic.simulations.cell.parameter\_estimations.OCVData}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a7f29703c20aebfec347b26e5b53591bb} 
+bmslogic.\+simulations.\+cell.\+parameter\+\_\+estimations.\+OCVData.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Union\mbox{[}str, Callable\mbox{]}}]{func\+\_\+ocp\+\_\+p}{, }\item[{Union\mbox{[}str, Callable\mbox{]}}]{func\+\_\+ocp\+\_\+n}{, }\item[{float}]{soc\+\_\+n\+\_\+min\+\_\+1}{, }\item[{float}]{soc\+\_\+n\+\_\+min\+\_\+2}{, }\item[{float}]{soc\+\_\+n\+\_\+max\+\_\+1}{, }\item[{float}]{soc\+\_\+n\+\_\+max\+\_\+2}{, }\item[{float}]{soc\+\_\+p\+\_\+min\+\_\+1}{, }\item[{float}]{soc\+\_\+p\+\_\+min\+\_\+2}{, }\item[{float}]{soc\+\_\+p\+\_\+max\+\_\+1}{, }\item[{float}]{soc\+\_\+p\+\_\+max\+\_\+2}{, }\item[{str}]{charge\+\_\+or\+\_\+discharge}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Constructor
+:param func_ocp_p: positive electrode OCP function
+:param func_ocp_n: negative electrode OCP function
+
+:soc_n_min_1: lower bound for negative electrode minimum SOC
+:soc_n_min_2: upper bound for negative electrode minimum SOC
+:soc_n_max_1: lower bound for negative electrode maximum SOC
+:soc_n_max_2: upper bound for negative electrode maximum SOC
+
+:soc_p_min_1: lower bound for positive electrode minimum SOC
+:soc_p_min_2: upper bound for positive electrode minimum SOC
+:soc_p_max_1: lower bound for positive electrode maximum SOC
+:soc_p_max_2: upper bound for positive electrode maximum SOC
+
+:charge_or_discharge: either 'charge' or 'discharge'
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a8c96b8618c09667bbf79a36b3e0869d4}\index{bmslogic.simulations.cell.parameter\_estimations.OCVData@{bmslogic.simulations.cell.parameter\_estimations.OCVData}!find\_optimized\_parameters@{find\_optimized\_parameters}}
+\index{find\_optimized\_parameters@{find\_optimized\_parameters}!bmslogic.simulations.cell.parameter\_estimations.OCVData@{bmslogic.simulations.cell.parameter\_estimations.OCVData}}
+\doxysubsubsection{\texorpdfstring{find\_optimized\_parameters()}{find\_optimized\_parameters()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_a8c96b8618c09667bbf79a36b3e0869d4} 
+ np.\+ndarray bmslogic.\+simulations.\+cell.\+parameter\+\_\+estimations.\+OCVData.\+find\+\_\+optimized\+\_\+parameters (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{npt.\+Array\+Like}]{array\+\_\+cap\+\_\+exp}{, }\item[{npt.\+Array\+Like}]{array\+\_\+v\+\_\+exp\+\_\+}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Applies the genetic algorithm to find the optimized parameters for the stoiciometric limits.
+:param array_cap_exp: Array containing experimental capacity [Ahr].
+:param array_v_exp_: Array containing experimental voltage [V].
+:return: Array containing optimized parameters [SOC_P_MIN, SOC_P_MAX, SOC_N_MIN, SOC_N_MAX].
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_ac1a9b7de415068526442487dde308824}\index{bmslogic.simulations.cell.parameter\_estimations.OCVData@{bmslogic.simulations.cell.parameter\_estimations.OCVData}!get\_soc@{get\_soc}}
+\index{get\_soc@{get\_soc}!bmslogic.simulations.cell.parameter\_estimations.OCVData@{bmslogic.simulations.cell.parameter\_estimations.OCVData}}
+\doxysubsubsection{\texorpdfstring{get\_soc()}{get\_soc()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1parameter__estimations_1_1_o_c_v_data_ac1a9b7de415068526442487dde308824} 
+ tuple\mbox{[}float, float\mbox{]} bmslogic.\+simulations.\+cell.\+parameter\+\_\+estimations.\+OCVData.\+get\+\_\+soc (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{Union\mbox{[}float, npt.\+Array\+Like\mbox{]}}]{soc\+\_\+lib}{, }\item[{float}]{soc\+\_\+p\+\_\+min}{, }\item[{float}]{soc\+\_\+p\+\_\+max}{, }\item[{float}]{soc\+\_\+n\+\_\+min}{, }\item[{float}]{soc\+\_\+n\+\_\+max}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns a tuple which contains the values of positive and negative electrode SOC from the LIB SOC.
+:param soc_lib: state-of-charge of the lithium-ion battery
+:param soc_p_min: minimum state-of-charge of the positive electrode
+:param soc_p_max: maximum state-of-charge of the negative electrode
+:param soc_n_min: minimum state-of-charge of the positive electrode
+:param soc_n_max: maximum state-of-charge of the negative electode
+
+:return: (tuple[float, float]) soc of the positive and negative electrode, respectively.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/parameter\+\_\+estimations.\+py\end{DoxyCompactItemize}

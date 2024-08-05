@@ -1,0 +1,241 @@
+\doxysection{electrode\+\_\+conc.\+Py\+Eigen\+Func\+Exp Class Reference}
+\hypertarget{classelectrode__conc_1_1_py_eigen_func_exp}{}\label{classelectrode__conc_1_1_py_eigen_func_exp}\index{electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}}
+Inheritance diagram for electrode\+\_\+conc.\+Py\+Eigen\+Func\+Exp\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classelectrode__conc_1_1_py_eigen_func_exp}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classelectrode__conc_1_1_py_eigen_func_exp_ac8bb6a1b7115770d1356598ae4212e2a}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, float \mbox{\hyperlink{classelectrode__conc_1_1_py_eigen_func_exp_a5de8d734a173a7b2bb39c0a460b3c582}{x\+\_\+init}}, int n, str electrode\+\_\+type)
+\item 
+float \mbox{\hyperlink{classelectrode__conc_1_1_py_eigen_func_exp_a5de8d734a173a7b2bb39c0a460b3c582}{x\+\_\+init}} (self)
+\item 
+int \mbox{\hyperlink{classelectrode__conc_1_1_py_eigen_func_exp_ac9518405246749777247f8adb0e52924}{N}} (self)
+\item 
+np.\+ndarray \mbox{\hyperlink{classelectrode__conc_1_1_py_eigen_func_exp_a68705f60c159160522fec752da85c44e}{lambda\+\_\+bounds}} (self)
+\item 
+np.\+ndarray \mbox{\hyperlink{classelectrode__conc_1_1_py_eigen_func_exp_a0e94bdd2ee60561038aa202405208f91}{lambda\+\_\+roots}} (self)
+\item 
+float \mbox{\hyperlink{classelectrode__conc_1_1_py_eigen_func_exp_ab913ea234c43200d087508f5b72bd641}{j\+\_\+scaled}} (self, i\+\_\+app, R, S, D\+\_\+s, c\+\_\+smax)
+\item 
+float \mbox{\hyperlink{classelectrode__conc_1_1_py_eigen_func_exp_aa8a0cc78505bd56532c0349d05220350}{update\+\_\+integ\+\_\+term}} (self, dt, i\+\_\+app, R, S, D\+\_\+s, c\+\_\+smax)
+\item 
+float \mbox{\hyperlink{classelectrode__conc_1_1_py_eigen_func_exp_af52a11137f542096f0969a66575a8afc}{solve\+\_\+u\+\_\+k}} (self, root\+\_\+value, t\+\_\+prev, dt, u\+\_\+k\+\_\+prev, i\+\_\+app, R, S, D\+\_\+s, c\+\_\+smax)
+\item 
+float \mbox{\hyperlink{classelectrode__conc_1_1_py_eigen_func_exp_a97b262701aa288d71ce6f3815e46d55a}{get\+\_\+summation\+\_\+term}} (self, dt, t\+\_\+prev, i\+\_\+app, R, S, D\+\_\+s, c\+\_\+smax)
+\item 
+float \mbox{\hyperlink{classelectrode__conc_1_1_py_eigen_func_exp_a62a338413550b5aecf522b96ac39494e}{calc\+\_\+\+SOC\+\_\+surf}} (self, dt, t\+\_\+prev, i\+\_\+app, R, S, D\+\_\+s, c\+\_\+smax)
+\item 
+float \mbox{\hyperlink{classelectrode__conc_1_1_py_eigen_func_exp_a57f498218accc096f1cb770d78d15f92}{\+\_\+\+\_\+call\+\_\+\+\_\+}} (self, dt, t\+\_\+prev, i\+\_\+app, R, S, D\+\_\+s, c\+\_\+smax)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{classelectrode__conc_1_1_py_eigen_func_exp_a4668a2ce736caf8601211e539a41d4f9}{lambda\+\_\+func}} (lambda\+\_\+k)
+\item 
+Callable \mbox{\hyperlink{classelectrode__conc_1_1_py_eigen_func_exp_afb7e54d1a910c4b9c13d79cf635c40ed}{u\+\_\+k\+\_\+expression}} (lambda\+\_\+k, D, R, scaled\+\_\+flux)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_a8ca62c9c2c80703160b3d133c8d97efd}\label{classelectrode__conc_1_1_py_eigen_func_exp_a8ca62c9c2c80703160b3d133c8d97efd} 
+{\bfseries x\+\_\+init\+\_\+}
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_a33017069884698c1e81589c6bcdfb776}\label{classelectrode__conc_1_1_py_eigen_func_exp_a33017069884698c1e81589c6bcdfb776} 
+{\bfseries N\+\_\+}
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_a8be03ee5df2fd0ec7235e2c1add403b5}\label{classelectrode__conc_1_1_py_eigen_func_exp_a8be03ee5df2fd0ec7235e2c1add403b5} 
+{\bfseries integ\+\_\+term}
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_aa5e2793fe1919c1b18642ae0f4fa8a94}\label{classelectrode__conc_1_1_py_eigen_func_exp_aa5e2793fe1919c1b18642ae0f4fa8a94} 
+{\bfseries lst\+\_\+u\+\_\+k}
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_af303851d8885039da573da62c9cb77af}\label{classelectrode__conc_1_1_py_eigen_func_exp_af303851d8885039da573da62c9cb77af} 
+{\bfseries N}
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_a7f52b94d67f03b198d1f619bd13f72fd}\label{classelectrode__conc_1_1_py_eigen_func_exp_a7f52b94d67f03b198d1f619bd13f72fd} 
+{\bfseries lambda\+\_\+func}
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_a788accdf26f8600ed92880f1d3b627d9}\label{classelectrode__conc_1_1_py_eigen_func_exp_a788accdf26f8600ed92880f1d3b627d9} 
+{\bfseries electrode\+\_\+type}
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_a0a7ef3aff42c9be24f1d7cc2c19f3d19}\label{classelectrode__conc_1_1_py_eigen_func_exp_a0a7ef3aff42c9be24f1d7cc2c19f3d19} 
+{\bfseries lambda\+\_\+roots}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classelectrode__conc_1_1_py_base_electrode_conc_solver}{electrode\+\_\+conc.\+Py\+Base\+Electrode\+Conc\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries electrode\+\_\+type}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}This solver uses the Eigen Function Expansion method as detailed in ref 1 to calculate the electrode
+surface SOC. As such, it stores all the necessary variables required for the iterative calculations for all time
+steps. After initiating the class, the object instance can be called iteratively to solve for electrode surface SOC
+for all time steps.
+
+The equation solved is
+    x_j_surf = x_ini + (1/5)*j_scaled + 3 * integration{D_sj * j_scaled / R_j ** 2} * dt +
+                summation{u_jk - 2 * scaled_j / lambda_k ** 2}
+In the above equation, the integration is performed from t=0 to the current time. Moreover, the summation is
+performed from k=1 to k=N. Here k represents the kth term of the solution series.
+
+Reference:
+1. Guo, M., Sikha, G., & White, R. E. (2011). Single-Particle Model for a Lithium-Ion Cell: Thermal Behavior.
+Journal of The Electrochemical Society, 158(2), A122. https://doi.org/10.1149/1.3521314/XML
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_ac8bb6a1b7115770d1356598ae4212e2a}\index{electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_eigen_func_exp_ac8bb6a1b7115770d1356598ae4212e2a} 
+electrode\+\_\+conc.\+Py\+Eigen\+Func\+Exp.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{x\+\_\+init}{, }\item[{int}]{n}{, }\item[{str}]{electrode\+\_\+type}{}\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classelectrode__conc_1_1_py_base_electrode_conc_solver}{electrode\+\_\+conc.\+Py\+Base\+Electrode\+Conc\+Solver}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_a57f498218accc096f1cb770d78d15f92}\index{electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}!\_\_call\_\_@{\_\_call\_\_}}
+\index{\_\_call\_\_@{\_\_call\_\_}!electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}}
+\doxysubsubsection{\texorpdfstring{\_\_call\_\_()}{\_\_call\_\_()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_eigen_func_exp_a57f498218accc096f1cb770d78d15f92} 
+ float electrode\+\_\+conc.\+Py\+Eigen\+Func\+Exp.\+\_\+\+\_\+call\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{dt}{, }\item[{}]{t\+\_\+prev}{, }\item[{}]{i\+\_\+app}{, }\item[{}]{R}{, }\item[{}]{S}{, }\item[{}]{D\+\_\+s}{, }\item[{}]{c\+\_\+smax}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This method calculates the electrode surface SOC
+:param dt: Time difference between current and previous time steps [s].
+:param t_prev: Time value at the previous time step [s].
+:param i_app: Applied current at the current time step [A].
+:param R:  Electrode particle radius [m]
+:param S: Electrode electroactive area [m2]
+:param D_s: Electrode diffusivity [m2/s]
+:param c_smax: Electrode max. conc [mol/m3]
+:return: (float) The electrode's surface SOC.
+\end{DoxyVerb}
+ \Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_a62a338413550b5aecf522b96ac39494e}\index{electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}!calc\_SOC\_surf@{calc\_SOC\_surf}}
+\index{calc\_SOC\_surf@{calc\_SOC\_surf}!electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}}
+\doxysubsubsection{\texorpdfstring{calc\_SOC\_surf()}{calc\_SOC\_surf()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_eigen_func_exp_a62a338413550b5aecf522b96ac39494e} 
+ float electrode\+\_\+conc.\+Py\+Eigen\+Func\+Exp.\+calc\+\_\+\+SOC\+\_\+surf (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{dt}{, }\item[{}]{t\+\_\+prev}{, }\item[{}]{i\+\_\+app}{, }\item[{}]{R}{, }\item[{}]{S}{, }\item[{}]{D\+\_\+s}{, }\item[{}]{c\+\_\+smax}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates the electrode surface SOC using the Eigen Expansion method.
+:param dt: The time difference between the current and the previous time steps [s].
+:param t_prev: Time value of the previous time step [s].
+:return: (float) The electrode's surface SOC.
+\end{DoxyVerb}
+ \Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_a97b262701aa288d71ce6f3815e46d55a}\index{electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}!get\_summation\_term@{get\_summation\_term}}
+\index{get\_summation\_term@{get\_summation\_term}!electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}}
+\doxysubsubsection{\texorpdfstring{get\_summation\_term()}{get\_summation\_term()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_eigen_func_exp_a97b262701aa288d71ce6f3815e46d55a} 
+ float electrode\+\_\+conc.\+Py\+Eigen\+Func\+Exp.\+get\+\_\+summation\+\_\+term (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{dt}{, }\item[{}]{t\+\_\+prev}{, }\item[{}]{i\+\_\+app}{, }\item[{}]{R}{, }\item[{}]{S}{, }\item[{}]{D\+\_\+s}{, }\item[{}]{c\+\_\+smax}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates and returns the summation term of the Eigen Expansion equation.
+:param t_prev:
+:param dt:
+:param j_scaled:
+:return:
+\end{DoxyVerb}
+ \Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_ab913ea234c43200d087508f5b72bd641}\index{electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}!j\_scaled@{j\_scaled}}
+\index{j\_scaled@{j\_scaled}!electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}}
+\doxysubsubsection{\texorpdfstring{j\_scaled()}{j\_scaled()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_eigen_func_exp_ab913ea234c43200d087508f5b72bd641} 
+ float electrode\+\_\+conc.\+Py\+Eigen\+Func\+Exp.\+j\+\_\+scaled (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{i\+\_\+app}{, }\item[{}]{R}{, }\item[{}]{S}{, }\item[{}]{D\+\_\+s}{, }\item[{}]{c\+\_\+smax}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns the dimensionless lithium-ion flux
+:return: (float) dimensionless lithium-ion flux
+\end{DoxyVerb}
+ \Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_a68705f60c159160522fec752da85c44e}\index{electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}!lambda\_bounds@{lambda\_bounds}}
+\index{lambda\_bounds@{lambda\_bounds}!electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}}
+\doxysubsubsection{\texorpdfstring{lambda\_bounds()}{lambda\_bounds()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_eigen_func_exp_a68705f60c159160522fec752da85c44e} 
+ np.\+ndarray electrode\+\_\+conc.\+Py\+Eigen\+Func\+Exp.\+lambda\+\_\+bounds (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}The list which contains the tuple containing the lower and upper bounds of the eigenvalues.
+:return: (list) list containing the tuple of bounds for the eigenvalues.
+\end{DoxyVerb}
+ \Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_a4668a2ce736caf8601211e539a41d4f9}\index{electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}!lambda\_func@{lambda\_func}}
+\index{lambda\_func@{lambda\_func}!electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}}
+\doxysubsubsection{\texorpdfstring{lambda\_func()}{lambda\_func()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_eigen_func_exp_a4668a2ce736caf8601211e539a41d4f9} 
+ float electrode\+\_\+conc.\+Py\+Eigen\+Func\+Exp.\+lambda\+\_\+func (\begin{DoxyParamCaption}\item[{}]{lambda\+\_\+k}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyVerb}Algebraic equation from which the eigenvalues can be calculated.
+:param lambda_k: (float) eigen value ot the kth term.
+:return: (float) the value of the elgebraic equation.
+\end{DoxyVerb}
+ \Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_a0e94bdd2ee60561038aa202405208f91}\index{electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}!lambda\_roots@{lambda\_roots}}
+\index{lambda\_roots@{lambda\_roots}!electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}}
+\doxysubsubsection{\texorpdfstring{lambda\_roots()}{lambda\_roots()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_eigen_func_exp_a0e94bdd2ee60561038aa202405208f91} 
+ np.\+ndarray electrode\+\_\+conc.\+Py\+Eigen\+Func\+Exp.\+lambda\+\_\+roots (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Uses the bisect method to solve for the eigenvalue algebraic equation within the bounds.
+:return: (list) list containing the eigenvalues for all solution terms.
+\end{DoxyVerb}
+ \Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_ac9518405246749777247f8adb0e52924}\index{electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}!N@{N}}
+\index{N@{N}!electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}}
+\doxysubsubsection{\texorpdfstring{N()}{N()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_eigen_func_exp_ac9518405246749777247f8adb0e52924} 
+ int electrode\+\_\+conc.\+Py\+Eigen\+Func\+Exp.\+N (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}The number of terms in the solution series.
+:return: (int) number of terms in the solution series.
+\end{DoxyVerb}
+ \Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_af52a11137f542096f0969a66575a8afc}\index{electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}!solve\_u\_k@{solve\_u\_k}}
+\index{solve\_u\_k@{solve\_u\_k}!electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}}
+\doxysubsubsection{\texorpdfstring{solve\_u\_k()}{solve\_u\_k()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_eigen_func_exp_af52a11137f542096f0969a66575a8afc} 
+ float electrode\+\_\+conc.\+Py\+Eigen\+Func\+Exp.\+solve\+\_\+u\+\_\+k (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{root\+\_\+value}{, }\item[{}]{t\+\_\+prev}{, }\item[{}]{dt}{, }\item[{}]{u\+\_\+k\+\_\+prev}{, }\item[{}]{i\+\_\+app}{, }\item[{}]{R}{, }\item[{}]{S}{, }\item[{}]{D\+\_\+s}{, }\item[{}]{c\+\_\+smax}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates the eigenfunction value from the eigen values using the ode function. This ode function is solved
+using the rk4 ode solver.
+:param root_value:
+:param t_prev:
+:param u_k_j_prev:
+:param dt:
+:return:
+\end{DoxyVerb}
+ \Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_afb7e54d1a910c4b9c13d79cf635c40ed}\index{electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}!u\_k\_expression@{u\_k\_expression}}
+\index{u\_k\_expression@{u\_k\_expression}!electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}}
+\doxysubsubsection{\texorpdfstring{u\_k\_expression()}{u\_k\_expression()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_eigen_func_exp_afb7e54d1a910c4b9c13d79cf635c40ed} 
+ Callable electrode\+\_\+conc.\+Py\+Eigen\+Func\+Exp.\+u\+\_\+k\+\_\+expression (\begin{DoxyParamCaption}\item[{}]{lambda\+\_\+k}{, }\item[{}]{D}{, }\item[{}]{R}{, }\item[{}]{scaled\+\_\+flux}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyVerb}Returns a function that represents the eigenfunction ode.
+:param lambda_k: eigenvalue of the kth term
+:param D: diffusivity [m2/s]
+:param R: electrode particle radius [m]
+:param scaled_flux: dimensionless scaled lithium-ion flux
+:return: (func) a function representing the eigenfunction ode
+\end{DoxyVerb}
+ \Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_aa8a0cc78505bd56532c0349d05220350}\index{electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}!update\_integ\_term@{update\_integ\_term}}
+\index{update\_integ\_term@{update\_integ\_term}!electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}}
+\doxysubsubsection{\texorpdfstring{update\_integ\_term()}{update\_integ\_term()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_eigen_func_exp_aa8a0cc78505bd56532c0349d05220350} 
+ float electrode\+\_\+conc.\+Py\+Eigen\+Func\+Exp.\+update\+\_\+integ\+\_\+term (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{dt}{, }\item[{}]{i\+\_\+app}{, }\item[{}]{R}{, }\item[{}]{S}{, }\item[{}]{D\+\_\+s}{, }\item[{}]{c\+\_\+smax}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Updates the integration term. Integration is performed using simple algebraic integration.
+:return: (float) updated integration term.
+\end{DoxyVerb}
+ \Hypertarget{classelectrode__conc_1_1_py_eigen_func_exp_a5de8d734a173a7b2bb39c0a460b3c582}\index{electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}!x\_init@{x\_init}}
+\index{x\_init@{x\_init}!electrode\_conc.PyEigenFuncExp@{electrode\_conc.PyEigenFuncExp}}
+\doxysubsubsection{\texorpdfstring{x\_init()}{x\_init()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_eigen_func_exp_a5de8d734a173a7b2bb39c0a460b3c582} 
+ float electrode\+\_\+conc.\+Py\+Eigen\+Func\+Exp.\+x\+\_\+init (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initial electrode SOC
+:return: (float) Initial electrode SOC
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers/electrode\+\_\+conc.\+py\end{DoxyCompactItemize}

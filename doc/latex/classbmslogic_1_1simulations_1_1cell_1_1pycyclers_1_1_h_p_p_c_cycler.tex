@@ -1,0 +1,45 @@
+\doxysection{bmslogic.\+simulations.\+cell.\+pycyclers.\+HPPCCycler Class Reference}
+\hypertarget{classbmslogic_1_1simulations_1_1cell_1_1pycyclers_1_1_h_p_p_c_cycler}{}\label{classbmslogic_1_1simulations_1_1cell_1_1pycyclers_1_1_h_p_p_c_cycler}\index{bmslogic.simulations.cell.pycyclers.HPPCCycler@{bmslogic.simulations.cell.pycyclers.HPPCCycler}}
+Inheritance diagram for bmslogic.\+simulations.\+cell.\+pycyclers.\+HPPCCycler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbmslogic_1_1simulations_1_1cell_1_1pycyclers_1_1_h_p_p_c_cycler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1pycyclers_1_1_h_p_p_c_cycler_a5b0e38a164d01fb3951fe3b4d264934b}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, float t1, float t2, float i\+\_\+app, str charge\+\_\+or\+\_\+discharge, float V\+\_\+min, float V\+\_\+max, float soc\+\_\+lib\+\_\+min, float soc\+\_\+lib\+\_\+max, float soc\+\_\+lib, int hppc\+\_\+steps=10)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1pycyclers_1_1_h_p_p_c_cycler_a5b0e38a164d01fb3951fe3b4d264934b}\index{bmslogic.simulations.cell.pycyclers.HPPCCycler@{bmslogic.simulations.cell.pycyclers.HPPCCycler}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!bmslogic.simulations.cell.pycyclers.HPPCCycler@{bmslogic.simulations.cell.pycyclers.HPPCCycler}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1pycyclers_1_1_h_p_p_c_cycler_a5b0e38a164d01fb3951fe3b4d264934b} 
+ None bmslogic.\+simulations.\+cell.\+pycyclers.\+HPPCCycler.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{t1}{, }\item[{float}]{t2}{, }\item[{float}]{i\+\_\+app}{, }\item[{str}]{charge\+\_\+or\+\_\+discharge}{, }\item[{float}]{V\+\_\+min}{, }\item[{float}]{V\+\_\+max}{, }\item[{float}]{soc\+\_\+lib\+\_\+min}{, }\item[{float}]{soc\+\_\+lib\+\_\+max}{, }\item[{float}]{soc\+\_\+lib}{, }\item[{int }]{hppc\+\_\+steps}{ = {\ttfamily 10}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}intended to be the cycler class for HPPC experiments. HPPC defined here has the following profile
+        1. Rest for t1
+        2. Current pulse, with the amplitude of i_app, for a time period of t2. THh current is negative if
+            the battery cell is discharging and positive if is charging. 
+        3. Repeat steps 1 and 2 until the desired terminal voltage is attained
+
+Args:
+    t1 (float): time period [s] for the initial rest and between the current pulse
+    t2 (float): time period [s] of the current pulse
+    current (float): current value [A] during the pulse
+    charge_or_discharge (str): options are 'charge' or 'discharge'
+    V_min (float): minimum terminal voltage [V]
+    V_max (float): maximum terminal voltage [V]
+    soc_lib_min (float): minimum LIB SOC
+    soc_lib_max (float): max. LIB SOC
+    soc_lib (float): SOC LIB at the start of the HPPC cycling step.
+    hppc_steps (int): number of HPPC repetitions. DEfault is 10.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/pycyclers.\+py\end{DoxyCompactItemize}

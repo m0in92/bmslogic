@@ -1,0 +1,68 @@
+\doxysection{kalman\+\_\+solvers.\+h}
+\hypertarget{kalman__solvers_8h_source}{}\label{kalman__solvers_8h_source}\index{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/kalman\_solvers.h@{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/kalman\_solvers.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Eigen/Core"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}solvers.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}calc\_helpers/kalman\_filter.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_s_p_k_f_polynomial_approx}{SPKFPolynomialApprox}}}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_s_p_k_f_polynomial_approx}{SPKFPolynomialApprox}}(\textcolor{keywordtype}{char}\ electrode\_type,\ \textcolor{keywordtype}{double}\ c\_init,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{double}\ D,\ \textcolor{keywordtype}{double}\ cov\_x,\ \textcolor{keywordtype}{double}\ cov\_w,\ \textcolor{keywordtype}{double}\ cov\_v);}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_s_p_k_f_polynomial_approx}{\string~SPKFPolynomialApprox}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ getter\ functions}}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_sigma_point_kalman_filter}{SigmaPointKalmanFilter}}\ get\_spkf\_solver()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_spkf\_solver;\ \}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{comment}{//\ helper\ functions}}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{double}\ solve\_spkf(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ t\_prev,\ \textcolor{keywordtype}{double}\ I\_app,\ \textcolor{keywordtype}{double}\ c\_surf\_true);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_dt;\ \ \ \ \ \textcolor{comment}{//\ [s]}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_t\_prev;\ \textcolor{comment}{//\ [D]}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_R;\ \ \ \ \ \ \textcolor{comment}{//\ Electrode\ Particle\ Size\ [m]}}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_S;\ \ \ \ \ \ \textcolor{comment}{//\ Electrode\ Electrochemically\ Active\ Area\ [m2];}}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_D;\ \ \ \ \ \ \textcolor{comment}{//\ Electrode\ Lithium-\/Ion\ Diffusivity\ [m2/2]}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_j;\ \ \ \ \ \ \textcolor{comment}{//\ Electrode\ Lithoim-\/ion\ Flux\ [mol/m2/s]}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{class_polynomial_approx}{PolynomialApprox}}\ conc\_solver;}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{comment}{//\ SPKF\ specific\ variables\ and\ methods}}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{class_sigma_point_kalman_filter}{SigmaPointKalmanFilter}}\ m\_spkf\_solver;}
+\DoxyCodeLine{00040\ \};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_s_p_k_f_solver}{SPKFSolver}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_base_battery_solver}{BaseBatterySolver}}}
+\DoxyCodeLine{00043\ \{}
+\DoxyCodeLine{00044\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{class_s_p_k_f_solver}{SPKFSolver}}(\mbox{\hyperlink{class_battery_cell}{BatteryCell}}\ i\_b\_cell,\ \textcolor{keywordtype}{bool}\ i\_isothermal,\ \textcolor{keywordtype}{bool}\ i\_degradation,}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ i\_state1\_init,\ \textcolor{keywordtype}{double}\ i\_state2\_init,\ \textcolor{keywordtype}{double}\ i\_cov\_state1,\ \textcolor{keywordtype}{double}\ i\_cov\_state2,}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ i\_cov\_w,\ \textcolor{keywordtype}{double}\ i\_cov\_v);}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{class_s_p_k_f_solver}{\string~SPKFSolver}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{comment}{//\ functions\ for\ calculations}}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{class_solution}{Solution}}\ solve(Eigen::VectorXd\ i\_t,\ Eigen::VectorXd\ i\_I,\ Eigen::VectorXd\ i\_V\_ob);}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{class_solution}{Solution}}\ solve(std::vector<double>\ i\_t,\ std::vector<double>\ i\_I,\ std::vector<double>\ i\_V\_ob);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//\ getters}}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_sigma_point_kalman_filter}{SigmaPointKalmanFilter}}\ get\_spkf\_solver\_instance()\ \{\ \textcolor{keywordflow}{return}\ m\_spkf\_solver;\ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_t\_prev;}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_dt;}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//\ electrode\ soc\ solvers}}
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{class_polynomial_approx}{PolynomialApprox}}\ m\_SOC\_solver\_p;}
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{class_polynomial_approx}{PolynomialApprox}}\ m\_SOC\_solver\_n;}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{//\ kalman\ filter\ specific}}
+\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{class_sigma_point_kalman_filter}{SigmaPointKalmanFilter}}\ m\_spkf\_solver;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{comment}{//\ helper\ functions}}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{struct_over_potentials}{OverPotentials}}\ calc\_overpotentials(\textcolor{keywordtype}{double}\ i\_I);}
+\DoxyCodeLine{00070\ \};}
+
+\end{DoxyCode}

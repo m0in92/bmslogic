@@ -1,0 +1,270 @@
+\doxysection{owl.\+h}
+\hypertarget{owl_8h_source}{}\label{owl_8h_source}\index{C:/Users/moina/dev/BMSLogic/bmslogic/extern/owl.h@{C:/Users/moina/dev/BMSLogic/bmslogic/extern/owl.h}}
+\mbox{\hyperlink{owl_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ BMSLOGIC\_OWL\_H}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ BMSLOGIC\_OWL\_H}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <exception>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <limits>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{namespace\ }OWL}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_o_w_l_1_1_size_mismatch_exception}{SizeMismatchException}}\ :\ \textcolor{keyword}{public}\ std::exception}
+\DoxyCodeLine{00033\ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *what()\ \{\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}ArrayXD\ lengths\ do\ not\ match."{}};\ \};}
+\DoxyCodeLine{00036\ \ \ \ \ \};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_o_w_l_1_1_empty_array_exception}{EmptyArrayException}}\ :\ \textcolor{keyword}{public}\ std::exception}
+\DoxyCodeLine{00043\ \ \ \ \ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *what()\ \{\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Empty\ Array!"{}};\ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}}
+\DoxyCodeLine{00056\ \ \ \ \ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a248a116356d1ea998d4e4d40cc4b6f02}{ArrayXD}}();}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a248a116356d1ea998d4e4d40cc4b6f02}{ArrayXD}}(std::vector<double>\ \&vec);}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{\string~ArrayXD}}()\ \{\};}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Getters}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ getArrayLength()\ \{\ \textcolor{keywordflow}{return}\ arrayLength;\ \};}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\ getArray()\ \{\ \textcolor{keywordflow}{return}\ array;\ \};}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Setters}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a372b5f4016bd46238ae98f729e5ca62d}{setArray}}(std::vector<double>\ \&newArray);}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Auxialaries}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ append(\textcolor{keywordtype}{double}\ new\_element)\ \{\ array.push\_back(new\_element);\ \}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ size()\ \{\ \textcolor{keywordflow}{return}\ array.size();\ \};}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a689a564e4ed16fe158f0de9984e8b2aa}{display}}();}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_aa10295d2b8df91ed5f0251620558a902}{isEqual}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_af575a51083b481d5379ea40978373b28}{isApproxEqual}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&,\ \textcolor{keywordtype}{double});}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a61999a451231dab8fc1e1eb63e9d3715}{sum}}();}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ compareArrayLength(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a14c4da58bb7159ae2f65aab6790736cd}{checkEmptyArray}}();}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a50e9e61a204e05f234f01a1d100b5f5e}{findMinElement}}();}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a1e72479e11204702d3fc823e4d62a874}{findMaxELement}}();}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a1aa16840199ce14dbbeb04ce9f86d4b3}{findClosestElement}}(\textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a09534cd40a667b8127287ed6ef386cdb}{findClosestElementIndex}}(\textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_aecba7ae0922326267de820ce964051e8}{findCLosestElementLessThan}}(\textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a08a16a111c7a2945efee398814781570}{findCLosestElementLessThanIndex}}(\textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_ad48a1398de0829b2b53c93c66bbfb9e0}{findCLosestElementGreaterThan}}(\textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_ad71dc110cc443941e6362dfd255d0c0c}{findCLosestElementGreaterThanIndex}}(\textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ operator\ overloads}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{class_o_w_l_1_1_array_x_d_ac4b250931b3e73fddfae1dc7c6e5e700}{operator[]}}(\textcolor{keywordtype}{size\_t});}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a194e6d232afc777cb00db45d0257161d}{operator+}}(\textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a194e6d232afc777cb00db45d0257161d}{operator+}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a264f4a4c222245ab2c256768a274478d}{operator-\/}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a249a4229900f923906ef3f07daf02d08}{operator*}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double});}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a249a4229900f923906ef3f07daf02d08}{operator*}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ operator<<(\textcolor{keywordtype}{double}\ inputValue)}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ array.push\_back(inputValue);}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ arrayLength\ +=\ 1;}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ arrayLength;}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ std::vector<double>\ array;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ arithmetic\ operations}}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ add(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ subtract(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ multiply(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ multiply(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00104\ \ \ \ \ \};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00107\ \textcolor{comment}{\ \ \ \ \ *\ The\ functions\ below\ pertains\ to\ creating\ a\ custom\ OWL::ArrayXD}}
+\DoxyCodeLine{00108\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{owl_8cpp_ab52b8586fa2f1ee450cb71aa83da609b}{Zeros}}(\textcolor{keywordtype}{int}\ len\ =\ 50);}
+\DoxyCodeLine{00110\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{owl_8cpp_aff45f7e53df0006a542b6ebd3822e45a}{Ones}}(\textcolor{keywordtype}{int}\ len\ =\ 50);}
+\DoxyCodeLine{00111\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{owl_8cpp_ae2c243e60bc700c7a2ed7262d94ea89b}{aRange}}(\textcolor{keywordtype}{double}\ start,\ \textcolor{keywordtype}{double}\ end,\ \textcolor{keywordtype}{double}\ dx);}
+\DoxyCodeLine{00112\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{owl_8cpp_acd23472bb73d05c40b17071e927dc6a6}{LinSpaced}}(\textcolor{keywordtype}{double}\ startDouble,\ \textcolor{keywordtype}{double}\ endDouble,\ \textcolor{keywordtype}{int}\ length\ =\ 50);}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00115\ \textcolor{comment}{\ \ \ \ \ *\ The\ functions\ below\ pertains\ to\ performing\ element-\/by-\/element\ math\ operatons\ on\ OWL::ArrayXD}}
+\DoxyCodeLine{00116\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{owl_8cpp_a5d1b2e3ec2eb9e52f6a4f0de5ee449a1}{abs}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{comment}{//\ trig\ functions}}
+\DoxyCodeLine{00121\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{owl_8cpp_a66e6e3b95a841a6f719e28d849f725ad}{sin}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00122\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{owl_8cpp_a24c8c0dac295fa4a1d49a5c96a411141}{cos}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00123\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{owl_8cpp_a9ca1e34d218a8c18657e44a9557e59d4}{tan}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00124\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{owl_8cpp_a922219bff72cb1949db55fec4133a984}{asin}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00125\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{owl_8cpp_a2de3a9fe8b33fdd210f07135ed97d95e}{acos}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00126\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{owl_8cpp_a15a8ca8aff4dbba0aa4f1bf74ba41854}{atan}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{comment}{//\ exponential\ and\ log\ functions}}
+\DoxyCodeLine{00129\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{owl_8cpp_aa1ed853f219787cbe3bf9f49516402d3}{exp}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00130\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{owl_8cpp_acc4195ec6031c017f113b9864be86754}{log10}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00131\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{owl_8cpp_a8ff29d3dca49546ab6c015cb9177b819}{ln}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00134\ \textcolor{comment}{\ \ \ \ Functions\ below\ pertains\ to\ operations\ on\ two\ OWL::ArrayXD}}
+\DoxyCodeLine{00135\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \mbox{\hyperlink{owl_8cpp_a5ea2510da3f79e167db515c0d1e5ae54}{append}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&,\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{ArrayXD}}\ \&);}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00139\ \textcolor{comment}{\ \ \ \ \ *\ Classes\ to\ handle\ exceptions\ for\ OWL::MatrixXD}}
+\DoxyCodeLine{00140\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_o_w_l_1_1_diff_array_lengths_exception}{DiffArrayLengthsException}}\ :\ \textcolor{keyword}{public}\ std::exception}
+\DoxyCodeLine{00148\ \ \ \ \ \{}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *what()\ \{\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Empty\ Array"{}};\ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \};}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_o_w_l_1_1_row_index_exceed_row_size_exception}{RowIndexExceedRowSizeException}}\ :\ \textcolor{keyword}{public}\ std::exception}
+\DoxyCodeLine{00159\ \ \ \ \ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *what()\ \{\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Empty\ Array"{}};\ \}}
+\DoxyCodeLine{00162\ \ \ \ \ \};}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d}{MatrixXD}}}
+\DoxyCodeLine{00168\ \ \ \ \ \{}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Constructors}}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d_a8addb067b6f5d2d0dd1278b9e43eb702}{MatrixXD}}();}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d_a8addb067b6f5d2d0dd1278b9e43eb702}{MatrixXD}}(std::vector<ArrayXD>\ inputElements);}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d_a8addb067b6f5d2d0dd1278b9e43eb702}{MatrixXD}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int});}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d}{\string~MatrixXD}}()\ \{\};}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Getter\ functions}}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getRowSize()\ \{\ \textcolor{keywordflow}{return}\ m;\ \};}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getColSize()\ \{\ \textcolor{keywordflow}{return}\ n;\ \};}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ std::vector<ArrayXD>\ getElements()\ \{\ \textcolor{keywordflow}{return}\ elements;\ \};}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ operator\ overloads}}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{OWL::ArrayXD}}\ \&operator[](\textcolor{keywordtype}{int}\ rowIndex)}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (rowIndex\ >\ (m\ -\/\ 1))}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{class_o_w_l_1_1_row_index_exceed_row_size_exception}{RowIndexExceedRowSizeException}}();}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ elements[rowIndex];}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ operator<<(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{OWL::ArrayXD}}\ inputRow)}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ elements.push\_back(inputRow);}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ m\ =\ findRowSize();}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ n\ =\ findColSize();}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d}{MatrixXD}}\ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d_a430bb2d2b9556315a05e91aacbff8efd}{operator+}}(\mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d}{MatrixXD}}\ \&);}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d}{MatrixXD}}\ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d_ae2f7924c7cc19a50dfdd69266eac404c}{operator-\/}}(\mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d}{MatrixXD}}\ \&);}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d}{MatrixXD}}\ operator*(\mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d}{MatrixXD}}\ \&);}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ operator()(\textcolor{keywordtype}{int}\ idx\_row,\ \textcolor{keywordtype}{int}\ idx\_col)}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((idx\_row\ >\ m)\ ||\ (idx\_col\ >\ n))}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::exception();}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ elements[idx\_row][idx\_col];}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Auxiliary\ Functions}}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d_a6f4bddf0c86183a41ca1152806c60b90}{compareSize}}(\mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d}{MatrixXD}}\ \&);}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{OWL::ArrayXD}}\ getCol(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ isSquare()}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ flag\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ ==\ m)}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flag\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ flag;}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ isSingular()}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ detVal\ =\ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d_ab28a3a1b9c8fa95f1c785b98651265b5}{det}}();}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (detVal\ ==\ 0.0)}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Matrix\ operations}}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d_aa270ca92d10ada8121a7517785e46c09}{T}}();}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d}{MatrixXD}}\ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d_a19284e10a4f3fc7ca11ed99e2863d24c}{submatrix}}(\textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int});}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d_ab28a3a1b9c8fa95f1c785b98651265b5}{det}}();}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ std::vector<ArrayXD>\ elements;\ \textcolor{comment}{//\ a\ vector\ of\ columns\ containing\ a\ OWL::ArrayXD\ as\ rows.}}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ m;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ n;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ findRowSize();}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ findColSize();}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ checkEmptyArrays();}
+\DoxyCodeLine{00239\ \ \ \ \ \};}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00242\ \textcolor{comment}{\ \ \ \ \ *\ The\ functions\ below\ pertains\ to\ creating\ a\ custom\ OWL::MatrixXD}}
+\DoxyCodeLine{00243\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00260\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d}{MatrixXD}}\ \mbox{\hyperlink{owl_8cpp_ab52b8586fa2f1ee450cb71aa83da609b}{Zeros}}(\textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int});}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00277\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d}{MatrixXD}}\ \mbox{\hyperlink{owl_8cpp_aff45f7e53df0006a542b6ebd3822e45a}{Ones}}(\textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int});}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00293\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d}{MatrixXD}}\ \mbox{\hyperlink{owl_8cpp_a0fcd68874cac52a5735286c73c35643b}{Diag}}(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{00294\ \}}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00297\ \textcolor{comment}{\ *\ Functions\ below\ pertains\ to\ operator\ overloads\ free\ functions}}
+\DoxyCodeLine{00298\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00299\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{OWL::ArrayXD}}\ operator+(\textcolor{keywordtype}{double},\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{OWL::ArrayXD}});}
+\DoxyCodeLine{00300\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{OWL::ArrayXD}}\ \mbox{\hyperlink{owl_8h_a3a9804711cf84f20c2a318ed947a04e0}{operator*}}(\textcolor{keywordtype}{double}\ lhsScalar,\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{OWL::ArrayXD}}\ rhsArray);}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00302\ \textcolor{keyword}{namespace\ }Newton}
+\DoxyCodeLine{00303\ \{}
+\DoxyCodeLine{00304\ \ \ \ \ \textcolor{keyword}{namespace\ }interp}
+\DoxyCodeLine{00305\ \ \ \ \ \{}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_newton_1_1interp_1_1_exceed_interpolate_limit}{ExceedInterpolateLimit}}\ :\ \textcolor{keyword}{public}\ std::exception}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{class_newton_1_1interp_1_1_exceed_interpolate_limit_a870e3e1bd61ea554e9dfb21af285e4c7}{what}}();}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{owl_8cpp_a782a0f8cc6a7dfbcf2375c0b394eb220}{slope}}(\textcolor{keywordtype}{double}\ \&y2,\ \textcolor{keywordtype}{double}\ \&y1,\ \textcolor{keywordtype}{double}\ \&x2,\ \textcolor{keywordtype}{double}\ \&x1);}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::function<double(\textcolor{keywordtype}{double})>\ \mbox{\hyperlink{owl_8cpp_ad923250f9931c59b079860f74444f0b6}{line}}(\textcolor{keywordtype}{double}\ \&slope,\ \textcolor{keywordtype}{double}\ \&x,\ \textcolor{keywordtype}{double}\ \&y);}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{owl_8cpp_a06fbe49bc1190985d1a53a6c89b45fe9}{interp}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{OWL::ArrayXD}}\ xArray,\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{OWL::ArrayXD}}\ yArray,\ \textcolor{keywordtype}{double}\ x);}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::function<double(\textcolor{keywordtype}{double})>\ \mbox{\hyperlink{owl_8cpp_aa89abd0168d396b4ee6804de0419adc6}{interpFunc}}(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{OWL::ArrayXD}}\ xArray,\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{OWL::ArrayXD}}\ yArray);}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{double}\ linear\_interpolation(\textcolor{keywordtype}{double}\ x,\ std::vector<double>\ vec\_x,\ std::vector<double>\ vec\_y);}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\ linear\_interpolation(\textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\ x,\ std::vector<long\ double>\ vec\_x,\ std::vector<long\ double>\ vec\_y);}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::vector<double>\ linear\_interpolation(std::vector<double>\ target\_vec\_x,\ std::vector<double>\ vec\_x,\ std::vector<double>\ vec\_y);}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::vector<long\ double>\ linear\_interpolation(std::vector<long\ double>\ target\_vec\_x,\ std::vector<long\ double>\ vec\_x,\ std::vector<long\ double>\ vec\_y);}
+\DoxyCodeLine{00323\ \ \ \ \ \}}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \ \ \ \ \textcolor{keyword}{namespace\ }ODESolver}
+\DoxyCodeLine{00326\ \ \ \ \ \{}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{double}\ Euler(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ x\_prev,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ y\_prev,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ step\_size,\ \textcolor{keywordtype}{double}\ (*func)(\textcolor{keywordtype}{double},\ \textcolor{keywordtype}{double}));}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{double}\ Euler(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ y\_prev,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ step\_size,\ \textcolor{keywordtype}{double}\ func\_value);}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{OWL::ArrayXD}}\ Euler(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{OWL::ArrayXD}}\ xArray,\ \textcolor{keywordtype}{double}\ yInit,\ \textcolor{keywordtype}{double}\ (*func)(\textcolor{keywordtype}{double},\ \textcolor{keywordtype}{double}));}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ [[nodiscard]]}
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{double}}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ rk4(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ x\_prev,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ y\_prev,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ step\_size,\ \textcolor{keywordtype}{double}\ (*func)(\textcolor{keywordtype}{double}\ x,\ \textcolor{keywordtype}{double}\ y));}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{double}\ rk4(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ x\_prev,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ y\_prev,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ step\_size,\ std::function<\textcolor{keywordtype}{double}(\textcolor{keywordtype}{double},\ \textcolor{keywordtype}{double})>\ func);}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{OWL::ArrayXD}}\ rk4(\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{OWL::ArrayXD}}\ xArray,\ \textcolor{keywordtype}{double}\ yInit,\ \textcolor{keywordtype}{double}\ (*func)(\textcolor{keywordtype}{double},\ \textcolor{keywordtype}{double}));}
+\DoxyCodeLine{00336\ \ \ \ \ \}}
+\DoxyCodeLine{00337\ }
+\DoxyCodeLine{00338\ \ \ \ \ \textcolor{keyword}{namespace\ }roots}
+\DoxyCodeLine{00339\ \ \ \ \ \{}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ double\ Brent(double\ (*func)(double),\ double\ lower\_bound,\ double\ upper\_bound,\ double\ TOL,\ double\ MAX\_ITER);}}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{double}\ Brent(std::function<\textcolor{keywordtype}{double}(\textcolor{keywordtype}{double})>\ func,\ \textcolor{keywordtype}{double}\ lower\_bound,\ \textcolor{keywordtype}{double}\ upper\_bound,\ \textcolor{keywordtype}{double}\ TOL,\ \textcolor{keywordtype}{double}\ MAX\_ITER);}
+\DoxyCodeLine{00342\ \ \ \ \ \}}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00344\ \ \ \ \ \textcolor{keyword}{namespace\ }MatrixSolvers}
+\DoxyCodeLine{00345\ \ \ \ \ \{}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::vector<double>\ \mbox{\hyperlink{owl_8cpp_a2f6189bfde35f9aeff3bd0212593f3b6}{TDMASolver}}(std::vector<double>\ l\_diag,\ std::vector<double>\ diag,\ std::vector<double>\ u\_diag,\ std::vector<double>\ col\_vec);}
+\DoxyCodeLine{00356\ \ \ \ \ \}}
+\DoxyCodeLine{00357\ \}}
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00359\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BMSLOGIC\_OWL\_H}}
+
+\end{DoxyCode}

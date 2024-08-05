@@ -1,0 +1,46 @@
+\doxysection{ESC Class Reference}
+\hypertarget{class_e_s_c}{}\label{class_e_s_c}\index{ESC@{ESC}}
+
+
+Class oject contains the relevant functions to perform the Enhanched-\/self-\/correcting ECM model.  
+
+
+
+
+{\ttfamily \#include $<$models.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_e_s_c_aee7646a71446bdcb472b5dccbcfffb6b}\label{class_e_s_c_aee7646a71446bdcb472b5dccbcfffb6b} 
+int {\bfseries sign} (double \&i\+\_\+number)
+\item 
+\Hypertarget{class_e_s_c_a1d570a3875235d96a11bd24cbb6fcfdc}\label{class_e_s_c_a1d570a3875235d96a11bd24cbb6fcfdc} 
+int {\bfseries sign} (int \&i\+\_\+number)
+\item 
+\Hypertarget{class_e_s_c_a252edf81b4d05fd108f7d714b5f376e4}\label{class_e_s_c_a252edf81b4d05fd108f7d714b5f376e4} 
+double {\bfseries s} (double \&i\+\_\+app, double \&s\+\_\+prev)
+\item 
+\Hypertarget{class_e_s_c_a54e85de8e15b820950ceab3e42973175}\label{class_e_s_c_a54e85de8e15b820950ceab3e42973175} 
+double {\bfseries soc\+\_\+next} (double dt, double i\+\_\+app, double soc\+\_\+prev, double Q, double eta)
+\item 
+\Hypertarget{class_e_s_c_acf461ca087601b323abf0cc55917a96c}\label{class_e_s_c_acf461ca087601b323abf0cc55917a96c} 
+double {\bfseries i\+\_\+\+R1\+\_\+next} (double dt, double i\+\_\+app, double i\+\_\+\+R1\+\_\+prev, double R1, double C1)
+\item 
+\Hypertarget{class_e_s_c_a49ab78ca27e29362cff05fc1d07dda9c}\label{class_e_s_c_a49ab78ca27e29362cff05fc1d07dda9c} 
+double {\bfseries h\+\_\+next} (double dt, double i\+\_\+app, double eta, double gamma, double cap, double h\+\_\+prev)
+\item 
+\Hypertarget{class_e_s_c_ab402d0bcea1a103bad35ac8081cccada}\label{class_e_s_c_ab402d0bcea1a103bad35ac8081cccada} 
+double {\bfseries v} (double i\+\_\+app, double ocv, double R0, double R1, double i\+\_\+\+R1, double m\+\_\+0, double m, double h, double s\+\_\+prev)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class oject contains the relevant functions to perform the Enhanched-\/self-\/correcting ECM model. 
+
+Notes\+: The discharge current is assumed to be positive values. Meanwhile, the charge current is negative by convention. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{models_8h}{models.\+h}}\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{models_8cpp}{models.\+cpp}}\end{DoxyCompactItemize}

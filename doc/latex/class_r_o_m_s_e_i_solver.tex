@@ -1,0 +1,71 @@
+\doxysection{ROMSEISolver Class Reference}
+\hypertarget{class_r_o_m_s_e_i_solver}{}\label{class_r_o_m_s_e_i_solver}\index{ROMSEISolver@{ROMSEISolver}}
+
+
+Degradation solvers.  
+
+
+
+
+{\ttfamily \#include $<$solvers.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_r_o_m_s_e_i_solver_a06f46f8b76718d38f80fb769429fee3d}\label{class_r_o_m_s_e_i_solver_a06f46f8b76718d38f80fb769429fee3d} 
+{\bfseries ROMSEISolver} (double i\+\_\+k, double i\+\_\+c\+\_\+e, double i\+\_\+S, double i\+\_\+c\+\_\+s\+\_\+max, double i\+\_\+\+U\+\_\+s, double i\+\_\+j\+\_\+0\+\_\+s, double i\+\_\+A, double i\+\_\+\+MW\+\_\+\+SEI, double i\+\_\+rho, double i\+\_\+kappa)
+\item 
+\Hypertarget{class_r_o_m_s_e_i_solver_aec1ec644aca6bf588e18eef0fb924927}\label{class_r_o_m_s_e_i_solver_aec1ec644aca6bf588e18eef0fb924927} 
+double {\bfseries get\+\_\+k} ()
+\item 
+\Hypertarget{class_r_o_m_s_e_i_solver_a959a188391a3c6c905060675a1d56619}\label{class_r_o_m_s_e_i_solver_a959a188391a3c6c905060675a1d56619} 
+double {\bfseries get\+\_\+c\+\_\+e} ()
+\item 
+\Hypertarget{class_r_o_m_s_e_i_solver_aba308a2069062de58e9ea33f5aa67758}\label{class_r_o_m_s_e_i_solver_aba308a2069062de58e9ea33f5aa67758} 
+double {\bfseries get\+\_\+S} ()
+\item 
+\Hypertarget{class_r_o_m_s_e_i_solver_ae515c2372fe67ba5b7a99ae9feb468a8}\label{class_r_o_m_s_e_i_solver_ae515c2372fe67ba5b7a99ae9feb468a8} 
+double {\bfseries get\+\_\+c\+\_\+s\+\_\+max} ()
+\item 
+\Hypertarget{class_r_o_m_s_e_i_solver_a2962408a186c52891abbb80ac3ff2ee1}\label{class_r_o_m_s_e_i_solver_a2962408a186c52891abbb80ac3ff2ee1} 
+double {\bfseries get\+\_\+\+U\+\_\+s} ()
+\item 
+\Hypertarget{class_r_o_m_s_e_i_solver_a74a3ec55fb8ebb27e9909bd50c0faf1d}\label{class_r_o_m_s_e_i_solver_a74a3ec55fb8ebb27e9909bd50c0faf1d} 
+double {\bfseries get\+\_\+j\+\_\+0\+\_\+s} ()
+\item 
+\Hypertarget{class_r_o_m_s_e_i_solver_aebfc5e7a3c00824b8079c335c9be3829}\label{class_r_o_m_s_e_i_solver_aebfc5e7a3c00824b8079c335c9be3829} 
+double {\bfseries get\+\_\+A} ()
+\item 
+\Hypertarget{class_r_o_m_s_e_i_solver_a90d2cf87e397dde74d05d0097134781a}\label{class_r_o_m_s_e_i_solver_a90d2cf87e397dde74d05d0097134781a} 
+double {\bfseries get\+\_\+\+MW} ()
+\item 
+\Hypertarget{class_r_o_m_s_e_i_solver_a2146a5be4389248923f820a19be0f0ff}\label{class_r_o_m_s_e_i_solver_a2146a5be4389248923f820a19be0f0ff} 
+double {\bfseries get\+\_\+rho} ()
+\item 
+\Hypertarget{class_r_o_m_s_e_i_solver_a9ddd7b70b7e1702c4c303eb1935ba82d}\label{class_r_o_m_s_e_i_solver_a9ddd7b70b7e1702c4c303eb1935ba82d} 
+double {\bfseries get\+\_\+kappa} ()
+\item 
+\Hypertarget{class_r_o_m_s_e_i_solver_a248e749d5adcbe3961ae791d1466f5ce}\label{class_r_o_m_s_e_i_solver_a248e749d5adcbe3961ae791d1466f5ce} 
+double {\bfseries get\+\_\+cumulative\+\_\+j\+\_\+s} ()
+\item 
+\Hypertarget{class_r_o_m_s_e_i_solver_a405a3ec685bb6c17047ae488d5bcc285}\label{class_r_o_m_s_e_i_solver_a405a3ec685bb6c17047ae488d5bcc285} 
+double {\bfseries get\+\_\+\+L\+\_\+\+SEI} ()
+\item 
+\Hypertarget{class_r_o_m_s_e_i_solver_accca055c6d4b3004224f0493a8e9d76c}\label{class_r_o_m_s_e_i_solver_accca055c6d4b3004224f0493a8e9d76c} 
+double {\bfseries solve\+\_\+current} (double soc\+\_\+n, double ocp\+\_\+n, double temp, double i\+\_\+app, double relative\+\_\+tolerance, int max\+\_\+iter)
+\item 
+\Hypertarget{class_r_o_m_s_e_i_solver_a623eb0e05ed12e0ffa5e25d7fd469524}\label{class_r_o_m_s_e_i_solver_a623eb0e05ed12e0ffa5e25d7fd469524} 
+double {\bfseries solve\+\_\+delta\+\_\+L} (double j\+\_\+s, double dt)
+\item 
+\Hypertarget{class_r_o_m_s_e_i_solver_aaa75e3c8bfe7123ac7ca6adfc4b6b56f}\label{class_r_o_m_s_e_i_solver_aaa75e3c8bfe7123ac7ca6adfc4b6b56f} 
+void {\bfseries update\+\_\+L} (double j\+\_\+s, double dt)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Degradation solvers. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers.\+h\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers.\+cpp\end{DoxyCompactItemize}

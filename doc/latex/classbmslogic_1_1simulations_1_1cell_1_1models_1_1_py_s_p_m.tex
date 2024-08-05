@@ -1,0 +1,82 @@
+\doxysection{bmslogic.\+simulations.\+cell.\+models.\+Py\+SPM Class Reference}
+\hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m}{}\label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m}\index{bmslogic.simulations.cell.models.PySPM@{bmslogic.simulations.cell.models.PySPM}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m_a0f9ead8a71a2d59fab33844687af24cd}{molar\+\_\+flux\+\_\+electrode}} (cls, float I, float S, str electrode\+\_\+type)
+\item 
+tuple\mbox{[}float, float, float, float, float\mbox{]} \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m_a7e88319ad1cb5cd771a8487740f196e4}{\+\_\+\+\_\+call\+\_\+\+\_\+}} (self, float OCP\+\_\+p, float OCP\+\_\+n, float R\+\_\+cell, float k\+\_\+p, float S\+\_\+p, float c\+\_\+smax\+\_\+p, float SOC\+\_\+p, float k\+\_\+n, float S\+\_\+n, float c\+\_\+smax\+\_\+n, float SOC\+\_\+n, float c\+\_\+e, float T, float I\+\_\+p\+\_\+i, float I\+\_\+n\+\_\+i)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m_ad567abf854d88e0628de5c75428d2971}{flux\+\_\+to\+\_\+current}} (float molar\+\_\+flux, float S, str electrode\+\_\+type)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m_a099d5896c90d9576b8f948950939c58d}\label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m_a099d5896c90d9576b8f948950939c58d} 
+float {\bfseries m} (float I, float k, float S, float c\+\_\+max, float SOC, float c\+\_\+e)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m_aead0dbee089e2ebd60dbfcc247e7cc8b}\label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m_aead0dbee089e2ebd60dbfcc247e7cc8b} 
+tuple\mbox{[}float, float, float, float, float\mbox{]} {\bfseries calc\+\_\+cell\+\_\+terminal\+\_\+voltage} (float OCP\+\_\+p, float OCP\+\_\+n, float m\+\_\+p, float m\+\_\+n, float R\+\_\+cell, float T, float I)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}This class contains the methods for calculating the molar lithium flux, cell terminal voltage according to the
+single particle model.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m_a7e88319ad1cb5cd771a8487740f196e4}\index{bmslogic.simulations.cell.models.PySPM@{bmslogic.simulations.cell.models.PySPM}!\_\_call\_\_@{\_\_call\_\_}}
+\index{\_\_call\_\_@{\_\_call\_\_}!bmslogic.simulations.cell.models.PySPM@{bmslogic.simulations.cell.models.PySPM}}
+\doxysubsubsection{\texorpdfstring{\_\_call\_\_()}{\_\_call\_\_()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m_a7e88319ad1cb5cd771a8487740f196e4} 
+ tuple\mbox{[}float, float, float, float, float\mbox{]} bmslogic.\+simulations.\+cell.\+models.\+Py\+SPM.\+\_\+\+\_\+call\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{OCP\+\_\+p}{, }\item[{float}]{OCP\+\_\+n}{, }\item[{float}]{R\+\_\+cell}{, }\item[{float}]{k\+\_\+p}{, }\item[{float}]{S\+\_\+p}{, }\item[{float}]{c\+\_\+smax\+\_\+p}{, }\item[{float}]{SOC\+\_\+p}{, }\item[{float}]{k\+\_\+n}{, }\item[{float}]{S\+\_\+n}{, }\item[{float}]{c\+\_\+smax\+\_\+n}{, }\item[{float}]{SOC\+\_\+n}{, }\item[{float}]{c\+\_\+e}{, }\item[{float}]{T}{, }\item[{float}]{I\+\_\+p\+\_\+i}{, }\item[{float}]{I\+\_\+n\+\_\+i}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates the cell terminal voltage and other overpotential contributions.
+:param OCP_p: Open-circuit potential of the positive electrode [V]
+:param OCP_n: Open-circuit potential of the negative electrode [V]
+:param R_cell: Battery cell ohmic resistance [ohms]
+:param k_p: positive electrode rate constant [m2 mol0.5 / s]
+:param S_p:  positive electrode electro-active area [mol/m2]
+:param c_smax_p: positive electrode max. lithium conc. [mol]
+:param SOC_p: positive electrode SOC
+:param k_n: negative electrode rate constant [m2 mol0.5 / s]
+:param S_n: negative electrode electrochemical active area [m2/mol]
+:param c_smax_n: negative electrode max. lithium conc. [mol]
+:param SOC_n: negative electrode SOC
+:param c_e: electrolyte conc. [mol]
+:param T: Battery cell temperature [K]
+:param I_p_i: positive electrode intercalation applied current [A]
+:param I_n_i: negative electrode intercalation applied current [A]
+:return: Battery cell terminal voltage [V]
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m_ad567abf854d88e0628de5c75428d2971}\index{bmslogic.simulations.cell.models.PySPM@{bmslogic.simulations.cell.models.PySPM}!flux\_to\_current@{flux\_to\_current}}
+\index{flux\_to\_current@{flux\_to\_current}!bmslogic.simulations.cell.models.PySPM@{bmslogic.simulations.cell.models.PySPM}}
+\doxysubsubsection{\texorpdfstring{flux\_to\_current()}{flux\_to\_current()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m_ad567abf854d88e0628de5c75428d2971} 
+ float bmslogic.\+simulations.\+cell.\+models.\+Py\+SPM.\+flux\+\_\+to\+\_\+current (\begin{DoxyParamCaption}\item[{float}]{molar\+\_\+flux}{, }\item[{float}]{S}{, }\item[{str}]{electrode\+\_\+type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyVerb}Converts molar flux [mol/m2/s] to current [A].
+:param molar_flux: molar lithium-ion flux [mol/m2/s]
+:param S: (float) electrode electrochemically active area [m2]
+:param electrode_type: (str) positive electrode ('p') or negative electrode ('n')
+:return: (float) current [A]
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m_a0f9ead8a71a2d59fab33844687af24cd}\index{bmslogic.simulations.cell.models.PySPM@{bmslogic.simulations.cell.models.PySPM}!molar\_flux\_electrode@{molar\_flux\_electrode}}
+\index{molar\_flux\_electrode@{molar\_flux\_electrode}!bmslogic.simulations.cell.models.PySPM@{bmslogic.simulations.cell.models.PySPM}}
+\doxysubsubsection{\texorpdfstring{molar\_flux\_electrode()}{molar\_flux\_electrode()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m_a0f9ead8a71a2d59fab33844687af24cd} 
+ float bmslogic.\+simulations.\+cell.\+models.\+Py\+SPM.\+molar\+\_\+flux\+\_\+electrode (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{I}{, }\item[{float}]{S}{, }\item[{str}]{electrode\+\_\+type}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates the model lithium-ion flux [mol/m2/s] into the electrodes.
+:param I: (float) Applied current [A]
+:param S: (float) electrode electrochemically active area [m2]
+:param electrode_type: (str) positive electrode ('p') or negative electrode ('n')
+:return: (float) molar flux [mol/m2/s]
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/models.\+py\end{DoxyCompactItemize}

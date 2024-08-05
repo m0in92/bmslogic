@@ -1,0 +1,148 @@
+\doxysection{bmslogic.\+calc\+\_\+helpers.\+CI\+\_\+algorithms.\+GA Class Reference}
+\hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a}{}\label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a}\index{bmslogic.calc\_helpers.CI\_algorithms.GA@{bmslogic.calc\_helpers.CI\_algorithms.GA}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a50e53cdc83c2735e326cc256663a7a87}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, float n\+\_\+chromosomes, np.\+ndarray bounds, Callable obj\+\_\+func, int n\+\_\+pool, int n\+\_\+elite, int n\+\_\+generations, float mutating\+\_\+factor=0.\+8)
+\item 
+np.\+ndarray \mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a6f96d272d4459cd20d828ddf615c18a1}{initialize\+\_\+population}} (self)
+\item 
+np.\+ndarray \mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a326924714f702c5dd2aadf336e90da65}{calc\+\_\+fitness}} (self, population)
+\item 
+tuple\mbox{[}np.\+ndarray, np.\+ndarray, np.\+ndarray\mbox{]} \mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_ab43e5034fedff77f8659fb8578ae5469}{sorting}} (self, population, fitness\+\_\+array)
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_aa7f5cea2e7e6a08ce1236090215a24f7}\label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_aa7f5cea2e7e6a08ce1236090215a24f7} 
+np.\+ndarray {\bfseries mating\+\_\+population} (self, population, fitness\+\_\+array)
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a2eb7b0bbde71b08fc45ad8607812050b}\label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a2eb7b0bbde71b08fc45ad8607812050b} 
+np.\+ndarray {\bfseries create\+\_\+new\+\_\+population} (self, mating\+\_\+population)
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a02ac8285c2d2b66e71222326291030da}\label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a02ac8285c2d2b66e71222326291030da} 
+npt.\+Array\+Like {\bfseries mutate} (self, population)
+\item 
+tuple \mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a76f6f80c456364f03c613769852a6e3c}{solve}} (self)
+\item 
+None \mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a5ea5ed46280afc7f1760ebd94b21a429}{plot}} (self, npt.\+Array\+Like obj\+\_\+func\+\_\+value\+\_\+array)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+npt.\+Array\+Like \mbox{\hyperlink{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_ae7ae3ac425e07f9d2a35d379070d4f50}{MSE}} (array\+\_\+sim, array\+\_\+actual)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_ad450ef6c8f43c56c8ea0f17c7ce1b4e1}\label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_ad450ef6c8f43c56c8ea0f17c7ce1b4e1} 
+{\bfseries n\+\_\+chromosomes}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a13ba09053b0edfc6792bfedd99c326b5}\label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a13ba09053b0edfc6792bfedd99c326b5} 
+{\bfseries bounds}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a780705b757828d2385488d9b8cd907a1}\label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a780705b757828d2385488d9b8cd907a1} 
+{\bfseries n\+\_\+genes}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_af6017d839ace2b11a4ac006400b877da}\label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_af6017d839ace2b11a4ac006400b877da} 
+{\bfseries obj\+\_\+func}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_ac1d7d0568790e7b2c8e081c83ef9fadb}\label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_ac1d7d0568790e7b2c8e081c83ef9fadb} 
+{\bfseries n\+\_\+pool}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a00d54bb1823c051c72e16d849567e3ad}\label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a00d54bb1823c051c72e16d849567e3ad} 
+{\bfseries n\+\_\+elite}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a378e2a02cbf4da75886f899c522b8341}\label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a378e2a02cbf4da75886f899c522b8341} 
+{\bfseries n\+\_\+mutatation}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a9ca53abea9f02613685254e378813ef6}\label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a9ca53abea9f02613685254e378813ef6} 
+{\bfseries n\+\_\+generations}
+\item 
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a1a33a0076ac0d95b0d685988abacd5d1}\label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a1a33a0076ac0d95b0d685988abacd5d1} 
+{\bfseries mutating\+\_\+factor}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a50e53cdc83c2735e326cc256663a7a87}\index{bmslogic.calc\_helpers.CI\_algorithms.GA@{bmslogic.calc\_helpers.CI\_algorithms.GA}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!bmslogic.calc\_helpers.CI\_algorithms.GA@{bmslogic.calc\_helpers.CI\_algorithms.GA}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a50e53cdc83c2735e326cc256663a7a87} 
+bmslogic.\+calc\+\_\+helpers.\+CI\+\_\+algorithms.\+GA.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{n\+\_\+chromosomes}{, }\item[{np.\+ndarray}]{bounds}{, }\item[{Callable}]{obj\+\_\+func}{, }\item[{int}]{n\+\_\+pool}{, }\item[{int}]{n\+\_\+elite}{, }\item[{int}]{n\+\_\+generations}{, }\item[{float }]{mutating\+\_\+factor}{ = {\ttfamily 0.8}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initializes the population by drawing numbers from a uniform distribution, within the bounds.
+:params n_chromosomes: (float) the number of parameter sets per generation
+:params bounds: (numpy array) contains the bounds for each of the parameters. Each row in this numpy array
+        corresponds to the bounds for the parameter.
+:params obj_func: (func) a function object that defines the objective function. Note: the objective function has
+                 to handle numpy array with 1 dimension. Furthermore, the GA class tries to minimize the
+                 objective function.
+:params n_pool: (int) number of pooling population
+:params n_elite: (int) number of elite population.
+:param n_generations: (int) number of generations.
+:params mutating_factor: (float) the ratio of population (excluding the elite chromosomes) to mutate.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a326924714f702c5dd2aadf336e90da65}\index{bmslogic.calc\_helpers.CI\_algorithms.GA@{bmslogic.calc\_helpers.CI\_algorithms.GA}!calc\_fitness@{calc\_fitness}}
+\index{calc\_fitness@{calc\_fitness}!bmslogic.calc\_helpers.CI\_algorithms.GA@{bmslogic.calc\_helpers.CI\_algorithms.GA}}
+\doxysubsubsection{\texorpdfstring{calc\_fitness()}{calc\_fitness()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a326924714f702c5dd2aadf336e90da65} 
+ np.\+ndarray bmslogic.\+calc\+\_\+helpers.\+CI\+\_\+algorithms.\+GA.\+calc\+\_\+fitness (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{population}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates the fitness of the parameters. In each iteration, the chromosomes are passed into the objective
+function and the fitness value is calculated.
+:param population: (Numpy array) population where the row indicates the chromosome.
+:return fitness_array: (Numpy array): a array containing the fitness from each chromosome.
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a6f96d272d4459cd20d828ddf615c18a1}\index{bmslogic.calc\_helpers.CI\_algorithms.GA@{bmslogic.calc\_helpers.CI\_algorithms.GA}!initialize\_population@{initialize\_population}}
+\index{initialize\_population@{initialize\_population}!bmslogic.calc\_helpers.CI\_algorithms.GA@{bmslogic.calc\_helpers.CI\_algorithms.GA}}
+\doxysubsubsection{\texorpdfstring{initialize\_population()}{initialize\_population()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a6f96d272d4459cd20d828ddf615c18a1} 
+ np.\+ndarray bmslogic.\+calc\+\_\+helpers.\+CI\+\_\+algorithms.\+GA.\+initialize\+\_\+population (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initializes the population by drawing numbers from a uniform distribution, within the bounds.
+:returns: (Numpy array) a numpy array of populations. Each row contains the chromosomes (i.e. parameter set)
+        and each column contains the genes (i.e., parameter values)
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_ae7ae3ac425e07f9d2a35d379070d4f50}\index{bmslogic.calc\_helpers.CI\_algorithms.GA@{bmslogic.calc\_helpers.CI\_algorithms.GA}!MSE@{MSE}}
+\index{MSE@{MSE}!bmslogic.calc\_helpers.CI\_algorithms.GA@{bmslogic.calc\_helpers.CI\_algorithms.GA}}
+\doxysubsubsection{\texorpdfstring{MSE()}{MSE()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_ae7ae3ac425e07f9d2a35d379070d4f50} 
+ npt.\+Array\+Like bmslogic.\+calc\+\_\+helpers.\+CI\+\_\+algorithms.\+GA.\+MSE (\begin{DoxyParamCaption}\item[{}]{array\+\_\+sim}{, }\item[{}]{array\+\_\+actual}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyVerb}Mean squared error.
+:param array_pred:
+:param array_actual:
+:return:
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a5ea5ed46280afc7f1760ebd94b21a429}\index{bmslogic.calc\_helpers.CI\_algorithms.GA@{bmslogic.calc\_helpers.CI\_algorithms.GA}!plot@{plot}}
+\index{plot@{plot}!bmslogic.calc\_helpers.CI\_algorithms.GA@{bmslogic.calc\_helpers.CI\_algorithms.GA}}
+\doxysubsubsection{\texorpdfstring{plot()}{plot()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a5ea5ed46280afc7f1760ebd94b21a429} 
+ None bmslogic.\+calc\+\_\+helpers.\+CI\+\_\+algorithms.\+GA.\+plot (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{npt.\+Array\+Like}]{obj\+\_\+func\+\_\+value\+\_\+array}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Plots the objective function values at each generation.
+:params obj_func_value_array: (Numpy array) array containg the objective function values at each generation.
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a76f6f80c456364f03c613769852a6e3c}\index{bmslogic.calc\_helpers.CI\_algorithms.GA@{bmslogic.calc\_helpers.CI\_algorithms.GA}!solve@{solve}}
+\index{solve@{solve}!bmslogic.calc\_helpers.CI\_algorithms.GA@{bmslogic.calc\_helpers.CI\_algorithms.GA}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_a76f6f80c456364f03c613769852a6e3c} 
+ tuple bmslogic.\+calc\+\_\+helpers.\+CI\+\_\+algorithms.\+GA.\+solve (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Performs the genetic algorithm.
+:returns: a tuple of Numpy arrays of optimized parameters and objective function's value after each generation.
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_ab43e5034fedff77f8659fb8578ae5469}\index{bmslogic.calc\_helpers.CI\_algorithms.GA@{bmslogic.calc\_helpers.CI\_algorithms.GA}!sorting@{sorting}}
+\index{sorting@{sorting}!bmslogic.calc\_helpers.CI\_algorithms.GA@{bmslogic.calc\_helpers.CI\_algorithms.GA}}
+\doxysubsubsection{\texorpdfstring{sorting()}{sorting()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a_ab43e5034fedff77f8659fb8578ae5469} 
+ tuple\mbox{[}np.\+ndarray, np.\+ndarray, np.\+ndarray\mbox{]} bmslogic.\+calc\+\_\+helpers.\+CI\+\_\+algorithms.\+GA.\+sorting (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{population}{, }\item[{}]{fitness\+\_\+array}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sorts the population array according to the values in the fitness array.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/calc\+\_\+helpers/CI\+\_\+algorithms.\+py\end{DoxyCompactItemize}

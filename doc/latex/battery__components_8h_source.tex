@@ -1,0 +1,274 @@
+\doxysection{battery\+\_\+components.\+h}
+\hypertarget{battery__components_8h_source}{}\label{battery__components_8h_source}\index{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/battery\_components.h@{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/battery\_components.h}}
+\mbox{\hyperlink{battery__components_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ BMSLOGIC\_CELL\_BATTERY\_COMPONENTS\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ BMSLOGIC\_CELL\_BATTERY\_COMPONENTS\_H}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_invalid_s_o_c_exception}{InvalidSOCException}}\ :\ \textcolor{keyword}{public}\ std::exception}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{char}\ *what()}
+\DoxyCodeLine{00023\ \ \ \ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}SOC\ is\ beyond\ 0\ or\ 1."{}};}
+\DoxyCodeLine{00025\ \ \ \ \ \}}
+\DoxyCodeLine{00026\ \};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_electrode}{Electrode}}}
+\DoxyCodeLine{00029\ \{}
+\DoxyCodeLine{00030\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{class_electrode}{Electrode}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_electrode}{Electrode}}(\textcolor{keywordtype}{double}\ L\_i,\ \textcolor{keywordtype}{double}\ A\_i,\ \textcolor{keywordtype}{double}\ kappa\_i,\ \textcolor{keywordtype}{double}\ epsilon\_i,\ \textcolor{keywordtype}{double}\ max\_conc\_i,\ \textcolor{keywordtype}{double}\ R\_i,\ \textcolor{keywordtype}{double}\ S\_i,}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ T\_ref\_i,\ \textcolor{keywordtype}{double}\ D\_ref\_i,\ \textcolor{keywordtype}{double}\ k\_ref\_i,\ \textcolor{keywordtype}{double}\ Ea\_D\_i,\ \textcolor{keywordtype}{double}\ Ea\_R\_i,\ \textcolor{keywordtype}{double}\ alpha\_i,}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ brugg\_i,\ \textcolor{keywordtype}{double}\ SOC\_i,\ \textcolor{keywordtype}{double}\ T\_i,\ std::function<\textcolor{keywordtype}{double}(\textcolor{keywordtype}{double})>\ func\_OCP\_i,\ std::function<\textcolor{keywordtype}{double}(\textcolor{keywordtype}{double})>\ func\_dOCPdT\_i);}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_electrode}{\string~Electrode}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//\ Accessor\ functions}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_L()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ L;\ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_A()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ A;\ \}}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_T()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ T;\ \}\ \textcolor{comment}{//\ returns\ the\ electrode\ temperature\ [K]}}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_SOC()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ SOC;\ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_OCP()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_electrode_a1e81a76e630e01b28c27331dd73f2423}{calc\_OCP}}(SOC);\ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ returns\ the\ OCP\ value\ at\ the\ inputted\ SOC.}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_dOCPdT()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ func\_dOCPdT(SOC);\ \}\ \textcolor{comment}{//\ returns\ the\ dOCP/dT\ value\ at\ the\ inputted\ SOC.}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_D()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_electrode_a9cc4b9d099f1c9c9048a031943b4075c}{calc\_D}}();\ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ calculates\ and\ returns\ the\ electrode\ diffusivity\ [m2/s]}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_k()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_electrode_ad1a46d514646b8911ccb0153191ac68e}{calc\_k}}();\ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_S()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ S;\ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_c\_max()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ max\_conc;\ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_R()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ R;\ \}}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{comment}{//\ Modifier\ functions}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ update\_T(\textcolor{keywordtype}{double}\ \&T\_new)\ \{\ T\ =\ T\_new;\ \}\ \textcolor{comment}{//\ updates\ the\ electrode\ temp.}}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ update\_SOC(\textcolor{keywordtype}{double}\ i\_SOC)}
+\DoxyCodeLine{00051\ \ \ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((i\_SOC\ <\ 0)\ ||\ (i\_SOC\ >\ 1))}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{class_invalid_s_o_c_exception}{InvalidSOCException}}();}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ SOC\ =\ i\_SOC;}
+\DoxyCodeLine{00057\ \ \ \ \ \}\ \textcolor{comment}{//\ update\ the\ electrode\ SOC}}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_electrode_a1e81a76e630e01b28c27331dd73f2423}{calc\_OCP}}(\textcolor{keywordtype}{double}\ i\_soc)\ \{\ \textcolor{keywordflow}{return}\ func\_OCP(i\_soc);\ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{double}\ L;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Electrode\ Thickness\ [m]}}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{double}\ A;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Electrode\ Area\ [m\string^2]}}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{double}\ kappa;\ \ \ \ \textcolor{comment}{//\ Ionic\ Conductivity\ [S\ m\string^-\/1]}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{double}\ epsilon;\ \ \textcolor{comment}{//\ Volume\ Fraction}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{double}\ max\_conc;\ \textcolor{comment}{//\ Max.\ Conc.\ [mol\ m\string^-\/3]}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{double}\ R;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Radius\ [m]}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{double}\ S;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Electro-\/active\ Area\ [m2]}}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{double}\ T\_ref;\ \ \ \ \textcolor{comment}{//\ Reference\ Temperature\ [K]}}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{double}\ D\_ref;\ \ \ \ \textcolor{comment}{//\ Reference\ Diffusivity\ [m2/s]}}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{double}\ k\_ref;\ \ \ \ \textcolor{comment}{//\ Reference\ Rate\ Constant\ [m2.5\ /\ (mol0.5\ s)}}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{double}\ Ea\_D;\ \ \ \ \ \textcolor{comment}{//\ Activation\ Energy\ of\ Diffusion\ [J\ /\ mol]}}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{double}\ Ea\_R;\ \ \ \ \ \textcolor{comment}{//\ Activation\ Energy\ of\ Reaction\ [J\ /\ mol]}}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{double}\ alpha;\ \ \ \ \textcolor{comment}{//\ Anodic\ Transfer\ Coefficient}}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{double}\ brugg;\ \ \ \ \textcolor{comment}{//\ Bruggerman\ Coefficient}}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{double}\ SOC\_init;\ \textcolor{comment}{//\ initial\ SOC}}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{double}\ SOC;\ \ \ \ \ \ \textcolor{comment}{//\ electrode\ SOC}}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{double}\ T;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ electrode\ temperature\ [K]}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ std::function<double(\textcolor{keywordtype}{double})>\ func\_OCP;\ \ \ \ \textcolor{comment}{//\ electrode\ SOC-\/OCP\ relationship\ at\ the\ reference\ temperature.}}
+\DoxyCodeLine{00080\ \ \ \ \ std::function<double(\textcolor{keywordtype}{double})>\ func\_dOCPdT;\ \textcolor{comment}{//\ this\ function\ represents\ the\ change\ in\ OCP\ with\ temp.}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{comment}{//\ Helper\ functions}}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_electrode_a1e81a76e630e01b28c27331dd73f2423}{calc\_OCP}}();}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_electrode_a9cc4b9d099f1c9c9048a031943b4075c}{calc\_D}}();}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_electrode_ad1a46d514646b8911ccb0153191ac68e}{calc\_k}}();}
+\DoxyCodeLine{00086\ \};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_p_electrode}{PElectrode}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_electrode}{Electrode}}}
+\DoxyCodeLine{00089\ \{}
+\DoxyCodeLine{00090\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{class_p_electrode}{PElectrode}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{class_p_electrode}{PElectrode}}(\textcolor{keywordtype}{double}\ L\_i,\ \textcolor{keywordtype}{double}\ A\_i,\ \textcolor{keywordtype}{double}\ kappa\_i,\ \textcolor{keywordtype}{double}\ epsilon\_i,\ \textcolor{keywordtype}{double}\ max\_conc\_i,\ \textcolor{keywordtype}{double}\ R\_i,\ \textcolor{keywordtype}{double}\ S\_i,}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ T\_ref\_i,\ \textcolor{keywordtype}{double}\ D\_ref\_i,\ \textcolor{keywordtype}{double}\ k\_ref\_i,\ \textcolor{keywordtype}{double}\ Ea\_D\_i,\ \textcolor{keywordtype}{double}\ Ea\_R\_i,\ \textcolor{keywordtype}{double}\ alpha\_i,}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ brugg\_i,\ \textcolor{keywordtype}{double}\ SOC\_i,\ \textcolor{keywordtype}{double}\ T\_i,}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{double}(\textcolor{keywordtype}{double})>\ func\_OCP\_i,\ std::function<\textcolor{keywordtype}{double}(\textcolor{keywordtype}{double})>\ func\_dOCPdT\_i);}
+\DoxyCodeLine{00096\ \ \ \ \ \mbox{\hyperlink{class_p_electrode}{\string~PElectrode}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{comment}{//\ Public\ attributes}}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{char}\ electrode\_type\ =\ \textcolor{charliteral}{'p'};}
+\DoxyCodeLine{00099\ \};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_n_electrode}{NElectrode}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_electrode}{Electrode}}}
+\DoxyCodeLine{00102\ \{}
+\DoxyCodeLine{00103\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00104\ \ \ \ \ \mbox{\hyperlink{class_n_electrode}{NElectrode}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00105\ \ \ \ \ \mbox{\hyperlink{class_n_electrode}{NElectrode}}(\textcolor{keywordtype}{double}\ L\_i,\ \textcolor{keywordtype}{double}\ A\_i,\ \textcolor{keywordtype}{double}\ kappa\_i,\ \textcolor{keywordtype}{double}\ epsilon\_i,\ \textcolor{keywordtype}{double}\ max\_conc\_i,\ \textcolor{keywordtype}{double}\ R\_i,\ \textcolor{keywordtype}{double}\ S\_i,}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ T\_ref\_i,\ \textcolor{keywordtype}{double}\ D\_ref\_i,\ \textcolor{keywordtype}{double}\ k\_ref\_i,\ \textcolor{keywordtype}{double}\ Ea\_D\_i,\ \textcolor{keywordtype}{double}\ Ea\_R\_i,\ \textcolor{keywordtype}{double}\ alpha\_i,}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ brugg\_i,\ \textcolor{keywordtype}{double}\ SOC\_i,\ \textcolor{keywordtype}{double}\ T\_i,}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{double}(\textcolor{keywordtype}{double})>\ func\_OCP\_i,\ std::function<\textcolor{keywordtype}{double}(\textcolor{keywordtype}{double})>\ func\_dOCPdT\_i);}
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{class_n_electrode}{\string~NElectrode}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{comment}{//\ Public\ attributes}}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{char}\ electrode\_type\ =\ \textcolor{charliteral}{'n'};}
+\DoxyCodeLine{00112\ \};}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_electrolyte}{Electrolyte}}}
+\DoxyCodeLine{00115\ \{}
+\DoxyCodeLine{00116\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00117\ \ \ \ \ \mbox{\hyperlink{class_electrolyte}{Electrolyte}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00118\ \ \ \ \ \mbox{\hyperlink{class_electrolyte}{Electrolyte}}(\textcolor{keywordtype}{double}\ conc\_i,\ \textcolor{keywordtype}{double}\ L\_i,\ \textcolor{keywordtype}{double}\ kappa\_i,\ \textcolor{keywordtype}{double}\ epsilon\_i,\ \textcolor{keywordtype}{double}\ brugg\_i);}
+\DoxyCodeLine{00119\ \ \ \ \ \mbox{\hyperlink{class_electrolyte}{Electrolyte}}(\textcolor{keywordtype}{double}\ conc\_i,\ \textcolor{keywordtype}{double}\ L\_i,\ \textcolor{keywordtype}{double}\ kappa\_i,\ \textcolor{keywordtype}{double}\ i\_epsilon\_n,\ \textcolor{keywordtype}{double}\ epsilon\_i,\ \textcolor{keywordtype}{double}\ i\_epsilon\_p,}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ i\_D\_e,\ \textcolor{keywordtype}{double}\ i\_t\_c,\ \textcolor{keywordtype}{double}\ brugg\_i);}
+\DoxyCodeLine{00121\ \ \ \ \ \mbox{\hyperlink{class_electrolyte}{\string~Electrolyte}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{comment}{//\ Accessor\ functions}}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_conc()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ conc;\ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_L()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ L;\ \}}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_kappa()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ kappa;\ \}}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_epsilon()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ epsilon;\ \}}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_brugg()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ brugg;\ \}}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_kappa\_eff()\ \{\ \textcolor{keywordflow}{return}\ kappa\ *\ std::pow(epsilon,\ brugg);\ \}}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{comment}{//\ //\ optional\ electrolyte\ parameters\ below}}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_epsilon\_p()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ epsilon\_p;\ \}}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_epsilon\_n()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ epsilon\_n;\ \}}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_D\_e()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ D\_e;\ \}}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_t\_c()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ t\_c;\ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{double}\ conc;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ electrolyte\ conc.\ [mol/m3]}}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{double}\ L;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ seperator\ thickness\ [m]}}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{double}\ kappa;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ electrolyte\ conductivity\ [S/m]}}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{double}\ epsilon;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ electrolyte\ volume\ fraction\ in\ the\ seperator\ region}}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{double}\ epsilon\_n\{0.0\};\ \textcolor{comment}{//\ electrolyte\ volume\ fraction\ in\ the\ negative\ electrode\ region}}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{double}\ epsilon\_p\{0.0\};\ \textcolor{comment}{//\ electrolyte\ volume\ fraction\ in\ the\ positive\ electrode\ region}}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{double}\ D\_e\{0.0\};\ \ \ \ \ \ \ \textcolor{comment}{//\ electrolyte\ diffusivity\ [m2/s]}}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{double}\ t\_c\{0.0\};\ \ \ \ \ \ \ \textcolor{comment}{//\ electrolyte\ cationic\ transference\ number}}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{double}\ brugg;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Bruggerman\ coefficient\ for\ the\ electrolyte}}
+\DoxyCodeLine{00145\ \};}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_battery_cell}{BatteryCell}}}
+\DoxyCodeLine{00148\ \{}
+\DoxyCodeLine{00149\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00150\ \ \ \ \ \mbox{\hyperlink{class_battery_cell}{BatteryCell}}(\mbox{\hyperlink{class_p_electrode}{PElectrode}}\ i\_elec\_p,\ \mbox{\hyperlink{class_n_electrode}{NElectrode}}\ i\_elec\_n,\ \mbox{\hyperlink{class_electrolyte}{Electrolyte}}\ i\_electrolyte,\ \textcolor{keywordtype}{double}\ i\_rho,\ \textcolor{keywordtype}{double}\ i\_Vol,}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ i\_C\_p,\ \textcolor{keywordtype}{double}\ i\_h,\ \textcolor{keywordtype}{double}\ i\_A,\ \textcolor{keywordtype}{double}\ i\_cap,\ \textcolor{keywordtype}{double}\ i\_V\_max,\ \textcolor{keywordtype}{double}\ i\_V\_min,\ \textcolor{keywordtype}{double}\ i\_R\_cell);}
+\DoxyCodeLine{00152\ \ \ \ \ \mbox{\hyperlink{class_battery_cell}{BatteryCell}}(\textcolor{keywordtype}{double}\ L\_p,\ \textcolor{keywordtype}{double}\ A\_p,\ \textcolor{keywordtype}{double}\ kappa\_p,\ \textcolor{keywordtype}{double}\ epsilon\_p,\ \textcolor{keywordtype}{double}\ max\_conc\_p,\ \textcolor{keywordtype}{double}\ R\_p,\ \textcolor{keywordtype}{double}\ S\_p,}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ T\_ref\_p,\ \textcolor{keywordtype}{double}\ D\_ref\_p,\ \textcolor{keywordtype}{double}\ k\_ref\_p,\ \textcolor{keywordtype}{double}\ Ea\_D\_p,\ \textcolor{keywordtype}{double}\ Ea\_R\_p,\ \textcolor{keywordtype}{double}\ alpha\_p,}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ brugg\_p,\ \textcolor{keywordtype}{double}\ SOC\_p,\ \textcolor{keywordtype}{double}\ T\_p,\ std::function<\textcolor{keywordtype}{double}(\textcolor{keywordtype}{double})>\ func\_OCP\_p,\ std::function<\textcolor{keywordtype}{double}(\textcolor{keywordtype}{double})>\ func\_dOCPdT\_p,}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ c\_e,\ \textcolor{keywordtype}{double}\ L\_s,\ \textcolor{keywordtype}{double}\ kappa\_s,\ \textcolor{keywordtype}{double}\ epsilon\_s,\ \textcolor{keywordtype}{double}\ brugg\_s,}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ L\_n,\ \textcolor{keywordtype}{double}\ A\_n,\ \textcolor{keywordtype}{double}\ kappa\_n,\ \textcolor{keywordtype}{double}\ epsilon\_n,\ \textcolor{keywordtype}{double}\ max\_conc\_n,\ \textcolor{keywordtype}{double}\ R\_n,\ \textcolor{keywordtype}{double}\ S\_n,}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ T\_ref\_n,\ \textcolor{keywordtype}{double}\ D\_ref\_n,\ \textcolor{keywordtype}{double}\ k\_ref\_n,\ \textcolor{keywordtype}{double}\ Ea\_D\_n,\ \textcolor{keywordtype}{double}\ Ea\_R\_n,\ \textcolor{keywordtype}{double}\ alpha\_n,}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ brugg\_n,\ \textcolor{keywordtype}{double}\ SOC\_n,\ \textcolor{keywordtype}{double}\ T\_n,}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{double}(\textcolor{keywordtype}{double})>\ func\_OCP\_n,\ std::function<\textcolor{keywordtype}{double}(\textcolor{keywordtype}{double})>\ func\_dOCPdT\_n,}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ i\_rho,\ \textcolor{keywordtype}{double}\ i\_Vol,}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ i\_C\_p,\ \textcolor{keywordtype}{double}\ i\_h,\ \textcolor{keywordtype}{double}\ i\_A,\ \textcolor{keywordtype}{double}\ i\_cap,\ \textcolor{keywordtype}{double}\ i\_V\_max,\ \textcolor{keywordtype}{double}\ i\_V\_min,\ \textcolor{keywordtype}{double}\ i\_R\_cell);}
+\DoxyCodeLine{00162\ \ \ \ \ \mbox{\hyperlink{class_battery_cell}{\string~BatteryCell}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{comment}{//\ public\ variables}}
+\DoxyCodeLine{00164\ \ \ \ \ \mbox{\hyperlink{class_p_electrode}{PElectrode}}\ elec\_p;}
+\DoxyCodeLine{00165\ \ \ \ \ \mbox{\hyperlink{class_n_electrode}{NElectrode}}\ elec\_n;}
+\DoxyCodeLine{00166\ \ \ \ \ \mbox{\hyperlink{class_electrolyte}{Electrolyte}}\ electrolyte;}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{comment}{//\ Getter\ methods}}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_T()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ T;\ \}}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_rho()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ rho;\ \}}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_Vol()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ Vol;\ \}}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_C\_p()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ C\_p;\ \}}
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_h()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ h;\ \}}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_A()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ A;\ \}}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_cap()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ cap;\ \}}
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_V\_max()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ V\_max;\ \}}
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_V\_min()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ V\_min;\ \}}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_R\_cell()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ R\_cell;\ \}}
+\DoxyCodeLine{00178\ \ \ \ \ \mbox{\hyperlink{class_p_electrode}{PElectrode}}\ get\_elec\_p()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ elec\_p;\ \}}
+\DoxyCodeLine{00179\ \ \ \ \ \mbox{\hyperlink{class_n_electrode}{NElectrode}}\ get\_elec\_n()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ elec\_n;\ \}}
+\DoxyCodeLine{00180\ \ \ \ \ \mbox{\hyperlink{class_electrolyte}{Electrolyte}}\ get\_electrolyte()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ electrolyte;\ \}}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{comment}{//\ Setter\ methods}}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_R\_cell(\textcolor{keywordtype}{double}\ \&R\_cell\_new)\ \{\ R\_cell\ =\ R\_cell\_new;\ \}}
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_temp(\textcolor{keywordtype}{double}\ \&temp\_new)\ \{\ T\ =\ temp\_new;\ \}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keywordtype}{double}\ T;\ \ \ \ \ \ \textcolor{comment}{//\ battery\ cell\ temperature,\ K}}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordtype}{double}\ rho;\ \ \ \ \textcolor{comment}{//\ battery\ density\ (mostly\ for\ thermal\ modelling),\ kg/m3}}
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordtype}{double}\ Vol;\ \ \ \ \textcolor{comment}{//\ battery\ cell\ volume,\ m3}}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordtype}{double}\ C\_p;\ \ \ \ \textcolor{comment}{//\ specific\ heat\ capacity,\ J\ /\ (K\ kg)}}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordtype}{double}\ h;\ \ \ \ \ \ \textcolor{comment}{//\ heat\ transfer\ coefficient,\ J\ /\ (S\ K)}}
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordtype}{double}\ A;\ \ \ \ \ \ \textcolor{comment}{//\ surface\ area,\ m2}}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keywordtype}{double}\ cap;\ \ \ \ \textcolor{comment}{//\ capacity,\ Ah}}
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordtype}{double}\ V\_max;\ \ \textcolor{comment}{//\ maximum\ potential}}
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keywordtype}{double}\ V\_min;\ \ \textcolor{comment}{//\ minimum\ potential}}
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordtype}{double}\ R\_cell;\ \textcolor{comment}{//\ battery\ cell\ internal\ resistance\ [ohms]}}
+\DoxyCodeLine{00196\ \};}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00202\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_e_c_m_battery_cell}{ECMBatteryCell}}}
+\DoxyCodeLine{00203\ \{}
+\DoxyCodeLine{00204\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00205\ \ \ \ \ \mbox{\hyperlink{class_e_c_m_battery_cell}{ECMBatteryCell}}(\textcolor{keywordtype}{double}\ i\_R0\_ref,\ \textcolor{keywordtype}{double}\ i\_R1\_ref,\ \textcolor{keywordtype}{double}\ i\_C1,\ \textcolor{keywordtype}{double}\ i\_temp\_ref,\ \textcolor{keywordtype}{double}\ i\_Ea\_R0,\ \textcolor{keywordtype}{double}\ i\_Ea\_R1,}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ i\_rho,\ \textcolor{keywordtype}{double}\ i\_vol,\ \textcolor{keywordtype}{double}\ i\_c\_p,\ \textcolor{keywordtype}{double}\ i\_h,\ \textcolor{keywordtype}{double}\ i\_area,\ \textcolor{keywordtype}{double}\ i\_cap,\ \textcolor{keywordtype}{double}\ i\_V\_max,\ \textcolor{keywordtype}{double}\ i\_V\_min,}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ i\_soc\_init,\ \textcolor{keywordtype}{double}\ i\_temp\_init,}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{double}(\textcolor{keywordtype}{double})>\ i\_func\_eta,\ std::function<\textcolor{keywordtype}{double}(\textcolor{keywordtype}{double})>\ i\_func\_ocv,\ std::function<\textcolor{keywordtype}{double}(\textcolor{keywordtype}{double})>\ i\_func\_docvdtemp,}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ i\_M\_0,\ \textcolor{keywordtype}{double}\ i\_M,\ \textcolor{keywordtype}{double}\ i\_gamma);}
+\DoxyCodeLine{00210\ \ \ \ \ \mbox{\hyperlink{class_e_c_m_battery_cell}{\string~ECMBatteryCell}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{comment}{//\ getters}}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_R0\_ref()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_R0\_ref;\ \}}
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_R0()\ \{\ \textcolor{keywordflow}{return}\ calc\_R0();\ \}}
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_R1\_ref()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_R1\_ref;\ \}}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_R1()\ \{\ \textcolor{keywordflow}{return}\ calc\_R1();\ \}}
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_C1()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_C1;\ \}}
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_temp\_ref()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_temp\_ref;\ \}}
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_Ea\_R0()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Ea\_R0;\ \}}
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_Ea\_R1()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Ea\_R1;\ \}}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_rho()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_rho;\ \}}
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_vol()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_vol;\ \}}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_C\_p()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_c\_p;\ \}}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_h()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_h;\ \}}
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_area()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_area;\ \}}
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_cap()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_cap;\ \}}
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_V\_max()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_v\_max;\ \}}
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_V\_min()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_v\_min;\ \}}
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_soc\_min()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_soc\_init;\ \}}
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_temp\_init()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_temp\_init;\ \}}
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_eta(\textcolor{keywordtype}{double}\ i\_soc)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_func\_eta(i\_soc);\ \}}
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_M0()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_M\_0;\ \}}
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_M()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_M;\ \}}
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_gamma()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_gamma;\ \}}
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_eta()\ \{\ \textcolor{keywordflow}{return}\ m\_func\_eta(m\_soc);\ \}}
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_ocv()\ \{\ \textcolor{keywordflow}{return}\ calc\_ocv(m\_soc);\ \}}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_soc()\ \{\ \textcolor{keywordflow}{return}\ m\_soc;\ \}}
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_temp()\ \{\ \textcolor{keywordflow}{return}\ m\_temp;\ \}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{comment}{//\ setters}}
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_soc(\textcolor{keywordtype}{double}\ i\_soc)\ \{\ m\_soc\ =\ i\_soc;\ \}}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{comment}{//\ functions\ for\ calculations}}
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{keywordtype}{double}\ calc\_ocv(\textcolor{keywordtype}{double}\ i\_soc)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_func\_ocv(i\_soc)\ +\ m\_func\_docvdtemp(i\_soc)\ *\ (m\_temp\ -\/\ m\_temp\_ref);\ \}}
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keywordtype}{double}\ calc\_R0();}
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordtype}{double}\ calc\_R1();}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00250\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_R0\_ref;\ \ \ \textcolor{comment}{//\ resistance\ value\ of\ R0\ [ohm]}}
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_R1\_ref;\ \ \ \textcolor{comment}{//\ resistance\ value\ of\ R1\ [ohm]}}
+\DoxyCodeLine{00252\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_C1;\ \ \ \ \ \ \ \textcolor{comment}{//\ capacitance\ of\ capacitor\ in\ RC\ circuit\ [ohm]}}
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_temp\_ref;\ \textcolor{comment}{//\ reference\ temperature\ for\ R0\_ref\ and\ R1\_ref}}
+\DoxyCodeLine{00254\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_Ea\_R0;\ \ \ \ \textcolor{comment}{//\ activation\ energy\ for\ R0\ [J/mol]}}
+\DoxyCodeLine{00255\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_Ea\_R1;\ \ \ \ \textcolor{comment}{//\ activation\ energy\ for\ R1\ [J/mol]}}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_rho;\ \ \ \textcolor{comment}{//\ battery\ density\ (mostly\ for\ thermal\ modelling),\ kg/m3}}
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_vol;\ \ \ \textcolor{comment}{//\ battery\ cell\ volume,\ m3}}
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_c\_p;\ \ \ \textcolor{comment}{//\ specific\ heat\ capacity,\ J\ /\ (K\ kg)}}
+\DoxyCodeLine{00260\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_h;\ \ \ \ \ \textcolor{comment}{//\ \#\ heat\ transfer\ coefficient,\ J\ /\ (S\ K)}}
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_area;\ \ \textcolor{comment}{//\ surface\ area,\ m2}}
+\DoxyCodeLine{00262\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_cap;\ \ \ \textcolor{comment}{//\ capacity,\ Ah}}
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_v\_max;\ \textcolor{comment}{//\ maximum\ potential}}
+\DoxyCodeLine{00264\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_v\_min;\ \textcolor{comment}{//\ minimum\ potential}}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_soc\_init;\ \ \textcolor{comment}{//\ initial\ SOC}}
+\DoxyCodeLine{00267\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_temp\_init;\ \textcolor{comment}{//\ initial\ battery\ cell\ temperature\ [K]}}
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_soc;}
+\DoxyCodeLine{00269\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_temp;\ \textcolor{comment}{//\ Battery\ cell\ temperature\ [K]}}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \ \ \ \ std::function<double(\textcolor{keywordtype}{double})>\ m\_func\_eta;\ \textcolor{comment}{//\ func\ for\ the\ Columbic\ efficiency\ as\ a\ func\ of\ SOC\ and\ temp}}
+\DoxyCodeLine{00272\ \ \ \ \ std::function<double(\textcolor{keywordtype}{double})>\ m\_func\_ocv;\ \textcolor{comment}{//\ func\ which\ outputs\ the\ battery\ OCV\ from\ its\ SOC\ function\ which\ outputs\ the\ change\ of\ OCV\ with\ respect\ to\ temperature\ from\ its\ SOC}}
+\DoxyCodeLine{00273\ \ \ \ \ std::function<double(\textcolor{keywordtype}{double})>\ m\_func\_docvdtemp;}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{comment}{//\ The\ parameters\ below\ relate\ the\ dynamic\ and\ instantaneous\ hysteresis}}
+\DoxyCodeLine{00276\ \ \ \ \ \textcolor{comment}{//\ The\ instantaneous\ hysteresis\ co-\/efficient\ [V]}}
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_M\_0;}
+\DoxyCodeLine{00278\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_M;\ \ \ \ \ \textcolor{comment}{//\ SOC-\/dependent\ hysteresis\ co-\/efficient\ [V]}}
+\DoxyCodeLine{00279\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_gamma;\ \textcolor{comment}{//\ Hysteresis\ time-\/constant}}
+\DoxyCodeLine{00280\ \};}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00282\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BMSLOGIC\_CELL\_BATTERY\_COMPONENTS\_H}}
+
+\end{DoxyCode}

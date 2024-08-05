@@ -1,0 +1,55 @@
+\doxysection{coords.\+h}
+\hypertarget{coords_8h_source}{}\label{coords_8h_source}\index{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/coords.h@{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/coords.h}}
+\mbox{\hyperlink{coords_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ BMSLOGIC\_SIMULATIONS\_COORDS}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ BMSLOGIC\_SIMULATIONS\_COORDS}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_electrolyte_f_v_m_coordinates}{ElectrolyteFVMCoordinates}}}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{class_electrolyte_f_v_m_coordinates}{ElectrolyteFVMCoordinates}}(\textcolor{keywordtype}{double}\ i\_L\_n,\ \textcolor{keywordtype}{double}\ i\_L\_sep,\ \textcolor{keywordtype}{double}\ i\_L\_p,}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i\_num\_grid\_n,\ \textcolor{keywordtype}{int}\ i\_num\_grid\_sep,\ \textcolor{keywordtype}{int}\ i\_num\_grid\_p);}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{class_electrolyte_f_v_m_coordinates}{\string~ElectrolyteFVMCoordinates}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//\ Getter\ functions}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_L\_n()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_L\_n;\ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_L\_sep()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_L\_sep;\ \}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_L\_p()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_L\_p;\ \}}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_num\_grid\_n()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_num\_grid\_n;\ \}}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_num\_grid\_sep()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_num\_grid\_sep;\ \}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_num\_grid\_p()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_num\_grid\_p;\ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_dx\_n()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_dx\_n;\ \}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_dx\_sep()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_dx\_sep;\ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_dx\_p()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_dx\_p;\ \}}
+\DoxyCodeLine{00039\ \ \ \ \ std::vector<double>\ get\_vector\_x\_n()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_vector\_x\_n;\ \}}
+\DoxyCodeLine{00040\ \ \ \ \ std::vector<double>\ get\_vector\_x\_sep()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_vector\_x\_sep;\ \}}
+\DoxyCodeLine{00041\ \ \ \ \ std::vector<double>\ get\_vector\_x\_p()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_vector\_x\_p;\ \}}
+\DoxyCodeLine{00042\ \ \ \ \ std::vector<double>\ get\_vector\_x()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_vector\_x;\ \}}
+\DoxyCodeLine{00043\ \ \ \ \ std::vector<double>\ get\_vector\_dx()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_vector\_dx;\ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_L\_n;}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_L\_sep;}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_L\_p;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_num\_grid\_n;}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_num\_grid\_sep;}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_num\_grid\_p;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_dx\_n;}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_dx\_sep;}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_dx\_p;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ std::vector<double>\ m\_vector\_x\_n;}
+\DoxyCodeLine{00059\ \ \ \ \ std::vector<double>\ m\_vector\_x\_sep;}
+\DoxyCodeLine{00060\ \ \ \ \ std::vector<double>\ m\_vector\_x\_p;}
+\DoxyCodeLine{00061\ \ \ \ \ std::vector<double>\ m\_vector\_x;}
+\DoxyCodeLine{00062\ \ \ \ \ std::vector<double>\ m\_vector\_dx;}
+\DoxyCodeLine{00063\ \};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BMSLOGIC\_SIMULATIONS\_COORDS}}
+
+\end{DoxyCode}

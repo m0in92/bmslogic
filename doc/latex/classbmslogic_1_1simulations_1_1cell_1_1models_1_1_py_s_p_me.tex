@@ -1,0 +1,104 @@
+\doxysection{bmslogic.\+simulations.\+cell.\+models.\+Py\+SPMe Class Reference}
+\hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me}{}\label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me}\index{bmslogic.simulations.cell.models.PySPMe@{bmslogic.simulations.cell.models.PySPMe}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_a9836d537ae50705760fe94c458dae8eb}{molar\+\_\+flux\+\_\+electrode}} (cls, float I, float S, str electrode\+\_\+type)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_a65d34d2106dc5def63e02a2eb25ac922}{a\+\_\+s}} (cls, float epsilon, float R)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_a7f1d5df3f09d1f7bf5e6ab45094311bd}{i\+\_\+0}} (cls, float k, float c\+\_\+s\+\_\+max, float c\+\_\+e, float soc\+\_\+surf)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_a73986864a2265c4dfbe44dc2bec3fd1b}\label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_a73986864a2265c4dfbe44dc2bec3fd1b} 
+float {\bfseries m} (cls, float i\+\_\+app, float k, float S, float c\+\_\+s\+\_\+max, float c\+\_\+e, float soc\+\_\+surf)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_a15f2aef017b5a57603a41377b677c388}{calc\+\_\+terminal\+\_\+voltage}} (cls, float ocp\+\_\+p, float ocp\+\_\+n, float m\+\_\+p, float m\+\_\+n, float l\+\_\+p, float l\+\_\+sep, float l\+\_\+n, float kappa\+\_\+eff\+\_\+avg, float k\+\_\+f\+\_\+avg, float t\+\_\+c, float R\+\_\+cell, float c\+\_\+e\+\_\+n, float c\+\_\+e\+\_\+p, float temp, float i\+\_\+app)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_ab3240394585cab04f3a72d4b5482f885}\label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_ab3240394585cab04f3a72d4b5482f885} 
+tuple\mbox{[}float, float, float, float, float, float\mbox{]} {\bfseries calc\+\_\+overpotentials} (cls, float ocp\+\_\+p, float ocp\+\_\+n, float m\+\_\+p, float m\+\_\+n, float l\+\_\+p, float l\+\_\+sep, float l\+\_\+n, float kappa\+\_\+eff\+\_\+avg, float k\+\_\+f\+\_\+avg, float t\+\_\+c, float R\+\_\+cell, float c\+\_\+e\+\_\+n, float c\+\_\+e\+\_\+p, float temp, float i\+\_\+app)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_a58434cf94ec3cbf9d846e1d3889eec55}\label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_a58434cf94ec3cbf9d846e1d3889eec55} 
+tuple\mbox{[}float, float, float, float, float, float\mbox{]} {\bfseries \+\_\+\+\_\+call\+\_\+\+\_\+} (self, float ocp\+\_\+p, float ocp\+\_\+n, float R\+\_\+cell, float k\+\_\+p, float S\+\_\+p, float c\+\_\+smax\+\_\+p, float soc\+\_\+surf\+\_\+p, float k\+\_\+n, float S\+\_\+n, float c\+\_\+smax\+\_\+n, float soc\+\_\+surf\+\_\+n, float c\+\_\+e, float temp, float I\+\_\+p\+\_\+i, float I\+\_\+n\+\_\+i, float l\+\_\+p, float l\+\_\+sep, float l\+\_\+n, float kappa\+\_\+eff\+\_\+avg, float k\+\_\+f\+\_\+avg, float t\+\_\+c, float c\+\_\+e\+\_\+n, float c\+\_\+e\+\_\+p)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}This class contains the methods to calculate the molar ionic flux in the electrode regions and the cell terminal
+voltage as expressed in the SPMe model [1].
+
+Reference:
+[1] S. J. Moura, F. B. Argomedo, R. Klein, A. Mirtabatabaei and M. Krstic,
+"Battery State Estimation for a Single Particle Model With Electrolyte Dynamics,"
+in IEEE Transactions on Control Systems Technology, vol. 25, no. 2, pp. 453-468, March 2017,
+doi: 10.1109/TCST.2016.2571663.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_a65d34d2106dc5def63e02a2eb25ac922}\index{bmslogic.simulations.cell.models.PySPMe@{bmslogic.simulations.cell.models.PySPMe}!a\_s@{a\_s}}
+\index{a\_s@{a\_s}!bmslogic.simulations.cell.models.PySPMe@{bmslogic.simulations.cell.models.PySPMe}}
+\doxysubsubsection{\texorpdfstring{a\_s()}{a\_s()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_a65d34d2106dc5def63e02a2eb25ac922} 
+ float bmslogic.\+simulations.\+cell.\+models.\+Py\+SPMe.\+a\+\_\+s (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{epsilon}{, }\item[{float}]{R}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates the electrode's interfacial surface area [m2/m3]
+:param epsilon: active material volume fraction
+:param R: radius of the electrode particle
+:return: (float) electrode's interfacial surface area [m2/m3]
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_a15f2aef017b5a57603a41377b677c388}\index{bmslogic.simulations.cell.models.PySPMe@{bmslogic.simulations.cell.models.PySPMe}!calc\_terminal\_voltage@{calc\_terminal\_voltage}}
+\index{calc\_terminal\_voltage@{calc\_terminal\_voltage}!bmslogic.simulations.cell.models.PySPMe@{bmslogic.simulations.cell.models.PySPMe}}
+\doxysubsubsection{\texorpdfstring{calc\_terminal\_voltage()}{calc\_terminal\_voltage()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_a15f2aef017b5a57603a41377b677c388} 
+ float bmslogic.\+simulations.\+cell.\+models.\+Py\+SPMe.\+calc\+\_\+terminal\+\_\+voltage (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{ocp\+\_\+p}{, }\item[{float}]{ocp\+\_\+n}{, }\item[{float}]{m\+\_\+p}{, }\item[{float}]{m\+\_\+n}{, }\item[{float}]{l\+\_\+p}{, }\item[{float}]{l\+\_\+sep}{, }\item[{float}]{l\+\_\+n}{, }\item[{float}]{kappa\+\_\+eff\+\_\+avg}{, }\item[{float}]{k\+\_\+f\+\_\+avg}{, }\item[{float}]{t\+\_\+c}{, }\item[{float}]{R\+\_\+cell}{, }\item[{float}]{c\+\_\+e\+\_\+n}{, }\item[{float}]{c\+\_\+e\+\_\+p}{, }\item[{float}]{temp}{, }\item[{float}]{i\+\_\+app}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns the cell terminal voltage [V] according to Moura et al.
+Note that the charge and the discharge currents are denoted with a positive and negative numbers, respectively.
+:param ocp_p:
+:param ocp_n:
+:param m_p:
+:param m_n:
+:param l_p:
+:param l_sep:
+:param l_n:
+:param battery_cross_area:
+:param kappa_eff_avg:
+:param k_f_avg:
+:param t_c:
+:param R_cell:
+:param c_e_n:
+:param c_e_p:
+:param temp:
+:param i_app:
+:return:
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_a7f1d5df3f09d1f7bf5e6ab45094311bd}\index{bmslogic.simulations.cell.models.PySPMe@{bmslogic.simulations.cell.models.PySPMe}!i\_0@{i\_0}}
+\index{i\_0@{i\_0}!bmslogic.simulations.cell.models.PySPMe@{bmslogic.simulations.cell.models.PySPMe}}
+\doxysubsubsection{\texorpdfstring{i\_0()}{i\_0()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_a7f1d5df3f09d1f7bf5e6ab45094311bd} 
+ float bmslogic.\+simulations.\+cell.\+models.\+Py\+SPMe.\+i\+\_\+0 (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{k}{, }\item[{float}]{c\+\_\+s\+\_\+max}{, }\item[{float}]{c\+\_\+e}{, }\item[{float}]{soc\+\_\+surf}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates the exchange current density for an electrode [mol/m2/s].
+:param k: rate constant [m2.5 / mol0.5 / s]
+:param c_s_max: max. lithium-ion electrode conc. [mol/m3]
+:param c_e: lithium-ion conc in the electrolyte [mol/m3]
+:param SOC_surf: state-of-charge of the electrode particle surface
+:return: (float) exchange current density [mol/m2/s]
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_a9836d537ae50705760fe94c458dae8eb}\index{bmslogic.simulations.cell.models.PySPMe@{bmslogic.simulations.cell.models.PySPMe}!molar\_flux\_electrode@{molar\_flux\_electrode}}
+\index{molar\_flux\_electrode@{molar\_flux\_electrode}!bmslogic.simulations.cell.models.PySPMe@{bmslogic.simulations.cell.models.PySPMe}}
+\doxysubsubsection{\texorpdfstring{molar\_flux\_electrode()}{molar\_flux\_electrode()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me_a9836d537ae50705760fe94c458dae8eb} 
+ float bmslogic.\+simulations.\+cell.\+models.\+Py\+SPMe.\+molar\+\_\+flux\+\_\+electrode (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{I}{, }\item[{float}]{S}{, }\item[{str}]{electrode\+\_\+type}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns the area molar flux entering/exiting the electrode surface [mol/m2/s]
+:param I:
+:param S:
+:param electrode_type:
+:return:
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/models.\+py\end{DoxyCompactItemize}

@@ -1,0 +1,116 @@
+\doxysection{ECMBattery\+Cell Class Reference}
+\hypertarget{class_e_c_m_battery_cell}{}\label{class_e_c_m_battery_cell}\index{ECMBatteryCell@{ECMBatteryCell}}
+
+
+class to store the variables for the equivalent circuit model (ECM) simulations.  
+
+
+
+
+{\ttfamily \#include $<$battery\+\_\+components.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a9eb4f57f85f67748799c83eb74370c42}\label{class_e_c_m_battery_cell_a9eb4f57f85f67748799c83eb74370c42} 
+{\bfseries ECMBattery\+Cell} (double i\+\_\+\+R0\+\_\+ref, double i\+\_\+\+R1\+\_\+ref, double i\+\_\+\+C1, double i\+\_\+temp\+\_\+ref, double i\+\_\+\+Ea\+\_\+\+R0, double i\+\_\+\+Ea\+\_\+\+R1, double i\+\_\+rho, double i\+\_\+vol, double i\+\_\+c\+\_\+p, double i\+\_\+h, double i\+\_\+area, double i\+\_\+cap, double i\+\_\+\+V\+\_\+max, double i\+\_\+\+V\+\_\+min, double i\+\_\+soc\+\_\+init, double i\+\_\+temp\+\_\+init, std\+::function$<$ double(double)$>$ i\+\_\+func\+\_\+eta, std\+::function$<$ double(double)$>$ i\+\_\+func\+\_\+ocv, std\+::function$<$ double(double)$>$ i\+\_\+func\+\_\+docvdtemp, double i\+\_\+\+M\+\_\+0, double i\+\_\+M, double i\+\_\+gamma)
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a987f2e9cf7e4d02ecfc73e7cd423f084}\label{class_e_c_m_battery_cell_a987f2e9cf7e4d02ecfc73e7cd423f084} 
+double {\bfseries get\+\_\+\+R0\+\_\+ref} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_ab34f9eb3547a9afc037f22161b602149}\label{class_e_c_m_battery_cell_ab34f9eb3547a9afc037f22161b602149} 
+double {\bfseries get\+\_\+\+R0} ()
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a2b79b238dd91afb1a5f2f75fa9a2ce4c}\label{class_e_c_m_battery_cell_a2b79b238dd91afb1a5f2f75fa9a2ce4c} 
+double {\bfseries get\+\_\+\+R1\+\_\+ref} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a052e3aa230d49d1798d9a0c75405924d}\label{class_e_c_m_battery_cell_a052e3aa230d49d1798d9a0c75405924d} 
+double {\bfseries get\+\_\+\+R1} ()
+\item 
+\Hypertarget{class_e_c_m_battery_cell_ae97d5540784eda5328eb032d4630f484}\label{class_e_c_m_battery_cell_ae97d5540784eda5328eb032d4630f484} 
+double {\bfseries get\+\_\+\+C1} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_aed1048ab0dfc3987c821675f83f00887}\label{class_e_c_m_battery_cell_aed1048ab0dfc3987c821675f83f00887} 
+double {\bfseries get\+\_\+temp\+\_\+ref} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a19723077601ae4c0dae59f30c7af020e}\label{class_e_c_m_battery_cell_a19723077601ae4c0dae59f30c7af020e} 
+double {\bfseries get\+\_\+\+Ea\+\_\+\+R0} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_ab8d52eb7b2a37a4447e542c3b5c42b18}\label{class_e_c_m_battery_cell_ab8d52eb7b2a37a4447e542c3b5c42b18} 
+double {\bfseries get\+\_\+\+Ea\+\_\+\+R1} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a14b776cc63f5acec00ae06545bfe6199}\label{class_e_c_m_battery_cell_a14b776cc63f5acec00ae06545bfe6199} 
+double {\bfseries get\+\_\+rho} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a5d13347ea87160e85283d409138b481d}\label{class_e_c_m_battery_cell_a5d13347ea87160e85283d409138b481d} 
+double {\bfseries get\+\_\+vol} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_ad6e98321a3aa21c5234c8c6ac2f7b1bd}\label{class_e_c_m_battery_cell_ad6e98321a3aa21c5234c8c6ac2f7b1bd} 
+double {\bfseries get\+\_\+\+C\+\_\+p} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_ae018ca4894861f0052b35d3566138b08}\label{class_e_c_m_battery_cell_ae018ca4894861f0052b35d3566138b08} 
+double {\bfseries get\+\_\+h} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_adffd72147d6da1f18000f9ac62cba141}\label{class_e_c_m_battery_cell_adffd72147d6da1f18000f9ac62cba141} 
+double {\bfseries get\+\_\+area} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a17fa1320b5c19c5ff82b03fdd6f12b98}\label{class_e_c_m_battery_cell_a17fa1320b5c19c5ff82b03fdd6f12b98} 
+double {\bfseries get\+\_\+cap} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a53e52d8ed178224e6ab039682afc0754}\label{class_e_c_m_battery_cell_a53e52d8ed178224e6ab039682afc0754} 
+double {\bfseries get\+\_\+\+V\+\_\+max} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_ae72a144a7aa3038cce2918f986e1632e}\label{class_e_c_m_battery_cell_ae72a144a7aa3038cce2918f986e1632e} 
+double {\bfseries get\+\_\+\+V\+\_\+min} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_aeb93442ae9ed8abcbe7a5b8bda2426f4}\label{class_e_c_m_battery_cell_aeb93442ae9ed8abcbe7a5b8bda2426f4} 
+double {\bfseries get\+\_\+soc\+\_\+min} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a24f7f429a8a4aaf27089164c0a9bf078}\label{class_e_c_m_battery_cell_a24f7f429a8a4aaf27089164c0a9bf078} 
+double {\bfseries get\+\_\+temp\+\_\+init} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a9a3fda1f2eab0451b7a133720bd4d9b5}\label{class_e_c_m_battery_cell_a9a3fda1f2eab0451b7a133720bd4d9b5} 
+double {\bfseries get\+\_\+eta} (double i\+\_\+soc) const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_aa255a08a80beb5a34af0fa620a136200}\label{class_e_c_m_battery_cell_aa255a08a80beb5a34af0fa620a136200} 
+double {\bfseries get\+\_\+\+M0} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a6cee2f9831d69c3e9c64bcec854f116d}\label{class_e_c_m_battery_cell_a6cee2f9831d69c3e9c64bcec854f116d} 
+double {\bfseries get\+\_\+M} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a7975aba7d63c9c03c34a6927435d262b}\label{class_e_c_m_battery_cell_a7975aba7d63c9c03c34a6927435d262b} 
+double {\bfseries get\+\_\+gamma} () const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_aca56c6fa0eff08b6591b07fb635be983}\label{class_e_c_m_battery_cell_aca56c6fa0eff08b6591b07fb635be983} 
+double {\bfseries get\+\_\+eta} ()
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a06e067f085d859cfaf07249e16a71520}\label{class_e_c_m_battery_cell_a06e067f085d859cfaf07249e16a71520} 
+double {\bfseries get\+\_\+ocv} ()
+\item 
+\Hypertarget{class_e_c_m_battery_cell_af72727927fb059fc90bb35bebd3b015a}\label{class_e_c_m_battery_cell_af72727927fb059fc90bb35bebd3b015a} 
+double {\bfseries get\+\_\+soc} ()
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a0688d201598d68305c732b6afa61f750}\label{class_e_c_m_battery_cell_a0688d201598d68305c732b6afa61f750} 
+double {\bfseries get\+\_\+temp} ()
+\item 
+\Hypertarget{class_e_c_m_battery_cell_ac85d6a486f88ebf4e740cd02131d29e9}\label{class_e_c_m_battery_cell_ac85d6a486f88ebf4e740cd02131d29e9} 
+void {\bfseries set\+\_\+soc} (double i\+\_\+soc)
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a30ed9da16e26125e788ad55a3ffe4f44}\label{class_e_c_m_battery_cell_a30ed9da16e26125e788ad55a3ffe4f44} 
+double {\bfseries calc\+\_\+ocv} (double i\+\_\+soc) const
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a3e8b33807dbc9d0e82f8ad076bc1685c}\label{class_e_c_m_battery_cell_a3e8b33807dbc9d0e82f8ad076bc1685c} 
+double {\bfseries calc\+\_\+\+R0} ()
+\item 
+\Hypertarget{class_e_c_m_battery_cell_a5bfe20fa107fb7eb71fb1e27b8644e9b}\label{class_e_c_m_battery_cell_a5bfe20fa107fb7eb71fb1e27b8644e9b} 
+double {\bfseries calc\+\_\+\+R1} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+class to store the variables for the equivalent circuit model (ECM) simulations. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{battery__components_8h}{battery\+\_\+components.\+h}}\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{battery__components_8cpp}{battery\+\_\+components.\+cpp}}\end{DoxyCompactItemize}

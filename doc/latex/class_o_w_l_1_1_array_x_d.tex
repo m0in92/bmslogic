@@ -1,0 +1,383 @@
+\doxysection{OWL\+::Array\+XD Class Reference}
+\hypertarget{class_o_w_l_1_1_array_x_d}{}\label{class_o_w_l_1_1_array_x_d}\index{OWL::ArrayXD@{OWL::ArrayXD}}
+
+
+Provides functionality for the array operations. It uses the C++ vectors from the C++ standard Library (std\+::vector) to create, store, and index element values.  
+
+
+
+
+{\ttfamily \#include $<$owl.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a248a116356d1ea998d4e4d40cc4b6f02}{Array\+XD}} ()
+\item 
+\mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a70084c792f8f1d2dd447dee1a876ed6a}{Array\+XD}} (std\+::vector$<$ double $>$ \&vec)
+\item 
+\Hypertarget{class_o_w_l_1_1_array_x_d_a17b47c8cc9d8c98cbc1693cafa667346}\label{class_o_w_l_1_1_array_x_d_a17b47c8cc9d8c98cbc1693cafa667346} 
+const size\+\_\+t {\bfseries get\+Array\+Length} ()
+\item 
+\Hypertarget{class_o_w_l_1_1_array_x_d_ab53c1fc62734fd70b8df99b21b17bd9e}\label{class_o_w_l_1_1_array_x_d_ab53c1fc62734fd70b8df99b21b17bd9e} 
+const std\+::vector$<$ double $>$ {\bfseries get\+Array} ()
+\item 
+void \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a372b5f4016bd46238ae98f729e5ca62d}{set\+Array}} (std\+::vector$<$ double $>$ \&new\+Array)
+\item 
+\Hypertarget{class_o_w_l_1_1_array_x_d_a8dcf5f3f83e57aa84c609a1b97b53f17}\label{class_o_w_l_1_1_array_x_d_a8dcf5f3f83e57aa84c609a1b97b53f17} 
+void {\bfseries append} (double new\+\_\+element)
+\item 
+\Hypertarget{class_o_w_l_1_1_array_x_d_a9a0add81cd2e289b9272b34e89fc1352}\label{class_o_w_l_1_1_array_x_d_a9a0add81cd2e289b9272b34e89fc1352} 
+size\+\_\+t {\bfseries size} ()
+\item 
+void \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a689a564e4ed16fe158f0de9984e8b2aa}{display}} ()
+\item 
+double \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_aa10295d2b8df91ed5f0251620558a902}{is\+Equal}} (\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} \&)
+\item 
+double \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_af575a51083b481d5379ea40978373b28}{is\+Approx\+Equal}} (\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} \&, double)
+\item 
+double \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a61999a451231dab8fc1e1eb63e9d3715}{sum}} ()
+\item 
+\Hypertarget{class_o_w_l_1_1_array_x_d_afc810b3246a79159ae03d936615ffd86}\label{class_o_w_l_1_1_array_x_d_afc810b3246a79159ae03d936615ffd86} 
+bool {\bfseries compare\+Array\+Length} (\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} \&)
+\item 
+bool \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a14c4da58bb7159ae2f65aab6790736cd}{check\+Empty\+Array}} ()
+\item 
+double \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a50e9e61a204e05f234f01a1d100b5f5e}{find\+Min\+Element}} ()
+\item 
+double \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a1e72479e11204702d3fc823e4d62a874}{find\+Max\+ELement}} ()
+\item 
+double \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a1aa16840199ce14dbbeb04ce9f86d4b3}{find\+Closest\+Element}} (double \&)
+\item 
+size\+\_\+t \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a09534cd40a667b8127287ed6ef386cdb}{find\+Closest\+Element\+Index}} (double \&)
+\item 
+double \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_aecba7ae0922326267de820ce964051e8}{find\+CLosest\+Element\+Less\+Than}} (double \&)
+\item 
+size\+\_\+t \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a08a16a111c7a2945efee398814781570}{find\+CLosest\+Element\+Less\+Than\+Index}} (double \&)
+\item 
+double \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_ad48a1398de0829b2b53c93c66bbfb9e0}{find\+CLosest\+Element\+Greater\+Than}} (double \&)
+\item 
+size\+\_\+t \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_ad71dc110cc443941e6362dfd255d0c0c}{find\+CLosest\+Element\+Greater\+Than\+Index}} (double \&)
+\item 
+double \& \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_ac4b250931b3e73fddfae1dc7c6e5e700}{operator\mbox{[}$\,$\mbox{]}}} (size\+\_\+t)
+\item 
+\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a194e6d232afc777cb00db45d0257161d}{operator+}} (double \&)
+\item 
+\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a8bc0a95182a900b69ebb2ddf24a61626}{operator+}} (\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} \&)
+\item 
+\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a264f4a4c222245ab2c256768a274478d}{operator-\/}} (\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} \&)
+\item 
+\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a249a4229900f923906ef3f07daf02d08}{operator\texorpdfstring{$\ast$}{*}}} (const double)
+\item 
+\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} \mbox{\hyperlink{class_o_w_l_1_1_array_x_d_a99e10290e0252fe87e950a9ed7541afa}{operator\texorpdfstring{$\ast$}{*}}} (\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} \&)
+\item 
+\Hypertarget{class_o_w_l_1_1_array_x_d_af3b43397822d7885a7757fd4c9c9acda}\label{class_o_w_l_1_1_array_x_d_af3b43397822d7885a7757fd4c9c9acda} 
+void {\bfseries operator$<$$<$} (double input\+Value)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides functionality for the array operations. It uses the C++ vectors from the C++ standard Library (std\+::vector) to create, store, and index element values. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_o_w_l_1_1_array_x_d_a248a116356d1ea998d4e4d40cc4b6f02}\index{OWL::ArrayXD@{OWL::ArrayXD}!ArrayXD@{ArrayXD}}
+\index{ArrayXD@{ArrayXD}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{ArrayXD()}{ArrayXD()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_a248a116356d1ea998d4e4d40cc4b6f02} 
+OWL\+::\+Array\+XD\+::\+Array\+XD (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\doxylink{class_o_w_l_1_1_array_x_d}{Array\+XD}
+
+Default Constructor. Sets array attribute to an empty array.
+
+Parameters\+: None
+
+Returns\+: None \Hypertarget{class_o_w_l_1_1_array_x_d_a70084c792f8f1d2dd447dee1a876ed6a}\index{OWL::ArrayXD@{OWL::ArrayXD}!ArrayXD@{ArrayXD}}
+\index{ArrayXD@{ArrayXD}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{ArrayXD()}{ArrayXD()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_a70084c792f8f1d2dd447dee1a876ed6a} 
+OWL\+::\+Array\+XD\+::\+Array\+XD (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$ \&}]{vec}{}\end{DoxyParamCaption})}
+
+\doxylink{class_o_w_l_1_1_array_x_d}{Array\+XD}
+
+Overload constructor. Sets the attribute array to a std\+::vector and sets the array\+Length.
+
+Parameters\+: vec\+: std\+::vector type
+
+Returns\+: None
+
+Throws\+: None 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_o_w_l_1_1_array_x_d_a14c4da58bb7159ae2f65aab6790736cd}\index{OWL::ArrayXD@{OWL::ArrayXD}!checkEmptyArray@{checkEmptyArray}}
+\index{checkEmptyArray@{checkEmptyArray}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{checkEmptyArray()}{checkEmptyArray()}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_a14c4da58bb7159ae2f65aab6790736cd} 
+bool OWL\+::\+Array\+XD\+::check\+Empty\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+check\+Empty array
+
+checks if the \doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD} is empty.
+
+Parameters\+: None
+
+Return\+: bool value is true if the array is empty, false otherwise.
+
+Throws\+: std\+\_\+invalid\+\_\+argument\+: thrown when the array is empty. \Hypertarget{class_o_w_l_1_1_array_x_d_a689a564e4ed16fe158f0de9984e8b2aa}\index{OWL::ArrayXD@{OWL::ArrayXD}!display@{display}}
+\index{display@{display}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{display()}{display()}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_a689a564e4ed16fe158f0de9984e8b2aa} 
+void OWL\+::\+Array\+XD\+::display (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+display
+
+Displays the array on the console.
+
+Parameters\+: None
+
+Throws\+: None \Hypertarget{class_o_w_l_1_1_array_x_d_a1aa16840199ce14dbbeb04ce9f86d4b3}\index{OWL::ArrayXD@{OWL::ArrayXD}!findClosestElement@{findClosestElement}}
+\index{findClosestElement@{findClosestElement}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{findClosestElement()}{findClosestElement()}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_a1aa16840199ce14dbbeb04ce9f86d4b3} 
+double OWL\+::\+Array\+XD\+::find\+Closest\+Element (\begin{DoxyParamCaption}\item[{double \&}]{input\+Value}{}\end{DoxyParamCaption})}
+
+find\+Closed\+Element\+LHS
+
+finds the closet element in \doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD} to the input element by iterating through the array and comparing the (absolute) distance of the value from the inputted value.
+
+Parameters\+: input\+Element\+: (double) input value
+
+Returns\+: (double) closest element present in the array.
+
+Throws\+: None \Hypertarget{class_o_w_l_1_1_array_x_d_ad48a1398de0829b2b53c93c66bbfb9e0}\index{OWL::ArrayXD@{OWL::ArrayXD}!findCLosestElementGreaterThan@{findCLosestElementGreaterThan}}
+\index{findCLosestElementGreaterThan@{findCLosestElementGreaterThan}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{findCLosestElementGreaterThan()}{findCLosestElementGreaterThan()}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_ad48a1398de0829b2b53c93c66bbfb9e0} 
+double OWL\+::\+Array\+XD\+::find\+CLosest\+Element\+Greater\+Than (\begin{DoxyParamCaption}\item[{double \&}]{input\+Val}{}\end{DoxyParamCaption})}
+
+find\+Closed\+Element\+Greater\+Than
+
+finds the closet element in \doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD} to the (greater than) input element by iterating through the array and comparing the distance of the value from the inputted value.
+
+Parameters\+: input\+Element\+: (double) input value
+
+Returns\+: (double) closest element present in the array.
+
+Throws\+: std\+::invalid\+\_\+argument\+: thrown when no element in the array is greater than the inputted value. \Hypertarget{class_o_w_l_1_1_array_x_d_ad71dc110cc443941e6362dfd255d0c0c}\index{OWL::ArrayXD@{OWL::ArrayXD}!findCLosestElementGreaterThanIndex@{findCLosestElementGreaterThanIndex}}
+\index{findCLosestElementGreaterThanIndex@{findCLosestElementGreaterThanIndex}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{findCLosestElementGreaterThanIndex()}{findCLosestElementGreaterThanIndex()}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_ad71dc110cc443941e6362dfd255d0c0c} 
+size\+\_\+t OWL\+::\+Array\+XD\+::find\+CLosest\+Element\+Greater\+Than\+Index (\begin{DoxyParamCaption}\item[{double \&}]{input\+Val}{}\end{DoxyParamCaption})}
+
+find\+Closed\+Element\+Greater\+Than\+Index
+
+finds the index of the closet element in \doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD} to the (greater than) input element by iterating through the array and comparing the distance of the value from the inputted value.
+
+Parameters\+: input\+Element\+: (double) input value
+
+Returns\+: (double) index of the closest element whose value is less than inputted array.
+
+Throws\+: \doxylink{class_o_w_l_1_1_empty_array_exception}{Empty\+Array\+Exception}\+: thrown when the array is empty. std\+::invalid\+\_\+argument\+: thrown when no element in the array is less than the inputted value. \Hypertarget{class_o_w_l_1_1_array_x_d_a09534cd40a667b8127287ed6ef386cdb}\index{OWL::ArrayXD@{OWL::ArrayXD}!findClosestElementIndex@{findClosestElementIndex}}
+\index{findClosestElementIndex@{findClosestElementIndex}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{findClosestElementIndex()}{findClosestElementIndex()}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_a09534cd40a667b8127287ed6ef386cdb} 
+size\+\_\+t OWL\+::\+Array\+XD\+::find\+Closest\+Element\+Index (\begin{DoxyParamCaption}\item[{double \&}]{input\+Val}{}\end{DoxyParamCaption})}
+
+find\+Closestelement\+Index
+
+returns the index of the element closest in value to the inputted value.
+
+Parameters\+: input\+Val\+: (double) input value.
+
+Returns\+: (size\+\_\+t) the index of the element cloest in value to the inputted value.
+
+Throws\+: None \Hypertarget{class_o_w_l_1_1_array_x_d_aecba7ae0922326267de820ce964051e8}\index{OWL::ArrayXD@{OWL::ArrayXD}!findCLosestElementLessThan@{findCLosestElementLessThan}}
+\index{findCLosestElementLessThan@{findCLosestElementLessThan}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{findCLosestElementLessThan()}{findCLosestElementLessThan()}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_aecba7ae0922326267de820ce964051e8} 
+double OWL\+::\+Array\+XD\+::find\+CLosest\+Element\+Less\+Than (\begin{DoxyParamCaption}\item[{double \&}]{input\+Val}{}\end{DoxyParamCaption})}
+
+find\+Closed\+Element\+Less\+Than
+
+finds the closet element in \doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD} to the (less than) input element by iterating through the array and comparing the distance of the value from the inputted value.
+
+Parameters\+: input\+Element\+: (double) input value
+
+Returns\+: (double) closest element present in the array.
+
+Throws\+: std\+::invalid\+\_\+argument\+: thrown when no element in the array is less than the inputted value. \Hypertarget{class_o_w_l_1_1_array_x_d_a08a16a111c7a2945efee398814781570}\index{OWL::ArrayXD@{OWL::ArrayXD}!findCLosestElementLessThanIndex@{findCLosestElementLessThanIndex}}
+\index{findCLosestElementLessThanIndex@{findCLosestElementLessThanIndex}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{findCLosestElementLessThanIndex()}{findCLosestElementLessThanIndex()}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_a08a16a111c7a2945efee398814781570} 
+size\+\_\+t OWL\+::\+Array\+XD\+::find\+CLosest\+Element\+Less\+Than\+Index (\begin{DoxyParamCaption}\item[{double \&}]{input\+Val}{}\end{DoxyParamCaption})}
+
+find\+Closed\+Element\+Less\+Than\+Index
+
+finds the index of the closet element in \doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD} to the (less than) input element by iterating through the array and comparing the distance of the value from the inputted value.
+
+Parameters\+: input\+Element\+: (double) input value
+
+Returns\+: (double) index of the closest element whose value is less than inputted array.
+
+Throws\+: \doxylink{class_o_w_l_1_1_empty_array_exception}{Empty\+Array\+Exception}\+: thrown when the array is empty. std\+::invalid\+\_\+argument\+: thrown when no element in the array is less than the inputted value. \Hypertarget{class_o_w_l_1_1_array_x_d_a1e72479e11204702d3fc823e4d62a874}\index{OWL::ArrayXD@{OWL::ArrayXD}!findMaxELement@{findMaxELement}}
+\index{findMaxELement@{findMaxELement}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{findMaxELement()}{findMaxELement()}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_a1e72479e11204702d3fc823e4d62a874} 
+double OWL\+::\+Array\+XD\+::find\+Max\+ELement (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+find\+Max\+Element
+
+finds the maximum element present in the array.
+
+Parameters\+: None
+
+Returns\+: (double) maximum element present in the array.
+
+Throws\+: \doxylink{class_o_w_l_1_1_empty_array_exception}{Empty\+Array\+Exception}\+: thrown when the array is empty \Hypertarget{class_o_w_l_1_1_array_x_d_a50e9e61a204e05f234f01a1d100b5f5e}\index{OWL::ArrayXD@{OWL::ArrayXD}!findMinElement@{findMinElement}}
+\index{findMinElement@{findMinElement}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{findMinElement()}{findMinElement()}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_a50e9e61a204e05f234f01a1d100b5f5e} 
+double OWL\+::\+Array\+XD\+::find\+Min\+Element (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+find\+Min\+Element
+
+finds the minimum element present in the array.
+
+Parameters\+: None
+
+Returns\+: (double) minimum element present in the array.
+
+Throws\+: \doxylink{class_o_w_l_1_1_empty_array_exception}{Empty\+Array\+Exception}\+: thrown when the array is empty \Hypertarget{class_o_w_l_1_1_array_x_d_af575a51083b481d5379ea40978373b28}\index{OWL::ArrayXD@{OWL::ArrayXD}!isApproxEqual@{isApproxEqual}}
+\index{isApproxEqual@{isApproxEqual}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{isApproxEqual()}{isApproxEqual()}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_af575a51083b481d5379ea40978373b28} 
+double OWL\+::\+Array\+XD\+::is\+Approx\+Equal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} \&}]{other\+Array}{, }\item[{double}]{tol}{}\end{DoxyParamCaption})}
+
+is\+Approx\+Equal
+
+checks if the array is equal to the inputted array.
+
+Parameters\+: other\+Array\+: (\doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD}) input array tol\+: (double) acceptable error range
+
+Returns\+: (bool) true if arrays are equal, false if they are not.
+
+Throws\+: None \Hypertarget{class_o_w_l_1_1_array_x_d_aa10295d2b8df91ed5f0251620558a902}\index{OWL::ArrayXD@{OWL::ArrayXD}!isEqual@{isEqual}}
+\index{isEqual@{isEqual}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{isEqual()}{isEqual()}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_aa10295d2b8df91ed5f0251620558a902} 
+double OWL\+::\+Array\+XD\+::is\+Equal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} \&}]{other\+Array}{}\end{DoxyParamCaption})}
+
+is\+Equal
+
+checks if the array is equal to the inputted array.
+
+Parameters\+: other\+Array\+: (\doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD}) input array
+
+Returns\+: (bool) true if arrays are equal, false if they are not.
+
+Throws\+: None \Hypertarget{class_o_w_l_1_1_array_x_d_a99e10290e0252fe87e950a9ed7541afa}\index{OWL::ArrayXD@{OWL::ArrayXD}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_a99e10290e0252fe87e950a9ed7541afa} 
+\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} OWL\+::\+Array\+XD\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} \&}]{other\+Array}{}\end{DoxyParamCaption})}
+
+operator overload for element-\/by-\/element multiplication
+
+Parameters\+: other\+Array\+: other \doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD}
+
+Return\+: double value of the \doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD} after element-\/by-\/element multiplication.
+
+Throws\+: std\+::invalid\+\_\+argument\+: if arrays lengths do not match. \Hypertarget{class_o_w_l_1_1_array_x_d_a249a4229900f923906ef3f07daf02d08}\index{OWL::ArrayXD@{OWL::ArrayXD}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_a249a4229900f923906ef3f07daf02d08} 
+\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} OWL\+::\+Array\+XD\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const double}]{scalar\+Value}{}\end{DoxyParamCaption})}
+
+operator overload for scalar multiplication
+
+Parameters\+: scalar\+Value\+: double scalar value.
+
+Return\+: double value of the \doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD} after scalar multiplication.
+
+Throws\+: None \Hypertarget{class_o_w_l_1_1_array_x_d_a8bc0a95182a900b69ebb2ddf24a61626}\index{OWL::ArrayXD@{OWL::ArrayXD}!operator+@{operator+}}
+\index{operator+@{operator+}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_a8bc0a95182a900b69ebb2ddf24a61626} 
+\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} OWL\+::\+Array\+XD\+::operator+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} \&}]{other\+Array}{}\end{DoxyParamCaption})}
+
+operator overload for addition with another OWL\+::\+Array
+
+Parameters\+: other\+Array\+: \doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD}
+
+Return\+: \doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD} corresponding to element-\/by-\/element additions.
+
+Throws\+: None \Hypertarget{class_o_w_l_1_1_array_x_d_a194e6d232afc777cb00db45d0257161d}\index{OWL::ArrayXD@{OWL::ArrayXD}!operator+@{operator+}}
+\index{operator+@{operator+}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_a194e6d232afc777cb00db45d0257161d} 
+\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} OWL\+::\+Array\+XD\+::operator+ (\begin{DoxyParamCaption}\item[{double \&}]{scalar}{}\end{DoxyParamCaption})}
+
+operator overload for addition with another double
+
+Parameters\+: other\+Double\+: scalar of double type.
+
+Return\+: \doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD}
+
+Throw\+: None \Hypertarget{class_o_w_l_1_1_array_x_d_a264f4a4c222245ab2c256768a274478d}\index{OWL::ArrayXD@{OWL::ArrayXD}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_a264f4a4c222245ab2c256768a274478d} 
+\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} OWL\+::\+Array\+XD\+::operator-\/ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_o_w_l_1_1_array_x_d}{Array\+XD}} \&}]{other\+Array}{}\end{DoxyParamCaption})}
+
+operator overload for subtraction.
+
+Parameters\+: other\+Array\+: \doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD}
+
+Return\+: \doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD} corresponding to element-\/by-\/element subtractions.
+
+Throws\+: std\+::invalid\+\_\+argument\+: thrown when the sizes do not match up. \Hypertarget{class_o_w_l_1_1_array_x_d_ac4b250931b3e73fddfae1dc7c6e5e700}\index{OWL::ArrayXD@{OWL::ArrayXD}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_ac4b250931b3e73fddfae1dc7c6e5e700} 
+double \& OWL\+::\+Array\+XD\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+operator overload for indexing
+
+Parameters\+: index\+: size\+\_\+t representing the desired index.
+
+Return\+: double value of the \doxylink{class_o_w_l_1_1_array_x_d}{OWL\+::\+Array\+XD} corresponding to the desired index.
+
+Throws\+: invalid\+\_\+argument\+: thrown when the inputted index exceeds the array length. \Hypertarget{class_o_w_l_1_1_array_x_d_a372b5f4016bd46238ae98f729e5ca62d}\index{OWL::ArrayXD@{OWL::ArrayXD}!setArray@{setArray}}
+\index{setArray@{setArray}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{setArray()}{setArray()}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_a372b5f4016bd46238ae98f729e5ca62d} 
+void OWL\+::\+Array\+XD\+::set\+Array (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$ \&}]{new\+Array}{}\end{DoxyParamCaption})}
+
+set\+Array
+
+sets existing std\+::vector to the \doxylink{class_o_w_l_1_1_array_x_d}{Array\+XD} instance by setting the array attribute.
+
+Parameters\+: new\+Array\+: std\+::vector
+
+Returns\+: void
+
+Throws\+: None \Hypertarget{class_o_w_l_1_1_array_x_d_a61999a451231dab8fc1e1eb63e9d3715}\index{OWL::ArrayXD@{OWL::ArrayXD}!sum@{sum}}
+\index{sum@{sum}!OWL::ArrayXD@{OWL::ArrayXD}}
+\doxysubsubsection{\texorpdfstring{sum()}{sum()}}
+{\footnotesize\ttfamily \label{class_o_w_l_1_1_array_x_d_a61999a451231dab8fc1e1eb63e9d3715} 
+double OWL\+::\+Array\+XD\+::sum (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+sum
+
+finds the sum of the elemets in the array
+
+Parameters\+: None
+
+Returns\+: (double) sum of all the elements in the array
+
+Throws\+: None 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/extern/\mbox{\hyperlink{owl_8h}{owl.\+h}}\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/extern/\mbox{\hyperlink{owl_8cpp}{owl.\+cpp}}\end{DoxyCompactItemize}

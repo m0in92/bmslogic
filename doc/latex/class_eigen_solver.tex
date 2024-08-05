@@ -1,0 +1,112 @@
+\doxysection{Eigen\+Solver Class Reference}
+\hypertarget{class_eigen_solver}{}\label{class_eigen_solver}\index{EigenSolver@{EigenSolver}}
+
+
+This solver uses the Eigen Function Expansion method as detailed in ref 1 to calculate the electrode surface SOC. As such, it stores all the necessary variables required for the iterative calculations for all time steps. After initiating the class, the object instance can be called iteratively to solve for electrode surface SOC for all time steps.  
+
+
+
+
+{\ttfamily \#include $<$solvers.\+h$>$}
+
+Inheritance diagram for Eigen\+Solver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_eigen_solver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_eigen_solver_acf07918e967f994ad2154521fe716edb}\label{class_eigen_solver_acf07918e967f994ad2154521fe716edb} 
+{\bfseries Eigen\+Solver} (char i\+\_\+electrode\+\_\+type, double i\+\_\+soc\+\_\+init, int i\+\_\+num\+\_\+roots)
+\item 
+\Hypertarget{class_eigen_solver_aa9cdcf01baffcfd0f213f3638d629d18}\label{class_eigen_solver_aa9cdcf01baffcfd0f213f3638d629d18} 
+std\+::vector$<$ double $>$ {\bfseries get\+\_\+roots} () const
+\item 
+\Hypertarget{class_eigen_solver_a4d35d57163bb0d90fada5cd1389cf159}\label{class_eigen_solver_a4d35d57163bb0d90fada5cd1389cf159} 
+double {\bfseries get\+\_\+integ\+\_\+term} ()
+\item 
+\Hypertarget{class_eigen_solver_ad12d3271507c4884deac73bb0c16a10c}\label{class_eigen_solver_ad12d3271507c4884deac73bb0c16a10c} 
+std\+::vector$<$ double $>$ {\bfseries get\+\_\+vec\+\_\+u\+\_\+k} ()
+\item 
+\Hypertarget{class_eigen_solver_a3db00daaf3904ad97086d23040faa340}\label{class_eigen_solver_a3db00daaf3904ad97086d23040faa340} 
+double {\bfseries j\+\_\+scaled} (double i\+\_\+app, double R, double S, double D\+\_\+s, double c\+\_\+s\+\_\+max)
+\item 
+void \mbox{\hyperlink{class_eigen_solver_aad7e83f8ff60d84166f9566614dd019c}{update\+\_\+integ\+\_\+term}} (double dt, double i\+\_\+app, double R, double S, double D\+\_\+s, double c\+\_\+s\+\_\+max)
+\begin{DoxyCompactList}\small\item\em Updates the integration term. Integration is performed using simple algebraic integration. \end{DoxyCompactList}\item 
+\Hypertarget{class_eigen_solver_acc99062ded90ec75323321ad9d819648}\label{class_eigen_solver_acc99062ded90ec75323321ad9d819648} 
+double {\bfseries du\+\_\+kdt} (double root, double D, double R, double scaled\+\_\+j, double t, double u)
+\item 
+\Hypertarget{class_eigen_solver_ad4810c5c778fe7a6dc35e3281b814b3f}\label{class_eigen_solver_ad4810c5c778fe7a6dc35e3281b814b3f} 
+double {\bfseries solve\+\_\+u\+\_\+k} (double roots, double t\+\_\+prev, double dt, double u\+\_\+k\+\_\+prev, double i\+\_\+app, double R, double S, double D\+\_\+s, double c\+\_\+s\+\_\+max)
+\item 
+\Hypertarget{class_eigen_solver_a9d3daee472bd15469456d1cfd4cd0a8f}\label{class_eigen_solver_a9d3daee472bd15469456d1cfd4cd0a8f} 
+void {\bfseries update\+\_\+vec\+\_\+u\+\_\+k} (double dt, double t\+\_\+prev, double i\+\_\+app, double R, double S, double D\+\_\+s, double c\+\_\+s\+\_\+max)
+\item 
+\Hypertarget{class_eigen_solver_a9a6cc4ddbe6f2550c545a37e254d7588}\label{class_eigen_solver_a9a6cc4ddbe6f2550c545a37e254d7588} 
+double {\bfseries get\+\_\+summation\+\_\+term} (double dt, double t\+\_\+prev, double i\+\_\+app, double R, double S, double D\+\_\+s, double c\+\_\+s\+\_\+max)
+\item 
+\Hypertarget{class_eigen_solver_ac8d33f41c4d69bfc4651b0052e208638}\label{class_eigen_solver_ac8d33f41c4d69bfc4651b0052e208638} 
+double {\bfseries solve} (double dt, double t\+\_\+prev, double i\+\_\+app, double R, double S, double D\+\_\+s, double c\+\_\+s\+\_\+max)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_base_conc_solver}{Base\+Conc\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Base\+Conc\+Solver} (char electrode\+\_\+type)
+\item 
+char \& {\bfseries get\+\_\+electrode\+Type} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_base_conc_solver}{Base\+Conc\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+char {\bfseries m\+\_\+electrode\+\_\+type}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This solver uses the Eigen Function Expansion method as detailed in ref 1 to calculate the electrode surface SOC. As such, it stores all the necessary variables required for the iterative calculations for all time steps. After initiating the class, the object instance can be called iteratively to solve for electrode surface SOC for all time steps. 
+
+The equation solved is x\+\_\+j\+\_\+surf = x\+\_\+ini + (1/5)\texorpdfstring{$\ast$}{*}j\+\_\+scaled + 3 \texorpdfstring{$\ast$}{*} integration\{D\+\_\+sj \texorpdfstring{$\ast$}{*} j\+\_\+scaled / R\+\_\+j \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} 2\} \texorpdfstring{$\ast$}{*} dt + summation\{u\+\_\+jk -\/ 2 \texorpdfstring{$\ast$}{*} scaled\+\_\+j / lambda\+\_\+k \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} 2\} In the above equation, the integration is performed from t=0 to the current time. Moreover, the summation is performed from k=1 to k=N. Here k represents the kth term of the solution series.
+
+Reference\+:
+\begin{DoxyEnumerate}
+\item Guo, M., Sikha, G., \& White, R. E. (2011). Single-\/\+Particle Model for a Lithium-\/\+Ion Cell\+: Thermal Behavior. Journal of The Electrochemical Society, 158(2), A122. \href{https://doi.org/10.1149/1.3521314/XML}{\texttt{ https\+://doi.\+org/10.\+1149/1.\+3521314/\+XML}} "{}"{}"{} 
+\end{DoxyEnumerate}
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_eigen_solver_aad7e83f8ff60d84166f9566614dd019c}\index{EigenSolver@{EigenSolver}!update\_integ\_term@{update\_integ\_term}}
+\index{update\_integ\_term@{update\_integ\_term}!EigenSolver@{EigenSolver}}
+\doxysubsubsection{\texorpdfstring{update\_integ\_term()}{update\_integ\_term()}}
+{\footnotesize\ttfamily \label{class_eigen_solver_aad7e83f8ff60d84166f9566614dd019c} 
+void Eigen\+Solver\+::update\+\_\+integ\+\_\+term (\begin{DoxyParamCaption}\item[{double}]{dt}{, }\item[{double}]{i\+\_\+app}{, }\item[{double}]{R}{, }\item[{double}]{S}{, }\item[{double}]{D\+\_\+s}{, }\item[{double}]{c\+\_\+s\+\_\+max}{}\end{DoxyParamCaption})}
+
+
+
+Updates the integration term. Integration is performed using simple algebraic integration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & \\
+\hline
+{\em i\+\_\+app} & \\
+\hline
+{\em R} & \\
+\hline
+{\em S} & \\
+\hline
+{\em D\+\_\+s} & \\
+\hline
+{\em c\+\_\+s\+\_\+max} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers.\+h\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers.\+cpp\end{DoxyCompactItemize}

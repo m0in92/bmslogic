@@ -1,0 +1,142 @@
+\doxysection{electrolyte\+\_\+potential.\+Py\+Electrolyte\+Potential\+FVMSolver Class Reference}
+\hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver}{}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver}\index{electrolyte\_potential.PyElectrolytePotentialFVMSolver@{electrolyte\_potential.PyElectrolytePotentialFVMSolver}}
+Inheritance diagram for electrolyte\+\_\+potential.\+Py\+Electrolyte\+Potential\+FVMSolver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a1f09eb9886ce80a1395791c95a93c04a}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a1f09eb9886ce80a1395791c95a93c04a} 
+{\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self, Py\+Electrolyte\+FVMCoordinates fvm\+\_\+coords, float epsilon\+\_\+en, float epsilon\+\_\+esep, float epsilon\+\_\+ep, float a\+\_\+s\+\_\+n, float a\+\_\+s\+\_\+p, float t\+\_\+c, float kappa\+\_\+e, float brugg, float temp)
+\item 
+npt.\+Array\+Like \mbox{\hyperlink{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a98db0c96abc2942cd4c5942d8848ca4e}{array\+\_\+epsilon\+\_\+e}} (self)
+\item 
+npt.\+Array\+Like \mbox{\hyperlink{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_ac3b76b1671f7502af9714fadd72dab2b}{array\+\_\+kappa\+\_\+eff}} (self)
+\item 
+npt.\+Array\+Like \mbox{\hyperlink{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a522101ec22fd100692852f7d6bde2263}{array\+\_\+kappa\+\_\+\+D\+\_\+eff}} (self)
+\item 
+npt.\+Array\+Like \mbox{\hyperlink{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a36117be8938ccd460ee96dbcf13063ee}{array\+\_\+a\+\_\+s}} (self)
+\item 
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_acdd319c588c4d3eca4f0c6485a157aaf}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_acdd319c588c4d3eca4f0c6485a157aaf} 
+tuple\mbox{[}np.\+ndarray, np.\+ndarray, np.\+ndarray\mbox{]} {\bfseries solve\+\_\+phi\+\_\+e} (self, np.\+ndarray j, np.\+ndarray c\+\_\+e)
+\item 
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a0d6fddc744a86bddd0f69d9d5b437974}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a0d6fddc744a86bddd0f69d9d5b437974} 
+{\bfseries extrapolate\+\_\+terminal\+\_\+potential} (self, array\+\_\+phi\+\_\+e)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a791931e9566cdbf53510666b349beac3}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a791931e9566cdbf53510666b349beac3} 
+{\bfseries coords}
+\item 
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a0de95ec120ce52384de57078f8cd804e}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a0de95ec120ce52384de57078f8cd804e} 
+{\bfseries epsilon\+\_\+en}
+\item 
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_ac0134207a11de490a707a1725bf3278d}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_ac0134207a11de490a707a1725bf3278d} 
+{\bfseries epsilon\+\_\+esep}
+\item 
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a6314cb9708df8c2a98f7063feeaa6e8a}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a6314cb9708df8c2a98f7063feeaa6e8a} 
+{\bfseries epsilon\+\_\+ep}
+\item 
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a2a944bf50253d68673cbbe4b9d86a7d9}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a2a944bf50253d68673cbbe4b9d86a7d9} 
+{\bfseries a\+\_\+s\+\_\+n}
+\item 
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a6366a2b73f9f3f9d4002e7ad15cf0959}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a6366a2b73f9f3f9d4002e7ad15cf0959} 
+{\bfseries a\+\_\+s\+\_\+p}
+\item 
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a68416b0d5437465dd9cdcd4ab304cbc9}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a68416b0d5437465dd9cdcd4ab304cbc9} 
+{\bfseries t\+\_\+c}
+\item 
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_ac3e18e4d4f3e66bd5af4683f20184e6e}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_ac3e18e4d4f3e66bd5af4683f20184e6e} 
+{\bfseries kappa\+\_\+e}
+\item 
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_acca574aa8cbb4378f1720d25c3fa1ed9}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_acca574aa8cbb4378f1720d25c3fa1ed9} 
+{\bfseries temp}
+\item 
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_ac162da5a522090f6b0361269123081dc}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_ac162da5a522090f6b0361269123081dc} 
+{\bfseries kappa\+\_\+D}
+\item 
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a74bdc701c9433960d9b233056f6f567f}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a74bdc701c9433960d9b233056f6f567f} 
+{\bfseries brugg}
+\item 
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_ae896d99485d2d54f8abf53027e66e8bb}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_ae896d99485d2d54f8abf53027e66e8bb} 
+int {\bfseries n}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a2fce3104a412a09d60da4594441f3387}\label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a2fce3104a412a09d60da4594441f3387} 
+{\bfseries \+\_\+m\+\_\+phi\+\_\+e} (self)
+\item 
+npt.\+Array\+Like \mbox{\hyperlink{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_ac98a2353dc545b49c5a6285981c158d9}{\+\_\+vec\+\_\+phi\+\_\+e}} (self, npt.\+Array\+Like j, npt.\+Array\+Like c\+\_\+e)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}This solver solves for the electrolyte potential across the battery cell thickness. It uses
+the finite volume method (FVM) as indicated by Han et al. [1].
+
+In their paper, Han et al. defined the flux in terms of A/m2/s. Here, the relevant equations have been modified
+to refer to flux in terms of mol/m2/s.
+
+[1] Han, S., Tang, Y., & Khaleghi Rahimian, S. (2021). A numerically efficient method of solving the full-order
+pseudo-2-dimensional (P2D) Li-ion cell model. Journal of Power Sources, 490, 229571.
+https://doi.org/10.1016/J.JPOWSOUR.2021.229571Han, S., Tang, Y., & Khaleghi Rahimian, S. (2021).
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_ac98a2353dc545b49c5a6285981c158d9}\index{electrolyte\_potential.PyElectrolytePotentialFVMSolver@{electrolyte\_potential.PyElectrolytePotentialFVMSolver}!\_vec\_phi\_e@{\_vec\_phi\_e}}
+\index{\_vec\_phi\_e@{\_vec\_phi\_e}!electrolyte\_potential.PyElectrolytePotentialFVMSolver@{electrolyte\_potential.PyElectrolytePotentialFVMSolver}}
+\doxysubsubsection{\texorpdfstring{\_vec\_phi\_e()}{\_vec\_phi\_e()}}
+{\footnotesize\ttfamily \label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_ac98a2353dc545b49c5a6285981c158d9} 
+ npt.\+Array\+Like electrolyte\+\_\+potential.\+Py\+Electrolyte\+Potential\+FVMSolver.\+\_\+vec\+\_\+phi\+\_\+e (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{npt.\+Array\+Like}]{j}{, }\item[{npt.\+Array\+Like}]{c\+\_\+e}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}returns the vector for the matrix form of the  FVM equations.
+:param j: molar lithium-ion flux in the electrode throughout the battery cell.
+:param c_e: array containing the lithium-ion concentration in the electrolyte in the individual fvm nodes.
+:return: column vector for the matrix form of the FVM equations.
+\end{DoxyVerb}
+ \Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a36117be8938ccd460ee96dbcf13063ee}\index{electrolyte\_potential.PyElectrolytePotentialFVMSolver@{electrolyte\_potential.PyElectrolytePotentialFVMSolver}!array\_a\_s@{array\_a\_s}}
+\index{array\_a\_s@{array\_a\_s}!electrolyte\_potential.PyElectrolytePotentialFVMSolver@{electrolyte\_potential.PyElectrolytePotentialFVMSolver}}
+\doxysubsubsection{\texorpdfstring{array\_a\_s()}{array\_a\_s()}}
+{\footnotesize\ttfamily \label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a36117be8938ccd460ee96dbcf13063ee} 
+ npt.\+Array\+Like electrolyte\+\_\+potential.\+Py\+Electrolyte\+Potential\+FVMSolver.\+array\+\_\+a\+\_\+s (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Array containing the interfacial specific area [1/m] throughout the battery cell.
+\end{DoxyVerb}
+ \Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a98db0c96abc2942cd4c5942d8848ca4e}\index{electrolyte\_potential.PyElectrolytePotentialFVMSolver@{electrolyte\_potential.PyElectrolytePotentialFVMSolver}!array\_epsilon\_e@{array\_epsilon\_e}}
+\index{array\_epsilon\_e@{array\_epsilon\_e}!electrolyte\_potential.PyElectrolytePotentialFVMSolver@{electrolyte\_potential.PyElectrolytePotentialFVMSolver}}
+\doxysubsubsection{\texorpdfstring{array\_epsilon\_e()}{array\_epsilon\_e()}}
+{\footnotesize\ttfamily \label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a98db0c96abc2942cd4c5942d8848ca4e} 
+ npt.\+Array\+Like electrolyte\+\_\+potential.\+Py\+Electrolyte\+Potential\+FVMSolver.\+array\+\_\+epsilon\+\_\+e (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns an array containing the volume fraction of the electrolyte at each spatial region
+:return:
+\end{DoxyVerb}
+ \Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a522101ec22fd100692852f7d6bde2263}\index{electrolyte\_potential.PyElectrolytePotentialFVMSolver@{electrolyte\_potential.PyElectrolytePotentialFVMSolver}!array\_kappa\_D\_eff@{array\_kappa\_D\_eff}}
+\index{array\_kappa\_D\_eff@{array\_kappa\_D\_eff}!electrolyte\_potential.PyElectrolytePotentialFVMSolver@{electrolyte\_potential.PyElectrolytePotentialFVMSolver}}
+\doxysubsubsection{\texorpdfstring{array\_kappa\_D\_eff()}{array\_kappa\_D\_eff()}}
+{\footnotesize\ttfamily \label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_a522101ec22fd100692852f7d6bde2263} 
+ npt.\+Array\+Like electrolyte\+\_\+potential.\+Py\+Electrolyte\+Potential\+FVMSolver.\+array\+\_\+kappa\+\_\+\+D\+\_\+eff (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns an array containing the effective kappa_D at spatial FVM points.
+:return:
+\end{DoxyVerb}
+ \Hypertarget{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_ac3b76b1671f7502af9714fadd72dab2b}\index{electrolyte\_potential.PyElectrolytePotentialFVMSolver@{electrolyte\_potential.PyElectrolytePotentialFVMSolver}!array\_kappa\_eff@{array\_kappa\_eff}}
+\index{array\_kappa\_eff@{array\_kappa\_eff}!electrolyte\_potential.PyElectrolytePotentialFVMSolver@{electrolyte\_potential.PyElectrolytePotentialFVMSolver}}
+\doxysubsubsection{\texorpdfstring{array\_kappa\_eff()}{array\_kappa\_eff()}}
+{\footnotesize\ttfamily \label{classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver_ac3b76b1671f7502af9714fadd72dab2b} 
+ npt.\+Array\+Like electrolyte\+\_\+potential.\+Py\+Electrolyte\+Potential\+FVMSolver.\+array\+\_\+kappa\+\_\+eff (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns an array containing the effective electrolyte conductivity at spatial FVM points.
+:return:
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers/electrolyte\+\_\+potential.\+py\end{DoxyCompactItemize}

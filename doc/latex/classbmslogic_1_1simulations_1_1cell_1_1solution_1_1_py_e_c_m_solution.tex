@@ -1,0 +1,100 @@
+\doxysection{bmslogic.\+simulations.\+cell.\+solution.\+Py\+ECMSolution Class Reference}
+\hypertarget{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution}{}\label{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution}\index{bmslogic.simulations.cell.solution.PyECMSolution@{bmslogic.simulations.cell.solution.PyECMSolution}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_ada8385d2c1c12b8f30b66723ae0198bd}{read\+\_\+from\+\_\+csv\+\_\+file}} (cls, str filepath)
+\item 
+\mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a91cf51da1eec5a74e967247a77a17b84}{read\+\_\+from\+\_\+arrays}} (cls, np.\+ndarray array\+\_\+t, np.\+ndarray array\+\_\+i, np.\+ndarray array\+\_\+v, np.\+ndarray array\+\_\+temp, Optional\mbox{[}np.\+ndarray\mbox{]} array\+\_\+soc)
+\item 
+None \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_abe9c17459c059e15ceece740b6d07b11}{update}} (self, float t, float i\+\_\+app, float v, float temp, float soc, float i\+\_\+r1)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_ad8c4518a952b6ec404e3d91ef860686f}\label{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_ad8c4518a952b6ec404e3d91ef860686f} 
+{\bfseries comprehensive\+\_\+plot} (self, Optional\mbox{[}Self\mbox{]} sol\+\_\+exp=None, Optional\mbox{[}str\mbox{]} save\+\_\+dir=None, Optional\mbox{[}str\mbox{]} plot\+\_\+line\+\_\+color=None)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a4da249aea3f65a342a006655c6f66a89}\label{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a4da249aea3f65a342a006655c6f66a89} 
+{\bfseries array\+\_\+V}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_af730c903adb8a0d423ba132b4fef12f1}\label{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_af730c903adb8a0d423ba132b4fef12f1} 
+{\bfseries array\+\_\+soc}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a6bbd1b75390d63dfcc9021dcf52585b5}\label{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a6bbd1b75390d63dfcc9021dcf52585b5} 
+{\bfseries array\+\_\+I}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a5b129870165162942930245f8b889aea}\label{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a5b129870165162942930245f8b889aea} 
+np {\bfseries array\+\_\+t} = field(default\+\_\+factory=lambda\+: np.\+array(\mbox{[}$\,$\mbox{]}))
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a367a4d3865c63a179d26bfa5661e4ac4}\label{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a367a4d3865c63a179d26bfa5661e4ac4} 
+np {\bfseries array\+\_\+I} = field(default\+\_\+factory=lambda\+: np.\+array(\mbox{[}$\,$\mbox{]}))
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a12f4f35e8ab89c02b8d2768363b7cd2a}\label{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a12f4f35e8ab89c02b8d2768363b7cd2a} 
+np {\bfseries array\+\_\+V} = field(default\+\_\+factory=lambda\+: np.\+array(\mbox{[}$\,$\mbox{]}))
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a78f2d48ca146f7322d21021cdbaef0f4}\label{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a78f2d48ca146f7322d21021cdbaef0f4} 
+np {\bfseries array\+\_\+temp} = field(default\+\_\+factory=lambda\+: np.\+array(\mbox{[}$\,$\mbox{]}))
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a8cafb9b8725636aae880812d17f5e3c3}\label{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a8cafb9b8725636aae880812d17f5e3c3} 
+np {\bfseries array\+\_\+soc} = field(default\+\_\+factory=lambda\+: np.\+array(\mbox{[}$\,$\mbox{]}))
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a4b4454c0aea0dbe16b26008b8e751a46}\label{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a4b4454c0aea0dbe16b26008b8e751a46} 
+np {\bfseries array\+\_\+\+I\+\_\+\+R1} = field(default\+\_\+factory=lambda\+: np.\+array(\mbox{[}$\,$\mbox{]}))
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a91cf51da1eec5a74e967247a77a17b84}\index{bmslogic.simulations.cell.solution.PyECMSolution@{bmslogic.simulations.cell.solution.PyECMSolution}!read\_from\_arrays@{read\_from\_arrays}}
+\index{read\_from\_arrays@{read\_from\_arrays}!bmslogic.simulations.cell.solution.PyECMSolution@{bmslogic.simulations.cell.solution.PyECMSolution}}
+\doxysubsubsection{\texorpdfstring{read\_from\_arrays()}{read\_from\_arrays()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_a91cf51da1eec5a74e967247a77a17b84} 
+bmslogic.\+simulations.\+cell.\+solution.\+Py\+ECMSolution.\+read\+\_\+from\+\_\+arrays (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{np.\+ndarray}]{array\+\_\+t}{, }\item[{np.\+ndarray}]{array\+\_\+i}{, }\item[{np.\+ndarray}]{array\+\_\+v}{, }\item[{np.\+ndarray}]{array\+\_\+temp}{, }\item[{Optional\mbox{[}np.\+ndarray\mbox{]}}]{array\+\_\+soc}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initiates a Solution instance from the numpy arrays. This method is useful for conducting Kalman filter - based
+simulation from the experimental data.
+
+For instance, for pre-existing numpy arrays representing time, current, voltage, temperature, the class instance
+can be instantiated using:
+                    sol_exp: ECMSolution = ECMSolution().read_from_arrays(...).
+:param array_t: array containing time values at each time-step [s]
+:param array_i: array containing current values at each time-step [A]
+:param array_v: array containing voltage at each time-step [V]
+:param array_temp: array containing temperature values at each time-step [K]
+:param array_soc: array containing battery cell SOC at each time-step
+:return: ECMSolution instance
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_ada8385d2c1c12b8f30b66723ae0198bd}\index{bmslogic.simulations.cell.solution.PyECMSolution@{bmslogic.simulations.cell.solution.PyECMSolution}!read\_from\_csv\_file@{read\_from\_csv\_file}}
+\index{read\_from\_csv\_file@{read\_from\_csv\_file}!bmslogic.simulations.cell.solution.PyECMSolution@{bmslogic.simulations.cell.solution.PyECMSolution}}
+\doxysubsubsection{\texorpdfstring{read\_from\_csv\_file()}{read\_from\_csv\_file()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_ada8385d2c1c12b8f30b66723ae0198bd} 
+bmslogic.\+simulations.\+cell.\+solution.\+Py\+ECMSolution.\+read\+\_\+from\+\_\+csv\+\_\+file (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{str}]{filepath}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Reads the csv file containing the experimental data and stores the data in its numpy arrays. The labelling
+of the columns in the experimental csv file needs to follow a certain naming conventions.
+:param filepath:
+:return:
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_abe9c17459c059e15ceece740b6d07b11}\index{bmslogic.simulations.cell.solution.PyECMSolution@{bmslogic.simulations.cell.solution.PyECMSolution}!update@{update}}
+\index{update@{update}!bmslogic.simulations.cell.solution.PyECMSolution@{bmslogic.simulations.cell.solution.PyECMSolution}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_e_c_m_solution_abe9c17459c059e15ceece740b6d07b11} 
+ None bmslogic.\+simulations.\+cell.\+solution.\+Py\+ECMSolution.\+update (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{t}{, }\item[{float}]{i\+\_\+app}{, }\item[{float}]{v}{, }\item[{float}]{temp}{, }\item[{float}]{soc}{, }\item[{float}]{i\+\_\+r1}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Updates the instance's arrays with the new data values
+:param t: time [s]
+:param i_app: applied current [A]
+:param v: cell terminal potential [V]
+:param temp: cell surface temp. [K]
+:param soc: state-of-charge
+:param i_r1: current across the R1 resistor [A].
+:return: None
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solution.\+py\end{DoxyCompactItemize}

@@ -1,0 +1,32 @@
+\doxysection{bmslogic.\+path\+\_\+definations Namespace Reference}
+\hypertarget{namespacebmslogic_1_1path__definations}{}\label{namespacebmslogic_1_1path__definations}\index{bmslogic.path\_definations@{bmslogic.path\_definations}}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{namespacebmslogic_1_1path__definations_aa6f9ac5deeea0241a7f1fba91d6e9c3d}\label{namespacebmslogic_1_1path__definations_aa6f9ac5deeea0241a7f1fba91d6e9c3d} 
+str {\bfseries ROOT\+\_\+\+DIR} = pathlib.\+Path(\+\_\+\+\_\+file\+\_\+\+\_\+).parent.\+parent.\+\_\+\+\_\+str\+\_\+\+\_\+()
+\item 
+\Hypertarget{namespacebmslogic_1_1path__definations_a36eb07a1afbac8c07ac21e6241ba79f6}\label{namespacebmslogic_1_1path__definations_a36eb07a1afbac8c07ac21e6241ba79f6} 
+str {\bfseries BMSLOGIC\+\_\+\+DIR} = pathlib.\+Path(\+\_\+\+\_\+file\+\_\+\+\_\+).parent.\+\_\+\+\_\+str\+\_\+\+\_\+()
+\item 
+\Hypertarget{namespacebmslogic_1_1path__definations_aaff2d04c034eb8ef1903781131f86d96}\label{namespacebmslogic_1_1path__definations_aaff2d04c034eb8ef1903781131f86d96} 
+str {\bfseries EV\+\_\+\+DATABASE\+\_\+\+DIR} = os.\+path.\+join(BMSLOGIC\+\_\+\+DIR, "{}parameter\+\_\+sets"{}, "{}application"{}, "{}EV"{})
+\item 
+\Hypertarget{namespacebmslogic_1_1path__definations_abeec816a9228bb332371380e725da874}\label{namespacebmslogic_1_1path__definations_abeec816a9228bb332371380e725da874} 
+str {\bfseries EV\+\_\+\+DATABASE\+\_\+\+FILE} = os.\+path.\+join(EV\+\_\+\+DATABASE\+\_\+\+DIR, "{}EV\+\_\+dataset.\+csv"{})
+\item 
+\Hypertarget{namespacebmslogic_1_1path__definations_a4a3759e114174edd3fbf6aeb4775cda2}\label{namespacebmslogic_1_1path__definations_a4a3759e114174edd3fbf6aeb4775cda2} 
+str {\bfseries EV\+\_\+\+DRIVECYCLE\+\_\+\+DIR} = os.\+path.\+join(EV\+\_\+\+DATABASE\+\_\+\+DIR, "{}drivecycles"{})
+\item 
+\Hypertarget{namespacebmslogic_1_1path__definations_a7317a0a54f2f79c598a854a5262e743c}\label{namespacebmslogic_1_1path__definations_a7317a0a54f2f79c598a854a5262e743c} 
+str {\bfseries PARAMETER\+\_\+\+SET\+\_\+\+DIR} = os.\+path.\+join(BMSLOGIC\+\_\+\+DIR, \textquotesingle{}parameter\+\_\+sets\textquotesingle{})
+\item 
+\Hypertarget{namespacebmslogic_1_1path__definations_a8cf777d48251fb54f6ef79dafae9d0cf}\label{namespacebmslogic_1_1path__definations_a8cf777d48251fb54f6ef79dafae9d0cf} 
+str {\bfseries ECM\+\_\+\+PARAMETER\+\_\+\+SET\+\_\+\+DIR} = os.\+path.\+join(PARAMETER\+\_\+\+SET\+\_\+\+DIR, \textquotesingle{}parameter\+\_\+sets\+\_\+ecm\textquotesingle{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Defines the important absolute file paths used by any source code within the BMSLogic directory.
+\end{DoxyVerb}
+ 

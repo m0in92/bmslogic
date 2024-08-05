@@ -1,0 +1,101 @@
+\doxysection{bmslogic.\+simulations.\+cell.\+models.\+Py\+Thevenin1\+RC Class Reference}
+\hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_thevenin1_r_c}{}\label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_thevenin1_r_c}\index{bmslogic.simulations.cell.models.PyThevenin1RC@{bmslogic.simulations.cell.models.PyThevenin1RC}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_thevenin1_r_c_af45f1f7a5e381e741d05c9f42b962add}{soc\+\_\+next}} (cls, float dt, float i\+\_\+app, float SOC\+\_\+prev, float Q, float eta)
+\item 
+\mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_thevenin1_r_c_ae428e1a05516178cb8ab6047fcab9d41}{i\+\_\+\+R1\+\_\+next}} (cls, float dt, float i\+\_\+app, float i\+\_\+\+R1\+\_\+prev, float R1, float C1)
+\item 
+\mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_thevenin1_r_c_a10663323c7824957af68f72f76e94c69}{v}} (cls, i\+\_\+app, float OCV, float R0, float R1, float i\+\_\+\+R1)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}This class creates a first order Thevenin model object for a lithium-ion battery cell. It contains relevant model
+parameters as class attributes and methods to calculate SOC and terminal voltage.
+
+Thevenin first order model is a phenomenological model that can be used to simulate the terminal voltage across a
+lithium-ion battery cell. It has representative electrical components that represent the open-circuit voltage,
+internal resistance, and diffusion voltages. The set of differential and algebraic equations are:
+
+dz/dt = -eta(t) * i_app(t) / capacity
+di_R1/dt = -i_R1/(R1*C1) + i_app(t)/(R1*C1)
+v(t) = OCV(z(t)) - R1*i_R1(t) - R0*i_app(t)
+
+Where the second equation is a non-homogenous linear first-order differential equation. Furthermore, the variables
+are:
+z: state of charge (SOC)
+R0: resistance of the resistor that represents the battery cell's internal resistance
+R1: resistance of the resistor in the RC pair.
+C1: capacitance of the capacitor in the RC pair.
+i_R1: current through R1
+i_app: applied current
+eta: Colombic efficiency
+
+Note that the RC pair represents the diffusion voltage in the battery cell.
+
+
+After time discretization, the set of algebraic equations are:
+
+z[k+1] = z[k] - delta_t*eta[k]*i_app[k]/capacity
+i_R1[k+1] = exp(-delta_t/(R1*C1))*i_R1[k] + (1-exp(-delta_t/(R1*C1))) * i_app[k]
+v[k] = OCV(z[k]) - R1*i_R1[k] - R0*i_app[k]
+
+Where k represents the time-point and delta_t represents the time-step between z[k+1] and z[k].
+
+Code Notes:
+1. It is assumed for now that eta is a function of applied current only.
+2. Discharge currrent is positve and charge current is negative by convention.
+
+Reference:
+Hariharan, K. S. (2013). A coupled nonlinear equivalent circuit – Thermal model for lithium ion cells.
+In Journal of Power Sources (Vol. 227, pp. 171–176). Elsevier BV.
+https://doi.org/10.1016/j.jpowsour.2012.11.044
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_thevenin1_r_c_ae428e1a05516178cb8ab6047fcab9d41}\index{bmslogic.simulations.cell.models.PyThevenin1RC@{bmslogic.simulations.cell.models.PyThevenin1RC}!i\_R1\_next@{i\_R1\_next}}
+\index{i\_R1\_next@{i\_R1\_next}!bmslogic.simulations.cell.models.PyThevenin1RC@{bmslogic.simulations.cell.models.PyThevenin1RC}}
+\doxysubsubsection{\texorpdfstring{i\_R1\_next()}{i\_R1\_next()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_thevenin1_r_c_ae428e1a05516178cb8ab6047fcab9d41} 
+bmslogic.\+simulations.\+cell.\+models.\+Py\+Thevenin1\+RC.\+i\+\_\+\+R1\+\_\+next (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{dt}{, }\item[{float}]{i\+\_\+app}{, }\item[{float}]{i\+\_\+\+R1\+\_\+prev}{, }\item[{float}]{R1}{, }\item[{float}]{C1}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Measures the current through R1 (i_R1) at the current time step.
+:param dt: time difference between the current and the previous time step [s]
+:param i_app: applied current [A]
+:param i_R1_prev: current through the RC branch at the previous time step [A]
+:param R1: resistance of R1 [ohms]
+:param C1: capacitance of C1 [F]
+:return: current through the RC branch at the current time step
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_thevenin1_r_c_af45f1f7a5e381e741d05c9f42b962add}\index{bmslogic.simulations.cell.models.PyThevenin1RC@{bmslogic.simulations.cell.models.PyThevenin1RC}!soc\_next@{soc\_next}}
+\index{soc\_next@{soc\_next}!bmslogic.simulations.cell.models.PyThevenin1RC@{bmslogic.simulations.cell.models.PyThevenin1RC}}
+\doxysubsubsection{\texorpdfstring{soc\_next()}{soc\_next()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_thevenin1_r_c_af45f1f7a5e381e741d05c9f42b962add} 
+bmslogic.\+simulations.\+cell.\+models.\+Py\+Thevenin1\+RC.\+soc\+\_\+next (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{dt}{, }\item[{float}]{i\+\_\+app}{, }\item[{float}]{SOC\+\_\+prev}{, }\item[{float}]{Q}{, }\item[{float}]{eta}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This methods calculates the SOC at the next time-step
+:param dt: time difference between the current and previous time steps [s]
+:param i_app: Applied current [A]
+:param SOC_prev: SOC at the previous time step
+:param Q: battery cell capacity [Ahr]
+:param eta: Columbic efficiency
+:return: SOC at the current time step
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_thevenin1_r_c_a10663323c7824957af68f72f76e94c69}\index{bmslogic.simulations.cell.models.PyThevenin1RC@{bmslogic.simulations.cell.models.PyThevenin1RC}!v@{v}}
+\index{v@{v}!bmslogic.simulations.cell.models.PyThevenin1RC@{bmslogic.simulations.cell.models.PyThevenin1RC}}
+\doxysubsubsection{\texorpdfstring{v()}{v()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_thevenin1_r_c_a10663323c7824957af68f72f76e94c69} 
+bmslogic.\+simulations.\+cell.\+models.\+Py\+Thevenin1\+RC.\+v (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{}]{i\+\_\+app}{, }\item[{float}]{OCV}{, }\item[{float}]{R0}{, }\item[{float}]{R1}{, }\item[{float}]{i\+\_\+\+R1}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This method calculates the cell terminal voltage.
+:param i_app: (float) applied current at current time step, k
+:return: (float) terminal voltage at the current time step, k
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/models.\+py\end{DoxyCompactItemize}

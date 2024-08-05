@@ -1,0 +1,95 @@
+\doxysection{general\+\_\+equations Namespace Reference}
+\hypertarget{namespacegeneral__equations}{}\label{namespacegeneral__equations}\index{general\_equations@{general\_equations}}
+
+
+contains the general battery-\/related equations  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespacegeneral__equations_ad5b4334fd70fd3916eb82f6f321b54b7}{delta\+\_\+cap}} (double Q, double I, double dt)
+\begin{DoxyCompactList}\small\item\em the capacity increment \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespacegeneral__equations_af73bc36318216dfc58881c04afb38f42}{calc\+\_\+cap}} (double cap\+\_\+prev, double Q, double I, double dt)
+\begin{DoxyCompactList}\small\item\em calculates the battery capacity \mbox{[}A hr\mbox{]} \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespacegeneral__equations_a6e04dd61353ff9161db4b8699d523d7f}{calc\+\_\+i\+\_\+0}} (double k, double c\+\_\+s\+\_\+max, double soc, double c\+\_\+e)
+\begin{DoxyCompactList}\small\item\em Calculates the exchange current density \mbox{[}mol/m2/s\mbox{]} for charge-\/transfer reactions at the electrode-\/electrolyte interface. \end{DoxyCompactList}\item 
+\Hypertarget{namespacegeneral__equations_ae2013b59f0c133fc2d3c325cd9c7bf4b}\label{namespacegeneral__equations_ae2013b59f0c133fc2d3c325cd9c7bf4b} 
+double {\bfseries molar\+\_\+flux\+\_\+to\+\_\+current} (double \&molar\+\_\+flux, double \&S, char electrode\+\_\+type)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+contains the general battery-\/related equations 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacegeneral__equations_af73bc36318216dfc58881c04afb38f42}\index{general\_equations@{general\_equations}!calc\_cap@{calc\_cap}}
+\index{calc\_cap@{calc\_cap}!general\_equations@{general\_equations}}
+\doxysubsubsection{\texorpdfstring{calc\_cap()}{calc\_cap()}}
+{\footnotesize\ttfamily \label{namespacegeneral__equations_af73bc36318216dfc58881c04afb38f42} 
+double general\+\_\+equations\+::calc\+\_\+cap (\begin{DoxyParamCaption}\item[{double}]{cap\+\_\+prev}{, }\item[{double}]{Q}{, }\item[{double}]{I}{, }\item[{double}]{dt}{}\end{DoxyParamCaption})}
+
+
+
+calculates the battery capacity \mbox{[}A hr\mbox{]} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cap\+\_\+prev} & Battery capacity at the previous time step \\
+\hline
+{\em Q} & Nominal battery capacity \mbox{[}Ahr\mbox{]} \\
+\hline
+{\em I} & current \mbox{[}A\mbox{]} \\
+\hline
+{\em dt} & time increment \mbox{[}s\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double 
+\end{DoxyReturn}
+\Hypertarget{namespacegeneral__equations_a6e04dd61353ff9161db4b8699d523d7f}\index{general\_equations@{general\_equations}!calc\_i\_0@{calc\_i\_0}}
+\index{calc\_i\_0@{calc\_i\_0}!general\_equations@{general\_equations}}
+\doxysubsubsection{\texorpdfstring{calc\_i\_0()}{calc\_i\_0()}}
+{\footnotesize\ttfamily \label{namespacegeneral__equations_a6e04dd61353ff9161db4b8699d523d7f} 
+double general\+\_\+equations\+::calc\+\_\+i\+\_\+0 (\begin{DoxyParamCaption}\item[{double}]{k}{, }\item[{double}]{c\+\_\+s\+\_\+max}{, }\item[{double}]{soc}{, }\item[{double}]{c\+\_\+e}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the exchange current density \mbox{[}mol/m2/s\mbox{]} for charge-\/transfer reactions at the electrode-\/electrolyte interface. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & rate constant m\texorpdfstring{$^\wedge$}{\string^}2.5/mol\texorpdfstring{$^\wedge$}{\string^}0.5/s \\
+\hline
+{\em c\+\_\+s\+\_\+max} & max. lithium-\/ion concentration at the electrode \mbox{[}mol/m3\mbox{]} \\
+\hline
+{\em soc} & state of charge of the electrode \\
+\hline
+{\em c\+\_\+e} & lithium-\/ion concentration in the electrolyte \mbox{[}mol/m3\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double exchange current density \mbox{[}mol/m2/s\mbox{]} 
+\end{DoxyReturn}
+\Hypertarget{namespacegeneral__equations_ad5b4334fd70fd3916eb82f6f321b54b7}\index{general\_equations@{general\_equations}!delta\_cap@{delta\_cap}}
+\index{delta\_cap@{delta\_cap}!general\_equations@{general\_equations}}
+\doxysubsubsection{\texorpdfstring{delta\_cap()}{delta\_cap()}}
+{\footnotesize\ttfamily \label{namespacegeneral__equations_ad5b4334fd70fd3916eb82f6f321b54b7} 
+double general\+\_\+equations\+::delta\+\_\+cap (\begin{DoxyParamCaption}\item[{double}]{Q}{, }\item[{double}]{I}{, }\item[{double}]{dt}{}\end{DoxyParamCaption})}
+
+
+
+the capacity increment 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Q} & Nomainl battery capacity \mbox{[}A hr\mbox{]} \\
+\hline
+{\em I} & Battery current \mbox{[}A\mbox{]} \\
+\hline
+{\em dt} & Time increment \mbox{[}s\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double 
+\end{DoxyReturn}

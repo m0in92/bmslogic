@@ -1,0 +1,110 @@
+\doxysection{PElectrode Class Reference}
+\hypertarget{class_p_electrode}{}\label{class_p_electrode}\index{PElectrode@{PElectrode}}
+Inheritance diagram for PElectrode\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_p_electrode}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_p_electrode_afc2510ddd5cda570b636b01edaf3e41f}\label{class_p_electrode_afc2510ddd5cda570b636b01edaf3e41f} 
+{\bfseries PElectrode} (double L\+\_\+i, double A\+\_\+i, double kappa\+\_\+i, double epsilon\+\_\+i, double max\+\_\+conc\+\_\+i, double R\+\_\+i, double S\+\_\+i, double T\+\_\+ref\+\_\+i, double D\+\_\+ref\+\_\+i, double k\+\_\+ref\+\_\+i, double Ea\+\_\+\+D\+\_\+i, double Ea\+\_\+\+R\+\_\+i, double alpha\+\_\+i, double brugg\+\_\+i, double SOC\+\_\+i, double T\+\_\+i, std\+::function$<$ double(double)$>$ func\+\_\+\+OCP\+\_\+i, std\+::function$<$ double(double)$>$ func\+\_\+d\+OCPd\+T\+\_\+i)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_electrode}{Electrode}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Electrode} (double L\+\_\+i, double A\+\_\+i, double kappa\+\_\+i, double epsilon\+\_\+i, double max\+\_\+conc\+\_\+i, double R\+\_\+i, double S\+\_\+i, double T\+\_\+ref\+\_\+i, double D\+\_\+ref\+\_\+i, double k\+\_\+ref\+\_\+i, double Ea\+\_\+\+D\+\_\+i, double Ea\+\_\+\+R\+\_\+i, double alpha\+\_\+i, double brugg\+\_\+i, double SOC\+\_\+i, double T\+\_\+i, std\+::function$<$ double(double)$>$ func\+\_\+\+OCP\+\_\+i, std\+::function$<$ double(double)$>$ func\+\_\+d\+OCPd\+T\+\_\+i)
+\item 
+double {\bfseries get\+\_\+L} () const
+\item 
+double {\bfseries get\+\_\+A} () const
+\item 
+double {\bfseries get\+\_\+T} () const
+\item 
+double {\bfseries get\+\_\+\+SOC} () const
+\item 
+double {\bfseries get\+\_\+\+OCP} ()
+\item 
+double {\bfseries get\+\_\+d\+OCPdT} () const
+\item 
+double {\bfseries get\+\_\+D} ()
+\item 
+double {\bfseries get\+\_\+k} ()
+\item 
+double {\bfseries get\+\_\+S} () const
+\item 
+double {\bfseries get\+\_\+c\+\_\+max} () const
+\item 
+double {\bfseries get\+\_\+R} () const
+\item 
+void {\bfseries update\+\_\+T} (double \&T\+\_\+new)
+\item 
+void {\bfseries update\+\_\+\+SOC} (double i\+\_\+\+SOC)
+\item 
+double {\bfseries calc\+\_\+\+OCP} (double i\+\_\+soc)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_p_electrode_a0ae66feb7cc9463dd35e3bab00470fdb}\label{class_p_electrode_a0ae66feb7cc9463dd35e3bab00470fdb} 
+char {\bfseries electrode\+\_\+type} = \textquotesingle{}p\textquotesingle{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_electrode}{Electrode}}}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_electrode_a1e81a76e630e01b28c27331dd73f2423}{calc\+\_\+\+OCP}} ()
+\item 
+double \mbox{\hyperlink{class_electrode_a9cc4b9d099f1c9c9048a031943b4075c}{calc\+\_\+D}} ()
+\item 
+double \mbox{\hyperlink{class_electrode_ad1a46d514646b8911ccb0153191ac68e}{calc\+\_\+k}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_electrode}{Electrode}}}
+\begin{DoxyCompactItemize}
+\item 
+double {\bfseries L}
+\item 
+double {\bfseries A}
+\item 
+double {\bfseries kappa}
+\item 
+double {\bfseries epsilon}
+\item 
+double {\bfseries max\+\_\+conc}
+\item 
+double {\bfseries R}
+\item 
+double {\bfseries S}
+\item 
+double {\bfseries T\+\_\+ref}
+\item 
+double {\bfseries D\+\_\+ref}
+\item 
+double {\bfseries k\+\_\+ref}
+\item 
+double {\bfseries Ea\+\_\+D}
+\item 
+double {\bfseries Ea\+\_\+R}
+\item 
+double {\bfseries alpha}
+\item 
+double {\bfseries brugg}
+\item 
+double {\bfseries SOC\+\_\+init}
+\item 
+double {\bfseries SOC}
+\item 
+double {\bfseries T}
+\item 
+std\+::function$<$ double(double)$>$ {\bfseries func\+\_\+\+OCP}
+\item 
+std\+::function$<$ double(double)$>$ {\bfseries func\+\_\+d\+OCPdT}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{battery__components_8h}{battery\+\_\+components.\+h}}\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{battery__components_8cpp}{battery\+\_\+components.\+cpp}}\end{DoxyCompactItemize}

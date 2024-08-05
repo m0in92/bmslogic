@@ -1,0 +1,34 @@
+\doxysection{SPKFPolynomial\+Approx Class Reference}
+\hypertarget{class_s_p_k_f_polynomial_approx}{}\label{class_s_p_k_f_polynomial_approx}\index{SPKFPolynomialApprox@{SPKFPolynomialApprox}}
+
+
+Sigma-\/\+Point Kalman filter solver for the electrode lithium-\/ion concentration inside the electrode particle using the polynomial approximation on the volume-\/averaged quantities.  
+
+
+
+
+{\ttfamily \#include $<$kalman\+\_\+solvers.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_s_p_k_f_polynomial_approx_afaab159d059982fded3198f754ed0fd6}\label{class_s_p_k_f_polynomial_approx_afaab159d059982fded3198f754ed0fd6} 
+{\bfseries SPKFPolynomial\+Approx} (char electrode\+\_\+type, double c\+\_\+init, double R, double S, double D, double cov\+\_\+x, double cov\+\_\+w, double cov\+\_\+v)
+\item 
+\Hypertarget{class_s_p_k_f_polynomial_approx_ade7f2408fa327c1056743bba84032b1d}\label{class_s_p_k_f_polynomial_approx_ade7f2408fa327c1056743bba84032b1d} 
+\mbox{\hyperlink{class_sigma_point_kalman_filter}{Sigma\+Point\+Kalman\+Filter}} {\bfseries get\+\_\+spkf\+\_\+solver} () const
+\item 
+\Hypertarget{class_s_p_k_f_polynomial_approx_a02be290e1e32fd4f9989b528d07911b4}\label{class_s_p_k_f_polynomial_approx_a02be290e1e32fd4f9989b528d07911b4} 
+double {\bfseries solve\+\_\+spkf} (double dt, double t\+\_\+prev, double I\+\_\+app, double c\+\_\+surf\+\_\+true)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Sigma-\/\+Point Kalman filter solver for the electrode lithium-\/ion concentration inside the electrode particle using the polynomial approximation on the volume-\/averaged quantities. 
+
+state\+: c\+\_\+s\+\_\+avg output\+: c\+\_\+s\+\_\+surf 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/kalman\+\_\+solvers.\+h\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/kalman\+\_\+solvers.\+cpp\end{DoxyCompactItemize}

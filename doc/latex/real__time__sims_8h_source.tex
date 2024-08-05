@@ -1,0 +1,20 @@
+\doxysection{real\+\_\+time\+\_\+sims.\+h}
+\hypertarget{real__time__sims_8h_source}{}\label{real__time__sims_8h_source}\index{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/pack/real\_time\_sims.h@{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/pack/real\_time\_sims.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BMS\_LOGIC\_TIMED\_SIMS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BMS\_LOGIC\_TIMED\_SIMS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}solvers.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00019\ \textcolor{keywordtype}{void}\ timed\_simulation(\textcolor{keywordtype}{double}\ simulation\_total\_duration,\ \textcolor{keywordtype}{long}\ step\_duration,\ \mbox{\hyperlink{class_battery_solver}{BatterySolver}}\ \&solver\_instance,\ \mbox{\hyperlink{class_base_cycler}{BaseCycler}}\ cycler);}
+\DoxyCodeLine{00020\ \textcolor{keywordtype}{void}\ timed\_simulation(\textcolor{keywordtype}{double}\ simulation\_total\_duration,\ \textcolor{keywordtype}{long}\ step\_duration,\ std::vector<BatterySolver>\ \&solver\_instance,\ \mbox{\hyperlink{class_base_cycler}{BaseCycler}}\ cycler);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BMSLOGIC\_TIMED\_SIMS\_h}}
+
+\end{DoxyCode}

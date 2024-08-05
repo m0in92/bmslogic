@@ -1,0 +1,159 @@
+\doxysection{battery.\+Py\+Enhanced\+SPSolver Class Reference}
+\hypertarget{classbattery_1_1_py_enhanced_s_p_solver}{}\label{classbattery_1_1_py_enhanced_s_p_solver}\index{battery.PyEnhancedSPSolver@{battery.PyEnhancedSPSolver}}
+Inheritance diagram for battery.\+Py\+Enhanced\+SPSolver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classbattery_1_1_py_enhanced_s_p_solver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbattery_1_1_py_enhanced_s_p_solver_a9d1f8289edbd2d89d25abe3f5ce515c3}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1battery__components_1_1_py_battery_cell}{Py\+Battery\+Cell}} b\+\_\+cell, bool isothermal, bool degradation, str electrode\+\_\+soc\+\_\+solver=\textquotesingle{}poly\textquotesingle{}, str electrolyte\+\_\+conc\+\_\+solver\+\_\+type="{}fvm"{})
+\item 
+\Hypertarget{classbattery_1_1_py_enhanced_s_p_solver_ab380ce130558e2d828255ae150b56da2}\label{classbattery_1_1_py_enhanced_s_p_solver_ab380ce130558e2d828255ae150b56da2} 
+float {\bfseries solve\+\_\+one\+\_\+iteration} (self, float t\+\_\+prev, float dt, float i\+\_\+app, float temp)
+\item 
+\mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_solution}{Py\+Solution}} \mbox{\hyperlink{classbattery_1_1_py_enhanced_s_p_solver_a3ed51aa70b3a46d36d42744081825477}{solve}} (self, \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_base_cycler}{Py\+Base\+Cycler}} cycler, Optional\mbox{[}str\mbox{]} sol\+\_\+name=None, Optional\mbox{[}str\mbox{]} save\+\_\+csv\+\_\+dir=None, bool verbose=False, float dt=0.\+1, str termination\+\_\+criteria="{}V"{})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classbattery_1_1_py_s_p_solver}{battery.\+Py\+SPSolver}}}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{classbattery_1_1_py_s_p_solver_aacdbad2d2abc7e5609e1bad7a8b8a90d}{calc\+\_\+terminal\+\_\+potential}} (self, float I\+\_\+p\+\_\+i, float I\+\_\+n\+\_\+i)
+\item 
+\mbox{\hyperlink{classbattery_1_1_py_s_p_solver_a29fed66320acdc581d2127b388896276}{delta\+\_\+\+SOC\+\_\+cap}} (cls, float Q, float I, float dt)
+\item 
+{\bfseries calc\+\_\+\+SOC\+\_\+cap} (self, float cap\+\_\+prev, float Q, float I, float dt)
+\item 
+\mbox{\hyperlink{classbattery_1_1_py_s_p_solver_a123deb3f41b060d0f7a7c7802768f8f1}{delta\+\_\+cap}} (cls, float I, float dt)
+\item 
+tuple\mbox{[}float, float, float, float, float\mbox{]} {\bfseries solve\+\_\+iteration\+\_\+one\+\_\+step} (self, float t\+\_\+prev, float dt, float I)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classbattery_1_1_py_base_solver}{battery.\+Py\+Base\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries check\+\_\+potential\+\_\+limits} (self, V)
+\item 
+{\bfseries update\+\_\+lists} (self, x\+\_\+p\+\_\+list, x\+\_\+n\+\_\+list, V\+\_\+list, cap\+\_\+list, T\+\_\+list, V, cap, T)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbattery_1_1_py_enhanced_s_p_solver_a88c7445610873460504178f1e4b6d65c}\label{classbattery_1_1_py_enhanced_s_p_solver_a88c7445610873460504178f1e4b6d65c} 
+Py\+Electrolyte\+FVMCoordinates {\bfseries electrolyte\+\_\+co\+\_\+ords}
+\item 
+\Hypertarget{classbattery_1_1_py_enhanced_s_p_solver_a53e03e18494a5a417a3aee32b584c71b}\label{classbattery_1_1_py_enhanced_s_p_solver_a53e03e18494a5a417a3aee32b584c71b} 
+str {\bfseries electrolyte\+\_\+conc\+\_\+solver\+\_\+type}
+\item 
+\Hypertarget{classbattery_1_1_py_enhanced_s_p_solver_aff553a4860cc2727f2776cd003b1498d}\label{classbattery_1_1_py_enhanced_s_p_solver_aff553a4860cc2727f2776cd003b1498d} 
+Py\+Electrolyte\+Conc\+FVMSolver {\bfseries electrolyte\+\_\+conc\+\_\+solver}
+\item 
+\Hypertarget{classbattery_1_1_py_enhanced_s_p_solver_a004eb0516f7515326bf9eaf6d90b7fa6}\label{classbattery_1_1_py_enhanced_s_p_solver_a004eb0516f7515326bf9eaf6d90b7fa6} 
+{\bfseries b\+\_\+model}
+\item 
+\Hypertarget{classbattery_1_1_py_enhanced_s_p_solver_a35d189136955969bd99b98934c8f7687}\label{classbattery_1_1_py_enhanced_s_p_solver_a35d189136955969bd99b98934c8f7687} 
+{\bfseries bool\+\_\+isothermal}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classbattery_1_1_py_s_p_solver}{battery.\+Py\+SPSolver}}}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries N}
+\item 
+{\bfseries sol\+\_\+init}
+\item 
+{\bfseries electrode\+\_\+\+SOC\+\_\+solver}
+\item 
+{\bfseries SOC\+\_\+solver\+\_\+p}
+\item 
+{\bfseries SOC\+\_\+solver\+\_\+n}
+\item 
+{\bfseries t\+\_\+model}
+\item 
+{\bfseries SEI\+\_\+model}
+\item 
+{\bfseries bool\+\_\+degradation}
+\item 
+{\bfseries bool\+\_\+isothermal}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classbattery_1_1_py_base_solver}{battery.\+Py\+Base\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries b\+\_\+cell}
+\item 
+{\bfseries bool\+\_\+isothermal}
+\item 
+{\bfseries bool\+\_\+degradation}
+\item 
+{\bfseries electrode\+\_\+\+SOC\+\_\+solver}
+\item 
+{\bfseries b\+\_\+model}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbattery_1_1_py_enhanced_s_p_solver_afd81c9edb858cf10483358de7df0a81d}{\+\_\+custom\+\_\+cycler\+\_\+solve}} (self, \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_custom_cycler}{Py\+Custom\+Cycler}} custom\+\_\+cycler\+\_\+instance, str sol\+\_\+name=None, str save\+\_\+csv\+\_\+dir=None, bool verbose=False, float t\+\_\+increment=0.\+1, str termination\+\_\+criteria=\textquotesingle{}V\textquotesingle{})
+\item 
+\mbox{\hyperlink{classbattery_1_1_py_enhanced_s_p_solver_a87e3ad5a1b0b856b8c0aeaa7c8a8c142}{\+\_\+cycler\+\_\+solve}} (self, \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_base_cycler}{Py\+Base\+Cycler}} cycler, str sol\+\_\+name=None, str save\+\_\+csv\+\_\+dir=None, bool verbose=False, float dt=0.\+1, float termination\+\_\+criteria=\textquotesingle{}V\textquotesingle{})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classbattery_1_1_py_s_p_solver}{battery.\+Py\+SPSolver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbattery_1_1_py_s_p_solver_a9424210b94eedaec7b98214185df1b6c}{calc\+\_\+cell\+\_\+temp}} (t\+\_\+model, t\+\_\+prev, dt, temp\+\_\+prev, V, I)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Solver for performing simulations using single-particle model with electrolyte dynamics.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classbattery_1_1_py_enhanced_s_p_solver_a9d1f8289edbd2d89d25abe3f5ce515c3}\index{battery.PyEnhancedSPSolver@{battery.PyEnhancedSPSolver}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!battery.PyEnhancedSPSolver@{battery.PyEnhancedSPSolver}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classbattery_1_1_py_enhanced_s_p_solver_a9d1f8289edbd2d89d25abe3f5ce515c3} 
+battery.\+Py\+Enhanced\+SPSolver.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1battery__components_1_1_py_battery_cell}{Py\+Battery\+Cell}}}]{b\+\_\+cell}{, }\item[{bool}]{isothermal}{, }\item[{bool}]{degradation}{, }\item[{str }]{electrode\+\_\+soc\+\_\+solver}{ = {\ttfamily \textquotesingle{}poly\textquotesingle{}}, }\item[{str }]{electrolyte\+\_\+conc\+\_\+solver\+\_\+type}{ = {\ttfamily "{}fvm"{}}}\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classbattery_1_1_py_s_p_solver}{battery.\+Py\+SPSolver}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbattery_1_1_py_enhanced_s_p_solver_afd81c9edb858cf10483358de7df0a81d}\index{battery.PyEnhancedSPSolver@{battery.PyEnhancedSPSolver}!\_custom\_cycler\_solve@{\_custom\_cycler\_solve}}
+\index{\_custom\_cycler\_solve@{\_custom\_cycler\_solve}!battery.PyEnhancedSPSolver@{battery.PyEnhancedSPSolver}}
+\doxysubsubsection{\texorpdfstring{\_custom\_cycler\_solve()}{\_custom\_cycler\_solve()}}
+{\footnotesize\ttfamily \label{classbattery_1_1_py_enhanced_s_p_solver_afd81c9edb858cf10483358de7df0a81d} 
+battery.\+Py\+Enhanced\+SPSolver.\+\_\+custom\+\_\+cycler\+\_\+solve (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_custom_cycler}{Py\+Custom\+Cycler}}}]{custom\+\_\+cycler\+\_\+instance}{, }\item[{str }]{sol\+\_\+name}{ = {\ttfamily None}, }\item[{str }]{save\+\_\+csv\+\_\+dir}{ = {\ttfamily None}, }\item[{bool }]{verbose}{ = {\ttfamily False}, }\item[{float }]{t\+\_\+increment}{ = {\ttfamily 0.1}, }\item[{str }]{termination\+\_\+criteria}{ = {\ttfamily \textquotesingle{}V\textquotesingle{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classbattery_1_1_py_s_p_solver}{battery.\+Py\+SPSolver}}.
+
+\Hypertarget{classbattery_1_1_py_enhanced_s_p_solver_a87e3ad5a1b0b856b8c0aeaa7c8a8c142}\index{battery.PyEnhancedSPSolver@{battery.PyEnhancedSPSolver}!\_cycler\_solve@{\_cycler\_solve}}
+\index{\_cycler\_solve@{\_cycler\_solve}!battery.PyEnhancedSPSolver@{battery.PyEnhancedSPSolver}}
+\doxysubsubsection{\texorpdfstring{\_cycler\_solve()}{\_cycler\_solve()}}
+{\footnotesize\ttfamily \label{classbattery_1_1_py_enhanced_s_p_solver_a87e3ad5a1b0b856b8c0aeaa7c8a8c142} 
+battery.\+Py\+Enhanced\+SPSolver.\+\_\+cycler\+\_\+solve (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_base_cycler}{Py\+Base\+Cycler}}}]{cycler}{, }\item[{str }]{sol\+\_\+name}{ = {\ttfamily None}, }\item[{str }]{save\+\_\+csv\+\_\+dir}{ = {\ttfamily None}, }\item[{bool }]{verbose}{ = {\ttfamily False}, }\item[{float }]{dt}{ = {\ttfamily 0.1}, }\item[{float }]{termination\+\_\+criteria}{ = {\ttfamily \textquotesingle{}V\textquotesingle{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classbattery_1_1_py_s_p_solver}{battery.\+Py\+SPSolver}}.
+
+\Hypertarget{classbattery_1_1_py_enhanced_s_p_solver_a3ed51aa70b3a46d36d42744081825477}\index{battery.PyEnhancedSPSolver@{battery.PyEnhancedSPSolver}!solve@{solve}}
+\index{solve@{solve}!battery.PyEnhancedSPSolver@{battery.PyEnhancedSPSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily \label{classbattery_1_1_py_enhanced_s_p_solver_a3ed51aa70b3a46d36d42744081825477} 
+ \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1solution_1_1_py_solution}{Py\+Solution}} battery.\+Py\+Enhanced\+SPSolver.\+solve (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_base_cycler}{Py\+Base\+Cycler}}}]{cycler}{, }\item[{Optional\mbox{[}str\mbox{]} }]{sol\+\_\+name}{ = {\ttfamily None}, }\item[{Optional\mbox{[}str\mbox{]} }]{save\+\_\+csv\+\_\+dir}{ = {\ttfamily None}, }\item[{bool }]{verbose}{ = {\ttfamily False}, }\item[{float }]{dt}{ = {\ttfamily 0.1}, }\item[{str }]{termination\+\_\+criteria}{ = {\ttfamily "{}V"{}}}\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classbattery_1_1_py_s_p_solver}{battery.\+Py\+SPSolver}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers/battery.\+py\end{DoxyCompactItemize}

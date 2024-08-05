@@ -1,0 +1,73 @@
+\doxysection{bmslogic.\+simulations.\+cell.\+models.\+Py\+ESC Class Reference}
+\hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c}{}\label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c}\index{bmslogic.simulations.cell.models.PyESC@{bmslogic.simulations.cell.models.PyESC}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c_a779b0fe2c86d921cceae9d6b22604518}\label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c_a779b0fe2c86d921cceae9d6b22604518} 
+int {\bfseries sign} (cls, Union\mbox{[}int, float\mbox{]} num)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c_a4caf505f3bdbe871601bad54380b7e1f}{s}} (cls, float i\+\_\+app, float s\+\_\+prev)
+\item 
+\mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c_a64e657210ec0fa0e7fac67227ea0bc4a}{soc\+\_\+next}} (cls, float dt, float i\+\_\+app, float SOC\+\_\+prev, float Q, float eta)
+\item 
+\mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c_afa146aebcba9607d908ecaceaba7bb48}{i\+\_\+\+R1\+\_\+next}} (cls, float dt, float i\+\_\+app, float i\+\_\+\+R1\+\_\+prev, float R1, float C1)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c_aa912958bfd49c584c062aec9f490c52f}\label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c_aa912958bfd49c584c062aec9f490c52f} 
+float {\bfseries h\+\_\+next} (cls, float dt, float i\+\_\+app, float eta, float gamma, float cap, float h\+\_\+prev)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c_ac94003b2c7c23c1591c82b18e311ff98}\label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c_ac94003b2c7c23c1591c82b18e311ff98} 
+float {\bfseries v} (cls, i\+\_\+app, float ocv, float R0, float R1, float i\+\_\+\+R1, float m\+\_\+0, float m, float h, float s\+\_\+prev)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Class oject contains the relevant functions to perform the Enhanched-self-correcting ECM model.
+Notes:
+    The discharge current is assumed to be positive values. Meanwhile, the charge current is negative by convention.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c_afa146aebcba9607d908ecaceaba7bb48}\index{bmslogic.simulations.cell.models.PyESC@{bmslogic.simulations.cell.models.PyESC}!i\_R1\_next@{i\_R1\_next}}
+\index{i\_R1\_next@{i\_R1\_next}!bmslogic.simulations.cell.models.PyESC@{bmslogic.simulations.cell.models.PyESC}}
+\doxysubsubsection{\texorpdfstring{i\_R1\_next()}{i\_R1\_next()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c_afa146aebcba9607d908ecaceaba7bb48} 
+bmslogic.\+simulations.\+cell.\+models.\+Py\+ESC.\+i\+\_\+\+R1\+\_\+next (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{dt}{, }\item[{float}]{i\+\_\+app}{, }\item[{float}]{i\+\_\+\+R1\+\_\+prev}{, }\item[{float}]{R1}{, }\item[{float}]{C1}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Measures the current through R1 (i_R1) at the current time step.
+:param dt: time difference between the current and the previous time step [s]
+:param i_app: applied current [A]
+:param i_R1_prev: current through the RC branch at the previous time step [A]
+:param R1: resistance of R1 [ohms]
+:param C1: capacitance of C1 [F]
+:return: current through the RC branch at the current time step
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c_a4caf505f3bdbe871601bad54380b7e1f}\index{bmslogic.simulations.cell.models.PyESC@{bmslogic.simulations.cell.models.PyESC}!s@{s}}
+\index{s@{s}!bmslogic.simulations.cell.models.PyESC@{bmslogic.simulations.cell.models.PyESC}}
+\doxysubsubsection{\texorpdfstring{s()}{s()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c_a4caf505f3bdbe871601bad54380b7e1f} 
+ float bmslogic.\+simulations.\+cell.\+models.\+Py\+ESC.\+s (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{i\+\_\+app}{, }\item[{float}]{s\+\_\+prev}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns the value for the instantaneous hysteresis
+:param i_app: Applied battery cell current [A]
+:return: value for the instantaneous hysteresis
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c_a64e657210ec0fa0e7fac67227ea0bc4a}\index{bmslogic.simulations.cell.models.PyESC@{bmslogic.simulations.cell.models.PyESC}!soc\_next@{soc\_next}}
+\index{soc\_next@{soc\_next}!bmslogic.simulations.cell.models.PyESC@{bmslogic.simulations.cell.models.PyESC}}
+\doxysubsubsection{\texorpdfstring{soc\_next()}{soc\_next()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c_a64e657210ec0fa0e7fac67227ea0bc4a} 
+bmslogic.\+simulations.\+cell.\+models.\+Py\+ESC.\+soc\+\_\+next (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{dt}{, }\item[{float}]{i\+\_\+app}{, }\item[{float}]{SOC\+\_\+prev}{, }\item[{float}]{Q}{, }\item[{float}]{eta}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This methods calculates the SOC at the next time-step
+:param dt: time difference between the current and previous time steps [s]
+:param i_app: Applied current [A]
+:param SOC_prev: SOC at the previous time step
+:param Q: battery cell capacity [Ahr]
+:param eta: Columbic efficiency
+:return: SOC at the current time step
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/models.\+py\end{DoxyCompactItemize}

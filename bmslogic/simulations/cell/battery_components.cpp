@@ -146,7 +146,7 @@ Electrolyte::Electrolyte(double conc_i, double L_i, double kappa_i, double i_eps
     brugg = brugg_i;
 }
 
-BatteryCell::BatteryCell(PElectrode i_elec_p, NElectrode i_elec_n, Electrolyte i_electrolyte, double i_rho, double i_Vol,
+BatteryCell::BatteryCell(PElectrode& i_elec_p, NElectrode& i_elec_n, Electrolyte& i_electrolyte, double i_rho, double i_Vol,
                          double i_C_p, double i_h, double i_A, double i_cap, double i_V_max, double i_V_min,
                          double i_R_cell) : elec_p(i_elec_p), elec_n(i_elec_n), electrolyte(i_electrolyte)
 {

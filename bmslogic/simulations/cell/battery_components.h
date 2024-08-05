@@ -147,7 +147,7 @@ private:
 class BatteryCell
 {
 public:
-    BatteryCell(PElectrode i_elec_p, NElectrode i_elec_n, Electrolyte i_electrolyte, double i_rho, double i_Vol,
+    BatteryCell(PElectrode &i_elec_p, NElectrode &i_elec_n, Electrolyte &i_electrolyte, double i_rho, double i_Vol,
                 double i_C_p, double i_h, double i_A, double i_cap, double i_V_max, double i_V_min, double i_R_cell);
     BatteryCell(double L_p, double A_p, double kappa_p, double epsilon_p, double max_conc_p, double R_p, double S_p,
                 double T_ref_p, double D_ref_p, double k_ref_p, double Ea_D_p, double Ea_R_p, double alpha_p,

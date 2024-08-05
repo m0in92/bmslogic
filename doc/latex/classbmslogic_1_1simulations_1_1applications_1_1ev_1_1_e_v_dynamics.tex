@@ -1,0 +1,183 @@
+\doxysection{bmslogic.\+simulations.\+applications.\+ev.\+EVDynamics Class Reference}
+\hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics}{}\label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics}\index{bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a09681163c988c3c1843eb42b694e954e}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v}{EV}} ev\+\_\+obj, \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1drivecycles_1_1_e_v_drive_cycle}{EVDrive\+Cycle}} drive\+\_\+cycle\+\_\+obj, \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1external__conditions_1_1_external_conditions}{External\+Conditions}} external\+\_\+condition\+\_\+obj)
+\item 
+np.\+ndarray \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a3eba44deeb6a082e560a953790a8f73d}{des\+\_\+speed}} (self)
+\item 
+\mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_ada995024f11e129a98b28a964b80f7be}{init\+\_\+cond}} (self)
+\item 
+\mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1sol_1_1_solution}{Solution}} \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_aa887623c810cb094bcbc5c9d7b4820bc}{create\+\_\+init\+\_\+arrays}} (self)
+\item 
+Callable\mbox{[}\mbox{[}$\,$\mbox{]}, \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1sol_1_1_solution}{Solution}}\mbox{]} \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a029b3278b374dba6f3752668bc8470f1}{simulate\+\_\+over\+\_\+all\+\_\+timesteps}} (func)
+\item 
+None \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a24722c0d25e6aa0168447274ac08a57b}{simulate}} (self, \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1sol_1_1_solution}{Solution}} sol, int k, float prev\+\_\+time, float prev\+\_\+speed, float prev\+\_\+motor\+\_\+speed, float prev\+\_\+distance, float prev\+\_\+\+SOC)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a2f870fe4451d5af42e3c621d544047ee}\label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a2f870fe4451d5af42e3c621d544047ee} 
+{\bfseries \+\_\+\+\_\+repr\+\_\+\+\_\+} (self)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a88b9a24dc751b04c019d6564689de100}\label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a88b9a24dc751b04c019d6564689de100} 
+{\bfseries \+\_\+\+\_\+str\+\_\+\+\_\+} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a7a28891d6224fddd2ea992b36478c29c}{desired\+\_\+acc}} (float desired\+\_\+speed, float prev\+\_\+speed, float current\+\_\+time, float prev\+\_\+time)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_aa5c4787fc34d27c5e285276fa756c9e2}{desired\+\_\+acc\+\_\+F}} (float equivalent\+\_\+mass, float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a7a28891d6224fddd2ea992b36478c29c}{desired\+\_\+acc}})
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a7002c7d5a19804ae105a1ca0dd245c9b}{aero\+\_\+F}} (float air\+\_\+density, float aero\+\_\+frontal\+\_\+area, float C\+\_\+d, float prev\+\_\+speed)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_aed47b9f8b59e5f9609df09bf3c78e70f}{roll\+\_\+grade\+\_\+F}} (float max\+\_\+veh\+\_\+mass, float gravity\+\_\+acc, float grade\+\_\+angle)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a738b7df06a7211401ace56295460ab53}\label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a738b7df06a7211401ace56295460ab53} 
+float {\bfseries demand\+\_\+torque} (float des\+\_\+acc\+\_\+F, float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a7002c7d5a19804ae105a1ca0dd245c9b}{aero\+\_\+F}}, float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_aed47b9f8b59e5f9609df09bf3c78e70f}{roll\+\_\+grade\+\_\+F}}, float road\+\_\+F, float wheel\+\_\+radius, float gear\+\_\+ratio)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a4417a58c398952463f2c3f19873ea6e8}\label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a4417a58c398952463f2c3f19873ea6e8} 
+{\bfseries EV}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a1b74a738bf3a9fc9987e1cbb99b0e15f}\label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a1b74a738bf3a9fc9987e1cbb99b0e15f} 
+{\bfseries Drive\+Cycle}
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_acabd30ee61fef447ecee3d13521de126}\label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_acabd30ee61fef447ecee3d13521de126} 
+{\bfseries Ext\+Cond}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}EVDynamics simulates the demanded power and current from the batter pack.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a09681163c988c3c1843eb42b694e954e}\index{bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a09681163c988c3c1843eb42b694e954e} 
+ None bmslogic.\+simulations.\+applications.\+ev.\+EVDynamics.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v}{EV}}}]{ev\+\_\+obj}{, }\item[{\mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1drivecycles_1_1_e_v_drive_cycle}{EVDrive\+Cycle}}}]{drive\+\_\+cycle\+\_\+obj}{, }\item[{\mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1external__conditions_1_1_external_conditions}{External\+Conditions}}}]{external\+\_\+condition\+\_\+obj}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}EVDynamics class constructor.
+:param ev_obj: (EV) EV class object that contains vehicle parameters.
+:param drive_cycle_obj: (DriveCycle) Drive cycle class object that contains all relevant drive cycle parameters.
+:param external_condition_obj: (ExternalConditions) ExternalConditions class object that contains all relevant
+external condition parameters.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a7002c7d5a19804ae105a1ca0dd245c9b}\index{bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}!aero\_F@{aero\_F}}
+\index{aero\_F@{aero\_F}!bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}}
+\doxysubsubsection{\texorpdfstring{aero\_F()}{aero\_F()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a7002c7d5a19804ae105a1ca0dd245c9b} 
+ float bmslogic.\+simulations.\+applications.\+ev.\+EVDynamics.\+aero\+\_\+F (\begin{DoxyParamCaption}\item[{float}]{air\+\_\+density}{, }\item[{float}]{aero\+\_\+frontal\+\_\+area}{, }\item[{float}]{C\+\_\+d}{, }\item[{float}]{prev\+\_\+speed}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyVerb}Calculates the aerodynamic drag in N.
+:param air_density: External air density, kg/m^3
+:param aero_frontal_area: Vehicle frontal area, m^2
+:param C_d: Drag coefficient, unit-;ess
+:param prev_speed: Speed at the previous time step, m/s
+:return: (float) aerodynamic drag, N
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_aa887623c810cb094bcbc5c9d7b4820bc}\index{bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}!create\_init\_arrays@{create\_init\_arrays}}
+\index{create\_init\_arrays@{create\_init\_arrays}!bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}}
+\doxysubsubsection{\texorpdfstring{create\_init\_arrays()}{create\_init\_arrays()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_aa887623c810cb094bcbc5c9d7b4820bc} 
+ \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1sol_1_1_solution}{Solution}} bmslogic.\+simulations.\+applications.\+ev.\+EVDynamics.\+create\+\_\+init\+\_\+arrays (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Create numpy arrays with zero elements of the desired sizes for all the simulation results. These simulation
+results are stored in the instance 'sol' of the Solution class.
+:return: (tuple) Solution object whose attributes are numpy arrays with zero elements (except for it's t (time)
+attribute).
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a3eba44deeb6a082e560a953790a8f73d}\index{bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}!des\_speed@{des\_speed}}
+\index{des\_speed@{des\_speed}!bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}}
+\doxysubsubsection{\texorpdfstring{des\_speed()}{des\_speed()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a3eba44deeb6a082e560a953790a8f73d} 
+ np.\+ndarray bmslogic.\+simulations.\+applications.\+ev.\+EVDynamics.\+des\+\_\+speed (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Desired vehicle speed in m/s.
+:return: (np.ndarray) Array of desired speed, m/s
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a7a28891d6224fddd2ea992b36478c29c}\index{bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}!desired\_acc@{desired\_acc}}
+\index{desired\_acc@{desired\_acc}!bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}}
+\doxysubsubsection{\texorpdfstring{desired\_acc()}{desired\_acc()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a7a28891d6224fddd2ea992b36478c29c} 
+ float bmslogic.\+simulations.\+applications.\+ev.\+EVDynamics.\+desired\+\_\+acc (\begin{DoxyParamCaption}\item[{float}]{desired\+\_\+speed}{, }\item[{float}]{prev\+\_\+speed}{, }\item[{float}]{current\+\_\+time}{, }\item[{float}]{prev\+\_\+time}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyVerb}Calculates and returns the desired acceleration, m/s^2.
+:param desired_speed: (float) desired speed, m/s
+:param prev_speed: (float) speed at the previous time step, m/s
+:param current_time: (float): time at the current time step, s
+:param prev_time: (float): time at the previous time step, s
+:return: (float) desired acceleration, m/s^2
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_aa5c4787fc34d27c5e285276fa756c9e2}\index{bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}!desired\_acc\_F@{desired\_acc\_F}}
+\index{desired\_acc\_F@{desired\_acc\_F}!bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}}
+\doxysubsubsection{\texorpdfstring{desired\_acc\_F()}{desired\_acc\_F()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_aa5c4787fc34d27c5e285276fa756c9e2} 
+ float bmslogic.\+simulations.\+applications.\+ev.\+EVDynamics.\+desired\+\_\+acc\+\_\+F (\begin{DoxyParamCaption}\item[{float}]{equivalent\+\_\+mass}{, }\item[{float}]{desired\+\_\+acc}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyVerb}Calculates the desired accelerating force in N.
+:param equivalent_mass: (float) Equivalent vehicle mass, kg
+:param desired_acc: (float) acceleration, m/s^2
+:return: (float) desired acceleration
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_ada995024f11e129a98b28a964b80f7be}\index{bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}!init\_cond@{init\_cond}}
+\index{init\_cond@{init\_cond}!bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}}
+\doxysubsubsection{\texorpdfstring{init\_cond()}{init\_cond()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_ada995024f11e129a98b28a964b80f7be} 
+bmslogic.\+simulations.\+applications.\+ev.\+EVDynamics.\+init\+\_\+cond (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Simulation initial conditions
+:return: (float) Returns the initial conditions of the relevant simulation variables.
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_aed47b9f8b59e5f9609df09bf3c78e70f}\index{bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}!roll\_grade\_F@{roll\_grade\_F}}
+\index{roll\_grade\_F@{roll\_grade\_F}!bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}}
+\doxysubsubsection{\texorpdfstring{roll\_grade\_F()}{roll\_grade\_F()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_aed47b9f8b59e5f9609df09bf3c78e70f} 
+ float bmslogic.\+simulations.\+applications.\+ev.\+EVDynamics.\+roll\+\_\+grade\+\_\+F (\begin{DoxyParamCaption}\item[{float}]{max\+\_\+veh\+\_\+mass}{, }\item[{float}]{gravity\+\_\+acc}{, }\item[{float}]{grade\+\_\+angle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyVerb}Calculates the rolling grade force.
+:param C_r: rolling coefficient, unit-less
+:param max_veh_mass: max. vehicle mass, kg
+:param gravity_acc: acceleration of gravity, 9.81 g/m^2
+:param grade_angle: grade_angle, rad
+:return:  (float) rolling grade force, N
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a24722c0d25e6aa0168447274ac08a57b}\index{bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}!simulate@{simulate}}
+\index{simulate@{simulate}!bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}}
+\doxysubsubsection{\texorpdfstring{simulate()}{simulate()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a24722c0d25e6aa0168447274ac08a57b} 
+ None bmslogic.\+simulations.\+applications.\+ev.\+EVDynamics.\+simulate (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1sol_1_1_solution}{Solution}}}]{sol}{, }\item[{int}]{k}{, }\item[{float}]{prev\+\_\+time}{, }\item[{float}]{prev\+\_\+speed}{, }\item[{float}]{prev\+\_\+motor\+\_\+speed}{, }\item[{float}]{prev\+\_\+distance}{, }\item[{float}]{prev\+\_\+\+SOC}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Performs vehicle dynamics simulation at a specific time step, k. It updates the Solution instance attributes
+at this time step, k.
+:param sol: Solution object that contains the all the simulation results in a arrays.
+:param k: time step
+:param prev_time: time at the previous time step
+:param prev_speed: speed at the previous time step
+:param prev_motor_speed: motor speed at the previous time step.
+:param prev_distance: distance at the previous time step.
+:param prev_SOC: SOC at the previous time step.
+:return: (None)
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a029b3278b374dba6f3752668bc8470f1}\index{bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}!simulate\_over\_all\_timesteps@{simulate\_over\_all\_timesteps}}
+\index{simulate\_over\_all\_timesteps@{simulate\_over\_all\_timesteps}!bmslogic.simulations.applications.ev.EVDynamics@{bmslogic.simulations.applications.ev.EVDynamics}}
+\doxysubsubsection{\texorpdfstring{simulate\_over\_all\_timesteps()}{simulate\_over\_all\_timesteps()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics_a029b3278b374dba6f3752668bc8470f1} 
+ Callable\mbox{[}\mbox{[}$\,$\mbox{]}, \mbox{\hyperlink{classbmslogic_1_1simulations_1_1applications_1_1sol_1_1_solution}{Solution}}\mbox{]} bmslogic.\+simulations.\+applications.\+ev.\+EVDynamics.\+simulate\+\_\+over\+\_\+all\+\_\+timesteps (\begin{DoxyParamCaption}\item[{}]{func}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Acts as a decorator function, whose wrapper function defines the initial conditions and performs simulation
+iterations over all time steps.
+:param func: (function type) simulation function
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/applications/ev.\+py\end{DoxyCompactItemize}

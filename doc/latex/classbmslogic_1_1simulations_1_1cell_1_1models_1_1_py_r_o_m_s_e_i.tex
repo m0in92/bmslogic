@@ -1,0 +1,105 @@
+\doxysection{bmslogic.\+simulations.\+cell.\+models.\+Py\+ROMSEI Class Reference}
+\hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i}{}\label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i}\index{bmslogic.simulations.cell.models.PyROMSEI@{bmslogic.simulations.cell.models.PyROMSEI}}
+Inheritance diagram for bmslogic.\+simulations.\+cell.\+models.\+Py\+ROMSEI\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_ad9e7393076d3e7bba16675f169390a48}{calc\+\_\+j\+\_\+0\+\_\+i}} (cls, float k, float c\+\_\+s\+\_\+max, float c\+\_\+e, float soc)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_af540207666e61f5e20130067aa550307}\label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_af540207666e61f5e20130067aa550307} 
+float {\bfseries calc\+\_\+j\+\_\+tot} (cls, float I, float S)
+\item 
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_a5d7e0cb5149d266be2d95ce713d6095b}\label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_a5d7e0cb5149d266be2d95ce713d6095b} 
+float {\bfseries calc\+\_\+j\+\_\+i} (cls, float j\+\_\+tot, float j\+\_\+s)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_a03fbdf16c01f39ea56e4332abccd0778}{calc\+\_\+eta\+\_\+n}} (cls, float temp, float j\+\_\+i, float j\+\_\+0\+\_\+i)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_a340007730c6d817e90fa3d9e041dd93a}{calc\+\_\+eta\+\_\+s}} (cls, float eta\+\_\+n, float ocp\+\_\+n, float ocp\+\_\+s)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_ae5370f14662ba5dc368527c038b39307}{calc\+\_\+j\+\_\+s}} (cls, float temp, float j\+\_\+0\+\_\+s, float eta\+\_\+s)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_ac7bff7cef157b0b9ae03766d65535e19}{flux\+\_\+to\+\_\+current}} (cls, float molar\+\_\+flux, float S)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}This class contains the equations for the reduced order SEI growth model as mentioned in ref [1], with slight
+modifications.
+
+Literature Reference:
+1. Randell et al. "Controls oriented reduced order modeling of solid-electrolyte interphase layer growth". 2012.
+Journal of Power Sources. Vol: 209. pgs: 282-288.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_a03fbdf16c01f39ea56e4332abccd0778}\index{bmslogic.simulations.cell.models.PyROMSEI@{bmslogic.simulations.cell.models.PyROMSEI}!calc\_eta\_n@{calc\_eta\_n}}
+\index{calc\_eta\_n@{calc\_eta\_n}!bmslogic.simulations.cell.models.PyROMSEI@{bmslogic.simulations.cell.models.PyROMSEI}}
+\doxysubsubsection{\texorpdfstring{calc\_eta\_n()}{calc\_eta\_n()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_a03fbdf16c01f39ea56e4332abccd0778} 
+ float bmslogic.\+simulations.\+cell.\+models.\+Py\+ROMSEI.\+calc\+\_\+eta\+\_\+n (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{temp}{, }\item[{float}]{j\+\_\+i}{, }\item[{float}]{j\+\_\+0\+\_\+i}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates and returns the surface over-potential [V] of the intercalation reaction.
+:param temp: Electrode temperature [K]
+:param j_i: intercalation flux [mol/m2/s]
+:param j_0_i: intercalation reaction exchange current [mol/m2/s]
+:return: (float) intercalation reaction surface over-potential [V]
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_a340007730c6d817e90fa3d9e041dd93a}\index{bmslogic.simulations.cell.models.PyROMSEI@{bmslogic.simulations.cell.models.PyROMSEI}!calc\_eta\_s@{calc\_eta\_s}}
+\index{calc\_eta\_s@{calc\_eta\_s}!bmslogic.simulations.cell.models.PyROMSEI@{bmslogic.simulations.cell.models.PyROMSEI}}
+\doxysubsubsection{\texorpdfstring{calc\_eta\_s()}{calc\_eta\_s()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_a340007730c6d817e90fa3d9e041dd93a} 
+ float bmslogic.\+simulations.\+cell.\+models.\+Py\+ROMSEI.\+calc\+\_\+eta\+\_\+s (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{eta\+\_\+n}{, }\item[{float}]{ocp\+\_\+n}{, }\item[{float}]{ocp\+\_\+s}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates and returns the side-reaction electrode surface over-potential [V]
+:param eta_n: intercalation reaction over-potential [V]
+:param ocp_n: open-circuit potential of the electrode [V
+:param ocp_s: reference potential of the SEI side reaction [V]
+:return:
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_ad9e7393076d3e7bba16675f169390a48}\index{bmslogic.simulations.cell.models.PyROMSEI@{bmslogic.simulations.cell.models.PyROMSEI}!calc\_j\_0\_i@{calc\_j\_0\_i}}
+\index{calc\_j\_0\_i@{calc\_j\_0\_i}!bmslogic.simulations.cell.models.PyROMSEI@{bmslogic.simulations.cell.models.PyROMSEI}}
+\doxysubsubsection{\texorpdfstring{calc\_j\_0\_i()}{calc\_j\_0\_i()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_ad9e7393076d3e7bba16675f169390a48} 
+ float bmslogic.\+simulations.\+cell.\+models.\+Py\+ROMSEI.\+calc\+\_\+j\+\_\+0\+\_\+i (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{k}{, }\item[{float}]{c\+\_\+s\+\_\+max}{, }\item[{float}]{c\+\_\+e}{, }\item[{float}]{soc}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates the exchange lithium ion flux density [mol/m2/s]
+:param k: rate of reaction at the negative electrode [m2.5/mol-0.5/s]
+:param c_s_max: max. lithium concentration at the negative electrode [mol/m3]
+:param c_e: electrolyte concentration [mol/m3]
+:param soc: negative electrode SOC
+:return: (float) exchange current density [mol/m2/s]
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_ae5370f14662ba5dc368527c038b39307}\index{bmslogic.simulations.cell.models.PyROMSEI@{bmslogic.simulations.cell.models.PyROMSEI}!calc\_j\_s@{calc\_j\_s}}
+\index{calc\_j\_s@{calc\_j\_s}!bmslogic.simulations.cell.models.PyROMSEI@{bmslogic.simulations.cell.models.PyROMSEI}}
+\doxysubsubsection{\texorpdfstring{calc\_j\_s()}{calc\_j\_s()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_ae5370f14662ba5dc368527c038b39307} 
+ float bmslogic.\+simulations.\+cell.\+models.\+Py\+ROMSEI.\+calc\+\_\+j\+\_\+s (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{temp}{, }\item[{float}]{j\+\_\+0\+\_\+s}{, }\item[{float}]{eta\+\_\+s}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates and returns the side-reaction flux [mol/m2/s]
+:param temp: Electrode temperature [K]
+:param j_0_s: side reaction exchange current density [mol/m2/s]
+:param eta_s: side reaction surface over-potential [V]
+:return: (float) side reaction flux [mol/m2/s]
+\end{DoxyVerb}
+ \Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_ac7bff7cef157b0b9ae03766d65535e19}\index{bmslogic.simulations.cell.models.PyROMSEI@{bmslogic.simulations.cell.models.PyROMSEI}!flux\_to\_current@{flux\_to\_current}}
+\index{flux\_to\_current@{flux\_to\_current}!bmslogic.simulations.cell.models.PyROMSEI@{bmslogic.simulations.cell.models.PyROMSEI}}
+\doxysubsubsection{\texorpdfstring{flux\_to\_current()}{flux\_to\_current()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_ac7bff7cef157b0b9ae03766d65535e19} 
+ float bmslogic.\+simulations.\+cell.\+models.\+Py\+ROMSEI.\+flux\+\_\+to\+\_\+current (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{molar\+\_\+flux}{, }\item[{float}]{S}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Converts molar flux [mol/m2/s] to current [A].
+:param molar_flux: molar lithium-ion flux [mol/m2/s]
+:param S: (float) electrode electrochemically active area [m2]
+:return: current [A]
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/models.\+py\end{DoxyCompactItemize}

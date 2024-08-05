@@ -1,0 +1,103 @@
+\doxysection{Interpolated\+Custom\+Cycler Class Reference}
+\hypertarget{class_interpolated_custom_cycler}{}\label{class_interpolated_custom_cycler}\index{InterpolatedCustomCycler@{InterpolatedCustomCycler}}
+
+
+Creates a cycler class whose time and current array values have been filled through interpolation. THIS CLASS HAS VERY HIGH COMPUTATIONAL TIMES AND IT IS RECOMMENDED TO NOT USE IT! USE THE CYCLER IN PYCYCLER INSTEAD.  
+
+
+
+
+{\ttfamily \#include $<$cyclers.\+h$>$}
+
+Inheritance diagram for Interpolated\+Custom\+Cycler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_interpolated_custom_cycler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_interpolated_custom_cycler_ad3bf421d8ffa0d5a55c570aabb2060c9}\label{class_interpolated_custom_cycler_ad3bf421d8ffa0d5a55c570aabb2060c9} 
+{\bfseries Interpolated\+Custom\+Cycler} (std\+::vector$<$ double $>$ i\+\_\+t\+\_\+exp, std\+::vector$<$ double $>$ i\+\_\+\+I\+\_\+exp, double dt, double V\+\_\+min, double V\+\_\+max, double soc\+\_\+min, double soc\+\_\+max, double soc)
+\item 
+\Hypertarget{class_interpolated_custom_cycler_a8fc12b4305e827ce32e3468bd25868e4}\label{class_interpolated_custom_cycler_a8fc12b4305e827ce32e3468bd25868e4} 
+std\+::vector$<$ double $>$ {\bfseries get\+\_\+t\+\_\+vector} ()
+\item 
+\Hypertarget{class_interpolated_custom_cycler_aadb2d551c2ac6dfad5f09e0d4592b579}\label{class_interpolated_custom_cycler_aadb2d551c2ac6dfad5f09e0d4592b579} 
+std\+::vector$<$ double $>$ {\bfseries get\+\_\+current\+\_\+vector} ()
+\item 
+\Hypertarget{class_interpolated_custom_cycler_a827d8a348a6e3edb7d42a83f3fec76aa}\label{class_interpolated_custom_cycler_a827d8a348a6e3edb7d42a83f3fec76aa} 
+void {\bfseries set\+\_\+t\+\_\+vector} (std\+::vector$<$ double $>$ \&t\+\_\+vector\+\_\+new)
+\item 
+\Hypertarget{class_interpolated_custom_cycler_a14934c99260e25603c72c96c61e27c4d}\label{class_interpolated_custom_cycler_a14934c99260e25603c72c96c61e27c4d} 
+void {\bfseries set\+\_\+current\+\_\+vector} (std\+::vector$<$ double $>$ \&current\+\_\+vector\+\_\+new)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_base_cycler}{Base\+Cycler}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Base\+Cycler} ()
+\begin{DoxyCompactList}\small\item\em constructor for the \doxylink{class_base_cycler}{Base\+Cycler}. Essentially the typical LIB parameters are initialized. \end{DoxyCompactList}\item 
+double {\bfseries get\+\_\+time\+\_\+elapsed} ()
+\item 
+double {\bfseries get\+\_\+\+V\+\_\+min} ()
+\item 
+double {\bfseries get\+\_\+\+V\+\_\+max} ()
+\item 
+double {\bfseries get\+\_\+rest\+\_\+time} ()
+\item 
+int {\bfseries get\+\_\+num\+\_\+cycles} ()
+\item 
+void {\bfseries set\+\_\+time\+\_\+elapsed} (double time\+\_\+elapsed\+\_\+new)
+\item 
+void {\bfseries set\+\_\+\+V\+\_\+min} (double V\+\_\+min\+\_\+new)
+\item 
+void {\bfseries set\+\_\+\+V\+\_\+max} (double \&V\+\_\+max\+\_\+new)
+\item 
+void {\bfseries set\+\_\+rest\+\_\+time} (double \&rest\+\_\+time\+\_\+new)
+\item 
+void {\bfseries set\+\_\+num\+\_\+cycles} (int \&num\+\_\+cycles\+\_\+new)
+\item 
+virtual double \mbox{\hyperlink{class_base_cycler_a1c0686132a51e7355e9818cc63320ab3}{get\+\_\+current}} (std\+::string cycling\+\_\+step, int time\+\_\+step)
+\begin{DoxyCompactList}\small\item\em method to get the current during the battery cycling steps. \end{DoxyCompactList}\item 
+void {\bfseries reset\+\_\+time\+\_\+elapsed} ()
+\begin{DoxyCompactList}\small\item\em resets the time\+\_\+elapsed to zero. Useful when subjecting an already cycled \doxylink{class_base_cycler}{Base\+Cycler} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{class_base_cycler}{Base\+Cycler}}}
+\begin{DoxyCompactItemize}
+\item 
+double {\bfseries time\+\_\+elapsed} = 0.\+0
+\item 
+double {\bfseries SOC\+\_\+\+LIB}
+\item 
+double {\bfseries SOC\+\_\+\+LIB\+\_\+min}
+\item 
+double {\bfseries SOC\+\_\+\+LIB\+\_\+max}
+\item 
+double {\bfseries V\+\_\+min}
+\item 
+double {\bfseries V\+\_\+max}
+\item 
+double {\bfseries discharge\+\_\+current}
+\item 
+double {\bfseries charge\+\_\+current}
+\item 
+double {\bfseries rest\+\_\+time}
+\item 
+int {\bfseries num\+\_\+cycles}
+\item 
+std\+::vector$<$ double $>$ {\bfseries m\+\_\+t\+\_\+vector}
+\item 
+std\+::vector$<$ double $>$ {\bfseries m\+\_\+current\+\_\+vector}
+\item 
+std\+::vector$<$ std\+::string $>$ {\bfseries cycle\+\_\+steps}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Creates a cycler class whose time and current array values have been filled through interpolation. THIS CLASS HAS VERY HIGH COMPUTATIONAL TIMES AND IT IS RECOMMENDED TO NOT USE IT! USE THE CYCLER IN PYCYCLER INSTEAD. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{cyclers_8h}{cyclers.\+h}}\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{cyclers_8cpp}{cyclers.\+cpp}}\end{DoxyCompactItemize}

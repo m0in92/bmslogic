@@ -1,0 +1,357 @@
+\doxysection{solvers.\+h}
+\hypertarget{solvers_8h_source}{}\label{solvers_8h_source}\index{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/solvers.h@{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/solvers.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SPCPP\_PROJECT\_SOLVERS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SPCPP\_PROJECT\_SOLVERS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{owl_8h}{extern/owl.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{battery__components_8h}{battery\_components.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{cyclers_8h}{cyclers.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{solution_8h}{solution.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{coords_8h}{coords.h}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{models_8h}{models.h}}"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_insufficient_e_s_p_m_parameters}{InsufficientESPMParameters}}\ :\ \textcolor{keyword}{public}\ std::exception}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *what()}
+\DoxyCodeLine{00019\ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Check\ electrolyte\ parameters.\ Insufficient\ Electrolyte\ parameters\ for\ enhanced\ single\ particle\ model\ simulation."{}};}
+\DoxyCodeLine{00021\ \ \ \ \ \}}
+\DoxyCodeLine{00022\ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_base_e_c_m_solver}{BaseECMSolver}}}
+\DoxyCodeLine{00031\ \{}
+\DoxyCodeLine{00032\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{class_base_e_c_m_solver}{BaseECMSolver}}(\mbox{\hyperlink{class_e_c_m_battery_cell}{ECMBatteryCell}}\ i\_b\_cell,\ \textcolor{keywordtype}{bool}\ i\_isothermal)\ :\ m\_b\_cell(i\_b\_cell),\ m\_isothermal(i\_isothermal)\ \{\}}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_base_e_c_m_solver}{\string~BaseECMSolver}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{class_e_c_m_battery_cell}{ECMBatteryCell}}\ m\_b\_cell;}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_isothermal;}
+\DoxyCodeLine{00039\ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_e_s_c_d_t_solver}{ESCDTSolver}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_base_e_c_m_solver}{BaseECMSolver}}}
+\DoxyCodeLine{00046\ \{}
+\DoxyCodeLine{00047\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{class_e_s_c_d_t_solver}{ESCDTSolver}}(\mbox{\hyperlink{class_e_c_m_battery_cell}{ECMBatteryCell}}\ i\_b\_cell,\ \textcolor{keywordtype}{bool}\ i\_isothermal)\ :\ \mbox{\hyperlink{class_base_e_c_m_solver}{BaseECMSolver}}(i\_b\_cell,\ i\_isothermal)\ \{\}}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{class_e_s_c_d_t_solver}{\string~ESCDTSolver}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{comment}{//\ methods\ for\ calculations}}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{class_e_c_m_solution}{ECMSolution}}\ solve(\mbox{\hyperlink{class_base_cycler}{BaseCycler}}\ cycler,\ \textcolor{keywordtype}{double}\ dt);}
+\DoxyCodeLine{00053\ \};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_r_o_m_s_e_i_solver}{ROMSEISolver}}}
+\DoxyCodeLine{00057\ \{}
+\DoxyCodeLine{00058\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{class_r_o_m_s_e_i_solver}{ROMSEISolver}}(\textcolor{keywordtype}{double}\ i\_k,\ \textcolor{keywordtype}{double}\ i\_c\_e,\ \textcolor{keywordtype}{double}\ i\_S,\ \textcolor{keywordtype}{double}\ i\_c\_s\_max,\ \textcolor{keywordtype}{double}\ i\_U\_s,\ \textcolor{keywordtype}{double}\ i\_j\_0\_s,\ \textcolor{keywordtype}{double}\ i\_A,}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ i\_MW\_SEI,\ \textcolor{keywordtype}{double}\ i\_rho,\ \textcolor{keywordtype}{double}\ i\_kappa);}
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{class_r_o_m_s_e_i_solver}{\string~ROMSEISolver}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{comment}{//\ getters}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_k()\ \{\ \textcolor{keywordflow}{return}\ m\_k;\ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_c\_e()\ \{\ \textcolor{keywordflow}{return}\ m\_c\_e;\ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_S()\ \{\ \textcolor{keywordflow}{return}\ m\_S;\ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_c\_s\_max()\ \{\ \textcolor{keywordflow}{return}\ m\_c\_s\_max;\ \}}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_U\_s()\ \{\ \textcolor{keywordflow}{return}\ m\_U\_s;\ \}}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_j\_0\_s()\ \{\ \textcolor{keywordflow}{return}\ m\_j\_0\_s;\ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_A()\ \{\ \textcolor{keywordflow}{return}\ m\_A;\ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_MW()\ \{\ \textcolor{keywordflow}{return}\ m\_MW\_SEI;\ \}}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_rho()\ \{\ \textcolor{keywordflow}{return}\ m\_rho;\ \}}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_kappa()\ \{\ \textcolor{keywordflow}{return}\ m\_kappa;\ \}}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_cumulative\_j\_s()\ \{\ \textcolor{keywordflow}{return}\ m\_cumulative\_j\_s;\ \}}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_L\_SEI()\ \{\ \textcolor{keywordflow}{return}\ m\_L\_SEI;\ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{comment}{//\ calculation\ methods}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{double}\ solve\_current(\textcolor{keywordtype}{double}\ soc\_n,\ \textcolor{keywordtype}{double}\ ocp\_n,\ \textcolor{keywordtype}{double}\ temp,\ \textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ relative\_tolerance,\ \textcolor{keywordtype}{int}\ max\_iter);}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{double}\ solve\_delta\_L(\textcolor{keywordtype}{double}\ j\_s,\ \textcolor{keywordtype}{double}\ dt);}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ update\_L(\textcolor{keywordtype}{double}\ j\_s,\ \textcolor{keywordtype}{double}\ dt)\ \{\ m\_L\_SEI\ +=\ solve\_delta\_L(j\_s,\ dt);\ \}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_k;\ \ \ \ \ \ \ \textcolor{comment}{//\ rate\ of\ reaction\ at\ the\ negative\ electrode\ [m2.5/mol0.5/s]}}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_c\_e;\ \ \ \ \ \textcolor{comment}{//\ electrolyte\ conc.\ [mol/m3]}}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_S;\ \ \ \ \ \ \ \textcolor{comment}{//\ electrode\ electrochemical\ area\ [mol/m2]}}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_c\_s\_max;\ \textcolor{comment}{//\ max.\ electrode\ conc.\ [mol/m3]}}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_U\_s;\ \ \ \ \ \textcolor{comment}{//\ side-\/reaction\ open-\/circuit\ potential\ [V]}}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_j\_0\_s;\ \ \ \textcolor{comment}{//\ exchange\ current\ density\ of\ the\ side\ reaction\ [mol/m2/s]}}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_A;\ \ \ \ \ \ \ \textcolor{comment}{//\ electrode\ Area\ [m2]}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_MW\_SEI;\ \ \textcolor{comment}{//\ molar\ weight\ of\ SEI\ [g/mol]}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_rho;\ \ \ \ \ \textcolor{comment}{//\ SEI\ density\ [g/m3]}}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_kappa;\ \ \ \textcolor{comment}{//\ SEI\ conductivity\ [S/m]}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_j\_s\ =\ 0.0;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ side-\/reaction\ molar\ flux\ [mol/m2/s]}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_cumulative\_j\_s\ =\ 0.0;\ \textcolor{comment}{//\ cumlative\ side\ reaction\ flux\ [mol/m2/s]}}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_L\_SEI\ =\ 0.0;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ represents\ the\ SEI\ thickness\ [m]}}
+\DoxyCodeLine{00097\ \};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00100\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_lumped_thermal_solver}{LumpedThermalSolver}}}
+\DoxyCodeLine{00101\ \{}
+\DoxyCodeLine{00102\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{class_lumped_thermal_solver}{LumpedThermalSolver}}(\textcolor{keywordtype}{double}\ i\_h,\ \textcolor{keywordtype}{double}\ i\_A,\ \textcolor{keywordtype}{double}\ i\_rho,\ \textcolor{keywordtype}{double}\ i\_vol,\ \textcolor{keywordtype}{double}\ i\_C\_p,\ \textcolor{keywordtype}{double}\ i\_temp\_init);}
+\DoxyCodeLine{00104\ \ \ \ \ \mbox{\hyperlink{class_lumped_thermal_solver}{\string~LumpedThermalSolver}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{comment}{//\ Calculation\ methods\ below}}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{double}\ reversible\_heat(\textcolor{keywordtype}{double}\ dOCPdT\_p,\ \textcolor{keywordtype}{double}\ dOCPdT\_n,\ \textcolor{keywordtype}{double}\ I,\ \textcolor{keywordtype}{double}\ T);}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{double}\ irreversible\_heat(\textcolor{keywordtype}{double}\ OCP\_p,\ \textcolor{keywordtype}{double}\ OCP\_n,\ \textcolor{keywordtype}{double}\ I,\ \textcolor{keywordtype}{double}\ V);}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{double}\ heat\_transfer(\textcolor{keywordtype}{double}\ T,\ \textcolor{keywordtype}{double}\ T\_amb);}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{double}\ solve\_temp(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ t\_prev,\ \textcolor{keywordtype}{double}\ I,\ \textcolor{keywordtype}{double}\ V,\ \textcolor{keywordtype}{double}\ temp\_amb,}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ OCP\_p,\ \textcolor{keywordtype}{double}\ OCP\_n,\ \textcolor{keywordtype}{double}\ dOCPdT\_p,\ \textcolor{keywordtype}{double}\ dOCPdT\_n);}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{comment}{//\ getters}}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_temp\_init()\ \{\ \textcolor{keywordflow}{return}\ m\_temp\_init;\ \}}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_temp()\ \{\ \textcolor{keywordflow}{return}\ m\_temp;\ \}}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_temp\_prev()\ \{\ \textcolor{keywordflow}{return}\ m\_temp\_prev;\ \}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_temp\_init;}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_temp;}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_temp\_prev;}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_h;}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_A;}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_rho;}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_vol;}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_C\_p;}
+\DoxyCodeLine{00126\ \};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00133\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_base_conc_solver}{BaseConcSolver}}}
+\DoxyCodeLine{00134\ \{}
+\DoxyCodeLine{00135\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_base_conc_solver}{BaseConcSolver}}(\textcolor{keywordtype}{char}\ electrode\_type);}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_base_conc_solver}{\string~BaseConcSolver}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{comment}{//\ getter\ functions}}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{char}\ \&get\_electrodeType()\ \{\ \textcolor{keywordflow}{return}\ m\_electrode\_type;\ \}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{char}\ m\_electrode\_type;}
+\DoxyCodeLine{00144\ \};}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_polynomial_approx}{PolynomialApprox}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_base_conc_solver}{BaseConcSolver}}}
+\DoxyCodeLine{00147\ \{}
+\DoxyCodeLine{00148\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00149\ \ \ \ \ \mbox{\hyperlink{class_polynomial_approx}{PolynomialApprox}}(\textcolor{keywordtype}{char}\ electrodeType,\ \textcolor{keywordtype}{double}\ i\_c\_init,\ std::string\ type);}
+\DoxyCodeLine{00150\ \ \ \ \ \mbox{\hyperlink{class_polynomial_approx}{\string~PolynomialApprox}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{comment}{//\ getter\ functions}}
+\DoxyCodeLine{00152\ \ \ \ \ std::string\ get\_solver\_type()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_type;\ \}}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_c\_s\_avg()\ \{\ \textcolor{keywordflow}{return}\ m\_c\_s\_avg\_prev;\ \}}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{double}\ \&get\_c\_surf()\ \{\ \textcolor{keywordflow}{return}\ m\_c\_surf;\ \}}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_x\_surf(\textcolor{keywordtype}{double}\ c\_s\_max)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_c\_surf\ /\ c\_s\_max;\ \}}
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{comment}{//\ setters}}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_c\_s\_avg(\textcolor{keywordtype}{double}\ i\_c\_s\_avg)\ \{\ m\_c\_s\_avg\_prev\ =\ i\_c\_s\_avg;\ \}}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_q(\textcolor{keywordtype}{double}\ i\_q)\ \{\ m\_q\ =\ i\_q;\ \}}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_c\_surf(\textcolor{keywordtype}{double}\ i\_c\_surf,\ \textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ t\_prev,\ \textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{double}\ D);}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordtype}{void}\ just\_set\_c\_surf(\textcolor{keywordtype}{double}\ i\_c\_surf)\ \{\ m\_c\_surf\ =\ i\_c\_surf;\ \}}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{comment}{//\ helper\ functions}}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_solve\_c\_s\_avg(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ t\_prev,\ \textcolor{keywordtype}{double}\ j,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ D)\ \{\ \textcolor{keywordflow}{return}\ solve\_c\_s\_avg(dt,\ t\_prev,\ j,\ R,\ D);\ \}}
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_solve\_q(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ t\_prev,\ \textcolor{keywordtype}{double}\ j,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ D)\ \{\ \textcolor{keywordflow}{return}\ solve\_q(dt,\ t\_prev,\ j,\ R,\ D);\ \}}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_polynomial_approx_aab86e7425ed0273d5ead57e4e0f55e1c}{solve\_without\_update}}(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ t\_prev,\ \textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{double}\ D);}
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordtype}{void}\ solve(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ t\_prev,\ \textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{double}\ D);}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00168\ \ \ \ \ std::string\ m\_type;}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_c\_s\_avg\_prev;}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_c\_surf;}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_q;\ \textcolor{comment}{//\ used\ for\ higher\ order\ approximations}}
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{comment}{//\ helper\ funcs}}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordtype}{double}\ solve\_c\_s\_avg(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ t\_prev,\ \textcolor{keywordtype}{double}\ j,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ D);}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordtype}{double}\ solve\_q(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ t\_prev,\ \textcolor{keywordtype}{double}\ j,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ D);}
+\DoxyCodeLine{00175\ \};}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00196\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_eigen_solver}{EigenSolver}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_base_conc_solver}{BaseConcSolver}}}
+\DoxyCodeLine{00197\ \{}
+\DoxyCodeLine{00198\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00199\ \ \ \ \ \mbox{\hyperlink{class_eigen_solver}{EigenSolver}}(\textcolor{keywordtype}{char}\ i\_electrode\_type,\ \textcolor{keywordtype}{double}\ i\_soc\_init,\ \textcolor{keywordtype}{int}\ i\_num\_roots);}
+\DoxyCodeLine{00200\ \ \ \ \ \mbox{\hyperlink{class_eigen_solver}{\string~EigenSolver}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{comment}{//\ getters}}
+\DoxyCodeLine{00202\ \ \ \ \ std::vector<double>\ get\_roots()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_roots;\ \}}
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_integ\_term()\ \{\ \textcolor{keywordflow}{return}\ m\_integ\_term;\ \}}
+\DoxyCodeLine{00204\ \ \ \ \ std::vector<double>\ get\_vec\_u\_k()\ \{\ \textcolor{keywordflow}{return}\ m\_vec\_u\_k;\ \}}
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{comment}{//\ calculations}}
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keywordtype}{double}\ j\_scaled(\textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{double}\ D\_s,\ \textcolor{keywordtype}{double}\ c\_s\_max);}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_eigen_solver_aad7e83f8ff60d84166f9566614dd019c}{update\_integ\_term}}(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{double}\ D\_s,\ \textcolor{keywordtype}{double}\ c\_s\_max);}
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keywordtype}{double}\ du\_kdt(\textcolor{keywordtype}{double}\ root,\ \textcolor{keywordtype}{double}\ D,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ scaled\_j,\ \textcolor{keywordtype}{double}\ t,\ \textcolor{keywordtype}{double}\ u);}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordtype}{double}\ solve\_u\_k(\textcolor{keywordtype}{double}\ roots,\ \textcolor{keywordtype}{double}\ t\_prev,\ \textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ u\_k\_prev,\ \textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{double}\ D\_s,\ \textcolor{keywordtype}{double}\ c\_s\_max);}
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keywordtype}{void}\ update\_vec\_u\_k(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ t\_prev,\ \textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{double}\ D\_s,\ \textcolor{keywordtype}{double}\ c\_s\_max);}
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_summation\_term(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ t\_prev,\ \textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{double}\ D\_s,\ \textcolor{keywordtype}{double}\ c\_s\_max);}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keywordtype}{double}\ solve(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ t\_prev,\ \textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{double}\ D\_s,\ \textcolor{keywordtype}{double}\ c\_s\_max);}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keywordtype}{char}\ m\_electrode\_type;}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_num\_roots;}
+\DoxyCodeLine{00217\ \ \ \ \ \mbox{\hyperlink{class_o_w_l_1_1_matrix_x_d}{OWL::MatrixXD}}\ m\_lambda\_bounds;}
+\DoxyCodeLine{00218\ \ \ \ \ std::vector<double>\ m\_roots;}
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_soc\_init;}
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_integ\_term;}
+\DoxyCodeLine{00221\ \ \ \ \ std::vector<double>\ m\_vec\_u\_k;}
+\DoxyCodeLine{00222\ \};}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \textcolor{keywordtype}{double}\ lambda\_function(\textcolor{keywordtype}{double}\ lambda\_k);}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00230\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_c_n_solver}{CNSolver}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_base_conc_solver}{BaseConcSolver}}}
+\DoxyCodeLine{00231\ \{}
+\DoxyCodeLine{00232\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00233\ \ \ \ \ \mbox{\hyperlink{class_c_n_solver}{CNSolver}}(\textcolor{keywordtype}{double}\ i\_c\_init,\ \textcolor{keywordtype}{char}\ i\_electrode\_type,\ \textcolor{keywordtype}{int}\ i\_spatial\_grid\_points);}
+\DoxyCodeLine{00234\ \ \ \ \ \mbox{\hyperlink{class_c_n_solver}{\string~CNSolver}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{comment}{//\ getter\ functions}}
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{keywordtype}{char}\ get\_electrode\_type()\ \{\ \textcolor{keywordflow}{return}\ m\_electrode\_type;\ \}}
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keywordtype}{int}\ get\_spatial\_pts()\ \{\ \textcolor{keywordflow}{return}\ m\_K;\ \}}
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_c\_s\_surf()\ \{\ \textcolor{keywordflow}{return}\ m\_c\_prev[m\_c\_prev.size()\ -\/\ 1];\ \}}
+\DoxyCodeLine{00240\ \ \ \ \ std::vector<double>\ get\_c\_prev()\ \{\ \textcolor{keywordflow}{return}\ m\_c\_prev;\ \}}
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{comment}{//\ double\ get\_c\_surf()\ \{\ return\ m\_c\_surf;\ \}}}
+\DoxyCodeLine{00242\ \ \ \ \ std::vector<double>\ get\_array\_R(\textcolor{keywordtype}{double}\ R)\ \{\ \textcolor{keywordflow}{return}\ array\_R(R);\ \}}
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_dr(\textcolor{keywordtype}{double}\ R)\ \{\ \textcolor{keywordflow}{return}\ dr(R);\ \}}
+\DoxyCodeLine{00244\ \ \ \ \ std::vector<double>\ get\_diag\_elements(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ D)\ \{\ \textcolor{keywordflow}{return}\ LHS\_diag\_elements(dt,\ R,\ D);\ \}}
+\DoxyCodeLine{00245\ \ \ \ \ std::vector<double>\ get\_l\_diag\_elements(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ D)\ \{\ \textcolor{keywordflow}{return}\ LHS\_lower\_diag\_elements(dt,\ R,\ D);\ \}}
+\DoxyCodeLine{00246\ \ \ \ \ std::vector<double>\ get\_u\_diag\_elements(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ D)\ \{\ \textcolor{keywordflow}{return}\ LHS\_upper\_diag\_elements(dt,\ R,\ D);\ \}}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \ \ \textcolor{comment}{//\ calculation\ functions}}
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordtype}{double}\ calc\_A(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ D)\ \{\ \textcolor{keywordflow}{return}\ A(dt,\ R,\ D);\ \}}
+\DoxyCodeLine{00250\ \ \ \ \ \textcolor{keywordtype}{double}\ calc\_B(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ D)\ \{\ \textcolor{keywordflow}{return}\ B(dt,\ R,\ D);\ \}}
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{keywordtype}{void}\ solve(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{double}\ D);}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00253\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00254\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_K;}
+\DoxyCodeLine{00255\ \ \ \ \ std::vector<double>\ m\_c\_prev;}
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_c\_surf;}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordtype}{double}\ dr(\textcolor{keywordtype}{double}\ R)\ \{\ \textcolor{keywordflow}{return}\ R\ /\ m\_K;\ \};}
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keywordtype}{double}\ A(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ D)\ \{\ \textcolor{keywordflow}{return}\ dt\ *\ D\ /\ std::pow(dr(R),\ 2);\ \}}
+\DoxyCodeLine{00260\ \ \ \ \ \textcolor{keywordtype}{double}\ B(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ D)\ \{\ \textcolor{keywordflow}{return}\ dt\ *\ D\ /\ (2\ *\ dr(R));\ \};}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \ \ \ \ std::vector<double>\ array\_R(\textcolor{keywordtype}{double}\ R);}
+\DoxyCodeLine{00263\ \ \ \ \ std::vector<double>\ LHS\_diag\_elements(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ D);}
+\DoxyCodeLine{00264\ \ \ \ \ std::vector<double>\ LHS\_lower\_diag\_elements(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ D);}
+\DoxyCodeLine{00265\ \ \ \ \ std::vector<double>\ LHS\_upper\_diag\_elements(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ D);}
+\DoxyCodeLine{00266\ \ \ \ \ std::vector<double>\ RHS\_vector(\textcolor{keywordtype}{double}\ j,\ \textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ R,\ \textcolor{keywordtype}{double}\ D);}
+\DoxyCodeLine{00267\ \};}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00270\ \textcolor{comment}{\ *\ Lithium-\/Ion\ Concentration\ Solver\ in\ the\ Electrolyte}}
+\DoxyCodeLine{00271\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00272\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_electrolyte_f_v_m_solver}{ElectrolyteFVMSolver}}}
+\DoxyCodeLine{00273\ \{}
+\DoxyCodeLine{00274\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00275\ \ \ \ \ \mbox{\hyperlink{class_electrolyte_f_v_m_solver}{ElectrolyteFVMSolver}}(\mbox{\hyperlink{class_electrolyte_f_v_m_coordinates}{ElectrolyteFVMCoordinates}}\ i\_coords,\ \textcolor{keywordtype}{double}\ i\_c\_e\_init,\ \textcolor{keywordtype}{double}\ i\_t\_c,}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ i\_epsilon\_e\_n,\ \textcolor{keywordtype}{double}\ i\_epsilon\_e\_sep,\ \textcolor{keywordtype}{double}\ i\_epsilon\_e\_p,}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ i\_a\_s\_n,\ \textcolor{keywordtype}{double}\ i\_a\_s\_p,}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ i\_D\_e,\ \textcolor{keywordtype}{double}\ i\_brugg);}
+\DoxyCodeLine{00279\ \ \ \ \ \mbox{\hyperlink{class_electrolyte_f_v_m_solver}{\string~ElectrolyteFVMSolver}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \ \ \ \ \textcolor{comment}{//\ getter\ functions}}
+\DoxyCodeLine{00282\ \ \ \ \ \mbox{\hyperlink{class_electrolyte_f_v_m_coordinates}{ElectrolyteFVMCoordinates}}\ get\_coords()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_coords;\ \}}
+\DoxyCodeLine{00283\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_t\_c()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_t\_c;\ \}}
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_c\_e\_init()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_c\_e\_init;\ \}}
+\DoxyCodeLine{00285\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_epsilon\_e\_n()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_epsilon\_e\_n;\ \}}
+\DoxyCodeLine{00286\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_epsilon\_e\_sep()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_epsilon\_e\_sep;\ \}}
+\DoxyCodeLine{00287\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_epsilon\_e\_p()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_epsilon\_e\_p;\ \}}
+\DoxyCodeLine{00288\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_a\_s\_n()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_a\_s\_n;\ \}}
+\DoxyCodeLine{00289\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_a\_s\_p()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_a\_s\_p;\ \}}
+\DoxyCodeLine{00290\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_D\_e()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_D\_e;\ \}}
+\DoxyCodeLine{00291\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_brugg()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_brugg;\ \}}
+\DoxyCodeLine{00292\ \ \ \ \ std::vector<double>\ get\_vector\_c\_e()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_vector\_c\_e;\ \}}
+\DoxyCodeLine{00293\ \ \ \ \ std::vector<double>\ get\_vector\_a\_s()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_vector\_a\_s;\ \}}
+\DoxyCodeLine{00294\ \ \ \ \ std::vector<double>\ get\_vector\_D\_eff()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_vector\_D\_eff;\ \}}
+\DoxyCodeLine{00295\ \ \ \ \ std::vector<double>\ get\_vector\_epsilon\_e()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_vector\_epsilon\_e;\ \}}
+\DoxyCodeLine{00296\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\ get\_calc\_lower\_diag(\textcolor{keywordtype}{double}\ \&dt)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_electrolyte_f_v_m_solver_af139f5eb8613427a00dbd7939cfdbd40}{calc\_lower\_diag}}(dt);\ \}}
+\DoxyCodeLine{00297\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\ get\_calc\_diag(\textcolor{keywordtype}{double}\ \&dt)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_electrolyte_f_v_m_solver_a790bcb34a331596a40f5d5210f983eff}{calc\_diag}}(dt);\ \}}
+\DoxyCodeLine{00298\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\ get\_calc\_upper\_diag(\textcolor{keywordtype}{double}\ \&dt)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_electrolyte_f_v_m_solver_a32b743aadb008526ce451002c4cf2864}{calc\_upper\_diag}}(dt);\ \}}
+\DoxyCodeLine{00299\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\ get\_vec\_ce\_j(std::vector<double>\ \&c\_prev,\ std::vector<double>\ \&j,\ \textcolor{keywordtype}{double}\ \&dt)\ \{\ \textcolor{keywordflow}{return}\ calc\_vector\_ce\_j(c\_prev,\ j,\ dt);\ \}}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00301\ \ \ \ \ \textcolor{comment}{//\ setter\ functions}}
+\DoxyCodeLine{00302\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_vector\_c\_e(std::vector<double>\ \&i\_vector\_c\_e)\ \{\ m\_vector\_c\_e\ =\ i\_vector\_c\_e;\ \}}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ \ \ \ \ \textcolor{comment}{//\ functions\ for\ calculations}}
+\DoxyCodeLine{00305\ \ \ \ \ std::vector<double>\ \mbox{\hyperlink{class_electrolyte_f_v_m_solver_af139f5eb8613427a00dbd7939cfdbd40}{calc\_lower\_diag}}(\textcolor{keywordtype}{double}\ \&dt);}
+\DoxyCodeLine{00306\ \ \ \ \ std::vector<double>\ \mbox{\hyperlink{class_electrolyte_f_v_m_solver_a790bcb34a331596a40f5d5210f983eff}{calc\_diag}}(\textcolor{keywordtype}{double}\ \&dt);}
+\DoxyCodeLine{00307\ \ \ \ \ std::vector<double>\ \mbox{\hyperlink{class_electrolyte_f_v_m_solver_a32b743aadb008526ce451002c4cf2864}{calc\_upper\_diag}}(\textcolor{keywordtype}{double}\ \&dt);}
+\DoxyCodeLine{00308\ }
+\DoxyCodeLine{00309\ \ \ \ \ std::vector<double>\ calc\_vector\_ce\_j(std::vector<double>\ \&c\_prev,\ std::vector<double>\ \&j,\ \textcolor{keywordtype}{double}\ \&dt);}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00311\ \ \ \ \ \textcolor{keywordtype}{void}\ solve(std::vector<double>\ j,\ \textcolor{keywordtype}{double}\ dt);}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00313\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00314\ \ \ \ \ \mbox{\hyperlink{class_electrolyte_f_v_m_coordinates}{ElectrolyteFVMCoordinates}}\ m\_coords;}
+\DoxyCodeLine{00315\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_t\_c;}
+\DoxyCodeLine{00316\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_c\_e\_init;}
+\DoxyCodeLine{00317\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_epsilon\_e\_n;}
+\DoxyCodeLine{00318\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_epsilon\_e\_sep;}
+\DoxyCodeLine{00319\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_epsilon\_e\_p;}
+\DoxyCodeLine{00320\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_a\_s\_n;}
+\DoxyCodeLine{00321\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_a\_s\_p;}
+\DoxyCodeLine{00322\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_D\_e;}
+\DoxyCodeLine{00323\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_brugg;}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \ \ \ \ std::vector<double>\ m\_vector\_c\_e;}
+\DoxyCodeLine{00326\ \ \ \ \ std::vector<double>\ m\_vector\_epsilon\_e;}
+\DoxyCodeLine{00327\ \ \ \ \ std::vector<double>\ m\_vector\_D\_eff;}
+\DoxyCodeLine{00328\ \ \ \ \ std::vector<double>\ m\_vector\_a\_s;}
+\DoxyCodeLine{00329\ \};}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00332\ \textcolor{comment}{\ *\ Battery\ Solvers\ below}}
+\DoxyCodeLine{00333\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00334\ }
+\DoxyCodeLine{00335\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_base_battery_solver}{BaseBatterySolver}}}
+\DoxyCodeLine{00336\ \{}
+\DoxyCodeLine{00337\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00338\ \ \ \ \ \mbox{\hyperlink{class_base_battery_solver}{BaseBatterySolver}}(\mbox{\hyperlink{class_battery_cell}{BatteryCell}}\ i\_b\_cell,\ \textcolor{keywordtype}{bool}\ i\_isothermal,\ \textcolor{keywordtype}{bool}\ i\_degradation,\ std::string\ i\_electrode\_SOC\_solver);}
+\DoxyCodeLine{00339\ \ \ \ \ \mbox{\hyperlink{class_base_battery_solver}{\string~BaseBatterySolver}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00341\ \ \ \ \ \textcolor{comment}{//\ member\ variables}}
+\DoxyCodeLine{00342\ \ \ \ \ \mbox{\hyperlink{class_battery_cell}{BatteryCell}}\ m\_b\_cell;}
+\DoxyCodeLine{00343\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_isothermal;}
+\DoxyCodeLine{00344\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_degradation;}
+\DoxyCodeLine{00345\ \ \ \ \ std::string\ m\_electrode\_SOC\_solver;}
+\DoxyCodeLine{00346\ \};}
+\DoxyCodeLine{00347\ }
+\DoxyCodeLine{00348\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_battery_solver}{BatterySolver}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_base_battery_solver}{BaseBatterySolver}}}
+\DoxyCodeLine{00349\ \{}
+\DoxyCodeLine{00350\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00351\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_battery_solver}{BatterySolver}}(\mbox{\hyperlink{class_battery_cell}{BatteryCell}}\ i\_b\_cell,\ \textcolor{keywordtype}{bool}\ i\_isothermal,\ \textcolor{keywordtype}{bool}\ i\_degradation,\ std::string\ i\_electrode\_SOC\_solver\ =\ \textcolor{stringliteral}{"{}poly"{}});}
+\DoxyCodeLine{00352\ \ \ \ \ \mbox{\hyperlink{class_battery_solver}{\string~BatterySolver}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00353\ \ \ \ \ \textcolor{comment}{//\ Solvers\ instances}}
+\DoxyCodeLine{00354\ \ \ \ \ \mbox{\hyperlink{class_polynomial_approx}{PolynomialApprox}}\ SOC\_solver\_p;}
+\DoxyCodeLine{00355\ \ \ \ \ \mbox{\hyperlink{class_polynomial_approx}{PolynomialApprox}}\ SOC\_solver\_n;}
+\DoxyCodeLine{00356\ \ \ \ \ \mbox{\hyperlink{class_c_n_solver}{CNSolver}}\ m\_CN\_SOC\_solver\_p;}
+\DoxyCodeLine{00357\ \ \ \ \ \mbox{\hyperlink{class_c_n_solver}{CNSolver}}\ m\_CN\_SOC\_solver\_n;}
+\DoxyCodeLine{00358\ \ \ \ \ \mbox{\hyperlink{class_lumped_thermal_solver}{LumpedThermalSolver}}\ thermal\_solver;}
+\DoxyCodeLine{00359\ \ \ \ \ std::string\ m\_electrode\_SOC\_solver;}
+\DoxyCodeLine{00360\ \ \ \ \ \textcolor{comment}{//\ Calculation\ functions}}
+\DoxyCodeLine{00361\ \ \ \ \ \mbox{\hyperlink{class_solution}{Solution}}\ solve(\mbox{\hyperlink{class_base_cycler}{BaseCycler}}\ i\_cycler,\ \textcolor{keywordtype}{int}\ store\_solution\_after\ =\ 1);}
+\DoxyCodeLine{00362\ \ \ \ \ \textcolor{comment}{//\ Solution\ solve(DischargeRest\ i\_cycler);}}
+\DoxyCodeLine{00363\ \ \ \ \ std::pair<OverPotentials,\ bool>\ solve\_one\_iteration(\textcolor{keywordtype}{double}\ t\_prev,\ \textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ I);}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00365\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00366\ \ \ \ \ \textcolor{keywordtype}{double}\ calc\_V(\textcolor{keywordtype}{double}\ I);}
+\DoxyCodeLine{00367\ \ \ \ \ \mbox{\hyperlink{struct_over_potentials}{OverPotentials}}\ calc\_overpotentials(\textcolor{keywordtype}{double}\ I);}
+\DoxyCodeLine{00368\ \};}
+\DoxyCodeLine{00369\ }
+\DoxyCodeLine{00370\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_e_s_p_battery_solver}{ESPBatterySolver}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_base_battery_solver}{BaseBatterySolver}}}
+\DoxyCodeLine{00371\ \{}
+\DoxyCodeLine{00372\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00373\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_e_s_p_battery_solver}{ESPBatterySolver}}(\mbox{\hyperlink{class_battery_cell}{BatteryCell}}\ i\_b\_cell,\ \textcolor{keywordtype}{bool}\ i\_isothermal,\ \textcolor{keywordtype}{bool}\ i\_degradation,\ std::string\ i\_electrode\_SOC\_solver);}
+\DoxyCodeLine{00374\ \ \ \ \ \mbox{\hyperlink{class_e_s_p_battery_solver}{\string~ESPBatterySolver}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00375\ }
+\DoxyCodeLine{00376\ \ \ \ \ \textcolor{comment}{//\ methods\ for\ calculations}}
+\DoxyCodeLine{00377\ \ \ \ \ \mbox{\hyperlink{class_solution}{Solution}}\ solve(\mbox{\hyperlink{class_base_cycler}{BaseCycler}}\ i\_cycler);}
+\DoxyCodeLine{00378\ }
+\DoxyCodeLine{00379\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00380\ \ \ \ \ \textcolor{keywordtype}{double}\ a\_s\_p;}
+\DoxyCodeLine{00381\ \ \ \ \ \textcolor{keywordtype}{double}\ a\_s\_n;}
+\DoxyCodeLine{00382\ \ \ \ \ \mbox{\hyperlink{class_polynomial_approx}{PolynomialApprox}}\ SOC\_solver\_p;}
+\DoxyCodeLine{00383\ \ \ \ \ \mbox{\hyperlink{class_polynomial_approx}{PolynomialApprox}}\ SOC\_solver\_n;}
+\DoxyCodeLine{00384\ \ \ \ \ \mbox{\hyperlink{class_lumped_thermal_solver}{LumpedThermalSolver}}\ thermal\_solver;}
+\DoxyCodeLine{00385\ \ \ \ \ \mbox{\hyperlink{class_electrolyte_f_v_m_coordinates}{ElectrolyteFVMCoordinates}}\ electrolyte\_coords;}
+\DoxyCodeLine{00386\ \ \ \ \ \mbox{\hyperlink{class_electrolyte_f_v_m_solver}{ElectrolyteFVMSolver}}\ electrolyte\_solver;}
+\DoxyCodeLine{00387\ \ \ \ \ \textcolor{comment}{//\ double\ calc\_V();}}
+\DoxyCodeLine{00388\ \ \ \ \ std::pair<OverPotentials,\ bool>\ solve\_one\_iteration(\textcolor{keywordtype}{double}\ t\_prev,\ \textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ temp);}
+\DoxyCodeLine{00389\ \};}
+\DoxyCodeLine{00390\ }
+\DoxyCodeLine{00391\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SPCPP\_PROJECT\_SOLVERS\_H}}
+
+\end{DoxyCode}

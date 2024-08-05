@@ -1,0 +1,54 @@
+\doxysection{hummingbird.\+h}
+\hypertarget{hummingbird_8h_source}{}\label{hummingbird_8h_source}\index{C:/Users/moina/dev/BMSLogic/bmslogic/extern/hummingbird.h@{C:/Users/moina/dev/BMSLogic/bmslogic/extern/hummingbird.h}}
+\mbox{\hyperlink{hummingbird_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#ifndef\ BMSLOGIC\_HUMMINGBIRD\_H}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ BMSLOGIC\_HUMMINGBIRD\_H}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{namespace\ }HB\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_h_b_1_1_data_frames}{DataFrames}}\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Accessor\ Functions}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ std::vector<std::string>\ getIndex()\ \{\ \textcolor{keywordflow}{return}\ index;\ \}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ std::vector<std::string>\ getColNames()\ \{\ \textcolor{keywordflow}{return}\ colName;\ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ std::vector<std::vector<std::string>>\ \mbox{\hyperlink{class_h_b_1_1_data_frames_aa1b6b1fd1da1a7ddf1f3c7de616d35ed}{getData}}();}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_ac532f4b08c9ba97b89d93cb69f3d52b5}{getColIndex}}(std::string);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_a34d072fa1e0d6d0ce0116014489a5c47}{getIndexIndex}}(std::string);}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_h_b_1_1_data_frames}{DataFrames}}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_ae759fa80dcb09b653e9865bbc2fa1fac}{getColValues}}(std::string);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_h_b_1_1_data_frames}{DataFrames}}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_a2b1ef1385804cd767e3405ac60711e7c}{getIndexValues}}(std::string);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_h_b_1_1_data_frames_ae806e4774151ea41ee2d4c4048b71747}{getValue}}(\textcolor{keyword}{const}\ std::string\ inputColName,\ \textcolor{keyword}{const}\ std::string\ inputIndexName);}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Modifier\ Functions}}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ set\_index(std::vector<std::string>\ inputIndex)\ \{\ index\ =\ inputIndex;\ \}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ set\_colname(std::vector<std::string>\ inputColName)\ \{\ colName\ =\ inputColName;\ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ set\_data(std::vector<std::vector<std::string>>\ inputData)\ \{\ data\ =\ inputData;\ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Display\ functions}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_afb9658c803a98f10d403a58d59f4aec1}{display\_colnames}}();}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ display\_dataframes();}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ operator\ overloads}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_h_b_1_1_data_frames}{DataFrames}}\ \mbox{\hyperlink{class_h_b_1_1_data_frames_a8e0784cd27c49b07328effa2c119a40e}{operator[]}}(std::string\ colName);}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Search\ functions}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ std::vector<std::string>\ colValueEqualTo(std::string\ colName,std::string\ inputValue);}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Helper\ functions}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_h_b_1_1_data_frames}{DataFrames}}\ create\_empty\_DataFrames();}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ std::vector<std::string>\ index;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ std::vector<std::string>\ colName;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ vector\ containing\ string\ vectors.\ Each\ string\ vector\ is\ a\ row\ or\ a\ data\ entry.}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ std::vector<std::vector<std::string>>\ data;}
+\DoxyCodeLine{00060\ \ \ \ \ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{class_h_b_1_1_data_frames}{DataFrames}}\ \mbox{\hyperlink{hummingbird_8cpp_a54cae211b100cab43f28871d998a238e}{read\_csv}}(std::string,\ \textcolor{keywordtype}{int}\ colNameIndex\ =\ 0,\ \textcolor{keywordtype}{int}\ indexRow\ =\ 0);}
+\DoxyCodeLine{00063\ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//BMSLOGIC\_HUMMINGBIRD\_H}}
+
+\end{DoxyCode}

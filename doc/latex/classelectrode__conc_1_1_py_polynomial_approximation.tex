@@ -1,0 +1,75 @@
+\doxysection{electrode\+\_\+conc.\+Py\+Polynomial\+Approximation Class Reference}
+\hypertarget{classelectrode__conc_1_1_py_polynomial_approximation}{}\label{classelectrode__conc_1_1_py_polynomial_approximation}\index{electrode\_conc.PyPolynomialApproximation@{electrode\_conc.PyPolynomialApproximation}}
+Inheritance diagram for electrode\+\_\+conc.\+Py\+Polynomial\+Approximation\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classelectrode__conc_1_1_py_polynomial_approximation}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classelectrode__conc_1_1_py_polynomial_approximation_a97a1de355305bacab0a0d2ea73e4ba28}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, float c\+\_\+init, str electrode\+\_\+type, str type=\textquotesingle{}higher\textquotesingle{})
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_polynomial_approximation_acd92bfcf716cc554add5bba4f8c5d501}\label{classelectrode__conc_1_1_py_polynomial_approximation_acd92bfcf716cc554add5bba4f8c5d501} 
+Callable {\bfseries func\+\_\+c\+\_\+s\+\_\+avg} (self, float j, float R)
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_polynomial_approximation_a18a802f6ed2a3c07075ea33f31d503db}\label{classelectrode__conc_1_1_py_polynomial_approximation_a18a802f6ed2a3c07075ea33f31d503db} 
+Callable {\bfseries func\+\_\+q} (self, float j, float R, float D)
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_polynomial_approximation_aee6a77dc1c3e206a4cd8dd2a187e3117}\label{classelectrode__conc_1_1_py_polynomial_approximation_aee6a77dc1c3e206a4cd8dd2a187e3117} 
+{\bfseries solve} (self, float dt, float t\+\_\+prev, float i\+\_\+app, float R, float S, float D)
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_polynomial_approximation_ae9b8c23bc8670526326b67d400856554}\label{classelectrode__conc_1_1_py_polynomial_approximation_ae9b8c23bc8670526326b67d400856554} 
+float {\bfseries \+\_\+\+\_\+call\+\_\+\+\_\+} (self, float dt, float t\+\_\+prev, float i\+\_\+app, float R, float S, float D\+\_\+s, float c\+\_\+smax)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_polynomial_approximation_ad776db250c1ffc8400f2ffef9464a9c2}\label{classelectrode__conc_1_1_py_polynomial_approximation_ad776db250c1ffc8400f2ffef9464a9c2} 
+{\bfseries c\+\_\+s\+\_\+avg\+\_\+prev}
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_polynomial_approximation_aab03c2db27b3b956e9768fb45aca20a9}\label{classelectrode__conc_1_1_py_polynomial_approximation_aab03c2db27b3b956e9768fb45aca20a9} 
+{\bfseries c\+\_\+surf}
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_polynomial_approximation_aa0c5953e9e3d1288b3feae19af8f1971}\label{classelectrode__conc_1_1_py_polynomial_approximation_aa0c5953e9e3d1288b3feae19af8f1971} 
+str {\bfseries type}
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_polynomial_approximation_a56f4ced09b39d293ec151641797effdc}\label{classelectrode__conc_1_1_py_polynomial_approximation_a56f4ced09b39d293ec151641797effdc} 
+float {\bfseries q}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classelectrode__conc_1_1_py_base_electrode_conc_solver}{electrode\+\_\+conc.\+Py\+Base\+Electrode\+Conc\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries electrode\+\_\+type}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Two=parameter polynomial approximation for the spherical diffusion using two parameters [1].
+
+Reference:
+[1] Torchio, M., Magni, L., Gopaluni, R. B., Braatz, R. D., & Raimondo, D. M. (2016).
+LIONSIMBA: A Matlab Framework Based on a Finite Volume Model Suitable for Li-Ion Battery Design, Simulation,
+and Control.
+Journal of The Electrochemical Society, 163(7), A1192–A1205.
+https://doi.org/10.1149/2.0291607JES/XML
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classelectrode__conc_1_1_py_polynomial_approximation_a97a1de355305bacab0a0d2ea73e4ba28}\index{electrode\_conc.PyPolynomialApproximation@{electrode\_conc.PyPolynomialApproximation}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!electrode\_conc.PyPolynomialApproximation@{electrode\_conc.PyPolynomialApproximation}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_polynomial_approximation_a97a1de355305bacab0a0d2ea73e4ba28} 
+electrode\+\_\+conc.\+Py\+Polynomial\+Approximation.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{c\+\_\+init}{, }\item[{str}]{electrode\+\_\+type}{, }\item[{str }]{type}{ = {\ttfamily \textquotesingle{}higher\textquotesingle{}}}\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classelectrode__conc_1_1_py_base_electrode_conc_solver}{electrode\+\_\+conc.\+Py\+Base\+Electrode\+Conc\+Solver}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers/electrode\+\_\+conc.\+py\end{DoxyCompactItemize}

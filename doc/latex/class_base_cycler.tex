@@ -1,0 +1,132 @@
+\doxysection{Base\+Cycler Class Reference}
+\hypertarget{class_base_cycler}{}\label{class_base_cycler}\index{BaseCycler@{BaseCycler}}
+
+
+Base Cycler class.  
+
+
+
+
+{\ttfamily \#include $<$cyclers.\+h$>$}
+
+Inheritance diagram for Base\+Cycler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=9.000000cm]{class_base_cycler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_base_cycler_a6e79dec7e3be5f5348051b8381347aca}\label{class_base_cycler_a6e79dec7e3be5f5348051b8381347aca} 
+{\bfseries Base\+Cycler} ()
+\begin{DoxyCompactList}\small\item\em constructor for the \doxylink{class_base_cycler}{Base\+Cycler}. Essentially the typical LIB parameters are initialized. \end{DoxyCompactList}\item 
+\Hypertarget{class_base_cycler_ace3cf90503378024e369c20fe4086dba}\label{class_base_cycler_ace3cf90503378024e369c20fe4086dba} 
+double {\bfseries get\+\_\+time\+\_\+elapsed} ()
+\item 
+\Hypertarget{class_base_cycler_a48d886f0cf2e8864b691c1b146f121cb}\label{class_base_cycler_a48d886f0cf2e8864b691c1b146f121cb} 
+double {\bfseries get\+\_\+\+V\+\_\+min} ()
+\item 
+\Hypertarget{class_base_cycler_a8b1b03eb25aa328a28aa07143efd26b1}\label{class_base_cycler_a8b1b03eb25aa328a28aa07143efd26b1} 
+double {\bfseries get\+\_\+\+V\+\_\+max} ()
+\item 
+\Hypertarget{class_base_cycler_ad12c40066c403adb2eb26eb381a0a82b}\label{class_base_cycler_ad12c40066c403adb2eb26eb381a0a82b} 
+double {\bfseries get\+\_\+rest\+\_\+time} ()
+\item 
+\Hypertarget{class_base_cycler_a9b5e194bf2dda112469c9399f06bf03d}\label{class_base_cycler_a9b5e194bf2dda112469c9399f06bf03d} 
+int {\bfseries get\+\_\+num\+\_\+cycles} ()
+\item 
+\Hypertarget{class_base_cycler_a116d4639bd723deb089a5fa81d0e905e}\label{class_base_cycler_a116d4639bd723deb089a5fa81d0e905e} 
+void {\bfseries set\+\_\+time\+\_\+elapsed} (double time\+\_\+elapsed\+\_\+new)
+\item 
+\Hypertarget{class_base_cycler_aab1fd0b495ece5e901795ae014dc5656}\label{class_base_cycler_aab1fd0b495ece5e901795ae014dc5656} 
+void {\bfseries set\+\_\+\+V\+\_\+min} (double V\+\_\+min\+\_\+new)
+\item 
+\Hypertarget{class_base_cycler_ac4cb0ea64b4b6daeacca9ff82d353e02}\label{class_base_cycler_ac4cb0ea64b4b6daeacca9ff82d353e02} 
+void {\bfseries set\+\_\+\+V\+\_\+max} (double \&V\+\_\+max\+\_\+new)
+\item 
+\Hypertarget{class_base_cycler_ae50a5b97df77f2fca58887fed05de13d}\label{class_base_cycler_ae50a5b97df77f2fca58887fed05de13d} 
+void {\bfseries set\+\_\+rest\+\_\+time} (double \&rest\+\_\+time\+\_\+new)
+\item 
+\Hypertarget{class_base_cycler_a1a6e91390ac2965658d17e8c809a4481}\label{class_base_cycler_a1a6e91390ac2965658d17e8c809a4481} 
+void {\bfseries set\+\_\+num\+\_\+cycles} (int \&num\+\_\+cycles\+\_\+new)
+\item 
+virtual double \mbox{\hyperlink{class_base_cycler_a1c0686132a51e7355e9818cc63320ab3}{get\+\_\+current}} (std\+::string cycling\+\_\+step, int time\+\_\+step)
+\begin{DoxyCompactList}\small\item\em method to get the current during the battery cycling steps. \end{DoxyCompactList}\item 
+\Hypertarget{class_base_cycler_a9b2b9fa59eed8a1f3750289cf0bd9061}\label{class_base_cycler_a9b2b9fa59eed8a1f3750289cf0bd9061} 
+void {\bfseries reset\+\_\+time\+\_\+elapsed} ()
+\begin{DoxyCompactList}\small\item\em resets the time\+\_\+elapsed to zero. Useful when subjecting an already cycled \doxylink{class_base_cycler}{Base\+Cycler} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_base_cycler_a24f6676a8ddebb8dc732538fb3c36d03}\label{class_base_cycler_a24f6676a8ddebb8dc732538fb3c36d03} 
+double {\bfseries time\+\_\+elapsed} = 0.\+0
+\item 
+\Hypertarget{class_base_cycler_ad7f11d654bd1293db2bfe238b82c748a}\label{class_base_cycler_ad7f11d654bd1293db2bfe238b82c748a} 
+double {\bfseries SOC\+\_\+\+LIB}
+\item 
+\Hypertarget{class_base_cycler_ac7ab405764f401f5007cb7d5ced22e0c}\label{class_base_cycler_ac7ab405764f401f5007cb7d5ced22e0c} 
+double {\bfseries SOC\+\_\+\+LIB\+\_\+min}
+\item 
+\Hypertarget{class_base_cycler_a570eea494af7d2d1a2156102ecf0ab4d}\label{class_base_cycler_a570eea494af7d2d1a2156102ecf0ab4d} 
+double {\bfseries SOC\+\_\+\+LIB\+\_\+max}
+\item 
+\Hypertarget{class_base_cycler_abb8e7625ec6b91714f7aeacf04958e02}\label{class_base_cycler_abb8e7625ec6b91714f7aeacf04958e02} 
+double {\bfseries V\+\_\+min}
+\item 
+\Hypertarget{class_base_cycler_a36943a2888ad27d4d7baa24842567244}\label{class_base_cycler_a36943a2888ad27d4d7baa24842567244} 
+double {\bfseries V\+\_\+max}
+\item 
+\Hypertarget{class_base_cycler_a4bd6a67acda7a7162c6ab32e631debb5}\label{class_base_cycler_a4bd6a67acda7a7162c6ab32e631debb5} 
+double {\bfseries discharge\+\_\+current}
+\item 
+\Hypertarget{class_base_cycler_a4087ba2b2875aaeb0b452d9382ea70ef}\label{class_base_cycler_a4087ba2b2875aaeb0b452d9382ea70ef} 
+double {\bfseries charge\+\_\+current}
+\item 
+\Hypertarget{class_base_cycler_a7da9086d6f1bf491f50cbb7d1a75233f}\label{class_base_cycler_a7da9086d6f1bf491f50cbb7d1a75233f} 
+double {\bfseries rest\+\_\+time}
+\item 
+\Hypertarget{class_base_cycler_a80cac9fa983204a64bfb69f53d58e907}\label{class_base_cycler_a80cac9fa983204a64bfb69f53d58e907} 
+int {\bfseries num\+\_\+cycles}
+\item 
+\Hypertarget{class_base_cycler_a3a290537ade9a4f574edb3bd6a8f8cef}\label{class_base_cycler_a3a290537ade9a4f574edb3bd6a8f8cef} 
+std\+::vector$<$ double $>$ {\bfseries m\+\_\+t\+\_\+vector}
+\item 
+\Hypertarget{class_base_cycler_a47a6eed91cdb6af90d36c7de9ab00f72}\label{class_base_cycler_a47a6eed91cdb6af90d36c7de9ab00f72} 
+std\+::vector$<$ double $>$ {\bfseries m\+\_\+current\+\_\+vector}
+\item 
+\Hypertarget{class_base_cycler_a2da50ea9aa2db12f97822d7aa6938135}\label{class_base_cycler_a2da50ea9aa2db12f97822d7aa6938135} 
+std\+::vector$<$ std\+::string $>$ {\bfseries cycle\+\_\+steps}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base Cycler class. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_base_cycler_a1c0686132a51e7355e9818cc63320ab3}\index{BaseCycler@{BaseCycler}!get\_current@{get\_current}}
+\index{get\_current@{get\_current}!BaseCycler@{BaseCycler}}
+\doxysubsubsection{\texorpdfstring{get\_current()}{get\_current()}}
+{\footnotesize\ttfamily \label{class_base_cycler_a1c0686132a51e7355e9818cc63320ab3} 
+double Base\+Cycler\+::get\+\_\+current (\begin{DoxyParamCaption}\item[{std\+::string}]{step\+\_\+name}{, }\item[{int}]{t\+\_\+step}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+method to get the current during the battery cycling steps. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em step\+\_\+name} & "{}charge"{}, "{}discharge"{} or "{}rest"{}. \\
+\hline
+{\em t} & time value \mbox{[}in s\mbox{]} of the present time step in question. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+current \mbox{[}in A\mbox{]} value of the present time step. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{cyclers_8h}{cyclers.\+h}}\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{cyclers_8cpp}{cyclers.\+cpp}}\end{DoxyCompactItemize}

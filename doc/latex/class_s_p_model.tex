@@ -1,0 +1,74 @@
+\doxysection{SPModel Class Reference}
+\hypertarget{class_s_p_model}{}\label{class_s_p_model}\index{SPModel@{SPModel}}
+
+
+Equations for the single particle model.  
+
+
+
+
+{\ttfamily \#include $<$models.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_s_p_model_a0b016c49fe6a60107beaa951c7bc1788}{m}} (double I, double k, double S, double c\+\_\+max, double SOC, double c\+\_\+e)
+\item 
+double \mbox{\hyperlink{class_s_p_model_a4f6ba13bc33a846e6776f90419104fa3}{calc\+\_\+terminal\+\_\+V}} (double OCP\+\_\+p, double OCP\+\_\+n, double m\+\_\+p, double m\+\_\+n, double R\+\_\+cell, double T, double I)
+\item 
+\Hypertarget{class_s_p_model_a28866e2f41f2e282fb9b1017c03e5af1}\label{class_s_p_model_a28866e2f41f2e282fb9b1017c03e5af1} 
+\mbox{\hyperlink{struct_over_potentials}{Over\+Potentials}} {\bfseries calc\+\_\+overpotentials} (double OCP\+\_\+p, double OCP\+\_\+n, double m\+\_\+p, double m\+\_\+n, double R\+\_\+cell, double T, double I)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{class_s_p_model_aeb5f08df5e1a5504b20218436d490b9a}{molar\+\_\+flux\+\_\+electrode}} (double \&I, double \&S, char \&electrode\+\_\+type)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Equations for the single particle model. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_s_p_model_a4f6ba13bc33a846e6776f90419104fa3}\index{SPModel@{SPModel}!calc\_terminal\_V@{calc\_terminal\_V}}
+\index{calc\_terminal\_V@{calc\_terminal\_V}!SPModel@{SPModel}}
+\doxysubsubsection{\texorpdfstring{calc\_terminal\_V()}{calc\_terminal\_V()}}
+{\footnotesize\ttfamily \label{class_s_p_model_a4f6ba13bc33a846e6776f90419104fa3} 
+double SPModel\+::calc\+\_\+terminal\+\_\+V (\begin{DoxyParamCaption}\item[{double}]{OCP\+\_\+p}{, }\item[{double}]{OCP\+\_\+n}{, }\item[{double}]{m\+\_\+p}{, }\item[{double}]{m\+\_\+n}{, }\item[{double}]{R\+\_\+cell}{, }\item[{double}]{T}{, }\item[{double}]{I}{}\end{DoxyParamCaption})}
+
+calc\+\_\+terminal\+\_\+V
+
+Calculates the cell terminal potential \mbox{[}V\mbox{]}
+
+Parameters\+: OCP\+\_\+p\+: (double) positive eletrode\textquotesingle{}s OCP OCP\+\_\+n\+: (double) negative electrode\textquotesingle{}s OCP m\+\_\+n\+: (double) negative electrode\textquotesingle{}s m m\+\_\+p\+: (double) positive electrode\textquotesingle{}s m R\+\_\+cell (double)\+: battery cell\textquotesingle{}s internal resistance \mbox{[}ohm\mbox{]} T\+: (double) battery cell\textquotesingle{}s internal resistance I\+: (double) applied current \mbox{[}A\mbox{]}
+
+Returns\+: (double) battery cell\textquotesingle{}s terminal voltage \Hypertarget{class_s_p_model_a0b016c49fe6a60107beaa951c7bc1788}\index{SPModel@{SPModel}!m@{m}}
+\index{m@{m}!SPModel@{SPModel}}
+\doxysubsubsection{\texorpdfstring{m()}{m()}}
+{\footnotesize\ttfamily \label{class_s_p_model_a0b016c49fe6a60107beaa951c7bc1788} 
+double SPModel\+::m (\begin{DoxyParamCaption}\item[{double}]{I}{, }\item[{double}]{k}{, }\item[{double}]{S}{, }\item[{double}]{c\+\_\+max}{, }\item[{double}]{SOC}{, }\item[{double}]{c\+\_\+e}{}\end{DoxyParamCaption})}
+
+m
+
+Calculates the intermediary variable in the single particle model.
+
+Parameters\+: (double) I\+: applied current \mbox{[}A\mbox{]} (double) k\+: reaction rate \mbox{[}m2.\+5/mol0.5/s\mbox{]} (double) c\+\_\+max\+: max. conc \mbox{[}mol/m3\mbox{]} (double) SOC\+: electrode SOC (double) c\+\_\+e\+: electrolyte conc. \mbox{[}mol/m3\mbox{]}
+
+Return\+: (double) m \Hypertarget{class_s_p_model_aeb5f08df5e1a5504b20218436d490b9a}\index{SPModel@{SPModel}!molar\_flux\_electrode@{molar\_flux\_electrode}}
+\index{molar\_flux\_electrode@{molar\_flux\_electrode}!SPModel@{SPModel}}
+\doxysubsubsection{\texorpdfstring{molar\_flux\_electrode()}{molar\_flux\_electrode()}}
+{\footnotesize\ttfamily \label{class_s_p_model_aeb5f08df5e1a5504b20218436d490b9a} 
+double SPModel\+::molar\+\_\+flux\+\_\+electrode (\begin{DoxyParamCaption}\item[{double \&}]{I}{, }\item[{double \&}]{S}{, }\item[{char \&}]{electrode\+\_\+type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+molar\+\_\+flux\+\_\+electrode
+
+Calculates the molar flux into the electrode \mbox{[}mol/m2/s\mbox{]}.
+
+Parameters\+: I\+: (double) applied current \mbox{[}A\mbox{]} S\+: (double) electro-\/active electrode area \mbox{[}m2\mbox{]} electrode\+\_\+type\+: (char) electrode type
+
+Returns\+: (double) molar area flux \mbox{[}mol/m2/s\mbox{]} 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{models_8h}{models.\+h}}\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{models_8cpp}{models.\+cpp}}\end{DoxyCompactItemize}

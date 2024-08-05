@@ -1,0 +1,81 @@
+\doxysection{CNSolver Class Reference}
+\hypertarget{class_c_n_solver}{}\label{class_c_n_solver}\index{CNSolver@{CNSolver}}
+
+
+This class uses the Crank Nicolson method for numerically calculating the electrode Li-\/ion concentration during battery operations.  
+
+
+
+
+{\ttfamily \#include $<$solvers.\+h$>$}
+
+Inheritance diagram for CNSolver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_c_n_solver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_c_n_solver_abad50f8fc7d0a389d04730d6cd759c12}\label{class_c_n_solver_abad50f8fc7d0a389d04730d6cd759c12} 
+{\bfseries CNSolver} (double i\+\_\+c\+\_\+init, char i\+\_\+electrode\+\_\+type, int i\+\_\+spatial\+\_\+grid\+\_\+points)
+\item 
+\Hypertarget{class_c_n_solver_a570e5114cff93bd60b094b5f3ec91503}\label{class_c_n_solver_a570e5114cff93bd60b094b5f3ec91503} 
+char {\bfseries get\+\_\+electrode\+\_\+type} ()
+\item 
+\Hypertarget{class_c_n_solver_ab536750773f09b3306e8eae0bb805881}\label{class_c_n_solver_ab536750773f09b3306e8eae0bb805881} 
+int {\bfseries get\+\_\+spatial\+\_\+pts} ()
+\item 
+\Hypertarget{class_c_n_solver_a12c9ebc0d3bbc4afdba127df62bca97a}\label{class_c_n_solver_a12c9ebc0d3bbc4afdba127df62bca97a} 
+double {\bfseries get\+\_\+c\+\_\+s\+\_\+surf} ()
+\item 
+\Hypertarget{class_c_n_solver_aad586fdf1cbae0ac314805afa4426786}\label{class_c_n_solver_aad586fdf1cbae0ac314805afa4426786} 
+std\+::vector$<$ double $>$ {\bfseries get\+\_\+c\+\_\+prev} ()
+\item 
+\Hypertarget{class_c_n_solver_a4f72c7f3e164a2883a2207e5f59c18cd}\label{class_c_n_solver_a4f72c7f3e164a2883a2207e5f59c18cd} 
+std\+::vector$<$ double $>$ {\bfseries get\+\_\+array\+\_\+R} (double R)
+\item 
+\Hypertarget{class_c_n_solver_acfeace75ffda28916b4359a5c10b646c}\label{class_c_n_solver_acfeace75ffda28916b4359a5c10b646c} 
+double {\bfseries get\+\_\+dr} (double R)
+\item 
+\Hypertarget{class_c_n_solver_a0c32c8a58caeaf030978e7e8f92720c8}\label{class_c_n_solver_a0c32c8a58caeaf030978e7e8f92720c8} 
+std\+::vector$<$ double $>$ {\bfseries get\+\_\+diag\+\_\+elements} (double dt, double R, double D)
+\item 
+\Hypertarget{class_c_n_solver_aa1c50cbf37c19342362f9253e602c808}\label{class_c_n_solver_aa1c50cbf37c19342362f9253e602c808} 
+std\+::vector$<$ double $>$ {\bfseries get\+\_\+l\+\_\+diag\+\_\+elements} (double dt, double R, double D)
+\item 
+\Hypertarget{class_c_n_solver_a905abaf1571123b6a7b22b7de309ea8f}\label{class_c_n_solver_a905abaf1571123b6a7b22b7de309ea8f} 
+std\+::vector$<$ double $>$ {\bfseries get\+\_\+u\+\_\+diag\+\_\+elements} (double dt, double R, double D)
+\item 
+\Hypertarget{class_c_n_solver_a2c6820c2c86682837d74200461158890}\label{class_c_n_solver_a2c6820c2c86682837d74200461158890} 
+double {\bfseries calc\+\_\+A} (double dt, double R, double D)
+\item 
+\Hypertarget{class_c_n_solver_a8736b354ff78e9b0cace884f2518e131}\label{class_c_n_solver_a8736b354ff78e9b0cace884f2518e131} 
+double {\bfseries calc\+\_\+B} (double dt, double R, double D)
+\item 
+\Hypertarget{class_c_n_solver_a0eaaf0ac06fffb98019ab8be5e8d71f9}\label{class_c_n_solver_a0eaaf0ac06fffb98019ab8be5e8d71f9} 
+void {\bfseries solve} (double dt, double i\+\_\+app, double R, double S, double D)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_base_conc_solver}{Base\+Conc\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Base\+Conc\+Solver} (char electrode\+\_\+type)
+\item 
+char \& {\bfseries get\+\_\+electrode\+Type} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_base_conc_solver}{Base\+Conc\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+char {\bfseries m\+\_\+electrode\+\_\+type}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class uses the Crank Nicolson method for numerically calculating the electrode Li-\/ion concentration during battery operations. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers.\+h\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers.\+cpp\end{DoxyCompactItemize}

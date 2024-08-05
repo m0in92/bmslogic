@@ -1,0 +1,139 @@
+\doxysection{Sigma\+Point\+Kalman\+Filter Class Reference}
+\hypertarget{class_sigma_point_kalman_filter}{}\label{class_sigma_point_kalman_filter}\index{SigmaPointKalmanFilter@{SigmaPointKalmanFilter}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_ab83b64e27cc669a2b222ef844bb2147f}\label{class_sigma_point_kalman_filter_ab83b64e27cc669a2b222ef844bb2147f} 
+{\bfseries Sigma\+Point\+Kalman\+Filter} (\mbox{\hyperlink{class_normal_random_vector}{Normal\+Random\+Vector}} i\+\_\+x, \mbox{\hyperlink{class_normal_random_vector}{Normal\+Random\+Vector}} i\+\_\+w, \mbox{\hyperlink{class_normal_random_vector}{Normal\+Random\+Vector}} i\+\_\+v, int y\+\_\+dim, std\+::function$<$ Eigen\+::\+Vector\+Xd(Eigen\+::\+Vector\+Xd, Eigen\+::\+Vector\+Xd, Eigen\+::\+Vector\+Xd)$>$ \&state\+\_\+equaton, std\+::function$<$ Eigen\+::\+Vector\+Xd(Eigen\+::\+Vector\+Xd, Eigen\+::\+Vector\+Xd, Eigen\+::\+Vector\+Xd)$>$ \&output\+\_\+equation, std\+::string method\+\_\+type="{}CDKF"{})
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a8cc9de3970321c8db3a030be1184e0ef}\label{class_sigma_point_kalman_filter_a8cc9de3970321c8db3a030be1184e0ef} 
+{\bfseries Sigma\+Point\+Kalman\+Filter} (\mbox{\hyperlink{class_normal_random_vector}{Normal\+Random\+Vector}} i\+\_\+x, \mbox{\hyperlink{class_normal_random_vector}{Normal\+Random\+Vector}} i\+\_\+w, \mbox{\hyperlink{class_normal_random_vector}{Normal\+Random\+Vector}} i\+\_\+v, int y\+\_\+dim)
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_ace3b8c49514db3db2508d513d9026c30}\label{class_sigma_point_kalman_filter_ace3b8c49514db3db2508d513d9026c30} 
+int {\bfseries get\+\_\+\+Nx} () const
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a793b6eb6740f950d59f2e86883a403ba}\label{class_sigma_point_kalman_filter_a793b6eb6740f950d59f2e86883a403ba} 
+int {\bfseries get\+\_\+\+Nw} () const
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a783e25e3b8801c85bccd03c6b7a19c7d}\label{class_sigma_point_kalman_filter_a783e25e3b8801c85bccd03c6b7a19c7d} 
+int {\bfseries get\+\_\+\+Nv} () const
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_ad06cdcc03fdd7d387946235260e292d7}\label{class_sigma_point_kalman_filter_ad06cdcc03fdd7d387946235260e292d7} 
+int {\bfseries get\+\_\+L} () const
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a5763aa7d5528fefd47b52cae235bc9c4}\label{class_sigma_point_kalman_filter_a5763aa7d5528fefd47b52cae235bc9c4} 
+int {\bfseries get\+\_\+p} () const
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a55cac611097d46dfc1209c7ac3617d48}\label{class_sigma_point_kalman_filter_a55cac611097d46dfc1209c7ac3617d48} 
+\mbox{\hyperlink{class_normal_random_vector}{Normal\+Random\+Vector}} {\bfseries get\+\_\+x} () const
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a86c560ef3a59813103f0320a1eee8dd6}\label{class_sigma_point_kalman_filter_a86c560ef3a59813103f0320a1eee8dd6} 
+\mbox{\hyperlink{class_normal_random_vector}{Normal\+Random\+Vector}} {\bfseries get\+\_\+w} () const
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a3c6f052717f68fa438811ee165b9f445}\label{class_sigma_point_kalman_filter_a3c6f052717f68fa438811ee165b9f445} 
+\mbox{\hyperlink{class_normal_random_vector}{Normal\+Random\+Vector}} {\bfseries get\+\_\+v} () const
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a108c4578fa53ee46d34b0ad0db79b2b8}\label{class_sigma_point_kalman_filter_a108c4578fa53ee46d34b0ad0db79b2b8} 
+Eigen\+::\+Vector\+Xd {\bfseries get\+\_\+aug\+\_\+vec} ()
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a4102a25b9d327f52d1fcfb90282091b8}\label{class_sigma_point_kalman_filter_a4102a25b9d327f52d1fcfb90282091b8} 
+Eigen\+::\+Matrix\+Xd {\bfseries get\+\_\+aug\+\_\+cov} ()
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a38ed0aa78975c8bea85c2610f7641562}\label{class_sigma_point_kalman_filter_a38ed0aa78975c8bea85c2610f7641562} 
+Eigen\+::\+Matrix\+Xd {\bfseries get\+\_\+mat\+\_\+sigma\+\_\+pts} ()
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_ad869785359acf25958950afeb50fb725}\label{class_sigma_point_kalman_filter_ad869785359acf25958950afeb50fb725} 
+Eigen\+::\+Matrix\+Xd {\bfseries get\+\_\+mat\+\_\+sigma\+\_\+pts\+\_\+x} ()
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_ae3131c4e316d33eedd7182f93c903719}\label{class_sigma_point_kalman_filter_ae3131c4e316d33eedd7182f93c903719} 
+Eigen\+::\+Matrix\+Xd {\bfseries get\+\_\+mat\+\_\+sigma\+\_\+pts\+\_\+w} ()
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a9f64a394a551ca3da2deb37a4fd2c102}\label{class_sigma_point_kalman_filter_a9f64a394a551ca3da2deb37a4fd2c102} 
+Eigen\+::\+Matrix\+Xd {\bfseries get\+\_\+mat\+\_\+sigma\+\_\+pts\+\_\+v} ()
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_adc2c17d73695fe9a0abb014bea7dd62d}\label{class_sigma_point_kalman_filter_adc2c17d73695fe9a0abb014bea7dd62d} 
+double {\bfseries get\+\_\+gamma} () const
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a9cf1a7cb5d922ef164d17230bb49411f}\label{class_sigma_point_kalman_filter_a9cf1a7cb5d922ef164d17230bb49411f} 
+double {\bfseries get\+\_\+h} () const
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a339c44d8922d99eb6990a6b40c745bfb}\label{class_sigma_point_kalman_filter_a339c44d8922d99eb6990a6b40c745bfb} 
+double {\bfseries get\+\_\+alpha\+\_\+m0} () const
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a3155409ba90d055b34beadfebdd3e005}\label{class_sigma_point_kalman_filter_a3155409ba90d055b34beadfebdd3e005} 
+double {\bfseries get\+\_\+alpha\+\_\+m} () const
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a6f2a660c4502a0fa1bb100591a0b6d43}\label{class_sigma_point_kalman_filter_a6f2a660c4502a0fa1bb100591a0b6d43} 
+double {\bfseries get\+\_\+alpha\+\_\+c0} () const
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a684be4c1509295a34dc0ce988b683534}\label{class_sigma_point_kalman_filter_a684be4c1509295a34dc0ce988b683534} 
+double {\bfseries get\+\_\+alpha\+\_\+c} () const
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a9518cc04ffc4085d8deb29ada8586a86}\label{class_sigma_point_kalman_filter_a9518cc04ffc4085d8deb29ada8586a86} 
+Eigen\+::\+Vector\+Xd {\bfseries get\+\_\+vector\+\_\+alpha\+\_\+m} () const
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a3d9aae81151c2659543776ead4e5cdee}\label{class_sigma_point_kalman_filter_a3d9aae81151c2659543776ead4e5cdee} 
+Eigen\+::\+Vector\+Xd {\bfseries get\+\_\+vector\+\_\+alpha\+\_\+c} () const
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a123fb276b7f6d1b79aa5195a95be0de5}\label{class_sigma_point_kalman_filter_a123fb276b7f6d1b79aa5195a95be0de5} 
+void {\bfseries set\+\_\+state\+\_\+equation} (std\+::function$<$ Eigen\+::\+Vector\+Xd(Eigen\+::\+Vector\+Xd, Eigen\+::\+Vector\+Xd, Eigen\+::\+Vector\+Xd)$>$ i\+\_\+state\+\_\+equation)
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a15406c0c1e11f9cff69987224ced6cef}\label{class_sigma_point_kalman_filter_a15406c0c1e11f9cff69987224ced6cef} 
+void {\bfseries set\+\_\+output\+\_\+equation} (std\+::function$<$ Eigen\+::\+Vector\+Xd(Eigen\+::\+Vector\+Xd, Eigen\+::\+Vector\+Xd, Eigen\+::\+Vector\+Xd)$>$ i\+\_\+output\+\_\+equation)
+\item 
+Eigen\+::\+Matrix\+Xd \mbox{\hyperlink{class_sigma_point_kalman_filter_a85d0a97e774273b3329e392c12116170}{calc\+\_\+and\+\_\+set\+\_\+state\+\_\+prediction}} (Eigen\+::\+Vector\+Xd u)
+\begin{DoxyCompactList}\small\item\em This is the step 1a (first step) of the process. The state estimate is performed in this step. \end{DoxyCompactList}\item 
+\Hypertarget{class_sigma_point_kalman_filter_a42ec753def0a505964e152d2f838a210}\label{class_sigma_point_kalman_filter_a42ec753def0a505964e152d2f838a210} 
+Eigen\+::\+Matrix\+Xd {\bfseries calc\+\_\+and\+\_\+set\+\_\+state\+\_\+covariance} (Eigen\+::\+Matrix\+Xd state\+\_\+equation\+\_\+results)
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_aa4f32adcfad2b8730a7f82c6bcef7ed7}\label{class_sigma_point_kalman_filter_aa4f32adcfad2b8730a7f82c6bcef7ed7} 
+std\+::pair$<$ Eigen\+::\+Matrix\+Xd, Eigen\+::\+Vector\+Xd $>$ {\bfseries predict\+\_\+system\+\_\+output} (Eigen\+::\+Matrix\+Xd state\+\_\+equation\+\_\+output, Eigen\+::\+Vector\+Xd u)
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a5829988b29c25b3a6d5b6e7f05920dc0}\label{class_sigma_point_kalman_filter_a5829988b29c25b3a6d5b6e7f05920dc0} 
+std\+::pair$<$ Eigen\+::\+Matrix\+Xd, Eigen\+::\+Matrix\+Xd $>$ {\bfseries estimator\+\_\+gain\+\_\+matrix} (Eigen\+::\+Matrix\+Xd big\+\_\+y, Eigen\+::\+Vector\+Xd y\+\_\+prediction, Eigen\+::\+Matrix\+Xd covariance\+\_\+estimates)
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a61a1b331c45d1717bca34ac40503be79}\label{class_sigma_point_kalman_filter_a61a1b331c45d1717bca34ac40503be79} 
+void {\bfseries set\+\_\+final\+\_\+state\+\_\+estimate} (Eigen\+::\+Matrix\+Xd L\+\_\+k, Eigen\+::\+Vector\+Xd y\+\_\+true, Eigen\+::\+Vector\+Xd y\+\_\+estimate)
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a4087ec73032954e669b6d9accbe144c3}\label{class_sigma_point_kalman_filter_a4087ec73032954e669b6d9accbe144c3} 
+void {\bfseries set\+\_\+final\+\_\+cov\+\_\+estimate} (Eigen\+::\+Matrix\+Xd L\+\_\+k, Eigen\+::\+Matrix\+Xd sigma\+\_\+y)
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a46f0dae171f9c8da21f1dde4a931fd0f}\label{class_sigma_point_kalman_filter_a46f0dae171f9c8da21f1dde4a931fd0f} 
+Eigen\+::\+Vector\+Xd {\bfseries solve\+\_\+one\+\_\+iteration} (Eigen\+::\+Vector\+Xd u, Eigen\+::\+Vector\+Xd y\+\_\+true)
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_ad5d2e6c01ee77711325c7f8df7ae8560}\label{class_sigma_point_kalman_filter_ad5d2e6c01ee77711325c7f8df7ae8560} 
+\mbox{\hyperlink{struct_simulation_results}{Simulation\+Results}} {\bfseries solve} (Eigen\+::\+Matrix\+Xd u, Eigen\+::\+Matrix\+Xd y\+\_\+true)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_sigma_point_kalman_filter_a56235f036c9abea46845244c13b9a01c}\label{class_sigma_point_kalman_filter_a56235f036c9abea46845244c13b9a01c} 
+static Eigen\+::\+Matrix\+Xd {\bfseries calc\+\_\+sqrt\+\_\+matrix} (Eigen\+::\+Matrix\+Xd i\+\_\+matrix)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_sigma_point_kalman_filter_a85d0a97e774273b3329e392c12116170}\index{SigmaPointKalmanFilter@{SigmaPointKalmanFilter}!calc\_and\_set\_state\_prediction@{calc\_and\_set\_state\_prediction}}
+\index{calc\_and\_set\_state\_prediction@{calc\_and\_set\_state\_prediction}!SigmaPointKalmanFilter@{SigmaPointKalmanFilter}}
+\doxysubsubsection{\texorpdfstring{calc\_and\_set\_state\_prediction()}{calc\_and\_set\_state\_prediction()}}
+{\footnotesize\ttfamily \label{class_sigma_point_kalman_filter_a85d0a97e774273b3329e392c12116170} 
+Eigen\+::\+Matrix\+Xd Sigma\+Point\+Kalman\+Filter\+::calc\+\_\+and\+\_\+set\+\_\+state\+\_\+prediction (\begin{DoxyParamCaption}\item[{Eigen\+::\+Vector\+Xd}]{u}{}\end{DoxyParamCaption})}
+
+
+
+This is the step 1a (first step) of the process. The state estimate is performed in this step. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & The process input. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Eigen\+::\+Matrix\+Xd 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/calc\+\_\+helpers/kalman\+\_\+filter.\+h\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/calc\+\_\+helpers/kalman\+\_\+filter.\+cpp\end{DoxyCompactItemize}

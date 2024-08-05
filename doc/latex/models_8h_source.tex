@@ -1,0 +1,99 @@
+\doxysection{models.\+h}
+\hypertarget{models_8h_source}{}\label{models_8h_source}\index{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/models.h@{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/models.h}}
+\mbox{\hyperlink{models_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ BMSLOGIC\_PROJECT\_MODELS\_H}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ BMSLOGIC\_PROJECT\_MODELS\_H}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <tuple>}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacegeneral__equations}{general\_equations}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespacegeneral__equations_ad5b4334fd70fd3916eb82f6f321b54b7}{delta\_cap}}(\textcolor{keywordtype}{double}\ Q,\ \textcolor{keywordtype}{double}\ I,\ \textcolor{keywordtype}{double}\ dt);}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespacegeneral__equations_af73bc36318216dfc58881c04afb38f42}{calc\_cap}}(\textcolor{keywordtype}{double}\ cap\_prev,\ \textcolor{keywordtype}{double}\ Q,\ \textcolor{keywordtype}{double}\ I,\ \textcolor{keywordtype}{double}\ dt);}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespacegeneral__equations_a6e04dd61353ff9161db4b8699d523d7f}{calc\_i\_0}}(\textcolor{keywordtype}{double}\ k,\ \textcolor{keywordtype}{double}\ c\_s\_max,\ \textcolor{keywordtype}{double}\ soc,\ \textcolor{keywordtype}{double}\ c\_e);}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{double}\ molar\_flux\_to\_current(\textcolor{keywordtype}{double}\ \&molar\_flux,\ \textcolor{keywordtype}{double}\ \&S,\ \textcolor{keywordtype}{char}\ electrode\_type);}
+\DoxyCodeLine{00027\ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00072\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_thevenin1_r_c}{Thevenin1RC}}}
+\DoxyCodeLine{00073\ \{}
+\DoxyCodeLine{00074\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{class_thevenin1_r_c}{Thevenin1RC}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{class_thevenin1_r_c}{\string~Thevenin1RC}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{double}\ soc\_next(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ soc\_prev,\ \textcolor{keywordtype}{double}\ Q,\ \textcolor{keywordtype}{double}\ eta)\ \{\ \textcolor{keywordflow}{return}\ soc\_prev\ -\/\ dt\ *\ eta\ *\ i\_app\ /\ (3600\ *\ Q);\ \}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{double}\ i\_R1\_next(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ i\_R1\_prev,\ \textcolor{keywordtype}{double}\ R1,\ \textcolor{keywordtype}{double}\ C1)\ \{\ \textcolor{keywordflow}{return}\ std::exp(-\/dt\ /\ (R1\ *\ C1))\ *\ i\_R1\_prev\ +\ (1\ -\/\ std::exp(-\/dt\ /\ (R1\ *\ C1)))\ *\ i\_app;\ \}}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{double}\ V(\textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ ocv,\ \textcolor{keywordtype}{double}\ R0,\ \textcolor{keywordtype}{double}\ R1,\ \textcolor{keywordtype}{double}\ i\_R1)\ \{\ \textcolor{keywordflow}{return}\ ocv\ -\/\ R1\ *\ i\_R1\ -\/\ R0\ *\ i\_app;\ \}}
+\DoxyCodeLine{00080\ \};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00089\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_e_s_c}{ESC}}}
+\DoxyCodeLine{00090\ \{}
+\DoxyCodeLine{00091\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{class_e_s_c}{ESC}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{class_e_s_c}{\string~ESC}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{comment}{//\ helper\ functions}}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{int}\ sign(\textcolor{keywordtype}{double}\ \&i\_number);}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{int}\ sign(\textcolor{keywordtype}{int}\ \&i\_number);}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{double}\ s(\textcolor{keywordtype}{double}\ \&i\_app,\ \textcolor{keywordtype}{double}\ \&s\_prev);}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{double}\ soc\_next(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ soc\_prev,\ \textcolor{keywordtype}{double}\ Q,\ \textcolor{keywordtype}{double}\ eta)\ \{\ \textcolor{keywordflow}{return}\ soc\_prev\ -\/\ dt\ *\ eta\ *\ i\_app\ /\ (3600\ *\ Q);\ \}}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{double}\ i\_R1\_next(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ i\_R1\_prev,\ \textcolor{keywordtype}{double}\ R1,\ \textcolor{keywordtype}{double}\ C1)\ \{\ \textcolor{keywordflow}{return}\ std::exp(-\/dt\ /\ (R1\ *\ C1))\ *\ i\_R1\_prev\ +\ (1\ -\/\ std::exp(-\/dt\ /\ (R1\ *\ C1)))\ *\ i\_app;\ \}}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{double}\ h\_next(\textcolor{keywordtype}{double}\ dt,\ \textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ eta,\ \textcolor{keywordtype}{double}\ gamma,\ \textcolor{keywordtype}{double}\ cap,\ \textcolor{keywordtype}{double}\ h\_prev);}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{double}\ v(\textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ ocv,\ \textcolor{keywordtype}{double}\ R0,\ \textcolor{keywordtype}{double}\ R1,\ \textcolor{keywordtype}{double}\ i\_R1,\ \textcolor{keywordtype}{double}\ m\_0,\ \textcolor{keywordtype}{double}\ m,\ \textcolor{keywordtype}{double}\ h,\ \textcolor{keywordtype}{double}\ s\_prev);}
+\DoxyCodeLine{00103\ \};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_over_potentials}{OverPotentials}}}
+\DoxyCodeLine{00106\ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{double}\ V;}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{double}\ OCV\_LIB;}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{double}\ elec\_p;}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{double}\ elec\_n;}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{double}\ R\_cell;}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{double}\ electrolyte;}
+\DoxyCodeLine{00113\ \};}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00120\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_s_p_model}{SPModel}}}
+\DoxyCodeLine{00121\ \{}
+\DoxyCodeLine{00122\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_s_p_model_aeb5f08df5e1a5504b20218436d490b9a}{molar\_flux\_electrode}}(\textcolor{keywordtype}{double}\ \&I,\ \textcolor{keywordtype}{double}\ \&S,\ \textcolor{keywordtype}{char}\ \&electrode\_type);}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_s_p_model_a0b016c49fe6a60107beaa951c7bc1788}{m}}(\textcolor{keywordtype}{double}\ I,\ \textcolor{keywordtype}{double}\ k,\ \textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{double}\ c\_max,\ \textcolor{keywordtype}{double}\ SOC,\ \textcolor{keywordtype}{double}\ c\_e);}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_s_p_model_a4f6ba13bc33a846e6776f90419104fa3}{calc\_terminal\_V}}(\textcolor{keywordtype}{double}\ OCP\_p,\ \textcolor{keywordtype}{double}\ OCP\_n,\ \textcolor{keywordtype}{double}\ m\_p,\ \textcolor{keywordtype}{double}\ m\_n,\ \textcolor{keywordtype}{double}\ R\_cell,\ \textcolor{keywordtype}{double}\ T,\ \textcolor{keywordtype}{double}\ I);}
+\DoxyCodeLine{00126\ \ \ \ \ \mbox{\hyperlink{struct_over_potentials}{OverPotentials}}\ calc\_overpotentials(\textcolor{keywordtype}{double}\ OCP\_p,\ \textcolor{keywordtype}{double}\ OCP\_n,\ \textcolor{keywordtype}{double}\ m\_p,\ \textcolor{keywordtype}{double}\ m\_n,\ \textcolor{keywordtype}{double}\ R\_cell,\ \textcolor{keywordtype}{double}\ T,\ \textcolor{keywordtype}{double}\ I);}
+\DoxyCodeLine{00127\ \};}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00134\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_e_s_p_model}{ESPModel}}}
+\DoxyCodeLine{00135\ \{}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{double}\ molar\_flux\_electrode(\textcolor{keywordtype}{double}\ \&i\_app,\ \textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{char}\ electrode\_type);}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{double}\ a\_s(\textcolor{keywordtype}{double}\ epsilon,\ \textcolor{keywordtype}{double}\ R);}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespace_e_s_p_model_a18a8b24438a46675524339a0f79c73c6}{i\_0}}(\textcolor{keywordtype}{double}\ k,\ \textcolor{keywordtype}{double}\ c\_s\_max,\ \textcolor{keywordtype}{double}\ c\_e,\ \textcolor{keywordtype}{double}\ soc\_surf);}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{double}\ m(\textcolor{keywordtype}{double}\ i\_app,\ \textcolor{keywordtype}{double}\ k,\ \textcolor{keywordtype}{double}\ S,\ \textcolor{keywordtype}{double}\ c\_s\_max,\ \textcolor{keywordtype}{double}\ c\_e,\ \textcolor{keywordtype}{double}\ soc\_surf);}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespace_e_s_p_model_a08d663264503719ad1d5f40323bc5401}{calc\_terminal\_voltage}}(\textcolor{keywordtype}{double}\ ocp\_p,\ \textcolor{keywordtype}{double}\ ocp\_n,\ \textcolor{keywordtype}{double}\ m\_p,\ \textcolor{keywordtype}{double}\ m\_n,}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ L\_n,\ \textcolor{keywordtype}{double}\ L\_sep,\ \textcolor{keywordtype}{double}\ L\_p,}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ kappa\_eff\_avg,\ \textcolor{keywordtype}{double}\ k\_f\_avg,\ \textcolor{keywordtype}{double}\ t\_c,\ \textcolor{keywordtype}{double}\ R\_cell,}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ c\_e\_n,\ \textcolor{keywordtype}{double}\ c\_e\_p,}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ temp,\ \textcolor{keywordtype}{double}\ i\_app);}
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{struct_over_potentials}{OverPotentials}}\ calc\_overpotentials(\textcolor{keywordtype}{double}\ ocp\_p,\ \textcolor{keywordtype}{double}\ ocp\_n,\ \textcolor{keywordtype}{double}\ m\_p,\ \textcolor{keywordtype}{double}\ m\_n,}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ L\_n,\ \textcolor{keywordtype}{double}\ L\_sep,\ \textcolor{keywordtype}{double}\ L\_p,}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ kappa\_eff\_avg,\ \textcolor{keywordtype}{double}\ k\_f\_avg,\ \textcolor{keywordtype}{double}\ t\_c,\ \textcolor{keywordtype}{double}\ R\_cell,}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ c\_e\_n,\ \textcolor{keywordtype}{double}\ c\_e\_p,}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ temp,\ \textcolor{keywordtype}{double}\ i\_app);}
+\DoxyCodeLine{00150\ \};}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00161\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_r_o_m_s_e_i}{ROMSEI}}}
+\DoxyCodeLine{00162\ \{}
+\DoxyCodeLine{00163\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00164\ \ \ \ \ \mbox{\hyperlink{class_r_o_m_s_e_i}{ROMSEI}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00165\ \ \ \ \ \mbox{\hyperlink{class_r_o_m_s_e_i}{\string~ROMSEI}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00166\ \ \ \ \ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{comment}{//\ calculation\ methods}}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_r_o_m_s_e_i_a3decf6b888ac615107e4e3e65ac3e615}{calc\_j\_i}}(\textcolor{keywordtype}{double}\ j\_tot,\ \textcolor{keywordtype}{double}\ j\_s);}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_r_o_m_s_e_i_a840efe9fd02dd2363e07265eb755bf15}{calc\_eta\_n}}(\textcolor{keywordtype}{double}\ temp,\ \textcolor{keywordtype}{double}\ j\_i,\ \textcolor{keywordtype}{double}\ i\_0);}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_r_o_m_s_e_i_a47701ecda2bfdd9ba6523bda0c407f64}{calc\_eta\_s}}(\textcolor{keywordtype}{double}\ eta\_n,\ \textcolor{keywordtype}{double}\ OCP\_n,\ \textcolor{keywordtype}{double}\ OCP\_s);}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_r_o_m_s_e_i_a92d59816449fe09f70cd9ee47cf22698}{calc\_j\_s}}(\textcolor{keywordtype}{double}\ temp,\ \textcolor{keywordtype}{double}\ i\_0\_s,\ \textcolor{keywordtype}{double}\ eta\_s);}
+\DoxyCodeLine{00172\ \};}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BMSLOGIC\_PROJECT\_MODELS\_H}}
+
+\end{DoxyCode}

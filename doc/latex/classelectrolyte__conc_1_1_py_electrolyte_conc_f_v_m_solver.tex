@@ -1,0 +1,143 @@
+\doxysection{electrolyte\+\_\+conc.\+Py\+Electrolyte\+Conc\+FVMSolver Class Reference}
+\hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver}{}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver}\index{electrolyte\_conc.PyElectrolyteConcFVMSolver@{electrolyte\_conc.PyElectrolyteConcFVMSolver}}
+Inheritance diagram for electrolyte\+\_\+conc.\+Py\+Electrolyte\+Conc\+FVMSolver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_afcb08e56c349c2ff973b75a3398806d6}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_afcb08e56c349c2ff973b75a3398806d6} 
+{\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self, \mbox{\hyperlink{classcoords_1_1_py_electrolyte_f_v_m_coordinates}{Py\+Electrolyte\+FVMCoordinates}} fvm\+\_\+co\+\_\+ords, float c\+\_\+e\+\_\+init, float transference, float epsilon\+\_\+en, float epsilon\+\_\+esep, float epsilon\+\_\+ep, float a\+\_\+sn, float a\+\_\+sp, float D\+\_\+e, float brugg)
+\item 
+np.\+ndarray \mbox{\hyperlink{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_ad9671dab0289c149c9c50a74ffd39818}{array\+\_\+epsilon\+\_\+e}} (self)
+\item 
+npt.\+Array\+Like \mbox{\hyperlink{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_acf684051ff00ef94264bf71daebc0472}{array\+\_\+\+D\+\_\+eff}} (self)
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_acba459b2e5eb2edf31bb0fd68f301205}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_acba459b2e5eb2edf31bb0fd68f301205} 
+npt.\+Array\+Like {\bfseries array\+\_\+a\+\_\+s} (self)
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_ad48020d95717a1d044b1886653d5d378}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_ad48020d95717a1d044b1886653d5d378} 
+npt.\+Array\+Like {\bfseries array\+\_\+c\+\_\+e} (self)
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a571e2ded30e7fbe6114128084a250d95}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a571e2ded30e7fbe6114128084a250d95} 
+None {\bfseries array\+\_\+c\+\_\+e} (self, np.\+ndarray new\+\_\+array\+\_\+c\+\_\+e\+\_\+prev)
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_aeb5d2434a88441f44ec14b0dcbb7b80c}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_aeb5d2434a88441f44ec14b0dcbb7b80c} 
+tuple\mbox{[}list\mbox{[}float\mbox{]}, list\mbox{[}float\mbox{]}, list\mbox{[}float\mbox{]}\mbox{]} {\bfseries diags} (self, float dt)
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a1f3e48c3ae70f9ccb7374f9ca2edf15a}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a1f3e48c3ae70f9ccb7374f9ca2edf15a} 
+npt.\+Array\+Like {\bfseries M\+\_\+ce} (self, dt)
+\item 
+npt.\+Array\+Like \mbox{\hyperlink{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a65a5e0231e75354f4df26ddf77c9066e}{ce\+\_\+j\+\_\+vec}} (self, npt.\+Array\+Like c\+\_\+prev, npt.\+Array\+Like j, float dt)
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a1f505323ddd771df5853b651f93da6cb}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a1f505323ddd771df5853b651f93da6cb} 
+None {\bfseries solve\+\_\+ce} (self, npt.\+Array\+Like j, float dt, str solver\+\_\+method=\textquotesingle{}TDMA\textquotesingle{})
+\item 
+float \mbox{\hyperlink{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_aa351ca6f38ffc611e1d09c1b6757632f}{extrapolate\+\_\+conc}} (self, float L\+\_\+value)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_afb544093fdb268bf6e93994087e12040}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_afb544093fdb268bf6e93994087e12040} 
+{\bfseries co\+\_\+ords}
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_ac0ec95cf70d64b7d6538348c9c36dece}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_ac0ec95cf70d64b7d6538348c9c36dece} 
+{\bfseries t\+\_\+c}
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_adeab53775483229abbd8a393b9596b83}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_adeab53775483229abbd8a393b9596b83} 
+float {\bfseries c\+\_\+e\+\_\+init}
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_ae2ab2bb14c43965a6b49d85758570c0e}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_ae2ab2bb14c43965a6b49d85758570c0e} 
+{\bfseries array\+\_\+c\+\_\+e\+\_\+}
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a5a4524b82f25a469344048323aa29d23}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a5a4524b82f25a469344048323aa29d23} 
+float {\bfseries epsilon\+\_\+en}
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_aa740bb7557aa76cd924b49b119036853}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_aa740bb7557aa76cd924b49b119036853} 
+float {\bfseries epsilon\+\_\+esep}
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_abb61213e4260104cb3475dcbb53ce818}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_abb61213e4260104cb3475dcbb53ce818} 
+float {\bfseries epsilon\+\_\+ep}
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a6d7f67a9a18f90a59b2ba3923c98ca08}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a6d7f67a9a18f90a59b2ba3923c98ca08} 
+float {\bfseries a\+\_\+sn}
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a3f2a2f1a2b15a2ecd06e70f173f0a209}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a3f2a2f1a2b15a2ecd06e70f173f0a209} 
+float {\bfseries a\+\_\+sp}
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a295c9e0ba40b0357c4f27aca0ad9f0f9}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a295c9e0ba40b0357c4f27aca0ad9f0f9} 
+float {\bfseries D\+\_\+e}
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a8edc4626d147df17c1dd58827c607550}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a8edc4626d147df17c1dd58827c607550} 
+float {\bfseries brugg}
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a54d9f23aa53f20209d28de5d3b5c3a32}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a54d9f23aa53f20209d28de5d3b5c3a32} 
+{\bfseries brugg}
+\item 
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a81f817ebc240dd098220889ff0dea19d}\label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a81f817ebc240dd098220889ff0dea19d} 
+{\bfseries array\+\_\+c\+\_\+e}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}This solver solves for the lithium-ion concentration in the electrolyte across the battery cell thickness. It uses
+the finite volume method (FVM) as indicated by Han et al. [1].
+
+In their paper, Han et al. defined the flux in terms of A/m2/s. Here, the relevant equations have been modified
+to refer to flux in terms of mol/m2/s.
+
+[1] Han, S., Tang, Y., & Khaleghi Rahimian, S. (2021). A numerically efficient method of solving the full-order
+pseudo-2-dimensional (P2D) Li-ion cell model. Journal of Power Sources, 490, 229571.
+https://doi.org/10.1016/J.JPOWSOUR.2021.229571Han, S., Tang, Y., & Khaleghi Rahimian, S. (2021).
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_acf684051ff00ef94264bf71daebc0472}\index{electrolyte\_conc.PyElectrolyteConcFVMSolver@{electrolyte\_conc.PyElectrolyteConcFVMSolver}!array\_D\_eff@{array\_D\_eff}}
+\index{array\_D\_eff@{array\_D\_eff}!electrolyte\_conc.PyElectrolyteConcFVMSolver@{electrolyte\_conc.PyElectrolyteConcFVMSolver}}
+\doxysubsubsection{\texorpdfstring{array\_D\_eff()}{array\_D\_eff()}}
+{\footnotesize\ttfamily \label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_acf684051ff00ef94264bf71daebc0472} 
+ npt.\+Array\+Like electrolyte\+\_\+conc.\+Py\+Electrolyte\+Conc\+FVMSolver.\+array\+\_\+\+D\+\_\+eff (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns an array containing the effective electrolyte diffusivity at spatial FVM points.
+:return:
+\end{DoxyVerb}
+ \Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_ad9671dab0289c149c9c50a74ffd39818}\index{electrolyte\_conc.PyElectrolyteConcFVMSolver@{electrolyte\_conc.PyElectrolyteConcFVMSolver}!array\_epsilon\_e@{array\_epsilon\_e}}
+\index{array\_epsilon\_e@{array\_epsilon\_e}!electrolyte\_conc.PyElectrolyteConcFVMSolver@{electrolyte\_conc.PyElectrolyteConcFVMSolver}}
+\doxysubsubsection{\texorpdfstring{array\_epsilon\_e()}{array\_epsilon\_e()}}
+{\footnotesize\ttfamily \label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_ad9671dab0289c149c9c50a74ffd39818} 
+ np.\+ndarray electrolyte\+\_\+conc.\+Py\+Electrolyte\+Conc\+FVMSolver.\+array\+\_\+epsilon\+\_\+e (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns an array containing the volume fraction of the electrolyte at each spatial region
+:return:
+\end{DoxyVerb}
+ \Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a65a5e0231e75354f4df26ddf77c9066e}\index{electrolyte\_conc.PyElectrolyteConcFVMSolver@{electrolyte\_conc.PyElectrolyteConcFVMSolver}!ce\_j\_vec@{ce\_j\_vec}}
+\index{ce\_j\_vec@{ce\_j\_vec}!electrolyte\_conc.PyElectrolyteConcFVMSolver@{electrolyte\_conc.PyElectrolyteConcFVMSolver}}
+\doxysubsubsection{\texorpdfstring{ce\_j\_vec()}{ce\_j\_vec()}}
+{\footnotesize\ttfamily \label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_a65a5e0231e75354f4df26ddf77c9066e} 
+ npt.\+Array\+Like electrolyte\+\_\+conc.\+Py\+Electrolyte\+Conc\+FVMSolver.\+ce\+\_\+j\+\_\+vec (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{npt.\+Array\+Like}]{c\+\_\+prev}{, }\item[{npt.\+Array\+Like}]{j}{, }\item[{float}]{dt}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns column vector, with the size (nx1).
+:param c_prev:
+:param j:
+:param dt:
+:return:
+\end{DoxyVerb}
+ \Hypertarget{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_aa351ca6f38ffc611e1d09c1b6757632f}\index{electrolyte\_conc.PyElectrolyteConcFVMSolver@{electrolyte\_conc.PyElectrolyteConcFVMSolver}!extrapolate\_conc@{extrapolate\_conc}}
+\index{extrapolate\_conc@{extrapolate\_conc}!electrolyte\_conc.PyElectrolyteConcFVMSolver@{electrolyte\_conc.PyElectrolyteConcFVMSolver}}
+\doxysubsubsection{\texorpdfstring{extrapolate\_conc()}{extrapolate\_conc()}}
+{\footnotesize\ttfamily \label{classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver_aa351ca6f38ffc611e1d09c1b6757632f} 
+ float electrolyte\+\_\+conc.\+Py\+Electrolyte\+Conc\+FVMSolver.\+extrapolate\+\_\+conc (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{L\+\_\+value}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns the electrolyte conc. [mol/m3] at the specified value L_value.
+:param L_value: float representing the cross-sectional length of the battery cell.
+:return: (float) electrolyte conc [mol/m3] at the specified value of L_value.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers/electrolyte\+\_\+conc.\+py\end{DoxyCompactItemize}

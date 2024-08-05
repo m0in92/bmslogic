@@ -1,0 +1,150 @@
+\doxysection{electrode\+\_\+conc.\+Py\+CNSolver Class Reference}
+\hypertarget{classelectrode__conc_1_1_py_c_n_solver}{}\label{classelectrode__conc_1_1_py_c_n_solver}\index{electrode\_conc.PyCNSolver@{electrode\_conc.PyCNSolver}}
+Inheritance diagram for electrode\+\_\+conc.\+Py\+CNSolver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classelectrode__conc_1_1_py_c_n_solver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classelectrode__conc_1_1_py_c_n_solver_a685231e1af7e6864a2ba46208460508d}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, float c\+\_\+init, str electrode\+\_\+type, int spatial\+\_\+grid\+\_\+points=100)
+\item 
+float \mbox{\hyperlink{classelectrode__conc_1_1_py_c_n_solver_a8c19a74a1eeafe0f4d1d5ee5985f68f6}{dr}} (self, float R)
+\item 
+float \mbox{\hyperlink{classelectrode__conc_1_1_py_c_n_solver_a5ce9f56b94d3dc89a995d79800bf6b8e}{A}} (self, float dt, float R, float D)
+\item 
+float \mbox{\hyperlink{classelectrode__conc_1_1_py_c_n_solver_af586a1f6321d3168bb4f3214a9310980}{B}} (self, float dt, float R, float D)
+\item 
+np.\+ndarray \mbox{\hyperlink{classelectrode__conc_1_1_py_c_n_solver_acf11d76fad93d176cd048934e4ae2348}{array\+\_\+R}} (self, float R)
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_c_n_solver_a878ccdb3db504439675a2343047d1276}\label{classelectrode__conc_1_1_py_c_n_solver_a878ccdb3db504439675a2343047d1276} 
+np.\+ndarray {\bfseries M} (self, float dt, float R, float D)
+\item 
+\mbox{\hyperlink{classelectrode__conc_1_1_py_c_n_solver_aa70bbaed6c89d572a0568fd57c17c0dc}{solve}} (self, float dt, float i\+\_\+app, float R, float S, float D, str solver\+\_\+method)
+\item 
+float \mbox{\hyperlink{classelectrode__conc_1_1_py_c_n_solver_a3d6a6f991eb37bfe3bd09d71215e332c}{\+\_\+\+\_\+call\+\_\+\+\_\+}} (self, float dt, float t\+\_\+prev, float i\+\_\+app, float R, float S, float D\+\_\+s, float c\+\_\+smax, str solver\+\_\+method="{}TDMA"{})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_c_n_solver_a149ffece5fe47b060f08b9072a26299f}\label{classelectrode__conc_1_1_py_c_n_solver_a149ffece5fe47b060f08b9072a26299f} 
+{\bfseries K}
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_c_n_solver_ad0c4dcc81934c4f62f8ee2e3e8e27dd1}\label{classelectrode__conc_1_1_py_c_n_solver_ad0c4dcc81934c4f62f8ee2e3e8e27dd1} 
+np.\+ndarray {\bfseries c\+\_\+prev}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classelectrode__conc_1_1_py_base_electrode_conc_solver}{electrode\+\_\+conc.\+Py\+Base\+Electrode\+Conc\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries electrode\+\_\+type}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_c_n_solver_a6df3760772e7aab690ab4cf01441537d}\label{classelectrode__conc_1_1_py_c_n_solver_a6df3760772e7aab690ab4cf01441537d} 
+np.\+ndarray {\bfseries \+\_\+\+LHS\+\_\+diag\+\_\+elements} (self, float dt, float R, float D)
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_c_n_solver_a60bb383467ec42946f415dd8eaa0886c}\label{classelectrode__conc_1_1_py_c_n_solver_a60bb383467ec42946f415dd8eaa0886c} 
+np.\+ndarray {\bfseries \+\_\+\+LHS\+\_\+lower\+\_\+diag} (self, float dt, float R, float D)
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_c_n_solver_a2c84e5b4b43c642b64cefa5a15391b23}\label{classelectrode__conc_1_1_py_c_n_solver_a2c84e5b4b43c642b64cefa5a15391b23} 
+np.\+ndarray {\bfseries \+\_\+\+LHS\+\_\+upper\+\_\+diag} (self, float dt, float R, float D)
+\item 
+\Hypertarget{classelectrode__conc_1_1_py_c_n_solver_a030e2110e257dfc8ca84bd6a55219014}\label{classelectrode__conc_1_1_py_c_n_solver_a030e2110e257dfc8ca84bd6a55219014} 
+{\bfseries \+\_\+\+RHS\+\_\+array} (self, float j, float dt, float R, float D)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Crank Nickelson Scheme for solving for spherical diffusion in solid electrode in lithium-ion batteries models. The
+associated PDE uses the mass transport with symmetry condition imposed at r=0 and flux boundary condition at r=R.
+
+The PDE is:
+dx/dt = (D/(R^2 * r_scaled^2)) * d(r_scaled^2 * dx/dr_scaled)/dr_scaled
+
+with BC:
+dx/dr_scaled = 0 at r_scaled=0
+dx/dr_scaled = -jR/D*c_smax at r_scaled=1
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classelectrode__conc_1_1_py_c_n_solver_a685231e1af7e6864a2ba46208460508d}\index{electrode\_conc.PyCNSolver@{electrode\_conc.PyCNSolver}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!electrode\_conc.PyCNSolver@{electrode\_conc.PyCNSolver}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_c_n_solver_a685231e1af7e6864a2ba46208460508d} 
+electrode\+\_\+conc.\+Py\+CNSolver.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{c\+\_\+init}{, }\item[{str}]{electrode\+\_\+type}{, }\item[{int }]{spatial\+\_\+grid\+\_\+points}{ = {\ttfamily 100}}\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classelectrode__conc_1_1_py_base_electrode_conc_solver}{electrode\+\_\+conc.\+Py\+Base\+Electrode\+Conc\+Solver}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classelectrode__conc_1_1_py_c_n_solver_a3d6a6f991eb37bfe3bd09d71215e332c}\index{electrode\_conc.PyCNSolver@{electrode\_conc.PyCNSolver}!\_\_call\_\_@{\_\_call\_\_}}
+\index{\_\_call\_\_@{\_\_call\_\_}!electrode\_conc.PyCNSolver@{electrode\_conc.PyCNSolver}}
+\doxysubsubsection{\texorpdfstring{\_\_call\_\_()}{\_\_call\_\_()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_c_n_solver_a3d6a6f991eb37bfe3bd09d71215e332c} 
+ float electrode\+\_\+conc.\+Py\+CNSolver.\+\_\+\+\_\+call\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{dt}{, }\item[{float}]{t\+\_\+prev}{, }\item[{float}]{i\+\_\+app}{, }\item[{float}]{R}{, }\item[{float}]{S}{, }\item[{float}]{D\+\_\+s}{, }\item[{float}]{c\+\_\+smax}{, }\item[{str }]{solver\+\_\+method}{ = {\ttfamily "{}TDMA"{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns the electrode surface SOC
+\end{DoxyVerb}
+ \Hypertarget{classelectrode__conc_1_1_py_c_n_solver_a5ce9f56b94d3dc89a995d79800bf6b8e}\index{electrode\_conc.PyCNSolver@{electrode\_conc.PyCNSolver}!A@{A}}
+\index{A@{A}!electrode\_conc.PyCNSolver@{electrode\_conc.PyCNSolver}}
+\doxysubsubsection{\texorpdfstring{A()}{A()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_c_n_solver_a5ce9f56b94d3dc89a995d79800bf6b8e} 
+ float electrode\+\_\+conc.\+Py\+CNSolver.\+A (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{dt}{, }\item[{float}]{R}{, }\item[{float}]{D}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Value of the constant A (delta_t * D / delta_r^2)
+:return: Returns the value of the A constant, used for the forming the matrices
+\end{DoxyVerb}
+ \Hypertarget{classelectrode__conc_1_1_py_c_n_solver_acf11d76fad93d176cd048934e4ae2348}\index{electrode\_conc.PyCNSolver@{electrode\_conc.PyCNSolver}!array\_R@{array\_R}}
+\index{array\_R@{array\_R}!electrode\_conc.PyCNSolver@{electrode\_conc.PyCNSolver}}
+\doxysubsubsection{\texorpdfstring{array\_R()}{array\_R()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_c_n_solver_acf11d76fad93d176cd048934e4ae2348} 
+ np.\+ndarray electrode\+\_\+conc.\+Py\+CNSolver.\+array\+\_\+R (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{R}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Array containing the values of r at every grid point.
+:return: Array containing the values of r at every grid point.
+\end{DoxyVerb}
+ \Hypertarget{classelectrode__conc_1_1_py_c_n_solver_af586a1f6321d3168bb4f3214a9310980}\index{electrode\_conc.PyCNSolver@{electrode\_conc.PyCNSolver}!B@{B}}
+\index{B@{B}!electrode\_conc.PyCNSolver@{electrode\_conc.PyCNSolver}}
+\doxysubsubsection{\texorpdfstring{B()}{B()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_c_n_solver_af586a1f6321d3168bb4f3214a9310980} 
+ float electrode\+\_\+conc.\+Py\+CNSolver.\+B (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{dt}{, }\item[{float}]{R}{, }\item[{float}]{D}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Value of constant B (delta_t * D / (2 * delta_r))
+:return:
+\end{DoxyVerb}
+ \Hypertarget{classelectrode__conc_1_1_py_c_n_solver_a8c19a74a1eeafe0f4d1d5ee5985f68f6}\index{electrode\_conc.PyCNSolver@{electrode\_conc.PyCNSolver}!dr@{dr}}
+\index{dr@{dr}!electrode\_conc.PyCNSolver@{electrode\_conc.PyCNSolver}}
+\doxysubsubsection{\texorpdfstring{dr()}{dr()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_c_n_solver_a8c19a74a1eeafe0f4d1d5ee5985f68f6} 
+ float electrode\+\_\+conc.\+Py\+CNSolver.\+dr (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{R}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Difference in radial coordinate [m].
+:param R: electrode particle radius
+:return:
+\end{DoxyVerb}
+ \Hypertarget{classelectrode__conc_1_1_py_c_n_solver_aa70bbaed6c89d572a0568fd57c17c0dc}\index{electrode\_conc.PyCNSolver@{electrode\_conc.PyCNSolver}!solve@{solve}}
+\index{solve@{solve}!electrode\_conc.PyCNSolver@{electrode\_conc.PyCNSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily \label{classelectrode__conc_1_1_py_c_n_solver_aa70bbaed6c89d572a0568fd57c17c0dc} 
+electrode\+\_\+conc.\+Py\+CNSolver.\+solve (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{dt}{, }\item[{float}]{i\+\_\+app}{, }\item[{float}]{R}{, }\item[{float}]{S}{, }\item[{float}]{D}{, }\item[{str}]{solver\+\_\+method}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Solves for the lithium-ion concentration after dt. It then updates the class instance's c_prev attribute.
+:param c_prev: (numpy array) matrix (Kx1) containing the concentrations at t_prev [mol/m3]
+:param j: (float) lithium flux at r=R [mol/m2/s]
+:param dt: (float) time difference [s]
+:param R: (float) electrode particle radius [m]
+:param D: (float) electrode diffusivity [m2/s]
+:return:
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers/electrode\+\_\+conc.\+py\end{DoxyCompactItemize}

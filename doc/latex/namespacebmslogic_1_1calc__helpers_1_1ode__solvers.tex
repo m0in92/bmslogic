@@ -1,0 +1,45 @@
+\doxysection{bmslogic.\+calc\+\_\+helpers.\+ode\+\_\+solvers Namespace Reference}
+\hypertarget{namespacebmslogic_1_1calc__helpers_1_1ode__solvers}{}\label{namespacebmslogic_1_1calc__helpers_1_1ode__solvers}\index{bmslogic.calc\_helpers.ode\_solvers@{bmslogic.calc\_helpers.ode\_solvers}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{namespacebmslogic_1_1calc__helpers_1_1ode__solvers_a1e96909c1f4b082591dcf4281530e2c1}\label{namespacebmslogic_1_1calc__helpers_1_1ode__solvers_a1e96909c1f4b082591dcf4281530e2c1} 
+{\bfseries euler} (func, t\+\_\+prev, y\+\_\+prev, step\+\_\+size)
+\item 
+\mbox{\hyperlink{namespacebmslogic_1_1calc__helpers_1_1ode__solvers_a1290c8a788dcdcf7185357b8d3f3959c}{rk4}} (Callable func, float t\+\_\+prev, float y\+\_\+prev, float step\+\_\+size)
+\item 
+npt.\+Array\+Like \mbox{\hyperlink{namespacebmslogic_1_1calc__helpers_1_1ode__solvers_a9fbf619a1bfc0abaa5db3708111fa2d2}{TDMAsolver}} (npt.\+Array\+Like l\+\_\+diag, npt.\+Array\+Like diag, npt.\+Array\+Like u\+\_\+diag, npt.\+Array\+Like col\+\_\+vec)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Contains the functionalities for performing ODEs using different solvers.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacebmslogic_1_1calc__helpers_1_1ode__solvers_a1290c8a788dcdcf7185357b8d3f3959c}\index{bmslogic.calc\_helpers.ode\_solvers@{bmslogic.calc\_helpers.ode\_solvers}!rk4@{rk4}}
+\index{rk4@{rk4}!bmslogic.calc\_helpers.ode\_solvers@{bmslogic.calc\_helpers.ode\_solvers}}
+\doxysubsubsection{\texorpdfstring{rk4()}{rk4()}}
+{\footnotesize\ttfamily \label{namespacebmslogic_1_1calc__helpers_1_1ode__solvers_a1290c8a788dcdcf7185357b8d3f3959c} 
+bmslogic.\+calc\+\_\+helpers.\+ode\+\_\+solvers.\+rk4 (\begin{DoxyParamCaption}\item[{Callable}]{func}{, }\item[{float}]{t\+\_\+prev}{, }\item[{float}]{y\+\_\+prev}{, }\item[{float}]{step\+\_\+size}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Solves for the value of y in the next time step for a ODE
+            dy/dt = f(y,t)
+:param func: (Callable) function that takes y and t as its input arguments (in that order).
+:param t_prev: The value of time in the previous time step [s]
+:param y_prev: The value of y in the previous time step
+:param step_size: the difference in time between the current and previous time steps [s]
+:return: The value of y at the next time step
+\end{DoxyVerb}
+ \Hypertarget{namespacebmslogic_1_1calc__helpers_1_1ode__solvers_a9fbf619a1bfc0abaa5db3708111fa2d2}\index{bmslogic.calc\_helpers.ode\_solvers@{bmslogic.calc\_helpers.ode\_solvers}!TDMAsolver@{TDMAsolver}}
+\index{TDMAsolver@{TDMAsolver}!bmslogic.calc\_helpers.ode\_solvers@{bmslogic.calc\_helpers.ode\_solvers}}
+\doxysubsubsection{\texorpdfstring{TDMAsolver()}{TDMAsolver()}}
+{\footnotesize\ttfamily \label{namespacebmslogic_1_1calc__helpers_1_1ode__solvers_a9fbf619a1bfc0abaa5db3708111fa2d2} 
+ npt.\+Array\+Like bmslogic.\+calc\+\_\+helpers.\+ode\+\_\+solvers.\+TDMAsolver (\begin{DoxyParamCaption}\item[{npt.\+Array\+Like}]{l\+\_\+diag}{, }\item[{npt.\+Array\+Like}]{diag}{, }\item[{npt.\+Array\+Like}]{u\+\_\+diag}{, }\item[{npt.\+Array\+Like}]{col\+\_\+vec}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}TDMA (a.k.a Thomas algorithm) solver for tridiagonal system of equations.
+Code Modified from:
+https://gist.github.com/cbellei/8ab3ab8551b8dfc8b081c518ccd9ada9?permalink_comment_id=3109807
+\end{DoxyVerb}
+ 

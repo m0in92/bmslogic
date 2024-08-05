@@ -1,0 +1,130 @@
+\doxysection{cyclers.\+h}
+\hypertarget{cyclers_8h_source}{}\label{cyclers_8h_source}\index{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/cyclers.h@{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/cyclers.h}}
+\mbox{\hyperlink{cyclers_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ BMSLOGIC\_PROJECT\_CYCLERS\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ BMSLOGIC\_PROJECT\_CYCLERS\_H}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{owl_8h}{extern/owl.h}}"{}}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_base_cycler}{BaseCycler}}}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{class_base_cycler_a6e79dec7e3be5f5348051b8381347aca}{BaseCycler}}();}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_base_cycler}{\string~BaseCycler}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//\ public\ variables}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{double}\ time\_elapsed\ =\ 0.0;}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{double}\ SOC\_LIB;}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{double}\ SOC\_LIB\_min;}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{double}\ SOC\_LIB\_max;}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{double}\ V\_min;}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{double}\ V\_max;}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{double}\ discharge\_current;}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{double}\ charge\_current;}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{double}\ rest\_time;}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{int}\ num\_cycles;}
+\DoxyCodeLine{00040\ \ \ \ \ std::vector<double>\ m\_t\_vector;}
+\DoxyCodeLine{00041\ \ \ \ \ std::vector<double>\ m\_current\_vector;}
+\DoxyCodeLine{00042\ \ \ \ \ std::vector<std::string>\ cycle\_steps;}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{comment}{//\ getters}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_time\_elapsed()\ \{\ \textcolor{keywordflow}{return}\ time\_elapsed;\ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_V\_min()\ \{\ \textcolor{keywordflow}{return}\ V\_min;\ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_V\_max()\ \{\ \textcolor{keywordflow}{return}\ V\_max;\ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_rest\_time()\ \{\ \textcolor{keywordflow}{return}\ rest\_time;\ \}}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{int}\ get\_num\_cycles()\ \{\ \textcolor{keywordflow}{return}\ num\_cycles;\ \}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{comment}{//\ setters}}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_time\_elapsed(\textcolor{keywordtype}{double}\ time\_elapsed\_new)\ \{\ time\_elapsed\ =\ time\_elapsed\_new;\ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_V\_min(\textcolor{keywordtype}{double}\ V\_min\_new)\ \{\ V\_min\ =\ V\_min\_new;\ \}}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_V\_max(\textcolor{keywordtype}{double}\ \&V\_max\_new)\ \{\ V\_max\ =\ V\_max\_new;\ \}}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_rest\_time(\textcolor{keywordtype}{double}\ \&rest\_time\_new)\ \{\ rest\_time\ =\ rest\_time\_new;\ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_num\_cycles(\textcolor{keywordtype}{int}\ \&num\_cycles\_new)\ \{\ num\_cycles\ =\ num\_cycles\_new;\ \}}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{comment}{//\ Helper/calculation\ methods}}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_base_cycler_a1c0686132a51e7355e9818cc63320ab3}{get\_current}}(std::string\ cycling\_step,\ \textcolor{keywordtype}{int}\ time\_step);}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_base_cycler_a9b2b9fa59eed8a1f3750289cf0bd9061}{reset\_time\_elapsed}}();}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00065\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_discharge}{Discharge}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_base_cycler}{BaseCycler}}}
+\DoxyCodeLine{00066\ \{}
+\DoxyCodeLine{00067\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{class_discharge}{Discharge}}(\textcolor{keywordtype}{double}\ discharge\_current,\ \textcolor{keywordtype}{double}\ V\_min,\ \textcolor{keywordtype}{double}\ SOC\_LIB\_min,\ \textcolor{keywordtype}{double}\ SOC\_LIB);}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{class_discharge}{\string~Discharge}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00070\ \};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00077\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_discharge_rest}{DischargeRest}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_base_cycler}{BaseCycler}}}
+\DoxyCodeLine{00078\ \{}
+\DoxyCodeLine{00079\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{class_discharge_rest}{DischargeRest}}(\textcolor{keywordtype}{double}\ i\_discharge\_current,\ \textcolor{keywordtype}{double}\ i\_V\_min,\ \textcolor{keywordtype}{double}\ i\_soc\_lib\_min,\ \textcolor{keywordtype}{double}\ i\_soc\_lib,\ \textcolor{keywordtype}{double}\ i\_rest\_time);}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{class_discharge_rest}{\string~DischargeRest}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00082\ \};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00089\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_charge}{Charge}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_base_cycler}{BaseCycler}}}
+\DoxyCodeLine{00090\ \{}
+\DoxyCodeLine{00091\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{class_charge}{Charge}}(\textcolor{keywordtype}{double}\ i\_charge\_current,\ \textcolor{keywordtype}{double}\ i\_V\_max,\ \textcolor{keywordtype}{double}\ i\_soc\_lib\_max,\ \textcolor{keywordtype}{double}\ i\_soc);}
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{class_charge}{\string~Charge}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00094\ \};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_charge_rest}{ChargeRest}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_base_cycler}{BaseCycler}}}
+\DoxyCodeLine{00097\ \{}
+\DoxyCodeLine{00098\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00099\ \ \ \ \ \mbox{\hyperlink{class_charge_rest}{ChargeRest}}(\textcolor{keywordtype}{double}\ i\_charge\_current,\ \textcolor{keywordtype}{double}\ i\_V\_min,\ \textcolor{keywordtype}{double}\ i\_soc\_lib\_max,\ \textcolor{keywordtype}{double}\ i\_soc,\ \textcolor{keywordtype}{double}\ i\_rest\_time);}
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{class_charge_rest}{\string~ChargeRest}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00101\ \};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00108\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_charge_discharge}{ChargeDischarge}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_base_cycler}{BaseCycler}}}
+\DoxyCodeLine{00109\ \{}
+\DoxyCodeLine{00110\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00111\ \ \ \ \ \mbox{\hyperlink{class_charge_discharge}{ChargeDischarge}}(\textcolor{keywordtype}{double}\ i\_charge\_current,\ \textcolor{keywordtype}{double}\ i\_discharge\_current,\ \textcolor{keywordtype}{double}\ i\_V\_max,\ \textcolor{keywordtype}{double}\ i\_V\_min,}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ i\_soc\_min,\ \textcolor{keywordtype}{double}\ i\_soc\_max,\ \textcolor{keywordtype}{double}\ i\_soc,\ \textcolor{keywordtype}{double}\ i\_rest\_time);}
+\DoxyCodeLine{00113\ \ \ \ \ \mbox{\hyperlink{class_charge_discharge}{\string~ChargeDischarge}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00114\ \};}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00121\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_custom_cycler}{CustomCycler}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_base_cycler}{BaseCycler}}}
+\DoxyCodeLine{00122\ \{}
+\DoxyCodeLine{00123\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00124\ \ \ \ \ \mbox{\hyperlink{class_custom_cycler}{CustomCycler}}(std::vector<double>\ t,\ std::vector<double>\ current,\ \textcolor{keywordtype}{double}\ V\_min,\ \textcolor{keywordtype}{double}\ V\_max,\ \textcolor{keywordtype}{double}\ soc\_min,\ \textcolor{keywordtype}{double}\ soc\_max,\ \textcolor{keywordtype}{double}\ soc);}
+\DoxyCodeLine{00125\ \ \ \ \ \mbox{\hyperlink{class_custom_cycler}{\string~CustomCycler}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{comment}{//\ getters}}
+\DoxyCodeLine{00127\ \ \ \ \ std::vector<double>\ get\_t\_vector()\ \{\ \textcolor{keywordflow}{return}\ m\_t\_vector;\ \}}
+\DoxyCodeLine{00128\ \ \ \ \ std::vector<double>\ get\_current\_vector()\ \{\ \textcolor{keywordflow}{return}\ m\_current\_vector;\ \}}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{comment}{//\ setters}}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_t\_vector(std::vector<double>\ \&t\_vector\_new)\ \{\ m\_t\_vector\ =\ t\_vector\_new;\ \}}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_current\_vector(std::vector<double>\ \&current\_vector\_new)\ \{\ m\_current\_vector\ =\ current\_vector\_new;\ \}}
+\DoxyCodeLine{00132\ \};}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00140\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_interpolated_custom_cycler}{InterpolatedCustomCycler}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_base_cycler}{BaseCycler}}}
+\DoxyCodeLine{00141\ \{}
+\DoxyCodeLine{00142\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{class_interpolated_custom_cycler}{InterpolatedCustomCycler}}(std::vector<double>\ i\_t\_exp,\ std::vector<double>\ i\_I\_exp,\ \textcolor{keywordtype}{double}\ dt,}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ V\_min,\ \textcolor{keywordtype}{double}\ V\_max,\ \textcolor{keywordtype}{double}\ soc\_min,\ \textcolor{keywordtype}{double}\ soc\_max,\ \textcolor{keywordtype}{double}\ soc);}
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{class_interpolated_custom_cycler}{\string~InterpolatedCustomCycler}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{comment}{//\ getters}}
+\DoxyCodeLine{00147\ \ \ \ \ std::vector<double>\ get\_t\_vector()\ \{\ \textcolor{keywordflow}{return}\ m\_t\_vector;\ \}}
+\DoxyCodeLine{00148\ \ \ \ \ std::vector<double>\ get\_current\_vector()\ \{\ \textcolor{keywordflow}{return}\ m\_current\_vector;\ \}}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{comment}{//\ setters}}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_t\_vector(std::vector<double>\ \&t\_vector\_new)\ \{\ m\_t\_vector\ =\ t\_vector\_new;\ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_current\_vector(std::vector<double>\ \&current\_vector\_new)\ \{\ m\_current\_vector\ =\ current\_vector\_new;\ \}}
+\DoxyCodeLine{00152\ \};}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_h_p_p_c_cycler}{HPPCCycler}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_base_cycler}{BaseCycler}}}
+\DoxyCodeLine{00155\ \{}
+\DoxyCodeLine{00156\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00157\ \ \ \ \ \mbox{\hyperlink{class_h_p_p_c_cycler}{HPPCCycler}}(\textcolor{keywordtype}{double}\ i\_t1,\ \textcolor{keywordtype}{double}\ i\_t2,\ \textcolor{keywordtype}{double}\ i\_i\_app,\ \textcolor{keywordtype}{int}\ i\_num\_hppc\_pulses,}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ i\_V\_min,\ \textcolor{keywordtype}{double}\ i\_SOC\_LIB\_min,\ \textcolor{keywordtype}{double}\ i\_SOC\_LIB);}
+\DoxyCodeLine{00159\ \ \ \ \ \mbox{\hyperlink{class_h_p_p_c_cycler}{\string~HPPCCycler}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{comment}{//\ helpers\ functions}}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_current(std::string\ cycling\_step,\ \textcolor{keywordtype}{double}\ t);}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_t1;}
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_t2;}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_num\_hppc\_pulses;}
+\DoxyCodeLine{00167\ \};}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BMSLOGIC\_PROJECT\_CYCLERS\_H}}
+
+\end{DoxyCode}

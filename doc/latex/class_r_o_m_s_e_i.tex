@@ -1,0 +1,128 @@
+\doxysection{ROMSEI Class Reference}
+\hypertarget{class_r_o_m_s_e_i}{}\label{class_r_o_m_s_e_i}\index{ROMSEI@{ROMSEI}}
+
+
+This class contains the equations for the reduced order SEI growth model as mentioned in ref \mbox{[}1\mbox{]}, with slight modifications.  
+
+
+
+
+{\ttfamily \#include $<$models.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_r_o_m_s_e_i_a3decf6b888ac615107e4e3e65ac3e615}{calc\+\_\+j\+\_\+i}} (double j\+\_\+tot, double j\+\_\+s)
+\begin{DoxyCompactList}\small\item\em Calculates the intercalation lithium molar flux density \mbox{[}mol/m2/s\mbox{]}. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_r_o_m_s_e_i_a840efe9fd02dd2363e07265eb755bf15}{calc\+\_\+eta\+\_\+n}} (double temp, double j\+\_\+i, double i\+\_\+0)
+\begin{DoxyCompactList}\small\item\em Calculates the overpotential \mbox{[}V\mbox{]} at the electrode (most probably negative electrode) using the Butler Volmer equation. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_r_o_m_s_e_i_a47701ecda2bfdd9ba6523bda0c407f64}{calc\+\_\+eta\+\_\+s}} (double eta\+\_\+n, double OCP\+\_\+n, double OCP\+\_\+s)
+\begin{DoxyCompactList}\small\item\em Calculates the side reaction over-\/potential \mbox{[}V\mbox{]}. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_r_o_m_s_e_i_a92d59816449fe09f70cd9ee47cf22698}{calc\+\_\+j\+\_\+s}} (double temp, double i\+\_\+0\+\_\+s, double eta\+\_\+s)
+\begin{DoxyCompactList}\small\item\em Calculates the side reaction molar flux at the electrode-\/electrolyte interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class contains the equations for the reduced order SEI growth model as mentioned in ref \mbox{[}1\mbox{]}, with slight modifications. 
+
+
+\begin{DoxyItemize}
+\item Literature Reference\+:
+\begin{DoxyEnumerate}
+\item Randell et al. "{}\+Controls oriented reduced order modeling of solid-\/electrolyte interphase layer growth"{}. 2012. Journal of Power Sources. Vol\+: 209. pgs\+: 282-\/288. 
+\end{DoxyEnumerate}
+\end{DoxyItemize}
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_r_o_m_s_e_i_a840efe9fd02dd2363e07265eb755bf15}\index{ROMSEI@{ROMSEI}!calc\_eta\_n@{calc\_eta\_n}}
+\index{calc\_eta\_n@{calc\_eta\_n}!ROMSEI@{ROMSEI}}
+\doxysubsubsection{\texorpdfstring{calc\_eta\_n()}{calc\_eta\_n()}}
+{\footnotesize\ttfamily \label{class_r_o_m_s_e_i_a840efe9fd02dd2363e07265eb755bf15} 
+double ROMSEI\+::calc\+\_\+eta\+\_\+n (\begin{DoxyParamCaption}\item[{double}]{temp}{, }\item[{double}]{j\+\_\+i}{, }\item[{double}]{i\+\_\+0}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the overpotential \mbox{[}V\mbox{]} at the electrode (most probably negative electrode) using the Butler Volmer equation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em temp} & electrode temperature \mbox{[}K\mbox{]} \\
+\hline
+{\em j\+\_\+i} & lithium molar flux density \mbox{[}mol/m2/s\mbox{]} \\
+\hline
+{\em i\+\_\+0} & exchange current density of the intercalation charge-\/transfer reaction \mbox{[}mol/m2/s\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double overpotential at the electrode \mbox{[}V\mbox{]} 
+\end{DoxyReturn}
+\Hypertarget{class_r_o_m_s_e_i_a47701ecda2bfdd9ba6523bda0c407f64}\index{ROMSEI@{ROMSEI}!calc\_eta\_s@{calc\_eta\_s}}
+\index{calc\_eta\_s@{calc\_eta\_s}!ROMSEI@{ROMSEI}}
+\doxysubsubsection{\texorpdfstring{calc\_eta\_s()}{calc\_eta\_s()}}
+{\footnotesize\ttfamily \label{class_r_o_m_s_e_i_a47701ecda2bfdd9ba6523bda0c407f64} 
+double ROMSEI\+::calc\+\_\+eta\+\_\+s (\begin{DoxyParamCaption}\item[{double}]{eta\+\_\+n}{, }\item[{double}]{OCP\+\_\+n}{, }\item[{double}]{OCP\+\_\+s}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the side reaction over-\/potential \mbox{[}V\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em eta\+\_\+n} & Overpotential of the intercalation reaction \mbox{[}V\mbox{]} \\
+\hline
+{\em OCP\+\_\+n} & Open-\/circuit potential of the electrode \mbox{[}V\mbox{]} \\
+\hline
+{\em OCP\+\_\+s} & Open-\/circuit potential of the side-\/reaction \mbox{[}V\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double 
+\end{DoxyReturn}
+\Hypertarget{class_r_o_m_s_e_i_a3decf6b888ac615107e4e3e65ac3e615}\index{ROMSEI@{ROMSEI}!calc\_j\_i@{calc\_j\_i}}
+\index{calc\_j\_i@{calc\_j\_i}!ROMSEI@{ROMSEI}}
+\doxysubsubsection{\texorpdfstring{calc\_j\_i()}{calc\_j\_i()}}
+{\footnotesize\ttfamily \label{class_r_o_m_s_e_i_a3decf6b888ac615107e4e3e65ac3e615} 
+double ROMSEI\+::calc\+\_\+j\+\_\+i (\begin{DoxyParamCaption}\item[{double}]{j\+\_\+tot}{, }\item[{double}]{j\+\_\+s}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the intercalation lithium molar flux density \mbox{[}mol/m2/s\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em j\+\_\+tot} & total lithium molar flux density \mbox{[}mol/m2/s\mbox{]} \\
+\hline
+{\em j\+\_\+s} & lithium side-\/reaction flux density \mbox{[}mol/m2/s\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double intercalation lithium molar flux density \mbox{[}mol/m2/s\mbox{]} 
+\end{DoxyReturn}
+\Hypertarget{class_r_o_m_s_e_i_a92d59816449fe09f70cd9ee47cf22698}\index{ROMSEI@{ROMSEI}!calc\_j\_s@{calc\_j\_s}}
+\index{calc\_j\_s@{calc\_j\_s}!ROMSEI@{ROMSEI}}
+\doxysubsubsection{\texorpdfstring{calc\_j\_s()}{calc\_j\_s()}}
+{\footnotesize\ttfamily \label{class_r_o_m_s_e_i_a92d59816449fe09f70cd9ee47cf22698} 
+double ROMSEI\+::calc\+\_\+j\+\_\+s (\begin{DoxyParamCaption}\item[{double}]{temp}{, }\item[{double}]{i\+\_\+0\+\_\+s}{, }\item[{double}]{eta\+\_\+s}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the side reaction molar flux at the electrode-\/electrolyte interface. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em temp} & electrode temperature \mbox{[}K\mbox{]} \\
+\hline
+{\em i\+\_\+0\+\_\+s} & exchange current density of the side reaction \mbox{[}mol/m2/s\mbox{]} \\
+\hline
+{\em eta\+\_\+s} & exhange current density of the side reaction \mbox{[}mol/m2/s\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double side reaction molar flux \mbox{[}mol/m2/s\mbox{]} 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{models_8h}{models.\+h}}\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{models_8cpp}{models.\+cpp}}\end{DoxyCompactItemize}

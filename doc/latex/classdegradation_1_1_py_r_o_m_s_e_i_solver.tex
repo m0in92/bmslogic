@@ -1,0 +1,181 @@
+\doxysection{degradation.\+Py\+ROMSEISolver Class Reference}
+\hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver}{}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver}\index{degradation.PyROMSEISolver@{degradation.PyROMSEISolver}}
+Inheritance diagram for degradation.\+Py\+ROMSEISolver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classdegradation_1_1_py_r_o_m_s_e_i_solver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdegradation_1_1_py_r_o_m_s_e_i_solver_a66c01aa9381931f52d0c0e82d1180f3b}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1battery__components_1_1_py_battery_cell}{Py\+Battery\+Cell}} b\+\_\+cell, float thickness\+\_\+\+SEI\+\_\+init=0.\+0)
+\item 
+tuple\mbox{[}float, float\mbox{]} \mbox{\hyperlink{classdegradation_1_1_py_r_o_m_s_e_i_solver_afe8b7308d6bd17a3d03e4c932fc07558}{solve\+\_\+current}} (self, float soc, float ocp, float temp, float I, float rel\+\_\+tol=1e-\/12, int max\+\_\+iter\+\_\+no=10)
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_a1c1ddf1c85cd0bda493aa5549fa6e406}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_a1c1ddf1c85cd0bda493aa5549fa6e406} 
+float {\bfseries solve\+\_\+delta\+\_\+L} (self, float j\+\_\+s, float dt)
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_a10972a5a13dad23495afb48157c1766f}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_a10972a5a13dad23495afb48157c1766f} 
+None {\bfseries update\+\_\+L} (self, float j\+\_\+s, float dt)
+\item 
+float \mbox{\hyperlink{classdegradation_1_1_py_r_o_m_s_e_i_solver_a9449f855e99f00de1cdfb240803b5574}{solve\+\_\+delta\+\_\+\+R\+\_\+\+SEI\+\_\+}} (self, float j\+\_\+s, float dt)
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_ae2fd05b347ca248028175913411323e8}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_ae2fd05b347ca248028175913411323e8} 
+float {\bfseries solve\+\_\+delta\+\_\+\+R\+\_\+\+SEI} (self, float j\+\_\+s, float dt)
+\item 
+\mbox{\hyperlink{classdegradation_1_1_py_r_o_m_s_e_i_solver_a6f239d4522d284ab175f7f1a2bc06373}{R\+\_\+\+SEI\+\_\+}} (self)
+\item 
+\mbox{\hyperlink{classdegradation_1_1_py_r_o_m_s_e_i_solver_a301245a2228f57547d4d2c0810c806c4}{R\+\_\+\+SEI}} (self)
+\item 
+tuple\mbox{[}float, float, float\mbox{]} \mbox{\hyperlink{classdegradation_1_1_py_r_o_m_s_e_i_solver_a1219c5174be0691ce2ca90c2ea85436d}{\+\_\+\+\_\+call\+\_\+\+\_\+}} (self, float soc, float ocp, float temp, float i\+\_\+app, float dt, float rel\+\_\+tol=1e-\/12, int max\+\_\+iter\+\_\+no=10)
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_acf15b1dc521aac3473ad16811a5a8cd8}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_acf15b1dc521aac3473ad16811a5a8cd8} 
+{\bfseries \+\_\+\+\_\+repr\+\_\+\+\_\+} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i}{bmslogic.\+simulations.\+cell.\+models.\+Py\+ROMSEI}}}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_ad9e7393076d3e7bba16675f169390a48}{calc\+\_\+j\+\_\+0\+\_\+i}} (cls, float k, float c\+\_\+s\+\_\+max, float c\+\_\+e, float soc)
+\item 
+float {\bfseries calc\+\_\+j\+\_\+tot} (cls, float I, float S)
+\item 
+float {\bfseries calc\+\_\+j\+\_\+i} (cls, float j\+\_\+tot, float j\+\_\+s)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_a03fbdf16c01f39ea56e4332abccd0778}{calc\+\_\+eta\+\_\+n}} (cls, float temp, float j\+\_\+i, float j\+\_\+0\+\_\+i)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_a340007730c6d817e90fa3d9e041dd93a}{calc\+\_\+eta\+\_\+s}} (cls, float eta\+\_\+n, float ocp\+\_\+n, float ocp\+\_\+s)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_ae5370f14662ba5dc368527c038b39307}{calc\+\_\+j\+\_\+s}} (cls, float temp, float j\+\_\+0\+\_\+s, float eta\+\_\+s)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i_ac7bff7cef157b0b9ae03766d65535e19}{flux\+\_\+to\+\_\+current}} (cls, float molar\+\_\+flux, float S)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_ab4b073adecafeb2e128f30ca5aa69616}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_ab4b073adecafeb2e128f30ca5aa69616} 
+{\bfseries k\+\_\+n}
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_a31e60b3e6e3571ccd51e418e41b2cd24}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_a31e60b3e6e3571ccd51e418e41b2cd24} 
+{\bfseries c\+\_\+e}
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_add052a12ee725dcbc4ee85f1376bb156}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_add052a12ee725dcbc4ee85f1376bb156} 
+{\bfseries S\+\_\+n}
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_ae5babbcb85c667aafbc54184c855411e}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_ae5babbcb85c667aafbc54184c855411e} 
+{\bfseries c\+\_\+nmax}
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_a53daea66cd1e4c7580cf04161605e5bf}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_a53daea66cd1e4c7580cf04161605e5bf} 
+{\bfseries U\+\_\+s}
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_af640a32e7888daa48bcb489564e3e52d}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_af640a32e7888daa48bcb489564e3e52d} 
+{\bfseries i\+\_\+s}
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_a997181a24283b8a5b9119b332ebd6843}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_a997181a24283b8a5b9119b332ebd6843} 
+{\bfseries A}
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_a49b1c8b26db5157f54f38adba29bdb02}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_a49b1c8b26db5157f54f38adba29bdb02} 
+{\bfseries MW\+\_\+\+SEI}
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_a47dd58b6a4a822926ce6adeba82074e3}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_a47dd58b6a4a822926ce6adeba82074e3} 
+{\bfseries rho}
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_a8728cfc2dd42b8331b6556243c4daf1f}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_a8728cfc2dd42b8331b6556243c4daf1f} 
+{\bfseries kappa}
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_ae4213af8aa5a5857991013f66cafe5ad}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_ae4213af8aa5a5857991013f66cafe5ad} 
+{\bfseries L}
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_addb51575a9faf12823e3a1e6b66d2222}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_addb51575a9faf12823e3a1e6b66d2222} 
+{\bfseries J\+\_\+tot}
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_a304babecc129b8412d41eb8b3ad4c626}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_a304babecc129b8412d41eb8b3ad4c626} 
+{\bfseries J\+\_\+i}
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_aa76cedba3f1ee225069001d905f81b33}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_aa76cedba3f1ee225069001d905f81b33} 
+{\bfseries J\+\_\+s}
+\item 
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_a778edb0502b3b8f57739bd235968df68}\label{classdegradation_1_1_py_r_o_m_s_e_i_solver_a778edb0502b3b8f57739bd235968df68} 
+{\bfseries cumulative\+\_\+\+J\+\_\+s}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_a66c01aa9381931f52d0c0e82d1180f3b}\index{degradation.PyROMSEISolver@{degradation.PyROMSEISolver}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!degradation.PyROMSEISolver@{degradation.PyROMSEISolver}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classdegradation_1_1_py_r_o_m_s_e_i_solver_a66c01aa9381931f52d0c0e82d1180f3b} 
+degradation.\+Py\+ROMSEISolver.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1battery__components_1_1_py_battery_cell}{Py\+Battery\+Cell}}}]{b\+\_\+cell}{, }\item[{float }]{thickness\+\_\+\+SEI\+\_\+init}{ = {\ttfamily 0.0}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This class stores and solves for parameters related to the SEI degradation. The degradations are calculated
+ONLY during charge cycles, i.e. when the applied current > 0.
+:param b_cell: PyBatteryCell instance
+:param thickness_SEI_init: initial SEI thickness
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_a1219c5174be0691ce2ca90c2ea85436d}\index{degradation.PyROMSEISolver@{degradation.PyROMSEISolver}!\_\_call\_\_@{\_\_call\_\_}}
+\index{\_\_call\_\_@{\_\_call\_\_}!degradation.PyROMSEISolver@{degradation.PyROMSEISolver}}
+\doxysubsubsection{\texorpdfstring{\_\_call\_\_()}{\_\_call\_\_()}}
+{\footnotesize\ttfamily \label{classdegradation_1_1_py_r_o_m_s_e_i_solver_a1219c5174be0691ce2ca90c2ea85436d} 
+ tuple\mbox{[}float, float, float\mbox{]} degradation.\+Py\+ROMSEISolver.\+\_\+\+\_\+call\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{soc}{, }\item[{float}]{ocp}{, }\item[{float}]{temp}{, }\item[{float}]{i\+\_\+app}{, }\item[{float}]{dt}{, }\item[{float }]{rel\+\_\+tol}{ = {\ttfamily 1e-\/12}, }\item[{int }]{max\+\_\+iter\+\_\+no}{ = {\ttfamily 10}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Peforms the relevant SEI degradation related calculations for a specific time step.
+:param soc: electrode SOC
+:param ocp: electrode OCP [V]
+:param temp: electrode temperature [K]
+:param i_app: applied battery cell current [A]
+:param dt: time difference of the current time step [s]
+:param rel_tol: relative tolerance for the side reaction flux (j_s) calculations.
+:param max_iter_no: Max. ROM iterations for the side reaction flux (j_s) calculations.
+:return:
+\end{DoxyVerb}
+ \Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_a301245a2228f57547d4d2c0810c806c4}\index{degradation.PyROMSEISolver@{degradation.PyROMSEISolver}!R\_SEI@{R\_SEI}}
+\index{R\_SEI@{R\_SEI}!degradation.PyROMSEISolver@{degradation.PyROMSEISolver}}
+\doxysubsubsection{\texorpdfstring{R\_SEI()}{R\_SEI()}}
+{\footnotesize\ttfamily \label{classdegradation_1_1_py_r_o_m_s_e_i_solver_a301245a2228f57547d4d2c0810c806c4} 
+degradation.\+Py\+ROMSEISolver.\+R\+\_\+\+SEI (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}SEI film resistance [ohm]
+:return: (float) SEI film resistance [ohm]
+\end{DoxyVerb}
+ \Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_a6f239d4522d284ab175f7f1a2bc06373}\index{degradation.PyROMSEISolver@{degradation.PyROMSEISolver}!R\_SEI\_@{R\_SEI\_}}
+\index{R\_SEI\_@{R\_SEI\_}!degradation.PyROMSEISolver@{degradation.PyROMSEISolver}}
+\doxysubsubsection{\texorpdfstring{R\_SEI\_()}{R\_SEI\_()}}
+{\footnotesize\ttfamily \label{classdegradation_1_1_py_r_o_m_s_e_i_solver_a6f239d4522d284ab175f7f1a2bc06373} 
+degradation.\+Py\+ROMSEISolver.\+R\+\_\+\+SEI\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}The resistance of the SEI layer [ohm m2]
+:return:
+\end{DoxyVerb}
+ \Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_afe8b7308d6bd17a3d03e4c932fc07558}\index{degradation.PyROMSEISolver@{degradation.PyROMSEISolver}!solve\_current@{solve\_current}}
+\index{solve\_current@{solve\_current}!degradation.PyROMSEISolver@{degradation.PyROMSEISolver}}
+\doxysubsubsection{\texorpdfstring{solve\_current()}{solve\_current()}}
+{\footnotesize\ttfamily \label{classdegradation_1_1_py_r_o_m_s_e_i_solver_afe8b7308d6bd17a3d03e4c932fc07558} 
+ tuple\mbox{[}float, float\mbox{]} degradation.\+Py\+ROMSEISolver.\+solve\+\_\+current (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{soc}{, }\item[{float}]{ocp}{, }\item[{float}]{temp}{, }\item[{float}]{I}{, }\item[{float }]{rel\+\_\+tol}{ = {\ttfamily 1e-\/12}, }\item[{int }]{max\+\_\+iter\+\_\+no}{ = {\ttfamily 10}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns the currents consumed for intercalation and side reactions.
+:param soc: electrode soc
+:param ocp: electrode ocp [V]
+:param temp: electrode temp. [K]
+:param I: applied current [A]
+:param max_iter_no: max. iteration
+:return: tuple containing the intercalation current [A] and side-reaction current [A]
+\end{DoxyVerb}
+ \Hypertarget{classdegradation_1_1_py_r_o_m_s_e_i_solver_a9449f855e99f00de1cdfb240803b5574}\index{degradation.PyROMSEISolver@{degradation.PyROMSEISolver}!solve\_delta\_R\_SEI\_@{solve\_delta\_R\_SEI\_}}
+\index{solve\_delta\_R\_SEI\_@{solve\_delta\_R\_SEI\_}!degradation.PyROMSEISolver@{degradation.PyROMSEISolver}}
+\doxysubsubsection{\texorpdfstring{solve\_delta\_R\_SEI\_()}{solve\_delta\_R\_SEI\_()}}
+{\footnotesize\ttfamily \label{classdegradation_1_1_py_r_o_m_s_e_i_solver_a9449f855e99f00de1cdfb240803b5574} 
+ float degradation.\+Py\+ROMSEISolver.\+solve\+\_\+delta\+\_\+\+R\+\_\+\+SEI\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{j\+\_\+s}{, }\item[{float}]{dt}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates the change in the SEI resistance [ohm]
+:param j_s:
+:param dt:
+:return:
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers/degradation.\+py\end{DoxyCompactItemize}

@@ -1,0 +1,82 @@
+\doxysection{HPPCCycler Class Reference}
+\hypertarget{class_h_p_p_c_cycler}{}\label{class_h_p_p_c_cycler}\index{HPPCCycler@{HPPCCycler}}
+Inheritance diagram for HPPCCycler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_h_p_p_c_cycler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_h_p_p_c_cycler_ac6710d6436891285d09f710979d933ab}\label{class_h_p_p_c_cycler_ac6710d6436891285d09f710979d933ab} 
+{\bfseries HPPCCycler} (double i\+\_\+t1, double i\+\_\+t2, double i\+\_\+i\+\_\+app, int i\+\_\+num\+\_\+hppc\+\_\+pulses, double i\+\_\+\+V\+\_\+min, double i\+\_\+\+SOC\+\_\+\+LIB\+\_\+min, double i\+\_\+\+SOC\+\_\+\+LIB)
+\item 
+\Hypertarget{class_h_p_p_c_cycler_a9c168044c9bb9eb5bb42024fdfe8bf23}\label{class_h_p_p_c_cycler_a9c168044c9bb9eb5bb42024fdfe8bf23} 
+double {\bfseries get\+\_\+current} (std\+::string cycling\+\_\+step, double t)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_base_cycler}{Base\+Cycler}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Base\+Cycler} ()
+\begin{DoxyCompactList}\small\item\em constructor for the \doxylink{class_base_cycler}{Base\+Cycler}. Essentially the typical LIB parameters are initialized. \end{DoxyCompactList}\item 
+double {\bfseries get\+\_\+time\+\_\+elapsed} ()
+\item 
+double {\bfseries get\+\_\+\+V\+\_\+min} ()
+\item 
+double {\bfseries get\+\_\+\+V\+\_\+max} ()
+\item 
+double {\bfseries get\+\_\+rest\+\_\+time} ()
+\item 
+int {\bfseries get\+\_\+num\+\_\+cycles} ()
+\item 
+void {\bfseries set\+\_\+time\+\_\+elapsed} (double time\+\_\+elapsed\+\_\+new)
+\item 
+void {\bfseries set\+\_\+\+V\+\_\+min} (double V\+\_\+min\+\_\+new)
+\item 
+void {\bfseries set\+\_\+\+V\+\_\+max} (double \&V\+\_\+max\+\_\+new)
+\item 
+void {\bfseries set\+\_\+rest\+\_\+time} (double \&rest\+\_\+time\+\_\+new)
+\item 
+void {\bfseries set\+\_\+num\+\_\+cycles} (int \&num\+\_\+cycles\+\_\+new)
+\item 
+virtual double \mbox{\hyperlink{class_base_cycler_a1c0686132a51e7355e9818cc63320ab3}{get\+\_\+current}} (std\+::string cycling\+\_\+step, int time\+\_\+step)
+\begin{DoxyCompactList}\small\item\em method to get the current during the battery cycling steps. \end{DoxyCompactList}\item 
+void {\bfseries reset\+\_\+time\+\_\+elapsed} ()
+\begin{DoxyCompactList}\small\item\em resets the time\+\_\+elapsed to zero. Useful when subjecting an already cycled \doxylink{class_base_cycler}{Base\+Cycler} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{class_base_cycler}{Base\+Cycler}}}
+\begin{DoxyCompactItemize}
+\item 
+double {\bfseries time\+\_\+elapsed} = 0.\+0
+\item 
+double {\bfseries SOC\+\_\+\+LIB}
+\item 
+double {\bfseries SOC\+\_\+\+LIB\+\_\+min}
+\item 
+double {\bfseries SOC\+\_\+\+LIB\+\_\+max}
+\item 
+double {\bfseries V\+\_\+min}
+\item 
+double {\bfseries V\+\_\+max}
+\item 
+double {\bfseries discharge\+\_\+current}
+\item 
+double {\bfseries charge\+\_\+current}
+\item 
+double {\bfseries rest\+\_\+time}
+\item 
+int {\bfseries num\+\_\+cycles}
+\item 
+std\+::vector$<$ double $>$ {\bfseries m\+\_\+t\+\_\+vector}
+\item 
+std\+::vector$<$ double $>$ {\bfseries m\+\_\+current\+\_\+vector}
+\item 
+std\+::vector$<$ std\+::string $>$ {\bfseries cycle\+\_\+steps}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{cyclers_8h}{cyclers.\+h}}\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{cyclers_8cpp}{cyclers.\+cpp}}\end{DoxyCompactItemize}

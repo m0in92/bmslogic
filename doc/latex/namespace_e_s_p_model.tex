@@ -1,0 +1,102 @@
+\doxysection{ESPModel Namespace Reference}
+\hypertarget{namespace_e_s_p_model}{}\label{namespace_e_s_p_model}\index{ESPModel@{ESPModel}}
+
+
+contains equations for the Enhanced single particle models.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{namespace_e_s_p_model_aff3f9402f0edd72acdabc6cfa245f438}\label{namespace_e_s_p_model_aff3f9402f0edd72acdabc6cfa245f438} 
+double {\bfseries molar\+\_\+flux\+\_\+electrode} (double \&I, double S, char electrode\+\_\+type)
+\item 
+\Hypertarget{namespace_e_s_p_model_a1692d82d1d7ea30054a676b7d4c3dd04}\label{namespace_e_s_p_model_a1692d82d1d7ea30054a676b7d4c3dd04} 
+double {\bfseries a\+\_\+s} (double epsilon, double R)
+\item 
+double \mbox{\hyperlink{namespace_e_s_p_model_a18a8b24438a46675524339a0f79c73c6}{i\+\_\+0}} (double k, double c\+\_\+s\+\_\+max, double c\+\_\+e, double soc\+\_\+surf)
+\begin{DoxyCompactList}\small\item\em Calculates the exchange current density for an electrode \mbox{[}mol/m2/s\mbox{]}. \end{DoxyCompactList}\item 
+\Hypertarget{namespace_e_s_p_model_af92cb84158f9cec3441e9ce89b3244d9}\label{namespace_e_s_p_model_af92cb84158f9cec3441e9ce89b3244d9} 
+double {\bfseries m} (double i\+\_\+app, double k, double S, double c\+\_\+s\+\_\+max, double c\+\_\+e, double soc\+\_\+surf)
+\item 
+double \mbox{\hyperlink{namespace_e_s_p_model_a08d663264503719ad1d5f40323bc5401}{calc\+\_\+terminal\+\_\+voltage}} (double ocp\+\_\+p, double ocp\+\_\+n, double m\+\_\+p, double m\+\_\+n, double L\+\_\+n, double L\+\_\+sep, double L\+\_\+p, double kappa\+\_\+eff\+\_\+avg, double k\+\_\+f\+\_\+avg, double t\+\_\+c, double R\+\_\+cell, double c\+\_\+e\+\_\+n, double c\+\_\+e\+\_\+p, double temp, double i\+\_\+app)
+\begin{DoxyCompactList}\small\item\em Returns the cell terminal voltage \mbox{[}V\mbox{]} according to Moura et al. \end{DoxyCompactList}\item 
+\Hypertarget{namespace_e_s_p_model_ae69300ac4cf4082a10fc81404cdc6135}\label{namespace_e_s_p_model_ae69300ac4cf4082a10fc81404cdc6135} 
+\mbox{\hyperlink{struct_over_potentials}{Over\+Potentials}} {\bfseries calc\+\_\+overpotentials} (double ocp\+\_\+p, double ocp\+\_\+n, double m\+\_\+p, double m\+\_\+n, double L\+\_\+n, double L\+\_\+sep, double L\+\_\+p, double kappa\+\_\+eff\+\_\+avg, double k\+\_\+f\+\_\+avg, double t\+\_\+c, double R\+\_\+cell, double c\+\_\+e\+\_\+n, double c\+\_\+e\+\_\+p, double temp, double i\+\_\+app)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+contains equations for the Enhanced single particle models. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespace_e_s_p_model_a08d663264503719ad1d5f40323bc5401}\index{ESPModel@{ESPModel}!calc\_terminal\_voltage@{calc\_terminal\_voltage}}
+\index{calc\_terminal\_voltage@{calc\_terminal\_voltage}!ESPModel@{ESPModel}}
+\doxysubsubsection{\texorpdfstring{calc\_terminal\_voltage()}{calc\_terminal\_voltage()}}
+{\footnotesize\ttfamily \label{namespace_e_s_p_model_a08d663264503719ad1d5f40323bc5401} 
+double ESPModel\+::calc\+\_\+terminal\+\_\+voltage (\begin{DoxyParamCaption}\item[{double}]{ocp\+\_\+p}{, }\item[{double}]{ocp\+\_\+n}{, }\item[{double}]{m\+\_\+p}{, }\item[{double}]{m\+\_\+n}{, }\item[{double}]{L\+\_\+n}{, }\item[{double}]{L\+\_\+sep}{, }\item[{double}]{L\+\_\+p}{, }\item[{double}]{kappa\+\_\+eff\+\_\+avg}{, }\item[{double}]{k\+\_\+f\+\_\+avg}{, }\item[{double}]{t\+\_\+c}{, }\item[{double}]{R\+\_\+cell}{, }\item[{double}]{c\+\_\+e\+\_\+n}{, }\item[{double}]{c\+\_\+e\+\_\+p}{, }\item[{double}]{temp}{, }\item[{double}]{i\+\_\+app}{}\end{DoxyParamCaption})}
+
+
+
+Returns the cell terminal voltage \mbox{[}V\mbox{]} according to Moura et al. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ocp\+\_\+p} & \\
+\hline
+{\em ocp\+\_\+n} & \\
+\hline
+{\em m\+\_\+p} & \\
+\hline
+{\em m\+\_\+n} & \\
+\hline
+{\em L\+\_\+n} & \\
+\hline
+{\em L\+\_\+sep} & \\
+\hline
+{\em L\+\_\+p} & \\
+\hline
+{\em kappa\+\_\+eff\+\_\+avg} & \\
+\hline
+{\em k\+\_\+f\+\_\+avg} & \\
+\hline
+{\em t\+\_\+c} & \\
+\hline
+{\em R\+\_\+cell} & \\
+\hline
+{\em c\+\_\+e\+\_\+n} & \\
+\hline
+{\em c\+\_\+e\+\_\+p} & \\
+\hline
+{\em temp} & \\
+\hline
+{\em i\+\_\+app} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double 
+\end{DoxyReturn}
+\Hypertarget{namespace_e_s_p_model_a18a8b24438a46675524339a0f79c73c6}\index{ESPModel@{ESPModel}!i\_0@{i\_0}}
+\index{i\_0@{i\_0}!ESPModel@{ESPModel}}
+\doxysubsubsection{\texorpdfstring{i\_0()}{i\_0()}}
+{\footnotesize\ttfamily \label{namespace_e_s_p_model_a18a8b24438a46675524339a0f79c73c6} 
+double ESPModel\+::i\+\_\+0 (\begin{DoxyParamCaption}\item[{double}]{k}{, }\item[{double}]{c\+\_\+s\+\_\+max}{, }\item[{double}]{c\+\_\+e}{, }\item[{double}]{soc\+\_\+surf}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the exchange current density for an electrode \mbox{[}mol/m2/s\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & rate constant \mbox{[}m2.\+5 / mol0.\+5 / s\mbox{]} \\
+\hline
+{\em c\+\_\+s\+\_\+max} & max. lithium-\/ion electrode conc. \mbox{[}mol/m3\mbox{]} \\
+\hline
+{\em c\+\_\+e} & lithium-\/ion conc in the electrolyte \mbox{[}mol/m3\mbox{]} \\
+\hline
+{\em soc\+\_\+surf} & state-\/of-\/charge of the electrode particle surface \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double exchange current density \mbox{[}mol/m2/s\mbox{]} 
+\end{DoxyReturn}

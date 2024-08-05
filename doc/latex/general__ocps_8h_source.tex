@@ -1,0 +1,237 @@
+\doxysection{general\+\_\+ocps.\+h}
+\hypertarget{general__ocps_8h_source}{}\label{general__ocps_8h_source}\index{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/general\_ocps.h@{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/general\_ocps.h}}
+\mbox{\hyperlink{general__ocps_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ BMSLOGIC\_PROJECT\_GENERAL\_OCP\_FUNCTIONS\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ BMSLOGIC\_PROJECT\_GENERAL\_OCP\_FUNCTIONS\_H}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{constants_8h}{calc\_helpers/constants.h}}"{}}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }positive\_electrode\_ocps}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{double}\ calc\_ocp\_schmit(std::vector<double>\ \&A\_list,\ \textcolor{keywordtype}{double}\ \&K,\ \textcolor{keywordtype}{double}\ \&U0,\ \textcolor{keywordtype}{double}\ \&SOC)}
+\DoxyCodeLine{00023\ \ \ \ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ R\ =\ Constants.R;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ F\ =\ Constants.F;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ temp\ =\ 298.15;\ \textcolor{comment}{//\ [K]}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sec\_term\ =\ (R\ *\ temp\ /\ F)\ *\ std::log((1\ -\/\ SOC)\ /\ SOC);\ \textcolor{comment}{//\ second\ term}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ following\ defines\ the\ third\ term}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ pre\_term\ =\ 1\ /\ (std::pow(K\ *\ (2\ *\ SOC\ -\/\ 1)\ +\ 1,\ 2));}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ post\_term\ =\ 0;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ A\_list.size();\ i++)}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ post\_term\ +=\ (A\_list[i]\ /\ F)\ *\ (std::pow(2\ *\ SOC\ -\/\ 1,\ i\ +\ 1)\ -\/\ 2\ *\ i\ *\ SOC\ *\ (1\ -\/\ SOC)\ /\ std::pow(2\ *\ SOC\ -\/\ 1,\ 1\ -\/\ i));}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ third\_term\ =\ pre\_term\ *\ post\_term;}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ following\ defines\ the\ fourth\ term}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ post\_term\ =\ 0;}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ A\_list.size();\ i++)}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ post\_term\ +=\ (A\_list[i]\ /\ F)\ *\ (std::pow(2\ *\ SOC\ -\/\ 1,\ i)\ *\ (2\ *\ (i\ +\ 1)\ *\ (std::pow(SOC,\ 2))\ -\/\ 2\ *\ (i\ +\ 1)\ *\ SOC\ +\ 1));}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ fou\_term\ =\ K\ *\ post\_term;}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ U0\ +\ sec\_term\ +\ third\_term\ +\ fou\_term;}
+\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{double}\ LCO(\textcolor{keywordtype}{double}\ \&SOC)}
+\DoxyCodeLine{00049\ \ \ \ \ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ std::vector<double>\ A\_list\ =\ \{5166082.0,\ -\/5191279.0,\ 5232986.0,\ -\/5257083.0,\ 5010583.0,\ -\/4520614.0,\ 7306952.0,\ -\/14634260.0,\ 6705611.0,}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 33894160.0,\ -\/63528110.0,\ 30487930.0,\ 21440020.0,\ -\/27731990.0,\ 8206452.0\};}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ K\ =\ -\/2.369020e-\/04;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ U0\ =\ -\/2.276828e+01;}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ calc\_ocp\_schmit(A\_list,\ K,\ U0,\ SOC);}
+\DoxyCodeLine{00056\ \ \ \ \ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ std::vector<double>\ LCO(std::vector<double>\ \&vector\_SOC)}
+\DoxyCodeLine{00059\ \ \ \ \ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ std::vector<double>\ result\_vector;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ SOC;}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ vector\_SOC.size();\ j++)}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ SOC\ =\ vector\_SOC[j];}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ result\_vector.push\_back(LCO(SOC));}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result\_vector;}
+\DoxyCodeLine{00069\ \ \ \ \ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{double}\ NMC(\textcolor{keywordtype}{double}\ \&SOC)}
+\DoxyCodeLine{00072\ \ \ \ \ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ std::vector<double>\ A\_list\ =\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ -\/1306.411,}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ -\/57995.21,}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ 128590.6,}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ -\/141860.5,}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ 128196.9,}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ -\/328128.3,}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ 817.6398,}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ 1373879,}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ 651141.4,}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ -\/7315831,}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ 4983891,}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ 6925178,}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ -\/6123714,}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ -\/3595215,}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ 3340694\};}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ K\ =\ -\/0.635961;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ U0\ =\ 3.755472;}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ calc\_ocp\_schmit(A\_list,\ K,\ U0,\ SOC);}
+\DoxyCodeLine{00093\ \ \ \ \ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ std::vector<double>\ NMC(std::vector<double>\ \&vector\_SOC)}
+\DoxyCodeLine{00096\ \ \ \ \ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ std::vector<double>\ result\_vector;}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ SOC;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ vector\_SOC.size();\ j++)}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ SOC\ =\ vector\_SOC[j];}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ result\_vector.push\_back(NMC(SOC));}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result\_vector;}
+\DoxyCodeLine{00106\ \ \ \ \ \}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{double}\ LFP(\textcolor{keywordtype}{double}\ \&SOC)}
+\DoxyCodeLine{00109\ \ \ \ \ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ std::vector<double>\ A\_list\ =\ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ -\/2244.923,}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ -\/2090.675,}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ -\/6045.274,}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ -\/6046.354,}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ -\/13952.1,}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ 49285.95,}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ 57688.95,}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ -\/270619.6,}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ -\/262397.3,}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ 695491.2,}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ 480539,}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ -\/881803.7,}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ -\/450067.5,}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ 425577.8,}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ 127814.6\};}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ K\ =\ 0.03932999;}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ U0\ =\ 3.407141;}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ calc\_ocp\_schmit(A\_list,\ K,\ U0,\ SOC);}
+\DoxyCodeLine{00130\ \ \ \ \ \}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ std::vector<double>\ LFP(std::vector<double>\ \&vector\_SOC)}
+\DoxyCodeLine{00133\ \ \ \ \ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ std::vector<double>\ result\_vector;}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ SOC;}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ vector\_SOC.size();\ j++)}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ SOC\ =\ vector\_SOC[j];}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ result\_vector.push\_back(LFP(SOC));}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result\_vector;}
+\DoxyCodeLine{00143\ \ \ \ \ \}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{double}\ LMO(\textcolor{keywordtype}{double}\ \&SOC)}
+\DoxyCodeLine{00146\ \ \ \ \ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ std::vector<double>\ A\_list\ =\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ 28.88073,}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ -\/19289.65,}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ 27516.93,}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ 25997.59,}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ 47959.29,}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ -\/277348.8,}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ -\/321162.5,}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ 998439.1,}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ 1227530,}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ -\/2722189,}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ -\/1973511,}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ 4613775,}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ 818839.4,}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ -\/4157314,}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ 1709075\};}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ K\ =\ -\/0.9996536;}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ U0\ =\ 4.004463;}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ calc\_ocp\_schmit(A\_list,\ K,\ U0,\ SOC);}
+\DoxyCodeLine{00167\ \ \ \ \ \}}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \ \ \ \ std::vector<double>\ LMO(std::vector<double>\ \&vector\_SOC)}
+\DoxyCodeLine{00170\ \ \ \ \ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ std::vector<double>\ result\_vector;}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ SOC;}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ vector\_SOC.size();\ j++)}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ SOC\ =\ vector\_SOC[j];}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ result\_vector.push\_back(LMO(SOC));}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result\_vector;}
+\DoxyCodeLine{00180\ \ \ \ \ \}}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordtype}{double}\ NCA(\textcolor{keywordtype}{double}\ \&SOC)}
+\DoxyCodeLine{00183\ \ \ \ \ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ std::vector<double>\ A\_list\ =\ \{}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ 1545979,}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ -\/1598187,}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ 1595170,}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ -\/1605545,}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ 1521194,}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ -\/1645695,}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ 1809373,}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ -\/1578053,}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ 2032672,}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ -\/2281842,}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ -\/1678912,}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ 2858489,}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ 5443521,}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ -\/9459781,}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ 3600413\};}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ K\ =\ 0.000104664;}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ U0\ =\ -\/4.419803;}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ calc\_ocp\_schmit(A\_list,\ K,\ U0,\ SOC);}
+\DoxyCodeLine{00204\ \ \ \ \ \}}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \ \ \ \ std::vector<double>\ NCA(std::vector<double>\ \&vector\_SOC)}
+\DoxyCodeLine{00207\ \ \ \ \ \{}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ std::vector<double>\ result\_vector;}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ SOC;}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ vector\_SOC.size();\ j++)}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ SOC\ =\ vector\_SOC[j];}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ result\_vector.push\_back(NCA(SOC));}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result\_vector;}
+\DoxyCodeLine{00217\ \ \ \ \ \}}
+\DoxyCodeLine{00218\ \}}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \textcolor{keyword}{namespace\ }negative\_electrode\_ocps}
+\DoxyCodeLine{00221\ \{}
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordtype}{double}\ graphite(\textcolor{keywordtype}{double}\ \&SOC)}
+\DoxyCodeLine{00223\ \ \ \ \ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.13966\ +\ 0.68920\ *\ std::exp(-\/49.20361\ *\ SOC)\ +\ 0.41903\ *\ std::exp(-\/254.40067\ *\ SOC)\ -\/\ std::exp(49.97886\ *\ SOC\ -\/\ 43.37888)\ -\/\ 0.028221\ *\ std::atan(22.52300\ *\ SOC\ -\/\ 3.65328)\ -\/\ 0.01308\ *\ std::atan(28.34801\ *\ SOC\ -\/\ 13.43960);}
+\DoxyCodeLine{00225\ \ \ \ \ \}}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00227\ \ \ \ \ std::vector<double>\ graphite(std::vector<double>\ \&vector\_SOC)}
+\DoxyCodeLine{00228\ \ \ \ \ \{}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ std::vector<double>\ res\_vector;}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ SOC;}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ vector\_SOC.size();\ i++)}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ SOC\ =\ vector\_SOC[i];}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ res\_vector.push\_back(graphite(SOC));}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res\_vector;}
+\DoxyCodeLine{00238\ \ \ \ \ \}}
+\DoxyCodeLine{00239\ \}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BMSLOGIC\_PROJECT\_GENERAL\_OCP\_FUNCTIONS\_H}}
+
+\end{DoxyCode}

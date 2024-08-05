@@ -1,0 +1,53 @@
+\doxysection{Thevenin1\+RC Class Reference}
+\hypertarget{class_thevenin1_r_c}{}\label{class_thevenin1_r_c}\index{Thevenin1RC@{Thevenin1RC}}
+
+
+This class creates a first order Thevenin model object for a lithium-\/ion battery cell. It contains relevant model parameters as class attributes and methods to calculate SOC and terminal voltage.  
+
+
+
+
+{\ttfamily \#include $<$models.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_thevenin1_r_c_aefb8052213bdebed8edcbcf41d24f5da}\label{class_thevenin1_r_c_aefb8052213bdebed8edcbcf41d24f5da} 
+double {\bfseries soc\+\_\+next} (double dt, double i\+\_\+app, double soc\+\_\+prev, double Q, double eta)
+\item 
+\Hypertarget{class_thevenin1_r_c_a20e19e53d23be3ba373b1b078a3028eb}\label{class_thevenin1_r_c_a20e19e53d23be3ba373b1b078a3028eb} 
+double {\bfseries i\+\_\+\+R1\+\_\+next} (double dt, double i\+\_\+app, double i\+\_\+\+R1\+\_\+prev, double R1, double C1)
+\item 
+\Hypertarget{class_thevenin1_r_c_a9f9810fccae4c0df0d7f0ea59c9373a8}\label{class_thevenin1_r_c_a9f9810fccae4c0df0d7f0ea59c9373a8} 
+double {\bfseries V} (double i\+\_\+app, double ocv, double R0, double R1, double i\+\_\+\+R1)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class creates a first order Thevenin model object for a lithium-\/ion battery cell. It contains relevant model parameters as class attributes and methods to calculate SOC and terminal voltage. 
+
+Thevenin first order model is a phenomenological model that can be used to simulate the terminal voltage across a lithium-\/ion battery cell. It has representative electrical components that represent the open-\/circuit voltage, internal resistance, and diffusion voltages. The set of differential and algebraic equations are\+:
+
+dz/dt = -\/eta(t) \texorpdfstring{$\ast$}{*} i\+\_\+app(t) / capacity di\+\_\+\+R1/dt = -\/i\+\_\+\+R1/(R1\texorpdfstring{$\ast$}{*}\+C1) + i\+\_\+app(t)/(R1\texorpdfstring{$\ast$}{*}\+C1) v(t) = OCV(z(t)) -\/ R1\texorpdfstring{$\ast$}{*}i\+\_\+\+R1(t) -\/ R0\texorpdfstring{$\ast$}{*}i\+\_\+app(t)
+
+Where the second equation is a non-\/homogenous linear first-\/order differential equation. Furthermore, the variables are\+: z\+: state of charge (SOC) R0\+: resistance of the resistor that represents the battery cell\textquotesingle{}s internal resistance R1\+: resistance of the resistor in the RC pair. C1\+: capacitance of the capacitor in the RC pair. i\+\_\+\+R1\+: current through R1 i\+\_\+app\+: applied current eta\+: Colombic efficiency
+
+Note that the RC pair represents the diffusion voltage in the battery cell.
+
+After time discretization, the set of algebraic equations are\+:
+
+z\mbox{[}k+1\mbox{]} = z\mbox{[}k\mbox{]} -\/ delta\+\_\+t\texorpdfstring{$\ast$}{*}eta\mbox{[}k\mbox{]}\texorpdfstring{$\ast$}{*}i\+\_\+app\mbox{[}k\mbox{]}/capacity i\+\_\+\+R1\mbox{[}k+1\mbox{]} = exp(-\/delta\+\_\+t/(R1\texorpdfstring{$\ast$}{*}\+C1))\texorpdfstring{$\ast$}{*}i\+\_\+\+R1\mbox{[}k\mbox{]} + (1-\/exp(-\/delta\+\_\+t/(R1\texorpdfstring{$\ast$}{*}\+C1))) \texorpdfstring{$\ast$}{*} i\+\_\+app\mbox{[}k\mbox{]} v\mbox{[}k\mbox{]} = OCV(z\mbox{[}k\mbox{]}) -\/ R1\texorpdfstring{$\ast$}{*}i\+\_\+\+R1\mbox{[}k\mbox{]} -\/ R0\texorpdfstring{$\ast$}{*}i\+\_\+app\mbox{[}k\mbox{]}
+
+Where k represents the time-\/point and delta\+\_\+t represents the time-\/step between z\mbox{[}k+1\mbox{]} and z\mbox{[}k\mbox{]}.
+
+Code Notes\+:
+\begin{DoxyEnumerate}
+\item It is assumed for now that eta is a function of applied current only.
+\item \doxylink{class_discharge}{Discharge} currrent is positve and charge current is negative by convention.
+\end{DoxyEnumerate}
+
+Reference\+: Hariharan, K. S. (2013). A coupled nonlinear equivalent circuit – Thermal model for lithium ion cells. In Journal of Power Sources (Vol. 227, pp. 171–176). Elsevier BV. \href{https://doi.org/10.1016/j.jpowsour.2012.11.044}{\texttt{ https\+://doi.\+org/10.\+1016/j.\+jpowsour.\+2012.\+11.\+044}} 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/\mbox{\hyperlink{models_8h}{models.\+h}}\end{DoxyCompactItemize}

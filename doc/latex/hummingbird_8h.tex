@@ -1,0 +1,59 @@
+\doxysection{C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/extern/hummingbird.h File Reference}
+\hypertarget{hummingbird_8h}{}\label{hummingbird_8h}\index{C:/Users/moina/dev/BMSLogic/bmslogic/extern/hummingbird.h@{C:/Users/moina/dev/BMSLogic/bmslogic/extern/hummingbird.h}}
+
+
+contains the functionality to read csv files and extract data.  
+
+
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_h_b_1_1_data_frames}{HB\+::\+Data\+Frames}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_h_b_1_1_data_frames}{Data\+Frames}} \mbox{\hyperlink{hummingbird_8cpp_a54cae211b100cab43f28871d998a238e}{HB\+::read\+\_\+csv}} (std\+::string file\+Path, int col\+Name\+Index, int index\+Row)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+contains the functionality to read csv files and extract data. 
+
+\begin{DoxyAuthor}{Author}
+Moin Ahmed (\href{mailto:moinahmed100@gmail.com}{\texttt{ moinahmed100@gmail.\+com}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2024-\/05-\/15
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2024 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{hummingbird_8cpp_a54cae211b100cab43f28871d998a238e}\index{hummingbird.h@{hummingbird.h}!read\_csv@{read\_csv}}
+\index{read\_csv@{read\_csv}!hummingbird.h@{hummingbird.h}}
+\doxysubsubsection{\texorpdfstring{read\_csv()}{read\_csv()}}
+{\footnotesize\ttfamily \label{hummingbird_8cpp_a54cae211b100cab43f28871d998a238e} 
+Data\+Frames HB\+::read\+\_\+csv (\begin{DoxyParamCaption}\item[{std\+::string}]{file\+Path}{, }\item[{int}]{col\+Name\+Index}{, }\item[{int}]{index\+Row}{}\end{DoxyParamCaption})}
+
+read\+\_\+csv
+
+function to parse through the csv file and create Humming\+Bird Data\+Frame.
+
+Parameters\+: file\+Path\+: std\+::string of the filepath of the csv file. col\+Name\+Index\+: int representing the index column in the csv file. Default is set to 0. index\+Row\+: int representing the index row of the csv file. Default is set to 0.
+
+Return\+: Humming\+Bird Data\+Frame structure
+
+Throws\+: None 

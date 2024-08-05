@@ -1,0 +1,105 @@
+\doxysection{bmslogic.\+simulations.\+cell.\+cyclers.\+Py\+HPPCCycler Class Reference}
+\hypertarget{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_h_p_p_c_cycler}{}\label{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_h_p_p_c_cycler}\index{bmslogic.simulations.cell.cyclers.PyHPPCCycler@{bmslogic.simulations.cell.cyclers.PyHPPCCycler}}
+Inheritance diagram for bmslogic.\+simulations.\+cell.\+cyclers.\+Py\+HPPCCycler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_h_p_p_c_cycler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_h_p_p_c_cycler_af921a23a8aee16a180064a3599bd24cf}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, float t1, float t2, float i\+\_\+app, str charge\+\_\+or\+\_\+discharge, float V\+\_\+min, float V\+\_\+max, float soc\+\_\+lib\+\_\+min, float soc\+\_\+lib\+\_\+max, float soc\+\_\+lib, int hppc\+\_\+steps=10)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_custom_cycler}{bmslogic.\+simulations.\+cell.\+cyclers.\+Py\+Custom\+Cycler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_custom_cycler_acd225bd9732b7e7394d583697d6d13c7}{t\+\_\+max}} (self)
+\item 
+float \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_custom_cycler_ab054df90c7d988456a06c912df116741}{get\+\_\+current}} (self, str step\+\_\+name, float t)
+\item 
+None \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_custom_cycler_a22a9cd4f3069b4620d8a7b7935a36616}{reset}} (self)
+\item 
+\mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_custom_cycler_a86499fce2653822ff6c6b3aa15be11f2}{plot}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_custom_cycler}{bmslogic.\+simulations.\+cell.\+cyclers.\+Py\+Custom\+Cycler}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries array\+\_\+t}
+\item 
+{\bfseries array\+\_\+I}
+\item 
+{\bfseries cycle\+\_\+steps}
+\item 
+{\bfseries SOC\+\_\+\+LIB\+\_\+init}
+\item 
+{\bfseries V\+\_\+min}
+\item 
+{\bfseries V\+\_\+max}
+\item 
+{\bfseries time\+\_\+elapsed}
+\item 
+{\bfseries SOC\+\_\+\+LIB}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_base_cycler}{bmslogic.\+simulations.\+cell.\+cyclers.\+Py\+Base\+Cycler}}}
+\begin{DoxyCompactItemize}
+\item 
+float {\bfseries time\+\_\+elapsed} = field(default=0.\+0)
+\item 
+float {\bfseries SOC\+\_\+\+LIB} = field(default=0.\+0)
+\item 
+float {\bfseries SOC\+\_\+\+LIB\+\_\+min} = field(default=0.\+0)
+\item 
+float {\bfseries SOC\+\_\+\+LIB\+\_\+max} = field(default=1.\+0)
+\item 
+float {\bfseries charge\+\_\+current} = field(default=0.\+0)
+\item 
+float {\bfseries discharge\+\_\+current} = field(default=0.\+0)
+\item 
+float {\bfseries rest\+\_\+time} = field(default=0.\+0)
+\item 
+float {\bfseries v\+\_\+min} = field(default=2.\+0)
+\item 
+float {\bfseries v\+\_\+max} = field(default=4.\+2)
+\item 
+int {\bfseries num\+\_\+cycles} = field(default=0)
+\item 
+list {\bfseries cycle\+\_\+steps} = field(default\+\_\+factory=lambda\+: \mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_h_p_p_c_cycler_af921a23a8aee16a180064a3599bd24cf}\index{bmslogic.simulations.cell.cyclers.PyHPPCCycler@{bmslogic.simulations.cell.cyclers.PyHPPCCycler}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!bmslogic.simulations.cell.cyclers.PyHPPCCycler@{bmslogic.simulations.cell.cyclers.PyHPPCCycler}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_h_p_p_c_cycler_af921a23a8aee16a180064a3599bd24cf} 
+ None bmslogic.\+simulations.\+cell.\+cyclers.\+Py\+HPPCCycler.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{t1}{, }\item[{float}]{t2}{, }\item[{float}]{i\+\_\+app}{, }\item[{str}]{charge\+\_\+or\+\_\+discharge}{, }\item[{float}]{V\+\_\+min}{, }\item[{float}]{V\+\_\+max}{, }\item[{float}]{soc\+\_\+lib\+\_\+min}{, }\item[{float}]{soc\+\_\+lib\+\_\+max}{, }\item[{float}]{soc\+\_\+lib}{, }\item[{int }]{hppc\+\_\+steps}{ = {\ttfamily 10}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}intended to be the cycler class for HPPC experiments. HPPC defined here has the following profile
+        1. Rest for t1
+        2. Current pulse, with the amplitude of i_app, for a time period of t2. THh current is negative if
+            the battery cell is discharging and positive if is charging.
+        3. Repeat steps 1 and 2 until the desired terminal voltage is attained
+
+Args:
+    t1 (float): time period [s] for the initial rest and between the current pulse
+    t2 (float): time period [s] of the current pulse
+    current (float): current value [A] during the pulse
+    charge_or_discharge (str): options are 'charge' or 'discharge'
+    V_min (float): minimum terminal voltage [V]
+    V_max (float): maximum terminal voltage [V]
+    soc_lib_min (float): minimum LIB SOC
+    soc_lib_max (float): max. LIB SOC
+    soc_lib (float): SOC LIB at the start of the HPPC cycling step.
+    hppc_steps (int): number of HPPC repetitions. Default is 10.
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_custom_cycler_a3bf02a1f8dff461301a869433dee49d0}{bmslogic.\+simulations.\+cell.\+cyclers.\+Py\+Custom\+Cycler}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/cyclers.\+py\end{DoxyCompactItemize}

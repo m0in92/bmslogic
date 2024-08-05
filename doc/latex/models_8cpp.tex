@@ -1,0 +1,52 @@
+\doxysection{C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/models.cpp File Reference}
+\hypertarget{models_8cpp}{}\label{models_8cpp}\index{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/models.cpp@{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/models.cpp}}
+
+
+Contains the class declarations for the relevant models. These classes are generally intended to contain simulation equations in their methods. These equations are used by the relevant solvers during the simulation runs.  
+
+
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include "{}models.\+h"{}}\newline
+{\ttfamily \#include "{}common\+\_\+includes.\+h"{}}\newline
+{\ttfamily \#include "{}extern/owl.\+h"{}}\newline
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_e_s_p_model}{ESPModel}}
+\begin{DoxyCompactList}\small\item\em contains equations for the Enhanced single particle models. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{namespace_e_s_p_model_aff3f9402f0edd72acdabc6cfa245f438}\label{namespace_e_s_p_model_aff3f9402f0edd72acdabc6cfa245f438} 
+double {\bfseries ESPModel\+::molar\+\_\+flux\+\_\+electrode} (double \&I, double S, char electrode\+\_\+type)
+\item 
+\Hypertarget{namespace_e_s_p_model_a1692d82d1d7ea30054a676b7d4c3dd04}\label{namespace_e_s_p_model_a1692d82d1d7ea30054a676b7d4c3dd04} 
+double {\bfseries ESPModel\+::a\+\_\+s} (double epsilon, double R)
+\item 
+double \mbox{\hyperlink{namespace_e_s_p_model_a18a8b24438a46675524339a0f79c73c6}{ESPModel\+::i\+\_\+0}} (double k, double c\+\_\+s\+\_\+max, double c\+\_\+e, double soc\+\_\+surf)
+\begin{DoxyCompactList}\small\item\em Calculates the exchange current density for an electrode \mbox{[}mol/m2/s\mbox{]}. \end{DoxyCompactList}\item 
+\Hypertarget{namespace_e_s_p_model_af92cb84158f9cec3441e9ce89b3244d9}\label{namespace_e_s_p_model_af92cb84158f9cec3441e9ce89b3244d9} 
+double {\bfseries ESPModel\+::m} (double i\+\_\+app, double k, double S, double c\+\_\+s\+\_\+max, double c\+\_\+e, double soc\+\_\+surf)
+\item 
+double \mbox{\hyperlink{namespace_e_s_p_model_a08d663264503719ad1d5f40323bc5401}{ESPModel\+::calc\+\_\+terminal\+\_\+voltage}} (double ocp\+\_\+p, double ocp\+\_\+n, double m\+\_\+p, double m\+\_\+n, double L\+\_\+n, double L\+\_\+sep, double L\+\_\+p, double kappa\+\_\+eff\+\_\+avg, double k\+\_\+f\+\_\+avg, double t\+\_\+c, double R\+\_\+cell, double c\+\_\+e\+\_\+n, double c\+\_\+e\+\_\+p, double temp, double i\+\_\+app)
+\begin{DoxyCompactList}\small\item\em Returns the cell terminal voltage \mbox{[}V\mbox{]} according to Moura et al. \end{DoxyCompactList}\item 
+\Hypertarget{namespace_e_s_p_model_ae69300ac4cf4082a10fc81404cdc6135}\label{namespace_e_s_p_model_ae69300ac4cf4082a10fc81404cdc6135} 
+\mbox{\hyperlink{struct_over_potentials}{Over\+Potentials}} {\bfseries ESPModel\+::calc\+\_\+overpotentials} (double ocp\+\_\+p, double ocp\+\_\+n, double m\+\_\+p, double m\+\_\+n, double L\+\_\+n, double L\+\_\+sep, double L\+\_\+p, double kappa\+\_\+eff\+\_\+avg, double k\+\_\+f\+\_\+avg, double t\+\_\+c, double R\+\_\+cell, double c\+\_\+e\+\_\+n, double c\+\_\+e\+\_\+p, double temp, double i\+\_\+app)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains the class declarations for the relevant models. These classes are generally intended to contain simulation equations in their methods. These equations are used by the relevant solvers during the simulation runs. 
+
+\begin{DoxyAuthor}{Author}
+Moin Ahmed (\href{mailto:moinahmed100@gmail.com}{\texttt{ moinahmed100@gmail.\+com}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2024-\/05-\/04
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2024 
+\end{DoxyCopyright}

@@ -1,0 +1,46 @@
+\doxysection{SPKFSolver Class Reference}
+\hypertarget{class_s_p_k_f_solver}{}\label{class_s_p_k_f_solver}\index{SPKFSolver@{SPKFSolver}}
+Inheritance diagram for SPKFSolver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_s_p_k_f_solver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_s_p_k_f_solver_a8a4676aaaf79551f28ebec03d16f7652}\label{class_s_p_k_f_solver_a8a4676aaaf79551f28ebec03d16f7652} 
+{\bfseries SPKFSolver} (\mbox{\hyperlink{class_battery_cell}{Battery\+Cell}} i\+\_\+b\+\_\+cell, bool i\+\_\+isothermal, bool i\+\_\+degradation, double i\+\_\+state1\+\_\+init, double i\+\_\+state2\+\_\+init, double i\+\_\+cov\+\_\+state1, double i\+\_\+cov\+\_\+state2, double i\+\_\+cov\+\_\+w, double i\+\_\+cov\+\_\+v)
+\item 
+\Hypertarget{class_s_p_k_f_solver_ab24c85bea95ae0b0c9808707b043b9f9}\label{class_s_p_k_f_solver_ab24c85bea95ae0b0c9808707b043b9f9} 
+\mbox{\hyperlink{class_solution}{Solution}} {\bfseries solve} (Eigen\+::\+Vector\+Xd i\+\_\+t, Eigen\+::\+Vector\+Xd i\+\_\+I, Eigen\+::\+Vector\+Xd i\+\_\+\+V\+\_\+ob)
+\item 
+\Hypertarget{class_s_p_k_f_solver_a626f89daa4e288398e802b7c3214e3b9}\label{class_s_p_k_f_solver_a626f89daa4e288398e802b7c3214e3b9} 
+\mbox{\hyperlink{class_solution}{Solution}} {\bfseries solve} (std\+::vector$<$ double $>$ i\+\_\+t, std\+::vector$<$ double $>$ i\+\_\+I, std\+::vector$<$ double $>$ i\+\_\+\+V\+\_\+ob)
+\item 
+\Hypertarget{class_s_p_k_f_solver_a068a8feaa0dc4d44b4867cbe64ee7a38}\label{class_s_p_k_f_solver_a068a8feaa0dc4d44b4867cbe64ee7a38} 
+const \mbox{\hyperlink{class_sigma_point_kalman_filter}{Sigma\+Point\+Kalman\+Filter}} {\bfseries get\+\_\+spkf\+\_\+solver\+\_\+instance} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_base_battery_solver}{Base\+Battery\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Base\+Battery\+Solver} (\mbox{\hyperlink{class_battery_cell}{Battery\+Cell}} i\+\_\+b\+\_\+cell, bool i\+\_\+isothermal, bool i\+\_\+degradation, std\+::string i\+\_\+electrode\+\_\+\+SOC\+\_\+solver)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{class_base_battery_solver}{Base\+Battery\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_battery_cell}{Battery\+Cell}} {\bfseries m\+\_\+b\+\_\+cell}
+\item 
+bool {\bfseries m\+\_\+isothermal}
+\item 
+bool {\bfseries m\+\_\+degradation}
+\item 
+std\+::string {\bfseries m\+\_\+electrode\+\_\+\+SOC\+\_\+solver}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/kalman\+\_\+solvers.\+h\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/kalman\+\_\+solvers.\+cpp\end{DoxyCompactItemize}

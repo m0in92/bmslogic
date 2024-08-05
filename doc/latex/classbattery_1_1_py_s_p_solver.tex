@@ -1,0 +1,172 @@
+\doxysection{battery.\+Py\+SPSolver Class Reference}
+\hypertarget{classbattery_1_1_py_s_p_solver}{}\label{classbattery_1_1_py_s_p_solver}\index{battery.PySPSolver@{battery.PySPSolver}}
+Inheritance diagram for battery.\+Py\+SPSolver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classbattery_1_1_py_s_p_solver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbattery_1_1_py_s_p_solver_a28571a80149b8509757f614eb5c3a9be}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, b\+\_\+cell, bool isothermal=True, bool degradation=False, str electrode\+\_\+\+SOC\+\_\+solver=\textquotesingle{}eigen\textquotesingle{}, \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}electrode\+\_\+\+SOC\+\_\+solver\+\_\+params)
+\item 
+float \mbox{\hyperlink{classbattery_1_1_py_s_p_solver_aacdbad2d2abc7e5609e1bad7a8b8a90d}{calc\+\_\+terminal\+\_\+potential}} (self, float I\+\_\+p\+\_\+i, float I\+\_\+n\+\_\+i)
+\item 
+\mbox{\hyperlink{classbattery_1_1_py_s_p_solver_a29fed66320acdc581d2127b388896276}{delta\+\_\+\+SOC\+\_\+cap}} (cls, float Q, float I, float dt)
+\item 
+\Hypertarget{classbattery_1_1_py_s_p_solver_af8f48f265f945a97f45035b95694c42a}\label{classbattery_1_1_py_s_p_solver_af8f48f265f945a97f45035b95694c42a} 
+{\bfseries calc\+\_\+\+SOC\+\_\+cap} (self, float cap\+\_\+prev, float Q, float I, float dt)
+\item 
+\mbox{\hyperlink{classbattery_1_1_py_s_p_solver_a123deb3f41b060d0f7a7c7802768f8f1}{delta\+\_\+cap}} (cls, float I, float dt)
+\item 
+\Hypertarget{classbattery_1_1_py_s_p_solver_a03580790aede04f3d001995676a9ff25}\label{classbattery_1_1_py_s_p_solver_a03580790aede04f3d001995676a9ff25} 
+tuple\mbox{[}float, float, float, float, float\mbox{]} {\bfseries solve\+\_\+iteration\+\_\+one\+\_\+step} (self, float t\+\_\+prev, float dt, float I)
+\item 
+\Hypertarget{classbattery_1_1_py_s_p_solver_abd612494916a0ce11f1cd1f32aabefe4}\label{classbattery_1_1_py_s_p_solver_abd612494916a0ce11f1cd1f32aabefe4} 
+{\bfseries solve} (self, \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_base_cycler}{Py\+Base\+Cycler}} cycler\+\_\+instance, str sol\+\_\+name=None, str save\+\_\+csv\+\_\+dir=None, bool verbose=False, float t\+\_\+increment=0.\+1, str termination\+\_\+criteria=\textquotesingle{}V\textquotesingle{}, float t\+\_\+prev=0.\+0, int store\+\_\+solution\+\_\+iter=1, Optional\mbox{[}float\mbox{]} t\+\_\+sim\+\_\+max=None)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classbattery_1_1_py_base_solver}{battery.\+Py\+Base\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries check\+\_\+potential\+\_\+limits} (self, V)
+\item 
+{\bfseries update\+\_\+lists} (self, x\+\_\+p\+\_\+list, x\+\_\+n\+\_\+list, V\+\_\+list, cap\+\_\+list, T\+\_\+list, V, cap, T)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbattery_1_1_py_s_p_solver_a9424210b94eedaec7b98214185df1b6c}{calc\+\_\+cell\+\_\+temp}} (t\+\_\+model, t\+\_\+prev, dt, temp\+\_\+prev, V, I)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbattery_1_1_py_s_p_solver_a0f9189eb9ffce907deccf23af321dbd3}\label{classbattery_1_1_py_s_p_solver_a0f9189eb9ffce907deccf23af321dbd3} 
+int {\bfseries N}
+\item 
+\Hypertarget{classbattery_1_1_py_s_p_solver_af00d9d279fb5c0a279de9a2802d23af7}\label{classbattery_1_1_py_s_p_solver_af00d9d279fb5c0a279de9a2802d23af7} 
+{\bfseries sol\+\_\+init}
+\item 
+\Hypertarget{classbattery_1_1_py_s_p_solver_a56929c1a1a48e79e032138b9ef3a4182}\label{classbattery_1_1_py_s_p_solver_a56929c1a1a48e79e032138b9ef3a4182} 
+{\bfseries electrode\+\_\+\+SOC\+\_\+solver}
+\item 
+\Hypertarget{classbattery_1_1_py_s_p_solver_ae33d9e89db5dedbe3ebe383721641104}\label{classbattery_1_1_py_s_p_solver_ae33d9e89db5dedbe3ebe383721641104} 
+{\bfseries SOC\+\_\+solver\+\_\+p}
+\item 
+\Hypertarget{classbattery_1_1_py_s_p_solver_af26c62302e1c2db1fb5f7cd6dbbff341}\label{classbattery_1_1_py_s_p_solver_af26c62302e1c2db1fb5f7cd6dbbff341} 
+{\bfseries SOC\+\_\+solver\+\_\+n}
+\item 
+\Hypertarget{classbattery_1_1_py_s_p_solver_ab426a73f469d6989d7debb6cd1014b6b}\label{classbattery_1_1_py_s_p_solver_ab426a73f469d6989d7debb6cd1014b6b} 
+{\bfseries t\+\_\+model}
+\item 
+\Hypertarget{classbattery_1_1_py_s_p_solver_a5c063c98cc300e7d0e016a034d5d38d1}\label{classbattery_1_1_py_s_p_solver_a5c063c98cc300e7d0e016a034d5d38d1} 
+{\bfseries SEI\+\_\+model}
+\item 
+\Hypertarget{classbattery_1_1_py_s_p_solver_a37a0c02381c49acb220d32df345bb472}\label{classbattery_1_1_py_s_p_solver_a37a0c02381c49acb220d32df345bb472} 
+{\bfseries bool\+\_\+degradation}
+\item 
+\Hypertarget{classbattery_1_1_py_s_p_solver_a6be8b4f470807ca8491c820759620845}\label{classbattery_1_1_py_s_p_solver_a6be8b4f470807ca8491c820759620845} 
+{\bfseries bool\+\_\+isothermal}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classbattery_1_1_py_base_solver}{battery.\+Py\+Base\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries b\+\_\+cell}
+\item 
+{\bfseries bool\+\_\+isothermal}
+\item 
+{\bfseries bool\+\_\+degradation}
+\item 
+{\bfseries electrode\+\_\+\+SOC\+\_\+solver}
+\item 
+{\bfseries b\+\_\+model}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbattery_1_1_py_s_p_solver_a17b7161943496ea903b9dfbec554ed1d}\label{classbattery_1_1_py_s_p_solver_a17b7161943496ea903b9dfbec554ed1d} 
+{\bfseries \+\_\+cycler\+\_\+solve} (self, \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_base_cycler}{Py\+Base\+Cycler}} cycler, str sol\+\_\+name=None, str save\+\_\+csv\+\_\+dir=None, bool verbose=False, float t\+\_\+increment=0.\+1, float termination\+\_\+criteria=\textquotesingle{}V\textquotesingle{}, float t\+\_\+prev=0.\+0, int store\+\_\+solution\+\_\+iter=1.\+0)
+\item 
+\Hypertarget{classbattery_1_1_py_s_p_solver_a62fc3317378038eb25f571408f80af60}\label{classbattery_1_1_py_s_p_solver_a62fc3317378038eb25f571408f80af60} 
+{\bfseries \+\_\+custom\+\_\+cycler\+\_\+solve} (self, \mbox{\hyperlink{classbmslogic_1_1simulations_1_1cell_1_1cyclers_1_1_py_custom_cycler}{Py\+Custom\+Cycler}} custom\+\_\+cycler\+\_\+instance, str sol\+\_\+name=None, str save\+\_\+csv\+\_\+dir=None, bool verbose=False, float t\+\_\+increment=0.\+1, str termination\+\_\+criteria=\textquotesingle{}V\textquotesingle{}, int store\+\_\+solution\+\_\+iter=1, Optional\mbox{[}float\mbox{]} t\+\_\+sim\+\_\+max=None)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}This class contains the attributes and methods to solve for the cell terminal voltage, battery cell temperature,
+and SEI degradation during battery cycling.
+The cell terminal voltage is solved using the single particle (SP) model. It uses the Eigen Expansion Function
+method to solve for the electrode surface SOC.
+The cell surface temperature is solved using the lumped cell thermal balance. The heat balance ODE is solved using
+the rk4 method.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classbattery_1_1_py_s_p_solver_a28571a80149b8509757f614eb5c3a9be}\index{battery.PySPSolver@{battery.PySPSolver}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!battery.PySPSolver@{battery.PySPSolver}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classbattery_1_1_py_s_p_solver_a28571a80149b8509757f614eb5c3a9be} 
+battery.\+Py\+SPSolver.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{b\+\_\+cell}{, }\item[{bool }]{isothermal}{ = {\ttfamily True}, }\item[{bool }]{degradation}{ = {\ttfamily False}, }\item[{str }]{electrode\+\_\+\+SOC\+\_\+solver}{ = {\ttfamily \textquotesingle{}eigen\textquotesingle{}}, }\item[{\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{electrode\+\_\+\+SOC\+\_\+solver\+\_\+params}{}\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classbattery_1_1_py_base_solver}{battery.\+Py\+Base\+Solver}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbattery_1_1_py_s_p_solver_a9424210b94eedaec7b98214185df1b6c}\index{battery.PySPSolver@{battery.PySPSolver}!calc\_cell\_temp@{calc\_cell\_temp}}
+\index{calc\_cell\_temp@{calc\_cell\_temp}!battery.PySPSolver@{battery.PySPSolver}}
+\doxysubsubsection{\texorpdfstring{calc\_cell\_temp()}{calc\_cell\_temp()}}
+{\footnotesize\ttfamily \label{classbattery_1_1_py_s_p_solver_a9424210b94eedaec7b98214185df1b6c} 
+battery.\+Py\+SPSolver.\+calc\+\_\+cell\+\_\+temp (\begin{DoxyParamCaption}\item[{}]{t\+\_\+model}{, }\item[{}]{t\+\_\+prev}{, }\item[{}]{dt}{, }\item[{}]{temp\+\_\+prev}{, }\item[{}]{V}{, }\item[{}]{I}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyVerb}Solves for the heat balance using the ODE rk4 solver.
+:param t_model: Thermal model class
+:param t_prev: time values at the previous time step [s]
+:param dt: time difference between the current and previous times [s]
+:param V: cell terminal voltage [V]
+:param temp_prev: previous cell temperature [K]
+:param I: applied current [A]
+:return: cell temperature values [K]
+\end{DoxyVerb}
+ \Hypertarget{classbattery_1_1_py_s_p_solver_aacdbad2d2abc7e5609e1bad7a8b8a90d}\index{battery.PySPSolver@{battery.PySPSolver}!calc\_terminal\_potential@{calc\_terminal\_potential}}
+\index{calc\_terminal\_potential@{calc\_terminal\_potential}!battery.PySPSolver@{battery.PySPSolver}}
+\doxysubsubsection{\texorpdfstring{calc\_terminal\_potential()}{calc\_terminal\_potential()}}
+{\footnotesize\ttfamily \label{classbattery_1_1_py_s_p_solver_aacdbad2d2abc7e5609e1bad7a8b8a90d} 
+ float battery.\+Py\+SPSolver.\+calc\+\_\+terminal\+\_\+potential (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{I\+\_\+p\+\_\+i}{, }\item[{float}]{I\+\_\+n\+\_\+i}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns the terminal potential [V]
+:param I_p_i: positive electrode intercalation current [A]
+:param I_n_i: negative electrode intercalation current [A]
+:return: (float) battery cell terminal potential [V]
+\end{DoxyVerb}
+ \Hypertarget{classbattery_1_1_py_s_p_solver_a123deb3f41b060d0f7a7c7802768f8f1}\index{battery.PySPSolver@{battery.PySPSolver}!delta\_cap@{delta\_cap}}
+\index{delta\_cap@{delta\_cap}!battery.PySPSolver@{battery.PySPSolver}}
+\doxysubsubsection{\texorpdfstring{delta\_cap()}{delta\_cap()}}
+{\footnotesize\ttfamily \label{classbattery_1_1_py_s_p_solver_a123deb3f41b060d0f7a7c7802768f8f1} 
+battery.\+Py\+SPSolver.\+delta\+\_\+cap (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{I}{, }\item[{float}]{dt}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Measures the change in battery cell's capacity [Ahr]
+:param I: applied current at the current time step [A]
+:param dt: difference in time in the time step [s]
+:return: change in battery cell capacity [Ahr]
+\end{DoxyVerb}
+ \Hypertarget{classbattery_1_1_py_s_p_solver_a29fed66320acdc581d2127b388896276}\index{battery.PySPSolver@{battery.PySPSolver}!delta\_SOC\_cap@{delta\_SOC\_cap}}
+\index{delta\_SOC\_cap@{delta\_SOC\_cap}!battery.PySPSolver@{battery.PySPSolver}}
+\doxysubsubsection{\texorpdfstring{delta\_SOC\_cap()}{delta\_SOC\_cap()}}
+{\footnotesize\ttfamily \label{classbattery_1_1_py_s_p_solver_a29fed66320acdc581d2127b388896276} 
+battery.\+Py\+SPSolver.\+delta\+\_\+\+SOC\+\_\+cap (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{float}]{Q}{, }\item[{float}]{I}{, }\item[{float}]{dt}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}returns the delta SOC capacity [unit-less].
+:param Q: Battery cell capacity
+:param I: Applied current [A]
+:param dt: time difference between the current and previous time step [s].
+:return: (float) change in delta SOC
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers/battery.\+py\end{DoxyCompactItemize}

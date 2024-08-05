@@ -1,0 +1,102 @@
+\doxysection{electrode\+\_\+potential.\+Py\+Electrode\+Potential\+FVMSolver Class Reference}
+\hypertarget{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver}{}\label{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver}\index{electrode\_potential.PyElectrodePotentialFVMSolver@{electrode\_potential.PyElectrodePotentialFVMSolver}}
+Inheritance diagram for electrode\+\_\+potential.\+Py\+Electrode\+Potential\+FVMSolver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a8a7a5ab162510a9b9b118b5509b4398e}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, Py\+Electrolyte\+FVMCoordinates fvm\+\_\+coords, str electrode\+\_\+type, float a\+\_\+s, float sigma\+\_\+eff, float ref\+\_\+potential=0.\+0)
+\item 
+\Hypertarget{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a1478fc802213d5f4a0ab5f6cad134a8d}\label{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a1478fc802213d5f4a0ab5f6cad134a8d} 
+npt.\+Array\+Like {\bfseries solve\+\_\+phi\+\_\+s} (self, npt.\+Array\+Like j, float terminal\+\_\+potential=0.\+0)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a0e46559781d1c493beb425a85ff6a481}\label{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a0e46559781d1c493beb425a85ff6a481} 
+str {\bfseries electrode\+\_\+type}
+\item 
+\Hypertarget{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a6d16cfc12b227fdaa69c8d50dc5734df}\label{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a6d16cfc12b227fdaa69c8d50dc5734df} 
+float {\bfseries a\+\_\+s}
+\item 
+\Hypertarget{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a8e03e48539dc78d0c0a82ed59b088286}\label{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a8e03e48539dc78d0c0a82ed59b088286} 
+float {\bfseries sigma\+\_\+eff}
+\item 
+\Hypertarget{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_ad06f7292970a4f76942cfe4f6285c162}\label{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_ad06f7292970a4f76942cfe4f6285c162} 
+float {\bfseries ref\+\_\+potential}
+\item 
+\Hypertarget{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a5856471416515cb218622c9a754b1582}\label{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a5856471416515cb218622c9a754b1582} 
+{\bfseries coords}
+\item 
+\Hypertarget{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_ab370fcb3336a6de18bd8444b50223405}\label{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_ab370fcb3336a6de18bd8444b50223405} 
+{\bfseries dx}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a31f169ecafa232c03b6614c58122edc3}\label{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a31f169ecafa232c03b6614c58122edc3} 
+npt.\+Array\+Like {\bfseries \+\_\+\+M\+\_\+phi\+\_\+n} (cls, int n)
+\item 
+\Hypertarget{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a13c35aba8ea2719ed8198d38eea2307e}\label{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a13c35aba8ea2719ed8198d38eea2307e} 
+npt.\+Array\+Like {\bfseries \+\_\+\+M\+\_\+phi\+\_\+p} (cls, int n)
+\item 
+\Hypertarget{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_ac37643cece75b04323ec01ac898b2385}\label{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_ac37643cece75b04323ec01ac898b2385} 
+npt.\+Array\+Like {\bfseries \+\_\+\+M\+\_\+phi\+\_\+s} (self)
+\item 
+\Hypertarget{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a72520643aee9fa9cc0fb9d8223d38bfc}\label{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a72520643aee9fa9cc0fb9d8223d38bfc} 
+npt.\+Array\+Like {\bfseries \+\_\+array\+\_\+V} (self, float terminal\+\_\+potential=0.\+0)
+\item 
+npt.\+Array\+Like \mbox{\hyperlink{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_aa79bbb907ca559da4edbafeb8b883050}{\+\_\+array\+\_\+j}} (self, npt.\+Array\+Like j)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}This solver solves for the solid phase potential across the electrode. It uses the finite volume method (FVM)
+as indicated by Han et al. [1].
+
+In their paper, Han et al. defined the flux in terms of A/m2/s. Here, the relevant equations have been modified
+to refer to flux in terms of mol/m2/s.
+
+[1] Han, S., Tang, Y., & Khaleghi Rahimian, S. (2021). A numerically efficient method of solving the full-order
+pseudo-2-dimensional (P2D) Li-ion cell model. Journal of Power Sources, 490, 229571.
+https://doi.org/10.1016/J.JPOWSOUR.2021.229571Han, S., Tang, Y., & Khaleghi Rahimian, S. (2021).
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a8a7a5ab162510a9b9b118b5509b4398e}\index{electrode\_potential.PyElectrodePotentialFVMSolver@{electrode\_potential.PyElectrodePotentialFVMSolver}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!electrode\_potential.PyElectrodePotentialFVMSolver@{electrode\_potential.PyElectrodePotentialFVMSolver}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_a8a7a5ab162510a9b9b118b5509b4398e} 
+ None electrode\+\_\+potential.\+Py\+Electrode\+Potential\+FVMSolver.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Py\+Electrolyte\+FVMCoordinates}]{fvm\+\_\+coords}{, }\item[{str}]{electrode\+\_\+type}{, }\item[{float}]{a\+\_\+s}{, }\item[{float}]{sigma\+\_\+eff}{, }\item[{float }]{ref\+\_\+potential}{ = {\ttfamily 0.0}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Constructor for the class
+:param fvm_coords:
+:param electrode_type: 'n' for the negative electrode and 'p' for positive electrode
+:param a_s: electrode's specific interfacial area [m2/m3]
+:param sigma_eff: effective conductivity [S/m]
+:param ref_potential: Refers to the potential at the negative electrode/Current Collector interface. Usually set
+to zero.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_aa79bbb907ca559da4edbafeb8b883050}\index{electrode\_potential.PyElectrodePotentialFVMSolver@{electrode\_potential.PyElectrodePotentialFVMSolver}!\_array\_j@{\_array\_j}}
+\index{\_array\_j@{\_array\_j}!electrode\_potential.PyElectrodePotentialFVMSolver@{electrode\_potential.PyElectrodePotentialFVMSolver}}
+\doxysubsubsection{\texorpdfstring{\_array\_j()}{\_array\_j()}}
+{\footnotesize\ttfamily \label{classelectrode__potential_1_1_py_electrode_potential_f_v_m_solver_aa79bbb907ca559da4edbafeb8b883050} 
+ npt.\+Array\+Like electrode\+\_\+potential.\+Py\+Electrode\+Potential\+FVMSolver.\+\_\+array\+\_\+j (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{npt.\+Array\+Like}]{j}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}returns the column vector for the FVM solver
+:param j: row or column vector containing the molar flux [mol m-2 s-1]
+:return: column vector with values in the units of V
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers/electrode\+\_\+potential.\+py\end{DoxyCompactItemize}

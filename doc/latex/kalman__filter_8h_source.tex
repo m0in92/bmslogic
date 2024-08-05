@@ -1,0 +1,197 @@
+\doxysection{kalman\+\_\+filter.\+h}
+\hypertarget{kalman__filter_8h_source}{}\label{kalman__filter_8h_source}\index{C:/Users/moina/dev/BMSLogic/bmslogic/calc\_helpers/kalman\_filter.h@{C:/Users/moina/dev/BMSLogic/bmslogic/calc\_helpers/kalman\_filter.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Eigen/Core"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ these\ changes\ are\ for\ the\ version\ of\ Eigen\ used\ here}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ all\ placeholders::all}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ last\ placeholders::last}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_invalid_size}{InvalidSize}}\ :\ \textcolor{keyword}{public}\ std::exception}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *what()}
+\DoxyCodeLine{00018\ \ \ \ \ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *error\_msg\ =\ \textcolor{stringliteral}{"{}invalid\ dimensions\ of\ input\ vector\ and\ covariance\ matrix."{}};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ error\_msg;}
+\DoxyCodeLine{00021\ \ \ \ \ \}}
+\DoxyCodeLine{00022\ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_invalid_k_f_method_type}{InvalidKFMethodType}}\ :\ \textcolor{keyword}{public}\ std::exception}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *what()}
+\DoxyCodeLine{00028\ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *error\_msg\ =\ \textcolor{stringliteral}{"{}Invalid\ Kalman\ Filter\ Type."{}};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ error\_msg;}
+\DoxyCodeLine{00031\ \ \ \ \ \}}
+\DoxyCodeLine{00032\ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_normal_random_vector}{NormalRandomVector}}}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{class_normal_random_vector}{NormalRandomVector}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{class_normal_random_vector}{NormalRandomVector}}(Eigen::VectorXd\ vector\_init,\ Eigen::MatrixXd\ cov\_init);}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//\ getters}}
+\DoxyCodeLine{00040\ \ \ \ \ Eigen::VectorXd\ get\_vec()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_vec;\ \}}
+\DoxyCodeLine{00041\ \ \ \ \ Eigen::MatrixXd\ get\_cov()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_cov;\ \}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{comment}{//\ size\_t\ get\_dim()\ \{\ return\ m\_vec.size();\ \}}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{comment}{//\ setters}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_vec(Eigen::VectorXd\ i\_vec)\ \{\ m\_vec\ =\ i\_vec;\ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_cov(Eigen::MatrixXd\ \&i\_cov)\ \{\ m\_cov\ =\ i\_cov;\ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00048\ \ \ \ \ Eigen::VectorXd\ m\_vec;}
+\DoxyCodeLine{00049\ \ \ \ \ Eigen::MatrixXd\ m\_cov;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ check\_for\_square\_matrix(Eigen::MatrixXd\ i\_matrix);}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ check\_for\_vector\_size\_with\_matrix(Eigen::VectorXd\ i\_vec,\ Eigen::MatrixXd\ i\_matrix);}
+\DoxyCodeLine{00053\ \};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_simulation_results}{SimulationResults}}}
+\DoxyCodeLine{00056\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ Eigen::MatrixXd\ states\_estimation;}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ Eigen::MatrixXd\ lower\_Cholesky\_decomposition(Eigen::MatrixXd\ i\_matrix);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_sigma_point_kalman_filter}{SigmaPointKalmanFilter}}}
+\DoxyCodeLine{00063\ \{}
+\DoxyCodeLine{00064\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{class_sigma_point_kalman_filter}{SigmaPointKalmanFilter}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{class_sigma_point_kalman_filter}{SigmaPointKalmanFilter}}(\mbox{\hyperlink{class_normal_random_vector}{NormalRandomVector}}\ i\_x,\ \mbox{\hyperlink{class_normal_random_vector}{NormalRandomVector}}\ i\_w,\ \mbox{\hyperlink{class_normal_random_vector}{NormalRandomVector}}\ i\_v,}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ y\_dim,}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<Eigen::VectorXd(Eigen::VectorXd,\ Eigen::VectorXd,\ Eigen::VectorXd)>\ \&state\_equaton,}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<Eigen::VectorXd(Eigen::VectorXd,\ Eigen::VectorXd,\ Eigen::VectorXd)>\ \&output\_equation,}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ method\_type\ =\ \textcolor{stringliteral}{"{}CDKF"{}});}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{class_sigma_point_kalman_filter}{SigmaPointKalmanFilter}}(\mbox{\hyperlink{class_normal_random_vector}{NormalRandomVector}}\ i\_x,\ \mbox{\hyperlink{class_normal_random_vector}{NormalRandomVector}}\ i\_w,\ \mbox{\hyperlink{class_normal_random_vector}{NormalRandomVector}}\ i\_v,}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ y\_dim);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{comment}{//\ getters}}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{int}\ get\_Nx()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Nx;\ \}}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{int}\ get\_Nw()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Nw;\ \}}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{int}\ get\_Nv()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Nv;\ \}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{int}\ get\_L()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_L;\ \}}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{int}\ get\_p()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_p;\ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{class_normal_random_vector}{NormalRandomVector}}\ get\_x()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_x;\ \}}
+\DoxyCodeLine{00082\ \ \ \ \ \mbox{\hyperlink{class_normal_random_vector}{NormalRandomVector}}\ get\_w()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_w;\ \}}
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{class_normal_random_vector}{NormalRandomVector}}\ get\_v()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_v;\ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ Eigen::VectorXd\ get\_aug\_vec()\ \{\ \textcolor{keywordflow}{return}\ generate\_aug\_vec();\ \}}
+\DoxyCodeLine{00086\ \ \ \ \ Eigen::MatrixXd\ get\_aug\_cov()\ \{\ \textcolor{keywordflow}{return}\ generate\_aug\_cov();\ \}}
+\DoxyCodeLine{00087\ \ \ \ \ Eigen::MatrixXd\ get\_mat\_sigma\_pts()\ \{\ \textcolor{keywordflow}{return}\ generate\_mat\_sigma\_pts();\ \}}
+\DoxyCodeLine{00088\ \ \ \ \ Eigen::MatrixXd\ get\_mat\_sigma\_pts\_x()\ \{\ \textcolor{keywordflow}{return}\ generate\_mat\_sigma\_pts()(Eigen::seq(0,\ m\_Nx\ -\/\ 1),\ Eigen::all);\ \}}
+\DoxyCodeLine{00089\ \ \ \ \ Eigen::MatrixXd\ get\_mat\_sigma\_pts\_w()\ \{\ \textcolor{keywordflow}{return}\ generate\_mat\_sigma\_pts()(Eigen::seq(m\_Nx,\ m\_Nx\ +\ m\_Nw\ -\/\ 1),\ Eigen::all);\ \}}
+\DoxyCodeLine{00090\ \ \ \ \ Eigen::MatrixXd\ get\_mat\_sigma\_pts\_v()\ \{\ \textcolor{keywordflow}{return}\ generate\_mat\_sigma\_pts()(Eigen::seq(m\_Nx\ +\ m\_Nw,\ Eigen::last),\ Eigen::all);\ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_gamma()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_gamma;\ \}}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_h()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_h;\ \}}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_alpha\_m0()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_alpha\_m0;\ \}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_alpha\_m()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_alpha\_m;\ \}}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_alpha\_c0()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_alpha\_c0;\ \}}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_alpha\_c()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_alpha\_c;\ \}}
+\DoxyCodeLine{00098\ \ \ \ \ Eigen::VectorXd\ get\_vector\_alpha\_m()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_vec\_alpha\_m;\ \}}
+\DoxyCodeLine{00099\ \ \ \ \ Eigen::VectorXd\ get\_vector\_alpha\_c()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_vec\_alpha\_c;\ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{comment}{//\ setters}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_state\_equation(std::function<Eigen::VectorXd(Eigen::VectorXd,\ Eigen::VectorXd,\ Eigen::VectorXd)>\ i\_state\_equation)\ \{\ m\_state\_equation\ =\ i\_state\_equation;\ \}}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_output\_equation(std::function<Eigen::VectorXd(Eigen::VectorXd,\ Eigen::VectorXd,\ Eigen::VectorXd)>\ i\_output\_equation)\ \{\ m\_output\_equation\ =\ i\_output\_equation;\ \}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{comment}{//\ helper\ functions}}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{static}\ Eigen::MatrixXd\ calc\_sqrt\_matrix(Eigen::MatrixXd\ i\_matrix);}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{comment}{//\ SPKF\ calculation\ steps}}
+\DoxyCodeLine{00109\ \ \ \ \ Eigen::MatrixXd\ \mbox{\hyperlink{class_sigma_point_kalman_filter_a85d0a97e774273b3329e392c12116170}{calc\_and\_set\_state\_prediction}}(Eigen::VectorXd\ u);}
+\DoxyCodeLine{00110\ \ \ \ \ Eigen::MatrixXd\ calc\_and\_set\_state\_covariance(Eigen::MatrixXd\ state\_equation\_results);}
+\DoxyCodeLine{00111\ \ \ \ \ std::pair<Eigen::MatrixXd,\ Eigen::VectorXd>\ predict\_system\_output(Eigen::MatrixXd\ state\_equation\_output,\ Eigen::VectorXd\ u);}
+\DoxyCodeLine{00112\ \ \ \ \ std::pair<Eigen::MatrixXd,\ Eigen::MatrixXd>\ estimator\_gain\_matrix(Eigen::MatrixXd\ big\_y,\ Eigen::VectorXd\ y\_prediction,\ Eigen::MatrixXd\ covariance\_estimates);}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_final\_state\_estimate(Eigen::MatrixXd\ L\_k,\ Eigen::VectorXd\ y\_true,\ Eigen::VectorXd\ y\_estimate);}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_final\_cov\_estimate(Eigen::MatrixXd\ L\_k,\ Eigen::MatrixXd\ sigma\_y);}
+\DoxyCodeLine{00115\ \ \ \ \ Eigen::VectorXd\ solve\_one\_iteration(Eigen::VectorXd\ u,\ Eigen::VectorXd\ y\_true);}
+\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{struct_simulation_results}{SimulationResults}}\ solve(Eigen::MatrixXd\ u,\ Eigen::MatrixXd\ y\_true);}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{comment}{//\ //\ instance\ variables}}
+\DoxyCodeLine{00120\ \ \ \ \ \mbox{\hyperlink{class_normal_random_vector}{NormalRandomVector}}\ m\_x;}
+\DoxyCodeLine{00121\ \ \ \ \ \mbox{\hyperlink{class_normal_random_vector}{NormalRandomVector}}\ m\_w;}
+\DoxyCodeLine{00122\ \ \ \ \ \mbox{\hyperlink{class_normal_random_vector}{NormalRandomVector}}\ m\_v;}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{comment}{//\ dimension\ related}}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_y\_dim;}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_Nx;}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_Nw;}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_Nv;}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_L;\ \textcolor{comment}{//\ dimension\ of\ augmented\ matrix}}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_p;\ \textcolor{comment}{//\ number\ of\ sigma\ points\ -\/\ 1}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ std::function<Eigen::VectorXd(Eigen::VectorXd,\ Eigen::VectorXd,\ Eigen::VectorXd)>\ m\_state\_equation;}
+\DoxyCodeLine{00133\ \ \ \ \ std::function<Eigen::VectorXd(Eigen::VectorXd,\ Eigen::VectorXd,\ Eigen::VectorXd)>\ m\_output\_equation;}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ std::string\ m\_method\_type;}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_gamma;}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_h;}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_alpha\_m0;}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_alpha\_m;}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_alpha\_c0;}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{double}\ m\_alpha\_c;}
+\DoxyCodeLine{00143\ \ \ \ \ Eigen::VectorXd\ m\_vec\_alpha\_m;}
+\DoxyCodeLine{00144\ \ \ \ \ Eigen::VectorXd\ m\_vec\_alpha\_c;}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{comment}{//\ //\ helper\ methods}}
+\DoxyCodeLine{00147\ \ \ \ \ Eigen::VectorXd\ generate\_aug\_vec();}
+\DoxyCodeLine{00148\ \ \ \ \ Eigen::MatrixXd\ generate\_aug\_cov();}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ Eigen::MatrixXd\ generate\_mat\_sigma\_pts();}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{comment}{//\ setters}}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordtype}{void}\ calc\_and\_set\_gamma();}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{void}\ calc\_and\_set\_h();}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordtype}{void}\ calc\_and\_set\_alpha\_m0();}
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordtype}{void}\ calc\_and\_set\_alpha\_m();}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{void}\ calc\_and\_set\_alpha\_c0();}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{void}\ calc\_and\_set\_alpha\_c();}
+\DoxyCodeLine{00159\ \};}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00166\ \textcolor{keyword}{static}\ Eigen::VectorXd\ default\_state\_equation\_(Eigen::VectorXd\ x\_k,\ Eigen::VectorXd\ u\_k,\ Eigen::VectorXd\ w\_k)}
+\DoxyCodeLine{00167\ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordflow}{return}\ x\_k;}
+\DoxyCodeLine{00169\ \}}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \textcolor{keyword}{static}\ Eigen::VectorXd\ default\_output\_equation\_(Eigen::VectorXd\ x\_k,\ Eigen::VectorXd\ u\_k,\ Eigen::VectorXd\ w\_k)}
+\DoxyCodeLine{00172\ \{}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordflow}{return}\ x\_k;}
+\DoxyCodeLine{00174\ \}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \textcolor{keyword}{static}\ std::function<Eigen::VectorXd(Eigen::VectorXd,\ Eigen::VectorXd,\ Eigen::VectorXd)>\ default\_state\_equation\ =\ default\_state\_equation\_;}
+\DoxyCodeLine{00177\ \textcolor{keyword}{static}\ std::function<Eigen::VectorXd(Eigen::VectorXd,\ Eigen::VectorXd,\ Eigen::VectorXd)>\ default\_output\_equation\ =\ default\_state\_equation\_;}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_two_states_one_input_one_output}{TwoStatesOneInputOneOutput}}}
+\DoxyCodeLine{00180\ \{}
+\DoxyCodeLine{00181\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00182\ \ \ \ \ \mbox{\hyperlink{class_two_states_one_input_one_output}{TwoStatesOneInputOneOutput}}();}
+\DoxyCodeLine{00183\ \ \ \ \ \mbox{\hyperlink{class_two_states_one_input_one_output}{TwoStatesOneInputOneOutput}}(\textcolor{keywordtype}{double}\ i\_state1\_init,\ \textcolor{keywordtype}{double}\ i\_state2\_init,\ \textcolor{keywordtype}{double}\ i\_cov\_state1,\ \textcolor{keywordtype}{double}\ i\_cov\_state2,}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ i\_cov\_w,\ \textcolor{keywordtype}{double}\ i\_cov\_v,}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<Eigen::VectorXd(Eigen::VectorXd,\ Eigen::VectorXd,\ Eigen::VectorXd)>\ i\_state\_equation,}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<Eigen::VectorXd(Eigen::VectorXd,\ Eigen::VectorXd,\ Eigen::VectorXd)>\ i\_output\_equation);}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{comment}{//\ getters}}
+\DoxyCodeLine{00188\ \ \ \ \ Eigen::VectorXd\ get\_state()\ \{\ \textcolor{keywordflow}{return}\ m\_spkf.get\_x().get\_vec();\ \}}
+\DoxyCodeLine{00189\ \ \ \ \ Eigen::MatrixXd\ get\_cov()\ \{\ \textcolor{keywordflow}{return}\ m\_spkf.get\_x().get\_cov();\ \}}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{comment}{//\ helper\ functions}}
+\DoxyCodeLine{00191\ \ \ \ \ Eigen::VectorXd\ solve\_one\_iteration(Eigen::VectorXd\ u,\ Eigen::VectorXd\ y\_true);}
+\DoxyCodeLine{00192\ \ \ \ \ Eigen::MatrixXd\ solve(Eigen::MatrixXd\ u,\ Eigen::MatrixXd\ y\_true);}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00195\ \ \ \ \ \mbox{\hyperlink{class_sigma_point_kalman_filter}{SigmaPointKalmanFilter}}\ m\_spkf;}
+\DoxyCodeLine{00196\ \};}
+
+\end{DoxyCode}

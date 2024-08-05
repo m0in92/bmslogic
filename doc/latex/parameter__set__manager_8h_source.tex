@@ -1,0 +1,116 @@
+\doxysection{parameter\+\_\+set\+\_\+manager.\+h}
+\hypertarget{parameter__set__manager_8h_source}{}\label{parameter__set__manager_8h_source}\index{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/parameter\_set\_manager.h@{C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/parameter\_set\_manager.h}}
+\mbox{\hyperlink{parameter__set__manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ /**}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ \ *\ @file\ parameter\_set\_manager.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ \ *\ @author\ Moin\ Ahmed\ (moinahmed100@gmail.com)}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ \ *\ @brief\ Contains\ the\ functionality\ to\ read\ the\ battery\ cell\ parameters\ from\ the\ csv\ files.}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ \ *\ @version\ 0.1}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ \ *\ @date\ 2024-\/05-\/15}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ \ *\ }}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ \ *\ @copyright\ Copyright\ (c)\ 2024}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ \ *\ }}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ \ */}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ \#ifndef\ BMSLOGIC\_PARAMETER\_SET\_MANAGER\_H}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ \#define\ BMSLOGIC\_PARAMETER\_SET\_MANAGER\_H}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \#include\ <string>}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \#include\ <vector>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ \#include\ "{}extern/hummingbird.h"{}}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ class\ ParameterSet\ \{}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ public:}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ \ \ \ \ ParameterSet(std::string);}}
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ \ \ \ \ ParameterSet(std::string,\ std::string);}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ \ \ \ \ \string~ParameterSet()\ \{\};\ \ //\ Destructor\ is\ an\ empty\ function\ since\ no\ complicated\ memory\ allocation\ utilized.}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ \ \ \ \ //\ Accessor\ Functions}}
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ \ \ \ \ std::string\ get\_parameter\_set\_name()\ \{return\ parameterSetName;\}}}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ \ \ \ \ std::string\ get\_positive\_electrode\_dir()\ \{return\ POSITIVE\_ELECTRODE\_DIR;\}}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ \ \ \ \ std::string\ get\_negative\_electrode\_dir()\ \{return\ NEGATIVE\_ELECTRODE\_DIR;\}}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ \ \ \ \ std::string\ get\_electrolyte\_dir()\ \{return\ ELECTROLTYE\_DIR;\}}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ \ \ \ \ std::string\ get\_battery\_cell\_dir()\ \{return\ BATTERY\_CELL\_DIR;\}}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ \ \ \ \ double\ get\_OCP\_p(double\ SOC)\ \{return\ func\_OCP\_ref\_p(SOC);\}\ \ //\ returns\ the\ OCP\ value\ at\ the\ inputted\ SOC.}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ \ \ \ \ double\ get\_OCP\_n(double\ SOC)\ \{return\ func\_OCP\_ref\_n(SOC);\}\ \ //\ returns\ the\ OCP\ value\ at\ the\ inputted\ SOC.}}
+\DoxyCodeLine{00034\ \textcolor{comment}{//\ \ \ \ \ double\ get\_dOCPdT\_p(double\ SOC)\ \{return\ func\_dOCPdT\_p(SOC);\}\ //\ returns\ the\ dOCP/dT\ value\ at\ the\ inputted\ SOC.}}
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ \ \ \ \ double\ get\_dOCPdT\_n(double\ SOC)\ \{return\ func\_dOCPdT\_n(SOC);\}\ \ //\ returns\ the\ dOCP/dT\ value\ at\ the\ inputted\ SOC.}}
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ \ \ \ \ auto\ get\_func\_OCP\_p()\ \{return\ func\_OCP\_ref\_p;\}}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ \ \ \ \ auto\ get\_func\_dOCPdT\_p()\ \{return\ func\_dOCPdT\_p;\}}}
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ \ \ \ \ auto\ get\_func\_OCP\_n()\ \{return\ func\_OCP\_ref\_n;\}}}
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ \ \ \ \ auto\ get\_func\_dOCPdT\_n()\ \{return\ func\_dOCPdT\_n;\}}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ \ \ \ \ auto\&\ get\_pos\_electrode\_params()\ \{return\ pos\_electrode\_params;\}}}
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ \ \ \ \ auto\&\ get\_neg\_electrode\_params()\ \{return\ neg\_electrode\_params;\}}}
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ \ \ \ \ auto\&\ get\_electrolyte\_params()\ \{return\ electrolyte\_params;\}}}
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ \ \ \ \ auto\&\ get\_battery\_cell\_params()\ \{return\ battery\_cell\_params;\}}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{comment}{//\ \ \ \ \ //\ Helper\ Functions}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ private:}}
+\DoxyCodeLine{00049\ \textcolor{comment}{//\ \ \ \ \ std::string\ parameterSetName;}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ \ \ \ \ std::string\ PARAMETER\_SET\_DIR\ =\ "{}../../../parameter\_sets/"{};\ \ //\ file\ path\ relative\ to\ the\ cmake-\/build\ directory.}}
+\DoxyCodeLine{00052\ \textcolor{comment}{//\ \ \ \ \ std::string\ POSITIVE\_ELECTRODE\_DIR;\ \ //\ file\ path\ to\ the\ csv\ containing\ the\ positive\ electrode\ parameters.}}
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ \ \ \ \ std::string\ NEGATIVE\_ELECTRODE\_DIR;\ \ //\ file\ path\ to\ the\ csv\ containing\ the\ negative\ electrode\ parameters.}}
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ \ \ \ \ std::string\ ELECTROLTYE\_DIR;\ \ //\ file\ path\ to\ the\ csv\ containing\ electrolyte\ parameters.}}
+\DoxyCodeLine{00055\ \textcolor{comment}{//\ \ \ \ \ std::string\ BATTERY\_CELL\_DIR;\ \ //\ file\ path\ to\ the\ csv\ containing\ battery\ cell\ parameters.}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{comment}{//\ \ \ \ \ struct}}
+\DoxyCodeLine{00058\ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{00059\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ L;\ //\ Electrode\ Thickness\ [m]}}
+\DoxyCodeLine{00060\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ A;\ //\ Electrode\ Area\ [m\string^2]}}
+\DoxyCodeLine{00061\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ kappa;\ //\ Ionic\ Conductivity\ [S\ m\string^-\/1]}}
+\DoxyCodeLine{00062\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ epsilon;\ //\ Volume\ Fraction}}
+\DoxyCodeLine{00063\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ max\_conc;\ //\ Max.\ Conc.\ [mol\ m\string^-\/3]}}
+\DoxyCodeLine{00064\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ R;\ //\ Radius\ [m]}}
+\DoxyCodeLine{00065\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ S;\ //\ Electroactive\ Area\ [m2]}}
+\DoxyCodeLine{00066\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ T\_ref;\ //\ Reference\ Temperature\ [K]}}
+\DoxyCodeLine{00067\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ D\_ref;\ //\ Reference\ Diffusitivity\ [m2/s]}}
+\DoxyCodeLine{00068\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ k\_ref;\ //\ Reference\ Rate\ Constant\ [m2.5\ /\ (mol0.5\ s)}}
+\DoxyCodeLine{00069\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ Ea\_D;\ //\ Activation\ Energy\ of\ Diffusion\ [J\ /\ mol]}}
+\DoxyCodeLine{00070\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ Ea\_R;\ //\ Activation\ Energy\ of\ Reaction\ [J\ /\ mol]}}
+\DoxyCodeLine{00071\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ alpha;\ \ //\ Anodic\ Transfer\ Coefficient}}
+\DoxyCodeLine{00072\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ brugg;\ //\ Bruggerman\ Coefficient}}
+\DoxyCodeLine{00073\ \textcolor{comment}{//\ \ \ \ \ \}\ pos\_electrode\_params,\ neg\_electrode\_params;}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{comment}{//\ \ \ \ \ struct}}
+\DoxyCodeLine{00076\ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{00077\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ conc;\ \ //\ electrolyte\ init\ conc\ [mol/m3]}}
+\DoxyCodeLine{00078\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ L;\ \ //\ electrolyte\ thickness\ [m]}}
+\DoxyCodeLine{00079\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ kappa;\ \ //\ electrolyte\ ionic\ conductivity\ [S/m]}}
+\DoxyCodeLine{00080\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ epsilon;\ \ //\ electrolyte\ volume\ fraction}}
+\DoxyCodeLine{00081\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ brugg;\ //\ Bruggerman\ coefficient\ value\ for\ the\ electrolyte}}
+\DoxyCodeLine{00082\ \textcolor{comment}{//\ \ \ \ \ \}\ electrolyte\_params;}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{comment}{//\ \ \ \ \ struct}}
+\DoxyCodeLine{00085\ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{00086\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ rho;\ \ //\ battery\ density\ (mostly\ for\ thermal\ modelling),\ kg/m3}}
+\DoxyCodeLine{00087\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ Vol;\ \ //\ battery\ cell\ volume,\ m3}}
+\DoxyCodeLine{00088\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ C\_p;\ \ //\ specific\ heat\ capacity,\ J\ /\ (K\ kg)}}
+\DoxyCodeLine{00089\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ h;\ \ //\ heat\ transfer\ coefficient,\ J\ /\ (S\ K)}}
+\DoxyCodeLine{00090\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ A;\ \ //\ surface\ area,\ m2}}
+\DoxyCodeLine{00091\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ cap;\ \ //\ capacity,\ Ah}}
+\DoxyCodeLine{00092\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ V\_max;\ \ //\ maximum\ potential}}
+\DoxyCodeLine{00093\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ V\_min;\ \ //\ minimum\ potential}}
+\DoxyCodeLine{00094\ \textcolor{comment}{//\ \ \ \ \ \}\ battery\_cell\_params;}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{comment}{//\ \ \ \ \ double\ (*func\_OCP\_ref\_p)(double);\ \ //\ function\ representing\ the\ OCP\ of\ the\ positive\ electrode}}
+\DoxyCodeLine{00097\ \textcolor{comment}{//\ \ \ \ \ double\ (*func\_OCP\_ref\_n)(double);\ \ //\ function\ representing\ the\ OCP\ of\ the\ positive\ electrode}}
+\DoxyCodeLine{00098\ \textcolor{comment}{//\ \ \ \ \ double\ (*func\_dOCPdT\_p)(double);\ \ //\ function\ representing\ the\ relationship\ between\ SOC\ and\ dOCPdT\ for\ the\ positive\ electrode.}}
+\DoxyCodeLine{00099\ \textcolor{comment}{//\ \ \ \ \ double\ (*func\_dOCPdT\_n)(double);\ \ //\ function\ representing\ the\ relationship\ between\ SOC\ and\ dOCPdT\ for\ the\ negative\ electrode.}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \textcolor{comment}{//\ \ \ \ \ //\ Helper\ funcs}}
+\DoxyCodeLine{00102\ \textcolor{comment}{//\ \ \ \ \ HB::DataFrames\ parse\_csv(std::string);}}
+\DoxyCodeLine{00103\ \textcolor{comment}{//\ \ \ \ \ void\ update\_directories();}}
+\DoxyCodeLine{00104\ \textcolor{comment}{//\ \ \ \ \ void\ update\_electrode\_params(char);}}
+\DoxyCodeLine{00105\ \textcolor{comment}{//\ \ \ \ \ void\ extract\_electrolyte\_params();}}
+\DoxyCodeLine{00106\ \textcolor{comment}{//\ \ \ \ \ void\ update\_OCP\_funcs();}}
+\DoxyCodeLine{00107\ \textcolor{comment}{//\ \ \ \ \ void\ update\_battery\_cell\_params();}}
+\DoxyCodeLine{00108\ \textcolor{comment}{//\ \};}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \textcolor{comment}{//\ \#endif\ //BMSLOGIC\_PARAMETER\_SET\_MANAGER\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,47 @@
+\doxysection{Lumped\+Thermal\+Solver Class Reference}
+\hypertarget{class_lumped_thermal_solver}{}\label{class_lumped_thermal_solver}\index{LumpedThermalSolver@{LumpedThermalSolver}}
+
+
+Thermal Solvers.  
+
+
+
+
+{\ttfamily \#include $<$solvers.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lumped_thermal_solver_a1ded2886ea527926243622cb5549229e}\label{class_lumped_thermal_solver_a1ded2886ea527926243622cb5549229e} 
+{\bfseries Lumped\+Thermal\+Solver} (double i\+\_\+h, double i\+\_\+A, double i\+\_\+rho, double i\+\_\+vol, double i\+\_\+\+C\+\_\+p, double i\+\_\+temp\+\_\+init)
+\item 
+\Hypertarget{class_lumped_thermal_solver_aefc01b52f1b9b5c1b4ce7fb43e38b66f}\label{class_lumped_thermal_solver_aefc01b52f1b9b5c1b4ce7fb43e38b66f} 
+double {\bfseries reversible\+\_\+heat} (double d\+OCPd\+T\+\_\+p, double d\+OCPd\+T\+\_\+n, double I, double T)
+\item 
+\Hypertarget{class_lumped_thermal_solver_ab14534af6207079bb52b2248cc5ff071}\label{class_lumped_thermal_solver_ab14534af6207079bb52b2248cc5ff071} 
+double {\bfseries irreversible\+\_\+heat} (double OCP\+\_\+p, double OCP\+\_\+n, double I, double V)
+\item 
+\Hypertarget{class_lumped_thermal_solver_a1008ba1be7bf3969fd171dbd67ba0eb2}\label{class_lumped_thermal_solver_a1008ba1be7bf3969fd171dbd67ba0eb2} 
+double {\bfseries heat\+\_\+transfer} (double T, double T\+\_\+amb)
+\item 
+\Hypertarget{class_lumped_thermal_solver_afd85c72767c6e09a9da601f0f9a9a9b2}\label{class_lumped_thermal_solver_afd85c72767c6e09a9da601f0f9a9a9b2} 
+double {\bfseries solve\+\_\+temp} (double dt, double t\+\_\+prev, double I, double V, double temp\+\_\+amb, double OCP\+\_\+p, double OCP\+\_\+n, double d\+OCPd\+T\+\_\+p, double d\+OCPd\+T\+\_\+n)
+\item 
+\Hypertarget{class_lumped_thermal_solver_a654c6874646110ef168327f338ae193c}\label{class_lumped_thermal_solver_a654c6874646110ef168327f338ae193c} 
+double {\bfseries get\+\_\+temp\+\_\+init} ()
+\item 
+\Hypertarget{class_lumped_thermal_solver_aaeed7c66d0fab9c1761c6b7439e8523d}\label{class_lumped_thermal_solver_aaeed7c66d0fab9c1761c6b7439e8523d} 
+double {\bfseries get\+\_\+temp} ()
+\item 
+\Hypertarget{class_lumped_thermal_solver_ae4098319e52c58d2d03f636c33e49ff7}\label{class_lumped_thermal_solver_ae4098319e52c58d2d03f636c33e49ff7} 
+double {\bfseries get\+\_\+temp\+\_\+prev} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Thermal Solvers. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers.\+h\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers.\+cpp\end{DoxyCompactItemize}

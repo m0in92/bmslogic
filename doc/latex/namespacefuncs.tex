@@ -1,0 +1,128 @@
+\doxysection{funcs Namespace Reference}
+\hypertarget{namespacefuncs}{}\label{namespacefuncs}\index{funcs@{funcs}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{namespacefuncs_a796f8dec5fea22fca581622f709faa78}\label{namespacefuncs_a796f8dec5fea22fca581622f709faa78} 
+{\bfseries OCP\+\_\+ref\+\_\+p} (SOC)
+\item 
+\Hypertarget{namespacefuncs_a43ea85ba277360c601fd1a6b4df0606d}\label{namespacefuncs_a43ea85ba277360c601fd1a6b4df0606d} 
+{\bfseries d\+OCPd\+T\+\_\+p} (SOC)
+\item 
+\Hypertarget{namespacefuncs_a804d1803e18bb4ba437c2cd8b2106ea3}\label{namespacefuncs_a804d1803e18bb4ba437c2cd8b2106ea3} 
+{\bfseries OCP\+\_\+ref\+\_\+n} (SOC)
+\item 
+\Hypertarget{namespacefuncs_ac69b9bf0029b99e3072478c45c4e8b0c}\label{namespacefuncs_ac69b9bf0029b99e3072478c45c4e8b0c} 
+{\bfseries d\+OCPd\+T\+\_\+n} (SOC)
+\item 
+float \mbox{\hyperlink{namespacefuncs_a2338bbc56f58a3ea0d15fbb1e7716bb2}{func\+\_\+\+D\+\_\+e}} (Union\mbox{[}float, npt.\+Array\+Like\mbox{]} c\+\_\+e, float temp)
+\item 
+Union\mbox{[}float, npt.\+Array\+Like\mbox{]} \mbox{\hyperlink{namespacefuncs_a3c70f4e07250226a4be6f828d0f5a48c}{func\+\_\+kappa\+\_\+e}} (Union\mbox{[}float, npt.\+Array\+Like\mbox{]} c\+\_\+e, float temp)
+\item 
+Union\mbox{[}float, npt.\+Array\+Like\mbox{]} \mbox{\hyperlink{namespacefuncs_a0402f8408a760b3e0e2cba3a0f281b1b}{func\+\_\+dlnf}} (Union\mbox{[}float, npt.\+Array\+Like\mbox{]} c\+\_\+e, float temp, float t\+\_\+c)
+\item 
+\Hypertarget{namespacefuncs_a2563d4a38d8127b59191eb84a75c6e4b}\label{namespacefuncs_a2563d4a38d8127b59191eb84a75c6e4b} 
+float {\bfseries func\+\_\+eta} (float soc, float temp)
+\item 
+\Hypertarget{namespacefuncs_aa3d92e29a0549d07837ac1ec8795f4b4}\label{namespacefuncs_aa3d92e29a0549d07837ac1ec8795f4b4} 
+Union\mbox{[}float, np.\+ndarray\mbox{]} {\bfseries ocp\+\_\+p} (Union\mbox{[}float, np.\+ndarray\mbox{]} soc)
+\item 
+\Hypertarget{namespacefuncs_a53fc449982042874e646366f7810e343}\label{namespacefuncs_a53fc449982042874e646366f7810e343} 
+Union\mbox{[}float, np.\+ndarray\mbox{]} {\bfseries docpd\+T\+\_\+p} (Union\mbox{[}float, np.\+ndarray\mbox{]} soc)
+\item 
+\Hypertarget{namespacefuncs_ad0574688e2f9e6e4231990a25bfeeca9}\label{namespacefuncs_ad0574688e2f9e6e4231990a25bfeeca9} 
+float {\bfseries d\+OCPd\+T\+\_\+p} (float SOC)
+\item 
+\Hypertarget{namespacefuncs_ade18c9a1ad44d9246a8e2941a9e0026b}\label{namespacefuncs_ade18c9a1ad44d9246a8e2941a9e0026b} 
+float {\bfseries OCP\+\_\+ref\+\_\+n} (float SOC)
+\item 
+\Hypertarget{namespacefuncs_aa04fa21ecbaa611fbfa720b459bca00a}\label{namespacefuncs_aa04fa21ecbaa611fbfa720b459bca00a} 
+float {\bfseries d\+OCPd\+T\+\_\+n} (float SOC)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Callable \mbox{\hyperlink{namespacefuncs_a53278912658dd5f3c57b1eefd681a714}{func\+\_\+ocv}}
+\item 
+Callable \mbox{\hyperlink{namespacefuncs_ac23435f9d7c82f8fa8d75588a029f17e}{func\+\_\+docvdtemp}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Contains the functions for the open-circuit potentials of the electrode.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacefuncs_a2338bbc56f58a3ea0d15fbb1e7716bb2}\index{funcs@{funcs}!func\_D\_e@{func\_D\_e}}
+\index{func\_D\_e@{func\_D\_e}!funcs@{funcs}}
+\doxysubsubsection{\texorpdfstring{func\_D\_e()}{func\_D\_e()}}
+{\footnotesize\ttfamily \label{namespacefuncs_a2338bbc56f58a3ea0d15fbb1e7716bb2} 
+float funcs.\+func\+\_\+\+D\+\_\+e (\begin{DoxyParamCaption}\item[{Union\mbox{[}float, npt.\+Array\+Like\mbox{]}}]{c\+\_\+e}{, }\item[{float}]{temp}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates the lithium-ion diffusivity in the electrolyte as a func of lithium-ion concentration and temperature
+Reference: Han et al. A numerically efficient method for solving the full-order pseudo-2D Li-ion cell model.
+2021. Journal of Power Sources. 490
+
+:param c_e: lithium-ion concentration [mol/m3]
+:param temp: electrolyte temp [K]
+:return: (float) diffusivity of the lithium-ion [m2/s]
+\end{DoxyVerb}
+ \Hypertarget{namespacefuncs_a0402f8408a760b3e0e2cba3a0f281b1b}\index{funcs@{funcs}!func\_dlnf@{func\_dlnf}}
+\index{func\_dlnf@{func\_dlnf}!funcs@{funcs}}
+\doxysubsubsection{\texorpdfstring{func\_dlnf()}{func\_dlnf()}}
+{\footnotesize\ttfamily \label{namespacefuncs_a0402f8408a760b3e0e2cba3a0f281b1b} 
+ Union\mbox{[}float, npt.\+Array\+Like\mbox{]} funcs.\+func\+\_\+dlnf (\begin{DoxyParamCaption}\item[{Union\mbox{[}float, npt.\+Array\+Like\mbox{]}}]{c\+\_\+e}{, }\item[{float}]{temp}{, }\item[{float}]{t\+\_\+c}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates the expression 1+dlnf/dlnc_e
+
+Reference: Han et al. A numerically efficient method for solving the full-order pseudo-2D Li-ion cell model.
+2021. Journal of Power Sources. 490
+:param c_e:
+:param temp:
+:param t_c:
+:return:
+\end{DoxyVerb}
+ \Hypertarget{namespacefuncs_a3c70f4e07250226a4be6f828d0f5a48c}\index{funcs@{funcs}!func\_kappa\_e@{func\_kappa\_e}}
+\index{func\_kappa\_e@{func\_kappa\_e}!funcs@{funcs}}
+\doxysubsubsection{\texorpdfstring{func\_kappa\_e()}{func\_kappa\_e()}}
+{\footnotesize\ttfamily \label{namespacefuncs_a3c70f4e07250226a4be6f828d0f5a48c} 
+ Union\mbox{[}float, npt.\+Array\+Like\mbox{]} funcs.\+func\+\_\+kappa\+\_\+e (\begin{DoxyParamCaption}\item[{Union\mbox{[}float, npt.\+Array\+Like\mbox{]}}]{c\+\_\+e}{, }\item[{float}]{temp}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates the conductivity [S/m] for the electrolyte.
+Reference: Han et al. A numerically efficient method for solving the full-order pseudo-2D Li-ion cell model.
+2021. Journal of Power Sources. 490
+
+:param c_e:
+:param temp:
+:return:
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacefuncs_ac23435f9d7c82f8fa8d75588a029f17e}\index{funcs@{funcs}!func\_docvdtemp@{func\_docvdtemp}}
+\index{func\_docvdtemp@{func\_docvdtemp}!funcs@{funcs}}
+\doxysubsubsection{\texorpdfstring{func\_docvdtemp}{func\_docvdtemp}}
+{\footnotesize\ttfamily \label{namespacefuncs_ac23435f9d7c82f8fa8d75588a029f17e} 
+Callable funcs.\+func\+\_\+docvdtemp}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ np.poly1d(np.array([-\/1.62911207e+01,\ 9.66871309e+01,\ -\/2.50145828e+02,\ 3.70280039e+02,}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/3.46021781e+02,\ 2.12461660e+02,\ -\/8.64646004e+01,\ 2.29561374e+01,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/3.80515739e+00,\ 3.58298325e-\/01,\ -\/1.40044753e-\/02,\ -\/6.86713653e-\/04]))}
+
+\end{DoxyCode}
+\Hypertarget{namespacefuncs_a53278912658dd5f3c57b1eefd681a714}\index{funcs@{funcs}!func\_ocv@{func\_ocv}}
+\index{func\_ocv@{func\_ocv}!funcs@{funcs}}
+\doxysubsubsection{\texorpdfstring{func\_ocv}{func\_ocv}}
+{\footnotesize\ttfamily \label{namespacefuncs_a53278912658dd5f3c57b1eefd681a714} 
+Callable funcs.\+func\+\_\+ocv}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ np.poly1d(np.array([7.83002260e+03,\ -\/4.72721395e+04,\ 1.25237092e+05,\ -\/1.91403553e+05,}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1.86656077e+05,\ -\/1.21342077e+05,\ 5.33553293e+04,\ -\/1.57665852e+04,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3.04748964e+03,\ -\/3.65636105e+02,\ 2.50281588e+01,\ 2.93438431e+00]))}
+
+\end{DoxyCode}

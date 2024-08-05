@@ -1,0 +1,99 @@
+\doxysection{Polynomial\+Approx Class Reference}
+\hypertarget{class_polynomial_approx}{}\label{class_polynomial_approx}\index{PolynomialApprox@{PolynomialApprox}}
+Inheritance diagram for Polynomial\+Approx\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_polynomial_approx}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_polynomial_approx_a84b4574d5c086230c2efb2457fb4a497}\label{class_polynomial_approx_a84b4574d5c086230c2efb2457fb4a497} 
+{\bfseries Polynomial\+Approx} (char electrode\+Type, double i\+\_\+c\+\_\+init, std\+::string type)
+\item 
+\Hypertarget{class_polynomial_approx_a04f948ca652e33effae1345bd2192b43}\label{class_polynomial_approx_a04f948ca652e33effae1345bd2192b43} 
+std\+::string {\bfseries get\+\_\+solver\+\_\+type} () const
+\item 
+\Hypertarget{class_polynomial_approx_a7a6689825367c73cfb1e24343b2a354d}\label{class_polynomial_approx_a7a6689825367c73cfb1e24343b2a354d} 
+double {\bfseries get\+\_\+c\+\_\+s\+\_\+avg} ()
+\item 
+\Hypertarget{class_polynomial_approx_a7fa833b48207f31fafbb492e7cbeb5af}\label{class_polynomial_approx_a7fa833b48207f31fafbb492e7cbeb5af} 
+double \& {\bfseries get\+\_\+c\+\_\+surf} ()
+\item 
+\Hypertarget{class_polynomial_approx_ac0aea27c8b72a717ecb0eb83db7fb470}\label{class_polynomial_approx_ac0aea27c8b72a717ecb0eb83db7fb470} 
+double {\bfseries get\+\_\+x\+\_\+surf} (double c\+\_\+s\+\_\+max) const
+\item 
+\Hypertarget{class_polynomial_approx_a1fc1850257a6bcefd2a43f86e66302e9}\label{class_polynomial_approx_a1fc1850257a6bcefd2a43f86e66302e9} 
+void {\bfseries set\+\_\+c\+\_\+s\+\_\+avg} (double i\+\_\+c\+\_\+s\+\_\+avg)
+\item 
+\Hypertarget{class_polynomial_approx_a333a2d5dacb39948850355401f3b49f0}\label{class_polynomial_approx_a333a2d5dacb39948850355401f3b49f0} 
+void {\bfseries set\+\_\+q} (double i\+\_\+q)
+\item 
+\Hypertarget{class_polynomial_approx_adabe09d878ab5ea996a167a7e920f690}\label{class_polynomial_approx_adabe09d878ab5ea996a167a7e920f690} 
+void {\bfseries set\+\_\+c\+\_\+surf} (double i\+\_\+c\+\_\+surf, double dt, double t\+\_\+prev, double i\+\_\+app, double R, double S, double D)
+\item 
+\Hypertarget{class_polynomial_approx_a37c3e7133a1c46408a361084a9765d1a}\label{class_polynomial_approx_a37c3e7133a1c46408a361084a9765d1a} 
+void {\bfseries just\+\_\+set\+\_\+c\+\_\+surf} (double i\+\_\+c\+\_\+surf)
+\item 
+\Hypertarget{class_polynomial_approx_ae32af5b155dc4c03768c19468574df9e}\label{class_polynomial_approx_ae32af5b155dc4c03768c19468574df9e} 
+double {\bfseries get\+\_\+solve\+\_\+c\+\_\+s\+\_\+avg} (double dt, double t\+\_\+prev, double j, double R, double D)
+\item 
+\Hypertarget{class_polynomial_approx_a87f82a12176683f52ab9e209db4b29ce}\label{class_polynomial_approx_a87f82a12176683f52ab9e209db4b29ce} 
+double {\bfseries get\+\_\+solve\+\_\+q} (double dt, double t\+\_\+prev, double j, double R, double D)
+\item 
+double \mbox{\hyperlink{class_polynomial_approx_aab86e7425ed0273d5ead57e4e0f55e1c}{solve\+\_\+without\+\_\+update}} (double dt, double t\+\_\+prev, double i\+\_\+app, double R, double S, double D)
+\begin{DoxyCompactList}\small\item\em Calculates the surface concentration without updating the instance variables. \end{DoxyCompactList}\item 
+\Hypertarget{class_polynomial_approx_a37b9eef66dd5c7a69d788e571c33cf07}\label{class_polynomial_approx_a37b9eef66dd5c7a69d788e571c33cf07} 
+void {\bfseries solve} (double dt, double t\+\_\+prev, double i\+\_\+app, double R, double S, double D)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_base_conc_solver}{Base\+Conc\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Base\+Conc\+Solver} (char electrode\+\_\+type)
+\item 
+char \& {\bfseries get\+\_\+electrode\+Type} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_base_conc_solver}{Base\+Conc\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+char {\bfseries m\+\_\+electrode\+\_\+type}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_polynomial_approx_aab86e7425ed0273d5ead57e4e0f55e1c}\index{PolynomialApprox@{PolynomialApprox}!solve\_without\_update@{solve\_without\_update}}
+\index{solve\_without\_update@{solve\_without\_update}!PolynomialApprox@{PolynomialApprox}}
+\doxysubsubsection{\texorpdfstring{solve\_without\_update()}{solve\_without\_update()}}
+{\footnotesize\ttfamily \label{class_polynomial_approx_aab86e7425ed0273d5ead57e4e0f55e1c} 
+double Polynomial\+Approx\+::solve\+\_\+without\+\_\+update (\begin{DoxyParamCaption}\item[{double}]{dt}{, }\item[{double}]{t\+\_\+prev}{, }\item[{double}]{i\+\_\+app}{, }\item[{double}]{R}{, }\item[{double}]{S}{, }\item[{double}]{D}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the surface concentration without updating the instance variables. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & \\
+\hline
+{\em t\+\_\+prev} & \\
+\hline
+{\em i\+\_\+app} & \\
+\hline
+{\em R} & \\
+\hline
+{\em S} & \\
+\hline
+{\em D} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers.\+h\item 
+C\+:/\+Users/moina/dev/\+BMSLogic/bmslogic/simulations/cell/solvers.\+cpp\end{DoxyCompactItemize}
