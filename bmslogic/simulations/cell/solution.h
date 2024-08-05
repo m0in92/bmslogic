@@ -27,6 +27,7 @@ public:
                 std::vector<double> i_temp,
                 std::vector<double> i_soc,
                 std::vector<double> i_i_R1);
+    ~ECMSolution() = default;
     // getter methods
     std::vector<double> get_t() { return m_t; }
     std::vector<double> get_I() { return m_I; }
@@ -77,6 +78,7 @@ public:
              std::vector<double> i_x_p,
              std::vector<double> i_x_n,
              std::vector<double> i_OCV);
+    ~Solution() = default;
     // getter methods
     std::vector<double> get_t() { return m_t; }
     std::vector<std::string> get_cycling_step() { return m_cycling_step; }

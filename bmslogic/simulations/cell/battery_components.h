@@ -38,7 +38,7 @@ public:
     double get_A() const { return A; }
     double get_T() const { return T; } // returns the electrode temperature [K]
     double get_SOC() const { return SOC; }
-    double get_OCP() { return calc_OCP(SOC); }                // returns the OCP value at the inputted SOC.
+    double get_OCP() { return calc_OCP(SOC); }             // returns the OCP value at the inputted SOC.
     double get_dOCPdT() const { return func_dOCPdT(SOC); } // returns the dOCP/dT value at the inputted SOC.
     double get_D() { return calc_D(); }                    // calculates and returns the electrode diffusivity [m2/s]
     double get_k() { return calc_k(); }
@@ -159,6 +159,7 @@ public:
                 std::function<double(double)> func_OCP_n, std::function<double(double)> func_dOCPdT_n,
                 double i_rho, double i_Vol,
                 double i_C_p, double i_h, double i_A, double i_cap, double i_V_max, double i_V_min, double i_R_cell);
+    ~BatteryCell() = default;
     // public variables
     PElectrode elec_p;
     NElectrode elec_n;
@@ -206,6 +207,7 @@ public:
                    double i_soc_init, double i_temp_init,
                    std::function<double(double)> i_func_eta, std::function<double(double)> i_func_ocv, std::function<double(double)> i_func_docvdtemp,
                    double i_M_0, double i_M, double i_gamma);
+    ~ECMBatteryCell() = default;
 
     // getters
     double get_R0_ref() const { return m_R0_ref; }

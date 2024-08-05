@@ -25,6 +25,7 @@ class ElectrolyteFVMCoordinates
 public:
     ElectrolyteFVMCoordinates(double i_L_n, double i_L_sep, double i_L_p,
                               int i_num_grid_n, int i_num_grid_sep, int i_num_grid_p);
+    ~ElectrolyteFVMCoordinates() = default;
     // Getter functions
     double get_L_n() const { return m_L_n; }
     double get_L_sep() const { return m_L_sep; }

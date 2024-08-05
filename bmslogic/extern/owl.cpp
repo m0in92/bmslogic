@@ -14,36 +14,6 @@
 
 namespace OWL
 {
-
-    /*
-     * what()
-     *
-     * what() overload from the base exception class
-     *
-     * Parameters:
-     *     None
-     *
-     * Returns:
-     *     returns an message when the array size do not match up.
-     *
-     * Throws:
-     *     None
-     */
-    const char *SizeMismatchException::what()
-    {
-        return "ArrayXD lengths do not match.";
-    }
-
-    /**
-     * what()
-     *
-     * exception msg when the array is empty.
-     */
-    const char *EmptyArrayException::what()
-    {
-        return "Empty Array";
-    }
-
     /*
      * ------------------------------------------------------------------
      * methods for ArrayXD class below

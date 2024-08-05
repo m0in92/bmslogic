@@ -73,6 +73,7 @@ class Thevenin1RC
 {
 public:
     Thevenin1RC() = default;
+    ~Thevenin1RC() = default;
     double soc_next(double dt, double i_app, double soc_prev, double Q, double eta) { return soc_prev - dt * eta * i_app / (3600 * Q); }
     double i_R1_next(double dt, double i_app, double i_R1_prev, double R1, double C1) { return std::exp(-dt / (R1 * C1)) * i_R1_prev + (1 - std::exp(-dt / (R1 * C1))) * i_app; }
     double V(double i_app, double ocv, double R0, double R1, double i_R1) { return ocv - R1 * i_R1 - R0 * i_app; }
@@ -89,6 +90,9 @@ class ESC
 {
 public:
     ESC() = default;
+    ~ESC() = default;
+
+    // helper functions
     int sign(double &i_number);
     int sign(int &i_number);
     double s(double &i_app, double &s_prev);
@@ -158,6 +162,9 @@ class ROMSEI
 {
 public:
     ROMSEI() = default;
+    ~ROMSEI() = default;
+    
+    // calculation methods
     double calc_j_i(double j_tot, double j_s);
     double calc_eta_n(double temp, double j_i, double i_0);
     double calc_eta_s(double eta_n, double OCP_n, double OCP_s);

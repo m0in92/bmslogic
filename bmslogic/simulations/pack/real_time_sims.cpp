@@ -66,7 +66,7 @@ void timed_simulation(double simulation_total_duration, long step_duration, std:
 
         int step_index = 0;
         std::vector<double> t_prev(solver_instance.size(), 0.0); // [s]
-        double dt = 0.1;     // [s]
+        double dt = 0.1;                                         // [s]
         std::vector<std::pair<OverPotentials, bool>> sim_results(solver_instance.size());
         double I_app{0.0};
         const int N_SIM_PER_STEP = static_cast<int>(step_duration / (1000 * dt));

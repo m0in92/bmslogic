@@ -22,33 +22,35 @@
 #include <algorithm>
 #include <functional>
 
-/**
- * @class OWL
- *
- * @brief allows for the functionality for the array operations using std::vector
- */
 namespace OWL
 {
-    /*
-     * Inherited exception class to handle situations when the array lengths/sizes do not match up.
+
+    /**
+     * @brief Custom Exception class to handle situations when OWL::ArrayXd array lengths/sizes do not match up.
+     *
      */
     class SizeMismatchException : public std::exception
     {
     public:
-        const char *what();
+        const char *what() { return "ArrayXD lengths do not match."; };
     };
 
-    /*
-     * Inherited exception class to handle situations when operations are required but the array is empty.
+    /**
+     * @brief Custom Exception class to handle situations when operations are required but the array is empty.
+     *
      */
     class EmptyArrayException : public std::exception
     {
     public:
-        const char *what();
+        const char *what() { return "Empty Array!"; }
     };
 
     /**
-     * Class to handle arrays containing elements of type double of any length (or size).
+     * @class ArrayXD
+     *
+     * @brief Provides functionality for the array operations. It uses the C++ vectors from the C++ standard Library
+     * (std::vector) to create, store, and index element values.
+     *
      */
     class ArrayXD
     {
@@ -169,6 +171,7 @@ namespace OWL
         MatrixXD();
         MatrixXD(std::vector<ArrayXD> inputElements);
         MatrixXD(const int, const int);
+        ~MatrixXD() {};
         // Getter functions
         int getRowSize() { return m; };
         int getColSize() { return n; };
@@ -323,9 +326,11 @@ namespace Newton
     {
         [[nodiscard]] double Euler(const double x_prev, const double y_prev, const double step_size, double (*func)(double, double));
         [[nodiscard]] double Euler(const double y_prev, const double step_size, double func_value);
-        [[nodiscard]] OWL::ArrayXD Euler(OWL::ArrayXD xArray, double yInit, double (*func)(double, double));[[nodiscard]] 
+        [[nodiscard]] OWL::ArrayXD Euler(OWL::ArrayXD xArray, double yInit, double (*func)(double, double));
+        [[nodiscard]]
 
-        [[nodiscard]] double rk4(const double x_prev, const double y_prev, const double step_size, double (*func)(double x, double y));
+        [[nodiscard]] double
+        rk4(const double x_prev, const double y_prev, const double step_size, double (*func)(double x, double y));
         [[nodiscard]] double rk4(const double x_prev, const double y_prev, const double step_size, std::function<double(double, double)> func);
         [[nodiscard]] OWL::ArrayXD rk4(OWL::ArrayXD xArray, double yInit, double (*func)(double, double));
     }

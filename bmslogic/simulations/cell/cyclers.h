@@ -25,6 +25,7 @@ class BaseCycler
 {
 public:
     BaseCycler();
+    virtual ~BaseCycler() = default;
     // public variables
     double time_elapsed = 0.0;
     double SOC_LIB;
@@ -65,6 +66,7 @@ class Discharge : public BaseCycler
 {
 public:
     Discharge(double discharge_current, double V_min, double SOC_LIB_min, double SOC_LIB);
+    ~Discharge() = default;
 };
 
 /**
@@ -76,6 +78,7 @@ class DischargeRest : public BaseCycler
 {
 public:
     DischargeRest(double i_discharge_current, double i_V_min, double i_soc_lib_min, double i_soc_lib, double i_rest_time);
+    ~DischargeRest() = default;
 };
 
 /**
@@ -87,12 +90,14 @@ class Charge : public BaseCycler
 {
 public:
     Charge(double i_charge_current, double i_V_max, double i_soc_lib_max, double i_soc);
+    ~Charge() = default;
 };
 
 class ChargeRest : public BaseCycler
 {
 public:
     ChargeRest(double i_charge_current, double i_V_min, double i_soc_lib_max, double i_soc, double i_rest_time);
+    ~ChargeRest() = default;
 };
 
 /**
@@ -105,6 +110,7 @@ class ChargeDischarge : public BaseCycler
 public:
     ChargeDischarge(double i_charge_current, double i_discharge_current, double i_V_max, double i_V_min,
                     double i_soc_min, double i_soc_max, double i_soc, double i_rest_time);
+    ~ChargeDischarge() = default;
 };
 
 /**
@@ -116,6 +122,7 @@ class CustomCycler : public BaseCycler
 {
 public:
     CustomCycler(std::vector<double> t, std::vector<double> current, double V_min, double V_max, double soc_min, double soc_max, double soc);
+    ~CustomCycler() = default;
     // getters
     std::vector<double> get_t_vector() { return m_t_vector; }
     std::vector<double> get_current_vector() { return m_current_vector; }
@@ -128,13 +135,14 @@ public:
  * @brief Creates a cycler class whose time and current array values have been filled through interpolation.
  *        THIS CLASS HAS VERY HIGH COMPUTATIONAL TIMES AND IT IS RECOMMENDED TO NOT USE IT! USE THE CYCLER IN PYCYCLER
  *        INSTEAD.
- * 
+ *
  */
 class InterpolatedCustomCycler : public BaseCycler
 {
 public:
     InterpolatedCustomCycler(std::vector<double> i_t_exp, std::vector<double> i_I_exp, double dt,
                              double V_min, double V_max, double soc_min, double soc_max, double soc);
+    ~InterpolatedCustomCycler() = default;
     // getters
     std::vector<double> get_t_vector() { return m_t_vector; }
     std::vector<double> get_current_vector() { return m_current_vector; }
@@ -148,6 +156,7 @@ class HPPCCycler : public BaseCycler
 public:
     HPPCCycler(double i_t1, double i_t2, double i_i_app, int i_num_hppc_pulses,
                double i_V_min, double i_SOC_LIB_min, double i_SOC_LIB);
+    ~HPPCCycler() = default;
     // helpers functions
     double get_current(std::string cycling_step, double t);
 

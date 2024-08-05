@@ -15,7 +15,7 @@
 class InsufficientESPMParameters : public std::exception
 {
 public:
-    char *what()
+    const char *what()
     {
         return "Check electrolyte parameters. Insufficient Electrolyte parameters for enhanced single particle model simulation.";
     }
@@ -31,6 +31,7 @@ class BaseECMSolver
 {
 public:
     BaseECMSolver(ECMBatteryCell i_b_cell, bool i_isothermal) : m_b_cell(i_b_cell), m_isothermal(i_isothermal) {}
+    virtual ~BaseECMSolver() = default;
 
 protected:
     ECMBatteryCell m_b_cell;
@@ -45,11 +46,10 @@ class ESCDTSolver : public BaseECMSolver
 {
 public:
     ESCDTSolver(ECMBatteryCell i_b_cell, bool i_isothermal) : BaseECMSolver(i_b_cell, i_isothermal) {}
-    ECMSolution solve(BaseCycler cycler, double dt);
+    ~ESCDTSolver() = default;
 
-    // private:
-    //     ECMBatteryCell m_b_cell;
-    //     bool m_isothermal;
+    // methods for calculations
+    ECMSolution solve(BaseCycler cycler, double dt);
 };
 
 /// @brief Degradation solvers
@@ -58,6 +58,8 @@ class ROMSEISolver
 public:
     ROMSEISolver(double i_k, double i_c_e, double i_S, double i_c_s_max, double i_U_s, double i_j_0_s, double i_A,
                  double i_MW_SEI, double i_rho, double i_kappa);
+    ~ROMSEISolver() = default;
+
     // getters
     double get_k() { return m_k; }
     double get_c_e() { return m_c_e; }
@@ -99,6 +101,7 @@ class LumpedThermalSolver
 {
 public:
     LumpedThermalSolver(double i_h, double i_A, double i_rho, double i_vol, double i_C_p, double i_temp_init);
+    ~LumpedThermalSolver() = default;
     // Calculation methods below
     double reversible_heat(double dOCPdT_p, double dOCPdT_n, double I, double T);
     double irreversible_heat(double OCP_p, double OCP_n, double I, double V);
@@ -131,6 +134,8 @@ class BaseConcSolver
 {
 public:
     explicit BaseConcSolver(char electrode_type);
+    virtual ~BaseConcSolver() = default;
+
     // getter functions
     char &get_electrodeType() { return m_electrode_type; }
 
@@ -142,6 +147,7 @@ class PolynomialApprox : public BaseConcSolver
 {
 public:
     PolynomialApprox(char electrodeType, double i_c_init, std::string type);
+    ~PolynomialApprox() = default;
     // getter functions
     std::string get_solver_type() const { return m_type; }
     double get_c_s_avg() { return m_c_s_avg_prev; }
@@ -191,6 +197,7 @@ class EigenSolver : public BaseConcSolver
 {
 public:
     EigenSolver(char i_electrode_type, double i_soc_init, int i_num_roots);
+    ~EigenSolver() = default;
     // getters
     std::vector<double> get_roots() const { return m_roots; }
     double get_integ_term() { return m_integ_term; }
@@ -224,6 +231,7 @@ class CNSolver : public BaseConcSolver
 {
 public:
     CNSolver(double i_c_init, char i_electrode_type, int i_spatial_grid_points);
+    ~CNSolver() = default;
 
     // getter functions
     char get_electrode_type() { return m_electrode_type; }
@@ -268,9 +276,10 @@ public:
                          double i_epsilon_e_n, double i_epsilon_e_sep, double i_epsilon_e_p,
                          double i_a_s_n, double i_a_s_p,
                          double i_D_e, double i_brugg);
-    ElectrolyteFVMCoordinates get_coords() const { return m_coords; }
+    ~ElectrolyteFVMSolver() = default;
 
     // getter functions
+    ElectrolyteFVMCoordinates get_coords() const { return m_coords; }
     double get_t_c() const { return m_t_c; }
     double get_c_e_init() const { return m_c_e_init; }
     double get_epsilon_e_n() const { return m_epsilon_e_n; }
@@ -327,6 +336,9 @@ class BaseBatterySolver
 {
 public:
     BaseBatterySolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver);
+    ~BaseBatterySolver() = default;
+
+    // member variables
     BatteryCell m_b_cell;
     bool m_isothermal;
     bool m_degradation;
@@ -337,6 +349,7 @@ class BatterySolver : public BaseBatterySolver
 {
 public:
     explicit BatterySolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver = "poly");
+    ~BatterySolver() = default;
     // Solvers instances
     PolynomialApprox SOC_solver_p;
     PolynomialApprox SOC_solver_n;
@@ -358,6 +371,7 @@ class ESPBatterySolver : public BaseBatterySolver
 {
 public:
     explicit ESPBatterySolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver);
+    ~ESPBatterySolver() = default;
 
     // methods for calculations
     Solution solve(BaseCycler i_cycler);

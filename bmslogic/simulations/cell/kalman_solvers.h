@@ -20,6 +20,7 @@ class SPKFPolynomialApprox
 {
 public:
     SPKFPolynomialApprox(char electrode_type, double c_init, double R, double S, double D, double cov_x, double cov_w, double cov_v);
+    ~SPKFPolynomialApprox() = default;
     // getter functions
     SigmaPointKalmanFilter get_spkf_solver() const { return m_spkf_solver; }
     // helper functions
@@ -44,6 +45,7 @@ public:
     SPKFSolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation,
                double i_state1_init, double i_state2_init, double i_cov_state1, double i_cov_state2,
                double i_cov_w, double i_cov_v);
+    ~SPKFSolver() = default;
 
     // functions for calculations
     Solution solve(Eigen::VectorXd i_t, Eigen::VectorXd i_I, Eigen::VectorXd i_V_ob);
