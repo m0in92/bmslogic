@@ -11,12 +11,15 @@
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -50,17 +53,29 @@ $(function() { codefold.init(0); });
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
-  initMenu('',true,false,'search.php','Search',false);
+  initMenu('',true,false,'search.php','Search',true);
   $(function() { init_search(); });
 });
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
+$(function(){initNavTree('owl_8h_source.html',''); initResizable(true); });
 /* @license-end */
 </script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -82,12 +97,6 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_b4d4b67f9e7e7eab0190f2add9edce20.html">bmslogic</a></li><li class="navelem"><a class="el" href="dir_4542f0f150218a0f99c88b334d814325.html">extern</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
   <div class="headertitle"><div class="title">owl.h</div></div>
 </div><!--header-->
@@ -402,14 +411,14 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="aclass_o_w_l_1_1_matrix_x_d_html_ae2f7924c7cc19a50dfdd69266eac404c"><div class="ttname"><a href="class_o_w_l_1_1_matrix_x_d.html#ae2f7924c7cc19a50dfdd69266eac404c">OWL::MatrixXD::operator-</a></div><div class="ttdeci">MatrixXD operator-(MatrixXD &amp;)</div><div class="ttdoc">Operator overload for addition to have matrix subtraction.</div><div class="ttdef"><b>Definition</b> owl.cpp:1589</div></div>
 <div class="ttc" id="aclass_o_w_l_1_1_row_index_exceed_row_size_exception_html"><div class="ttname"><a href="class_o_w_l_1_1_row_index_exceed_row_size_exception.html">OWL::RowIndexExceedRowSizeException</a></div><div class="ttdoc">Exception when the index called is greater than the matrix row size.</div><div class="ttdef"><b>Definition</b> owl.h:160</div></div>
 <div class="ttc" id="aclass_o_w_l_1_1_size_mismatch_exception_html"><div class="ttname"><a href="class_o_w_l_1_1_size_mismatch_exception.html">OWL::SizeMismatchException</a></div><div class="ttdoc">Custom Exception class to handle situations when OWL::ArrayXd array lengths/sizes do not match up.</div><div class="ttdef"><b>Definition</b> owl.h:37</div></div>
-<div class="ttc" id="anamespace_newton_1_1_matrix_solvers_html_a2f6189bfde35f9aeff3bd0212593f3b6"><div class="ttname"><a href="namespace_newton_1_1_matrix_solvers.html#a2f6189bfde35f9aeff3bd0212593f3b6">Newton::MatrixSolvers::TDMASolver</a></div><div class="ttdeci">std::vector&lt; double &gt; TDMASolver(std::vector&lt; double &gt; l_diag, std::vector&lt; double &gt; diag, std::vector&lt; double &gt; u_diag, std::vector&lt; double &gt; col_vec)</div><div class="ttdoc">Thomas Algorithm for solving system of equtions that contain diagonally dominant tridiagonal matrix.</div><div class="ttdef"><b>Definition</b> owl.cpp:2267</div></div>
+<div class="ttc" id="anamespace_newton_1_1_matrix_solvers_html_a2f6189bfde35f9aeff3bd0212593f3b6"><div class="ttname"><a href="namespace_newton_1_1_matrix_solvers.html#a2f6189bfde35f9aeff3bd0212593f3b6">Newton::MatrixSolvers::TDMASolver</a></div><div class="ttdeci">std::vector&lt; double &gt; TDMASolver(std::vector&lt; double &gt; l_diag, std::vector&lt; double &gt; diag, std::vector&lt; double &gt; u_diag, std::vector&lt; double &gt; col_vec)</div><div class="ttdoc">Thomas Algorithm for solving system of equtions that contain diagonally dominant tridiagonal matrix.</div><div class="ttdef"><b>Definition</b> owl.cpp:2250</div></div>
 <div class="ttc" id="anamespace_newton_1_1_o_d_e_solver_html_a1985fb2d0eb52fe07deed96f28eda448"><div class="ttname"><a href="namespace_newton_1_1_o_d_e_solver.html#a1985fb2d0eb52fe07deed96f28eda448">Newton::ODESolver::rk4</a></div><div class="ttdeci">double rk4(const double x_prev, const double y_prev, const double step_size, double(*func)(double x, double y))</div><div class="ttdoc">solves a ode for a time step using rk4 method of the form: dy/dx = f(x,y)</div><div class="ttdef"><b>Definition</b> owl.cpp:2115</div></div>
 <div class="ttc" id="anamespace_newton_1_1_o_d_e_solver_html_a7d59ca5258f38d826e979fa72b0f9b66"><div class="ttname"><a href="namespace_newton_1_1_o_d_e_solver.html#a7d59ca5258f38d826e979fa72b0f9b66">Newton::ODESolver::Euler</a></div><div class="ttdeci">double Euler(const double x_prev, const double y_prev, const double step_size, double(*func)(double x, double y))</div><div class="ttdoc">solves a ode for a time step using Euler's method of the form: dy/dx = f(x,y)</div><div class="ttdef"><b>Definition</b> owl.cpp:2092</div></div>
 <div class="ttc" id="anamespace_newton_1_1interp_html_a06fbe49bc1190985d1a53a6c89b45fe9"><div class="ttname"><a href="namespace_newton_1_1interp.html#a06fbe49bc1190985d1a53a6c89b45fe9">Newton::interp::interp</a></div><div class="ttdeci">double interp(OWL::ArrayXD xArray, OWL::ArrayXD yArray, double x)</div><div class="ttdoc">interp</div><div class="ttdef"><b>Definition</b> owl.cpp:1953</div></div>
 <div class="ttc" id="anamespace_newton_1_1interp_html_a782a0f8cc6a7dfbcf2375c0b394eb220"><div class="ttname"><a href="namespace_newton_1_1interp.html#a782a0f8cc6a7dfbcf2375c0b394eb220">Newton::interp::slope</a></div><div class="ttdeci">double slope(double &amp;y2, double &amp;y1, double &amp;x2, double &amp;x1)</div><div class="ttdoc">slope</div><div class="ttdef"><b>Definition</b> owl.cpp:1911</div></div>
 <div class="ttc" id="anamespace_newton_1_1interp_html_aa89abd0168d396b4ee6804de0419adc6"><div class="ttname"><a href="namespace_newton_1_1interp.html#aa89abd0168d396b4ee6804de0419adc6">Newton::interp::interpFunc</a></div><div class="ttdeci">std::function&lt; double(double)&gt; interpFunc(OWL::ArrayXD xArray, OWL::ArrayXD yArray)</div><div class="ttdoc">interpFunc</div><div class="ttdef"><b>Definition</b> owl.cpp:1985</div></div>
 <div class="ttc" id="anamespace_newton_1_1interp_html_ad923250f9931c59b079860f74444f0b6"><div class="ttname"><a href="namespace_newton_1_1interp.html#ad923250f9931c59b079860f74444f0b6">Newton::interp::line</a></div><div class="ttdeci">std::function&lt; double(double)&gt; line(double &amp;slope, double &amp;x, double &amp;y)</div><div class="ttdoc">line</div><div class="ttdef"><b>Definition</b> owl.cpp:1929</div></div>
-<div class="ttc" id="anamespace_newton_1_1roots_html_af36050f1f2e2c6bd023bfb28ce9ec5eb"><div class="ttname"><a href="namespace_newton_1_1roots.html#af36050f1f2e2c6bd023bfb28ce9ec5eb">Newton::roots::Brent</a></div><div class="ttdeci">double Brent(std::function&lt; double(double)&gt; f, double lower_bound, double upper_bound, double TOL, double MAX_ITER)</div><div class="ttdoc">Finds the roots using Brent's method.</div><div class="ttdef"><b>Definition</b> owl.cpp:2165</div></div>
+<div class="ttc" id="anamespace_newton_1_1roots_html_af36050f1f2e2c6bd023bfb28ce9ec5eb"><div class="ttname"><a href="namespace_newton_1_1roots.html#af36050f1f2e2c6bd023bfb28ce9ec5eb">Newton::roots::Brent</a></div><div class="ttdeci">double Brent(std::function&lt; double(double)&gt; f, double lower_bound, double upper_bound, double TOL, double MAX_ITER)</div><div class="ttdoc">Finds the roots using Brent's method.</div><div class="ttdef"><b>Definition</b> owl.cpp:2148</div></div>
 <div class="ttc" id="anamespace_newton_html"><div class="ttname"><a href="namespace_newton.html">Newton</a></div><div class="ttdoc">Contains the relevant equations to perform linear interpolation on arrays, numerical schemes for ordi...</div><div class="ttdef"><b>Definition</b> owl.cpp:1871</div></div>
 <div class="ttc" id="anamespace_o_w_l_html"><div class="ttname"><a href="namespace_o_w_l.html">OWL</a></div><div class="ttdoc">Adds the functionality to store, index, and perform basic mathematical array and matrix operations.</div><div class="ttdef"><b>Definition</b> owl.cpp:16</div></div>
 <div class="ttc" id="anamespace_o_w_l_html_a15a8ca8aff4dbba0aa4f1bf74ba41854"><div class="ttname"><a href="namespace_o_w_l.html#a15a8ca8aff4dbba0aa4f1bf74ba41854">OWL::atan</a></div><div class="ttdeci">ArrayXD atan(ArrayXD &amp;inputOWLArray)</div><div class="ttdoc">atan</div><div class="ttdef"><b>Definition</b> owl.cpp:1176</div></div>
@@ -430,10 +439,13 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="anamespace_o_w_l_html_aff45f7e53df0006a542b6ebd3822e45a"><div class="ttname"><a href="namespace_o_w_l.html#aff45f7e53df0006a542b6ebd3822e45a">OWL::Ones</a></div><div class="ttdeci">ArrayXD Ones(int len)</div><div class="ttdoc">Ones.</div><div class="ttdef"><b>Definition</b> owl.cpp:861</div></div>
 <div class="ttc" id="aowl_8h_html_a3a9804711cf84f20c2a318ed947a04e0"><div class="ttname"><a href="owl_8h.html#a3a9804711cf84f20c2a318ed947a04e0">operator*</a></div><div class="ttdeci">OWL::ArrayXD operator*(double lhsScalar, OWL::ArrayXD rhsArray)</div><div class="ttdoc">operator overload for *</div><div class="ttdef"><b>Definition</b> owl.cpp:1856</div></div>
 </div><!-- fragment --></div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
-</small></address>
 </div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_b4d4b67f9e7e7eab0190f2add9edce20.html">bmslogic</a></li><li class="navelem"><a class="el" href="dir_4542f0f150218a0f99c88b334d814325.html">extern</a></li><li class="navelem"><a class="el" href="owl_8h.html">owl.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0 </li>
+  </ul>
+</div>
 </body>
 </html>

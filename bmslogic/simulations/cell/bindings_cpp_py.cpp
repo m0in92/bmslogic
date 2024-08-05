@@ -124,7 +124,7 @@ PYBIND11_MODULE(cell, m)
 
      // BatteryCell class
      py::class_<BatteryCell>(m, "BatteryCell")
-         .def(py::init<PElectrode, NElectrode, Electrolyte, double, double, double, double, double, double, double, double, double>(),
+         .def(py::init<PElectrode&, NElectrode&, Electrolyte&, double, double, double, double, double, double, double, double, double>(),
               py::arg("p_elec"), py::arg("n_elec"), py::arg("electrolyte"),
               py::arg("rho"), py::arg("Vol"), py::arg("C_p"), py::arg("h"), py::arg("A"), py::arg("cap"),
               py::arg("V_max"), py::arg("V_min"), py::arg("R_cell"))
