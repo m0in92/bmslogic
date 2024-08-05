@@ -46,7 +46,6 @@ namespace OWL
     };
 
     /**
-     * @class ArrayXD
      *
      * @brief Provides functionality for the array operations. It uses the C++ vectors from the C++ standard Library
      * (std::vector) to create, store, and index element values.
@@ -137,12 +136,11 @@ namespace OWL
 
     /*
      * Classes to handle exceptions for OWL::MatrixXD
-     */
+    */
 
     /**
-     * DiffArrayLengthsException
-     *
-     * Exception when the arrays have different lengths.
+     * @brief Exception when the arrays have different lengths.
+     * 
      */
     class DiffArrayLengthsException : public std::exception
     {
@@ -151,9 +149,8 @@ namespace OWL
     };
 
     /**
-     * RowIndexExceedRowSizeException
-     *
-     * Exception when the index called is greater than the matrix row size.
+     * @brief Exception when the index called is greater than the matrix row size.
+     * 
      */
     class RowIndexExceedRowSizeException : public std::exception
     {
@@ -161,8 +158,12 @@ namespace OWL
         const char *what() { return "Empty Array"; }
     };
 
+
     /**
-     * class to handle matrix with elements of type double and size m*n
+     * @brief Class to handle matrix with elements of type double and size m*n. 
+     * 
+     * It uses C++ standard vectors for creating, storing, and indexing matrix element values.
+     * 
      */
     class MatrixXD
     {
@@ -238,59 +239,34 @@ namespace OWL
         bool checkEmptyArrays();
     };
 
-    /*
-     * The functions below pertains to creating a custom OWL::MatrixXD
-     */
-
     /**
-     * Zeros
+     * @brief Returns a matrix with all elements equal to zero.
      *
-     * Returns a matrix with all elements equal to zero.
+     * @param n_row number of desired rows.
+     * @param n_col number of desired columns.
      *
-     * Parameters:
-     *     rowLen: (int) row length
-     *     colLen: (int) row length
-     *
-     * Return:
-     *     (OWL::MatrixXD) Matrix with all elements equal to zero.
-     *
-     * Throws:
-     *     None
+     * @return MatrixXD
      */
     MatrixXD Zeros(int, int);
 
     /**
-     * Ones
+     * @brief Return an instance of OWL::MatrixXD with all elements equal to one.
      *
-     * Returns a matrix with all elements equal to one.
+     * @param n_row desired row length.
+     * @param n_col desired column length
      *
-     * Parameters:
-     *     rowLen: (int) row length
-     *     colLen: (int) row length
-     *
-     * Return:
-     *     (OWL::MatrixXD) Matrix with all elements equal to one.
-     *
-     * Throws:
-     *     None
+     * @return OWL::MatrixXD instance with all elements equal to one.
      */
-    MatrixXD Ones(int, int);
+    MatrixXD Ones(int n_row, int n_col);
 
     /**
-     * Diagnal
+     * @brief Returns a diagnal matrix, where the diagonal elements are equal to 1.
      *
-     * Returns a diagnal matrix.
+     * @param len_row integeter containing the length of the square matrix
      *
-     * Parameters:
-     *     len: (int) length of the matrix
-     *
-     * Return:
-     *     (OWL::MatrixXD) Squre diagnal matrix.
-     *
-     * Throws:
-     *     None
+     * @return a MatrixXD instance containing the diagonal elements as 1.
      */
-    MatrixXD Diag(int);
+    MatrixXD Diag(int len_row);
 }
 
 /*
@@ -304,7 +280,8 @@ namespace Newton
     namespace interp
     {
         /**
-         * Class to handle exceptions when the interpolation limts are exceeded.
+         * @brief Class to handle exceptions when the interpolation limts are exceeded.
+         *
          */
         class ExceedInterpolateLimit : public std::exception
         {
@@ -337,20 +314,34 @@ namespace Newton
 
     namespace roots
     {
-        // double Brent(double (*func)(double), double lower_bound, double upper_bound, double TOL, double MAX_ITER);
+        /**
+         * @brief Finds the roots using Brent's method. Code from the internet.
+         *
+         * @param func
+         * @param lower_bound lower bound of the bracket
+         * @param upper_bound upper bound of the bracket
+         * @param TOL tolerance
+         * @param MAX_ITER maximum allowed iterations
+         *
+         * @return double containing the root.
+         */
         [[nodiscard]] double Brent(std::function<double(double)> func, double lower_bound, double upper_bound, double TOL, double MAX_ITER);
     }
 
     namespace MatrixSolvers
     {
         /**
-         * @brief Thomas Algorithm source https://www.quantstart.com/articles/Tridiagonal-Matrix-Algorithm-Thomas-Algorithm-in-C/
+         * @brief Thomas Algorithm for solving system of equtions that contain diagonally dominant tridiagonal matrix.
          *
-         * @param l_diag
-         * @param diag
-         * @param u_diag
-         * @param col_vec
-         * @return std::vector<double>
+         * The matrix is assumed to be square with the size of N x N.
+         * code source from https://www.quantstart.com/articles/Tridiagonal-Matrix-Algorithm-Thomas-Algorithm-in-C/
+         *
+         * @param l_diag C++ vector containing the lower diagonal elements of length N-1
+         * @param diag C++ vector containing the diagonal elements of length N
+         * @param u_diag C++ vector containing the upper diagonal elements of length N+1
+         * @param col_vec C++ vector containing the RHS column vector.
+         *
+         * @return a C++ vector containing the solution of size N
          */
         [[nodiscard]] std::vector<double> TDMASolver(std::vector<double> l_diag, std::vector<double> diag, std::vector<double> u_diag, std::vector<double> col_vec);
     }

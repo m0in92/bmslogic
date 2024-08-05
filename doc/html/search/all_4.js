@@ -7,7 +7,7 @@ var searchData=
   ['desired_5facc_4',['desired_acc',['../classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics.html#a7a28891d6224fddd2ea992b36478c29c',1,'bmslogic::simulations::applications::ev::EVDynamics']]],
   ['desired_5facc_5ff_5',['desired_acc_F',['../classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics.html#aa5c4787fc34d27c5e285276fa756c9e2',1,'bmslogic::simulations::applications::ev::EVDynamics']]],
   ['det_6',['det',['../class_o_w_l_1_1_matrix_x_d.html#ab28a3a1b9c8fa95f1c785b98651265b5',1,'OWL::MatrixXD']]],
-  ['diag_7',['Diag',['../owl_8cpp.html#a0fcd68874cac52a5735286c73c35643b',1,'OWL']]],
+  ['diag_7',['Diag',['../owl_8cpp.html#a6003923eb022b6e8404bb5cfecfaec27',1,'OWL']]],
   ['diffarraylengthsexception_8',['DiffArrayLengthsException',['../class_o_w_l_1_1_diff_array_lengths_exception.html',1,'OWL']]],
   ['discharge_9',['Discharge',['../class_discharge.html',1,'']]],
   ['dischargerest_10',['DischargeRest',['../class_discharge_rest.html',1,'']]],

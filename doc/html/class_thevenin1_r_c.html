@@ -92,7 +92,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>This class creates a first order Thevenin model object for a lithium-ion battery cell. It contains relevant model parameters as class attributes and methods to calculate SOC and terminal voltage.  
+<p>This class creates a first order Thevenin model object for a lithium-ion battery cell.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="models_8h_source.html">models.h</a>&gt;</code></p>
@@ -110,7 +110,8 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>V</b> (double i_app
 <tr class="separator:a9f9810fccae4c0df0d7f0ea59c9373a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class creates a first order Thevenin model object for a lithium-ion battery cell. It contains relevant model parameters as class attributes and methods to calculate SOC and terminal voltage. </p>
+<div class="textblock"><p>This class creates a first order Thevenin model object for a lithium-ion battery cell. </p>
+<p>It contains relevant model parameters as class attributes and methods to calculate SOC and terminal voltage.</p>
 <p>Thevenin first order model is a phenomenological model that can be used to simulate the terminal voltage across a lithium-ion battery cell. It has representative electrical components that represent the open-circuit voltage, internal resistance, and diffusion voltages. The set of differential and algebraic equations are:</p>
 <p>dz/dt = -eta(t) * i_app(t) / capacity di_R1/dt = -i_R1/(R1*C1) + i_app(t)/(R1*C1) v(t) = OCV(z(t)) - R1*i_R1(t) - R0*i_app(t)</p>
 <p>Where the second equation is a non-homogenous linear first-order differential equation. Furthermore, the variables are: z: state of charge (SOC) R0: resistance of the resistor that represents the battery cell's internal resistance R1: resistance of the resistor in the RC pair. C1: capacitance of the capacitor in the RC pair. i_R1: current through R1 i_app: applied current eta: Colombic efficiency</p>

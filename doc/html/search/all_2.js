@@ -39,5 +39,5 @@ var searchData=
   ['bmslogic_3a_3asimulations_3a_3acell_3a_3aplot_36',['plot',['../namespacebmslogic_1_1simulations_1_1cell_1_1plot.html',1,'bmslogic::simulations::cell']]],
   ['bmslogic_3a_3asimulations_3a_3acell_3a_3apycyclers_37',['pycyclers',['../namespacebmslogic_1_1simulations_1_1cell_1_1pycyclers.html',1,'bmslogic::simulations::cell']]],
   ['bmslogic_3a_3asimulations_3a_3acell_3a_3asolution_38',['solution',['../namespacebmslogic_1_1simulations_1_1cell_1_1solution.html',1,'bmslogic::simulations::cell']]],
-  ['brent_39',['Brent',['../owl_8cpp.html#a2949915046243b5206443fd3895109b6',1,'Newton::roots']]]
+  ['brent_39',['Brent',['../owl_8cpp.html#af36050f1f2e2c6bd023bfb28ce9ec5eb',1,'Newton::roots']]]
 ];

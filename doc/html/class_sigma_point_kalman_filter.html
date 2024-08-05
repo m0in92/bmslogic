@@ -174,7 +174,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_state_equation</b
 void&#160;</td><td class="memItemRight" valign="bottom"><b>set_output_equation</b> (std::function&lt; Eigen::VectorXd(Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd)&gt; i_output_equation)</td></tr>
 <tr class="separator:a15406c0c1e11f9cff69987224ced6cef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85d0a97e774273b3329e392c12116170" id="r_a85d0a97e774273b3329e392c12116170"><td class="memItemLeft" align="right" valign="top">Eigen::MatrixXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85d0a97e774273b3329e392c12116170">calc_and_set_state_prediction</a> (Eigen::VectorXd u)</td></tr>
-<tr class="memdesc:a85d0a97e774273b3329e392c12116170"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the step 1a (first step) of the process. The state estimate is performed in this step.  <br /></td></tr>
+<tr class="memdesc:a85d0a97e774273b3329e392c12116170"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the step 1a (first step) of the process.  <br /></td></tr>
 <tr class="separator:a85d0a97e774273b3329e392c12116170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42ec753def0a505964e152d2f838a210" id="r_a42ec753def0a505964e152d2f838a210"><td class="memItemLeft" align="right" valign="top"><a id="a42ec753def0a505964e152d2f838a210" name="a42ec753def0a505964e152d2f838a210"></a>
 Eigen::MatrixXd&#160;</td><td class="memItemRight" valign="bottom"><b>calc_and_set_state_covariance</b> (Eigen::MatrixXd state_equation_results)</td></tr>
@@ -220,7 +220,8 @@ static Eigen::MatrixXd&#160;</td><td class="memItemRight" valign="bottom"><b>cal
       </table>
 </div><div class="memdoc">
 
-<p>This is the step 1a (first step) of the process. The state estimate is performed in this step. </p>
+<p>This is the step 1a (first step) of the process. </p>
+<p>The state estimate is performed in this step.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">u</td><td>The process input. </td></tr>

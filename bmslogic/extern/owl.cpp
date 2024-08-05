@@ -2252,25 +2252,6 @@ namespace Newton
 
     namespace roots
     {
-
-        /**
-         * Brent
-         *
-         * Finds the roots using Brent's method. Code from the internet.
-         *
-         * Parameters:
-         *     f: (func pointer) function
-         *     lower_bound: (double) lower bound of the bracket
-         *     upper_bound: (double) upper bound of the bracket
-         *     TOL: (double) tolerance
-         *     MEX_ITER: (double) maximum allowed iterations
-         *
-         * Returns:
-         *     (double) root of the function
-         *
-         * Throws:
-         *     None
-         */
         double Brent(std::function<double(double)> f, double lower_bound, double upper_bound, double TOL, double MAX_ITER)
         {
             double a = lower_bound;
@@ -2373,15 +2354,6 @@ namespace Newton
 
     namespace MatrixSolvers
     {
-        /**
-         * @brief Thomas Algorithm source https://www.quantstart.com/articles/Tridiagonal-Matrix-Algorithm-Thomas-Algorithm-in-C/
-         *
-         * @param l_diag
-         * @param diag
-         * @param u_diag
-         * @param col_vec
-         * @return std::vector<double>
-         */
         std::vector<double> TDMASolver(std::vector<double> l_diag, std::vector<double> diag, std::vector<double> u_diag, std::vector<double> col_vec)
         {
             int N = static_cast<int>(col_vec.size());

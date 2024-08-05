@@ -92,7 +92,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>This solver uses the Eigen Function Expansion method as detailed in ref 1 to calculate the electrode surface SOC. As such, it stores all the necessary variables required for the iterative calculations for all time steps. After initiating the class, the object instance can be called iteratively to solve for electrode surface SOC for all time steps.  
+<p>This solver uses the Eigen Function Expansion method as detailed in ref 1 to calculate the electrode surface SOC.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="solvers_8h_source.html">solvers.h</a>&gt;</code></p>
@@ -124,7 +124,7 @@ std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><
 double&#160;</td><td class="memItemRight" valign="bottom"><b>j_scaled</b> (double i_app, double R, double S, double D_s, double c_s_max)</td></tr>
 <tr class="separator:a3db00daaf3904ad97086d23040faa340"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad7e83f8ff60d84166f9566614dd019c" id="r_aad7e83f8ff60d84166f9566614dd019c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad7e83f8ff60d84166f9566614dd019c">update_integ_term</a> (double dt, double i_app, double R, double S, double D_s, double c_s_max)</td></tr>
-<tr class="memdesc:aad7e83f8ff60d84166f9566614dd019c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the integration term. Integration is performed using simple algebraic integration.  <br /></td></tr>
+<tr class="memdesc:aad7e83f8ff60d84166f9566614dd019c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the integration term.  <br /></td></tr>
 <tr class="separator:aad7e83f8ff60d84166f9566614dd019c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc99062ded90ec75323321ad9d819648" id="r_acc99062ded90ec75323321ad9d819648"><td class="memItemLeft" align="right" valign="top"><a id="acc99062ded90ec75323321ad9d819648" name="acc99062ded90ec75323321ad9d819648"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>du_kdt</b> (double root, double D, double R, double scaled_j, double t, double u)</td></tr>
@@ -157,7 +157,8 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>m_electrode_type</b><
 <tr class="separator:a22bfeff1441536f2d833f2943c68655e inherit pro_attribs_class_base_conc_solver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This solver uses the Eigen Function Expansion method as detailed in ref 1 to calculate the electrode surface SOC. As such, it stores all the necessary variables required for the iterative calculations for all time steps. After initiating the class, the object instance can be called iteratively to solve for electrode surface SOC for all time steps. </p>
+<div class="textblock"><p>This solver uses the Eigen Function Expansion method as detailed in ref 1 to calculate the electrode surface SOC. </p>
+<p>As such, it stores all the necessary variables required for the iterative calculations for all time steps. After initiating the class, the object instance can be called iteratively to solve for electrode surface SOC for all time steps.</p>
 <p>The equation solved is x_j_surf = x_ini + (1/5)*j_scaled + 3 * integration{D_sj * j_scaled / R_j ** 2} * dt + summation{u_jk - 2 * scaled_j / lambda_k ** 2} In the above equation, the integration is performed from t=0 to the current time. Moreover, the summation is performed from k=1 to k=N. Here k represents the kth term of the solution series.</p>
 <p>Reference:</p><ol type="1">
 <li>Guo, M., Sikha, G., &amp; White, R. E. (2011). Single-Particle Model for a Lithium-Ion Cell: Thermal Behavior. Journal of The Electrochemical Society, 158(2), A122. <a href="https://doi.org/10.1149/1.3521314/XML">https://doi.org/10.1149/1.3521314/XML</a> """ </li>
@@ -202,7 +203,8 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>m_electrode_type</b><
       </table>
 </div><div class="memdoc">
 
-<p>Updates the integration term. Integration is performed using simple algebraic integration. </p>
+<p>Updates the integration term. </p>
+<p>Integration is performed using simple algebraic integration.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">dt</td><td></td></tr>

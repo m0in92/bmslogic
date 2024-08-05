@@ -101,8 +101,10 @@ $(function(){ initResizable(false); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0b016c49fe6a60107beaa951c7bc1788" id="r_a0b016c49fe6a60107beaa951c7bc1788"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b016c49fe6a60107beaa951c7bc1788">m</a> (double I, double k, double S, double c_max, double SOC, double c_e)</td></tr>
+<tr class="memdesc:a0b016c49fe6a60107beaa951c7bc1788"><td class="mdescLeft">&#160;</td><td class="mdescRight">m  <br /></td></tr>
 <tr class="separator:a0b016c49fe6a60107beaa951c7bc1788"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f6ba13bc33a846e6776f90419104fa3" id="r_a4f6ba13bc33a846e6776f90419104fa3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4f6ba13bc33a846e6776f90419104fa3">calc_terminal_V</a> (double OCP_p, double OCP_n, double m_p, double m_n, double R_cell, double T, double I)</td></tr>
+<tr class="memdesc:a4f6ba13bc33a846e6776f90419104fa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">calc_terminal_V  <br /></td></tr>
 <tr class="separator:a4f6ba13bc33a846e6776f90419104fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28866e2f41f2e282fb9b1017c03e5af1" id="r_a28866e2f41f2e282fb9b1017c03e5af1"><td class="memItemLeft" align="right" valign="top"><a id="a28866e2f41f2e282fb9b1017c03e5af1" name="a28866e2f41f2e282fb9b1017c03e5af1"></a>
 <a class="el" href="struct_over_potentials.html">OverPotentials</a>&#160;</td><td class="memItemRight" valign="bottom"><b>calc_overpotentials</b> (double OCP_p, double OCP_n, double m_p, double m_n, double R_cell, double T, double I)</td></tr>
@@ -111,6 +113,7 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aeb5f08df5e1a5504b20218436d490b9a" id="r_aeb5f08df5e1a5504b20218436d490b9a"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb5f08df5e1a5504b20218436d490b9a">molar_flux_electrode</a> (double &amp;I, double &amp;S, char &amp;electrode_type)</td></tr>
+<tr class="memdesc:aeb5f08df5e1a5504b20218436d490b9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">molar_flux_electrode  <br /></td></tr>
 <tr class="separator:aeb5f08df5e1a5504b20218436d490b9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -159,7 +162,8 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>calc_terminal_V</p>
+
+<p>calc_terminal_V </p>
 <p>Calculates the cell terminal potential [V]</p>
 <p>Parameters: OCP_p: (double) positive eletrode's OCP OCP_n: (double) negative electrode's OCP m_n: (double) negative electrode's m m_p: (double) positive electrode's m R_cell (double): battery cell's internal resistance [ohm] T: (double) battery cell's internal resistance I: (double) applied current [A]</p>
 <p>Returns: (double) battery cell's terminal voltage </p>
@@ -204,7 +208,8 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>m</p>
+
+<p>m </p>
 <p>Calculates the intermediary variable in the single particle model.</p>
 <p>Parameters: (double) I: applied current [A] (double) k: reaction rate [m2.5/mol0.5/s] (double) c_max: max. conc [mol/m3] (double) SOC: electrode SOC (double) c_e: electrolyte conc. [mol/m3]</p>
 <p>Return: (double) m </p>
@@ -242,7 +247,8 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>molar_flux_electrode</p>
+
+<p>molar_flux_electrode </p>
 <p>Calculates the molar flux into the electrode [mol/m2/s].</p>
 <p>Parameters: I: (double) applied current [A] S: (double) electro-active electrode area [m2] electrode_type: (char) electrode type</p>
 <p>Returns: (double) molar area flux [mol/m2/s] </p>
