@@ -2,11 +2,11 @@ var searchData=
 [
   ['a_0',['A',['../classelectrode__conc_1_1_py_c_n_solver.html#a5ce9f56b94d3dc89a995d79800bf6b8e',1,'electrode_conc::PyCNSolver']]],
   ['a_5fs_1',['a_s',['../classbmslogic_1_1simulations_1_1cell_1_1battery__components_1_1_py_electrode.html#a6f042e86deb80a703b26c79616e06991',1,'bmslogic.simulations.cell.battery_components.PyElectrode.a_s()'],['../classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me.html#a65d34d2106dc5def63e02a2eb25ac922',1,'bmslogic.simulations.cell.models.PySPMe.a_s()'],['../classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_p2_d_m.html#a0922441c4716c867ce643874307800fb',1,'bmslogic.simulations.cell.models.PyP2DM.a_s()']]],
-  ['abs_2',['abs',['../owl_8cpp.html#a5d1b2e3ec2eb9e52f6a4f0de5ee449a1',1,'OWL']]],
-  ['acos_3',['acos',['../owl_8cpp.html#a2de3a9fe8b33fdd210f07135ed97d95e',1,'OWL']]],
+  ['abs_2',['abs',['../namespace_o_w_l.html#a5d1b2e3ec2eb9e52f6a4f0de5ee449a1',1,'OWL']]],
+  ['acos_3',['acos',['../namespace_o_w_l.html#a2de3a9fe8b33fdd210f07135ed97d95e',1,'OWL']]],
   ['aero_5ff_4',['aero_F',['../classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics.html#a7002c7d5a19804ae105a1ca0dd245c9b',1,'bmslogic::simulations::applications::ev::EVDynamics']]],
-  ['append_5',['append',['../owl_8cpp.html#a5ea2510da3f79e167db515c0d1e5ae54',1,'OWL']]],
-  ['arange_6',['aRange',['../owl_8cpp.html#ae2c243e60bc700c7a2ed7262d94ea89b',1,'OWL']]],
+  ['append_5',['append',['../namespace_o_w_l.html#a5ea2510da3f79e167db515c0d1e5ae54',1,'OWL']]],
+  ['arange_6',['aRange',['../namespace_o_w_l.html#ae2c243e60bc700c7a2ed7262d94ea89b',1,'OWL']]],
   ['array_5fa_5fs_7',['array_a_s',['../classelectrolyte__potential_1_1_py_electrolyte_potential_f_v_m_solver.html#a36117be8938ccd460ee96dbcf13063ee',1,'electrolyte_potential::PyElectrolytePotentialFVMSolver']]],
   ['array_5falpha_5fc_8',['array_alpha_c',['../classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter.html#adce5a283addc5143d07faa17e626c309',1,'bmslogic::calc_helpers::kalman_filter::SigmaPointKalmanFilter']]],
   ['array_5falpha_5fm_9',['array_alpha_m',['../classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter.html#aa0f5c72b2d982988d4153d60170039df',1,'bmslogic::calc_helpers::kalman_filter::SigmaPointKalmanFilter']]],
@@ -21,6 +21,6 @@ var searchData=
   ['array_5fx_5fp_18',['array_x_p',['../classcoords_1_1_py_electrolyte_f_v_m_coordinates.html#a5f2b17d30491e3041f94bb1e7ebd8fd1',1,'coords::PyElectrolyteFVMCoordinates']]],
   ['array_5fx_5fs_19',['array_x_s',['../classcoords_1_1_py_electrolyte_f_v_m_coordinates.html#abecfafc4f91133738afffbc61fdbf0ed',1,'coords::PyElectrolyteFVMCoordinates']]],
   ['arrayxd_20',['ArrayXD',['../class_o_w_l_1_1_array_x_d.html#a248a116356d1ea998d4e4d40cc4b6f02',1,'OWL::ArrayXD::ArrayXD()'],['../class_o_w_l_1_1_array_x_d.html#a70084c792f8f1d2dd447dee1a876ed6a',1,'OWL::ArrayXD::ArrayXD(std::vector&lt; double &gt; &amp;vec)']]],
-  ['asin_21',['asin',['../owl_8cpp.html#a922219bff72cb1949db55fec4133a984',1,'OWL']]],
-  ['atan_22',['atan',['../owl_8cpp.html#a15a8ca8aff4dbba0aa4f1bf74ba41854',1,'OWL']]]
+  ['asin_21',['asin',['../namespace_o_w_l.html#a922219bff72cb1949db55fec4133a984',1,'OWL']]],
+  ['atan_22',['atan',['../namespace_o_w_l.html#a15a8ca8aff4dbba0aa4f1bf74ba41854',1,'OWL']]]
 ];

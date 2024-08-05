@@ -19,13 +19,13 @@ var searchData=
   ['escdtsolver_16',['ESCDTSolver',['../class_e_s_c_d_t_solver.html',1,'']]],
   ['espbatterysolver_17',['ESPBatterySolver',['../class_e_s_p_battery_solver.html',1,'']]],
   ['espmodel_18',['ESPModel',['../namespace_e_s_p_model.html',1,'']]],
-  ['euler_19',['Euler',['../owl_8cpp.html#a7d59ca5258f38d826e979fa72b0f9b66',1,'Newton::ODESolver::Euler(const double x_prev, const double y_prev, const double step_size, double(*func)(double x, double y))'],['../owl_8cpp.html#a30fa891976761c0d2d12d93b958fddff',1,'Newton::ODESolver::Euler(const double y_prev, const double step_size, double func_value)'],['../owl_8cpp.html#a0162ccde7958ca960a066d51b6d058e5',1,'Newton::ODESolver::Euler(OWL::ArrayXD xArray, double yInit, double(*func)(double, double))']]],
+  ['euler_19',['Euler',['../namespace_newton_1_1_o_d_e_solver.html#a7d59ca5258f38d826e979fa72b0f9b66',1,'Newton::ODESolver::Euler(const double x_prev, const double y_prev, const double step_size, double(*func)(double x, double y))'],['../namespace_newton_1_1_o_d_e_solver.html#a30fa891976761c0d2d12d93b958fddff',1,'Newton::ODESolver::Euler(const double y_prev, const double step_size, double func_value)'],['../namespace_newton_1_1_o_d_e_solver.html#a0162ccde7958ca960a066d51b6d058e5',1,'Newton::ODESolver::Euler(OWL::ArrayXD xArray, double yInit, double(*func)(double, double))']]],
   ['ev_20',['EV',['../classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v.html',1,'bmslogic::simulations::applications::ev']]],
   ['evdrivecycle_21',['EVDriveCycle',['../classbmslogic_1_1simulations_1_1applications_1_1drivecycles_1_1_e_v_drive_cycle.html',1,'bmslogic::simulations::applications::drivecycles']]],
   ['evdynamics_22',['EVDynamics',['../classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics.html',1,'bmslogic::simulations::applications::ev']]],
   ['evfromdatabase_23',['EVFromDatabase',['../classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_from_database.html',1,'bmslogic::simulations::applications::ev']]],
   ['exceedinterpolatelimit_24',['ExceedInterpolateLimit',['../class_newton_1_1interp_1_1_exceed_interpolate_limit.html',1,'Newton::interp']]],
-  ['exp_25',['exp',['../owl_8cpp.html#aa1ed853f219787cbe3bf9f49516402d3',1,'OWL']]],
+  ['exp_25',['exp',['../namespace_o_w_l.html#aa1ed853f219787cbe3bf9f49516402d3',1,'OWL']]],
   ['externalconditions_26',['ExternalConditions',['../classbmslogic_1_1simulations_1_1applications_1_1external__conditions_1_1_external_conditions.html',1,'bmslogic::simulations::applications::external_conditions']]],
   ['extrapolate_5fconc_27',['extrapolate_conc',['../classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver.html#aa351ca6f38ffc611e1d09c1b6757632f',1,'electrolyte_conc::PyElectrolyteConcFVMSolver']]]
 ];

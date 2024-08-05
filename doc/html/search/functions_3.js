@@ -25,7 +25,7 @@ var searchData=
   ['ce_5fj_5fvec_22',['ce_j_vec',['../classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver.html#a65a5e0231e75354f4df26ddf77c9066e',1,'electrolyte_conc::PyElectrolyteConcFVMSolver']]],
   ['checkemptyarray_23',['checkEmptyArray',['../class_o_w_l_1_1_array_x_d.html#a14c4da58bb7159ae2f65aab6790736cd',1,'OWL::ArrayXD']]],
   ['comparesize_24',['compareSize',['../class_o_w_l_1_1_matrix_x_d.html#a6f4bddf0c86183a41ca1152806c60b90',1,'OWL::MatrixXD']]],
-  ['cos_25',['cos',['../owl_8cpp.html#a24c8c0dac295fa4a1d49a5c96a411141',1,'OWL']]],
+  ['cos_25',['cos',['../namespace_o_w_l.html#a24c8c0dac295fa4a1d49a5c96a411141',1,'OWL']]],
   ['create_5fdf_26',['create_df',['../classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_from_database.html#a0f65d5e2712592c7cbf74ff3c3660bd7',1,'bmslogic::simulations::applications::ev::EVFromDatabase']]],
   ['create_5finit_5farrays_27',['create_init_arrays',['../classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics.html#aa887623c810cb094bcbc5c9d7b4820bc',1,'bmslogic::simulations::applications::ev::EVDynamics']]],
   ['curb_5fmass_28',['curb_mass',['../classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v.html#ac9b8f9985b1f5d550360ab6bcd991d15',1,'bmslogic::simulations::applications::ev::EV']]],

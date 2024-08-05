@@ -6,7 +6,7 @@ var searchData=
   ['desired_5facc_3',['desired_acc',['../classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics.html#a7a28891d6224fddd2ea992b36478c29c',1,'bmslogic::simulations::applications::ev::EVDynamics']]],
   ['desired_5facc_5ff_4',['desired_acc_F',['../classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics.html#aa5c4787fc34d27c5e285276fa756c9e2',1,'bmslogic::simulations::applications::ev::EVDynamics']]],
   ['det_5',['det',['../class_o_w_l_1_1_matrix_x_d.html#ab28a3a1b9c8fa95f1c785b98651265b5',1,'OWL::MatrixXD']]],
-  ['diag_6',['Diag',['../owl_8cpp.html#a6003923eb022b6e8404bb5cfecfaec27',1,'OWL']]],
+  ['diag_6',['Diag',['../namespace_o_w_l.html#a6003923eb022b6e8404bb5cfecfaec27',1,'OWL']]],
   ['display_7',['display',['../class_o_w_l_1_1_array_x_d.html#a689a564e4ed16fe158f0de9984e8b2aa',1,'OWL::ArrayXD']]],
   ['display_5fcolnames_8',['display_colnames',['../class_h_b_1_1_data_frames.html#afb9658c803a98f10d403a58d59f4aec1',1,'HB::DataFrames']]],
   ['dr_9',['dr',['../classelectrode__conc_1_1_py_c_n_solver.html#a8c19a74a1eeafe0f4d1d5ee5985f68f6',1,'electrode_conc::PyCNSolver']]]

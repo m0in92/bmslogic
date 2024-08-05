@@ -12,7 +12,7 @@ var searchData=
   ['batterymodule_9',['BatteryModule',['../classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_battery_module.html',1,'bmslogic::simulations::applications::ev']]],
   ['batterypack_10',['BatteryPack',['../classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_battery_pack.html',1,'bmslogic::simulations::applications::ev']]],
   ['batterysolver_11',['BatterySolver',['../class_battery_solver.html',1,'']]],
-  ['below_20pertains_20to_20creating_20a_20custom_20owl_3a_3aarrayxd_12',['The functions below pertains to creating a custom OWL::ArrayXD',['../owl_8cpp.html#autotoc_md1',1,'']]],
+  ['below_20pertains_20to_20creating_20a_20custom_20owl_3a_3aarrayxd_12',['The functions below pertains to creating a custom OWL::ArrayXD',['../namespace_o_w_l.html#autotoc_md1',1,'']]],
   ['bindings_5fcpp_5fpy_2ecpp_13',['bindings_cpp_py.cpp',['../bindings__cpp__py_8cpp.html',1,'']]],
   ['bmslogic_3a_3acalc_5fhelpers_3a_3aci_5falgorithms_14',['CI_algorithms',['../namespacebmslogic_1_1calc__helpers_1_1_c_i__algorithms.html',1,'bmslogic::calc_helpers']]],
   ['bmslogic_3a_3acalc_5fhelpers_3a_3aconstants_15',['constants',['../namespacebmslogic_1_1calc__helpers_1_1constants.html',1,'bmslogic::calc_helpers']]],
@@ -39,5 +39,5 @@ var searchData=
   ['bmslogic_3a_3asimulations_3a_3acell_3a_3aplot_36',['plot',['../namespacebmslogic_1_1simulations_1_1cell_1_1plot.html',1,'bmslogic::simulations::cell']]],
   ['bmslogic_3a_3asimulations_3a_3acell_3a_3apycyclers_37',['pycyclers',['../namespacebmslogic_1_1simulations_1_1cell_1_1pycyclers.html',1,'bmslogic::simulations::cell']]],
   ['bmslogic_3a_3asimulations_3a_3acell_3a_3asolution_38',['solution',['../namespacebmslogic_1_1simulations_1_1cell_1_1solution.html',1,'bmslogic::simulations::cell']]],
-  ['brent_39',['Brent',['../owl_8cpp.html#af36050f1f2e2c6bd023bfb28ce9ec5eb',1,'Newton::roots']]]
+  ['brent_39',['Brent',['../namespace_newton_1_1roots.html#af36050f1f2e2c6bd023bfb28ce9ec5eb',1,'Newton::roots']]]
 ];

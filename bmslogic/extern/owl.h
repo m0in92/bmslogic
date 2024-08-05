@@ -22,6 +22,10 @@
 #include <algorithm>
 #include <functional>
 
+/**
+ * @brief Adds the functionality to store, index, and perform basic mathematical array and matrix operations.
+ *
+ */
 namespace OWL
 {
 
@@ -136,11 +140,11 @@ namespace OWL
 
     /*
      * Classes to handle exceptions for OWL::MatrixXD
-    */
+     */
 
     /**
      * @brief Exception when the arrays have different lengths.
-     * 
+     *
      */
     class DiffArrayLengthsException : public std::exception
     {
@@ -150,7 +154,7 @@ namespace OWL
 
     /**
      * @brief Exception when the index called is greater than the matrix row size.
-     * 
+     *
      */
     class RowIndexExceedRowSizeException : public std::exception
     {
@@ -158,12 +162,11 @@ namespace OWL
         const char *what() { return "Empty Array"; }
     };
 
-
     /**
-     * @brief Class to handle matrix with elements of type double and size m*n. 
-     * 
+     * @brief Class to handle matrix with elements of type double and size m*n.
+     *
      * It uses C++ standard vectors for creating, storing, and indexing matrix element values.
-     * 
+     *
      */
     class MatrixXD
     {
@@ -275,8 +278,17 @@ namespace OWL
 OWL::ArrayXD operator+(double, OWL::ArrayXD);
 OWL::ArrayXD operator*(double lhsScalar, OWL::ArrayXD rhsArray);
 
+/**
+ * @brief Contains the relevant equations to perform linear interpolation on arrays, numerical schemes for ordinary differential equations,
+ * root finding, and linear algebra operations.
+ *
+ */
 namespace Newton
 {
+    /**
+     * @brief Contains the relevant equations for performing linear interpolation based on the arrays.
+     *
+     */
     namespace interp
     {
         /**
@@ -299,19 +311,91 @@ namespace Newton
         [[nodiscard]] std::vector<long double> linear_interpolation(std::vector<long double> target_vec_x, std::vector<long double> vec_x, std::vector<long double> vec_y);
     }
 
+    /**
+     * @brief Contains the equations for Euler and Runge-Kutta ordinary differential equation numerical schemes.
+     *
+     */
     namespace ODESolver
     {
-        [[nodiscard]] double Euler(const double x_prev, const double y_prev, const double step_size, double (*func)(double, double));
-        [[nodiscard]] double Euler(const double y_prev, const double step_size, double func_value);
-        [[nodiscard]] OWL::ArrayXD Euler(OWL::ArrayXD xArray, double yInit, double (*func)(double, double));
-        [[nodiscard]]
+        /**
+         * @brief solves a ode for a time step using Euler's method of the form:
+         *     dy/dx = f(x,y)
+         *
+         * @param x_prev previous x value
+         * @param y_prev previous y value
+         * @param step_size delta x
+         * @param func ode function that takes x and y values. Note that the order of the function parameters is x AND THEN y.
+         * @return y value at the current solution step.
+         */
+        [[nodiscard]] double Euler(const double x_prev, const double y_prev, const double step_size, double (*func)(double x, double y));
 
-        [[nodiscard]] double
-        rk4(const double x_prev, const double y_prev, const double step_size, double (*func)(double x, double y));
+        /**
+         * @brief solves a ode for a time step using Euler's method of the form:
+         *          dy/dx = f(x,y)
+         *
+         * @param y_prev previous y value
+         * @param step_size delta x
+         * @param func_value value of the ode function at the previous solution step.
+         *
+         * @return y value at the current solution step.
+         */
+        [[nodiscard]] double Euler(const double y_prev, const double step_size, double func_value);
+
+        /**
+         * @brief solves a initial value ordinary problem differential equation (IVP ODE) for a time step using Euler's method of the form:
+         *     dy/dx = f(x,y)
+         *
+         * @param xArray OWL::ArrayXD instance containing elements of x values.
+         * @param yInit intial value of the ODE.
+         * @param func function that takes the value of x and y. Note that the order of the function parameters is x AND THEN y.
+         *
+         * @return OWL::ArrayXD array containing the values of the solutions.
+         */
+        [[nodiscard]] OWL::ArrayXD Euler(OWL::ArrayXD xArray, double yInit, double (*func)(double, double));
+
+
+        /**
+         * @brief solves a ode for a time step using rk4 method of the form:
+         *     dy/dx = f(x,y)
+         *
+         * @param x_prev previous x value
+         * @param y_prev previous y value
+         * @param step_size delta x
+         * @param func values of the ode function at the previous solution step.
+         *
+         * @return double y value at the current solution step.
+         */
+        [[nodiscard]] double rk4(const double x_prev, const double y_prev, const double step_size, double (*func)(double x, double y));
+
+        /**
+         * @brief solves a initial value ordinary problem differential equation (IVP ODE) for a time step using fourth-order Runge-Kutta of the form:
+         *     dy/dx = f(x,y)
+         *
+         * @param x_prev previous x value
+         * @param y_prev previous y value
+         * @param step_size delta x
+         * @param func (std::function<double(double, double)>) f(x,y). Note that the order of the function parameters is x AND THEN y.
+         *
+         * @return double
+         */
         [[nodiscard]] double rk4(const double x_prev, const double y_prev, const double step_size, std::function<double(double, double)> func);
+
+        /**
+         * @brief solves a initial value ordinary problem differential equation (IVP ODE) for a time step using fourth-order Runge-Kutta of the form:
+         *     dy/dx = f(x,y)
+         *
+         * @param xArray (OWL::ArrayXD) array of x values.
+         * @param yInit (double) intial-value.
+         * @param func ode function f(x,y). Note that the order of the function parameters is x AND THEN y.
+         * @return OWL::ArrayXD
+         */
         [[nodiscard]] OWL::ArrayXD rk4(OWL::ArrayXD xArray, double yInit, double (*func)(double, double));
     }
 
+    /**
+     * @brief Contains the algorithms for the root determination using numerical schemes.
+     *
+     */
     namespace roots
     {
         /**
@@ -328,6 +412,10 @@ namespace Newton
         [[nodiscard]] double Brent(std::function<double(double)> func, double lower_bound, double upper_bound, double TOL, double MAX_ITER);
     }
 
+    /**
+     * @brief Contains the functionality for solving tridiagonal systems of equations.
+     *
+     */
     namespace MatrixSolvers
     {
         /**

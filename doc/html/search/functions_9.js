@@ -4,8 +4,8 @@ var searchData=
   ['i_5fr1_5fnext_1',['i_R1_next',['../classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_thevenin1_r_c.html#ae428e1a05516178cb8ab6047fcab9d41',1,'bmslogic.simulations.cell.models.PyThevenin1RC.i_R1_next()'],['../classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_e_s_c.html#afa146aebcba9607d908ecaceaba7bb48',1,'bmslogic.simulations.cell.models.PyESC.i_R1_next()']]],
   ['init_5fcond_2',['init_cond',['../classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v_dynamics.html#ada995024f11e129a98b28a964b80f7be',1,'bmslogic::simulations::applications::ev::EVDynamics']]],
   ['initialize_5fpopulation_3',['initialize_population',['../classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a.html#a6f96d272d4459cd20d828ddf615c18a1',1,'bmslogic::calc_helpers::CI_algorithms::GA']]],
-  ['interp_4',['interp',['../owl_8cpp.html#a06fbe49bc1190985d1a53a6c89b45fe9',1,'Newton::interp']]],
-  ['interpfunc_5',['interpFunc',['../owl_8cpp.html#aa89abd0168d396b4ee6804de0419adc6',1,'Newton::interp']]],
+  ['interp_4',['interp',['../namespace_newton_1_1interp.html#a06fbe49bc1190985d1a53a6c89b45fe9',1,'Newton::interp']]],
+  ['interpfunc_5',['interpFunc',['../namespace_newton_1_1interp.html#aa89abd0168d396b4ee6804de0419adc6',1,'Newton::interp']]],
   ['isapproxequal_6',['isApproxEqual',['../class_o_w_l_1_1_array_x_d.html#af575a51083b481d5379ea40978373b28',1,'OWL::ArrayXD']]],
   ['isequal_7',['isEqual',['../class_o_w_l_1_1_array_x_d.html#aa10295d2b8df91ed5f0251620558a902',1,'OWL::ArrayXD']]]
 ];

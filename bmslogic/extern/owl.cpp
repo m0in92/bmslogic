@@ -2089,70 +2089,16 @@ namespace Newton
 
     namespace ODESolver
     {
-
-        /**
-         * Euler
-         *
-         * solves a ode for a time step using Euler's method of the form:
-         *     dy/dx = f(x,y)
-         *
-         * Parameters:
-         *     x_prev: (double) previous x value
-         *     y_prev: (double) previous y value
-         *     step_size: (double) delta x
-         *     func(double x, double y): ode function that takes x and y values
-         *
-         * Returns:
-         *     (double) y value at the current solution step.
-         *
-         * Throws:
-         *     None
-         */
         double Euler(const double x_prev, const double y_prev, const double step_size, double (*func)(double x, double y))
         {
             return y_prev + func(x_prev, y_prev) * step_size;
         }
 
-        /**
-         * Euler
-         *
-         * solves a ode for a time step using Euler's method of the form:
-         *     dy/dx = f(x,y)
-         *
-         * Parameters:
-         *     x_prev: (double) previous x value
-         *     y_prev: (double) previous y value
-         *     step_size: (double) delta x
-         *     func_value: value of the ode function at the previous solution step.
-         *
-         * Returns:
-         *     (double) y value at the current solution step.
-         *
-         * Throws:
-         *     None
-         */
         double Euler(const double y_prev, const double step_size, double func_value)
         {
             return y_prev + func_value * step_size;
         }
 
-        /**
-         * Euler
-         *
-         * solves a initial value ordinary problem differential equation (IVP ODE) for a time step using Euler's method of the form:
-         *     dy/dx = f(x,y)
-         *
-         * Parameters:
-         *     x_prev: (OWL::ArrayXD) array of x values.
-         *     yInit: (double) intial-value.
-         *     func_value: ode function.
-         *
-         * Returns:
-         *     (OWL::ArrayXD) array of y.
-         *
-         * Throws:
-         *     None
-         */
         OWL::ArrayXD Euler(OWL::ArrayXD xArray, double yInit, double (*func)(double, double))
         {
             // initialize the results vector to zeros.
@@ -2166,24 +2112,6 @@ namespace Newton
             return resArray;
         }
 
-        /**
-         * rk4
-         *
-         *  solves a ode for a time step using rk4 method of the form:
-         *     dy/dx = f(x,y)
-         *
-         * Parameters:
-         *     x_prev: (double) previous x value
-         *     y_prev: (double) previous y value
-         *     step_size: (double) delta x
-         *     func_value: valus of the ode function at the previous solution step.
-         *
-         * Returns:
-         *     (double) y value at the current solution step.
-         *
-         * Throws:
-         *     None
-         */
         double rk4(const double x_prev, const double y_prev, const double step_size, double (*func)(double x, double y))
         {
             double k1 = func(x_prev, y_prev);
@@ -2193,24 +2121,6 @@ namespace Newton
             return y_prev + (k1 + 2 * k2 + 2 * k3 + k4) * (step_size / 6.0);
         }
 
-        /**
-         * rk4
-         *
-         * solves a initial value ordinary problem differential equation (IVP ODE) for a time step using fourth-order Runge-Kutta of the form:
-         *     dy/dx = f(x,y)
-         *
-         * Parameters:
-         *     x_prev: (double) previous x value
-         *     y_prev: (double) previous y value
-         *     step_size: (double) delta x
-         *     func: (std::function<double(double, double)>) f(x,y)
-         *
-         * Returns:
-         *     (OWL::ArrayXD) array of y.
-         *
-         * Throws:
-         *     None
-         */
         double rk4(const double x_prev, const double y_prev, const double step_size, std::function<double(double, double)> func)
         {
             double k1 = func(x_prev, y_prev);
@@ -2220,23 +2130,6 @@ namespace Newton
             return y_prev + (k1 + 2.0 * k2 + 2.0 * k3 + k4) * (step_size / 6.0);
         }
 
-        /**
-         * rk4
-         *
-         * solves a initial value ordinary problem differential equation (IVP ODE) for a time step using fourth-order Runge-Kutta of the form:
-         *     dy/dx = f(x,y)
-         *
-         * Parameters:
-         *     x_prev: (OWL::ArrayXD) array of x values.
-         *     yInit: (double) intial-value.
-         *     func_value: ode function.
-         *
-         * Returns:
-         *     (OWL::ArrayXD) array of y.
-         *
-         * Throws:
-         *     None
-         */
         OWL::ArrayXD rk4(OWL::ArrayXD xArray, double yInit, double (*func)(double, double))
         {
             OWL::ArrayXD res = OWL::Zeros(static_cast<int>(xArray.getArrayLength()));

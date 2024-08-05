@@ -22,5 +22,5 @@ var searchData=
   ['func_5fdlnf_19',['func_dlnf',['../namespacefuncs.html#a0402f8408a760b3e0e2cba3a0f281b1b',1,'funcs']]],
   ['func_5fkappa_5fe_20',['func_kappa_e',['../namespacefuncs.html#a3c70f4e07250226a4be6f828d0f5a48c',1,'funcs']]],
   ['funcs_21',['funcs',['../namespacefuncs.html',1,'']]],
-  ['functions_20below_20pertains_20to_20creating_20a_20custom_20owl_3a_3aarrayxd_22',['The functions below pertains to creating a custom OWL::ArrayXD',['../owl_8cpp.html#autotoc_md1',1,'']]]
+  ['functions_20below_20pertains_20to_20creating_20a_20custom_20owl_3a_3aarrayxd_22',['The functions below pertains to creating a custom OWL::ArrayXD',['../namespace_o_w_l.html#autotoc_md1',1,'']]]
 ];

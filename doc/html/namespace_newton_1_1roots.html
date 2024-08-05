@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>BMSLogic: Newton::interp::ExceedInterpolateLimit Class Reference</title>
+<title>BMSLogic: Newton::roots Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -84,65 +84,87 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespace_newton.html">Newton</a></li><li class="navelem"><a class="el" href="namespace_newton_1_1interp.html">interp</a></li><li class="navelem"><a class="el" href="class_newton_1_1interp_1_1_exceed_interpolate_limit.html">ExceedInterpolateLimit</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespace_newton.html">Newton</a></li><li class="navelem"><a class="el" href="namespace_newton_1_1roots.html">roots</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="class_newton_1_1interp_1_1_exceed_interpolate_limit-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">Newton::interp::ExceedInterpolateLimit Class Reference</div></div>
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">Newton::roots Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Class to handle exceptions when the interpolation limts are exceeded.  
- <a href="#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="owl_8h_source.html">owl.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for Newton::interp::ExceedInterpolateLimit:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_newton_1_1interp_1_1_exceed_interpolate_limit.png" alt=""/>
- </div></div>
+<p>Contains the algorithms for the root determination using numerical schemes.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a870e3e1bd61ea554e9dfb21af285e4c7" id="r_a870e3e1bd61ea554e9dfb21af285e4c7"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a870e3e1bd61ea554e9dfb21af285e4c7">what</a> ()</td></tr>
-<tr class="memdesc:a870e3e1bd61ea554e9dfb21af285e4c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">what  <br /></td></tr>
-<tr class="separator:a870e3e1bd61ea554e9dfb21af285e4c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:af36050f1f2e2c6bd023bfb28ce9ec5eb" id="r_af36050f1f2e2c6bd023bfb28ce9ec5eb"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af36050f1f2e2c6bd023bfb28ce9ec5eb">Brent</a> (std::function&lt; double(double)&gt; func, double lower_bound, double upper_bound, double TOL, double MAX_ITER)</td></tr>
+<tr class="memdesc:af36050f1f2e2c6bd023bfb28ce9ec5eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the roots using Brent's method.  <br /></td></tr>
+<tr class="separator:af36050f1f2e2c6bd023bfb28ce9ec5eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Class to handle exceptions when the interpolation limts are exceeded. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a870e3e1bd61ea554e9dfb21af285e4c7" name="a870e3e1bd61ea554e9dfb21af285e4c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a870e3e1bd61ea554e9dfb21af285e4c7">&#9670;&#160;</a></span>what()</h2>
+<div class="textblock"><p>Contains the algorithms for the root determination using numerical schemes. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="af36050f1f2e2c6bd023bfb28ce9ec5eb" name="af36050f1f2e2c6bd023bfb28ce9ec5eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af36050f1f2e2c6bd023bfb28ce9ec5eb">&#9670;&#160;</a></span>Brent()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char * Newton::interp::ExceedInterpolateLimit::what </td>
+          <td class="memname">double Newton::roots::Brent </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">std::function&lt; double(double)&gt;</td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>lower_bound</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>upper_bound</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>TOL</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>MAX_ITER</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>what </p>
-<p><a class="el" href="#a870e3e1bd61ea554e9dfb21af285e4c7" title="what">what()</a> overload from the exception class.</p>
-<p>Parameters: None</p>
-<p>Returns: exception message.</p>
-<p>Throws: None </p>
+<p>Finds the roots using Brent's method. </p>
+<p>Code from the internet.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td></td></tr>
+    <tr><td class="paramname">lower_bound</td><td>lower bound of the bracket </td></tr>
+    <tr><td class="paramname">upper_bound</td><td>upper bound of the bracket </td></tr>
+    <tr><td class="paramname">TOL</td><td>tolerance </td></tr>
+    <tr><td class="paramname">MAX_ITER</td><td>maximum allowed iterations</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double containing the root. </dd></dl>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Users/moina/dev/BMSLogic/bmslogic/extern/<a class="el" href="owl_8h_source.html">owl.h</a></li>
-<li>C:/Users/moina/dev/BMSLogic/bmslogic/extern/<a class="el" href="owl_8cpp.html">owl.cpp</a></li>
-</ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
