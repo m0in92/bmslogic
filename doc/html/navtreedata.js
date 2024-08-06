@@ -24,38 +24,12 @@
 */
 var NAVTREE =
 [
-  [ "BMSLogic", "index.html", [
-    [ "Namespaces", "namespaces.html", [
-      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
-      [ "Namespace Members", "namespacemembers.html", [
-        [ "All", "namespacemembers.html", null ],
-        [ "Functions", "namespacemembers_func.html", null ]
-      ] ]
-    ] ],
-    [ "Classes", "annotated.html", [
-      [ "Class List", "annotated.html", "annotated_dup" ],
-      [ "Class Index", "classes.html", null ],
-      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
-      [ "Class Members", "functions.html", [
-        [ "All", "functions.html", "functions_dup" ],
-        [ "Functions", "functions_func.html", "functions_func" ]
-      ] ]
-    ] ],
-    [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ],
-      [ "File Members", "globals.html", [
-        [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ]
-      ] ]
-    ] ]
-  ] ]
+  [ "BMSLogic", "index.html", ]
 ];
 
 var NAVTREEINDEX =
 [
-"annotated.html",
-"classbmslogic_1_1simulations_1_1cell_1_1custom__warnings__exceptions_1_1_max_conc_reached.html",
-"functions_func_f.html"
+"index.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

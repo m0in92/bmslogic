@@ -298,12 +298,56 @@ namespace Newton
         class ExceedInterpolateLimit : public std::exception
         {
         public:
+            /**
+             * @brief what() overload from the exception class.
+             * 
+             * @return const char* exception message
+             */
             const char *what();
         };
 
+        /**
+         * @brief Calculates the slope given two data points
+         * 
+         * @param y2 y value for second data point
+         * @param y1 y value for first data point (double type)
+         * @param x2 x value for the second data point (double type)
+         * @param x1 x value for the second data point (double type)
+         * @return double slope of the line
+         */
         [[nodiscard]] double slope(double &y2, double &y1, double &x2, double &x1);
+
+        /**
+         * @brief returns an linear interpolating function. Requires slope of the line and a datapoint.
+         * 
+         * @param slope (double) slope of the line.
+         * @param x (double) x datapoint valuw.
+         * @param y (double) y data point.
+         * @return std::function<double(double)> 
+         */
         [[nodiscard]] std::function<double(double)> line(double &slope, double &x, double &y);
+
+        /**
+         * @brief linear interpolation of the data points.
+         * 
+         * @param xArray (OWL::ArrayXD) array representing the x-values.
+         * @param yArray (OWL::ArrayXD) array representing the y-values.
+         * @param x x-value where the desired interpolation is required.
+         * @return double y-value of the interpolation
+         * 
+         * @throws ExceedInterpolationLimits thrown when the inputed x value is beyound the xArray.
+         */
         [[nodiscard]] double interp(OWL::ArrayXD xArray, OWL::ArrayXD yArray, double x);
+
+        /**
+         * @brief linear interpolation of the data points. Returns a lambda function.
+         * 
+         * @param xArray (OWL::ArrayXD) array representing the x-values.
+         * @param yArray (OWL::ArrayXD) array representing the y-values.
+         * @return std::function<double(double)> lambda expression that outputs y value and takes x value as the input.
+         * 
+         * @throws ExceedInterpolationLimits thrown when the inputted x value is beyound the xArray.
+         */
         [[nodiscard]] std::function<double(double)> interpFunc(OWL::ArrayXD xArray, OWL::ArrayXD yArray);
         [[nodiscard]] double linear_interpolation(double x, std::vector<double> vec_x, std::vector<double> vec_y);
         [[nodiscard]] long double linear_interpolation(long double x, std::vector<long double> vec_x, std::vector<long double> vec_y);
@@ -352,7 +396,6 @@ namespace Newton
          * @return OWL::ArrayXD array containing the values of the solutions.
          */
         [[nodiscard]] OWL::ArrayXD Euler(OWL::ArrayXD xArray, double yInit, double (*func)(double, double));
-
 
         /**
          * @brief solves a ode for a time step using rk4 method of the form:

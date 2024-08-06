@@ -1891,41 +1891,11 @@ namespace Newton
             return "Interpolation Limits Exceeded.";
         }
 
-        /**
-         * slope
-         *
-         * Calculates the slope given two data points
-         *
-         * Parameters:
-         *     y2: y value for second data point (double type)
-         *     y1: y value for first data point (double type)
-         *     x2: x value for the second data point (double type)
-         *     x1: x value for the second data point (double type)
-         *
-         * Return:
-         *     slope of the line
-         *
-         * Throws:
-         *     None
-         */
         double slope(double &y2, double &y1, double &x2, double &x1)
         {
             return (y2 - y1) / (x2 - x1);
         }
 
-        /**
-         * line
-         *
-         * returns an linear interpolating function. Requires slope of the line and a datapoint.
-         *
-         * Paramters:
-         *     slope: (double) slope of the line.
-         *     x: (double) x datapoint valuw.
-         *     y: (double) y data point.
-         *
-         * Throws:
-         *     None
-         */
         std::function<double(double)> line(double &slope, double &x, double &y)
         {
             double y_intercept = y - (slope * x);
@@ -1933,23 +1903,6 @@ namespace Newton
             { return slope * x_value + y_intercept; };
         }
 
-        /**
-        * interp
-        *
-        linear interpolation of the data points.
-        *
-        * Parameters:
-        *     xArray: (OWL::ArrayXD) array representing the x-values.
-        *     yArray: (OWL::ArrayXD) array representing the y-values.
-        *     x: (double) x-value where the desired interpolation is required.
-        *
-        * Return:
-        *     (double) y-value of the interpolation
-        *
-        * Throws:
-        *     ExceedInterpolationLimits: thrown when the inputted x value is beyound the xArray.
-        *
-        */
         double interp(OWL::ArrayXD xArray, OWL::ArrayXD yArray, double x)
         {
             // check if the xvalue is within the desired interpolation region.
@@ -1967,21 +1920,6 @@ namespace Newton
             return lineEquation(x);
         }
 
-        /**
-         * interpFunc
-         *
-         * linear interpolation of the data points. Returns a lambda function.
-         *
-         * Parameters:
-         *     xArray: (OWL::ArrayXD) array representing the x-values.
-         *     yArray: (OWL::ArrayXD) array representing the y-values.
-         *
-         * Return:
-         *     (std::function<double (double)>) lambda expression that outputs y value and takes x value as the input.
-         *
-         * Throws:
-         *     ExceedInterpolationLimits: thrown when the inputted x value is beyound the xArray.
-         */
         std::function<double(double)> interpFunc(OWL::ArrayXD xArray, OWL::ArrayXD yArray)
         {
             return [xArray, yArray](double x)
