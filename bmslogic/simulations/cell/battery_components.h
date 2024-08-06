@@ -16,6 +16,11 @@
 #include <cmath>
 #include <functional>
 
+/**
+ * @brief Exception overloading class that is intended to be thrown every time the electrode's state-of-charge (SOC)
+ * is below 0 or exceeds 1.
+ *
+ */
 class InvalidSOCException : public std::exception
 {
 public:
@@ -25,6 +30,12 @@ public:
     }
 };
 
+/**
+ * @brief Class to store the model parameters for the electrodes as well as the functionality to calculate the changing model
+ * parameters. These changing parameters include the electrode's state-of-charge (SOC), diffusivity (D_e), and charge transfer
+ * rate-constant (k).
+ *
+ */
 class Electrode
 {
 public:
@@ -58,33 +69,91 @@ public:
     double calc_OCP(double i_soc) { return func_OCP(i_soc); }
 
 protected:
-    double L;        // Electrode Thickness [m]
-    double A;        // Electrode Area [m^2]
-    double kappa;    // Ionic Conductivity [S m^-1]
-    double epsilon;  // Volume Fraction
-    double max_conc; // Max. Conc. [mol m^-3]
-    double R;        // Radius [m]
-    double S;        // Electro-active Area [m2]
-    double T_ref;    // Reference Temperature [K]
-    double D_ref;    // Reference Diffusivity [m2/s]
-    double k_ref;    // Reference Rate Constant [m2.5 / (mol0.5 s)
-    double Ea_D;     // Activation Energy of Diffusion [J / mol]
-    double Ea_R;     // Activation Energy of Reaction [J / mol]
-    double alpha;    // Anodic Transfer Coefficient
-    double brugg;    // Bruggerman Coefficient
-    double SOC_init; // initial SOC
-    double SOC;      // electrode SOC
-    double T;        // electrode temperature [K]
+    /// @brief electrode thickness [m]
+    double L;
 
-    std::function<double(double)> func_OCP;    // electrode SOC-OCP relationship at the reference temperature.
-    std::function<double(double)> func_dOCPdT; // this function represents the change in OCP with temp.
+    /// @brief electrode area [m2]
+    double A;
+
+    /// @brief Ionic Conductivity [S / m]
+    double kappa;
+
+    /// @brief Volume Fraction
+    double epsilon;
+
+    /// @brief max. conc. [mol / m3]
+    double max_conc;
+
+    /// @brief electrode particle radius [m]
+    double R;
+
+    /// @brief Electro-active Area [m2]
+    double S;
+
+    /// @brief Reference Temperature [K]
+    double T_ref;
+
+    /// @brief diffusivity at the reference temperature [m2/s]
+    double D_ref;
+
+    /// @brief Reference Rate Constant [m2.5 / (mol0.5 s)]
+    double k_ref;
+
+    /// @brief Activation Energy of Diffusion [J / mol]
+    double Ea_D;
+
+    /// @brief Activation Energy of Reaction [J / mol]
+    double Ea_R;
+
+    /// @brief Transfer Coefficient
+    double alpha;
+
+    /// @brief Bruggerman Coefficient
+    double brugg;
+
+    /// @brief electrode initial state-of-charge (SOC)
+    double SOC_init;
+
+    /// @brief electrode state-of-charge (SOC)
+    double SOC;
+
+    /// @brief electrode temperature [K]
+    double T;
+
+    /// @brief function that represents the electrode state-of-charge(SOC) - open-circuit potential (OCP) relationship at the reference temperature.
+    std::function<double(double)> func_OCP;
+
+    /// @brief function that represents the change in open-circuit potential change with respect to the electrode temperature [K].
+    std::function<double(double)> func_dOCPdT;
 
     // Helper functions
+
+    /**
+     * @brief Calculates the electrode's open-circuit potential [V]
+     *
+     * @return open-circuit potential of the electrode
+     */
     double calc_OCP();
+
+    /**
+     * @brief calculates and returns the electrode diffusivity [m2/s] at the current electrode temperature.
+     *
+     * @return electrode diffusivity [m2/s]
+     */
     double calc_D();
+
+    /**
+     * @brief calculates the charge transfer rate constant at the current electrode temperature.
+     *
+     * @return double
+     */
     double calc_k();
 };
 
+/**
+ * @brief Inherits from the Electrode class and is intended for use for the positive electrode.
+ *
+ */
 class PElectrode : public Electrode
 {
 public:
@@ -98,6 +167,10 @@ public:
     char electrode_type = 'p';
 };
 
+/**
+ * @brief Inherits from the Electrode class and is intended for use for the negative electrode.
+ *
+ */
 class NElectrode : public Electrode
 {
 public:
@@ -111,6 +184,10 @@ public:
     char electrode_type = 'n';
 };
 
+/**
+ * @brief Class to store the model parameters for the electrolyte.
+ *
+ */
 class Electrolyte
 {
 public:
@@ -133,17 +210,38 @@ public:
     double get_t_c() const { return t_c; }
 
 private:
-    double conc;           // electrolyte conc. [mol/m3]
-    double L;              // seperator thickness [m]
-    double kappa;          // electrolyte conductivity [S/m]
-    double epsilon;        // electrolyte volume fraction in the seperator region
-    double epsilon_n{0.0}; // electrolyte volume fraction in the negative electrode region
-    double epsilon_p{0.0}; // electrolyte volume fraction in the positive electrode region
-    double D_e{0.0};       // electrolyte diffusivity [m2/s]
-    double t_c{0.0};       // electrolyte cationic transference number
-    double brugg;          // Bruggerman coefficient for the electrolyte
+    /// @brief electrolyte conc. [mol/m3]
+    double conc;
+
+    /// @brief separator thickness [m]
+    double L;
+
+    /// @brief electrolyte conductivity [S/m]
+    double kappa;
+
+    /// @brief electrolyte volume fraction in the seperator region
+    double epsilon;
+
+    /// @brief electrolyte volume fraction in the negative electode region [mol/m3]
+    double epsilon_n{0.0};
+
+    /// @brief electrolyte volume fraction in the positive electrode region [mol/m3]
+    double epsilon_p{0.0};
+
+    /// @brief electrolyte diffusivity [m2/s]
+    double D_e{0.0};
+
+    /// @brief electrolyte cationic transference number
+    double t_c{0.0};
+
+    /// @brief Bruggerman coefficient for the electrolyte
+    double brugg;
 };
 
+/**
+ * @brief Class to store the model parameters for the battery cell.
+ *
+ */
 class BatteryCell
 {
 public:

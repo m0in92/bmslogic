@@ -16,5 +16,6 @@ var searchData=
   ['solve_5fwithout_5fupdate_13',['solve_without_update',['../class_polynomial_approx.html#aab86e7425ed0273d5ead57e4e0f55e1c',1,'PolynomialApprox']]],
   ['sorting_14',['sorting',['../classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a.html#ab43e5034fedff77f8659fb8578ae5469',1,'bmslogic::calc_helpers::CI_algorithms::GA']]],
   ['submatrix_15',['submatrix',['../class_o_w_l_1_1_matrix_x_d.html#a19284e10a4f3fc7ca11ed99e2863d24c',1,'OWL::MatrixXD']]],
-  ['sum_16',['sum',['../class_o_w_l_1_1_array_x_d.html#a61999a451231dab8fc1e1eb63e9d3715',1,'OWL::ArrayXD']]]
+  ['subtract_16',['subtract',['../class_o_w_l_1_1_array_x_d.html#a6fc69e812964840bd71a8359d902c339',1,'OWL::ArrayXD']]],
+  ['sum_17',['sum',['../class_o_w_l_1_1_array_x_d.html#a61999a451231dab8fc1e1eb63e9d3715',1,'OWL::ArrayXD']]]
 ];

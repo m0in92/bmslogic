@@ -100,6 +100,8 @@ $(function(){initNavTree('classbattery_1_1_py_k_f_s_p_solver.html',''); initResi
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classbattery_1_1_py_k_f_s_p_solver-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">battery.PyKFSPSolver Class Reference</div></div>
 </div><!--header-->
@@ -141,6 +143,23 @@ tuple[float, float, float, float, float]&#160;</td><td class="memItemRight" vali
 <tr class="memitem:afce243f4384b4463581f1d987c63cb66 inherit pub_methods_classbattery_1_1_py_base_solver" id="r_afce243f4384b4463581f1d987c63cb66"><td class="memItemLeft" align="right" valign="top">
 &#160;</td><td class="memItemRight" valign="bottom"><b>update_lists</b> (self, x_p_list, x_n_list, V_list, cap_list, T_list, V, cap, T)</td></tr>
 <tr class="separator:afce243f4384b4463581f1d987c63cb66 inherit pub_methods_classbattery_1_1_py_base_solver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a4dd8adc3a3cde2bd500f9af31b42e51b" id="r_a4dd8adc3a3cde2bd500f9af31b42e51b"><td class="memItemLeft" align="right" valign="top"><a id="a4dd8adc3a3cde2bd500f9af31b42e51b" name="a4dd8adc3a3cde2bd500f9af31b42e51b"></a>
+np.ndarray&#160;</td><td class="memItemRight" valign="bottom"><b>__state_equation_next</b> (self, Union[float, np.ndarray] x_k, Union[float, np.ndarray] u_k, Union[float, np.ndarray] w_k)</td></tr>
+<tr class="separator:a4dd8adc3a3cde2bd500f9af31b42e51b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fa23bbd76d668ab89cfbad61de3eae0" id="r_a6fa23bbd76d668ab89cfbad61de3eae0"><td class="memItemLeft" align="right" valign="top">np.ndarray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6fa23bbd76d668ab89cfbad61de3eae0">__output_equation</a> (self, Union[float, np.ndarray] x_k, Union[float, np.ndarray] u_k, Union[float, np.ndarray] v_k)</td></tr>
+<tr class="separator:a6fa23bbd76d668ab89cfbad61de3eae0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a9067757e14544eabf0862478802c2153" id="r_a9067757e14544eabf0862478802c2153"><td class="memItemLeft" align="right" valign="top"><a id="a9067757e14544eabf0862478802c2153" name="a9067757e14544eabf0862478802c2153"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>__dt</b></td></tr>
+<tr class="separator:a9067757e14544eabf0862478802c2153"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0645ef4d941a92c56ce2156c0722ba32" id="r_a0645ef4d941a92c56ce2156c0722ba32"><td class="memItemLeft" align="right" valign="top"><a id="a0645ef4d941a92c56ce2156c0722ba32" name="a0645ef4d941a92c56ce2156c0722ba32"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>__t_prev</b></td></tr>
+<tr class="separator:a0645ef4d941a92c56ce2156c0722ba32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -252,6 +271,51 @@ sigma point Kalman filter). It is a derived class of the class for single partic
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6fa23bbd76d668ab89cfbad61de3eae0" name="a6fa23bbd76d668ab89cfbad61de3eae0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fa23bbd76d668ab89cfbad61de3eae0">&#9670;&#160;</a></span>__output_equation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"> np.ndarray battery.PyKFSPSolver.__output_equation </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Union[float, np.ndarray]</td>          <td class="paramname"><span class="paramname"><em>x_k</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Union[float, np.ndarray]</td>          <td class="paramname"><span class="paramname"><em>u_k</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Union[float, np.ndarray]</td>          <td class="paramname"><span class="paramname"><em>v_k</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<pre class="fragment">The output equation for the sigma-point Kalman filter for non-isothermal single particle model. Here the sensor
+noise is simply added to the cell terminal voltage equation.
+:param x_k: state
+:param u_k: input
+:param v_k: sensor noise
+:return: cell terminal voltage
+</pre> 
+</div>
+</div>
 <a id="ae75820d0a5112a677de51a291b7f4d9e" name="ae75820d0a5112a677de51a291b7f4d9e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae75820d0a5112a677de51a291b7f4d9e">&#9670;&#160;</a></span>solve()</h2>
 

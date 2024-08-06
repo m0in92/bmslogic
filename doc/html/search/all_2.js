@@ -39,5 +39,6 @@ var searchData=
   ['bmslogic_3a_3asimulations_3a_3acell_3a_3aplot_36',['plot',['../namespacebmslogic_1_1simulations_1_1cell_1_1plot.html',1,'bmslogic::simulations::cell']]],
   ['bmslogic_3a_3asimulations_3a_3acell_3a_3apycyclers_37',['pycyclers',['../namespacebmslogic_1_1simulations_1_1cell_1_1pycyclers.html',1,'bmslogic::simulations::cell']]],
   ['bmslogic_3a_3asimulations_3a_3acell_3a_3asolution_38',['solution',['../namespacebmslogic_1_1simulations_1_1cell_1_1solution.html',1,'bmslogic::simulations::cell']]],
-  ['brent_39',['Brent',['../namespace_newton_1_1roots.html#af36050f1f2e2c6bd023bfb28ce9ec5eb',1,'Newton::roots']]]
+  ['brent_39',['Brent',['../namespace_newton_1_1roots.html#af36050f1f2e2c6bd023bfb28ce9ec5eb',1,'Newton::roots']]],
+  ['brugg_40',['brugg',['../class_electrode.html#af62ba3f937d174e7ac8445bee637fb86',1,'Electrode::brugg'],['../class_electrolyte.html#a2b2cf12cceeb94840d6f0cb8e591d30b',1,'Electrolyte::brugg']]]
 ];

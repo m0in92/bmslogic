@@ -104,13 +104,18 @@ $(function(){initNavTree('class_charge.html',''); initResizable(true); });
   <div class="headertitle"><div class="title">Charge Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Contains cycling parameters relevant for the charge cycling step.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="cyclers_8h_source.html">cyclers.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Charge:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_charge.png" usemap="#Charge_map" alt=""/>
   <map id="Charge_map" name="Charge_map">
-<area href="class_base_cycler.html" title="Base Cycler class." alt="BaseCycler" shape="rect" coords="0,0,78,24"/>
+<area href="class_base_cycler.html" title="This class is intended to store the relevant cycling variables for the battery cell simulations." alt="BaseCycler" shape="rect" coords="0,0,78,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -122,7 +127,7 @@ Public Member Functions</h2></td></tr>
 <tr class="inherit_header pub_methods_class_base_cycler"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_base_cycler')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_base_cycler.html">BaseCycler</a></td></tr>
 <tr class="memitem:a6e79dec7e3be5f5348051b8381347aca inherit pub_methods_class_base_cycler" id="r_a6e79dec7e3be5f5348051b8381347aca"><td class="memItemLeft" align="right" valign="top">
 &#160;</td><td class="memItemRight" valign="bottom"><b>BaseCycler</b> ()</td></tr>
-<tr class="memdesc:a6e79dec7e3be5f5348051b8381347aca inherit pub_methods_class_base_cycler"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor for the <a class="el" href="class_base_cycler.html" title="Base Cycler class.">BaseCycler</a>. Essentially the typical LIB parameters are initialized. <br /></td></tr>
+<tr class="memdesc:a6e79dec7e3be5f5348051b8381347aca inherit pub_methods_class_base_cycler"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor for the <a class="el" href="class_base_cycler.html" title="This class is intended to store the relevant cycling variables for the battery cell simulations.">BaseCycler</a>. Essentially the typical LIB parameters are initialized. <br /></td></tr>
 <tr class="separator:a6e79dec7e3be5f5348051b8381347aca inherit pub_methods_class_base_cycler"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace3cf90503378024e369c20fe4086dba inherit pub_methods_class_base_cycler" id="r_ace3cf90503378024e369c20fe4086dba"><td class="memItemLeft" align="right" valign="top">
 double&#160;</td><td class="memItemRight" valign="bottom"><b>get_time_elapsed</b> ()</td></tr>
@@ -159,7 +164,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_num_cycles</b> (i
 <tr class="separator:a1c0686132a51e7355e9818cc63320ab3 inherit pub_methods_class_base_cycler"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b2b9fa59eed8a1f3750289cf0bd9061 inherit pub_methods_class_base_cycler" id="r_a9b2b9fa59eed8a1f3750289cf0bd9061"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reset_time_elapsed</b> ()</td></tr>
-<tr class="memdesc:a9b2b9fa59eed8a1f3750289cf0bd9061 inherit pub_methods_class_base_cycler"><td class="mdescLeft">&#160;</td><td class="mdescRight">resets the time_elapsed to zero. Useful when subjecting an already cycled <a class="el" href="class_base_cycler.html" title="Base Cycler class.">BaseCycler</a> instance. <br /></td></tr>
+<tr class="memdesc:a9b2b9fa59eed8a1f3750289cf0bd9061 inherit pub_methods_class_base_cycler"><td class="mdescLeft">&#160;</td><td class="mdescRight">resets the time_elapsed to zero. Useful when subjecting an already cycled <a class="el" href="class_base_cycler.html" title="This class is intended to store the relevant cycling variables for the battery cell simulations.">BaseCycler</a> instance. <br /></td></tr>
 <tr class="separator:a9b2b9fa59eed8a1f3750289cf0bd9061 inherit pub_methods_class_base_cycler"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
@@ -205,7 +210,9 @@ std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><
 std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>cycle_steps</b></td></tr>
 <tr class="separator:a2da50ea9aa2db12f97822d7aa6938135 inherit pub_attribs_class_base_cycler"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Contains cycling parameters relevant for the charge cycling step. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/<a class="el" href="cyclers_8h_source.html">cyclers.h</a></li>
 <li>C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/<a class="el" href="cyclers_8cpp.html">cyclers.cpp</a></li>
 </ul>

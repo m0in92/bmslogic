@@ -5,5 +5,6 @@ var searchData=
   ['max_5fmass_2',['max_mass',['../classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v.html#ae97ea84dc9865e1430a43f5e071cb58c',1,'bmslogic::simulations::applications::ev::EV']]],
   ['max_5fspeed_3',['max_speed',['../classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v.html#a93afc4614dec90a67ea0f14f3ea42785',1,'bmslogic::simulations::applications::ev::EV']]],
   ['molar_5fflux_5felectrode_4',['molar_flux_electrode',['../class_s_p_model.html#aeb5f08df5e1a5504b20218436d490b9a',1,'SPModel::molar_flux_electrode()'],['../classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m.html#a0f9ead8a71a2d59fab33844687af24cd',1,'bmslogic.simulations.cell.models.PySPM.molar_flux_electrode()'],['../classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_me.html#a9836d537ae50705760fe94c458dae8eb',1,'bmslogic.simulations.cell.models.PySPMe.molar_flux_electrode()']]],
-  ['mse_5',['MSE',['../classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a.html#ae7ae3ac425e07f9d2a35d379070d4f50',1,'bmslogic::calc_helpers::CI_algorithms::GA']]]
+  ['mse_5',['MSE',['../classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a.html#ae7ae3ac425e07f9d2a35d379070d4f50',1,'bmslogic::calc_helpers::CI_algorithms::GA']]],
+  ['multiply_6',['multiply',['../class_o_w_l_1_1_array_x_d.html#a3c2e25ea88d16ae81a8149628f7dd845',1,'OWL::ArrayXD::multiply(const double &amp;)'],['../class_o_w_l_1_1_array_x_d.html#a6f1dad160f67bb1a431664881329e31e',1,'OWL::ArrayXD::multiply(ArrayXD &amp;)']]]
 ];

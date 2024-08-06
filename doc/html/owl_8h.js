@@ -29,6 +29,7 @@ var owl_8h =
     [ "Ones", "owl_8h.html#aff45f7e53df0006a542b6ebd3822e45a", null ],
     [ "Ones", "owl_8h.html#a60bf4fced8971dba2b3c704b3d94ceec", null ],
     [ "operator*", "owl_8h.html#a3a9804711cf84f20c2a318ed947a04e0", null ],
+    [ "operator+", "owl_8h.html#aa9da1f0e19d1c1d77446d220f24bb358", null ],
     [ "rk4", "owl_8h.html#a1985fb2d0eb52fe07deed96f28eda448", null ],
     [ "rk4", "owl_8h.html#ae26911f689027bd14a2573989eb10cf2", null ],
     [ "rk4", "owl_8h.html#a181f78eb2bbdb2a0e69934249e91b4a8", null ],

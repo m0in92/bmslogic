@@ -100,6 +100,8 @@ $(function(){initNavTree('class_c_n_solver.html',''); initResizable(true); });
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_c_n_solver-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">CNSolver Class Reference</div></div>
 </div><!--header-->
@@ -167,6 +169,45 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>solve</b> (double dt,
 <tr class="memitem:a064da770e047def475cfde5ac82238f8 inherit pub_methods_class_base_conc_solver" id="r_a064da770e047def475cfde5ac82238f8"><td class="memItemLeft" align="right" valign="top">
 char &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_electrodeType</b> ()</td></tr>
 <tr class="separator:a064da770e047def475cfde5ac82238f8 inherit pub_methods_class_base_conc_solver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ae8d95a0458a7875a855a4911e149c247" id="r_ae8d95a0458a7875a855a4911e149c247"><td class="memItemLeft" align="right" valign="top"><a id="ae8d95a0458a7875a855a4911e149c247" name="ae8d95a0458a7875a855a4911e149c247"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>dr</b> (double R)</td></tr>
+<tr class="separator:ae8d95a0458a7875a855a4911e149c247"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12c2ebb00300568411c69e2fcf3278be" id="r_a12c2ebb00300568411c69e2fcf3278be"><td class="memItemLeft" align="right" valign="top"><a id="a12c2ebb00300568411c69e2fcf3278be" name="a12c2ebb00300568411c69e2fcf3278be"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>A</b> (double dt, double R, double D)</td></tr>
+<tr class="separator:a12c2ebb00300568411c69e2fcf3278be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab918bc012a424d6217978d0ee11a6d70" id="r_ab918bc012a424d6217978d0ee11a6d70"><td class="memItemLeft" align="right" valign="top"><a id="ab918bc012a424d6217978d0ee11a6d70" name="ab918bc012a424d6217978d0ee11a6d70"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>B</b> (double dt, double R, double D)</td></tr>
+<tr class="separator:ab918bc012a424d6217978d0ee11a6d70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad58124cb82dd6e4c76327e671aae4d9" id="r_aad58124cb82dd6e4c76327e671aae4d9"><td class="memItemLeft" align="right" valign="top"><a id="aad58124cb82dd6e4c76327e671aae4d9" name="aad58124cb82dd6e4c76327e671aae4d9"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>array_R</b> (double R)</td></tr>
+<tr class="separator:aad58124cb82dd6e4c76327e671aae4d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a782b072af4eec8641864133d065b0fed" id="r_a782b072af4eec8641864133d065b0fed"><td class="memItemLeft" align="right" valign="top"><a id="a782b072af4eec8641864133d065b0fed" name="a782b072af4eec8641864133d065b0fed"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>LHS_diag_elements</b> (double dt, double R, double D)</td></tr>
+<tr class="separator:a782b072af4eec8641864133d065b0fed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a250a8f8fabc17dcb57cc36ea3bbed60c" id="r_a250a8f8fabc17dcb57cc36ea3bbed60c"><td class="memItemLeft" align="right" valign="top"><a id="a250a8f8fabc17dcb57cc36ea3bbed60c" name="a250a8f8fabc17dcb57cc36ea3bbed60c"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>LHS_lower_diag_elements</b> (double dt, double R, double D)</td></tr>
+<tr class="separator:a250a8f8fabc17dcb57cc36ea3bbed60c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab70d7869d176ae663077396446ad94b1" id="r_ab70d7869d176ae663077396446ad94b1"><td class="memItemLeft" align="right" valign="top"><a id="ab70d7869d176ae663077396446ad94b1" name="ab70d7869d176ae663077396446ad94b1"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>LHS_upper_diag_elements</b> (double dt, double R, double D)</td></tr>
+<tr class="separator:ab70d7869d176ae663077396446ad94b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa826b66967e6a5c66b2f1e6cd4d74cc6" id="r_aa826b66967e6a5c66b2f1e6cd4d74cc6"><td class="memItemLeft" align="right" valign="top"><a id="aa826b66967e6a5c66b2f1e6cd4d74cc6" name="aa826b66967e6a5c66b2f1e6cd4d74cc6"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>RHS_vector</b> (double j, double dt, double R, double D)</td></tr>
+<tr class="separator:aa826b66967e6a5c66b2f1e6cd4d74cc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a3dd773886e1bbe5524151249eef2567c" id="r_a3dd773886e1bbe5524151249eef2567c"><td class="memItemLeft" align="right" valign="top"><a id="a3dd773886e1bbe5524151249eef2567c" name="a3dd773886e1bbe5524151249eef2567c"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>m_K</b></td></tr>
+<tr class="separator:a3dd773886e1bbe5524151249eef2567c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae64a8e9d5c8776a098cdb8f81829b666" id="r_ae64a8e9d5c8776a098cdb8f81829b666"><td class="memItemLeft" align="right" valign="top"><a id="ae64a8e9d5c8776a098cdb8f81829b666" name="ae64a8e9d5c8776a098cdb8f81829b666"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_c_prev</b></td></tr>
+<tr class="separator:ae64a8e9d5c8776a098cdb8f81829b666"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb4faa738b9c4e5b6582d356a9d8b0bd" id="r_abb4faa738b9c4e5b6582d356a9d8b0bd"><td class="memItemLeft" align="right" valign="top"><a id="abb4faa738b9c4e5b6582d356a9d8b0bd" name="abb4faa738b9c4e5b6582d356a9d8b0bd"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>m_c_surf</b></td></tr>
+<tr class="separator:abb4faa738b9c4e5b6582d356a9d8b0bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>

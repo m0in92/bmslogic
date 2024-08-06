@@ -1763,7 +1763,6 @@ namespace OWL
     /*
      * The functions below pertains to creating a custom OWL::MatrixXD
      */
-
     MatrixXD Zeros(int rowLen, int colLen)
     {
         MatrixXD resMatrix = MatrixXD();
@@ -1813,19 +1812,6 @@ namespace OWL
     }
 }
 
-/*
- * operator overload for scalar addition is the scalar is on the lhs of the addition.
- *
- * Parameters:
- *     lhsScalar: scalar of double type
- *     rhsArray: OWL::ArrayXD
- *
- * Return:
- *     OWL::ArrayXD
- *
- * Throws:
- *     None
- */
 OWL::ArrayXD operator+(double lhsScalar, OWL::ArrayXD rhsArray)
 {
     std::vector<double> interVec;
@@ -1837,22 +1823,6 @@ OWL::ArrayXD operator+(double lhsScalar, OWL::ArrayXD rhsArray)
     return resultArray;
 }
 
-/**
- * operator overload for *
- *
- * This function ensures that a scalar mulitplication can be performed with a scalar on
- * the lhs of the multiplication.
- *
- * Parameters:
- *     lhsScalar: scalar double type.
- *     rhsArray: OWL::ArrayXD array
- *
- * Returns:
- *     OWL::ArrayXD object result from the scalar multiplication
- *
- * Throws:
- *     None
- */
 OWL::ArrayXD operator*(double lhsScalar, OWL::ArrayXD rhsArray)
 {
     // initiate a std::vector
@@ -1871,21 +1841,6 @@ namespace Newton
 {
     namespace interp
     {
-
-        /**
-         * what
-         *
-         * what() overload from the exception class.
-         *
-         * Parameters:
-         *     None
-         *
-         * Returns:
-         *     exception message.
-         *
-         * Throws:
-         *     None
-         */
         const char *ExceedInterpolateLimit::what()
         {
             return "Interpolation Limits Exceeded.";

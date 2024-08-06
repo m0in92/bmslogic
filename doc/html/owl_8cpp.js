@@ -22,6 +22,7 @@ var owl_8cpp =
     [ "Ones", "owl_8cpp.html#aff45f7e53df0006a542b6ebd3822e45a", null ],
     [ "Ones", "owl_8cpp.html#a60bf4fced8971dba2b3c704b3d94ceec", null ],
     [ "operator*", "owl_8cpp.html#a3a9804711cf84f20c2a318ed947a04e0", null ],
+    [ "operator+", "owl_8cpp.html#a573cb488f44c086123ac614dbecf176e", null ],
     [ "rk4", "owl_8cpp.html#a1985fb2d0eb52fe07deed96f28eda448", null ],
     [ "rk4", "owl_8cpp.html#ae26911f689027bd14a2573989eb10cf2", null ],
     [ "rk4", "owl_8cpp.html#a181f78eb2bbdb2a0e69934249e91b4a8", null ],

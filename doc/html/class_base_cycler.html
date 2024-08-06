@@ -106,7 +106,7 @@ $(function(){initNavTree('class_base_cycler.html',''); initResizable(true); });
 </div><!--header-->
 <div class="contents">
 
-<p>Base Cycler class.  
+<p>This class is intended to store the relevant cycling variables for the battery cell simulations.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="cyclers_8h_source.html">cyclers.h</a>&gt;</code></p>
@@ -116,13 +116,13 @@ Inheritance diagram for BaseCycler:</div>
  <div class="center">
   <img src="class_base_cycler.png" usemap="#BaseCycler_map" alt=""/>
   <map id="BaseCycler_map" name="BaseCycler_map">
-<area href="class_charge.html" alt="Charge" shape="rect" coords="167,56,324,80"/>
-<area href="class_charge_discharge.html" alt="ChargeDischarge" shape="rect" coords="167,112,324,136"/>
-<area href="class_charge_rest.html" alt="ChargeRest" shape="rect" coords="167,168,324,192"/>
-<area href="class_custom_cycler.html" alt="CustomCycler" shape="rect" coords="167,224,324,248"/>
-<area href="class_discharge.html" alt="Discharge" shape="rect" coords="167,280,324,304"/>
-<area href="class_discharge_rest.html" alt="DischargeRest" shape="rect" coords="167,336,324,360"/>
-<area href="class_h_p_p_c_cycler.html" alt="HPPCCycler" shape="rect" coords="167,392,324,416"/>
+<area href="class_charge.html" title="Contains cycling parameters relevant for the charge cycling step." alt="Charge" shape="rect" coords="167,56,324,80"/>
+<area href="class_charge_discharge.html" title="Contains cycling parameters relevant for the charge-discharge cycle." alt="ChargeDischarge" shape="rect" coords="167,112,324,136"/>
+<area href="class_charge_rest.html" title="Contains cycling parameters relevant for the charge-rest cycling steps." alt="ChargeRest" shape="rect" coords="167,168,324,192"/>
+<area href="class_custom_cycler.html" title="Contains cycling parameters for the Custom Cycling step." alt="CustomCycler" shape="rect" coords="167,224,324,248"/>
+<area href="class_discharge.html" title="Contains cycling parameters relevant for the discharge cycling step." alt="Discharge" shape="rect" coords="167,280,324,304"/>
+<area href="class_discharge_rest.html" title="Contains cycling parameters relevant for the discharge-rest cycling step." alt="DischargeRest" shape="rect" coords="167,336,324,360"/>
+<area href="class_h_p_p_c_cycler.html" title="This cycler is intended to provide the applied current during the HPPC discharge step." alt="HPPCCycler" shape="rect" coords="167,392,324,416"/>
 <area href="class_interpolated_custom_cycler.html" title="Creates a cycler class whose time and current array values have been filled through interpolation." alt="InterpolatedCustomCycler" shape="rect" coords="167,448,324,472"/>
   </map>
 </div></div>
@@ -131,7 +131,7 @@ Inheritance diagram for BaseCycler:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6e79dec7e3be5f5348051b8381347aca" id="r_a6e79dec7e3be5f5348051b8381347aca"><td class="memItemLeft" align="right" valign="top"><a id="a6e79dec7e3be5f5348051b8381347aca" name="a6e79dec7e3be5f5348051b8381347aca"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>BaseCycler</b> ()</td></tr>
-<tr class="memdesc:a6e79dec7e3be5f5348051b8381347aca"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor for the <a class="el" href="class_base_cycler.html" title="Base Cycler class.">BaseCycler</a>. Essentially the typical LIB parameters are initialized. <br /></td></tr>
+<tr class="memdesc:a6e79dec7e3be5f5348051b8381347aca"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor for the <a class="el" href="class_base_cycler.html" title="This class is intended to store the relevant cycling variables for the battery cell simulations.">BaseCycler</a>. Essentially the typical LIB parameters are initialized. <br /></td></tr>
 <tr class="separator:a6e79dec7e3be5f5348051b8381347aca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace3cf90503378024e369c20fe4086dba" id="r_ace3cf90503378024e369c20fe4086dba"><td class="memItemLeft" align="right" valign="top"><a id="ace3cf90503378024e369c20fe4086dba" name="ace3cf90503378024e369c20fe4086dba"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>get_time_elapsed</b> ()</td></tr>
@@ -168,7 +168,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_num_cycles</b> (i
 <tr class="separator:a1c0686132a51e7355e9818cc63320ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b2b9fa59eed8a1f3750289cf0bd9061" id="r_a9b2b9fa59eed8a1f3750289cf0bd9061"><td class="memItemLeft" align="right" valign="top"><a id="a9b2b9fa59eed8a1f3750289cf0bd9061" name="a9b2b9fa59eed8a1f3750289cf0bd9061"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reset_time_elapsed</b> ()</td></tr>
-<tr class="memdesc:a9b2b9fa59eed8a1f3750289cf0bd9061"><td class="mdescLeft">&#160;</td><td class="mdescRight">resets the time_elapsed to zero. Useful when subjecting an already cycled <a class="el" href="class_base_cycler.html" title="Base Cycler class.">BaseCycler</a> instance. <br /></td></tr>
+<tr class="memdesc:a9b2b9fa59eed8a1f3750289cf0bd9061"><td class="mdescLeft">&#160;</td><td class="mdescRight">resets the time_elapsed to zero. Useful when subjecting an already cycled <a class="el" href="class_base_cycler.html" title="This class is intended to store the relevant cycling variables for the battery cell simulations.">BaseCycler</a> instance. <br /></td></tr>
 <tr class="separator:a9b2b9fa59eed8a1f3750289cf0bd9061"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -214,7 +214,7 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 <tr class="separator:a2da50ea9aa2db12f97822d7aa6938135"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Base Cycler class. </p>
+<div class="textblock"><p>This class is intended to store the relevant cycling variables for the battery cell simulations. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a1c0686132a51e7355e9818cc63320ab3" name="a1c0686132a51e7355e9818cc63320ab3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1c0686132a51e7355e9818cc63320ab3">&#9670;&#160;</a></span>get_current()</h2>

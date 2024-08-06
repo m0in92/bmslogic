@@ -275,7 +275,25 @@ namespace OWL
 /*
  * Functions below pertains to operator overloads free functions
  */
+
+/**
+ * @brief perator overload for scalar addition is the scalar is on the lhs of the addition.
+ *
+ * @param lhsScalar description scalar of double type
+ * @param rhsArray OWL array
+ *
+ * @return OWL::ArrayXD resultant array from the element-wise multiplication of array with a double.
+ */
 OWL::ArrayXD operator+(double, OWL::ArrayXD);
+
+/**
+ * @brief This function ensures that a scalar mulitplication can be performed with a scalar on
+ * the lhs of the multiplication.
+ *
+ * @param lhsScalar scalar double type.
+ * @param rhsArray array
+ * @return OWL::ArrayXD array from the element-wise multiplicaiton of the scalar with the array.
+ */
 OWL::ArrayXD operator*(double lhsScalar, OWL::ArrayXD rhsArray);
 
 /**
@@ -300,7 +318,7 @@ namespace Newton
         public:
             /**
              * @brief what() overload from the exception class.
-             * 
+             *
              * @return const char* exception message
              */
             const char *what();
@@ -308,7 +326,7 @@ namespace Newton
 
         /**
          * @brief Calculates the slope given two data points
-         * 
+         *
          * @param y2 y value for second data point
          * @param y1 y value for first data point (double type)
          * @param x2 x value for the second data point (double type)
@@ -319,33 +337,33 @@ namespace Newton
 
         /**
          * @brief returns an linear interpolating function. Requires slope of the line and a datapoint.
-         * 
+         *
          * @param slope (double) slope of the line.
          * @param x (double) x datapoint valuw.
          * @param y (double) y data point.
-         * @return std::function<double(double)> 
+         * @return std::function<double(double)>
          */
         [[nodiscard]] std::function<double(double)> line(double &slope, double &x, double &y);
 
         /**
          * @brief linear interpolation of the data points.
-         * 
+         *
          * @param xArray (OWL::ArrayXD) array representing the x-values.
          * @param yArray (OWL::ArrayXD) array representing the y-values.
          * @param x x-value where the desired interpolation is required.
          * @return double y-value of the interpolation
-         * 
+         *
          * @throws ExceedInterpolationLimits thrown when the inputed x value is beyound the xArray.
          */
         [[nodiscard]] double interp(OWL::ArrayXD xArray, OWL::ArrayXD yArray, double x);
 
         /**
          * @brief linear interpolation of the data points. Returns a lambda function.
-         * 
+         *
          * @param xArray (OWL::ArrayXD) array representing the x-values.
          * @param yArray (OWL::ArrayXD) array representing the y-values.
          * @return std::function<double(double)> lambda expression that outputs y value and takes x value as the input.
-         * 
+         *
          * @throws ExceedInterpolationLimits thrown when the inputted x value is beyound the xArray.
          */
         [[nodiscard]] std::function<double(double)> interpFunc(OWL::ArrayXD xArray, OWL::ArrayXD yArray);

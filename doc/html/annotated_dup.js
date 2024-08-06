@@ -3,7 +3,7 @@ var annotated_dup =
     [ "battery", "namespacebattery.html", [
       [ "PyBaseSolver", "classbattery_1_1_py_base_solver.html", null ],
       [ "PyEnhancedSPSolver", "classbattery_1_1_py_enhanced_s_p_solver.html", null ],
-      [ "PyKFSPSolver", "classbattery_1_1_py_k_f_s_p_solver.html", null ],
+      [ "PyKFSPSolver", "classbattery_1_1_py_k_f_s_p_solver.html", "classbattery_1_1_py_k_f_s_p_solver" ],
       [ "PySPSolver", "classbattery_1_1_py_s_p_solver.html", "classbattery_1_1_py_s_p_solver" ]
     ] ],
     [ "bmslogic", null, [
@@ -186,7 +186,7 @@ var annotated_dup =
     [ "ECMSolution", "class_e_c_m_solution.html", null ],
     [ "EigenSolver", "class_eigen_solver.html", "class_eigen_solver" ],
     [ "Electrode", "class_electrode.html", "class_electrode" ],
-    [ "Electrolyte", "class_electrolyte.html", null ],
+    [ "Electrolyte", "class_electrolyte.html", "class_electrolyte" ],
     [ "ElectrolyteFVMCoordinates", "class_electrolyte_f_v_m_coordinates.html", null ],
     [ "ElectrolyteFVMSolver", "class_electrolyte_f_v_m_solver.html", "class_electrolyte_f_v_m_solver" ],
     [ "ESC", "class_e_s_c.html", null ],

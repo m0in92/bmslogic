@@ -117,16 +117,16 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a782a0f8cc6a7dfbcf2375c0b394eb220" id="r_a782a0f8cc6a7dfbcf2375c0b394eb220"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a782a0f8cc6a7dfbcf2375c0b394eb220">slope</a> (double &amp;y2, double &amp;y1, double &amp;x2, double &amp;x1)</td></tr>
-<tr class="memdesc:a782a0f8cc6a7dfbcf2375c0b394eb220"><td class="mdescLeft">&#160;</td><td class="mdescRight">slope  <br /></td></tr>
+<tr class="memdesc:a782a0f8cc6a7dfbcf2375c0b394eb220"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the slope given two data points.  <br /></td></tr>
 <tr class="separator:a782a0f8cc6a7dfbcf2375c0b394eb220"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad923250f9931c59b079860f74444f0b6" id="r_ad923250f9931c59b079860f74444f0b6"><td class="memItemLeft" align="right" valign="top">std::function&lt; double(double)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad923250f9931c59b079860f74444f0b6">line</a> (double &amp;<a class="el" href="#a782a0f8cc6a7dfbcf2375c0b394eb220">slope</a>, double &amp;x, double &amp;y)</td></tr>
-<tr class="memdesc:ad923250f9931c59b079860f74444f0b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">line  <br /></td></tr>
+<tr class="memdesc:ad923250f9931c59b079860f74444f0b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns an linear interpolating function.  <br /></td></tr>
 <tr class="separator:ad923250f9931c59b079860f74444f0b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06fbe49bc1190985d1a53a6c89b45fe9" id="r_a06fbe49bc1190985d1a53a6c89b45fe9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a06fbe49bc1190985d1a53a6c89b45fe9">interp</a> (<a class="el" href="class_o_w_l_1_1_array_x_d.html">OWL::ArrayXD</a> xArray, <a class="el" href="class_o_w_l_1_1_array_x_d.html">OWL::ArrayXD</a> yArray, double x)</td></tr>
-<tr class="memdesc:a06fbe49bc1190985d1a53a6c89b45fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">interp  <br /></td></tr>
+<tr class="memdesc:a06fbe49bc1190985d1a53a6c89b45fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">linear interpolation of the data points.  <br /></td></tr>
 <tr class="separator:a06fbe49bc1190985d1a53a6c89b45fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa89abd0168d396b4ee6804de0419adc6" id="r_aa89abd0168d396b4ee6804de0419adc6"><td class="memItemLeft" align="right" valign="top">std::function&lt; double(double)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa89abd0168d396b4ee6804de0419adc6">interpFunc</a> (<a class="el" href="class_o_w_l_1_1_array_x_d.html">OWL::ArrayXD</a> xArray, <a class="el" href="class_o_w_l_1_1_array_x_d.html">OWL::ArrayXD</a> yArray)</td></tr>
-<tr class="memdesc:aa89abd0168d396b4ee6804de0419adc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">interpFunc  <br /></td></tr>
+<tr class="memdesc:aa89abd0168d396b4ee6804de0419adc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">linear interpolation of the data points.  <br /></td></tr>
 <tr class="separator:aa89abd0168d396b4ee6804de0419adc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8dc3c52ea3f373d504889c11ee612c24" id="r_a8dc3c52ea3f373d504889c11ee612c24"><td class="memItemLeft" align="right" valign="top"><a id="a8dc3c52ea3f373d504889c11ee612c24" name="a8dc3c52ea3f373d504889c11ee612c24"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>linear_interpolation</b> (double x, std::vector&lt; double &gt; vec_x, std::vector&lt; double &gt; vec_y)</td></tr>
@@ -176,11 +176,22 @@ std::vector&lt; long double &gt;&#160;</td><td class="memItemRight" valign="bott
 </table>
 </div><div class="memdoc">
 
-<p>interp </p>
-<p>linear interpolation of the data points.</p>
-<p>Parameters: xArray: (<a class="el" href="class_o_w_l_1_1_array_x_d.html" title="Provides functionality for the array operations.">OWL::ArrayXD</a>) array representing the x-values. yArray: (<a class="el" href="class_o_w_l_1_1_array_x_d.html" title="Provides functionality for the array operations.">OWL::ArrayXD</a>) array representing the y-values. x: (double) x-value where the desired interpolation is required.</p>
-<p>Return: (double) y-value of the interpolation</p>
-<p>Throws: ExceedInterpolationLimits: thrown when the inputted x value is beyound the xArray. </p>
+<p>linear interpolation of the data points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xArray</td><td>(<a class="el" href="class_o_w_l_1_1_array_x_d.html" title="Provides functionality for the array operations.">OWL::ArrayXD</a>) array representing the x-values. </td></tr>
+    <tr><td class="paramname">yArray</td><td>(<a class="el" href="class_o_w_l_1_1_array_x_d.html" title="Provides functionality for the array operations.">OWL::ArrayXD</a>) array representing the y-values. </td></tr>
+    <tr><td class="paramname">x</td><td>x-value where the desired interpolation is required. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double y-value of the interpolation</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">ExceedInterpolationLimits</td><td>thrown when the inputed x value is beyound the xArray. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -211,11 +222,22 @@ std::vector&lt; long double &gt;&#160;</td><td class="memItemRight" valign="bott
 </table>
 </div><div class="memdoc">
 
-<p>interpFunc </p>
-<p>linear interpolation of the data points. Returns a lambda function.</p>
-<p>Parameters: xArray: (<a class="el" href="class_o_w_l_1_1_array_x_d.html" title="Provides functionality for the array operations.">OWL::ArrayXD</a>) array representing the x-values. yArray: (<a class="el" href="class_o_w_l_1_1_array_x_d.html" title="Provides functionality for the array operations.">OWL::ArrayXD</a>) array representing the y-values.</p>
-<p>Return: (std::function&lt;double (double)&gt;) lambda expression that outputs y value and takes x value as the input.</p>
-<p>Throws: ExceedInterpolationLimits: thrown when the inputted x value is beyound the xArray. </p>
+<p>linear interpolation of the data points. </p>
+<p>Returns a lambda function.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xArray</td><td>(<a class="el" href="class_o_w_l_1_1_array_x_d.html" title="Provides functionality for the array operations.">OWL::ArrayXD</a>) array representing the x-values. </td></tr>
+    <tr><td class="paramname">yArray</td><td>(<a class="el" href="class_o_w_l_1_1_array_x_d.html" title="Provides functionality for the array operations.">OWL::ArrayXD</a>) array representing the y-values. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::function&lt;double(double)&gt; lambda expression that outputs y value and takes x value as the input.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">ExceedInterpolationLimits</td><td>thrown when the inputted x value is beyound the xArray. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -251,10 +273,17 @@ std::vector&lt; long double &gt;&#160;</td><td class="memItemRight" valign="bott
 </table>
 </div><div class="memdoc">
 
-<p>line </p>
-<p>returns an linear interpolating function. Requires slope of the line and a datapoint.</p>
-<p>Paramters: slope: (double) slope of the line. x: (double) x datapoint valuw. y: (double) y data point.</p>
-<p>Throws: None </p>
+<p>returns an linear interpolating function. </p>
+<p>Requires slope of the line and a datapoint.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">slope</td><td>(double) slope of the line. </td></tr>
+    <tr><td class="paramname">x</td><td>(double) x datapoint valuw. </td></tr>
+    <tr><td class="paramname">y</td><td>(double) y data point. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::function&lt;double(double)&gt; </dd></dl>
 
 </div>
 </div>
@@ -295,11 +324,17 @@ std::vector&lt; long double &gt;&#160;</td><td class="memItemRight" valign="bott
 </table>
 </div><div class="memdoc">
 
-<p>slope </p>
-<p>Calculates the slope given two data points</p>
-<p>Parameters: y2: y value for second data point (double type) y1: y value for first data point (double type) x2: x value for the second data point (double type) x1: x value for the second data point (double type)</p>
-<p>Return: slope of the line</p>
-<p>Throws: None </p>
+<p>Calculates the slope given two data points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">y2</td><td>y value for second data point </td></tr>
+    <tr><td class="paramname">y1</td><td>y value for first data point (double type) </td></tr>
+    <tr><td class="paramname">x2</td><td>x value for the second data point (double type) </td></tr>
+    <tr><td class="paramname">x1</td><td>x value for the second data point (double type) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double slope of the line </dd></dl>
 
 </div>
 </div>

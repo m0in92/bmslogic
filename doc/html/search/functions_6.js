@@ -14,11 +14,13 @@ var searchData=
   ['findclosestelementindex_11',['findClosestElementIndex',['../class_o_w_l_1_1_array_x_d.html#a09534cd40a667b8127287ed6ef386cdb',1,'OWL::ArrayXD']]],
   ['findclosestelementlessthan_12',['findCLosestElementLessThan',['../class_o_w_l_1_1_array_x_d.html#aecba7ae0922326267de820ce964051e8',1,'OWL::ArrayXD']]],
   ['findclosestelementlessthanindex_13',['findCLosestElementLessThanIndex',['../class_o_w_l_1_1_array_x_d.html#a08a16a111c7a2945efee398814781570',1,'OWL::ArrayXD']]],
-  ['findmaxelement_14',['findMaxELement',['../class_o_w_l_1_1_array_x_d.html#a1e72479e11204702d3fc823e4d62a874',1,'OWL::ArrayXD']]],
-  ['findminelement_15',['findMinElement',['../class_o_w_l_1_1_array_x_d.html#a50e9e61a204e05f234f01a1d100b5f5e',1,'OWL::ArrayXD']]],
-  ['first_5fcentered_5ffd_16',['first_centered_FD',['../namespacebmslogic_1_1calc__helpers_1_1numerical__diff.html#a944c83493b1cb2a03c61cdc9c9f435de',1,'bmslogic::calc_helpers::numerical_diff']]],
-  ['flux_5fto_5fcurrent_17',['flux_to_current',['../classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m.html#ad567abf854d88e0628de5c75428d2971',1,'bmslogic.simulations.cell.models.PySPM.flux_to_current()'],['../classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i.html#ac7bff7cef157b0b9ae03766d65535e19',1,'bmslogic.simulations.cell.models.PyROMSEI.flux_to_current()']]],
-  ['func_5fd_5fe_18',['func_D_e',['../namespacefuncs.html#a2338bbc56f58a3ea0d15fbb1e7716bb2',1,'funcs']]],
-  ['func_5fdlnf_19',['func_dlnf',['../namespacefuncs.html#a0402f8408a760b3e0e2cba3a0f281b1b',1,'funcs']]],
-  ['func_5fkappa_5fe_20',['func_kappa_e',['../namespacefuncs.html#a3c70f4e07250226a4be6f828d0f5a48c',1,'funcs']]]
+  ['findcolsize_14',['findColSize',['../class_o_w_l_1_1_matrix_x_d.html#acc7b9ca5466ff373d12aef58e986ee6f',1,'OWL::MatrixXD']]],
+  ['findmaxelement_15',['findMaxELement',['../class_o_w_l_1_1_array_x_d.html#a1e72479e11204702d3fc823e4d62a874',1,'OWL::ArrayXD']]],
+  ['findminelement_16',['findMinElement',['../class_o_w_l_1_1_array_x_d.html#a50e9e61a204e05f234f01a1d100b5f5e',1,'OWL::ArrayXD']]],
+  ['findrowsize_17',['findRowSize',['../class_o_w_l_1_1_matrix_x_d.html#a1cad5b7f5dc2886f6def789ea48ae1af',1,'OWL::MatrixXD']]],
+  ['first_5fcentered_5ffd_18',['first_centered_FD',['../namespacebmslogic_1_1calc__helpers_1_1numerical__diff.html#a944c83493b1cb2a03c61cdc9c9f435de',1,'bmslogic::calc_helpers::numerical_diff']]],
+  ['flux_5fto_5fcurrent_19',['flux_to_current',['../classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_s_p_m.html#ad567abf854d88e0628de5c75428d2971',1,'bmslogic.simulations.cell.models.PySPM.flux_to_current()'],['../classbmslogic_1_1simulations_1_1cell_1_1models_1_1_py_r_o_m_s_e_i.html#ac7bff7cef157b0b9ae03766d65535e19',1,'bmslogic.simulations.cell.models.PyROMSEI.flux_to_current()']]],
+  ['func_5fd_5fe_20',['func_D_e',['../namespacefuncs.html#a2338bbc56f58a3ea0d15fbb1e7716bb2',1,'funcs']]],
+  ['func_5fdlnf_21',['func_dlnf',['../namespacefuncs.html#a0402f8408a760b3e0e2cba3a0f281b1b',1,'funcs']]],
+  ['func_5fkappa_5fe_22',['func_kappa_e',['../namespacefuncs.html#a3c70f4e07250226a4be6f828d0f5a48c',1,'funcs']]]
 ];

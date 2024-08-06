@@ -101,6 +101,7 @@ $(function(){initNavTree('classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_s
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="classbmslogic_1_1calc__helpers_1_1kalman__filter_1_1_sigma_point_kalman_filter-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">bmslogic.calc_helpers.kalman_filter.SigmaPointKalmanFilter Class Reference</div></div>
 </div><!--header-->
@@ -206,6 +207,23 @@ self.Nx+self.Nw,]&#160;</td><td class="memItemRight" valign="bottom"><b>Nx</b></
 <tr class="memitem:a599429ee563b4625d051d7bebb3ce290" id="r_a599429ee563b4625d051d7bebb3ce290"><td class="memItemLeft" align="right" valign="top"><a id="a599429ee563b4625d051d7bebb3ce290" name="a599429ee563b4625d051d7bebb3ce290"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>array_alpha_m</b></td></tr>
 <tr class="separator:a599429ee563b4625d051d7bebb3ce290"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a0b34a92f560ac742d40189662623b852" id="r_a0b34a92f560ac742d40189662623b852"><td class="memItemLeft" align="right" valign="top">tuple[npt.ArrayLike, npt.ArrayLike]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b34a92f560ac742d40189662623b852">__state_prediction</a> (self, float u)</td></tr>
+<tr class="separator:a0b34a92f560ac742d40189662623b852"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0807b08266c61c7f9916c0d4d8119204" id="r_a0807b08266c61c7f9916c0d4d8119204"><td class="memItemLeft" align="right" valign="top">npt.ArrayLike&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0807b08266c61c7f9916c0d4d8119204">__cov_prediction</a> (self, npt.ArrayLike Xx)</td></tr>
+<tr class="separator:a0807b08266c61c7f9916c0d4d8119204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2bac03933e9d6c86fb4ed18c179d56a" id="r_af2bac03933e9d6c86fb4ed18c179d56a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af2bac03933e9d6c86fb4ed18c179d56a">__output_estimate</a> (self, npt.ArrayLike Xx, float u)</td></tr>
+<tr class="separator:af2bac03933e9d6c86fb4ed18c179d56a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefc53f782f3a554c07e75385775078e7" id="r_aefc53f782f3a554c07e75385775078e7"><td class="memItemLeft" align="right" valign="top">\ tuple[npt.ArrayLike, npt.ArrayLike]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aefc53f782f3a554c07e75385775078e7">__estimator_gain_matrix</a> (self, npt.ArrayLike y, npt.ArrayLike yhat, npt.ArrayLike xs)</td></tr>
+<tr class="separator:aefc53f782f3a554c07e75385775078e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f0fced8a6aaf94bc51a298919c58b02" id="r_a9f0fced8a6aaf94bc51a298919c58b02"><td class="memItemLeft" align="right" valign="top"><a id="a9f0fced8a6aaf94bc51a298919c58b02" name="a9f0fced8a6aaf94bc51a298919c58b02"></a>
+None&#160;</td><td class="memItemRight" valign="bottom"><b>__state_update</b> (self, npt.ArrayLike L, npt.ArrayLike ytrue, npt.ArrayLike yhat)</td></tr>
+<tr class="separator:a9f0fced8a6aaf94bc51a298919c58b02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac24dc6cf29cced78a6be419e1b5805d4" id="r_ac24dc6cf29cced78a6be419e1b5805d4"><td class="memItemLeft" align="right" valign="top"><a id="ac24dc6cf29cced78a6be419e1b5805d4" name="ac24dc6cf29cced78a6be419e1b5805d4"></a>
+None&#160;</td><td class="memItemRight" valign="bottom"><b>__cov_measurement_update</b> (self, Lx, SigmaY)</td></tr>
+<tr class="separator:ac24dc6cf29cced78a6be419e1b5805d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">The class for sigma-point Kalman filter.
@@ -269,6 +287,155 @@ of arrays of inputs values, their mean and covariance as well the state and outp
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0807b08266c61c7f9916c0d4d8119204" name="a0807b08266c61c7f9916c0d4d8119204"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0807b08266c61c7f9916c0d4d8119204">&#9670;&#160;</a></span>__cov_prediction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"> npt.ArrayLike bmslogic.calc_helpers.kalman_filter.SigmaPointKalmanFilter.__cov_prediction </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">npt.ArrayLike</td>          <td class="paramname"><span class="paramname"><em>Xx</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<pre class="fragment">This is the step 1b (second step) of the process. The estimate covariance is estimated.
+:param Xx: Sigma-point matrix containing sigma-points for the xhat.
+:param xhat: state vector estimate as calculated from step 1a.
+:return:
+</pre> 
+</div>
+</div>
+<a id="aefc53f782f3a554c07e75385775078e7" name="aefc53f782f3a554c07e75385775078e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefc53f782f3a554c07e75385775078e7">&#9670;&#160;</a></span>__estimator_gain_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"> \
+            tuple[npt.ArrayLike, npt.ArrayLike] bmslogic.calc_helpers.kalman_filter.SigmaPointKalmanFilter.__estimator_gain_matrix </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">npt.ArrayLike</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">npt.ArrayLike</td>          <td class="paramname"><span class="paramname"><em>yhat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">npt.ArrayLike</td>          <td class="paramname"><span class="paramname"><em>xs</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<pre class="fragment">Step 2a
+:param Y: Output Sigma Point
+:param yhat: output variable vector
+:param Xs: difference between sigma points and state variable
+:return: SigmaY and gain estimator, Lx
+</pre> 
+</div>
+</div>
+<a id="af2bac03933e9d6c86fb4ed18c179d56a" name="af2bac03933e9d6c86fb4ed18c179d56a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2bac03933e9d6c86fb4ed18c179d56a">&#9670;&#160;</a></span>__output_estimate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bmslogic.calc_helpers.kalman_filter.SigmaPointKalmanFilter.__output_estimate </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">npt.ArrayLike</td>          <td class="paramname"><span class="paramname"><em>Xx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>u</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<pre class="fragment">Step 1c (third step), which is the output prediction.
+:param Xx:
+:param u:
+:return:
+</pre> 
+</div>
+</div>
+<a id="a0b34a92f560ac742d40189662623b852" name="a0b34a92f560ac742d40189662623b852"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b34a92f560ac742d40189662623b852">&#9670;&#160;</a></span>__state_prediction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"> tuple[npt.ArrayLike, npt.ArrayLike] bmslogic.calc_helpers.kalman_filter.SigmaPointKalmanFilter.__state_prediction </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>u</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<pre class="fragment">This is the step 1a (first step) of the process. The state estimate is performed in this step.
+:param u: The process input.
+:return: tuple containing the augmented state matrix and the resultant state estimate. Note that the second
+element is in the numpy matrix form and hence need indexing to extract its individual elements.
+</pre> 
+</div>
+</div>
 <a id="adce5a283addc5143d07faa17e626c309" name="adce5a283addc5143d07faa17e626c309"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adce5a283addc5143d07faa17e626c309">&#9670;&#160;</a></span>array_alpha_c()</h2>
 

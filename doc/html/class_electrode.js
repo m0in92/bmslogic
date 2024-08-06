@@ -2,5 +2,24 @@ var class_electrode =
 [
     [ "calc_D", "class_electrode.html#a9cc4b9d099f1c9c9048a031943b4075c", null ],
     [ "calc_k", "class_electrode.html#ad1a46d514646b8911ccb0153191ac68e", null ],
-    [ "calc_OCP", "class_electrode.html#a1e81a76e630e01b28c27331dd73f2423", null ]
+    [ "calc_OCP", "class_electrode.html#a1e81a76e630e01b28c27331dd73f2423", null ],
+    [ "A", "class_electrode.html#a7bb8700a06bd079c7241e0e2bc47e6ce", null ],
+    [ "alpha", "class_electrode.html#a9e77ce0395e5678d344828b1624e8415", null ],
+    [ "brugg", "class_electrode.html#af62ba3f937d174e7ac8445bee637fb86", null ],
+    [ "D_ref", "class_electrode.html#a217647f05508f0153b8c2199fe531196", null ],
+    [ "Ea_D", "class_electrode.html#a67917a472965230890fcab97cd774530", null ],
+    [ "Ea_R", "class_electrode.html#ab8168a5c600575e0f9f5796bb6e153ab", null ],
+    [ "epsilon", "class_electrode.html#a636ba51d6c64583bdc19ddbd096f46ff", null ],
+    [ "func_dOCPdT", "class_electrode.html#aeff43ec43d2fa1e1353e079c3c78462f", null ],
+    [ "func_OCP", "class_electrode.html#a33444f326161ed471a6058037e2c3951", null ],
+    [ "k_ref", "class_electrode.html#aa00f06ba477a7b5b0028fe0fedb75009", null ],
+    [ "kappa", "class_electrode.html#a0c70e0d1b58a631a8e8f7e4e564e511e", null ],
+    [ "L", "class_electrode.html#ae51fe18d74a3b4629c1d458ef399c28b", null ],
+    [ "max_conc", "class_electrode.html#a96bd264ebeaa654e7785ab8ec1bb279c", null ],
+    [ "R", "class_electrode.html#acb364c8072195ca86d56d78c6c6924bd", null ],
+    [ "S", "class_electrode.html#a6708d7cb191cabd9e2365c2c816e371b", null ],
+    [ "SOC", "class_electrode.html#a3e68077c1e38d45445c7bf9300aa0c9b", null ],
+    [ "SOC_init", "class_electrode.html#a610d80c2abb52bfba99d78ba3f688a2a", null ],
+    [ "T", "class_electrode.html#a03504a26ec35a44a66a0923c0c5d2a05", null ],
+    [ "T_ref", "class_electrode.html#a27f0c293f0f2a846bbfedcc7e5aaf615", null ]
 ];

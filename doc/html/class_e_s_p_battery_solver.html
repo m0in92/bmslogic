@@ -100,6 +100,8 @@ $(function(){initNavTree('class_e_s_p_battery_solver.html',''); initResizable(tr
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_e_s_p_battery_solver-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">ESPBatterySolver Class Reference</div></div>
 </div><!--header-->
@@ -126,6 +128,36 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1a143d36c557fdcbe9d68648bdc33422 inherit pub_methods_class_base_battery_solver" id="r_a1a143d36c557fdcbe9d68648bdc33422"><td class="memItemLeft" align="right" valign="top">
 &#160;</td><td class="memItemRight" valign="bottom"><b>BaseBatterySolver</b> (<a class="el" href="class_battery_cell.html">BatteryCell</a> i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver)</td></tr>
 <tr class="separator:a1a143d36c557fdcbe9d68648bdc33422 inherit pub_methods_class_base_battery_solver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a81f8481918d9cd7876a86ed701966846" id="r_a81f8481918d9cd7876a86ed701966846"><td class="memItemLeft" align="right" valign="top"><a id="a81f8481918d9cd7876a86ed701966846" name="a81f8481918d9cd7876a86ed701966846"></a>
+std::pair&lt; <a class="el" href="struct_over_potentials.html">OverPotentials</a>, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>solve_one_iteration</b> (double t_prev, double dt, double i_app, double temp)</td></tr>
+<tr class="separator:a81f8481918d9cd7876a86ed701966846"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ac890a3593d47bdfda202b85387ab1c9e" id="r_ac890a3593d47bdfda202b85387ab1c9e"><td class="memItemLeft" align="right" valign="top"><a id="ac890a3593d47bdfda202b85387ab1c9e" name="ac890a3593d47bdfda202b85387ab1c9e"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>a_s_p</b></td></tr>
+<tr class="separator:ac890a3593d47bdfda202b85387ab1c9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1d69084d7d6fe495ab7c076043903ef" id="r_ae1d69084d7d6fe495ab7c076043903ef"><td class="memItemLeft" align="right" valign="top"><a id="ae1d69084d7d6fe495ab7c076043903ef" name="ae1d69084d7d6fe495ab7c076043903ef"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>a_s_n</b></td></tr>
+<tr class="separator:ae1d69084d7d6fe495ab7c076043903ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3581b94491eb575a936c7416e1b6561" id="r_ab3581b94491eb575a936c7416e1b6561"><td class="memItemLeft" align="right" valign="top"><a id="ab3581b94491eb575a936c7416e1b6561" name="ab3581b94491eb575a936c7416e1b6561"></a>
+<a class="el" href="class_polynomial_approx.html">PolynomialApprox</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SOC_solver_p</b></td></tr>
+<tr class="separator:ab3581b94491eb575a936c7416e1b6561"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32065da1020023fb22ed9c3accfe2de5" id="r_a32065da1020023fb22ed9c3accfe2de5"><td class="memItemLeft" align="right" valign="top"><a id="a32065da1020023fb22ed9c3accfe2de5" name="a32065da1020023fb22ed9c3accfe2de5"></a>
+<a class="el" href="class_polynomial_approx.html">PolynomialApprox</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SOC_solver_n</b></td></tr>
+<tr class="separator:a32065da1020023fb22ed9c3accfe2de5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac41bf90870db10f8cce76c5a7cbeb387" id="r_ac41bf90870db10f8cce76c5a7cbeb387"><td class="memItemLeft" align="right" valign="top"><a id="ac41bf90870db10f8cce76c5a7cbeb387" name="ac41bf90870db10f8cce76c5a7cbeb387"></a>
+<a class="el" href="class_lumped_thermal_solver.html">LumpedThermalSolver</a>&#160;</td><td class="memItemRight" valign="bottom"><b>thermal_solver</b></td></tr>
+<tr class="separator:ac41bf90870db10f8cce76c5a7cbeb387"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8af8a8e989176194ed8492cbb7555dc8" id="r_a8af8a8e989176194ed8492cbb7555dc8"><td class="memItemLeft" align="right" valign="top"><a id="a8af8a8e989176194ed8492cbb7555dc8" name="a8af8a8e989176194ed8492cbb7555dc8"></a>
+<a class="el" href="class_electrolyte_f_v_m_coordinates.html">ElectrolyteFVMCoordinates</a>&#160;</td><td class="memItemRight" valign="bottom"><b>electrolyte_coords</b></td></tr>
+<tr class="separator:a8af8a8e989176194ed8492cbb7555dc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abad94506e9346020438ab7b0a31d3174" id="r_abad94506e9346020438ab7b0a31d3174"><td class="memItemLeft" align="right" valign="top"><a id="abad94506e9346020438ab7b0a31d3174" name="abad94506e9346020438ab7b0a31d3174"></a>
+<a class="el" href="class_electrolyte_f_v_m_solver.html">ElectrolyteFVMSolver</a>&#160;</td><td class="memItemRight" valign="bottom"><b>electrolyte_solver</b></td></tr>
+<tr class="separator:abad94506e9346020438ab7b0a31d3174"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>

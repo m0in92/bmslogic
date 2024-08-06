@@ -4,7 +4,7 @@ var battery__components_8h =
     [ "Electrode", "class_electrode.html", "class_electrode" ],
     [ "PElectrode", "class_p_electrode.html", null ],
     [ "NElectrode", "class_n_electrode.html", "class_n_electrode" ],
-    [ "Electrolyte", "class_electrolyte.html", null ],
+    [ "Electrolyte", "class_electrolyte.html", "class_electrolyte" ],
     [ "BatteryCell", "class_battery_cell.html", null ],
     [ "ECMBatteryCell", "class_e_c_m_battery_cell.html", null ]
 ];

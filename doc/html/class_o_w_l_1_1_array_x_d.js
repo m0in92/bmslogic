@@ -2,6 +2,7 @@ var class_o_w_l_1_1_array_x_d =
 [
     [ "ArrayXD", "class_o_w_l_1_1_array_x_d.html#a248a116356d1ea998d4e4d40cc4b6f02", null ],
     [ "ArrayXD", "class_o_w_l_1_1_array_x_d.html#a70084c792f8f1d2dd447dee1a876ed6a", null ],
+    [ "add", "class_o_w_l_1_1_array_x_d.html#ac9f9555f4450ff22c1811660a24e37ba", null ],
     [ "checkEmptyArray", "class_o_w_l_1_1_array_x_d.html#a14c4da58bb7159ae2f65aab6790736cd", null ],
     [ "display", "class_o_w_l_1_1_array_x_d.html#a689a564e4ed16fe158f0de9984e8b2aa", null ],
     [ "findClosestElement", "class_o_w_l_1_1_array_x_d.html#a1aa16840199ce14dbbeb04ce9f86d4b3", null ],
@@ -14,6 +15,8 @@ var class_o_w_l_1_1_array_x_d =
     [ "findMinElement", "class_o_w_l_1_1_array_x_d.html#a50e9e61a204e05f234f01a1d100b5f5e", null ],
     [ "isApproxEqual", "class_o_w_l_1_1_array_x_d.html#af575a51083b481d5379ea40978373b28", null ],
     [ "isEqual", "class_o_w_l_1_1_array_x_d.html#aa10295d2b8df91ed5f0251620558a902", null ],
+    [ "multiply", "class_o_w_l_1_1_array_x_d.html#a6f1dad160f67bb1a431664881329e31e", null ],
+    [ "multiply", "class_o_w_l_1_1_array_x_d.html#a3c2e25ea88d16ae81a8149628f7dd845", null ],
     [ "operator*", "class_o_w_l_1_1_array_x_d.html#a99e10290e0252fe87e950a9ed7541afa", null ],
     [ "operator*", "class_o_w_l_1_1_array_x_d.html#a249a4229900f923906ef3f07daf02d08", null ],
     [ "operator+", "class_o_w_l_1_1_array_x_d.html#a8bc0a95182a900b69ebb2ddf24a61626", null ],
@@ -21,5 +24,6 @@ var class_o_w_l_1_1_array_x_d =
     [ "operator-", "class_o_w_l_1_1_array_x_d.html#a264f4a4c222245ab2c256768a274478d", null ],
     [ "operator[]", "class_o_w_l_1_1_array_x_d.html#ac4b250931b3e73fddfae1dc7c6e5e700", null ],
     [ "setArray", "class_o_w_l_1_1_array_x_d.html#a372b5f4016bd46238ae98f729e5ca62d", null ],
+    [ "subtract", "class_o_w_l_1_1_array_x_d.html#a6fc69e812964840bd71a8359d902c339", null ],
     [ "sum", "class_o_w_l_1_1_array_x_d.html#a61999a451231dab8fc1e1eb63e9d3715", null ]
 ];

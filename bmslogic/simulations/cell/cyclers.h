@@ -18,8 +18,7 @@
 #include "extern/owl.h"
 
 /**
- * @class BaseCycler
- * @brief Base Cycler class
+ * @brief This class is intended to store the relevant cycling variables for the battery cell simulations.
  */
 class BaseCycler
 {
@@ -58,8 +57,7 @@ public:
 };
 
 /**
- * @class Discharge
- * @brief
+ * @brief Contains cycling parameters relevant for the discharge cycling step.
  *
  */
 class Discharge : public BaseCycler
@@ -70,8 +68,7 @@ public:
 };
 
 /**
- * @class DischargeRest
- * @brief
+ * @brief Contains cycling parameters relevant for the discharge-rest cycling step.
  *
  */
 class DischargeRest : public BaseCycler
@@ -82,8 +79,7 @@ public:
 };
 
 /**
- * @class Charge
- * @brief
+ * @brief Contains cycling parameters relevant for the charge cycling step.
  *
  */
 class Charge : public BaseCycler
@@ -93,6 +89,10 @@ public:
     ~Charge() = default;
 };
 
+/**
+ * @brief Contains cycling parameters relevant for the charge-rest cycling steps.
+ *
+ */
 class ChargeRest : public BaseCycler
 {
 public:
@@ -101,8 +101,8 @@ public:
 };
 
 /**
- * @class ChargeDischarge
- * @brief
+ * @brief Contains cycling parameters relevant for the charge-discharge cycle. The first charge step is followed by the rest period.
+ * The subsequent discharge cycling step is again followed by the rest period.
  *
  */
 class ChargeDischarge : public BaseCycler
@@ -114,8 +114,8 @@ public:
 };
 
 /**
- * @class CustomCycler
- * @brief
+ * @brief Contains cycling parameters for the Custom Cycling step. The use inputs the time and current arrays where the elements in the
+ * current array corresponds to the applied battery cell current at the time step.
  *
  */
 class CustomCycler : public BaseCycler
@@ -151,6 +151,10 @@ public:
     void set_current_vector(std::vector<double> &current_vector_new) { m_current_vector = current_vector_new; }
 };
 
+/**
+ * @brief This cycler is intended to provide the applied current during the HPPC discharge step.
+ *
+ */
 class HPPCCycler : public BaseCycler
 {
 public:
