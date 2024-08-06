@@ -20,10 +20,12 @@ var searchData=
   ['solve_5fdelta_5fr_5fsei_5f_17',['solve_delta_R_SEI_',['../classdegradation_1_1_py_r_o_m_s_e_i_solver.html#a9449f855e99f00de1cdfb240803b5574',1,'degradation::PyROMSEISolver']]],
   ['solve_5fu_5fk_18',['solve_u_k',['../classelectrode__conc_1_1_py_eigen_func_exp.html#af52a11137f542096f0969a66575a8afc',1,'electrode_conc::PyEigenFuncExp']]],
   ['solve_5fwithout_5fupdate_19',['solve_without_update',['../class_polynomial_approx.html#aab86e7425ed0273d5ead57e4e0f55e1c',1,'PolynomialApprox']]],
-  ['sorting_20',['sorting',['../classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a.html#ab43e5034fedff77f8659fb8578ae5469',1,'bmslogic::calc_helpers::CI_algorithms::GA']]],
-  ['spkfpolynomialapprox_21',['SPKFPolynomialApprox',['../class_s_p_k_f_polynomial_approx.html',1,'']]],
-  ['spkfsolver_22',['SPKFSolver',['../class_s_p_k_f_solver.html',1,'']]],
-  ['spmodel_23',['SPModel',['../class_s_p_model.html',1,'']]],
-  ['submatrix_24',['submatrix',['../class_o_w_l_1_1_matrix_x_d.html#a19284e10a4f3fc7ca11ed99e2863d24c',1,'OWL::MatrixXD']]],
-  ['sum_25',['sum',['../class_o_w_l_1_1_array_x_d.html#a61999a451231dab8fc1e1eb63e9d3715',1,'OWL::ArrayXD']]]
+  ['solvers_2ecpp_20',['solvers.cpp',['../solvers_8cpp.html',1,'']]],
+  ['solvers_2eh_21',['solvers.h',['../solvers_8h.html',1,'']]],
+  ['sorting_22',['sorting',['../classbmslogic_1_1calc__helpers_1_1_c_i__algorithms_1_1_g_a.html#ab43e5034fedff77f8659fb8578ae5469',1,'bmslogic::calc_helpers::CI_algorithms::GA']]],
+  ['spkfpolynomialapprox_23',['SPKFPolynomialApprox',['../class_s_p_k_f_polynomial_approx.html',1,'']]],
+  ['spkfsolver_24',['SPKFSolver',['../class_s_p_k_f_solver.html',1,'']]],
+  ['spmodel_25',['SPModel',['../class_s_p_model.html',1,'']]],
+  ['submatrix_26',['submatrix',['../class_o_w_l_1_1_matrix_x_d.html#a19284e10a4f3fc7ca11ed99e2863d24c',1,'OWL::MatrixXD']]],
+  ['sum_27',['sum',['../class_o_w_l_1_1_array_x_d.html#a61999a451231dab8fc1e1eb63e9d3715',1,'OWL::ArrayXD']]]
 ];

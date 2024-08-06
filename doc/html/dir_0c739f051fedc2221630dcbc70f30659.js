@@ -15,5 +15,6 @@ var dir_0c739f051fedc2221630dcbc70f30659 =
     [ "parameter_set_manager.h", "parameter__set__manager_8h.html", null ],
     [ "solution.cpp", "solution_8cpp.html", null ],
     [ "solution.h", "solution_8h.html", "solution_8h" ],
-    [ "solvers.h", "solvers_8h_source.html", null ]
+    [ "solvers.cpp", "solvers_8cpp.html", "solvers_8cpp" ],
+    [ "solvers.h", "solvers_8h.html", "solvers_8h" ]
 ];

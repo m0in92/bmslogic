@@ -1,11 +1,19 @@
+/**
+ * @file solvers.cpp
+ * @author Moin Ahmed (moinahmed100@gmail.com)
+ * @brief Contains the classes and functions for performing battery cell simulations.
+ * @version 0.1
+ * @date 2024-08-05
+ *
+ * @copyright Copyright (c) 2024
+ *
+ */
+
 #include <iostream>
 #include <stdexcept>
 #include <cmath>
-#include <ctime>
-#include <stdexcept>
+#include <ratio>
 #include <chrono>
-#include <iomanip>
-#include <thread>
 
 #include "calc_helpers/constants.h"
 #include "extern/owl.h"
@@ -395,9 +403,9 @@ std::vector<double> CNSolver::LHS_diag_elements(double dt, double R, double D)
     double A_ = A(dt, R, D);
     std::vector<double> result_vector;
     result_vector.push_back(1 + 3 * A_); // for symmetry boundary condition at r=0
-    for (int i=0; i<m_K-1; i++)
+    for (int i = 0; i < m_K - 1; i++)
     {
-        result_vector.push_back(1+A_);
+        result_vector.push_back(1 + A_);
     }
     return result_vector;
 }
@@ -724,11 +732,7 @@ std::pair<OverPotentials, bool> BatterySolver::solve_one_iteration(double t_prev
 
 Solution BatterySolver::solve(BaseCycler i_cycler, int store_solution_iter)
 {
-    clock_t start, end;
-    start = clock();
-    // const std::clock_t c_start = std::clock();
-    // auto t_start = std::chrono::high_resolution_clock::now();
-    // std::time_t time_start = std::time(NULL);
+    std::chrono::high_resolution_clock::time_point t_start{std::chrono::high_resolution_clock::now()};
 
     // initialization of the simulation results vectors
     Solution sol = Solution();
@@ -805,12 +809,8 @@ Solution BatterySolver::solve(BaseCycler i_cycler, int store_solution_iter)
         }
     }
 
-    end = clock();
-    // const std::clock_t c_end = std::clock();
-    // std::time_t time_end = std::time(NULL);
-    // const auto t_end = std::chrono::high_resolution_clock::now();
-
-    std::cout << std::fixed << std::setprecision(10) << "Solution time: " << double(end - start) / double(CLOCKS_PER_SEC) << "s" << std::endl;
+    std::chrono::high_resolution_clock::time_point t_end{std::chrono::high_resolution_clock::now()};
+    std::cout << "Solution Time: " << std::chrono::duration<double, std::ratio<1, 1000>>(t_end - t_start).count() << " ms. " << std::endl;
 
     return sol;
 }
@@ -901,11 +901,7 @@ Solution ESPBatterySolver::solve(BaseCycler i_cycler)
     if ((m_b_cell.electrolyte.get_D_e() == 0.0) || (m_b_cell.electrolyte.get_t_c() == 0.0) || (m_b_cell.electrolyte.get_epsilon_n() == 0.0) || (m_b_cell.electrolyte.get_epsilon_p() == 0.0))
         throw InsufficientESPMParameters();
 
-    clock_t start, end;
-    start = clock();
-    // const std::clock_t c_start = std::clock();
-    // auto t_start = std::chrono::high_resolution_clock::now();
-    // std::time_t time_start = std::time(NULL);
+    std::chrono::high_resolution_clock::time_point t_start{std::chrono::high_resolution_clock::now()};
 
     // initialization of the simulation results vectors
     Solution sol = Solution();
@@ -978,12 +974,8 @@ Solution ESPBatterySolver::solve(BaseCycler i_cycler)
         }
     }
 
-    end = clock();
-    // const std::clock_t c_end = std::clock();
-    // std::time_t time_end = std::time(NULL);
-    // const auto t_end = std::chrono::high_resolution_clock::now();
-
-    std::cout << std::fixed << std::setprecision(10) << "Solution time: " << double(end - start) / double(CLOCKS_PER_SEC) << "s" << std::endl;
+    std::chrono::high_resolution_clock::time_point t_end{std::chrono::high_resolution_clock::now()};
+    std::cout << "Solution time: " << std::chrono::duration<double, std::ratio<1,1000>> (t_end-t_start).count() << " ms. " << std::endl;
 
     return sol;
 }

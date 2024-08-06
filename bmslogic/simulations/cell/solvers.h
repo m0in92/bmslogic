@@ -1,3 +1,14 @@
+/**
+ * @file solvers.h
+ * @author Moin Ahmed (moinahmed100@gmail.com)
+ * @brief Contains the classes and functions for performing battery cell simulations.
+ * @version 0.1
+ * @date 2024-08-05
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
+
 #ifndef SPCPP_PROJECT_SOLVERS_H
 #define SPCPP_PROJECT_SOLVERS_H
 

@@ -1,7 +1,8 @@
 /**
  * @file bindings_cpp_py.cpp
  * @author Moin Ahmed (moinahmed100@gmail.com)
- * @brief contains the code to compile .so files pertaining to battery cell simulations
+ * @brief contains the code to compile .so files pertaining to battery cell simulations. These files are intended to be used
+ *        by Python programming language.
  * @version 0.1
  * @date 2024-05-03
  *
@@ -124,7 +125,7 @@ PYBIND11_MODULE(cell, m)
 
      // BatteryCell class
      py::class_<BatteryCell>(m, "BatteryCell")
-         .def(py::init<PElectrode&, NElectrode&, Electrolyte&, double, double, double, double, double, double, double, double, double>(),
+         .def(py::init<PElectrode &, NElectrode &, Electrolyte &, double, double, double, double, double, double, double, double, double>(),
               py::arg("p_elec"), py::arg("n_elec"), py::arg("electrolyte"),
               py::arg("rho"), py::arg("Vol"), py::arg("C_p"), py::arg("h"), py::arg("A"), py::arg("cap"),
               py::arg("V_max"), py::arg("V_min"), py::arg("R_cell"))

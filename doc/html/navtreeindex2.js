@@ -186,7 +186,11 @@ var NAVTREEINDEX2 =
 "solution_8cpp.html":[2,0,0,2,0,13],
 "solution_8h.html":[2,0,0,2,0,14],
 "solution_8h_source.html":[2,0,0,2,0,14],
-"solvers_8h_source.html":[2,0,0,2,0,15],
+"solvers_8cpp.html":[2,0,0,2,0,15],
+"solvers_8cpp.html#a5f6a813ad39656c73751fc2e43d9590e":[2,0,0,2,0,15,0],
+"solvers_8h.html":[2,0,0,2,0,16],
+"solvers_8h.html#a5f6a813ad39656c73751fc2e43d9590e":[2,0,0,2,0,16,13],
+"solvers_8h_source.html":[2,0,0,2,0,16],
 "struct_over_potentials.html":[1,0,44],
 "struct_simulation_results.html":[1,0,50]
 };
