@@ -14,6 +14,7 @@ var NAVTREEINDEX0 =
 "class_base_e_c_m_solver.html":[1,0,15],
 "class_battery_cell.html":[1,0,16],
 "class_battery_solver.html":[1,0,17],
+"class_battery_solver.html#aaee44e39bc558c0c3392a0051c8960ed":[1,0,17,0],
 "class_c_n_solver.html":[1,0,21],
 "class_charge.html":[1,0,18],
 "class_charge_discharge.html":[1,0,19],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "classbmslogic_1_1simulations_1_1applications_1_1drivecycles_1_1_e_v_drive_cycle.html#a4fafc4893bb54cb2d0d5ae843e13c121":[1,0,1,1,0,1,0,1],
 "classbmslogic_1_1simulations_1_1applications_1_1drivecycles_1_1_e_v_drive_cycle.html#aa7490416c4fdc0f29ac487ec8d58f75d":[1,0,1,1,0,1,0,0],
 "classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_a_c_induction_motor.html":[1,0,1,1,0,2,0],
-"classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_battery_cell.html":[1,0,1,1,0,2,1],
-"classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_battery_module.html":[1,0,1,1,0,2,2]
+"classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_battery_cell.html":[1,0,1,1,0,2,1]
 };

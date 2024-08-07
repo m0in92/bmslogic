@@ -106,23 +106,28 @@ $(function(){initNavTree('class_battery_solver.html',''); initResizable(true); }
   <div class="headertitle"><div class="title">BatterySolver Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Contains the method to solve for the continuum-scale battery using the single particle model (SPM).  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="solvers_8h_source.html">solvers.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for BatterySolver:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_battery_solver.png" usemap="#BatterySolver_map" alt=""/>
   <map id="BatterySolver_map" name="BatterySolver_map">
-<area href="class_base_battery_solver.html" alt="BaseBatterySolver" shape="rect" coords="0,0,117,24"/>
+<area href="class_base_battery_solver.html" title="Intended to be the parent class for the continuum-scale physics-based battery cell models." alt="BaseBatterySolver" shape="rect" coords="0,0,117,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a961d9825c8d03ae076a1c55c6365ca73" id="r_a961d9825c8d03ae076a1c55c6365ca73"><td class="memItemLeft" align="right" valign="top"><a id="a961d9825c8d03ae076a1c55c6365ca73" name="a961d9825c8d03ae076a1c55c6365ca73"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BatterySolver</b> (<a class="el" href="class_battery_cell.html">BatteryCell</a> i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver=&quot;poly&quot;)</td></tr>
-<tr class="separator:a961d9825c8d03ae076a1c55c6365ca73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaee44e39bc558c0c3392a0051c8960ed" id="r_aaee44e39bc558c0c3392a0051c8960ed"><td class="memItemLeft" align="right" valign="top"><a id="aaee44e39bc558c0c3392a0051c8960ed" name="aaee44e39bc558c0c3392a0051c8960ed"></a>
-<a class="el" href="class_solution.html">Solution</a>&#160;</td><td class="memItemRight" valign="bottom"><b>solve</b> (<a class="el" href="class_base_cycler.html">BaseCycler</a> i_cycler, int store_solution_after=1)</td></tr>
+<tr class="memitem:a1adcf73665295298cf0fb249c722c0d1" id="r_a1adcf73665295298cf0fb249c722c0d1"><td class="memItemLeft" align="right" valign="top"><a id="a1adcf73665295298cf0fb249c722c0d1" name="a1adcf73665295298cf0fb249c722c0d1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>BatterySolver</b> (<a class="el" href="class_battery_cell.html">BatteryCell</a> &amp;i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver=&quot;poly&quot;)</td></tr>
+<tr class="separator:a1adcf73665295298cf0fb249c722c0d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaee44e39bc558c0c3392a0051c8960ed" id="r_aaee44e39bc558c0c3392a0051c8960ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_solution.html">Solution</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaee44e39bc558c0c3392a0051c8960ed">solve</a> (<a class="el" href="class_base_cycler.html">BaseCycler</a> i_cycler, int store_solution_after=1)</td></tr>
+<tr class="memdesc:aaee44e39bc558c0c3392a0051c8960ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the iteration for the battery cell solver.  <br /></td></tr>
 <tr class="separator:aaee44e39bc558c0c3392a0051c8960ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e73619fd06e68c48b06d316bd332c85" id="r_a3e73619fd06e68c48b06d316bd332c85"><td class="memItemLeft" align="right" valign="top"><a id="a3e73619fd06e68c48b06d316bd332c85" name="a3e73619fd06e68c48b06d316bd332c85"></a>
 std::pair&lt; <a class="el" href="struct_over_potentials.html">OverPotentials</a>, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>solve_one_iteration</b> (double t_prev, double dt, double I)</td></tr>
@@ -131,6 +136,9 @@ std::pair&lt; <a class="el" href="struct_over_potentials.html">OverPotentials</a
 <tr class="memitem:a1a143d36c557fdcbe9d68648bdc33422 inherit pub_methods_class_base_battery_solver" id="r_a1a143d36c557fdcbe9d68648bdc33422"><td class="memItemLeft" align="right" valign="top">
 &#160;</td><td class="memItemRight" valign="bottom"><b>BaseBatterySolver</b> (<a class="el" href="class_battery_cell.html">BatteryCell</a> i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver)</td></tr>
 <tr class="separator:a1a143d36c557fdcbe9d68648bdc33422 inherit pub_methods_class_base_battery_solver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99da9085d347f1f68ebea3724713be8a inherit pub_methods_class_base_battery_solver" id="r_a99da9085d347f1f68ebea3724713be8a"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>check_for_step_completion</b> (const std::string &amp;cycling_step, const double &amp;rest_time, const double &amp;V_min, const double &amp;V_max, const double &amp;V_i, const double &amp;t_curr)</td></tr>
+<tr class="separator:a99da9085d347f1f68ebea3724713be8a inherit pub_methods_class_base_battery_solver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -175,6 +183,43 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>calc_V</b> (double 
 <a class="el" href="struct_over_potentials.html">OverPotentials</a>&#160;</td><td class="memItemRight" valign="bottom"><b>calc_overpotentials</b> (double I)</td></tr>
 <tr class="separator:a4f8ef6e6a7a8480d73d526b5ca257ca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Contains the method to solve for the continuum-scale battery using the single particle model (SPM). </p>
+<p>The model equations have been adateped from the following literature.</p>
+<p>Guo, M., Sikha, G., &amp; White, R. E. (2011). Single-Particle Model for a Lithium-Ion Cell: Thermal Behavior. Journal of The Electrochemical Society, 158(2), A122. <a href="https://doi.org/10.1149/1.3521314/XML">https://doi.org/10.1149/1.3521314/XML</a> </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="aaee44e39bc558c0c3392a0051c8960ed" name="aaee44e39bc558c0c3392a0051c8960ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaee44e39bc558c0c3392a0051c8960ed">&#9670;&#160;</a></span>solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_solution.html">Solution</a> BatterySolver::solve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_base_cycler.html">BaseCycler</a></td>          <td class="paramname"><span class="paramname"><em>i_cycler</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>store_solution_iter</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Runs the iteration for the battery cell solver. </p>
+<p>The solution time for the iteration is also printed in the terminal.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i_cycler</td><td>The instance of the cycler </td></tr>
+    <tr><td class="paramname">store_solution_iter</td><td>iteration at which at which to store the solution varaibles. For instance, the value of 5 means that the solution variables are stored after 5 iterations. Use the value of 1 to store solution variables obtained after all of the iterations. Note that the solutions variables from the first iteration is always stored. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_solution.html">Solution</a> </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/<a class="el" href="solvers_8h_source.html">solvers.h</a></li>
 <li>C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/<a class="el" href="solvers_8cpp.html">solvers.cpp</a></li>

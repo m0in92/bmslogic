@@ -92,6 +92,10 @@ static double c_init_e = 1000.0;
 static double kappa_e = 0.2875;
 static double epsilon_e = 0.724;
 static double brugg_e = 1.5;
+static double D_e = 3.5e-10;
+static double t_c = 0.354;
+static double epsilon_en = 0.385;
+static double epsilon_ep = 0.485;
 
 /*
  * Battery Cell

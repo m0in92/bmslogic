@@ -174,7 +174,7 @@ var annotated_dup =
     [ "BaseCycler", "class_base_cycler.html", "class_base_cycler" ],
     [ "BaseECMSolver", "class_base_e_c_m_solver.html", null ],
     [ "BatteryCell", "class_battery_cell.html", null ],
-    [ "BatterySolver", "class_battery_solver.html", null ],
+    [ "BatterySolver", "class_battery_solver.html", "class_battery_solver" ],
     [ "Charge", "class_charge.html", null ],
     [ "ChargeDischarge", "class_charge_discharge.html", null ],
     [ "ChargeRest", "class_charge_rest.html", null ],

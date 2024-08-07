@@ -55,8 +55,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_battery_pack.html",
-"classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver.html#ad9671dab0289c149c9c50a74ffd39818"
+"classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_battery_module.html",
+"classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver.html#acf684051ff00ef94264bf71daebc0472"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

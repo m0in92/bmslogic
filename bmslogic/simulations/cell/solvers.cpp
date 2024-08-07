@@ -638,7 +638,25 @@ BaseBatterySolver::BaseBatterySolver(BatteryCell i_b_cell, bool i_isothermal, bo
     m_electrode_SOC_solver = i_electrode_SOC_solver;
 }
 
-BatterySolver::BatterySolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation,
+bool BaseBatterySolver::check_for_step_completion(const std::string &cycling_step, const double &rest_time,
+                                                  const double &V_min, const double &V_max,
+                                                  const double &V_i, const double &t_curr)
+{
+    bool step_completed = false;
+
+    if ((cycling_step == "rest") & (t_curr > rest_time))
+        step_completed = true;
+    if ((cycling_step == "discharge") & (V_i < V_min))
+        step_completed = true;
+    if ((cycling_step == "charge") & (V_i > V_max))
+        step_completed = true;
+    if ((cycling_step == "custom") & ((t_curr > rest_time) | (V_i < V_min)))
+        step_completed = true;
+
+    return step_completed;
+}
+
+BatterySolver::BatterySolver(BatteryCell &i_b_cell, bool i_isothermal, bool i_degradation,
                              std::string i_electrode_SOC_solver) : BaseBatterySolver(i_b_cell, i_isothermal, i_degradation, i_electrode_SOC_solver),
                                                                    SOC_solver_p('p', i_b_cell.elec_p.get_c_max() * i_b_cell.elec_p.get_SOC(), "higher"),
                                                                    SOC_solver_n('n', i_b_cell.elec_n.get_c_max() * i_b_cell.elec_n.get_SOC(), "higher"),
@@ -730,6 +748,16 @@ std::pair<OverPotentials, bool> BatterySolver::solve_one_iteration(double t_prev
     return {overpotential_, step_completed};
 }
 
+/**
+ * @brief Runs the iteration for the battery cell solver. The solution time for the iteration is also printed in the
+ * terminal.
+ *
+ * @param i_cycler The instance of the cycler
+ * @param store_solution_iter iteration at which at which to store the solution varaibles. For instance, the value of 5 means that
+ * the solution variables are stored after 5 iterations. Use the value of 1 to store solution variables obtained after all of the
+ * iterations. Note that the solutions variables from the first iteration is always stored.
+ * @return Solution
+ */
 Solution BatterySolver::solve(BaseCycler i_cycler, int store_solution_iter)
 {
     std::chrono::high_resolution_clock::time_point t_start{std::chrono::high_resolution_clock::now()};
@@ -771,17 +799,12 @@ Solution BatterySolver::solve(BaseCycler i_cycler, int store_solution_iter)
             }
             cap = general_equations::calc_cap(cap, m_b_cell.get_cap(), I, dt);
 
-            // break conditions
-            if ((i_cycler.cycle_steps[i] == "rest") & (t_curr > i_cycler.rest_time))
-                step_completed = true;
-            if ((i_cycler.cycle_steps[i] == "discharge") & (term_V < i_cycler.V_min))
-                step_completed = true;
-            if ((i_cycler.cycle_steps[i] == "charge") & (term_V > i_cycler.V_max))
-                step_completed = true;
-            if ((i_cycler.cycle_steps[i] == "custom") & ((t_curr > i_cycler.rest_time) | (term_V < i_cycler.V_min)))
-                step_completed = true;
+            // check if the conditions for the completion of the iteration has been met
+            step_completed = check_for_step_completion(i_cycler.cycle_steps[i], i_cycler.rest_time,
+                                                       i_cycler.V_min, i_cycler.V_max,
+                                                       term_V, t_curr);
 
-            // The arrays are updated below
+            // The solution arrays are updated below
             if ((time_index == 0) || (time_index % store_solution_iter == 0))
             {
                 sol.update_t(sim_time);
@@ -792,12 +815,7 @@ Solution BatterySolver::solve(BaseCycler i_cycler, int store_solution_iter)
                 sol.update_x_p(m_b_cell.elec_p.get_SOC());
                 sol.update_x_n(m_b_cell.elec_n.get_SOC());
 
-                // // calculation and updates of overpotentials
-                // std::tuple<double, double, double, double, double> overpotential_values = calc_overpotentials(I);
-                // sol.update_OCV_LIB(std::get<1>(overpotential_values));
-                // sol.update_overpotential_elec_p(std::get<2>(overpotential_values));
-                // sol.update_overpotential_elec_n(std::get<3>(overpotential_values));
-                // sol.update_overpotential_R_cell(std::get<4>(overpotential_values));
+                // calculation and updates of overpotentials
                 sol.update_OCV_LIB(step_overpotentials.OCV_LIB);
                 sol.update_overpotential_elec_p(step_overpotentials.elec_p);
                 sol.update_overpotential_elec_n(step_overpotentials.elec_n);
@@ -911,13 +929,6 @@ Solution ESPBatterySolver::solve(BaseCycler i_cycler)
     double cap = 0.0;
     double sim_time = 0.0;
     std::pair<OverPotentials, bool> term_V_and_bool;
-    // sol.update_t(sim_time);
-    // sol.update_cycling_step("rest");
-    // sol.update_V(term_V);
-    // sol.update_temp(m_b_cell.get_T());
-    // sol.update_cap(cap);
-    // sol.update_x_p(m_b_cell.elec_p.get_SOC());
-    // sol.update_x_n(m_b_cell.elec_n.get_SOC());
 
     // simultion loop
     for (int i = 0; i < i_cycler.cycle_steps.size(); i++)
@@ -945,15 +956,10 @@ Solution ESPBatterySolver::solve(BaseCycler i_cycler)
             }
             cap = general_equations::calc_cap(cap, m_b_cell.get_cap(), I, dt);
 
-            // break conditions
-            if ((i_cycler.cycle_steps[i] == "rest") & (t_curr > i_cycler.rest_time))
-                step_completed = true;
-            if ((i_cycler.cycle_steps[i] == "discharge") & (term_V < i_cycler.V_min))
-                step_completed = true;
-            if ((i_cycler.cycle_steps[i] == "charge") & (term_V > i_cycler.V_max))
-                step_completed = true;
-            if ((i_cycler.cycle_steps[i] == "custom") & ((t_curr > i_cycler.rest_time) | (term_V < i_cycler.V_min)))
-                step_completed = true;
+            // check if the conditions for the completion of the iteration has been met
+            step_completed = check_for_step_completion(i_cycler.cycle_steps[i], i_cycler.rest_time,
+                                                       i_cycler.V_min, i_cycler.V_max,
+                                                       term_V, t_curr);
 
             // The arrays are updated below
             sol.update_t(sim_time);
@@ -975,7 +981,7 @@ Solution ESPBatterySolver::solve(BaseCycler i_cycler)
     }
 
     std::chrono::high_resolution_clock::time_point t_end{std::chrono::high_resolution_clock::now()};
-    std::cout << "Solution time: " << std::chrono::duration<double, std::ratio<1,1000>> (t_end-t_start).count() << " ms. " << std::endl;
+    std::cout << "Solution time: " << std::chrono::duration<double, std::ratio<1, 1000>>(t_end - t_start).count() << " ms. " << std::endl;
 
     return sol;
 }

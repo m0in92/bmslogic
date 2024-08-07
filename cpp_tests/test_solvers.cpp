@@ -596,3 +596,46 @@ TEST(SPSolverTest, IsoThermalSPSolverCNSolver)
     EXPECT_EQ(sol.get_temp()[3], temp);
     EXPECT_EQ(sol.get_temp()[4], temp);
 }
+
+TEST(ESPBatterySolverTest, MethodSolveIsothermal)
+{
+    double temp = 298.15;
+    double soc_n = 0.7568;
+    double soc_p = 0.4956;
+
+    double discharge_current = 1.656;
+    double V_min = 4.0;
+    double SOC_lib_min = 0.0;
+    double SOC_lib = 0.0;
+
+    std::function<double(double)> OCP_ref_n_ = OCP_ref_n;
+    std::function<double(double)> dOCPdT_n_ = dOCPdT_n;
+    std::function<double(double)> OCP_ref_p_ = OCP_ref_p;
+    std::function<double(double)> dOCPdT_p_ = dOCPdT_p;
+
+    NElectrode elec_n = NElectrode(L_n, A_n, kappa_n, epsilon_n, max_conc_n, R_n, S_n,
+                                   T_ref_n, D_ref_n, k_ref_n, Ea_D_n, Ea_R_n, alpha_n,
+                                   brugg_n, soc_n, temp, OCP_ref_n_, dOCPdT_n_);
+    PElectrode elec_p = PElectrode(L_p, A_p, kappa_p, epsilon_p, max_conc_p, R_p, S_p,
+                                   T_ref_p, D_ref_p, k_ref_p, Ea_D_p, Ea_R_p, alpha_p,
+                                   brugg_p, soc_p, temp, OCP_ref_p_, dOCPdT_p_);
+    Electrolyte electrolyte = Electrolyte(c_init_e, L_e, kappa_e, epsilon_en, epsilon_e, epsilon_ep, D_e, t_c, brugg_e);
+    BatteryCell b_cell = BatteryCell(elec_p, elec_n, electrolyte, rho, Vol, C_p, h, A, cap, V_max, V_min, R_cell);
+
+    Discharge cycler = Discharge(discharge_current, V_min, SOC_lib_min, SOC_lib);
+
+    ESPBatterySolver solver = ESPBatterySolver(b_cell, true, false, "poly");
+    Solution sol = solver.solve(cycler);
+
+    EXPECT_EQ(sol.get_V()[0], 4.0190579108689812);
+    EXPECT_EQ(sol.get_V()[1], 4.0190125310905893);
+    EXPECT_EQ(sol.get_V()[2], 4.0189671543528735);
+    EXPECT_EQ(sol.get_V()[3], 4.0189217806410218);
+    EXPECT_EQ(sol.get_V()[4], 4.0188764100058387);
+
+    EXPECT_EQ(sol.get_temp()[0], temp);
+    EXPECT_EQ(sol.get_temp()[1], temp);
+    EXPECT_EQ(sol.get_temp()[2], temp);
+    EXPECT_EQ(sol.get_temp()[3], temp);
+    EXPECT_EQ(sol.get_temp()[4], temp);
+}

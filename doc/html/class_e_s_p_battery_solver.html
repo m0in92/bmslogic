@@ -106,13 +106,18 @@ $(function(){initNavTree('class_e_s_p_battery_solver.html',''); initResizable(tr
   <div class="headertitle"><div class="title">ESPBatterySolver Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Contains the method for solving the continuum scale physics-based models using extended single particle model.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="solvers_8h_source.html">solvers.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ESPBatterySolver:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_e_s_p_battery_solver.png" usemap="#ESPBatterySolver_map" alt=""/>
   <map id="ESPBatterySolver_map" name="ESPBatterySolver_map">
-<area href="class_base_battery_solver.html" alt="BaseBatterySolver" shape="rect" coords="0,0,117,24"/>
+<area href="class_base_battery_solver.html" title="Intended to be the parent class for the continuum-scale physics-based battery cell models." alt="BaseBatterySolver" shape="rect" coords="0,0,117,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -128,6 +133,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1a143d36c557fdcbe9d68648bdc33422 inherit pub_methods_class_base_battery_solver" id="r_a1a143d36c557fdcbe9d68648bdc33422"><td class="memItemLeft" align="right" valign="top">
 &#160;</td><td class="memItemRight" valign="bottom"><b>BaseBatterySolver</b> (<a class="el" href="class_battery_cell.html">BatteryCell</a> i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver)</td></tr>
 <tr class="separator:a1a143d36c557fdcbe9d68648bdc33422 inherit pub_methods_class_base_battery_solver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99da9085d347f1f68ebea3724713be8a inherit pub_methods_class_base_battery_solver" id="r_a99da9085d347f1f68ebea3724713be8a"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>check_for_step_completion</b> (const std::string &amp;cycling_step, const double &amp;rest_time, const double &amp;V_min, const double &amp;V_max, const double &amp;V_i, const double &amp;t_curr)</td></tr>
+<tr class="separator:a99da9085d347f1f68ebea3724713be8a inherit pub_methods_class_base_battery_solver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -175,7 +183,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_degradation</b></td
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>m_electrode_SOC_solver</b></td></tr>
 <tr class="separator:ad88df1ae543837c41c2c09dda294e6b0 inherit pub_attribs_class_base_battery_solver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Contains the method for solving the continuum scale physics-based models using extended single particle model. </p>
+<p>The extended single particle models add the electrolyte dynamics to the single particle model. The model equations have been adapted from the following literature.</p>
+<p>Moura, S. J., Argomedo, F. B., Klein, R., Mirtabatabaei, A., &amp; Krstic, M. (2017). Battery State Estimation for a Single Particle Model with <a class="el" href="class_electrolyte.html" title="Class to store the model parameters for the electrolyte.">Electrolyte</a> Dynamics. IEEE Transactions on Control Systems Technology, 25(2), 453–468. <a href="https://doi.org/10.1109/TCST.2016.2571663">https://doi.org/10.1109/TCST.2016.2571663</a> </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/<a class="el" href="solvers_8h_source.html">solvers.h</a></li>
 <li>C:/Users/moina/dev/BMSLogic/bmslogic/simulations/cell/<a class="el" href="solvers_8cpp.html">solvers.cpp</a></li>
 </ul>

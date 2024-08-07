@@ -4,9 +4,9 @@
  * @brief Contains the classes and functions for performing battery cell simulations.
  * @version 0.1
  * @date 2024-08-05
- * 
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 
 #ifndef SPCPP_PROJECT_SOLVERS_H
@@ -277,8 +277,14 @@ private:
     std::vector<double> RHS_vector(double j, double dt, double R, double D);
 };
 
-/*
- * Lithium-Ion Concentration Solver in the Electrolyte
+/**
+ * @brief Contains the methods to solve for the lithium-ion concentration in the electrolyte region using the the
+ * finite volume method techique (FEM). The solution scheme has been adapted from the publication:
+ *
+ * Han, S., Tang, Y., & Khaleghi Rahimian, S. (2021). A numerically efficient method of solving the full-order pseudo-2-dimensional (P2D)
+ * Li-ion cell model. Journal of Power Sources, 490, 229571.
+ * https://doi.org/10.1016/J.JPOWSOUR.2021.229571
+ *
  */
 class ElectrolyteFVMSolver
 {
@@ -343,11 +349,20 @@ private:
  * Battery Solvers below
  */
 
+/**
+ * @brief Intended to be the parent class for the continuum-scale physics-based battery cell models.
+ *
+ */
 class BaseBatterySolver
 {
 public:
     BaseBatterySolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver);
     ~BaseBatterySolver() = default;
+
+    // helper methods
+    bool check_for_step_completion(const std::string &cycling_step, const double &rest_time,
+                                   const double &V_min, const double &V_max,
+                                   const double &V_i, const double &t_curr);
 
     // member variables
     BatteryCell m_b_cell;
@@ -356,10 +371,18 @@ public:
     std::string m_electrode_SOC_solver;
 };
 
+/**
+ * @brief Contains the method to solve for the continuum-scale battery using the single particle model (SPM).
+ * The model equations have been adateped from the following literature.
+ *
+ * Guo, M., Sikha, G., & White, R. E. (2011). Single-Particle Model for a Lithium-Ion Cell: Thermal Behavior.
+ * Journal of The Electrochemical Society, 158(2), A122. https://doi.org/10.1149/1.3521314/XML
+ *
+ */
 class BatterySolver : public BaseBatterySolver
 {
 public:
-    explicit BatterySolver(BatteryCell i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver = "poly");
+    explicit BatterySolver(BatteryCell &i_b_cell, bool i_isothermal, bool i_degradation, std::string i_electrode_SOC_solver = "poly");
     ~BatterySolver() = default;
     // Solvers instances
     PolynomialApprox SOC_solver_p;
@@ -377,7 +400,16 @@ private:
     double calc_V(double I);
     OverPotentials calc_overpotentials(double I);
 };
-
+/**
+ * @brief Contains the method for solving the continuum scale physics-based models using extended single particle model. The extended
+ * single particle models add the electrolyte dynamics to the single particle model. The model equations have been adapted from the
+ * following literature.
+ *
+ *Moura, S. J., Argomedo, F. B., Klein, R., Mirtabatabaei, A., & Krstic, M. (2017). Battery State Estimation for a Single Particle Model with Electrolyte Dynamics.
+ IEEE Transactions on Control Systems Technology, 25(2), 453–468.
+ https://doi.org/10.1109/TCST.2016.2571663
+ *
+ */
 class ESPBatterySolver : public BaseBatterySolver
 {
 public:

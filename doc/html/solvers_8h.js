@@ -11,7 +11,7 @@ var solvers_8h =
     [ "CNSolver", "class_c_n_solver.html", null ],
     [ "ElectrolyteFVMSolver", "class_electrolyte_f_v_m_solver.html", "class_electrolyte_f_v_m_solver" ],
     [ "BaseBatterySolver", "class_base_battery_solver.html", null ],
-    [ "BatterySolver", "class_battery_solver.html", null ],
+    [ "BatterySolver", "class_battery_solver.html", "class_battery_solver" ],
     [ "ESPBatterySolver", "class_e_s_p_battery_solver.html", null ],
     [ "lambda_function", "solvers_8h.html#a5f6a813ad39656c73751fc2e43d9590e", null ]
 ];

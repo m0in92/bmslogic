@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_battery_module.html":[1,0,1,1,0,2,2],
 "classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_battery_pack.html":[1,0,1,1,0,2,3],
 "classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_drive_train.html":[1,0,1,1,0,2,4],
 "classbmslogic_1_1simulations_1_1applications_1_1ev_1_1_e_v.html":[1,0,1,1,0,2,5],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver.html#a65a5e0231e75354f4df26ddf77c9066e":[1,0,7,1,2],
 "classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver.html#aa351ca6f38ffc611e1d09c1b6757632f":[0,0,4,1,3],
 "classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver.html#aa351ca6f38ffc611e1d09c1b6757632f":[1,0,7,1,3],
-"classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver.html#acf684051ff00ef94264bf71daebc0472":[0,0,4,1,0],
-"classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver.html#acf684051ff00ef94264bf71daebc0472":[1,0,7,1,0]
+"classelectrolyte__conc_1_1_py_electrolyte_conc_f_v_m_solver.html#acf684051ff00ef94264bf71daebc0472":[0,0,4,1,0]
 };

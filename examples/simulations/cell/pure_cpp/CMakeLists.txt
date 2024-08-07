@@ -24,6 +24,14 @@ set_target_properties(discharge_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE 
 # set_target_properties(discharge_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)
 # set_target_properties(discharge_spm PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)
 
+add_executable(discharge_espm discharge_espm.cpp ${EXAMPLE_SOURCE})
+target_include_directories(discharge_espm PUBLIC ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell ${PROJECT_SOURCE_DIR}/bmslogic/
+                                                ${PROJECT_SOURCE_DIR}/extern/cpp_plotting)
+target_link_libraries(discharge_espm matplotlib_cpp)
+set_target_properties(discharge_espm PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)
+set_target_properties(discharge_espm PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)
+set_target_properties(discharge_espm PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)
+
 add_executable(discharge_spm_cn_solver discharge_spm_cn_solver.cpp ${EXAMPLE_SOURCE})
 target_include_directories(discharge_spm_cn_solver PUBLIC ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell ${PROJECT_SOURCE_DIR}/bmslogic/)
 set_target_properties(discharge_spm_cn_solver PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/examples/simulations/cell/pure_cpp)

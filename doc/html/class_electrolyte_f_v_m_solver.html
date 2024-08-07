@@ -105,6 +105,11 @@ $(function(){initNavTree('class_electrolyte_f_v_m_solver.html',''); initResizabl
   <div class="headertitle"><div class="title">ElectrolyteFVMSolver Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Contains the methods to solve for the lithium-ion concentration in the electrolyte region using the the finite volume method techique (FEM).  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="solvers_8h_source.html">solvers.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -229,7 +234,11 @@ std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><
 std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_vector_a_s</b></td></tr>
 <tr class="separator:a4e5c7e92c5d179e33a5a5611f6b7fd5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Contains the methods to solve for the lithium-ion concentration in the electrolyte region using the the finite volume method techique (FEM). </p>
+<p>The solution scheme has been adapted from the publication:</p>
+<p>Han, S., Tang, Y., &amp; Khaleghi Rahimian, S. (2021). A numerically efficient method of solving the full-order pseudo-2-dimensional (P2D) Li-ion cell model. Journal of Power Sources, 490, 229571. <a href="https://doi.org/10.1016/J.JPOWSOUR.2021.229571">https://doi.org/10.1016/J.JPOWSOUR.2021.229571</a> </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a790bcb34a331596a40f5d5210f983eff" name="a790bcb34a331596a40f5d5210f983eff"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a790bcb34a331596a40f5d5210f983eff">&#9670;&#160;</a></span>calc_diag()</h2>
 
