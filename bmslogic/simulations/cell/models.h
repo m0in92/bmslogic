@@ -113,7 +113,6 @@ struct OverPotentials
 };
 
 /**
- * @class SPModel
  * @brief Equations for the single particle model
  *
  */
@@ -130,7 +129,6 @@ public:
  * @brief contains equations for the Enhanced single particle models.
  *
  */
-
 namespace ESPModel
 {
     double molar_flux_electrode(double &i_app, double S, char electrode_type);
@@ -150,7 +148,6 @@ namespace ESPModel
 };
 
 /**
- * @class ROMSEI
  * @brief This class contains the equations for the reduced order SEI growth model as mentioned in ref [1], with slight
  * modifications.
  *
