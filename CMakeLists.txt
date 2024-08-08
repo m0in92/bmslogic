@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.12)
 project(bmslogic)
 
+# set variables for the relevant filepaths of the BMSLogic project.
+set(CALC_HELPERS_DIR ${PROJECT_SOURCE_DIR}/bmslogic/calc_helpers)
+set(CELL_SIM_DIR ${PROJECT_SOURCE_DIR}/bmslogic/simulations/cell)
+
 if(${APPLE})
     set(CMAKE_CXX_STANDARD 20)
     set(CXX_STANDARD_REQUIRED OFF)
@@ -9,7 +13,7 @@ else()
     set(CXX_STANDARD_REQUIRED FALSE)
 endif()
 
-option(CPP_ONLY "Only compiles the executables" OFF)
+# option(CPP_ONLY "Only compiles the executables" OFF)
 option(EMBEDDED "Only compiles the executables for the linux embedded system" OFF)
 
 add_subdirectory(extern/pybind11)

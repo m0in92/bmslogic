@@ -43,20 +43,6 @@ int main()
     Solution sol = solver.solve(cycler);
 
     // With KF
-
-    // Eigen::VectorXd t;
-    // // t << 0.0, 0.1, 0.2, 0.3;
-    // Eigen::VectorXd I;
-    // // I << -1.656, -1.656, -1.656, -1.656;
-    // Eigen::VectorXd V;
-    // // V << 4.2, 4.2, 4.2, 4.2;
-    // for (auto t_: sol.get_t())
-    //     t << t_;
-    // for (int idx=0; idx<sol.get_t().size(); idx++)
-    //     I << discharge_current;
-    // for (auto V_: sol.get_V())
-    //     V << V_;
-
     std::vector<double> t = sol.get_t();
     std::vector<double> I;
     for (int idx=0; idx<t.size(); idx++)
