@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 
-#include "extern/owl.h"
+#include "owl.h"
 
 /**
  * @brief This class is intended to store the relevant cycling variables for the battery cell simulations.

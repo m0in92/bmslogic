@@ -9,8 +9,8 @@
  *
  */
 
-#include "calc_helpers/constants.h"
-#include "extern/owl.h"
+#include "constants.h"
+#include "owl.h"
 #include "coords.h"
 
 ElectrolyteFVMCoordinates::ElectrolyteFVMCoordinates(double i_L_n, double i_L_sep, double i_L_p,

@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-#include "extern/owl.h"
+#include "owl.h"
 #include "solvers.h"
 
 #include "example_parameters.cpp"

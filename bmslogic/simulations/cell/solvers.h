@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 
-#include "extern/owl.h"
+#include "owl.h"
 #include "battery_components.h"
 #include "cyclers.h"
 #include "solution.h"

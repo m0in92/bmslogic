@@ -190,8 +190,9 @@ namespace OWL
                 return flag;
             }
         }
-        catch (std::invalid_argument &e)
+        catch (const std::invalid_argument &e)
         {
+            std::cerr << e.what() << std::endl;
             return false;
         }
     }
@@ -793,7 +794,7 @@ namespace OWL
      * Throws:
      *     None
      */
-    ArrayXD ArrayXD::operator*(const double scalarValue)
+    ArrayXD ArrayXD::operator*(const double &scalarValue)
     {
         ArrayXD resultVec = multiply(scalarValue);
         return resultVec;

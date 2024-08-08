@@ -7,7 +7,7 @@
 
 #include "gtest/gtest.h"
 
-#include "extern/owl.h"
+#include "owl.h"
 
 TEST(TestArrayXDConstructor, EmptyArray)
 {

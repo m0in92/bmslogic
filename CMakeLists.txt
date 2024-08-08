@@ -16,10 +16,12 @@ endif()
 # option(CPP_ONLY "Only compiles the executables" OFF)
 option(EMBEDDED "Only compiles the executables for the linux embedded system" OFF)
 
+# add the subdirectory to the extern libraries
 add_subdirectory(extern/pybind11)
 add_subdirectory(extern/eigen)
 add_subdirectory(extern/cpp_plotting)
 
+# add subdirectories to this project directories
 if(EMBEDDED)
     message("EMBEDDED")
 elseif(NOT EMBEDDED)

@@ -88,7 +88,7 @@ namespace OWL
         ArrayXD operator+(double &);
         ArrayXD operator+(ArrayXD &);
         ArrayXD operator-(ArrayXD &);
-        ArrayXD operator*(const double);
+        ArrayXD operator*(const double&);
         ArrayXD operator*(ArrayXD &);
         void operator<<(double inputValue)
         {

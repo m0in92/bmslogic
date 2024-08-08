@@ -11,6 +11,7 @@
 
 #include <cmath>
 
+#include "constants.h"
 #include "battery_components.h"
 #include "common_includes.h"
 

@@ -12,9 +12,10 @@
 
 #include <cmath>
 
+#include "constants.h"
 #include "models.h"
-#include "common_includes.h"
-#include "extern/owl.h"
+// #include "common_includes.h"
+#include "owl.h"
 
 /**
  * @brief the capacity increment

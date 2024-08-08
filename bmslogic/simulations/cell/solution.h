@@ -15,7 +15,7 @@
 #include <vector>
 #include <string>
 
-#include "extern/owl.h"
+#include "owl.h"
 
 class ECMSolution
 {

@@ -6,7 +6,7 @@
 #include "Eigen/Core"
 
 #include "solvers.h"
-#include "calc_helpers/kalman_filter.h"
+#include "kalman_filter.h"
 
 /**
  * @brief Sigma-Point Kalman filter solver for the electrode lithium-ion concentration inside the electrode

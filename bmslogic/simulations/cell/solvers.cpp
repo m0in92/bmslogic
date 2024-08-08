@@ -15,8 +15,8 @@
 #include <ratio>
 #include <chrono>
 
-#include "calc_helpers/constants.h"
-#include "extern/owl.h"
+#include "constants.h"
+#include "owl.h"
 #include "solvers.h"
 #include "models.h"
 #include "coords.h"
