@@ -518,7 +518,7 @@ PYBIND11_MODULE(cell, m)
 
      // Battery Solver
      py::class_<BatterySolver>(m, "BatterySolver")
-         .def(py::init<BatteryCell, bool, bool, std::string>(),
+         .def(py::init<BatteryCell&, bool, bool, std::string>(),
               py::arg("battery_cell"), py::arg("is_isothermal"), py::arg("enable_degradation"),
               py::arg("electrode_soc_solver") = "poly")
          .def("solve", &BatterySolver::solve, py::arg("cycler"), py::arg("store_solution_iter") = 1);
