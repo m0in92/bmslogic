@@ -17,7 +17,7 @@
 #include "pybind11/stl.h"
 #include "pybind11/eigen.h"
 
-#include "calc_helpers/constants.h"
+#include "constants.h"
 #include "general_ocps.h"
 #include "battery_components.h"
 #include "models.h"

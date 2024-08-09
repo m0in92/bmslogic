@@ -15,7 +15,7 @@
 #include <cmath>
 #include <vector>
 
-#include "calc_helpers/constants.h"
+#include "constants.h"
 
 namespace positive_electrode_ocps
 {
