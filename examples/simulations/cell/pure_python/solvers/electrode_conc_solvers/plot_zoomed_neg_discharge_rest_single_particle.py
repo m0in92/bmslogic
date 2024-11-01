@@ -35,17 +35,15 @@ with open(os.path.join(FILE_DIR, "neg_discharge_rest_poly_soc.pkl"), "rb") as pk
 
 # Plots
 # Plots
-matplotlib.rc('xtick', labelsize=12) 
-matplotlib.rc('ytick', labelsize=12) 
+matplotlib.rc('xtick', labelsize=25) 
+matplotlib.rc('ytick', labelsize=25) 
 
-plt.plot(lst_cn_time, lst_cn_soc, label="Crank-Nicolson Scheme")
-plt.plot(lst_eigen_time, lst_eigen_soc, label="Eigen Expansion Method")
-plt.plot(lst_poly_time, lst_poly_soc, label="Polynomial Approximation")
-# plt.plot(lst_poly_time_two, lst_poly_soc_two, label="Polynomial Approximation - Two Order")
+plt.plot(lst_cn_time, lst_cn_soc, label="Crank-Nicolson Scheme", linewidth=3)
+plt.plot(lst_eigen_time, lst_eigen_soc, label="Eigen Expansion Method", linewidth=3)
+plt.plot(lst_poly_time, lst_poly_soc, label="Polynomial Approximation", linewidth=3)
 
-plt.xlabel("Time [s]", fontsize=15)
-plt.ylabel("Negative Electrode SOC", fontsize=15)
-plt.legend(fontsize=12)
+plt.xlim(0, 1000)
+plt.ylim(0.5, 0.8)
 plt.tight_layout()
 plt.show()
 

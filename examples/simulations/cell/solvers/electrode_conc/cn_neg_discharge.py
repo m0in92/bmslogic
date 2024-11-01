@@ -84,8 +84,8 @@ print(f"Poly solver solved in {t_end - t_start} s")
 
 # plots
 plt.plot(lst_cn_time, lst_cn_soc, label="CN")
-# plt.plot(lst_eigen_time, lst_eigen_soc, label="eigen")
-# plt.plot(lst_poly_time, lst_poly_soc, label="poly")
+plt.plot(lst_eigen_time, lst_eigen_soc, label="eigen")
+plt.plot(lst_poly_time, lst_poly_soc, label="poly")
 
 plt.legend()
 plt.show()
