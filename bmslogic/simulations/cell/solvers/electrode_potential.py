@@ -120,11 +120,11 @@ class PyElectrodePotentialFVMSolver(PyBaseElectrodePotentialSolver):
         """
         returns the column vector for the FVM solver
         :param j: row or column vector containing the molar flux [mol m-2 s-1]
-        :return: column vector with values in the units of V
+        :return: column vector (with the array dimensions of n x 1) with values in the units of V. 
         """
         if j.ndim == 1:
             j = j.reshape(-1, 1)
-        return self.a_s * constants.Constants.F * (self.dx ** 2) * j / self.sigma_eff
+        return self.a_s * constants.Constants.F * (self.dx ** 2) * (-j) / self.sigma_eff
 
     def solve_phi_s(self, j: npt.ArrayLike, terminal_potential: float = 0.0) -> np.ndarray:
         """Returns an array containing the spatial distribution of the potential across the solid electrode region

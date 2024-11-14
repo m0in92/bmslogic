@@ -934,3 +934,26 @@ class PyEnhancedSPSolver(PySPSolver):
                                                        electrolyte_conc,
                                                        axis=0)
         return PySolution(base_solution_instance=self.sol_init, name=sol_name)
+
+
+class SimplifiedP2D(PySPSolver):
+    """Contains the relevant variables and methods for solving a simplified P2D simulation. In the simplified P2D simulation,
+    the lithium-ion flux across the solid electrode region is considered to be consistent throughout and calculated using the same 
+    equation as the single particle model 
+
+    Parameters
+    ----------
+    PyBaseSolver : _type_
+        _description_
+    """
+    
+    def __init__(self, b_cell, isothermal: bool = True, degradation: bool = False, electrode_SOC_solver: str = 'eigen', **electrode_SOC_solver_params):
+        super().__init__(b_cell, isothermal, degradation, electrode_SOC_solver, **electrode_SOC_solver_params)
+        pass
+
+    def solve_one_iteration():
+        pass
+
+    @timer
+    def solve():
+        pass

@@ -1,5 +1,7 @@
 """
-This script demonstrates the example usage of the solid phase electrode potential using the finite volume method (FVM).
+This script demonstrates the example usage of the solid phase electrode potential using the finite volume method (FVM). 
+
+Spatial electrode potential for both positive and negative electrode is solved in this scipt.
 """
 
 __author__ = "Moin Ahmed"
@@ -25,12 +27,19 @@ except ModuleNotFoundError:
     from bmslogic.simulations.cell.solvers.electrode_potential import PyElectrodePotentialFVMSolver
 
 
-L_n: float = 8e-5
-L_s: float = 2.5e-5
-L_p: float = 8.8e-5
+L_n: float = 8e-5  # [m]
+L_s: float = 2.5e-5  # [m]
+L_p: float = 8.8e-5  # [m]
+R_n: float = 1.25e-5  # [m]
+R_p: float = 8.5e-6  # [m]
+epsilon_n: float = 0.59
+epsilon_p: float = 0.49
 
-a_s_p: float = 7.28e3
-a_s_n: float = 5.78e3
+# a_s_p: float = 7.28e3
+# a_s_n: float = 5.78e3
+
+a_s_p: float = 3 * epsilon_p / R_p
+a_s_n: float = 3 * epsilon_n / R_n
 
 brugg_p: float = 1.5
 brugg_n: float = 1.5
@@ -42,16 +51,19 @@ sigma_n: float = 100
 sigma_eff_p: float = sigma_p * (epsilon_ep ** brugg_p)
 sigma_eff_n: float = sigma_n * (epsilon_ep ** brugg_n)
 
-coords: PyElectrolyteFVMCoordinates = PyElectrolyteFVMCoordinates(L_n=8e-5, L_s=2.5e-5, L_p=8.8e-5)
+coords: PyElectrolyteFVMCoordinates = PyElectrolyteFVMCoordinates(
+    L_n=8e-5, L_s=2.5e-5, L_p=8.8e-5)
 fvm_solver_p: PyElectrodePotentialFVMSolver = PyElectrodePotentialFVMSolver(fvm_coords=coords,
-                                                                        electrode_type='p',
-                                                                        sigma_eff=sigma_eff_p, a_s=a_s_p)
+                                                                            electrode_type='p',
+                                                                            sigma_eff=sigma_eff_p, a_s=a_s_p)
 fvm_solver_n: PyElectrodePotentialFVMSolver = PyElectrodePotentialFVMSolver(fvm_coords=coords,
-                                                                        electrode_type='n',
-                                                                        sigma_eff=sigma_eff_n, a_s=a_s_n)
-j_n: np.ndarray = PySPMe.molar_flux_electrode(I=-1.656, S=0.7824, electrode_type='n') * np.ones(len(coords.array_x_n))
+                                                                            electrode_type='n',
+                                                                            sigma_eff=sigma_eff_n, a_s=a_s_n)
+j_n: np.ndarray = PySPMe.molar_flux_electrode(
+    I=-1.656, S=0.7824, electrode_type='n') * np.ones(len(coords.array_x_n))
 # [mol/m2/s]
-j_p: np.ndarray = PySPMe.molar_flux_electrode(I=-1.656, S=0.7824, electrode_type='n') * np.ones(len(coords.array_x_n))
+j_p: np.ndarray = PySPMe.molar_flux_electrode(
+    I=-1.656, S=0.7824, electrode_type='n') * np.ones(len(coords.array_x_n))
 # [mol/m2/s]
 
 
@@ -59,14 +71,15 @@ j_p: np.ndarray = PySPMe.molar_flux_electrode(I=-1.656, S=0.7824, electrode_type
 fig = plt.figure()
 
 ax1 = fig.add_subplot(121)
-ax1.plot(coords.array_x_n, fvm_solver_n.solve_phi_s(j=j_n, terminal_potential=0.0).flatten())
-ax1.set_ylim(0, 4.2)
+ax1.plot(coords.array_x_n, fvm_solver_n.solve_phi_s(
+    j=j_n, terminal_potential=0.0).flatten())
+ax1.set_ylim(-0.001, 0.001)
 
 ax2 = fig.add_subplot(122)
-ax2.plot(coords.array_x_p, fvm_solver_p.solve_phi_s(j=j_p, terminal_potential=4.2).flatten())
-ax2.set_ylim(0, 4.5)
+ax2.plot(coords.array_x_p, fvm_solver_p.solve_phi_s(
+    j=j_p, terminal_potential=4.2).flatten())
+ax2.set_ylim(4.19, 4.21)
 
 plt.ticklabel_format(axis='x', scilimits=[-1, 1])
+plt.tight_layout()
 plt.show()
-
-

@@ -6,7 +6,7 @@ import os
 import pathlib
 import unittest
 
-import bmslogic.extern.extern as cpp_extern
+import bmslogic.calc_helpers.calc_helpers as cpp_extern
 
 
 # below gets the absoulute file path to the sample csv file
@@ -42,5 +42,5 @@ class TestHB(unittest.TestCase):
     def test_get_value(self):
         self.assertEqual("1626", self.df.get_value("Value", "Density [kg m^-3]"))
 
-print(cpp_extern.read_csv(FILEPATH_TO_SAMPLE_CSV, 0, 0).get_data)
+# print(cpp_extern.read_csv(FILEPATH_TO_SAMPLE_CSV, 0, 0).get_data)
 
