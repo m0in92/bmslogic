@@ -15,7 +15,7 @@ import numpy as np
 from bmslogic.simulations.cell.custom_warnings_exceptions import *
 from bmslogic.simulations.cell.battery_components import PyBatteryCell
 from bmslogic.simulations.cell.cyclers import PyDischarge
-from bmslogic.simulations.cell.solvers.battery import PySPSolver, PyEnhancedSPSolver
+from bmslogic.simulations.cell.solvers.battery import PySPSolver, PyEnhancedSPSolver, PySimplifiedP2D
 
 
 class TestSPSolverBasic(unittest.TestCase):
@@ -190,13 +190,15 @@ class TestESPSolver(unittest.TestCase):
     t = np.arange(0, 4000, 0.1)
     I = -1.656 * np.ones(len(t))
     test_cell = PyBatteryCell.read_from_parametersets(parameter_set_name='test',
-                                                         soc_init_p=SOC_init_p, soc_init_n=SOC_init_n,
-                                                         temp_init=T)
+                                                      soc_init_p=SOC_init_p, soc_init_n=SOC_init_n,
+                                                      temp_init=T)
 
     def test_constructor(self):
-        test_solver = PyEnhancedSPSolver(b_cell=self.test_cell, isothermal=True, degradation=False)
+        test_solver = PyEnhancedSPSolver(
+            b_cell=self.test_cell, isothermal=True, degradation=False)
 
-        self.assertEqual(self.test_cell.elec_p.a_s, test_solver.b_cell.elec_p.a_s)
+        self.assertEqual(self.test_cell.elec_p.a_s,
+                         test_solver.b_cell.elec_p.a_s)
         self.assertEqual(True, test_solver.bool_isothermal)
         self.assertEqual(False, test_solver.bool_degradation)
         self.assertEqual('poly', test_solver.electrode_SOC_solver)
@@ -208,13 +210,56 @@ class TestESPSolver(unittest.TestCase):
 
         c_init: np.ndarray = 1000 * np.ones(30)
         c_init = c_init[np.newaxis, :]
-        self.assertTrue(np.array_equal(c_init, test_solver.sol_init.electrolyte_conc[1:]))
+        self.assertTrue(np.array_equal(
+            c_init, test_solver.sol_init.electrolyte_conc[1:]))
 
     def test_constructor_with_insufficient_parameters(self):
         b_cell: PyBatteryCell = PyBatteryCell.read_from_parametersets(parameter_set_name="test_single_particle_only",
-                                                                            soc_init_p=self.SOC_init_p,
-                                                                            soc_init_n=self.SOC_init_n,
-                                                                            temp_init=self.T)
+                                                                      soc_init_p=self.SOC_init_p,
+                                                                      soc_init_n=self.SOC_init_n,
+                                                                      temp_init=self.T)
         with self.assertRaises(InsufficientParameters):
-            test_solver = PyEnhancedSPSolver(b_cell=b_cell, isothermal=True, degradation=False)
+            test_solver = PyEnhancedSPSolver(
+                b_cell=b_cell, isothermal=True, degradation=False)
 
+
+class TestSimplifiedP2D(unittest.TestCase):
+    """Class for testing the implementation of the object pertaining to the solution of the Simplified P2D.
+
+    Parameters
+    ----------
+    unittest : _type_
+        _description_
+    """
+    T = 298.15
+    SOC_init_p = 0.4956
+    SOC_init_n = 0.7568
+    t = np.arange(0, 4000, 0.1)
+    I = -1.656 * np.ones(len(t))
+    test_cell = PyBatteryCell.read_from_parametersets(parameter_set_name='test',
+                                                      soc_init_p=SOC_init_p, soc_init_n=SOC_init_n,
+                                                      temp_init=T)
+
+    def test_constructor(self):
+        test_solver: PySimplifiedP2D = PySimplifiedP2D(
+            b_cell=self.test_cell, isothermal=True, degradation=False)
+        self.assertEqual(self.test_cell.elec_p.a_s,
+                         test_solver.b_cell.elec_p.a_s)
+        self.assertEqual(True, test_solver.bool_isothermal)
+        self.assertEqual(False, test_solver.bool_degradation)
+        self.assertEqual('poly', test_solver.electrode_SOC_solver)
+
+        # below checks for the object pertaining to the fvm coordinates and the electrolyte solver
+        self.assertEqual(7.35e-5 / 10, test_solver.electrolyte_co_ords.dx_n)
+        self.assertEqual(2.0e-5 / 10, test_solver.electrolyte_co_ords.dx_s)
+
+        self.assertEqual([], test_solver.sol_init.lst_V)
+
+        c_init: np.ndarray = 1000 * np.ones(30)
+        c_init = c_init[np.newaxis, :]
+        self.assertTrue(np.array_equal(
+            c_init, test_solver.sol_init.electrolyte_conc[1:]))
+        
+        # below checks for the objects pertaining to the electrode and electrolte potential solvers
+        self.assertEqual('p', test_solver.electrode_p_potential_solver.electrode_type)
+        self.assertEqual('n', test_solver.electrode_n_potential_solver.electrode_type)

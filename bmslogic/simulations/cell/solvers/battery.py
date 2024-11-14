@@ -709,6 +709,7 @@ class PyEnhancedSPSolver(PySPSolver):
             self.electrolyte_conc_solver.solve_ce(
                 j=j, dt=dt, solver_method='TDMA')
 
+            # Second, the electrolyte potential at the battery ends are extrapolated
             c_e_0: float = self.electrolyte_conc_solver.extrapolate_conc(
                 L_value=0)
             L_cell: float = self.b_cell.elec_n.L + \
@@ -725,8 +726,6 @@ class PyEnhancedSPSolver(PySPSolver):
             c_e_L: float = self.electrolyte_conc_solver.conc_e_L_cell()
 
         # Finally the termination voltage is calculated and returned
-        # Note that the concentration of the electrolyte for the electrode's exchange current density is assumed
-        # to be the initial electrolyte concentration.
         L_cell: float = self.b_cell.elec_n.L + \
             self.b_cell.electrolyte.L + self.b_cell.elec_p.L
 
@@ -938,10 +937,10 @@ class PyEnhancedSPSolver(PySPSolver):
         return PySolution(base_solution_instance=self.sol_init, name=sol_name)
 
 
-class SimplifiedP2D(PySPSolver):
+class PySimplifiedP2D(PySPSolver):
     """Contains the relevant variables and methods for solving a simplified P2D simulation. In the simplified P2D simulation,
-    the lithium-ion flux across the solid electrode region is considered to be consistent throughout and calculated using the same 
-    equation as the single particle model 
+    the lithium-ion flux across the solid electrode region is considered to be consistent throughout and calculated using the same
+    equation as the single particle model
 
     Parameters
     ----------
@@ -949,7 +948,7 @@ class SimplifiedP2D(PySPSolver):
         _description_
     """
 
-    def __init__(self, b_cell: PyBatteryCell, isothermal: bool, degradation: bool):
+    def __init__(self, b_cell: PyBatteryCell, isothermal: bool, degradation: bool) -> None:
         """Constructor
 
         Notes:
@@ -993,35 +992,261 @@ class SimplifiedP2D(PySPSolver):
         self.sol_init.electrolyte_conc = np.append(self.sol_init.electrolyte_conc,
                                                    electrolyte_conc_,
                                                    axis=0)
-        
+
         # initialize the solvers for the electrode potentials
-        sigma_eff_p: float = 3.8 * (self.b_cell.elec_p.epsilon ** self.b_cell.elec_p.brugg)
-        sigma_eff_n: float = 100 * (self.b_cell.elec_n.epsilon ** self.b_cell.elec_n.brugg)
+        sigma_eff_p: float = 3.8 * \
+            (self.b_cell.elec_p.epsilon ** self.b_cell.elec_p.brugg)
+        sigma_eff_n: float = 100 * \
+            (self.b_cell.elec_n.epsilon ** self.b_cell.elec_n.brugg)
         self.electrode_p_potential_solver: PyElectrodePotentialFVMSolver = PyElectrodePotentialFVMSolver(fvm_coords=self.electrolyte_co_ords,
                                                                                                          electrode_type='p',
+                                                                                                         a_s=a_s_p,
                                                                                                          sigma_eff=sigma_eff_p)
         self.electrode_n_potential_solver: PyElectrodePotentialFVMSolver = PyElectrodePotentialFVMSolver(fvm_coords=self.electrolyte_co_ords,
                                                                                                          electrode_type='n',
+                                                                                                         a_s=a_s_n,
                                                                                                          sigma_eff=sigma_eff_n)
 
         # initialize the solvers for the electrolyte potentials
         self.electrolyte_potential_solver: PyElectrolytePotentialFVMSolver = PyElectrolytePotentialFVMSolver(fvm_coords=self.electrolyte_co_ords,
-                                                                                                            epsilon_en=self.b_cell.electrolyte.epsilon_n,
-                                                                                                            epsilon_esep=self.b_cell.electrolyte.epsilon_sep,
-                                                                                                            epsilon_ep=self.b_cell.electrolyte.epsilon_p,
-                                                                                                            a_s_n=a_s_n, a_s_p=a_s_p,
-                                                                                                            brugg=self.b_cell.electrolyte.brugg,
-                                                                                                            t_c=self.b_cell.electrolyte.t_c,
-                                                                                                            kappa_e=self.b_cell.electrolyte.kappa)
+                                                                                                             epsilon_en=self.b_cell.electrolyte.epsilon_n,
+                                                                                                             epsilon_esep=self.b_cell.electrolyte.epsilon_sep,
+                                                                                                             epsilon_ep=self.b_cell.electrolyte.epsilon_p,
+                                                                                                             a_s_n=a_s_n, a_s_p=a_s_p,
+                                                                                                             brugg=self.b_cell.electrolyte.brugg,
+                                                                                                             t_c=self.b_cell.electrolyte.t_c,
+                                                                                                             kappa_e=self.b_cell.electrolyte.kappa,
+                                                                                                             temp=self.b_cell.T)
         # in the above solver initialization, note that kappa is inputted instead of kappa_eff. This is because the solver calculates the sigma_eff.
         # TODO: refactor the elelctrolyte potential fvm solver so that it takes in sigma_eff.
 
         # the object for the battery model is initialized below
-        self.b_model = PySPMe()  # enhanced single particle model with electrolyte dynamics is initialized below
+        # enhanced single particle model with electrolyte dynamics is initialized below
+        self.b_model = PySPMe()
 
-    def solve_one_iteration():
+    def solve_one_iteration(self, t_prev: float, dt: float, i_app: float, temp: float) -> float:
+        # Solve for the electrode SOC below
+        self.b_cell.elec_p.SOC = self.SOC_solver_p(dt=dt, t_prev=t_prev, i_app=i_app,
+                                                   R=self.b_cell.elec_p.R,
+                                                   S=self.b_cell.elec_p.S,
+                                                   D_s=self.b_cell.elec_p.D,
+                                                   c_smax=self.b_cell.elec_p.max_conc)  # calc p surf SOC
+        self.b_cell.elec_n.SOC = self.SOC_solver_n(dt=dt, t_prev=t_prev, i_app=i_app,
+                                                   R=self.b_cell.elec_n.R,
+                                                   S=self.b_cell.elec_n.S,
+                                                   D_s=self.b_cell.elec_n.D,
+                                                   c_smax=self.b_cell.elec_n.max_conc)  # calc n surf SOC
+
+        # Solve for the electrolyte concentration below.
+        # potential at the negative terminal of the battery
+        c_e_0: Optional[float] = None
+        # potential at the postive terminal of the battery
+        c_e_L: Optional[float] = None
+
+        # First (for the fvm solver), the array for the electrolyte is defined below. Note if contains three distinct subdomains, the domain
+        # for the negative electrode, seperator, and the positive electrode.
+        j_p = PySPMe.molar_flux_electrode(I=i_app, S=self.b_cell.elec_p.S, electrode_type='p') * np.ones(
+            len(self.electrolyte_co_ords.array_x_p))  # [mol/m2/s]
+        j_sep = np.zeros(
+            len(self.electrolyte_co_ords.array_x_s))  # [mol/m2/s]
+        j_n = PySPMe.molar_flux_electrode(I=i_app, S=self.b_cell.elec_n.S, electrode_type='n') * np.ones(
+            len(self.electrolyte_co_ords.array_x_n))  # [mol/m2/s]
+        j = np.append(np.append(j_n, j_sep), j_p)  # [mol/m2/s]
+        self.electrolyte_conc_solver.solve_ce(
+            j=j, dt=dt, solver_method='TDMA')
+
+        # Second, the electrolyte potential at the battery ends are extrapolated
+        c_e_0: float = self.electrolyte_conc_solver.extrapolate_conc(
+            L_value=0)
+        L_cell: float = self.b_cell.elec_n.L + \
+            self.b_cell.electrolyte.L + self.b_cell.elec_p.L
+        c_e_L: float = self.electrolyte_conc_solver.extrapolate_conc(
+            L_value=L_cell)
+
+        # Calculation of the cell termination voltage
+        L_cell: float = self.b_cell.elec_n.L + \
+            self.b_cell.electrolyte.L + self.b_cell.elec_p.L
+
+        V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell, overpotential_electrolyte = self.b_model(ocp_p=self.b_cell.elec_p.OCP, ocp_n=self.b_cell.elec_n.OCP,
+                                                                                                                           R_cell=self.b_cell.R_cell,
+                                                                                                                           k_p=self.b_cell.elec_p.k, S_p=self.b_cell.elec_p.S, c_smax_p=self.b_cell.elec_p.max_conc,
+                                                                                                                           soc_surf_p=self.b_cell.elec_p.SOC,
+                                                                                                                           k_n=self.b_cell.elec_n.k, S_n=self.b_cell.elec_n.S, c_smax_n=self.b_cell.elec_n.max_conc,
+                                                                                                                           soc_surf_n=self.b_cell.elec_n.SOC,
+                                                                                                                           c_e=self.b_cell.electrolyte.conc,
+                                                                                                                           I_p_i=i_app, I_n_i=i_app, temp=temp,
+                                                                                                                           l_p=self.b_cell.elec_p.L, l_sep=self.b_cell.electrolyte.L, l_n=self.b_cell.elec_n.L,
+                                                                                                                           kappa_eff_avg=self.b_cell.electrolyte.kappa_sep_eff, k_f_avg=1,
+                                                                                                                           t_c=self.b_cell.electrolyte.t_c,
+                                                                                                                           c_e_n=c_e_0,
+                                                                                                                           c_e_p=c_e_L)
+
+        # The spatial distributions of the electrode and electrolyte potentials are now calculated
+        self.electrode_p_potential_solver.solve_phi_s(
+            j=j_p, terminal_potential=V)
+        self.electrode_n_potential_solver.solve_phi_s(
+            j=j_n, terminal_potential=0.0)
+        terminal_phi, phi, rel_phi = self.electrolyte_potential_solver.solve_phi_e(
+            j=j, c_e=self.electrolyte_conc_solver.array_c_e)
+        phi-terminal_phi
+
+        # Calc temp below and update the battery cell's temperature attribute.
+        if not self.bool_isothermal:
+            self.b_cell.T = self.calc_cell_temp(t_model=self.t_model, t_prev=t_prev, dt=dt,
+                                                temp_prev=self.b_cell.T, V=V, I=i_app)
+        return V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell, overpotential_electrolyte
+
+    @ timer
+    def solve(self, cycler: PyBaseCycler, sol_name: Optional[str] = None,
+              save_csv_dir: Optional[str] = None,
+              verbose: bool = False,
+              dt: float = 0.1, termination_criteria: str = "V") -> PySolution:
+        """Method to perform the simulation for a specified cycler
+
+        Parameters
+        ----------
+        cycler : PyBaseCycler
+            _description_
+        sol_name : Optional[str], optional
+            _description_, by default None
+        save_csv_dir : Optional[str], optional
+            _description_, by default None
+        verbose : bool, optional
+            _description_, by default False
+        dt : float, optional
+            _description_, by default 0.1
+        termination_criteria : str, optional
+            _description_, by default "V"
+
+        Returns
+        -------
+        PySolution
+            _description_
+
+        Raises
+        ------
+        TypeError
+            _description_
+        """
+        # check for function input parameter types below.
+        if not isinstance(cycler, PyBaseCycler):
+            raise TypeError("cycler needs to be a Cycler object.")
+
+        if isinstance(cycler, PyCustomCycler):
+            return self._custom_cycler_solve(custom_cycler_instance=cycler, sol_name=sol_name,
+                                             save_csv_dir=save_csv_dir, verbose=verbose, t_increment=dt,
+                                             termination_criteria=termination_criteria)
+        else:
+            return self._cycler_solve(cycler=cycler, sol_name=sol_name,
+                                      save_csv_dir=save_csv_dir, verbose=verbose, dt=dt,
+                                      termination_criteria=termination_criteria)
+
+    def _custom_cycler_solve(self):
         pass
 
-    @timer
-    def solve():
-        pass
+    def _cycler_solve(self, cycler: PyBaseCycler, sol_name: str = None, save_csv_dir: str = None, verbose: bool = False,
+                      dt: float = 0.1, termination_criteria: float = 'V'):
+        """Solves the simulation for a standard cycler (e.g., constant current charge, constant current discharge).
+
+        Parameters
+        ----------
+        cycler : PyBaseCycler
+            _description_
+        sol_name : str, optional
+            _description_, by default None
+        save_csv_dir : str, optional
+            _description_, by default None
+        verbose : bool, optional
+            _description_, by default False
+        dt : float, optional
+            _description_, by default 0.1
+        termination_criteria : float, optional
+            _description_, by default 'V'
+
+        Returns
+        -------
+        _type_
+            _description_
+        """
+        for cycle_no in tqdm(range(cycler.num_cycles)):
+
+            cap: float = 0
+            cap_charge: float = 0
+            cap_discharge: float = 0
+
+            step_completed: bool = False
+            t_prev: float = 0.0
+
+            for step in cycler.cycle_steps:
+                cap: float = 0
+                cap_charge: float = 0
+                cap_discharge: float = 0
+
+                step_completed: bool = False
+                t_prev: float = 0.0
+                while not step_completed:
+                    t_curr = t_prev + dt
+                    i_app = cycler.get_current(step_name=step, t=t_curr)
+
+                    # break condition for rest time
+                    if (step == "rest") and (t_curr > cycler.rest_time):
+                        step_completed = True
+
+                    V, OCV, overpotential_elec_p, overpotential_elec_n, overpotential_R_cell, overpotential_electrolyte = self.solve_one_iteration(t_prev=t_prev, dt=dt, i_app=i_app,
+                                                                                                                                                   temp=self.b_cell.T)
+
+                    # Calc charge capacity, discharge capacity, and overall LIB capacity
+                    cap = self.calc_SOC_cap(
+                        cap_prev=cap, Q=self.b_cell.cap, I=i_app, dt=dt)
+                    delta_cap = self.delta_SOC_cap(
+                        Q=self.b_cell.cap, I=i_app, dt=dt)
+                    if step == "charge":
+                        cap_charge += self.delta_cap(I=i_app, dt=dt)
+                        cycler.SOC_LIB += delta_cap
+                    elif step == "discharge":
+                        cap_discharge += self.delta_cap(I=i_app, dt=dt)
+                        cycler.SOC_LIB -= delta_cap
+
+                    # break condition for charge and discharge if stop criteria is V-based
+                    if termination_criteria == 'V':
+                        if (step == "charge") and (V > cycler.v_max):
+                            step_completed = True
+                        if (step == "discharge") and (V < cycler.v_min):
+                            step_completed = True
+
+                    # update time
+                    t_prev = t_curr
+                    cycler.time_elapsed += dt
+
+                    # Update results lists
+                    self.sol_init.update(cycle_num=cycle_no,
+                                         cycle_step=step,
+                                         t=cycler.time_elapsed,
+                                         I=i_app,
+                                         V=V,
+                                         OCV=OCV,
+                                         overpotential_elec_p=overpotential_elec_p,
+                                         overpotential_elec_n=overpotential_elec_n,
+                                         overpotential_R_cell=overpotential_R_cell,
+                                         overpotential_electrolyte=overpotential_electrolyte,
+                                         x_surf_p=self.b_cell.elec_p.SOC,
+                                         x_surf_n=self.b_cell.elec_n.SOC,
+                                         cap=cap,
+                                         cap_charge=cap_charge,
+                                         cap_discharge=cap_discharge,
+                                         SOC_LIB=cycler.SOC_LIB,
+                                         battery_cap=self.b_cell.cap,
+                                         temp=self.b_cell.T,
+                                         R_cell=self.b_cell.R_cell)
+
+                    if verbose:
+                        print("time elapsed [s]: ", cycler.time_elapsed, ", cycle_no: ", cycle_no,
+                              'step: ', step, "current [A]", i_app, ", terminal voltage [V]: ", V, ", SOC_LIB: ",
+                              cycler.SOC_LIB, "SOC_p: ", self.b_cell.elec_p.SOC, "SOC_n: ", self.b_cell.elec_n.SOC,
+                              "cap: ", cap, "temp: ", self.b_cell.T)
+        # Add the electrolyte concentration profile at the last iteration to the Solution object.
+        electrolyte_conc: np.ndarray = self.electrolyte_conc_solver.array_c_e[np.newaxis, :]
+        self.sol_init.electrolyte_conc = np.append(self.sol_init.electrolyte_conc,
+                                                   electrolyte_conc,
+                                                   axis=0)
+        return PySolution(base_solution_instance=self.sol_init, name=sol_name)
