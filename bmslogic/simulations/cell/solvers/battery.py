@@ -994,9 +994,9 @@ class PySimplifiedP2D(PySPSolver):
                                                    axis=0)
 
         # initialize the solvers for the electrode potentials
-        sigma_eff_p: float = 3.8 * \
+        sigma_eff_p: float = self.b_cell.elec_p.kappa * \
             (self.b_cell.elec_p.epsilon ** self.b_cell.elec_p.brugg)
-        sigma_eff_n: float = 100 * \
+        sigma_eff_n: float = self.b_cell.elec_n.kappa * \
             (self.b_cell.elec_n.epsilon ** self.b_cell.elec_n.brugg)
         self.electrode_p_potential_solver: PyElectrodePotentialFVMSolver = PyElectrodePotentialFVMSolver(fvm_coords=self.electrolyte_co_ords,
                                                                                                          electrode_type='p',

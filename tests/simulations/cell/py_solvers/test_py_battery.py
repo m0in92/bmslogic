@@ -260,6 +260,9 @@ class TestSimplifiedP2D(unittest.TestCase):
         self.assertTrue(np.array_equal(
             c_init, test_solver.sol_init.electrolyte_conc[1:]))
         
-        # below checks for the objects pertaining to the electrode and electrolte potential solvers
+        # below checks for the variables and objects pertaining to the electrode and electrolte potential solvers
+        self.assertEqual(3.8, test_solver.b_cell.elec_p.kappa)
+        self.assertEqual(100, test_solver.b_cell.elec_n.kappa)
+        
         self.assertEqual('p', test_solver.electrode_p_potential_solver.electrode_type)
         self.assertEqual('n', test_solver.electrode_n_potential_solver.electrode_type)

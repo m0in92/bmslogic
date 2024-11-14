@@ -3,7 +3,7 @@ contains the class and functionality for the battery cell objects
 """
 
 __all__ = ['Electrode', 'PElectrode', 'NElectrode',
-           'BatteryCell', 'ECMBatteryCell', 'ParameterSets']
+           'BatteryCell', 'ECMBatteryCell']
 
 __author__ = 'Moin Ahmed'
 __copyright__ = 'Copyright 2024 by BMSLogic. All rights reserved.'

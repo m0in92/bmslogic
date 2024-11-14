@@ -23,9 +23,6 @@ matplotlib.rc('xtick', labelsize=12)
 matplotlib.rc('ytick', labelsize=12) 
 
 plt.plot(sol_time, sol_V, label="ROM-P2D")
-# plt.plot(sol_spm_non_isothermal_time, sol_spm_non_isothermal_V, label="SPM-non_isothermal")
-# plt.plot(sol_espm_time, sol_espm_V, label="Enhanced SPM")
-# plt.plot(sol_espm_non_isothermal_time, sol_espm_non_isothermal_V, label="Enhanced SPM-non_isothermal")
 
 plt.xlabel("Time [$s$]", fontsize=15)
 plt.ylabel("Terminal Voltage [$V$]", fontsize=15)
