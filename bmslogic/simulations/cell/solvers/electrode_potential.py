@@ -29,19 +29,25 @@ class PyElectrodePotentialFVMSolver(PyBaseElectrodePotentialSolver):
     This solver solves for the solid phase potential across the electrode. It uses the finite volume method (FVM)
     as indicated by Han et al. [1].
 
-    In their paper, Han et al. defined the flux in terms of A/m2/s. Here, the relevant equations have been modified
-    to refer to flux in terms of mol/m2/s.
+    Please note the following:
+    1. A seperate object for the positive and negative electrode needs to be created. Usually, the electrode type is declared using
+       the creation of the object. 
 
+    2. In their paper, Han et al. defined the flux in terms of A/m2/s. Here, the relevant equations have been modified
+       to refer to flux in terms of mol/m2/s.
+
+    References:
     [1] Han, S., Tang, Y., & Khaleghi Rahimian, S. (2021). A numerically efficient method of solving the full-order
     pseudo-2-dimensional (P2D) Li-ion cell model. Journal of Power Sources, 490, 229571.
     https://doi.org/10.1016/J.JPOWSOUR.2021.229571Han, S., Tang, Y., & Khaleghi Rahimian, S. (2021).
     """
+
     def __init__(self, fvm_coords: PyElectrolyteFVMCoordinates,
                  electrode_type: str, a_s: float, sigma_eff: float,
                  ref_potential: float = 0.0) -> None:
         """
         Constructor for the class
-        :param fvm_coords:
+        :param fvm_coords: A PyElectrolyteFVMCoordinates object which contains the spatial values of the electrode and the electrolyte regions
         :param electrode_type: 'n' for the negative electrode and 'p' for positive electrode
         :param a_s: electrode's specific interfacial area [m2/m3]
         :param sigma_eff: effective conductivity [S/m]
@@ -58,7 +64,8 @@ class PyElectrodePotentialFVMSolver(PyBaseElectrodePotentialSolver):
         elif electrode_type == 'p':
             self.coords = fvm_coords.array_x_p
 
-        self.dx = self.coords[1] - self.coords[0]  # this assumes that the spatial co-ordinates are equally spaced
+        # this assumes that the spatial co-ordinates are equally spaced
+        self.dx = self.coords[1] - self.coords[0]
 
     @classmethod
     def _M_phi_n(cls, n: int) -> npt.ArrayLike:
@@ -71,7 +78,8 @@ class PyElectrodePotentialFVMSolver(PyBaseElectrodePotentialSolver):
         # create lower diagonal elements
         lower_diag_elements = np.ones(n - 1)
         # create matrix
-        m_ = np.diag(diag_elements) + np.diag(upper_diag_elements, 1) + np.diag(lower_diag_elements, -1)
+        m_ = np.diag(diag_elements) + np.diag(upper_diag_elements,
+                                              1) + np.diag(lower_diag_elements, -1)
         return m_
 
     @classmethod
@@ -85,12 +93,14 @@ class PyElectrodePotentialFVMSolver(PyBaseElectrodePotentialSolver):
         # create lower diagonal elements
         lower_diag_elements = np.ones(n - 1)
         # create matrix
-        m_ = np.diag(diag_elements) + np.diag(upper_diag_elements, 1) + np.diag(lower_diag_elements, -1)
+        m_ = np.diag(diag_elements) + np.diag(upper_diag_elements,
+                                              1) + np.diag(lower_diag_elements, -1)
         return m_
 
     @property
     def _M_phi_s(self) -> npt.ArrayLike:
-        n = self.coords.shape[0]  # the size of the rows and columns of the square matrix
+        # the size of the rows and columns of the square matrix
+        n = self.coords.shape[0]
         if self.electrode_type == 'n':
             return PyElectrodePotentialFVMSolver._M_phi_n(n=n)
         elif self.electrode_type == 'p':
@@ -116,8 +126,24 @@ class PyElectrodePotentialFVMSolver(PyBaseElectrodePotentialSolver):
             j = j.reshape(-1, 1)
         return self.a_s * constants.Constants.F * (self.dx ** 2) * j / self.sigma_eff
 
-    def solve_phi_s(self, j: npt.ArrayLike, terminal_potential: float = 0.0) -> npt.ArrayLike:
-        vec = self._array_j(j=j) - 2 * self._array_V(terminal_potential=terminal_potential)
+    def solve_phi_s(self, j: npt.ArrayLike, terminal_potential: float = 0.0) -> np.ndarray:
+        """Returns an array containing the spatial distribution of the potential across the solid electrode region
+
+        Parameters
+        ----------
+        j : npt.ArrayLike
+            array containing the lithium-ion flux [mol m-2 s-1]
+        terminal_potential : float, optional
+            the terminal potential [V]. Usually the terminal potential for the negative electrode is set to zero. However the 
+            terminal potential for the positive electrode (near the positive end of the battery) needs to be calculated., by default 0.0
+
+        Returns
+        -------
+        np.ndarray
+            array containing the spatial distribution of the potential [V] across the solid electrode region.
+        """
+        vec = self._array_j(j=j) - 2 * \
+            self._array_V(terminal_potential=terminal_potential)
         inv_matrix = np.linalg.inv(self._M_phi_s)
         return inv_matrix@vec
 

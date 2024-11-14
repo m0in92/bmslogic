@@ -60,9 +60,11 @@ fig = plt.figure()
 
 ax1 = fig.add_subplot(121)
 ax1.plot(coords.array_x_n, fvm_solver_n.solve_phi_s(j=j_n, terminal_potential=0.0).flatten())
+ax1.set_ylim(0, 4.2)
 
 ax2 = fig.add_subplot(122)
 ax2.plot(coords.array_x_p, fvm_solver_p.solve_phi_s(j=j_p, terminal_potential=4.2).flatten())
+ax2.set_ylim(0, 4.5)
 
 plt.ticklabel_format(axis='x', scilimits=[-1, 1])
 plt.show()
