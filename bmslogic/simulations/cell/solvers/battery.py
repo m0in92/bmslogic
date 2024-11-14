@@ -25,6 +25,8 @@ from bmslogic.simulations.cell.solvers.electrode_conc import PyEigenFuncExp, PyC
 from bmslogic.simulations.cell.models import PySPM, PySPMe, PyLumped, PyROMSEI
 
 from bmslogic.simulations.cell.solvers.electrolyte_conc import PyElectrolyteFVMCoordinates, PyElectrolyteConcFVMSolver, PyElectrolyteConcVolAvgSolver
+from bmslogic.simulations.cell.solvers.electrode_potential import PyElectrodePotentialFVMSolver
+from bmslogic.simulations.cell.solvers.electrolyte_potential import PyElectrolytePotentialFVMSolver
 from bmslogic.simulations.cell.solvers.degradation import PyROMSEISolver
 
 from bmslogic.simulations.cell.cyclers import PyBaseCycler, PyCustomDischarge, PyCustomCycler
@@ -525,7 +527,7 @@ class PyKFSPSolver(PySPSolver):
     @timer
     def solve(self, sol_exp: PySolution, cov_soc_p: float, cov_soc_n: float, cov_process: float, cov_sensor: float,
               v_min: float, v_max: float, soc_min: float, soc_max: float, soc_init: float) -> PySolution:
-        
+
         cycling_step = PyCustomCycler(array_t=sol_exp.t, array_I=sol_exp.I, V_min=v_min, V_max=v_max,
                                       SOC_LIB=soc_init, SOC_LIB_min=soc_min, SOC_LIB_max=soc_max)
         # array containing y_true is extracted from the solution object
@@ -576,7 +578,7 @@ class PyKFSPSolver(PySPSolver):
             v: float = self.calc_terminal_potential(
                 I_n_i=i_app_prev, I_p_i=i_app_prev)[0]
             # if isinstance(v, complex):
-                # v = v.real
+            # v = v.real
 
             # loop termination criteria
             if v > cycling_step.V_max:
@@ -946,10 +948,76 @@ class SimplifiedP2D(PySPSolver):
     PyBaseSolver : _type_
         _description_
     """
-    
-    def __init__(self, b_cell, isothermal: bool = True, degradation: bool = False, electrode_SOC_solver: str = 'eigen', **electrode_SOC_solver_params):
-        super().__init__(b_cell, isothermal, degradation, electrode_SOC_solver, **electrode_SOC_solver_params)
-        pass
+
+    def __init__(self, b_cell: PyBatteryCell, isothermal: bool, degradation: bool):
+        """Constructor
+
+        Notes:
+        1. Currently, the electrode concentration solver is set to polynomial solver
+        2. Currently, the electrolyte concentration solver is set to fvm solver
+        3. Currently, the electrode potential solver is set to fvm solver
+        4. Currently the eletrolyte potential solver is set to fvm solver
+
+        Parameters
+        ----------
+        b_cell : PyBatteryCell
+            _description_
+        isothermal : bool
+            _description_
+        degradation : bool
+            _description_
+        """
+        super().__init__(b_cell, isothermal, degradation,
+                         electrode_SOC_solver='poly')  # initializers the electrode concentration solver and the sol_init object
+
+        # initialization of the electrolyte concentration solver below
+        self.electrolyte_co_ords: PyElectrolyteFVMCoordinates = PyElectrolyteFVMCoordinates(L_p=self.b_cell.elec_p.L,
+                                                                                            L_s=self.b_cell.electrolyte.L,
+                                                                                            L_n=self.b_cell.elec_n.L)
+        a_s_p: float = self.b_cell.elec_p.S / self.b_cell.elec_p.L
+        a_s_n: float = self.b_cell.elec_n.S / self.b_cell.elec_n.L
+        self.electrolyte_conc_solver: PyElectrolyteConcFVMSolver = PyElectrolyteConcFVMSolver(fvm_co_ords=self.electrolyte_co_ords,
+                                                                                              c_e_init=self.b_cell.electrolyte.conc,
+                                                                                              transference=self.b_cell.electrolyte.t_c,
+                                                                                              epsilon_ep=self.b_cell.electrolyte.epsilon_p,
+                                                                                              epsilon_esep=self.b_cell.electrolyte.epsilon_sep,
+                                                                                              epsilon_en=self.b_cell.electrolyte.epsilon_n,
+                                                                                              a_sn=a_s_n, a_sp=a_s_p, D_e=self.b_cell.electrolyte.D_e,
+                                                                                              brugg=self.b_cell.electrolyte.brugg)
+        # Add the spatial electrolyte conc.
+        self.sol_init.electrolyte_conc = self.electrolyte_co_ords.array_x
+        # across the battery length.
+        self.sol_init.electrolyte_conc = self.sol_init.electrolyte_conc[np.newaxis, :]
+        electrolyte_conc_: np.ndarray = self.electrolyte_conc_solver.array_c_e[
+            np.newaxis, :]
+        self.sol_init.electrolyte_conc = np.append(self.sol_init.electrolyte_conc,
+                                                   electrolyte_conc_,
+                                                   axis=0)
+        
+        # initialize the solvers for the electrode potentials
+        sigma_eff_p: float = 3.8 * (self.b_cell.elec_p.epsilon ** self.b_cell.elec_p.brugg)
+        sigma_eff_n: float = 100 * (self.b_cell.elec_n.epsilon ** self.b_cell.elec_n.brugg)
+        self.electrode_p_potential_solver: PyElectrodePotentialFVMSolver = PyElectrodePotentialFVMSolver(fvm_coords=self.electrolyte_co_ords,
+                                                                                                         electrode_type='p',
+                                                                                                         sigma_eff=sigma_eff_p)
+        self.electrode_n_potential_solver: PyElectrodePotentialFVMSolver = PyElectrodePotentialFVMSolver(fvm_coords=self.electrolyte_co_ords,
+                                                                                                         electrode_type='n',
+                                                                                                         sigma_eff=sigma_eff_n)
+
+        # initialize the solvers for the electrolyte potentials
+        self.electrolyte_potential_solver: PyElectrolytePotentialFVMSolver = PyElectrolytePotentialFVMSolver(fvm_coords=self.electrolyte_co_ords,
+                                                                                                            epsilon_en=self.b_cell.electrolyte.epsilon_n,
+                                                                                                            epsilon_esep=self.b_cell.electrolyte.epsilon_sep,
+                                                                                                            epsilon_ep=self.b_cell.electrolyte.epsilon_p,
+                                                                                                            a_s_n=a_s_n, a_s_p=a_s_p,
+                                                                                                            brugg=self.b_cell.electrolyte.brugg,
+                                                                                                            t_c=self.b_cell.electrolyte.t_c,
+                                                                                                            kappa_e=self.b_cell.electrolyte.kappa)
+        # in the above solver initialization, note that kappa is inputted instead of kappa_eff. This is because the solver calculates the sigma_eff.
+        # TODO: refactor the elelctrolyte potential fvm solver so that it takes in sigma_eff.
+
+        # the object for the battery model is initialized below
+        self.b_model = PySPMe()  # enhanced single particle model with electrolyte dynamics is initialized below
 
     def solve_one_iteration():
         pass
