@@ -146,7 +146,7 @@ The following contains the instructions for running this repository locally in t
 
    To complie only C++ code (for example in embedded systems), set the ```cmake``` variable ```CPP_ONLY``` to ```ON``` via using the following command (instead of ```cmake ..``` above) 
    ```sh
-   cmake .. -DCPP_ONLY=ON
+   cmake .. -EMBEDDED=ON
    ```
 
    ### Tests
