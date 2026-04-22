@@ -1,76 +1,90 @@
-<a name="readme-top"></a>
+<a id="readme-top"></a>
 
 <!-- PROJECT SHIELDS -->
+<div align="center">
+  <img src="assests/BMSLogic_logo.png" alt="BMSLogic Logo" width="120">
 
-<!-- [![Contributors][contributors-shield]][contributors-url] -->
-<!-- [![Forks][forks-shield]][forks-url] -->
-<!-- [![Stargazers][stars-shield]][stars-url] -->
-<!-- [![Issues][issues-shield]][issues-url] -->
+# BMSLogic
+
+Open-source battery management system (BMS) simulation toolkit for lithium-ion batteries  
+Python + C++ framework for battery cell models, EV-level simulations, and high-performance solver workflows
 
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC_BY--NC_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](#getting-started)
+[![CMake](https://img.shields.io/badge/CMake-3.12%2B-orange)](#build-and-installation)
 
-<!-- [![LinkedIn][linkedin-shield]][linkedin-url] -->
+<p align="center">BMSLogic © 2024 by Moin Ahmed is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International <p>
 
-<!-- PROJECT LOGO -->
-
-<br />
-<div align="center">
-  <a href="https://github.com/github_username/repo_name">
-    <img src="assests/BMSLogic_logo.png" alt="Logo" width="80" height="80">
-  </a>
-
-<h3 align="center">BMSLogic</h3>
-<p align="left">BMSLogic © 2024 by Moin Ahmed is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International <p>
-
-  <p align="center">
-    Created by: Moin Ahmed 
-    <br />
-    Source code for the everything related to battery management systems (BMS), wriite mostly in Python and C++. The backend source code is mainly written in Python and C++.
-    <!-- <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a> -->
+  <p align="center"> Built and Created by <strong>Moin Ahmed and Contributers</strong>
   </p>
 </div>
 
 <!-- TABLE OF CONTENTS -->
 
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#how-to-cite">How to Cite</a></li>
-    <li><a>Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <!-- <li><a href="#contact">Contact</a></li> -->
-    <!-- <li><a href="#acknowledgments">Acknowledgments</a></li> -->
-  </ol>
-</details>
+<p align="center">
+  <a href="#about-the-project">About</a> •
+  <a href="#getting-started">Getting Started</a> •
+  <a href="#examples">Examples</a> •
+  <a href="#developer-architecture-doc">Architecture Doc</a> •
+  <a href="#contributing">Contributing</a> •
+  <a href="#-how-to-cite">Cite</a>
+</p>
+</div>
 
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
-
+<p>
 This repository contains the source code for performing battery management system related simulations and calculations including battery cell, battery packs, and other system-level simulations.
+
+It combines:
+
+- Electrochemical battery cell models (SPM/SPMe/P2D-style workflows),
+- Equivalent circuit models (ECM/ESC),
+- Thermal + degradation model components,
+- Kalman filtering utilities,
+- Application-level electric vehicles (EVs) and drive-cycle simulations,
+- Python ergonomics with C++ acceleration via pybind11.
+
+If you are working on **lithium-ion battery modeling**, **lithium-ion state estimation**, **solver performance studies**, **BMS prototyping**, or **Electric vehicle energy consumption and range** this repo is designed for you.
+
+</p>
+
+### 🔥 Why this repo is useful
+
+<p>
+- **Hybrid performance stack**: iterate quickly in Python, accelerate critical paths in C++.
+- **Research-ready**: includes examples, test suites, and parameter sets for repeatable studies.
+- **End-to-end flow**: from battery cell physics to EV drive-cycle level analysis.
+- **Extensible architecture**: add new parameter sets, models, solvers, and workflows with clear module boundaries.
+
+> If this project helps your research or product, please ⭐ star the repository and share it with peers in battery/BMS communities.
+
+</p>
+
+### 🧠 Key capabilities
+
+##### Battery cell simulation
+- Cell component abstractions (electrodes, electrolyte, cell).
+- Charge/discharge/custom cycling workflows.
+- Solver families for concentration, potential, and model-level terminal voltage evolution.
+
+##### Modeling and estimation
+- Single-particle model, enhanced single particle model, and simple pseudo two-dimensional (P2D) models.
+- Equivalent-circuit model support.
+- Kalman filter support in helper modules.
+
+##### EV/application layer
+- Drive-cycle utilities (e.g., FTP, UDDS, HWFET, US06, etc. where present in data).
+- EV drivetrain and pack-level abstractions for systems-oriented simulations.
+
+##### Developer productivity
+- CMake build pipeline for native + Python-extension targets.
+- Python and C++ tests.
+- Rich examples in both languages.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -163,18 +177,47 @@ The following contains the instructions for running this repository locally in t
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## How to cite
+## Examples
+
+Explore runnable examples under:
+
+- `examples/simulations/cell/`
+- `examples/calc_helpers/`
+- `examples/simulations/cell/pure_cpp/`
+- `examples/simulations/cell/pure_python/`
+
+These cover simulation runs, solver variants, kalman-filter-related workflows, and plotting scripts.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Developer architecture doc
+
+A detailed architecture walkthrough (module boundaries, runtime flow, build targets, extension points) can be found at the following link:
+
+- [`doc/developer_guidelines/architecture.md`](doc/developer_guidelines/architecture.md)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Contributing
+
+Contributions are welcome from battery researchers, controls engineers, and simulation developers.
+
+Useful places to start:
+
+- run tests locally,
+- pick an example and reproduce results,
+- add a new parameter set,
+- improve solver performance,
+- improve docs and onboarding.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 📚 How to Cite
 
 If you want to use this codebase in your research and cite it in your work, please cite the following works:
 
 1. Ahmed, M., Mao, Z., Liu, Y., Yu, A., Fowler, M., & Chen, Z. (2024). Comparative Analysis of Computational Times of Lithium-Ion Battery Management Solvers and Battery Models Under Different Programming Languages and Computing Architectures. Batteries 2024, Vol. 10, Page 439, 10(12), 439. https://doi.org/10.3390/BATTERIES10120439
 2. Ahmed, M. (2024). Applications of Mathematical Models for Lithium-Ion Battery Management Systems. University of Waterloo. https://hdl.handle.net/10012/21242
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Usage
-
-Coming soon!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
