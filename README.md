@@ -56,12 +56,11 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#how-to-cite">How to Cite</a></li>
+    <li><a>Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <!-- <li><a href="#contact">Contact</a></li> -->
+    <!-- <li><a href="#acknowledgments">Acknowledgments</a></li> -->
   </ol>
 </details>
 
@@ -162,11 +161,25 @@ The following contains the instructions for running this repository locally in t
    bmslogic.exe       (on Windows)
    ```
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## How to cite
 
 If you want to use this codebase in your research and cite it in your work, please cite the following works:
 
 1. Ahmed, M., Mao, Z., Liu, Y., Yu, A., Fowler, M., & Chen, Z. (2024). Comparative Analysis of Computational Times of Lithium-Ion Battery Management Solvers and Battery Models Under Different Programming Languages and Computing Architectures. Batteries 2024, Vol. 10, Page 439, 10(12), 439. https://doi.org/10.3390/BATTERIES10120439
 2. Ahmed, M. (2024). Applications of Mathematical Models for Lithium-Ion Battery Management Systems. University of Waterloo. https://hdl.handle.net/10012/21242
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Usage
+
+Coming soon!
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Road Map
+
+Coming soon!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
