@@ -6,10 +6,10 @@
 <!-- [![Forks][forks-shield]][forks-url] -->
 <!-- [![Stargazers][stars-shield]][stars-url] -->
 <!-- [![Issues][issues-shield]][issues-url] -->
+
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC_BY--NC_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
 <!-- [![LinkedIn][linkedin-shield]][linkedin-url] -->
-
-
 
 <!-- PROJECT LOGO -->
 
@@ -20,8 +20,7 @@
   </a>
 
 <h3 align="center">BMSLogic</h3>
-<p align="left">BMSLogic © 2024 by Moin Ahmed is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International <p> 
-
+<p align="left">BMSLogic © 2024 by Moin Ahmed is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International <p>
 
   <p align="center">
     Created by: Moin Ahmed 
@@ -38,8 +37,6 @@
     <a href="https://github.com/github_username/repo_name/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a> -->
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 
@@ -68,9 +65,8 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
@@ -79,57 +75,58 @@ This repository contains the source code for performing battery management syste
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 The following contains the instructions for running this repository locally in this machine.
 
 ### Prerequisites
 
-* Ensure your system has the following
-    * Python with pip and venv installed
-    * CMake
+- Ensure your system has the following
+  - Python with pip and venv installed
+  - CMake
 
-* Install Python project dependencies. <br>
+- Install Python project dependencies. <br>
   It is recommended to create a virtual Python environment for this project, especially if the functionalities supported by Python Language are to be used. For this purpose, follow the steps below:
-
   1. Create the Python virtual environment
-      ```sh
-      python -m venv venv
-      ``` 
+
+     ```sh
+     python -m venv venv
+     ```
 
   2. Activate the virtual envinronment <br>
-      On Windows:
-      ```sh
-      venv\Scripts\activate
-      ```
-      On macOS and Linux:
-      ```sh
-      source venv/bin/activate
-      ```
+     On Windows:
+
+     ```sh
+     venv\Scripts\activate
+     ```
+
+     On macOS and Linux:
+
+     ```sh
+     source venv/bin/activate
+     ```
 
   3. Verify Activation <br>
-      Once activated, your command line prompt should prepend the name of the virtual environment, indicating that it's active. For example:
-      ```sh
-      (venv) user@hostname:~/path/to/repository$
-      ```
-  
+     Once activated, your command line prompt should prepend the name of the virtual environment, indicating that it's active. For example:
+     ```sh
+     (venv) user@hostname:~/path/to/repository$
+     ```
   4. Install Python dependencies
-      ```sh
-      pip install -r requirements.txt
-      ```
-
+     ```sh
+     pip install -r requirements.txt
+     ```
 
 ### Installation
 
 1. Clone the repository
+
    ```sh
    git clone --recurse-submodules git@github.com:ChargeSage-Inc/BMSLogic.git
    ```
 
-   Note that when pulling the updates use the following ```git``` commands to pull the updates and additional submodules
+   Note that when pulling the updates use the following `git` commands to pull the updates and additional submodules
 
    ```
    git pull origin main
@@ -138,29 +135,38 @@ The following contains the instructions for running this repository locally in t
    ```
 
 2. Build the C++ files using cmake
+
    ```sh
    cd build && mkdir build
    cmake ..
    cmake --build .
    ```
 
-   To complie only C++ code (for example in embedded systems), set the ```cmake``` variable ```CPP_ONLY``` to ```ON``` via using the following command (instead of ```cmake ..``` above) 
+   To complie only C++ code (for example in embedded systems), set the `cmake` variable `CPP_ONLY` to `ON` via using the following command (instead of `cmake ..` above)
+
    ```sh
    cmake .. -EMBEDDED=ON
    ```
 
    ### Tests
 
-1. For python tests, run the following on the command line
+3. For python tests, run the following on the command line
    ```sh
    pytest tests
    ```
-2. Google tests is used for testing the C++ code. Use the following
-  to run the existing tests.
+4. Google tests is used for testing the C++ code. Use the following
+   to run the existing tests.
    ```sh
    cd cpp_tests
    ./bmslogic_tests   (on Linux)
    bmslogic.exe       (on Windows)
    ```
+
+## How to cite
+
+If you want to use this codebase in your research and cite it in your work, please cite the following works:
+
+1. Ahmed, M., Mao, Z., Liu, Y., Yu, A., Fowler, M., & Chen, Z. (2024). Comparative Analysis of Computational Times of Lithium-Ion Battery Management Solvers and Battery Models Under Different Programming Languages and Computing Architectures. Batteries 2024, Vol. 10, Page 439, 10(12), 439. https://doi.org/10.3390/BATTERIES10120439
+2. Ahmed, M. (2024). Applications of Mathematical Models for Lithium-Ion Battery Management Systems. University of Waterloo. https://hdl.handle.net/10012/21242
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
