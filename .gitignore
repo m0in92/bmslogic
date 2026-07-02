@@ -290,6 +290,12 @@ _deps
 
 ### BMSLogic FILES ###
 BMSLogic\examples\simulations\cell\pure_python\full_simulation_runs\single_particle_model\plot_discharge_spm_isothermal.py
+examples/simulations/cell/pure_cpp/charge_rest_spm
+examples/simulations/cell/pure_cpp/charge_spm
+examples/simulations/cell/pure_cpp/discharge_espm
+examples/simulations/cell/pure_cpp/discharge_rest_spm
+examples/simulations/cell/pure_cpp/discharge_spm
+examples/simulations/cell/pure_cpp/discharge_spm_cn_solver
 
 ## Project Files ##
 .idea/

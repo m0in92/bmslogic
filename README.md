@@ -92,15 +92,47 @@ If you are working on **lithium-ion battery modeling**, **lithium-ion state esti
 
 ## Getting Started
 
-The following contains the instructions for running this repository locally in this machine.
+The following contains the instructions for running this repository locally in this machine. 
+
+While installing, it is important to keep in mind that the source code contains both C++ and Python code. Hence, after cloning the repository from Github, C++ code is built using CMake. Then the Python virtual environment is setup and required Python packages are installed. 
 
 ### Prerequisites
 
 - Ensure your system has the following
   - Python with pip and venv installed
-  - CMake
+  - C++ Compilers and CMake
 
-- Install Python project dependencies. <br>
+### Installation
+
+1. Clone the repository
+
+   ```sh
+   git clone --recurse-submodules git@github.com:m0in92/bmslogic.git
+   ```
+
+   Note that when pulling the updates use the following `git` commands to pull the updates and additional submodules
+
+   ```
+   git pull origin main
+   git submodule init
+   git submodule update
+   ```
+
+2. Build the C++ files using cmake
+
+   ```sh
+   mkdir build && cd build
+   cmake ..
+   cmake --build .
+   ```
+
+   To complie only C++ code (for example in embedded systems), set the `cmake` variable `CPP_ONLY` to `ON` via using the following command (instead of `cmake ..` above)
+
+   ```sh
+   cmake .. -EMBEDDED=ON
+   ```
+
+   - Install Python project dependencies. <br>
   It is recommended to create a virtual Python environment for this project, especially if the functionalities supported by Python Language are to be used. For this purpose, follow the steps below:
   1. Create the Python virtual environment
 
@@ -130,36 +162,6 @@ The following contains the instructions for running this repository locally in t
      ```sh
      pip install -r requirements.txt
      ```
-
-### Installation
-
-1. Clone the repository
-
-   ```sh
-   git clone --recurse-submodules git@github.com:m0in92/bmslogic.git
-   ```
-
-   Note that when pulling the updates use the following `git` commands to pull the updates and additional submodules
-
-   ```
-   git pull origin main
-   git submodule init
-   git submodule update
-   ```
-
-2. Build the C++ files using cmake
-
-   ```sh
-   cd build && mkdir build
-   cmake ..
-   cmake --build .
-   ```
-
-   To complie only C++ code (for example in embedded systems), set the `cmake` variable `CPP_ONLY` to `ON` via using the following command (instead of `cmake ..` above)
-
-   ```sh
-   cmake .. -EMBEDDED=ON
-   ```
 
    ### Tests
 
