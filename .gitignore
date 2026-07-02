@@ -297,6 +297,13 @@ examples/simulations/cell/pure_cpp/discharge_rest_spm
 examples/simulations/cell/pure_cpp/discharge_spm
 examples/simulations/cell/pure_cpp/discharge_spm_cn_solver
 
+examples/simulations/cell/pure_cpp/solvers/electrolyte_conc_fvm
+examples/simulations/cell/pure_cpp/solvers/neg_charge_single_particle
+examples/simulations/cell/pure_cpp/solvers/neg_discharge_rest_single_particle
+examples/simulations/cell/pure_cpp/solvers/neg_discharge_single_particle
+examples/simulations/cell/pure_cpp/solvers/pos_charge_single_particle
+examples/simulations/cell/pure_cpp/solvers/pos_discharge_single_particle
+
 ## Project Files ##
 .idea/
 wsl_build/
