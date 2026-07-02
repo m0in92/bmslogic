@@ -136,7 +136,7 @@ The following contains the instructions for running this repository locally in t
 1. Clone the repository
 
    ```sh
-   git clone --recurse-submodules git@github.com:ChargeSage-Inc/BMSLogic.git
+   git clone --recurse-submodules git@github.com:m0in92/bmslogic.git
    ```
 
    Note that when pulling the updates use the following `git` commands to pull the updates and additional submodules
