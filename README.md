@@ -104,6 +104,17 @@ While installing, it is important to keep in mind that the source code contains 
 
 ### Installation
 
+#### Option 1: Using pip installer (easier, tested on Ubuntu)
+
+1. It is highly recommended to setup and activate Python virtual environment for your project
+1. Run the following command in the terminal/command prompt to install this as a Python package for your project.
+
+```sh
+pip install git+https://github.com/m0in92/bmslogic.git
+```
+
+#### Option 2: Build from Source
+
 1. Clone the repository
 
    ```sh
