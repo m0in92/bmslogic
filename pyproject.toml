@@ -52,3 +52,12 @@ changelog = "https://github.com/m0in92/bmslogic.git"
 
 [tool.setuptools.packages.find]
 include = ["bmslogic*"]
+
+[tool.setuptools.package-data]
+bmslogic = [
+  "**/*.cpp",
+  "**/*.h",
+  "**/*.so",
+  "**/*.pyd",
+  "**/*.dylib",
+]
