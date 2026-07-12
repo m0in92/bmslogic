@@ -45,10 +45,10 @@ test = [
 ]
 
 [project.urls]
-homepage = ""
-documentation = ""
+homepage = "https://github.com/m0in92/bmslogic.git"
+documentation = "https://github.com/m0in92/bmslogic.git"
 repository = "https://github.com/m0in92/bmslogic.git"
-changelog = ""
+changelog = "https://github.com/m0in92/bmslogic.git"
 
 [tool.setuptools.packages.find]
 include = ["bmslogic*"]
