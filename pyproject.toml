@@ -1,33 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "bmslogic"
 version = "0.1.0"
-description = "Open-source battery management system (BMS) simulation toolkit for lithium-ion batteries  
-Python + C++ framework for battery cell models, EV-level simulations, and high-performance solver workflows"
+description = "Open-source battery management system (BMS) simulation toolkit for lithium-ion batteries. Python + C++ framework for battery cell models, EV-level simulations, and high-performance solver workflows."
 readme = "README.md"
 requires-python = ">=3.8"
-license = {file = "LICENSE.txt"}
-keywords = ["lithium-ion", "battery", "simulation", "equivalent circuit model", "single particle battery model", "enhanced single particle battery model"]
+license = {file = "LICENSE"}
+keywords = [
+  "lithium-ion",
+  "battery",
+  "simulation",
+  "equivalent circuit model",
+  "single particle battery model",
+  "enhanced single particle battery model",
+]
 authors = [
   {email = "moinahmed100@gmail.com"},
-  {name = "Moin Ahmed"}
+  {name = "Moin Ahmed"},
 ]
 maintainers = [
-  {name = "Moin Ahmed", email = "moinahmed100@gmail.com"}
+  {name = "Moin Ahmed", email = "moinahmed100@gmail.com"},
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
-  "Programming Language :: Python"
+  "Programming Language :: Python",
 ]
-
 dependencies = [
-    "numpy"
-    "pandas"
-    "scipy"
-    "matplotlib"
-    "memory-profiler"
-    "pydantic"
-    "sphinx"
-    "tqdm"
+  "numpy",
+  "pandas",
+  "scipy",
+  "matplotlib",
+  "memory-profiler",
+  "pydantic",
+  "sphinx",
+  "tqdm",
 ]
 
 [project.optional-dependencies]
@@ -41,8 +50,5 @@ documentation = ""
 repository = "https://github.com/m0in92/bmslogic.git"
 changelog = ""
 
-[project.scripts]
-bmslogic-cli = "
-
-[project.gui-scripts]
-bmslogic-gui = ""
+[tool.setuptools.packages.find]
+include = ["bmslogic*"]
