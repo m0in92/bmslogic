@@ -1,0 +1,48 @@
+[project]
+name = "bmslogic"
+version = "0.1.0"
+description = "Open-source battery management system (BMS) simulation toolkit for lithium-ion batteries  
+Python + C++ framework for battery cell models, EV-level simulations, and high-performance solver workflows"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE.txt"}
+keywords = ["lithium-ion", "battery", "simulation", "equivalent circuit model", "single particle battery model", "enhanced single particle battery model"]
+authors = [
+  {email = "moinahmed100@gmail.com"},
+  {name = "Moin Ahmed"}
+]
+maintainers = [
+  {name = "Moin Ahmed", email = "moinahmed100@gmail.com"}
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python"
+]
+
+dependencies = [
+    "numpy"
+    "pandas"
+    "scipy"
+    "matplotlib"
+    "memory-profiler"
+    "pydantic"
+    "sphinx"
+    "tqdm"
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest",
+]
+
+[project.urls]
+homepage = ""
+documentation = ""
+repository = "https://github.com/m0in92/bmslogic.git"
+changelog = ""
+
+[project.scripts]
+bmslogic-cli = "
+
+[project.gui-scripts]
+bmslogic-gui = ""
